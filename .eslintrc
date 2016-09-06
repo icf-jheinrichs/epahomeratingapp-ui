@@ -70,5 +70,8 @@
     register: true,
     _: true,
     expect: true
+  },
+  parserOptions: {
+    'sourceType': 'module'
   }
 }
