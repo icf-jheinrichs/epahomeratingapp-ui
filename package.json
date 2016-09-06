@@ -1,0 +1,15 @@
+{
+  "name": "common-ui",
+  "version": "1.0.0",
+  "description": "Package of all common ui (angular components and associated styles)",
+  "main": "epahomeratingappUI.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/common-ui"
+  },
+  "author": "",
+  "license": "ISC"
+}
