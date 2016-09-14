@@ -1,7 +1,7 @@
-import elements from '.client/js/elements/elements';
-import components from '.client/js/components/components';
+import ElementsModule from './client/js/elements/elements.module';
+import ComponentsModule from './client/js/components/components.module';
 
 export {
-    elements,
-    components
+    ElementsModule,
+    ComponentsModule
 };

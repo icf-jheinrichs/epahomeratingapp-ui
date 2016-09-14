@@ -8,8 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/common-ui"
+    "url": "https://github.com/icf-jheinrichs/epahomeratingapp-ui.git"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "ICF International",
+  "contributors": [
+    "Greg Gruse <Greg.Gruse@icfi.com>",
+    "Jeff Heinrichs <jeff.heinrichs@icfi.com>",
+    "Yuantong Lu <Yuantong.Lu@icfi.com>"
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "angular": "^1.5.8"
+  }
 }
