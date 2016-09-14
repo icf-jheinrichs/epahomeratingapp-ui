@@ -1,0 +1,19 @@
+// .item-list {
+
+// }
+
+.item-list-filter {
+    background-color: $brand-tertiary;
+}
+
+.item-list-header {
+    background-color: $brand-auxillary;
+}
+
+.list-item {
+    display: block;
+
+    + .list-item {
+        border-top: 1px solid $border-color-default;
+    }
+}

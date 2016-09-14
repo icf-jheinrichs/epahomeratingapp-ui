@@ -1,0 +1,38 @@
+.navbar {
+    @include gradient-vertical($brand-secondary, darken($brand-secondary, 5%));
+    color: $text-color-inverse;
+    padding: $gutter-half;
+
+    .btn {
+        @extend %btn-inverse;
+    }
+
+    &.flex-container,
+    .flex-container {
+        align-items: center;
+    }
+
+    .nav {
+        margin-left: auto;
+    }
+}
+
+.site-title {
+    margin: 0;
+    white-space: nowrap;
+
+    span {
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+}
+
+.site-logo {
+    box-shadow: 0 2 4px $shadow-default;
+    margin-right: $offset-default;
+    vertical-align: middle;
+}
+
+.user-menu {
+    margin-right: $offset-default;
+}

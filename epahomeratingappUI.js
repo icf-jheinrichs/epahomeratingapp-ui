@@ -1,7 +1,7 @@
-import elements from './elements/elements';
-import components from './components/components';
+import elements from '.client/js/elements/elements';
+import components from '.client/js/components/components';
 
-export default {
+export {
     elements,
     components
 };

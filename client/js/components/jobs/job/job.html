@@ -1,0 +1,36 @@
+<a data-ui-sref="job-checklist({_id: jobCtrl.job._id})" class="job flex-container" data-ng-class="{'job-returned': jobCtrl.hasStatusLabel()}">
+    <figure class="job-photos">
+        <img src="/img/job-photo-default.svg" />
+    </figure>
+
+    <div class="job-info">
+        <div class="job-meta">
+            <span class="label label-rating-type" data-ng-class="jobCtrl.getRatingTypeClass()">{{jobCtrl.job.RatingType}}</span>
+            <span class="job-id">{{jobCtrl.job.JobType}} ID: {{jobCtrl.job._id}}</span>
+        </div>
+
+        <h3 class="job-title">{{jobCtrl.job.AddressInformation}}</h3>
+
+        <div class="job-history">
+            <span class="last-update">Last {{jobCtrl.job.History.Description}}: {{jobCtrl.job.History.DateTime}}</span>
+            <span class="last-update-user">by {{jobCtrl.job.History.User}}</span>
+            <span class="data-sync-status">({{jobCtrl.job.SyncStatus}})</span>
+        </div>
+
+        <div class="job-house-quantity">
+            <span data-ng-if="isSample">{{ jobCtrl.job.(sampleSize - 1) }} more</span>
+        </div>
+    </div>
+
+    <div class="job-status">
+        <span class="label label-job-status label-status-returned" data-ng-if="jobCtrl.job.ReturnedFromInternal">Returned from QA</span>
+        <span class="label label-job-status label-status-returned" data-ng-if="jobCtrl.job.ReturnedFromProvider">Returned from Provider</span>
+    </div>
+
+    <div class="job-progress">
+        <div class="radial-progress"><radial-progress title="Pre-drywall" progress="jobCtrl.job.Progress.PreDrywall" /></radial-progress></div>
+        <div class="radial-progress"><radial-progress title="Final" progress="jobCtrl.job.Progress.Final" /></radial-progress></div>
+    </div>
+
+    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+</a>

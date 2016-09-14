@@ -1,0 +1,67 @@
+@import '../../../../scss/variables';
+@import '../../../../scss/mixins';
+@import '../../../../scss/utilities';
+
+$job-photo-width:   115px;
+$job-photo-height:  115px;
+
+.job {
+    align-items: center;
+    cursor: pointer;
+    padding: $gutter-half;
+    position: relative;
+
+    &.job-returned {
+        padding-top: $gutter-half + $offset-default;
+    }
+}
+
+.job-photos {
+    align-self: flex-start;
+    height: $job-photo-height;
+    margin: 0 $gutter-half 0 0;
+    min-width: $job-photo-width;
+    width: $job-photo-width;
+}
+
+.job-info {
+    align-self: flex-start;
+}
+
+.job-id {
+    color: $text-color-muted;
+    font-size: $font-size-small;
+}
+
+.job-title {
+    margin: 0 0 $offset-small;
+}
+
+.job-history {
+    color: $text-color-muted;
+    line-height: $line-height-small;
+}
+
+.job-status {
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+.last-update {
+    display: block;
+}
+
+.data-sync-status {
+    font-weight: bold;
+}
+
+.job-progress {
+    margin-left: auto;
+    width: 200px;
+}
+
+.icon-chevron-right {
+    position: absolute;
+    right: 0;
+}

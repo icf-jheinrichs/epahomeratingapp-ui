@@ -1,0 +1,15 @@
+.flex-container {
+    display: flex;
+}
+
+.flex-static {
+    flex-grow: 0;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}
+
+.fuild-container {
+    @extend %clearfix;
+}

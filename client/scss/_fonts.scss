@@ -1,0 +1,92 @@
+// @mixin font-face(
+//         $family,
+//         $path,
+//         $locals,
+//         $filename,
+//         $weight,
+//         $style
+//     );
+
+$roboto-family: 'Roboto';
+$roboto-path: '../font/roboto/';
+
+@include font-face(
+        $roboto-family,
+        $roboto-path,
+        "Roboto Light",
+        "Roboto-Light",
+        'Roboto-Light',
+        300,
+        normal
+    );
+
+@include font-face(
+        $roboto-family,
+        $roboto-path,
+        "Roboto",
+        "Roboto-Regular",
+        'Roboto-Regular',
+        400,
+        normal
+    );
+
+@include font-face(
+        $roboto-family,
+        $roboto-path,
+        "Roboto",
+        "Roboto-Italic",
+        'Roboto-Italic',
+        400,
+        italic
+    );
+
+@include font-face(
+        $roboto-family,
+        $roboto-path,
+        "Roboto",
+        "Roboto-Regular",
+        'Roboto-Bold',
+        700,
+        normal
+    );
+
+@include font-face(
+        $roboto-family,
+        $roboto-path,
+        "Roboto Bold Italic",
+        "Roboto-BoldItalic",
+        'Roboto-BoldItalic',
+        700,
+        italic
+    );
+
+// @font-face {
+//   font-family: 'Roboto';
+//   font-style: normal;
+//   font-weight: 300;
+//   src: local('Roboto Light'), local('Roboto-Light'), url(https://fonts.gstatic.com/s/roboto/v15/Hgo13k-tfSpn0qi1SFdUfbO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+// }
+// @font-face {
+//   font-family: 'Roboto';
+//   font-style: normal;
+//   font-weight: 400;
+//   src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v15/CrYjSnGjrRCn0pd9VQsnFOvvDin1pK8aKteLpeZ5c0A.woff) format('woff');
+// }
+// @font-face {
+//   font-family: 'Roboto';
+//   font-style: normal;
+//   font-weight: 700;
+//   src: local('Roboto Bold'), local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v15/d-6IYplOFocCacKzxwXSOLO3LdcAZYWl9Si6vvxL-qU.woff) format('woff');
+// }
+// @font-face {
+//   font-family: 'Roboto';
+//   font-style: italic;
+//   font-weight: 400;
+//   src: local('Roboto Italic'), local('Roboto-Italic'), url(https://fonts.gstatic.com/s/roboto/v15/1pO9eUAp8pSF8VnRTP3xnnYhjbSpvc47ee6xR_80Hnw.woff) format('woff');
+// }
+// @font-face {
+//   font-family: 'Roboto';
+//   font-style: italic;
+//   font-weight: 700;
+//   src: local('Roboto Bold Italic'), local('Roboto-BoldItalic'), url(https://fonts.gstatic.com/s/roboto/v15/t6Nd4cfPRhZP44Q5QAjcC7rIa-7acMAeDBVuclsi6Gc.woff) format('woff');
+// }

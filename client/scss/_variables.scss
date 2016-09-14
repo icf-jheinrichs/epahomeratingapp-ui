@@ -1,0 +1,115 @@
+/*
+# Variables
+*/
+
+/*
+## Colors
+*/
+
+/*
+### Brand Colors
+*/
+$brand-primary:     #00aeef; // light blue from logo
+$brand-secondary:   #017ea8; // darker blue
+$brand-tertiary:    #414a51; // dark grey
+$brand-auxillary:   #f2f5f6; // light grey
+
+/*
+### Status Colors
+*/
+$status-correct:    #b8e986;
+$status-error:      #ff464b;
+
+/*
+## Typography
+*/
+
+$font-family-base:  Roboto, arial, sans-serif;
+$font-family-heading: Roboto, arial, sans-serif;
+
+$text-color:        #262b2f;
+$text-color-inverse: #fff;
+$text-color-muted:  lighten($text-color, 25%);
+
+$text-color-heading: $text-color;
+
+$link-color:        $brand-secondary;
+
+$font-size-base:    14px;
+$font-size-small:   12px;
+
+$font-size-h1:      ceil($font-size-base * 2);      // 28px
+$font-size-h2:      ceil($font-size-base * 1.428);  // 20px
+$font-size-h3:      ceil($font-size-base * 1.285);  // 18px
+$font-size-h4:      ceil($font-size-base * 2);
+$font-size-h5:      ceil($font-size-base * 2);
+$font-size-h6:      ceil($font-size-base * 2);
+
+$line-height-base:  1.8em;
+$line-height-small: 1.4em;
+$line-height-none:  1em;
+
+$heading-font-weight: normal;
+
+/*
+## Scaffolding
+*/
+
+$gutter-half:       20px;
+$gutter-full:       ($gutter-half * 2);
+
+$offset-default: 10px;
+$offset-small: 5px;
+$offset-large: $gutter-half;
+
+/*
+## Padding
+*/
+
+$padding-default:   6px;
+$padding-small:     3px;
+$padding-large:     9px;
+
+/*
+## Borders
+*/
+
+$border-color-default:  $brand-auxillary;
+$border-color-inverse:  #fff;
+
+$border-radius-default: 4px;
+$border-radius-small:   2px;
+$border-radius-large:   6px;
+
+$border-size-default:   1px;
+
+/*
+## Animation
+*/
+
+$transition-default:    300ms;
+
+/*
+## Tables
+*/
+
+/*
+## Buttons
+*/
+
+$button-border-color-default: #60bfdd;
+$button-border-color-inverse: $border-color-inverse;
+
+$button-background-color-hover-inverse: rgba(255, 255, 255, .15);
+
+$shadow-default:        rgba(0, 0, 0, .25);
+
+/*
+## Labels
+*/
+
+$label-returned:    $status-error;
+$label-energy-star: $brand-secondary;
+$label-hers:        #fff578;
+
+$label-padding:     $padding-default;

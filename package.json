@@ -1,5 +1,5 @@
 {
-  "name": "common-ui",
+  "name": "epahomeratingapp-ui",
   "version": "1.0.0",
   "description": "Package of all common ui (angular components and associated styles)",
   "main": "epahomeratingappUI.js",

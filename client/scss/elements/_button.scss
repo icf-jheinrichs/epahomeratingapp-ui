@@ -1,0 +1,36 @@
+.btn {
+    border: $border-size-default solid $button-border-color-default;
+    border-radius: $border-radius-small;
+    display: inline-block;
+    line-height: $line-height-small;
+    padding: $padding-default ($padding-default * 2);
+    text-align: center;
+    text-decoration: none;
+    transition: color $transition-default, border-color $transition-default, background $transition-default;
+}
+
+%btn-inverse {
+    border-color: $button-border-color-inverse;
+    color: $text-color-inverse;
+
+    &:hover,
+    &:focus {
+        background-color: $button-background-color-hover-inverse;
+    }
+}
+
+.btn-inverse {
+    @extend %btn-inverse;
+}
+
+.btn-sm {
+    border-radius: $border-radius-small;
+}
+
+.btn-lg {
+    border-radius: $border-radius-large;
+}
+
+.btn-block {
+    display: block;
+}
