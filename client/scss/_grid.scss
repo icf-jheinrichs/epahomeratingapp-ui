@@ -2,14 +2,30 @@
     display: flex;
 }
 
-.flex-static {
+.flex-justify-end {
+    justify-content: flex-end;
+}
+
+.flex-justify-between {
+    justify-content: space-between;
+}
+
+.flex-align-center {
+    align-items: center;
+}
+
+.flex-item-static {
     flex-grow: 0;
 }
 
-.flex-grow {
+.flex-item-grow {
     flex-grow: 1;
 }
 
-.fuild-container {
+.fluid-container {
     @extend %clearfix;
+}
+
+.col {
+    padding: $gutter-half;
 }

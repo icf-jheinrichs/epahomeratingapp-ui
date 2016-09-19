@@ -1,19 +1,35 @@
-// .item-list {
-
-// }
-
-.item-list-filter {
-    background-color: $brand-tertiary;
+.item-list-header {
+    margin-bottom: $gutter-half;
+    padding: 0 $gutter-half;
 }
 
-.item-list-header {
-    background-color: $brand-auxillary;
+.item-list-title {
+    margin-bottom: 0;
+}
+
+.item-list {
+    border-bottom: $border-size-default solid $border-color-default;
+}
+
+.list-item-activate {
+    transition: transform $transition-default ease-out;
 }
 
 .list-item {
+    border-top: $border-size-default solid $border-color-default;
     display: block;
+    transition: background-color $transition-default ease-out;
 
-    + .list-item {
-        border-top: 1px solid $border-color-default;
+    &:hover,
+    &:focus {
+        background-color: lighten($brand-auxillary, 3%);
+
+        .list-item-title {
+            text-decoration: underline;
+        }
+
+        .list-item-activate {
+            transform: translateX($offset-default);
+        }
     }
 }

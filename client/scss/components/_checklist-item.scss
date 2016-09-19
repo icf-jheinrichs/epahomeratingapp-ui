@@ -1,0 +1,17 @@
+.checklist-item {
+    border-top: $border-size-default solid $border-color-default;
+    padding: $gutter-half;
+}
+
+.checklist-item-title {
+    display: inline-block;
+}
+
+.comments-quantity {
+    background-color: #fff;
+    border-radius: ceil($font-size-base / 2);
+    color: $status-correct;
+    position: absolute;
+    right: 8px;
+    top: 2px;
+}

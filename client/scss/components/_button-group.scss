@@ -1,0 +1,19 @@
+.button-group {
+    @extend %clearfix;
+    display: flex;
+    flex-wrap: nowrap;
+
+    .btn {
+        border-radius: 0;
+        float: left;
+        margin-right: -1px;
+
+        &:first-of-type {
+            border-radius: $border-radius-default 0 0 $border-radius-default;
+        }
+
+        &:last-of-type {
+            border-radius: 0 $border-radius-default $border-radius-default 0;
+        }
+    }
+}

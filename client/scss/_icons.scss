@@ -1,0 +1,8 @@
+// override fa styles
+.fa-lg {
+    font-size: $icon-font-size;
+}
+
+.fa-2x {
+    font-size: ceil($icon-font-size * 1.5);
+}

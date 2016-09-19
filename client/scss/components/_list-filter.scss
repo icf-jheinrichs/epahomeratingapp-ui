@@ -1,0 +1,29 @@
+.filters {
+    background-color: $brand-auxillary;
+    padding: $padding-large ($gutter-half - $padding-default);
+
+    // .btn {
+    //     @extend %btn-inverse;
+
+    //     &.active {
+    //         color: $brand-tertiary;
+    //     }
+    // }
+
+    // .active + .active {
+    //     border-left: 1px solid $brand-tertiary;
+    // }
+
+    .fa {
+        margin-right: $offset-small;
+    }
+}
+
+.filter-summary {
+    border-bottom: 2px solid $border-color-default;
+    padding: $padding-large $gutter-half;
+}
+
+.filter-results-quantity {
+    font-weight: bold;
+}

@@ -16,7 +16,7 @@
     text-transform: uppercase;
 }
 
-.label-hers {
+.label-hers-rating {
     background-color: $label-hers;
 }
 
@@ -27,6 +27,10 @@
     float: left;
     font-size: $font-size-small;
     margin-right: 1px;
+
+    &:first-of-type {
+        padding-left: $gutter-half;
+    }
 
     &:last-of-type {
         border-radius: 0 0 $border-radius-default;

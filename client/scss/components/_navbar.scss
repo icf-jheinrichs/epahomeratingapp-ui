@@ -28,9 +28,22 @@
 }
 
 .site-logo {
-    box-shadow: 0 2 4px $shadow-default;
+    box-shadow: 0 2px 5px $shadow-default;
     margin-right: $offset-default;
+    transition: transform $transition-default ease-in;
     vertical-align: middle;
+}
+
+.site-home-link {
+    &:hover .site-title,
+    &:focus .site-title {
+        text-decoration: underline;
+    }
+
+    &:hover .site-logo,
+    &:focus .site-logo {
+        transform: scale(1.1, 1.1);
+    }
 }
 
 .user-menu {
