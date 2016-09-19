@@ -1,0 +1,48 @@
+<div class="checklist-item">
+    <header>
+        <h4 class="checklist-item-title">{{::checklistItemCtrl.checklistItem.Shorthand}}</h4>
+        <button class="btn btn-link text-muted" type="button"><i class="fa fa-info-circle" aria-label="More Information"></i></button>
+    </header>
+
+    <table>
+        <caption>Slabs</caption>
+        <thead>
+            <tr>
+                <th>Foundation Type</th>
+                <th>Thermal Boundary Loc.</th>
+                <th>Crawl Space Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Slab</td>
+                <td>Floor</td>
+                <td>Unvented</td>
+            </tr>
+            <tr>
+                <td>Open crawl space/raised floor</td>
+                <td>Foundation Wall</td>
+                <td>Vented</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="flex-container flex-justify-end">
+        <div class="comments">
+            <button type="button" class="btn btn-link btn-comment">
+                <i class="fa fa-commenting-o fa-lg" aria-label="Leave a Comment"></i>
+
+                <i class="fa fa-check-circle comments-quantity" aria-label="3 comments"></i>
+            </button>
+        </div>
+
+        <div class="verification">
+            <div class="button-group">
+                <button class="btn" type="button">Rater Verified</button>
+                <button class="btn" type="button">Must Correct</button>
+                <button class="btn" type="button">Builder Verified</button>
+                <button class="btn" type="button">N/A</button>
+            </div>
+        </div>
+    </div>
+</div> <!-- .checklist-item -->

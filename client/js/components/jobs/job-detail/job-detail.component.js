@@ -1,5 +1,5 @@
 import template from './job-detail.html';
-import controller from './job-detail.controller.js';
+import controller from './job-detail.controller';
 
 let jobDetailComponent = {
     bindings : {

@@ -1,6 +1,5 @@
 import template from './jobs.html';
-import controller from './jobs.controller.js';
-// import './job.scss';
+import controller from './jobs.controller';
 
 let jobsComponent = {
     template,

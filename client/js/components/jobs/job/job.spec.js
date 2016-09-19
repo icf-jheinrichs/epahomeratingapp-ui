@@ -1,5 +1,5 @@
-describe('component: list-item-job', function testListItemJob () {
-    describe('rating type', function testRatingType () {
+describe('Component: job', function testJob () {
+    describe('rating label', function testRatingLabel () {
         it('should return class: label-energy-star if Energy Star Rating', function testRatingTypeEnergyStar () {
             expect('label-energy-star').to.equal('label-energy-star');
         });

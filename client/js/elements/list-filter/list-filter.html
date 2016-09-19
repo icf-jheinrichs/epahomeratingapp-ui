@@ -1,0 +1,26 @@
+<div class="filters flex-container flex-justify-between">
+    <div class="sort">
+        <button class="btn btn-link btn-sort" type="button">
+            <i class="fa fa-sort fa-lg" aria-hidden="true"></i> Sort
+        </button>
+    </div>
+
+    <div class="quick-filter">
+        <button-group
+            class="button-group"
+            buttons="listFilterCtrl.buttons"
+            allow-multiple="true">
+        </button-group>
+    </div>
+
+    <div class="search">
+        <button class="btn btn-link btn-search" type="button">
+            <i class="fa fa-search fa-lg" aria-hidden="true"></i> Search
+        </button>
+    </div>
+</div>
+
+<div class="filter-summary ellipsis">
+    <span class="filter-results-quantity">{{listFilterCtrl.quantity}}</span>
+    <span class="filter-criteria">{{listFilterCtrl.criteria}}</span>
+</div>

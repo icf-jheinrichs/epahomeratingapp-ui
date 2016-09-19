@@ -1,5 +1,5 @@
 import template from './radial-progress.html';
-import controller from './radial-progress.controller.js';
+import controller from './radial-progress.controller';
 import './radial-progress.scss';
 
 let radialProgressComponent = {

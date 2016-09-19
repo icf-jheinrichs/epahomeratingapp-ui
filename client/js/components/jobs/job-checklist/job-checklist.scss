@@ -1,0 +1,93 @@
+@import '../../../../scss/variables';
+@import '../../../../scss/mixins';
+@import '../../../../scss/utilities';
+@import '../../../../scss/elements/button';
+
+.job-checklist-header {
+    background-color: $brand-tertiary;
+    color: $text-color-inverse;
+    padding: $gutter-half;
+
+    .btn {
+        @extend %btn-inverse;
+    }
+
+    .label {
+        color: $text-color;
+    }
+
+    .actions {
+        margin-left: auto;
+    }
+}
+
+.job-checklist-meta {
+    margin-left: $gutter-half;
+}
+
+.job-checklist-title {
+    font-size: $font-size-h4;
+    margin-bottom: 0;
+}
+
+.checklist-section {
+    border-bottom: $border-size-default solid $border-color-default;
+}
+
+.checklist-section-title {
+    margin: $gutter-full $gutter-half $offset-default;
+}
+
+.nav-checklist-sections {
+    margin: $gutter-half ($gutter-half / 2);
+}
+
+.nav-checklist-item {
+    flex: 1;
+    margin: 0 ($gutter-half / 2);
+
+    img {
+        opacity: .5;
+        transition: opacity $transition-default;
+    }
+
+    &:hover,
+    &:focus {
+        .nav-checklist-item-description {
+            background-color: lighten($border-color-default, 3%);
+        }
+
+        img {
+            opacity: .75;
+        }
+    }
+
+    .active,
+    &:active {
+        .nav-checklist-item-description {
+            background-color: $border-color-default;
+        }
+
+        img {
+            opacity: 1;
+        }
+    }
+}
+
+.nav-checklist-item-description {
+    border: $border-size-default solid $border-color-default;
+    height: 85px;
+    margin: $offset-small 0;
+    padding: $padding-default;
+    text-align: center;
+    transition: background-color $transition-default;
+
+    span {
+        display: block;
+    }
+}
+
+.checklist-item .button-group .btn {
+    line-height: $line-height-small;
+    width: 90px;
+}

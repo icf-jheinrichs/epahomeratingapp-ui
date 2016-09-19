@@ -6,13 +6,16 @@ $job-photo-width:   115px;
 $job-photo-height:  115px;
 
 .job {
-    align-items: center;
     cursor: pointer;
     padding: $gutter-half;
     position: relative;
 
     &.job-returned {
         padding-top: $gutter-half + $offset-default;
+    }
+
+    .fa-chevron-right {
+        color: $link-color;
     }
 }
 
@@ -56,12 +59,14 @@ $job-photo-height:  115px;
     font-weight: bold;
 }
 
-.job-progress {
-    margin-left: auto;
-    width: 200px;
+.job-house-quantity {
+    margin: 0 $gutter-full 0 auto;
+
+    .fa {
+        margin-right: $offset-small;
+    }
 }
 
-.icon-chevron-right {
-    position: absolute;
-    right: 0;
+.job-progress {
+    width: 200px;
 }

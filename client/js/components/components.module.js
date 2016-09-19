@@ -1,5 +1,5 @@
 import angular from 'angular';
-import JobsModule from './jobs/jobs.module.js';
+import JobsModule from './jobs/jobs.module';
 
 let componentModule
     = angular

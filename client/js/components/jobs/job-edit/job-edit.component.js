@@ -1,5 +1,5 @@
 import template from './job-edit.html';
-import controller from './job-edit.controller.js';
+import controller from './job-edit.controller';
 // import './job.scss';
 
 let jobEditComponent = {

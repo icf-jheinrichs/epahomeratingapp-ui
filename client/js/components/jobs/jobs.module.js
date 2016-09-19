@@ -1,14 +1,18 @@
 import angular from 'angular';
-import jobsComponent from './jobs/jobs.component.js';
-import jobComponent from './job/job.component.js';
-import jobEditComponent from './job-edit/job-edit.component.js';
-import jobNewComponent from './job-new/job-new.component.js';
-import jobDetailComponent from './job-detail/job-detail.component.js';
-import jobChecklistComponent from './job-checklist/job-checklist.component.js';
+import jobsComponent from './jobs/jobs.component';
+import jobComponent from './job/job.component';
+import jobEditComponent from './job-edit/job-edit.component';
+import jobNewComponent from './job-new/job-new.component';
+import jobDetailComponent from './job-detail/job-detail.component';
+import jobChecklistComponent from './job-checklist/job-checklist.component';
 
-let componentModule
+import JobChecklistModule from './job-checklist/job-checklist.module';
+
+let jobsModule
     = angular
-        .module('epahomeratingapp.components.jobs', [])
+        .module('epahomeratingapp.components.jobs', [
+            JobChecklistModule.name
+        ])
         .component('jobs', jobsComponent)
         .component('job', jobComponent)
         .component('jobEdit', jobEditComponent)
@@ -16,4 +20,4 @@ let componentModule
         .component('jobDetail', jobDetailComponent)
         .component('jobChecklist', jobChecklistComponent);
 
-export default componentModule;
+export default jobsModule;

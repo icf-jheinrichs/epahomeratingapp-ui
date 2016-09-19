@@ -1,5 +1,5 @@
 import template from './job-new.html';
-import controller from './job-new.controller.js';
+import controller from './job-new.controller';
 // import './job.scss';
 
 let jobNewComponent = {

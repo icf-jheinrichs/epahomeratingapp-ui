@@ -1,0 +1,7 @@
+<button
+    data-ng-repeat="button in buttonGroupCtrl.buttons track by button.value"
+    data-ng-click="buttonGroupCtrl.handleClick(button.value)"
+    class="btn"
+    data-ng-class="{active : buttonGroupCtrl.isActive(button.value)}">
+        {{button.display}}
+</button>
