@@ -5,8 +5,7 @@ import './checklist-house-selection.scss';
 
 let checklistHouseSelectionComponent = {
     bindings : {
-        houses        : '<',
-        onHouseSelect : '&'
+        houses             : '<'
     },
     template,
     controller,

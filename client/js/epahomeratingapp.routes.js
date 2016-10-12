@@ -28,17 +28,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
                             });
 
                     return jobsPromise;
-                }// ,
-                // jobDisplayList : (JobDisplayListService, $stateParams) => {
-                //     let jobDisplayListPromise
-                //         = JobDisplayListService
-                //             .get($stateParams.id)
-                //             .then(jobDisplayList => {
-                //                 return jobDisplayList.data;
-                //             });
-
-                //     return jobDisplayListPromise;
-                // }
+                }
             }
         })
 

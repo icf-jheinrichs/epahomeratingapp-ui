@@ -5,8 +5,11 @@ import './house-selection-item.scss';
 
 let houseSelectionItemComponent = {
     bindings : {
-        house     : '<',
-        isPrimary : '@'
+        house              : '<',
+        isPrimary          : '@'
+    },
+    require : {
+        'checklist' : '^^jobChecklist'
     },
     template,
     controller,

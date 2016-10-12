@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 class JobChecklistController {
     constructor ($stateParams, JobsService) {
         'ngInject';
@@ -22,8 +24,22 @@ class JobChecklistController {
         this.RatingTypeLabel = (this.job.RatingType === 'energy-star') ? 'Energy Star' : 'HERS Rating';
     }
 
-    onSelectHouse (HouseId) {
-        this.selectedHouse = HouseId;
+    onUpdateHousePhoto (HouseId, photo) {
+        let secondaryIndex;
+
+        debugger;
+
+        if (this.job.Primary.HouseId === HouseId) {
+            this.job.Primary.Photo = [photo];
+        } else {
+            secondaryIndex = _.findIndex(this.job.Secondary, {HouseId : HouseId});
+
+            this.job.Secondary[secondaryIndex].Photo = [photo];
+        }
+
+        this
+            .JobsService
+            .put(this.job);
     }
 }
 

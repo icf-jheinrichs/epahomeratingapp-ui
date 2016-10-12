@@ -1,8 +1,9 @@
 class JobsService {
-    constructor ($http) {
+    constructor ($http, $q) {
         'ngInject';
 
         this.$http = $http;
+        this.$q    = $q;
     }
 
     get () {
@@ -21,6 +22,14 @@ class JobsService {
                 .get('/api/jobs/' + id);
 
         return results;
+    }
+
+    put (job) {
+        let deferred = this.$q.defer();
+
+        deferred.resolve(job);
+
+        return deferred.promise;
     }
 }
 

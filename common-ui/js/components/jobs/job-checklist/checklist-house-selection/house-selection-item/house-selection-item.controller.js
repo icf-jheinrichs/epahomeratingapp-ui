@@ -1,7 +1,11 @@
 class houseSelectionItemController {
-    constructor () {
+    constructor (CameraService) {
         'ngInject';
 
+        this.CameraService = CameraService;
+    }
+
+    $onInit () {
         let AddressInformation = this.house.AddressInformation;
 
         //TODO: move this to service
@@ -16,11 +20,32 @@ class houseSelectionItemController {
         } else {
             this.HouseTitle = `Manual ID: ${AddressInformation.ManualId}`;
         }
+
+        this.photoUrl = this.getPhotoUrl;
     }
 
     onEditPhoto (HouseId, $event) {
+        let self = this;
         $event.preventDefault();
         $event.stopPropagation();
+
+        this.CameraService
+            .getPhoto()
+            .then(function handleCamera (photo) {
+                self.checklist.onUpdateHousePhoto(HouseId, photo);
+            });
+    }
+
+    getPhotoUrl () {
+        let photoUrl;
+
+        if (this.house.Photo.length === 0) {
+            photoUrl = 'img/job-photo-default.svg';
+        } else {
+            photoUrl = this.house.Photo[0];
+        }
+
+        return photoUrl;
     }
 }
 
