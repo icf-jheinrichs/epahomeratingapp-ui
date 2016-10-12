@@ -27,8 +27,6 @@ class JobChecklistController {
     onUpdateHousePhoto (HouseId, photo) {
         let secondaryIndex;
 
-        debugger;
-
         if (this.job.Primary.HouseId === HouseId) {
             this.job.Primary.Photo = [photo];
         } else {
