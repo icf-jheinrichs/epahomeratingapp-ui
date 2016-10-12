@@ -1,0 +1,24 @@
+@import '../../../../scss/variables';
+@import '../../../../scss/mixins';
+@import '../../../../scss/utilities';
+
+.linear-progress {
+    background-color: $brand-auxillary;
+    height: $linear-progress-thickness;
+    overflow: hidden;
+    width: 100%;
+}
+
+.linear-must-correct,
+.linear-verified {
+    float: left;
+    height: $linear-progress-thickness;
+}
+
+.linear-must-correct {
+    background-color: $status-error;
+}
+
+.linear-verified {
+    background-color: $status-correct;
+}

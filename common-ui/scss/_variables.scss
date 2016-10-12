@@ -1,0 +1,166 @@
+//
+//# Variables
+//
+
+//
+//## Colors
+//
+
+//
+//### Brand Colors
+//
+$brand-primary:     #00aeef; // light blue from logo
+$brand-secondary:   #018edc; // darker blue
+$brand-tertiary:    #414a51; // dark grey
+$brand-auxillary:   #f0f0f0; // light grey
+
+//
+//### Status Colors
+//
+
+$status-active:     #f5a623;
+$status-correct:    #7ed321;
+$status-error:      #ff464b;
+
+//
+//## Typography
+//
+
+$font-family-base:  Roboto, arial, sans-serif;
+$font-family-heading: Roboto, arial, sans-serif;
+
+$text-color:        #262b2f;
+$text-color-inverse: #fff;
+$text-color-muted:  lighten($text-color, 25%);
+
+$text-color-heading: $text-color;
+
+$link-color:        $brand-secondary;
+$link-color-hover:  darken($brand-secondary, 10%);
+
+$font-size-base:    14px;
+$font-size-small:   12px;
+
+$font-size-h1:      ceil($font-size-base * 2);      // 28px
+$font-size-h2:      ceil($font-size-base * 2);      // 28px
+$font-size-h3:      ceil($font-size-base * 1.428);  // 20px
+$font-size-h4:      ceil($font-size-base * 1.285);  // 18px
+$font-size-h5:      ceil($font-size-base * 1.285);  // 16px
+$font-size-h6:      $font-size-base;                // 14px;
+
+$line-height-base:  1.6em;
+$line-height-small: 1.2em;
+$line-height-none:  1em;
+
+$heading-font-weight: normal;
+
+$icon-font-size:    20px;
+$icon-font-size-small: $font-size-base;
+
+//
+//## Scaffolding
+//
+
+$gutter-half:       20px;
+$gutter-full:       ($gutter-half * 2);
+
+$offset-default:    10px;
+$offset-small:      5px;
+$offset-large:      $gutter-half;
+
+$body-bg:           #fff;
+
+//
+//## Padding
+//
+
+$padding-default:   6px;
+$padding-small:     3px;
+$padding-large:     9px;
+
+//
+//## Borders
+//
+
+$border-color-default:  $brand-auxillary;
+$border-color-dark:     darken($brand-auxillary, 10%);
+$border-color-inverse:  #fff;
+
+$border-radius-default: 4px;
+$border-radius-small:   2px;
+$border-radius-large:   6px;
+
+$border-size-default:   1px;
+$border-size-medium:    ($border-size-default * 2);
+$border-size-large:     ($border-size-medium * 2);
+
+//
+//## Animation
+//
+
+$transition-default:    300ms;
+$transition-slow:       600ms;
+$transition-fast:       150ms;
+
+//
+//## Tables
+//
+
+$table-header-color:    #60bfdd;
+$table-header-border-color: #fff;
+
+//
+//## Buttons
+//
+
+$button-color-active:   #fff;
+
+$button-border-color-default: #60bfdd;
+$button-border-color-hover: darken($button-border-color-default, 15%);
+$button-border-color-inverse: $border-color-inverse;
+
+$button-background-color-default: #fff;
+$button-background-color-hover: darken($button-background-color-default, 10%);
+$button-background-color-active: $button-border-color-default;
+$button-background-color-inverse: transparent;
+$button-background-color-inverse-active: $border-color-inverse;
+$button-background-color-hover-inverse: rgba(255, 255, 255, .20);
+
+$shadow-default:        rgba(0, 0, 0, .25);
+
+//
+//## Labels
+//
+
+$label-returned:    $status-error;
+$label-energy-star: $brand-secondary;
+$label-hers:        #fff578;
+
+$label-padding:     $padding-default;
+
+//
+//## Z indexes
+//
+
+$zindex-fixed-header: 1000;
+$zindex-fixed-footer: 900;
+
+//
+//## Screen Sizes
+//
+
+$screen-lg:         1024px;
+$screen-md:         768px;
+$screen-sm:         640px;
+
+$screen-lg-min:     ($screen-md + 1);
+$screen-md-max:     ($screen-lg - 1);
+$screen-md-min:     ($screen-sm + 1);
+
+
+//
+//## Components
+//
+
+// Linear Progress
+$linear-progress-thickness: 10px;

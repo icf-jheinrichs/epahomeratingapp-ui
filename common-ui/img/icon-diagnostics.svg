@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="57px" height="50px" viewBox="0 0 57 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <defs>
+        <path d="M1.39941406,48.2685547 C1.35791016,44.8085937 5.10888672,26.5078125 9.91113281,28.5791016 C14.7133789,30.6503906 15.7587891,44.0927734 20.425293,43.1694336 C25.0917969,42.2460937 27.1455078,9.27392578 34.4667969,10.0307617 C41.7880859,10.7875977 38.9853516,32.2910156 44.8989258,32.0410156 C50.8125,31.7910156 48.7963867,13.3955078 53.8520508,13.3989258" id="path-1"></path>
+        <rect id="path-2" x="1" y="2" width="52" height="46"></rect>
+        <mask id="mask-3" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-2" y="-2" width="56" height="50">
+            <rect x="-1" y="0" width="56" height="50" fill="white"></rect>
+            <use xlink:href="#path-2" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="Diagnostic-Tests" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-diagnostics" transform="translate(2.000000, 0.000000)">
+            <rect id="Rectangle" fill="#FFFFFF" x="1" y="2" width="52" height="46"></rect>
+            <g id="grid-horizontal" transform="translate(27.500000, 24.500000) rotate(-270.000000) translate(-27.500000, -24.500000) translate(9.500000, -3.000000)" stroke="#979797" stroke-linecap="square">
+                <path d="M1.5,0.572771991 L1.5,54.4133391" id="Line"></path>
+                <path d="M13.5,1.67298168 L13.5,54.5248907" id="Line"></path>
+                <path d="M24,2.19944444 L24,54.9861111" id="Line"></path>
+                <path d="M35,2.19944444 L35,54.9861111" id="Line"></path>
+            </g>
+            <g id="grid-vertical" transform="translate(9.000000, 0.000000)" stroke="#979797" stroke-linecap="square">
+                <path d="M1.5,0.5 L1.5,47.5" id="Line"></path>
+                <path d="M13.1666667,1.5 L13.1666667,47.5977211" id="Line"></path>
+                <path d="M24.3333333,2 L24.3333333,48.0977211" id="Line"></path>
+                <path d="M35,2 L35,48.0977211" id="Line"></path>
+            </g>
+            <g id="Path-2">
+                <use stroke="#FFFFFF" stroke-width="6" xlink:href="#path-1"></use>
+                <use stroke="#979797" stroke-width="4" xlink:href="#path-1"></use>
+                <use stroke="#60BFDD" stroke-width="3" xlink:href="#path-1"></use>
+            </g>
+            <use id="Rectangle" stroke="#000000" mask="url(#mask-3)" stroke-width="4" xlink:href="#path-2"></use>
+        </g>
+    </g>
+</svg>

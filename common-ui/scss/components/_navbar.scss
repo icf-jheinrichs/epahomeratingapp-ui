@@ -1,0 +1,55 @@
+.navbar {
+    color: $text-color-inverse;
+    padding: $gutter-half;
+
+    .btn {
+        @extend %btn-inverse;
+    }
+
+    &.flex-container,
+    .flex-container {
+        align-items: center;
+    }
+
+    .nav {
+        margin-left: auto;
+    }
+}
+
+.site-title {
+    margin: 0;
+    white-space: nowrap;
+
+    span {
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+}
+
+.site-logo {
+    box-shadow: 0 2px 5px $shadow-default;
+    margin-right: $offset-default;
+    transition: transform $transition-default ease-in;
+    vertical-align: middle;
+}
+
+.site-home-link {
+    &:hover .site-title,
+    &:focus .site-title {
+        text-decoration: underline;
+    }
+
+    &:hover .site-logo,
+    &:focus .site-logo {
+        transform: scale(1.1, 1.1);
+    }
+}
+
+.user-menu {
+    margin-right: $offset-default;
+}
+
+// variants
+#site-head {
+    @include gradient-vertical($brand-secondary, darken($brand-secondary, 5%));
+}

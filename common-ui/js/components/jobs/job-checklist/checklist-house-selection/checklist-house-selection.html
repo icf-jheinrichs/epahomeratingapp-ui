@@ -1,0 +1,41 @@
+<div class="house-selection">
+    <div class="page-container house-selection-toggle">
+        <button
+            type="button"
+            class="btn btn-link btn-inverse btn-house-selection-toggle"
+            data-ng-click="checklistHouseSelectionCtrl.onHouseSelectionToggle()">
+                {{checklistHouseSelectionCtrl.toggleText}} <i class="fa fa-caret-down" data-ng-class="{'fa-rotate-180' : !checklistHouseSelectionCtrl.showNavbar}" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <section class="page-container flex-container flex-align-center house-selection-selected" data-ng-class="{'collapse-height' : checklistHouseSelectionCtrl.showNavbar}">
+        <h3 class="house-selection-title">You Are Rating:</h3>
+
+        <figure class="house-photo">
+            <img src="img/job-photo-default.svg" />
+        </figure>
+
+        <div class="house-info flex-item-grow">
+            <h4 class="house-title">{{checklistHouseSelectionCtrl.selectedHouseTitle}}</h4>
+            <span class="house-builder">Builder: {{checklistHouseSelectionCtrl.selectedHouse.BuilderId}}</span>
+            <span class="house-plan">House Plan: {{checklistHouseSelectionCtrl.selectedHouse.HousePlanId[0]}}</span>
+        </div>
+    </section>
+
+    <nav class="navbar-house-selection page-container" data-ng-class="{'collapse-height' : !checklistHouseSelectionCtrl.showNavbar}">
+        <h3 class="house-selection-title">{{::checklistHouseSelectionCtrl.sampleSize}} Addresses For This Sample Set</h3>
+
+        <div class="house-selection-list flex-container">
+            <house-selection-item
+                house="checklistHouseSelectionCtrl.houses.Primary"
+                is-primary="true">
+            </house-selection-item>
+
+            <house-selection-item
+                data-ng-repeat="house in checklistHouseSelectionCtrl.houses.Secondary"
+                house="house"
+                is-primary="false">
+            </house-selection-item>
+        </div>
+    </nav>
+</div>

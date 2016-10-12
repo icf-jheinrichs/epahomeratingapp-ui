@@ -1,0 +1,28 @@
+<a class="house-selection-list-item flex-container"
+   ui-sref=".category({houseId: houseSelectionItemCtrl.house.HouseId})"
+   ui-sref-active="active">
+
+    <figure class="house-photo">
+        <img src="img/job-photo-default.svg" />
+
+        <figcaption class="house-photo-edit">
+            <button
+                class="btn btn-block btn-link"
+                type="button"
+                data-ng-click="houseSelectionItemCtrl.onEditPhoto(houseSelectionItemCtrl.house.HouseId, $event)">
+
+                <i class="fa fa-camera" aria-hidden="true"></i> Edit Photo
+
+            </button>
+        </figcaption>
+    </figure>
+
+    <div class="house-info">
+        <h4 class="house-title">{{houseSelectionItemCtrl.HouseTitle}} {{hhouseSelectionItemCtrlouse.isPrimary}}</h4>
+        <span class="label label-primary" data-ng-if="houseSelectionItemCtrl.isPrimary=='true'"><i class="fa fa-star" aria-hidden="true"></i> Primary</span>
+
+        <p>Builder: The House Designers</p>
+
+        <p>House Plan: {{::houseSelectionItemCtrl.house.HousePlanId[0]}}</p>
+    </div>
+</a>

@@ -1,0 +1,87 @@
+@import '../../../../../../scss/variables';
+@import '../../../../../../scss/mixins';
+@import '../../../../../../scss/utilities';
+
+.house-selection-list-item {
+    min-width: 310px;
+    position: relative;
+
+    + .house-selection-list-item {
+        margin-left: $gutter-half;
+    }
+
+    &:last-of-type {
+        margin-right: $gutter-half;
+    }
+
+    &::before {
+        background-color: $status-active;
+        bottom: 0;
+        content: '';
+        position: absolute;
+        top: 0;
+        transition: transform $transition-default;
+        width: 100%;
+    }
+
+    &.active::before {
+        transform: scale(1.04, 1.08);
+    }
+
+    .house-info {
+        background-color: $brand-auxillary;
+        border-left: 1px solid $body-bg;
+    }
+}
+
+.house-photo {
+    margin: 0;
+    position: relative;
+
+    img {
+        float: left;
+        width: 100%;
+    }
+}
+
+.house-photo-edit {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+
+    .btn {
+        background-color: rgba($brand-secondary, .6);
+        color: $text-color-inverse;
+
+        &:hover,
+        &:focus {
+            background-color: rgba($brand-secondary, 1);
+            color: $text-color-inverse;
+        }
+    }
+}
+
+.house-info {
+    font-size: $font-size-small;
+    padding: ($padding-large + $offset-default) $padding-large $padding-large;
+    position: relative;
+    width: 200px;
+
+    .label-primary {
+        border-radius: 0 0 $border-radius-default;
+        left: 0;
+        padding-left: $padding-large;
+        position: absolute;
+        top: 0;
+    }
+
+    .house-title {
+        font-size: $font-size-h6;
+        font-weight: bold;
+        margin: 0 0 $offset-small;
+    }
+
+    p {
+        margin: 0;
+    }
+}

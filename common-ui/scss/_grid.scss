@@ -1,0 +1,37 @@
+.flex-container {
+    display: flex;
+}
+
+.flex-justify-end {
+    justify-content: flex-end;
+}
+
+.flex-justify-between {
+    justify-content: space-between;
+}
+
+.flex-align-center {
+    align-items: center;
+}
+
+.flex-item-static {
+    flex-grow: 0;
+}
+
+.flex-item-grow {
+    flex-grow: 1;
+}
+
+.fluid-container {
+    @extend %clearfix;
+}
+
+.col {
+    padding: $gutter-half;
+}
+
+.page-container {
+    margin: 0 auto;
+    max-width: $screen-lg;
+    position: relative;
+}

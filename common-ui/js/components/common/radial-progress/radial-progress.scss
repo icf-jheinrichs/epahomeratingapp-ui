@@ -1,0 +1,39 @@
+@import '../../../../scss/variables';
+@import '../../../../scss/mixins';
+@import '../../../../scss/utilities';
+
+.radial-progress {
+    display: inline-block;
+    height: 90px;
+    margin-left: $offset-default;
+    position: relative;
+    width: 80px;
+
+    .progress-total {
+        font-size: $font-size-h4;
+        font-weight: bold;
+        height: $font-size-h4;
+        line-height: $line-height-none;
+        margin-top: -($font-size-h4 / 2);
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        width: 100%;
+    }
+
+    .radial-wrapper {
+        transform: rotate(180deg);
+    }
+
+    .radial-progress-background {
+        fill: $brand-auxillary;
+    }
+
+    .radial-progress-verified {
+        fill: $status-correct;
+    }
+
+    .radial-progress-must-correct {
+        fill: $status-error;
+    }
+}

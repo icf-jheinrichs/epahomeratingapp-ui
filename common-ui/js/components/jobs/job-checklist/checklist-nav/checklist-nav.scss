@@ -1,0 +1,69 @@
+@import '../../../../../scss/variables';
+@import '../../../../../scss/mixins';
+@import '../../../../../scss/utilities';
+
+.nav-checklist-sections {
+    margin: $gutter-half ($gutter-half / 2);
+}
+
+.nav-checklist-item {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin: 0 ($gutter-half / 2);
+    padding: ($linear-progress-thickness) 0;
+    position: relative;
+
+    img {
+        opacity: .5;
+        transition: opacity $transition-default;
+    }
+
+    &:hover,
+    &:focus {
+        .nav-checklist-item-description {
+            background-color: lighten($border-color-default, 3%);
+        }
+
+        img {
+            opacity: .75;
+        }
+    }
+
+    &.active,
+    &:active {
+        .nav-checklist-item-description {
+            background-color: $border-color-default;
+        }
+
+        img {
+            opacity: 1;
+        }
+    }
+
+    .linear-progress {
+        flex: 0;
+        position: absolute;
+    }
+
+    .linear-progress-pre-drywall {
+        top: 0;
+    }
+
+    .linear-progress-final {
+        bottom: 0;
+    }
+}
+
+.nav-checklist-item-description {
+    border: $border-size-default solid $border-color-default;
+    flex: 1;
+    margin: $offset-small 0;
+    padding: $padding-default;
+    text-align: center;
+    transition: background-color $transition-default;
+
+    span {
+        display: block;
+    }
+}

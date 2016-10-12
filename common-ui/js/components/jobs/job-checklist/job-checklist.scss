@@ -1,0 +1,47 @@
+@import '../../../../scss/variables';
+@import '../../../../scss/mixins';
+@import '../../../../scss/utilities';
+@import '../../../../scss/elements/button';
+
+.job-checklist-header {
+    background-color: $brand-tertiary;
+    color: $text-color-inverse;
+
+    .btn {
+        @extend %btn-inverse;
+    }
+
+    .label {
+        color: $text-color;
+    }
+
+    .actions {
+        margin-left: auto;
+    }
+
+    header {
+        padding: $gutter-half;
+    }
+}
+
+.job-checklist-meta {
+    margin-left: $gutter-half;
+}
+
+.job-checklist-title {
+    font-size: $font-size-h4;
+    margin-bottom: 0;
+}
+
+.checklist-section {
+    border-bottom: $border-size-default solid $border-color-default;
+}
+
+.checklist-section-title {
+    margin: $gutter-full $gutter-half $offset-default;
+}
+
+.checklist-item .button-group .btn {
+    line-height: $line-height-small;
+    width: 90px;
+}

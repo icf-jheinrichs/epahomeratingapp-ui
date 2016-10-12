@@ -1,0 +1,73 @@
+@import '../../../../../scss/variables';
+@import '../../../../../scss/mixins';
+@import '../../../../../scss/utilities';
+
+.house-selection-toggle {
+    padding: 0;
+}
+
+.house-selection-selected {
+    color: $text-color-inverse;
+    height: 100px;
+    padding: $gutter-half;
+
+    .house-photo {
+        height: auto;
+        margin: 0 $offset-large;
+        width: 50px;
+    }
+}
+
+.house-selection {
+    background-color: $brand-tertiary;
+    bottom: 0;
+    position: fixed;
+    width: 100%;
+    z-index: $zindex-fixed-footer;
+
+    .btn-house-selection-toggle {
+        background-color: $brand-tertiary;
+        border-radius: $border-radius-default $border-radius-default 0 0;
+        bottom: 100%;
+        position: absolute;
+        right: 0;
+
+        &:hover,
+        &:focus {
+            background-color: lighten($brand-tertiary, 10%);
+        }
+    }
+
+    .fa-caret-down {
+        transition: transform $transition-slow;
+    }
+
+    .house-selection-title {
+        color: $text-color-inverse;
+        font-size: $font-size-h6;
+        font-weight: bold;
+        margin: 0;
+    }
+}
+
+.navbar-house-selection {
+    height: 250px;
+    padding: $gutter-half;
+
+    .house-selection-title {
+        margin-bottom: $offset-default;
+    }
+}
+
+.house-selection-list {
+    background-color: $body-bg;
+    overflow-y: scroll;
+    padding: $gutter-half;
+}
+
+.house-selection-selected,
+.navbar-house-selection {
+    overflow-y: hidden;
+    position: relative;
+    transition: height $transition-default, padding $transition-default;
+}

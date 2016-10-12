@@ -1,0 +1,52 @@
+$roboto-family: 'Roboto';
+$roboto-path: '../font/roboto/';
+
+@include font-face(
+        $roboto-family,
+        $roboto-path,
+        "Roboto Light",
+        "Roboto-Light",
+        'Roboto-Light',
+        300,
+        normal
+    );
+
+@include font-face(
+        $roboto-family,
+        $roboto-path,
+        "Roboto",
+        "Roboto-Regular",
+        'Roboto-Regular',
+        400,
+        normal
+    );
+
+@include font-face(
+        $roboto-family,
+        $roboto-path,
+        "Roboto",
+        "Roboto-Italic",
+        'Roboto-Italic',
+        400,
+        italic
+    );
+
+@include font-face(
+        $roboto-family,
+        $roboto-path,
+        "Roboto",
+        "Roboto-Regular",
+        'Roboto-Bold',
+        700,
+        normal
+    );
+
+@include font-face(
+        $roboto-family,
+        $roboto-path,
+        "Roboto Bold Italic",
+        "Roboto-BoldItalic",
+        'Roboto-BoldItalic',
+        700,
+        italic
+    );
