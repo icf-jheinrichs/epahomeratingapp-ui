@@ -21,7 +21,7 @@ class houseSelectionItemController {
             this.HouseTitle = `Manual ID: ${AddressInformation.ManualId}`;
         }
 
-        this.photoUrl = this.getPhotoUrl;
+        this.photoUrl = this.getPhotoUrl();
     }
 
     onEditPhoto (HouseId, $event) {
