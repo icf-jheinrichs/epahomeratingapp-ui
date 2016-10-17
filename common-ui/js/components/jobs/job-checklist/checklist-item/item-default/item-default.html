@@ -5,14 +5,15 @@
     </header>
 
     <div class="flex-container">
-        <div class="comments">
-            <button type="button" class="btn btn-link" aria-label="Leave a Comment">
-                <i class="fa fa-commenting-o fa-lg" aria-hidden="true"></i>
-            </button>
-        </div>
+        <checklist-item-comments></checklist-item-comments>
 
         <div class="verification">
-            <button-group class="button-group" buttons="checklistItemCtrl.responseButtons"></button-group>
+            <button-group
+                class="button-group"
+                buttons="checklistItemCtrl.responseButtons"
+                initial-value="checklistItemCtrl.response"
+                on-set-value="checklistItemCtrl.onSetResponse(response)">
+            </button-group>
         </div>
     </div>
 </div>

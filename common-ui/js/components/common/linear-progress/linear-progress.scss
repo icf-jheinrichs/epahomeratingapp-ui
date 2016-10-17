@@ -7,12 +7,17 @@
     height: $linear-progress-thickness;
     overflow: hidden;
     width: 100%;
+
+    &.not-applicable {
+        background-image: repeating-linear-gradient(45deg, transparent, transparent ($linear-progress-thickness / 2), $body-bg ($linear-progress-thickness / 2), $body-bg $linear-progress-thickness);
+    }
 }
 
 .linear-must-correct,
 .linear-verified {
     float: left;
     height: $linear-progress-thickness;
+    transition: width $transition-default;
 }
 
 .linear-must-correct {

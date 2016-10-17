@@ -1,3 +1,5 @@
+'use strict';
+
 describe('List Filter Component', function testRadialProgress () {
     describe('Total Progress', function testTotalProgress () {
         let progress = 10 + 51;

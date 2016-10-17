@@ -1,0 +1,17 @@
+.popover {
+    background-color: $body-bg;
+    border: $border-size-default solid $border-color-default;
+    border-radius: $border-radius-default;
+    position: absolute;
+    top: 100%;
+    z-index: $zindex-popover;
+}
+
+.popover-panel-header {
+    background-color: $brand-auxillary;
+    padding: $gutter-half;
+}
+
+.popover-pane-body {
+    padding: $gutter-half;
+}

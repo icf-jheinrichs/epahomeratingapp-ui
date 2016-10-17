@@ -4,7 +4,11 @@ import controller from './item-default.controller';
 
 let checklistItemDefaultComponent = {
     bindings : {
-        checklistItem : '<'
+        itemId               : '@',
+        itemCategory         : '@',
+        itemCategoryProgress : '@',
+        checklistItem        : '<',
+        response             : '<'
     },
     template,
     controller,

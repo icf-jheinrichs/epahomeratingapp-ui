@@ -59,6 +59,8 @@ class checklistHouseSelectionController {
 
     onHouseSelectionToggle () {
         this.showNavbar = !this.showNavbar;
+
+        this.setHouseSelectionState();
     }
 
     hideHouseSelection () {

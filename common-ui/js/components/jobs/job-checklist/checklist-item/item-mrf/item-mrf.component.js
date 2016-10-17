@@ -4,7 +4,12 @@ import controller from './item-mrf.controller';
 
 let checklistItemMrfComponent = {
     bindings : {
-        checklistItem : '<'
+        itemId               : '@',
+        itemCategory         : '@',
+        itemCategoryProgress : '@',
+        checklistItem        : '<',
+        response             : '<',
+        homePerformance      : '<'
     },
     template,
     controller,

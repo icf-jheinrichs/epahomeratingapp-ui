@@ -1,34 +1,7 @@
-const buttons = [
-    {
-        'display' : 'Rater Verified',
-        'value'   : 'rater-verified'
-    },
-    {
-        'display' : 'Must Correct',
-        'value'   : 'must-correct'
-    },
-    {
-        'display' : 'Builder Verified',
-        'value'   : 'builder-verified'
-    },
-    {
-        'display' : 'N/A',
-        'value'   : 'na'
-    }
-];
+import ChecklistItemClass from '../checklist-item.class';
 
-class ChecklistItemMrfController {
-    constructor () {
-        'ngInject';
-    }
+class ChecklistItemMrfController extends ChecklistItemClass {
 
-    $onInit () {
-        this.responseButtons = this.getOptions();
-    }
-
-    getOptions () {
-        return buttons;
-    }
 }
 
 export default ChecklistItemMrfController;

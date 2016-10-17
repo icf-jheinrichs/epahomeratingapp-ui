@@ -6,13 +6,11 @@ class ChecklistItemController {
     }
 
     $onInit () {
-        this.checklistItem = {};
-
         this
             .DisplayLogicDigestService
-            .get('1')
-            .then(checklistItemDisplay => {
-                this.checklistItem.ShortHand = checklistItemDisplay.ShortHand;
+            .get(this.itemId)
+            .then(checklistItem => {
+                this.checklistItem = checklistItem;
             });
     }
 }

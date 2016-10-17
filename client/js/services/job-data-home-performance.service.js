@@ -1,12 +1,12 @@
 import PouchDB from 'pouchdb';
 
-class JobDisplayListService {
+class JobDataHomePerformanceService {
     constructor ($q, DB) {
         'ngInject';
 
         this.$q    = $q;
 
-        this.db    = new PouchDB(DB.JOB_DISPLAY_LIST);
+        this.db    = new PouchDB(DB.JOB_DATA_HOME_PERFORMANCE);
     }
 
     getById (_id) {
@@ -26,4 +26,4 @@ class JobDisplayListService {
     }
 }
 
-export default JobDisplayListService;
+export default JobDataHomePerformanceService;

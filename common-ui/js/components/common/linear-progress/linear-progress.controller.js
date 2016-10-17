@@ -1,12 +1,22 @@
 class LinearProgressController {
-    constructor ($log) {
-        'ngInject';
-
+    constructor ($element) {
+        this.$element = $element;
     }
 
     $onInit () {
-        this.mustCorrectWidth = this.getWidth(this.mustCorrect, this.total);
-        this.verifiedWidth = this.getWidth(this.verified, this.total);
+        this.mustCorrectWidth = () => {
+            return this.getWidth(this.progress.MustCorrect, this.progress.Total);
+        };
+
+        this.verifiedWidth = () => {
+            return this.getWidth(this.progress.Verified, this.progress.Total);
+        };
+    }
+
+    $postLink () {
+        if (this.progress.Total === 0) {
+            this.$element.addClass('not-applicable');
+        }
     }
 
     getWidth (partial, total) {

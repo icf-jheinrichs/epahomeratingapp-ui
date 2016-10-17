@@ -1,6 +1,10 @@
 class jobChecklistNavController {
-    constructor ($log) {
-        'ngInject';
+    constructor ($rootScope, CATEGORIES) {
+        this.CATEGORIES = CATEGORIES;
+
+        $rootScope.$on('updateChecklistResponseTotals', (event, progress) => {
+            this.progress = progress;
+        });
     }
 }
 

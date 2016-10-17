@@ -1,24 +1,31 @@
 <div class="job-checklist-header">
     <header class="page-container flex-container flex-align-center">
-        <a data-ui-sref="jobs()" aria-label="Back to Jobs"><i class="fa fa-chevron-left fa-lg" aria-hidden="true"></i></a>
+        <a data-ui-sref="jobs()" aria-label="Back to Jobs">
+            <i class="fa fa-chevron-left fa-lg" aria-hidden="true"></i>
+        </a>
 
         <div class="job-checklist-meta">
-            <span class="label label-rating-type" data-ng-class="jobChecklistCtrl.getRatingTypeClass()">{{jobChecklistCtrl.RatingTypeLabel}}</span>
-            <h2 class="job-checklist-title">{{jobChecklistCtrl.job.JobType}} ID: {{jobChecklistCtrl.job._id}}</h2>
+            <span class="label label-rating-type" data-ng-class="jobChecklistCtrl.getRatingTypeClass()">
+                {{jobChecklistCtrl.RatingTypeLabel}}
+            </span>
+
+            <h2 class="job-checklist-title">
+                {{jobChecklistCtrl.job.JobType}} ID: {{jobChecklistCtrl.job._id}}
+            </h2>
         </div>
 
         <div class="actions">
-            <button type="button" class="btn">Actions <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+            <button type="button" class="btn">
+                Actions <i class="fa fa-caret-down" aria-hidden="true"></i>
+            </button>
         </div>
     </header>
 </div>
 
-<checklist-house-selection
-    houses="jobChecklistCtrl.houses">
-</checklist-house-selection>
+<checklist-house-selection houses="jobChecklistCtrl.houses"></checklist-house-selection>
 
 <div class="page-container">
-    <checklist-nav></checklist-nav>
+    <checklist-nav progress="jobChecklistCtrl.jobDataResponse.Progress"></checklist-nav>
 
     <checklist-filter></checklist-filter>
 

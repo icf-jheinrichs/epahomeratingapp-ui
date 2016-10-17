@@ -4,7 +4,9 @@ import controller from './button-group.controller';
 let buttonGroupComponent = {
     bindings : {
         buttons       : '<',
-        allowMultiple : '<'
+        allowMultiple : '<',
+        initialValue  : '<',
+        onSetValue    : '&'
     },
     template,
     controller,

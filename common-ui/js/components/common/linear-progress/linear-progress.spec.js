@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Element: Linear Progress', function testLinearProgress () {
     describe('Total Progress', function testTotalProgress () {
         let progress = 10 + 51;

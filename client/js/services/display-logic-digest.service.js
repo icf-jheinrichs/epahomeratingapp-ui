@@ -1,16 +1,20 @@
+import PouchDB from 'pouchdb';
+
 class DisplayLogicDigestService {
-    constructor ($http) {
+    constructor (DB) {
         'ngInject';
 
-        this.digest = $http
-            .get('/api/display-logic/digest');
+        this.db = new PouchDB(DB.DISPLAY_LOGIC_DIGEST);
+
+        this.digest = this.db.get('displaydigest:stable');
     }
 
     get (id) {
         let checklistItemDisplay = this.digest
             .then(digest => {
-                return digest.data.ChecklistItems[id];
+                return digest.ChecklistItems[id];
             });
+
 
         return checklistItemDisplay;
     }

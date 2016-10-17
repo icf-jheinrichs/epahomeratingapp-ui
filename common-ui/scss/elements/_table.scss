@@ -1,6 +1,6 @@
 table {
     border-collapse: collapse;
-    margin-bottom: $gutter-half;
+    margin-bottom: $gutter-full;
 }
 
 th,
@@ -8,8 +8,9 @@ td {
     padding: $padding-default $gutter-half;
 }
 
-caption {
+.table-caption {
     font-size: $font-size-h5;
+    font-weight: normal;
     margin-bottom: $offset-small;
     text-align: left;
 }
@@ -18,6 +19,7 @@ th {
     background-color: $table-header-color;
     border-left: $border-size-default solid lighten($table-header-color, 33%);
     text-align: left;
+    white-space: nowrap;
 
     &:first-of-type {
         border-left-color: $table-header-color;
@@ -43,5 +45,16 @@ tbody {
 
     > tr:last-of-type td {
         border-bottom: $border-size-default solid $border-color-dark;
+    }
+}
+
+.table-responsive {
+    display: block;
+    margin-bottom: $gutter-full;
+    overflow-x: auto;
+    width: 100%;
+
+    table {
+        margin-bottom: 0;
     }
 }

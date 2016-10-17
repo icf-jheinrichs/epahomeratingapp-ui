@@ -1,14 +1,31 @@
-    <section id="exterior-walls">
-        <h2 class="sr-only">{{jobChecklistCategoryCtrl.categoryName}}</h2>
+<section id="exterior-walls">
+    <h2 class="sr-only">{{jobChecklistCategoryCtrl.categoryName}}</h2>
 
-        <section class="checklist-section" aria-labelledby="exeterior-walls-pre-drywall">
-            <h3 class="checklist-section-title" id="exeterior-walls-pre-drywall">{{jobChecklistCategoryCtrl.categoryName}} - Pre-Drywall</h3>
+    <section data-ng-if="jobChecklistCategoryCtrl.hasPredrywallItems" class="checklist-section" aria-labelledby="exeterior-walls-pre-drywall">
+        <h3 class="checklist-section-title" id="exeterior-walls-pre-drywall">{{jobChecklistCategoryCtrl.categoryName}} - Pre-Drywall</h3>
 
-            <checklist-item-default></checklist-item-default>
+        <checklist-item
+            data-ng-repeat="(key, value) in jobChecklistCategoryCtrl.preDrywallChecklistItems track by $index"
+            item-id="{{::key}}"
+            item-category="{{::jobChecklistCategoryCtrl.categoryKey}}"
+            item-category-progress="{{::jobChecklistCategoryCtrl.CATEGORY_PROGRESS['pre-drywall'].Key}}"
+            response="jobChecklistCategoryCtrl.jobDataResponse.ChecklistItems[jobChecklistCategoryCtrl.categoryKey].PreDrywall[key].Response"
+            home-performance="jobChecklistCategoryCtrl.jobDataHomePerformance.ChecklistItems[key]">
+        </checklist-item>
 
-        </section>
-
-        <section class="checklist-section" aria-labelledby="exeterior-walls-final">
-            <h3 class="checklist-section-title" id="exeterior-walls-final">{{jobChecklistCategoryCtrl.categoryName}} - Final</h3>
-        </section>
     </section>
+
+    <section data-ng-if="jobChecklistCategoryCtrl.hasFinalItems" class="checklist-section" aria-labelledby="exeterior-walls-final">
+        <h3 class="checklist-section-title" id="exeterior-walls-final">{{jobChecklistCategoryCtrl.categoryName}} - Final</h3>
+
+        <checklist-item
+            data-ng-repeat="(key, value) in jobChecklistCategoryCtrl.finalChecklistItems track by $index"
+            item-id="{{::key}}"
+            item-category="{{::jobChecklistCategoryCtrl.categoryKey}}"
+            item-category-progress="{{::jobChecklistCategoryCtrl.CATEGORY_PROGRESS['final'].Key}}"
+            response="jobChecklistCategoryCtrl.jobDataResponse.ChecklistItems[jobChecklistCategoryCtrl.categoryKey].Final[key].Response"
+            home-performance="jobChecklistCategoryCtrl.jobDataHomePerformance.ChecklistItems[key]">
+        </checklist-item>
+
+    </section>
+</section>

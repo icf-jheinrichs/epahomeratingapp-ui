@@ -1,0 +1,11 @@
+@import '../../../../../../scss/variables';
+@import '../../../../../../scss/mixins';
+@import '../../../../../../scss/utilities';
+
+.item-comments {
+    position: relative;
+
+    .popover {
+        width: 350px;
+    }
+}

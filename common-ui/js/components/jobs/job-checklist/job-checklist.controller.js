@@ -1,27 +1,33 @@
 import _ from 'lodash';
 
 class JobChecklistController {
-    constructor ($stateParams, JobsService) {
+    constructor ($rootScope, JobsService, JobDataResponseService, RESPONSES) {
         'ngInject';
 
-        this.id                  = $stateParams.id;
-        this.JobsService         = JobsService;
+        this.$rootScope             = $rootScope;
 
-        this.houses              = {
-            Primary   : this.job.Primary,
-            Secondary : this.job.Secondary
-        };
-        this.selectedHouse       = $stateParams.houseId;
-    }
+        this.JobsService            = JobsService;
+        this.JobDataResponseService = JobDataResponseService;
+        this.RESPONSES              = RESPONSES;
 
-    getRatingTypeClass () {
-        //TODO: make this better
-        return (this.job.RatingType === 'energy-star') ? 'label-energy-star' : 'label-hers-rating';
+        this.$rootScope.$on('setResponse', (event, response) => {
+            this.onSetResponse(response);
+        });
     }
 
     $onInit () {
         //TODO: make this better
         this.RatingTypeLabel = (this.job.RatingType === 'energy-star') ? 'Energy Star' : 'HERS Rating';
+
+        this.houses              = {
+            Primary   : this.job.Primary,
+            Secondary : this.job.Secondary
+        };
+    }
+
+    getRatingTypeClass () {
+        //TODO: make this better
+        return (this.job.RatingType === 'energy-star') ? 'label-energy-star' : 'label-hers-rating';
     }
 
     onUpdateHousePhoto (HouseId, photo) {
@@ -38,6 +44,43 @@ class JobChecklistController {
         this
             .JobsService
             .put(this.job);
+    }
+
+    onSetResponse (response) {
+        let updateResponse = (response.Response.length === 0) ? undefined : response.Response;
+
+        this.updateChecklistResponseTotals(response);
+
+        this.jobDataResponse.ChecklistItems[response.Category][response.CategoryProgress][response.ItemId].Response = updateResponse;
+
+        this
+            .JobDataResponseService
+            .put(this.jobDataResponse);
+    }
+
+    updateChecklistResponseTotals (response) {
+        let currentResponse = this.jobDataResponse.ChecklistItems[response.Category][response.CategoryProgress][response.ItemId].Response;
+        let currentResponseValue = (currentResponse === undefined) ? currentResponse : currentResponse[0];
+
+        let updateResponse = response.Response[0];
+
+        if (currentResponseValue === undefined && updateResponse === this.RESPONSES.MustCorrect.Key) {
+            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].MustCorrect += 1;
+        } else if (currentResponseValue === undefined) {
+            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].Verified += 1;
+        } else if (currentResponseValue === this.RESPONSES.MustCorrect.Key && updateResponse !== this.RESPONSES.MustCorrect.Key) {
+            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].MustCorrect -= 1;
+            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].Verified += 1;
+        } else if (currentResponseValue !== this.RESPONSES.MustCorrect.Key && updateResponse === this.RESPONSES.MustCorrect.Key) {
+            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].Verified -= 1;
+            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].MustCorrect += 1;
+        } else if (currentResponseValue === this.RESPONSES.MustCorrect.Key && updateResponse === undefined) {
+            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].MustCorrect -= 1;
+        } else if (currentResponseValue !== this.RESPONSES.MustCorrect.Key && updateResponse === undefined) {
+            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].Verified -= 1;
+        }
+
+        this.$rootScope.$broadcast('updateChecklistResponseTotals', this.jobDataResponse.Progress);
     }
 }
 

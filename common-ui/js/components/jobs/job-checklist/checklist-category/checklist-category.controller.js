@@ -1,34 +1,32 @@
+import _ from 'lodash';
+
 class jobChecklistChecklistController {
-    constructor ($stateParams) {
+    constructor ($stateParams, JobDataHomePerformanceService, CATEGORIES, CATEGORY_PROGRESS) {
         'ngInject';
 
-        //TODO: Put this in an enum service
-        this.categoryEnum = {
-            'exterior-walls' : {
-                name : 'Exterior Walls'
-            },
-            'ceilings-roof' : {
-                name : 'Ceilings & Roofs'
-            },
-            'slabs-floors-joists' : {
-                name : 'Slabs, Floors & Rim Joists'
-            },
-            'interior-walls' : {
-                name : 'Interior Walls'
-            },
-            'hvac-water' : {
-                name : 'HVAC & Water'
-            },
-            'electrical' : {
-                name : 'Plug Loads, Lighting, PV, Meters'
-            }
-        };
+        this.$stateParams                  = $stateParams;
+        this.JobDataHomePerformanceService = JobDataHomePerformanceService;
 
-        this.categoryId = $stateParams.categoryId;
+        this.CATEGORIES        = CATEGORIES;
+        this.CATEGORY_PROGRESS = CATEGORY_PROGRESS;
     }
 
     $onInit () {
-        this.categoryName = this.categoryEnum[this.categoryId].name;
+        this.categoryKey  = this.CATEGORIES[this.$stateParams.categoryId].Key;
+        this.categoryName = this.CATEGORIES[this.$stateParams.categoryId].Name;
+
+        //TODO: handle catch error.
+        this.JobDataHomePerformanceService
+                .getById(`${this.$stateParams.id}:${this.$stateParams.houseId}`)
+                .then(jobDataHomePerformance => {
+                    this.jobDataHomePerformance = jobDataHomePerformance;
+                });
+
+        this.preDrywallChecklistItems = this.jobDisplayList[this.categoryKey][this.CATEGORY_PROGRESS['pre-drywall'].Key];
+        this.finalChecklistItems = this.jobDisplayList[this.categoryKey][this.CATEGORY_PROGRESS['final'].Key];
+
+        this.hasPredrywallItems = !_.isEmpty(this.preDrywallChecklistItems);
+        this.hasFinalItems = !_.isEmpty(this.finalChecklistItems);
     }
 }
 

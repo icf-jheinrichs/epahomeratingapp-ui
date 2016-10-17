@@ -1,0 +1,16 @@
+@import '../../../../scss/variables';
+@import '../../../../scss/mixins';
+@import '../../../../scss/utilities';
+@import '../../../../scss/elements/button';
+
+.item-list-head-jobs {
+    font-weight: bold;
+    margin: $gutter-half 0 $offset-default;
+    padding-right: 55px;
+
+    span {
+        margin-left: $offset-default;
+        text-align: center;
+        width: 80px;
+    }
+}

@@ -4,7 +4,9 @@ import './job-checklist.scss';
 
 let jobChecklistComponent = {
     bindings : {
-        job : '<'
+        job             : '<',
+        jobDisplayList  : '<',
+        jobDataResponse : '<'
     },
     template,
     controller,

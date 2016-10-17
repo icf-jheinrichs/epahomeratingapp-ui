@@ -4,11 +4,15 @@ import controller from './checklist-item.controller';
 
 let checklistItemComponent = {
     bindings     : {
-        checklistItem : '<'
+        itemId               : '@',
+        itemCategory         : '@',
+        itemCategoryProgress : '@',
+        response             : '<',
+        homePerformance      : '<'
     },
     template,
     controller,
-    controllerAs : 'checklistItemCtrl'
+    controllerAs : 'checklistItemStubCtrl'
 };
 
 export default checklistItemComponent;

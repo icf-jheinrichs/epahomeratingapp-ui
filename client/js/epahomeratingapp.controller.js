@@ -11,9 +11,11 @@ class epahomeratingappController {
             return bottomPad;
         });
 
-        // $rootScope.$on('setTopPad', function onSetTopPad (topPad) {
-        //     this.paddingTop = `${topPad}px`;
-        // });
+        $rootScope.$on('setTopPad', (event, topPad) => {
+            this.paddingTop = `${topPad}px`;
+
+            return topPad;
+        });
     }
 }
 

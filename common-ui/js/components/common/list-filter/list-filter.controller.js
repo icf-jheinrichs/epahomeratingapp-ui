@@ -1,15 +1,15 @@
 const buttons = [
     {
-        'display' : 'Active',
-        'value'   : 'active'
+        'Name'  : 'Active',
+        'Key'   : 'active'
     },
     {
-        'display' : 'In QA',
-        'value'   : 'qa'
+        'Name'  : 'In QA',
+        'Key'   : 'qa'
     },
     {
-        'display' : 'History',
-        'value'   : 'history'
+        'Name'  : 'History',
+        'Key'   : 'history'
     }
 ];
 

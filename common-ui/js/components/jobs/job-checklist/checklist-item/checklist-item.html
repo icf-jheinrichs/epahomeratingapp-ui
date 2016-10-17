@@ -1,9 +1,18 @@
 <checklist-item-default
-    data-ng-if="checklistItemCtrl.checklistItem.Type === 'Default'"
-    checklist-item="checklistItemCtrl.checklistItem">
-    </checklist-item-default>
+    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Default'"
+    item-id="{{::checklistItemStubCtrl.itemId}}"
+    item-category="{{::checklistItemStubCtrl.itemCategory}}"
+    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
+    checklist-item="checklistItemStubCtrl.checklistItem"
+    response="checklistItemStubCtrl.response">
+</checklist-item-default>
 
 <checklist-item-mrf
-    data-ng-if="checklistItemCtrl.checklistItem.Type === 'MRF'"
-    checklist-item="checklistItemCtrl.checklistItem">
-    </checklist-item-mrf>
+    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'MRF'"
+    item-id="{{::checklistItemStubCtrl.itemId}}"
+    item-category="{{::checklistItemStubCtrl.itemCategory}}"
+    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
+    checklist-item="checklistItemStubCtrl.checklistItem"
+    response="checklistItemStubCtrl.response"
+    home-performance="checklistItemStubCtrl.homePerformance">
+</checklist-item-mrf>

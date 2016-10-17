@@ -1,134 +1,21 @@
 <nav class="nav nav-checklist-sections flex-container">
-    <a ui-sref=".category({categoryId: 'exterior-walls'})"
+    <a data-ng-repeat="(key, value) in jobChecklistNavCtrl.CATEGORIES"
+       ui-sref=".category({categoryId: key})"
        ui-sref-active="active"
        class="nav-checklist-item">
         <linear-progress
             class="linear-progress linear-progress-pre-drywall"
-            verified="23"
-            total="65"
-            must-correct="2">
-            </linear-progress>
+            progress="jobChecklistNavCtrl.progress[value.Key].PreDrywall">
+        </linear-progress>
 
         <div class="nav-checklist-item-description">
-            <img src="img/icon-exterior-walls.svg" alt="" />
-            <span>Exterior Walls</span>
+            <img data-ng-src="img/icon-{{::key}}.svg" alt="" />
+            <span>{{::value.Name}}</span>
         </div>
 
         <linear-progress
             class="linear-progress linear-progress-final"
-            verified="30"
-            total="65"
-            must-correct="0">
-            </linear-progress>
-    </a>
-    <a ui-sref=".category({categoryId: 'ceilings-roof'})"
-       ui-sref-active="active"
-       class="nav-checklist-item">
-        <linear-progress
-            class="linear-progress linear-progress-pre-drywall"
-            verified="23"
-            total="65"
-            must-correct="2">
-            </linear-progress>
-
-        <div class="nav-checklist-item-description">
-            <img src="img/icon-ceilings-roof.svg" alt="" />
-            <span>Ceilings &amp; Roofs</span>
-        </div>
-
-        <linear-progress
-            class="linear-progress linear-progress-final"
-            verified="0"
-            total="65"
-            must-correct="3">
-            </linear-progress>
-    </a>
-    <a ui-sref=".category({categoryId: 'slabs-floors-joists'})"
-       ui-sref-active="active"
-       class="nav-checklist-item">
-        <linear-progress
-            class="linear-progress linear-progress-pre-drywall"
-            verified="23"
-            total="35"
-            must-correct="2">
-            </linear-progress>
-
-        <div class="nav-checklist-item-description">
-            <img src="img/icon-floors.svg" alt="" />
-            <span>Slabs, Floors &amp; Rim Joists</span>
-        </div>
-
-        <linear-progress
-            class="linear-progress linear-progress-final"
-            verified="35"
-            total="35"
-            must-correct="0">
-            </linear-progress>
-    </a>
-    <a ui-sref=".category({categoryId: 'interior-walls'})"
-       ui-sref-active="active"
-       class="nav-checklist-item">
-        <linear-progress
-            class="linear-progress linear-progress-pre-drywall"
-            verified="23"
-            total="45"
-            must-correct="2">
-            </linear-progress>
-
-        <div class="nav-checklist-item-description">
-            <img src="img/icon-interior-walls.svg" alt="" />
-            <span>Interior Walls</span>
-        </div>
-
-        <linear-progress
-            class="linear-progress linear-progress-final"
-            verified="0"
-            total="45"
-            must-correct="0">
-            </linear-progress>
-    </a>
-    <a ui-sref=".category({categoryId: 'hvac-water'})"
-       ui-sref-active="active"
-       class="nav-checklist-item">
-        <linear-progress
-            class="linear-progress linear-progress-pre-drywall"
-            verified="23"
-            total="105"
-            must-correct="2">
-            </linear-progress>
-
-        <div class="nav-checklist-item-description">
-            <img src="img/icon-hvac.svg" alt="" />
-            <span>HVAC &amp; Water</span>
-        </div>
-
-        <linear-progress
-            class="linear-progress linear-progress-final"
-            verified="20"
-            total="105"
-            must-correct="0">
-            </linear-progress>
-    </a>
-    <a ui-sref=".category({categoryId: 'electrical'})"
-       ui-sref-active="active"
-       class="nav-checklist-item">
-        <linear-progress
-            class="linear-progress linear-progress-pre-drywall"
-            verified="23"
-            total="50"
-            must-correct="2">
-            </linear-progress>
-
-        <div class="nav-checklist-item-description">
-            <img src="img/icon-diagnostics.svg" alt="" />
-            <span>Plug Loads, Lighting, PV, Meters</span>
-        </div>
-
-        <linear-progress
-            class="linear-progress linear-progress-final"
-            verified="0"
-            total="50"
-            must-correct="0">
-            </linear-progress>
+            progress="jobChecklistNavCtrl.progress[value.Key].Final">
+        </linear-progress>
     </a>
 </nav>

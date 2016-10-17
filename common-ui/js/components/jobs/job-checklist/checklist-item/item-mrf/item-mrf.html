@@ -4,38 +4,34 @@
         <button class="btn btn-link text-muted" type="button"><i class="fa fa-info-circle" aria-label="More Information"></i></button>
     </header>
 
-    <table>
-        <caption>Slabs</caption>
-        <thead>
-            <tr>
-                <th>Foundation Type</th>
-                <th>Thermal Boundary Loc.</th>
-                <th>Crawl Space Type</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Slab</td>
-                <td>Floor</td>
-                <td>Unvented</td>
-            </tr>
-            <tr>
-                <td>Open crawl space/raised floor</td>
-                <td>Foundation Wall</td>
-                <td>Vented</td>
-            </tr>
-        </tbody>
-    </table>
+    <section data-ng-repeat="mrfTable in checklistItemCtrl.checklistItem.Sections">
+        <h5 class="table-caption">{{::mrfTable.Name}}</h5>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th data-ng-repeat="columnHeader in mrfTable.Columns">{{::columnHeader.Name}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="dataRow in checklistItemCtrl.homePerformance[mrfTable.Key]">
+                        <td data-ng-repeat="(key, value) in dataRow">{{value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
 
     <div class="flex-container flex-justify-end">
-        <div class="comments">
-            <button type="button" class="btn btn-link btn-comment">
-                <i class="fa fa-commenting-o fa-lg" aria-label="Leave a Comment"></i>
-            </button>
-        </div>
+        <checklist-item-comments></checklist-item-comments>
 
         <div class="verification">
-            <button-group class="button-group" buttons="checklistItemCtrl.responseButtons"></button-group>
+            <button-group
+                class="button-group"
+                buttons="checklistItemCtrl.responseButtons"
+                initial-value="checklistItemCtrl.response"
+                on-set-value="checklistItemCtrl.onSetResponse(response)">
+            </button-group>
         </div>
     </div>
 </div> <!-- .checklist-item -->

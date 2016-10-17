@@ -20,14 +20,34 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             component  : 'jobChecklist',
             resolve    : {
                 job : (JobsService, $stateParams) => {
-                    let jobsPromise
+                    let jobPromise
                         = JobsService
                             .getById($stateParams.id)
                             .then(job => {
                                 return job.data;
                             });
 
-                    return jobsPromise;
+                    return jobPromise;
+                },
+                jobDisplayList : (JobDisplayListService, $stateParams) => {
+                    let jobDisplayListPromise
+                        = JobDisplayListService
+                            .getById($stateParams.id)
+                            .then(jobDisplayList => {
+                                return jobDisplayList;
+                            });
+
+                    return jobDisplayListPromise;
+                },
+                jobDataResponse : (JobDataResponseService, $stateParams) => {
+                    let jobDataResponsePromise
+                        = JobDataResponseService
+                            .getById($stateParams.id)
+                            .then(jobDataResponse => {
+                                return jobDataResponse;
+                            });
+
+                    return jobDataResponsePromise;
                 }
             }
         })

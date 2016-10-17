@@ -8,7 +8,7 @@ class ButtonGroupController {
     }
 
     $onInit () {
-        this.selected = [];
+        this.selected = this.initialValue || [];
     }
 
     handleClick (buttonValue) {
@@ -19,6 +19,8 @@ class ButtonGroupController {
         } else {
             this.selected = [buttonValue];
         }
+
+        this.onSetValue({response : this.selected});
     }
 
     isActive (buttonValue) {

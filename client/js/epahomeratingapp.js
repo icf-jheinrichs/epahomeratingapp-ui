@@ -1,11 +1,17 @@
 // Angular Library
 import angular from 'angular';
-import ngAria from 'angular-aria';
 import uiRouter from 'angular-ui-router';
 
 // Site Styles
 import 'normalize.css';
 import 'font-awesome/css/font-awesome.css';
+
+// Constants
+import {DB, CATEGORIES, CATEGORY_PROGRESS, RESPONSES} from './epahomeratingapp.constant';
+
+// DB
+import purgeData from './services/db/purge-data';
+import seedData from './services/db/seed-data';
 
 // Services
 import ServicesModule from './services/services.module';
@@ -19,34 +25,32 @@ import ComponentsModule from '../../epahomeratingappUI.js';
 // Root Component
 import epahomeratingappComponent from './epahomeratingapp.component';
 
-const APP_NAME = 'epahomeratingapp';
+const APP_NAME  = 'epahomeratingapp';
 
 angular
     .module(APP_NAME, [
         ServicesModule.name,
         ComponentsModule.name,
-        ngAria,
         uiRouter
     ])
     .component(APP_NAME, epahomeratingappComponent)
-    .config(epahomeratingappRoutes);
+    .config(epahomeratingappRoutes)
+    .constant('DB', DB)
+    .constant('CATEGORIES', CATEGORIES)
+    .constant('CATEGORY_PROGRESS', CATEGORY_PROGRESS)
+    .constant('RESPONSES', RESPONSES);
 
 angular
     .element(document)
     .ready(function handleDocumentReady () {
-        let initInjector = angular.injector(['ng']);
-        let $http        = initInjector.get('$http');
-
-        $http
-            .get('/api/display-logic/digest')
-            .then(function handleDisplayLogic (response) {
-                angular
-                    .module(APP_NAME)
-                    .constant('DISPLAY_LOGIC_DIGEST', response.data);
-
+        purgeData(DB)
+            .then(function handlePurge () {
+                return seedData(DB);
+            })
+            .then(function handleBootstrap () {
                 angular.bootstrap(document, [APP_NAME]);
             })
-            .catch(function handleDisplayLogicError (response) {
-                //TODO: handle error
+            .catch(function handleInfoError (err) {
+                //TODO: this
             });
     });

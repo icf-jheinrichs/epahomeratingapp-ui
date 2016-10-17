@@ -12,5 +12,6 @@ module.exports = {
         PROD  : PROD,
         STAGE : STAGE,
         DEV   : DEV
-    }
+    },
+    db     : '127.0.0.1:5984'
 };

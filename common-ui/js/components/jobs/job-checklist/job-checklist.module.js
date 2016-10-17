@@ -6,6 +6,7 @@ import houseSelectionItemComponent from './checklist-house-selection/house-selec
 import checklistCategoryComponent from './checklist-category/checklist-category.component';
 import checklistFilterComponent from './checklist-filter/checklist-filter.component';
 import checklistItemComponent from './checklist-item/checklist-item.component';
+import checklistItemCommentsComponent from './checklist-item/item-comments/item-comments.component';
 import checklistItemDefaultComponent from './checklist-item/item-default/item-default.component';
 import checklistItemMrfComponent from './checklist-item/item-mrf/item-mrf.component';
 
@@ -18,6 +19,7 @@ let jobsModule
         .component('checklistCategory', checklistCategoryComponent)
         .component('checklistFilter', checklistFilterComponent)
         .component('checklistItem', checklistItemComponent)
+        .component('checklistItemComments', checklistItemCommentsComponent)
         .component('checklistItemDefault', checklistItemDefaultComponent)
         .component('checklistItemMrf', checklistItemMrfComponent);
 

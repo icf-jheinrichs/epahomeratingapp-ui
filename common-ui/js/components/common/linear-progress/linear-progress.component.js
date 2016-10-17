@@ -4,9 +4,7 @@ import './linear-progress.scss';
 
 let linearProgressComponent = {
     bindings : {
-        verified    : '@',
-        mustCorrect : '@',
-        total       : '@'
+        progress : '='
     },
     template,
     controller,
