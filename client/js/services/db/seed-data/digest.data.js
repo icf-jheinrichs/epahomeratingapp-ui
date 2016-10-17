@@ -827,9 +827,6 @@ export default {
 	                    },
 	                    {
 	                        'Name': 'Gypsum Thickness (in)',
-	                    },
-	                    {
-	                        'Name': 'Note',
 	                    }
 	                ]
 	            }
@@ -907,9 +904,6 @@ export default {
 	                    },
 	                    {
 	                        'Name': 'Attic Exterior (sq ft)',
-	                    },
-	                    {
-	                        'Name': 'Note',
 	                    }
 	                ]
 	            }
@@ -1016,9 +1010,6 @@ export default {
 	                    },
 	                    {
 	                        'Name': 'Adjacent Shading Summer',
-	                    },
-	                    {
-	                        'Name': 'Note',
 	                    }
 	                ]
 	            }
