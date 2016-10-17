@@ -141,25 +141,14 @@ export default [
             '81' : {
                 'RimJoist' : [
                     {
-                        'Name': 'String() max:30',
-                        'CeilingTypeName': 'String() enum:thermBoundary',
-                        'CeilingType': 'String() type:type',
-                        'ContinousInsulationRValue': 'Float() min:0 max:125 precision:1',
-                        'CavityInsulationRValue': 'Float() min:0 max:100 precision:1',
-                        'CavityInsulationGrade': 'String() enum:InsGradeEnum',
-                        'RadiantBarrier': 'String() enum:yesNoEnum',
-                        'RoofColor': 'String() type:exteriorColor',
-                        'FramingFactor': 'Float() min:0 max:1 precision:4',
-                        'DefaultFramingFactor': 'Boolean()',
-                        'CeilingArea': 'Float() min:0 max:99999.9 precision:1',
-                        'ClayTile': 'String() enum:yesNoEnum',
-                        'Ventilation': 'String() enum:yesNoEnum',
-                        'ChordSpacing': 'Float() min:10 max:50 precision:1',
-                        'ChordWidth': 'Float() min:0 max:10 precision:1',
-                        'ChordHeight': 'Float() min:0 max:36 precision:1',
-                        'CavityInsulationThickness': 'Float() min:0 max:36 precision:1',
-                        'GypsumThickness': 'Float() min:0 max:9.999 precision:3',
-                        'RoofArea': 'Float() min:0 max:99999.9 precision:3',
+                        "Name": "String() max:20",
+                        "ContinuousInsulationRValue": "Float() min:0 max:99 precision:1",
+                        "CavityInsulationRValue": "Float() min:0 max:99 precision:1",
+                        "InsulationGrade": "String() enum:InsGradeEnum",
+                        "Location": "String() enum:agwallLocationEnum",
+                        "Area": "Float() min:0 max:999 precision:1",
+                        "Spacing": "Float() min:10 max:50 precision:1",
+                        "Thickness": "Float() min:0 max:99 precision:1"
                     }
                 ]
             },
@@ -211,17 +200,46 @@ export default [
                         'LeakageTestExemption': 'Boolean',
                         'TotalLeakageConditions': 'String() type:ductLeakTightTest',
                         'TotalLeakage': 'Float() min:0',
-                        'NumberofReturnRegisters': 'Int() min:0 max:99',
-                        'SupplyDuctSurfaceArea': 'Float() min:0 max:9999.9',
-                        'ReturnDuctSurfaceArea': 'Float() min:0 max:9999.9',
-                        'Ducts': [
-                            {
-                                'DuctLocation' : 'String() type:location',
-                                'DuctType' : 'String() type:type',
-                                'FractionDuctArea' : 'Float() min:0 max:100',
-                                'DuctInsulationRValue' : 'Float() min:0 max:99.9'
-                            }
-                        ]
+                        'NumberofReturnedGrilles': 'Int() min:0',
+
+                        '1stLocation': 'String() type:location',
+                        '1stSupplyArea': 'Int() min:0 max:100',
+                        '1stReturnArea': 'Int() min:0 max:100',
+                        '1stSupplyRValue': 'Float() min:0',
+                        '1stReturnRValue': 'Float() min:0',
+
+                        '2ndLocation': 'String() type:location',
+                        '2ndSupplyArea': 'Int() min:0 max:100',
+                        '2ndReturnArea': 'Int() min:0 max:100',
+                        '2ndSupplyRValue': 'Float() min:0',
+                        '2ndReturnRValue': 'Float() min:0',
+
+                        '3rdLocation': 'String() type:location',
+                        '3rdSupplyArea': 'Int() min:0 max:100',
+                        '3rdReturnArea': 'Int() min:0 max:100',
+                        '3rdSupplyRValue': 'Float() min:0',
+                        '3rdReturnRValue': 'Float() min:0',
+
+                        '4thLocation': 'String() type:location',
+                        '4thSupplyArea': 'Int() min:0 max:100',
+                        '4thReturnArea': 'Int() min:0 max:100',
+                        '4thSupplyRValue': 'Float() min:0',
+                        '4thReturnRValue': 'Float() min:0',
+
+                        '5thLocation': 'String() type:location',
+                        '5thSupplyArea': 'Int() min:0 max:100',
+                        '5thReturnArea': 'Int() min:0 max:100',
+                        '5thSupplyRValue': 'Float() min:0',
+                        '5thReturnRValue': 'Float() min:0',
+
+                        '6thLocation': 'String() type:location',
+                        '6thSupplyArea': 'Int() min:0 max:100',
+                        '6thReturnArea': 'Int() min:0 max:100',
+                        '6thSupplyRValue': 'Float() min:0',
+                        '6thReturnRValue': 'Float() min:0',
+
+                        'SupplyDuctSurfaceArea': 'Float() min:0',
+                        'ReturnDuctSurfaceArea': 'Float() min:0'
                     }
                 ]
             },
