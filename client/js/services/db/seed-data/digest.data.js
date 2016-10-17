@@ -1054,158 +1054,158 @@ export default {
 	        ]
         },
         '87' : {
-            "Type": "MRF",
-            "Shorthand": "Duct systems match proposed design",
-            "ShorthandFormula": "",
-            "Footnotes": "",
-            "ResponseOptions": {
-                "MustCorrect": true,
-                "BuilderVerified": false,
-                "RaterVerified": true,
-                "NotApplicable": true
+            'Type': 'MRF',
+            'Shorthand': 'Duct systems match proposed design',
+            'ShorthandFormula': '',
+            'Footnotes': '',
+            'ResponseOptions': {
+                'MustCorrect': true,
+                'BuilderVerified': false,
+                'RaterVerified': true,
+                'NotApplicable': true
             },
-            "Sections": [
+            'Sections': [
 	            {
-	                "Name": "",
+	                'Name': '',
                     'Key' : 'DuctLeakageMeasurement',
-	                "Columns": [
+	                'Columns': [
 	                    {
-	                        "Name": "Name"
+	                        'Name': 'Name'
 	                    },
 	                    {
-	                        "Name": "Htg. Equip Served"
+	                        'Name': 'Htg. Equip Served'
 	                    },
 	                    {
-	                        "Name": "Clg. Equip Served"
+	                        'Name': 'Clg. Equip Served'
 	                    },
 	                    {
-	                        "Name": "Area Served (sq. ft.)"
+	                        'Name': 'Area Served (sq. ft.)'
 	                    },
 	                    {
-	                        "Name": "Leakage Input Type"
+	                        'Name': 'Leakage Input Type'
 	                    },
 	                    {
-	                        "Name": "Default Leakage"
+	                        'Name': 'Default Leakage'
 	                    },
 	                    {
-	                        "Name": "Supply Leakage to Outside"
+	                        'Name': 'Supply Leakage to Outside'
 	                    },
 	                    {
-	                        "Name": "Return Leakage to Outside"
+	                        'Name': 'Return Leakage to Outside'
 	                    },
 	                    {
-	                        "Name": "Total Leakage to Outside"
+	                        'Name': 'Total Leakage to Outside'
 	                    },
 	                    {
-	                        "Name": "Leakage to Outside Units"
+	                        'Name': 'Leakage to Outside Units'
 	                    },
 	                    {
-	                        "Name": "Leakage Test Exemption?"
+	                        'Name': 'Leakage Test Exemption?'
 	                    },
 	                    {
-	                        "Name": "Total Leakage Conditions"
+	                        'Name': 'Total Leakage Conditions'
 	                    },
 	                    {
-	                        "Name": "Total Leakage"
+	                        'Name': 'Total Leakage'
 	                    },
 	                    {
-	                        "Name": "# Return Grilles"
+	                        'Name': '# Return Grilles'
 	                    },
 	                    {
-	                        "Name": "1st Location"
+	                        'Name': '1st Location'
 	                    },
 	                    {
-	                        "Name": "1st Supply % Area"
+	                        'Name': '1st Supply % Area'
 	                    },
 	                    {
-	                        "Name": "1st Return % Area"
+	                        'Name': '1st Return % Area'
 	                    },
 	                    {
-	                        "Name": "1st Supply R-value"
+	                        'Name': '1st Supply R-value'
 	                    },
 	                    {
-	                        "Name": "1st Return R-valule"
+	                        'Name': '1st Return R-valule'
 	                    },
 	                    {
-	                        "Name": "2nd Location"
+	                        'Name': '2nd Location'
 	                    },
 	                    {
-	                        "Name": "2nd Supply % Area"
+	                        'Name': '2nd Supply % Area'
 	                    },
 	                    {
-	                        "Name": "2nd Return % Area"
+	                        'Name': '2nd Return % Area'
 	                    },
 	                    {
-	                        "Name": "2nd Supply R-value"
+	                        'Name': '2nd Supply R-value'
 	                    },
 	                    {
-	                        "Name": "2nd Return R-valule"
+	                        'Name': '2nd Return R-valule'
 	                    },
 	                    {
-	                        "Name": "3rd Location"
+	                        'Name': '3rd Location'
 	                    },
 	                    {
-	                        "Name": "3rd Supply % Area"
+	                        'Name': '3rd Supply % Area'
 	                    },
 	                    {
-	                        "Name": "3rd Return % Area"
+	                        'Name': '3rd Return % Area'
 	                    },
 	                    {
-	                        "Name": "3rd Supply R-value"
+	                        'Name': '3rd Supply R-value'
 	                    },
 	                    {
-	                        "Name": "3rd Return R-valule"
+	                        'Name': '3rd Return R-valule'
 	                    },
 	                    {
-	                        "Name": "4th Location"
+	                        'Name': '4th Location'
 	                    },
 	                    {
-	                        "Name": "4th Supply % Area"
+	                        'Name': '4th Supply % Area'
 	                    },
 	                    {
-	                        "Name": "4th Return % Area"
+	                        'Name': '4th Return % Area'
 	                    },
 	                    {
-	                        "Name": "4th Supply R-value"
+	                        'Name': '4th Supply R-value'
 	                    },
 	                    {
-	                        "Name": "4th Return R-valule"
+	                        'Name': '4th Return R-valule'
 	                    },
 	                    {
-	                        "Name": "5th Location"
+	                        'Name': '5th Location'
 	                    },
 	                    {
-	                        "Name": "5th Supply % Area"
+	                        'Name': '5th Supply % Area'
 	                    },
 	                    {
-	                        "Name": "5th Return % Area"
+	                        'Name': '5th Return % Area'
 	                    },
 	                    {
-	                        "Name": "5th Supply R-value"
+	                        'Name': '5th Supply R-value'
 	                    },
 	                    {
-	                        "Name": "5th Return R-valule"
+	                        'Name': '5th Return R-valule'
 	                    },
 	                    {
-	                        "Name": "6th Location"
+	                        'Name': '6th Location'
 	                    },
 	                    {
-	                        "Name": "6th Supply % Area"
+	                        'Name': '6th Supply % Area'
 	                    },
 	                    {
-	                        "Name": "6th Return % Area"
+	                        'Name': '6th Return % Area'
 	                    },
 	                    {
-	                        "Name": "6th Supply R-value"
+	                        'Name': '6th Supply R-value'
 	                    },
 	                    {
-	                        "Name": "6th Return R-valule"
+	                        'Name': '6th Return R-valule'
 	                    },
 	                    {
-	                        "Name": "Supply Duct Surface Area (sq ft)"
+	                        'Name': 'Supply Duct Surface Area (sq ft)'
 	                    },
 	                    {
-	                        "Name": "Return Duct Surface Area (sq ft)"
+	                        'Name': 'Return Duct Surface Area (sq ft)'
 	                    }
 	                ]
 	            }
@@ -1268,62 +1268,172 @@ export default {
             ]
         },
         '94' : {
-            "Type": "MRF",
-            "Shorthand": "Thermostats match proposed design",
-            "ShorthandFormula": "",
-            "Footnotes": "",
-            "ResponseOptions": {
-                "MustCorrect": true,
-                "BuilderVerified": false,
-                "RaterVerified": true,
-                "NotApplicable": true
+            'Type': 'MRF',
+            'Shorthand': 'Thermostats match proposed design',
+            'ShorthandFormula': '',
+            'Footnotes': '',
+            'ResponseOptions': {
+                'MustCorrect': true,
+                'BuilderVerified': false,
+                'RaterVerified': true,
+                'NotApplicable': true
             },
-            "Sections": [
+            'Sections': [
 	            {
-	                "Name": "",
+	                'Name': '',
                     'Key' : 'HVACControl',
-	                "Columns": [
+	                'Columns': [
 	                    {
-	                        "Name": "Pstat for Heating System"
+	                        'Name': 'Pstat for Heating System'
 	                    },
 	                    {
-	                        "Name": "Pstat for Cooling System"
+	                        'Name': 'Pstat for Cooling System'
 	                    }
 	                ]
 	            }
 	        ]
         },
         '95' : {
-            "Type": "MRF",
-            "Shorthand": "Lighting matches proposed design",
-            "ShorthandFormula": "",
-            "Footnotes": "",
-            "ResponseOptions": {
-                "MustCorrect": true,
-                "BuilderVerified": false,
-                "RaterVerified": true,
-                "NotApplicable": true
+            'Type': 'MRF',
+            'Shorthand': 'Lighting matches proposed design',
+            'ShorthandFormula': '',
+            'Footnotes': '',
+            'ResponseOptions': {
+                'MustCorrect': true,
+                'BuilderVerified': false,
+                'RaterVerified': true,
+                'NotApplicable': true
             },
-            "Sections": [
-	            {
-	                "Name": "",
+            'Sections': [
+                {
+                    'Name': '',
                     'Key' : 'LightingFractions',
-	                "Columns": [
-	                    {
-	                        "Name": "Qualifying Int. Screw-Base CFL Fixtures (%)"
-	                    },
-	                    {
-	                        "Name": "Qualifying Int. Pin-Base CFL Fixtures (%)"
-	                    },
-	                    {
-	                        "Name": "Qualifying Garage Fixtures (%)"
-	                    },
-	                    {
-	                        "Name": "Qualifying Exterior Fixtures (%)"
-	                    }
-	                ]
-	            }
-	        ]
+                    'Columns': [
+                        {
+                            'Name': 'Qualifying Int. Screw-Base CFL Fixtures (%)'
+                        },
+                        {
+                            'Name': 'Qualifying Int. Pin-Base CFL Fixtures (%)'
+                        },
+                        {
+                            'Name': 'Qualifying Garage Fixtures (%)'
+                        },
+                        {
+                            'Name': 'Qualifying Exterior Fixtures (%)'
+                        }
+                    ]
+                }
+            ]
+        },
+        '96': {
+            'Type': 'MRF',
+            'Shorthand': 'Refrigerators match proposed design',
+            'ShorthandFormula': '',
+            'Footnotes': '',
+            'ResponseOptions': {
+                'MustCorrect': true,
+                'BuilderVerified': false,
+                'RaterVerified': true,
+                'NotApplicable': true
+            },
+            'Sections': [
+                {
+                    'Name': '',
+                    'Key' : 'Refrigerator',
+                    'Columns': [
+                        {
+                            'Name': 'Consumption (kWh/yr)'
+                        },
+                        {
+                            'Name': 'Location'
+                        }
+                    ]
+                }
+            ]
+        },
+        '97': {
+            'Type': 'MRF',
+            'Shorthand': 'Dishwashers match proposed design',
+            'ShorthandFormula': '',
+            'Footnotes': '',
+            'ResponseOptions': {
+                'MustCorrect': true,
+                'BuilderVerified': false,
+                'RaterVerified': true,
+                'NotApplicable': true
+            },
+            'Sections': [
+                {
+                    'Name': '',
+                    'Key' : 'Dishwasher',
+                    'Columns': [
+                        {
+                            'Name': 'Consumption (kWh/yr)'
+                        },
+                        {
+                            'Name': 'Energy Factor'
+                        },
+                        {
+                            'Name': 'Place Setting Cap.'
+                        }
+                    ]
+                }
+            ]
+        },
+        '98': {
+            'Type': 'MRF',
+            'Shorthand': 'Ranges and ovens match proposed design',
+            'ShorthandFormula': '',
+            'Footnotes': '',
+            'ResponseOptions': {
+                'MustCorrect': true,
+                'BuilderVerified': false,
+                'RaterVerified': true,
+                'NotApplicable': true
+            },
+            'Sections': [
+                {
+                    'Name': '',
+                    'Key': 'Oven',
+                    'Columns': [
+                        {
+                            'Name': 'Fuel'
+                        },
+                        {
+                            'Name': 'Induction Range'
+                        },
+                        {
+                            'Name': 'Convection Oven'
+                        }
+                    ]
+                }
+            ]
+        },
+        '101': {
+            'Type': 'MRF',
+            'Shorthand': 'Ceiling fans match proposed design',
+            'ShorthandFormula': '',
+            'Footnotes': '',
+            'ResponseOptions': {
+                'MustCorrect': true,
+                'BuilderVerified': false,
+                'RaterVerified': true,
+                'NotApplicable': true
+            },
+            'Sections': [
+                {
+                    'Name': '',
+                    'Key': 'CeilingFan',
+                    'Columns': [
+                        {
+                            'Name': 'CFM / Watt',
+                            'Order': '1',
+                            'DisplayLogic': 'Display',
+                            'Type': 'Decimal:ceilingFanCFMWatt',
+                        }
+                    ]
+                }
+            ]
         },
         '102' : {
             'Type': 'MRF',

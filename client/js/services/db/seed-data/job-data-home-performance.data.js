@@ -279,6 +279,39 @@ export default [
                     }
                 ]
             },
+            '96' : {
+                'Refrigerator' : [
+                    {
+                        "RatedAnnualkWh": "Int() min:0 max:9999",
+                        "Location": "String() enum:lightAppRatingLocEnum"
+                    }
+                ]
+            },
+            '97' : {
+                'Dishwasher' : [
+                    {
+                        "RatedAnnualkWh": "Int() min:0 max:9999",
+                        "EnergyFactor": "String()",
+                        "Capacity": "Int() min:0 max:9999"
+                    }
+                ]
+            },
+            '98' : {
+                'Oven' : [
+                    {
+                        "FuelType": "String() enum:fuelEnum",
+                        "InductionRange": "Boolean()",
+                        "ConventionOven": "Boolean()"
+                    }
+                ]
+            },
+            '101' : {
+                'CeilingFan' : [
+                    {
+                        'Efficiency': 'Float() type:CeilingFanCFMWatt'
+                    }
+                ]
+            },
             '102' : {
                 'VentilationFan' : [
                     {
