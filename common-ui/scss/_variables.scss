@@ -74,9 +74,9 @@ $body-bg:           #fff;
 //## Padding
 //
 
-$padding-default:   6px;
+$padding-default:   5px;
 $padding-small:     3px;
-$padding-large:     9px;
+$padding-large:     10px;
 
 //
 //## Borders
@@ -93,6 +93,21 @@ $border-radius-large:   6px;
 $border-size-default:   1px;
 $border-size-medium:    ($border-size-default * 2);
 $border-size-large:     ($border-size-medium * 2);
+
+//
+//## Arrows
+//
+
+$arrow-default:         10px;
+$arrow-small:            4px;
+$arrow-large:           15px;
+
+//
+//## Shadows
+//
+
+$shadow-color-default:  rgba(0, 0, 0, .25);
+$shadow-default:        0 0 15px $shadow-color-default;
 
 //
 //## Animation
@@ -125,8 +140,6 @@ $button-background-color-active: $button-border-color-default;
 $button-background-color-inverse: transparent;
 $button-background-color-inverse-active: $border-color-inverse;
 $button-background-color-hover-inverse: rgba(255, 255, 255, .20);
-
-$shadow-default:        rgba(0, 0, 0, .25);
 
 //
 //## Labels

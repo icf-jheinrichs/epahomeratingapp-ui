@@ -69,3 +69,28 @@
     display: block;
     width: 100%;
 }
+
+$btn-comments-size: 30px;
+
+.btn-comments {
+    border-radius: $btn-comments-size / 2;
+    height: $btn-comments-size;
+    margin-right: $offset-default;
+    text-align: center;
+    width: $btn-comments-size;
+
+    &.has-comments {
+        background-color: $link-color;
+        color: $text-color-inverse;
+
+        &:hover,
+        &:focus {
+            background-color: darken($link-color, 10%);
+        }
+
+        .fa {
+            margin-left: -5px;
+        }
+    }
+}
+

@@ -7,14 +7,7 @@ export default [{
                 '78' : {
                     'Response'  : undefined,
                     'HouseID'   : undefined,
-                    'Comments'  : [
-                        {
-                            'HouseID'  : '12345678',
-                            'PhotoUrl' : '',
-                            'Comment'  : '',
-                            'User'     : '12345678'
-                        }
-                    ]
+                    'Comments'  : []
                 },
                 '79' : {
                     'Response'  : undefined,

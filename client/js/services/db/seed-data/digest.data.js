@@ -533,7 +533,7 @@ export default {
             },
             'Sections': [
 	            {
-	                'Name': 'n/a',
+	                'Name': '',
                     'Key' : 'BuildingSummary',
 	                'Columns': [
 	                    {
@@ -774,7 +774,7 @@ export default {
             },
             'Sections': [
 	            {
-	                'Name': 'n/a',
+	                'Name': '',
                     'Key' : 'Wall',
 	                'Columns': [
 	                    {
@@ -827,9 +827,6 @@ export default {
 	                    },
 	                    {
 	                        'Name': 'Gypsum Thickness (in)',
-	                    },
-	                    {
-	                        'Name': 'Note',
 	                    }
 	                ]
 	            }
@@ -848,7 +845,7 @@ export default {
             },
             'Sections': [
 	            {
-	                'Name': 'n/a',
+	                'Name': '',
                     'Key' : 'Roof',
 	                'Columns': [
 	                    {
@@ -907,9 +904,6 @@ export default {
 	                    },
 	                    {
 	                        'Name': 'Attic Exterior (sq ft)',
-	                    },
-	                    {
-	                        'Name': 'Note',
 	                    }
 	                ]
 	            }
@@ -928,7 +922,7 @@ export default {
             },
             'Sections': [
 	            {
-	                'Name': 'n/a',
+	                'Name': '',
                     'Key' : 'RimJoist',
 	                'Columns': [
 	                    {
@@ -972,7 +966,7 @@ export default {
             },
             'Sections': [
 	            {
-	                'Name': 'n/a',
+	                'Name': '',
                     'Key' : 'Window',
 	                'Columns': [
 	                    {
@@ -1016,9 +1010,6 @@ export default {
 	                    },
 	                    {
 	                        'Name': 'Adjacent Shading Summer',
-	                    },
-	                    {
-	                        'Name': 'Note',
 	                    }
 	                ]
 	            }
@@ -1037,7 +1028,7 @@ export default {
             },
             'Sections': [
 	            {
-	                'Name': 'n/a',
+	                'Name': '',
                     'Key' : 'AirInfiltrationMeasurement',
 	                'Columns': [
 	                    {
@@ -1075,7 +1066,7 @@ export default {
             },
             "Sections": [
 	            {
-	                "Name": "n/a",
+	                "Name": "",
                     'Key' : 'DuctLeakageMeasurement',
 	                "Columns": [
 	                    {
@@ -1289,7 +1280,7 @@ export default {
             },
             "Sections": [
 	            {
-	                "Name": "n/a",
+	                "Name": "",
                     'Key' : 'HVACControl',
 	                "Columns": [
 	                    {
@@ -1315,7 +1306,7 @@ export default {
             },
             "Sections": [
 	            {
-	                "Name": "n/a",
+	                "Name": "",
                     'Key' : 'LightingFractions',
 	                "Columns": [
 	                    {
@@ -1347,7 +1338,7 @@ export default {
             },
             'Sections': [
                 {
-                    'Name': 'n/a',
+                    'Name': '',
                     'Key' : 'VentilationFan',
                     'Columns': [
                         {

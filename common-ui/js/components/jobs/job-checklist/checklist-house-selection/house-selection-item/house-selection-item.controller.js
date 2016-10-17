@@ -33,6 +33,9 @@ class houseSelectionItemController {
             .getPhoto()
             .then(function handleCamera (photo) {
                 self.checklist.onUpdateHousePhoto(HouseId, photo);
+
+                self.house.Photo.push(photo);
+                self.photoUrl = photo;
             });
     }
 

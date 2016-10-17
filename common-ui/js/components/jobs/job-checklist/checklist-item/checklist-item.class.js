@@ -32,6 +32,18 @@ class ChecklistItemClass {
             'Response'         : Response
         });
     }
+
+    postComment (Comment) {
+        console.log(Comment);
+
+        this.$rootScope.$emit('postComment', {
+            'ItemId'           : this.itemId,
+            'Category'         : this.itemCategory,
+            'CategoryProgress' : this.itemCategoryProgress,
+            'Comment'          : Comment
+        });
+
+    }
 }
 
 export default ChecklistItemClass;

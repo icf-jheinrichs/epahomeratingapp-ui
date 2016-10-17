@@ -35,7 +35,9 @@
 }
 
 .house-photo {
+    background-color: $brand-auxillary;
     margin: 0;
+    max-width: 150px;
     position: relative;
 
     img {

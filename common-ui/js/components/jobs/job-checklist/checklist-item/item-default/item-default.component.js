@@ -8,7 +8,8 @@ let checklistItemDefaultComponent = {
         itemCategory         : '@',
         itemCategoryProgress : '@',
         checklistItem        : '<',
-        response             : '<'
+        response             : '<',
+        comments             : '<'
     },
     template,
     controller,

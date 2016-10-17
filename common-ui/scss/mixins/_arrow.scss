@@ -1,0 +1,7 @@
+@mixin arrow-up($size: $arrow-default, $color: $brand-auxillary) {
+    width: 0;
+    height: 0;
+    border-bottom: $size solid $color;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+}

@@ -10,6 +10,7 @@
             item-category="{{::jobChecklistCategoryCtrl.categoryKey}}"
             item-category-progress="{{::jobChecklistCategoryCtrl.CATEGORY_PROGRESS['pre-drywall'].Key}}"
             response="jobChecklistCategoryCtrl.jobDataResponse.ChecklistItems[jobChecklistCategoryCtrl.categoryKey].PreDrywall[key].Response"
+            comments="jobChecklistCategoryCtrl.jobDataResponse.ChecklistItems[jobChecklistCategoryCtrl.categoryKey].PreDrywall[key].Comments"
             home-performance="jobChecklistCategoryCtrl.jobDataHomePerformance.ChecklistItems[key]">
         </checklist-item>
 
@@ -24,6 +25,7 @@
             item-category="{{::jobChecklistCategoryCtrl.categoryKey}}"
             item-category-progress="{{::jobChecklistCategoryCtrl.CATEGORY_PROGRESS['final'].Key}}"
             response="jobChecklistCategoryCtrl.jobDataResponse.ChecklistItems[jobChecklistCategoryCtrl.categoryKey].Final[key].Response"
+            comments="jobChecklistCategoryCtrl.jobDataResponse.ChecklistItems[jobChecklistCategoryCtrl.categoryKey].Final[key].Comments"
             home-performance="jobChecklistCategoryCtrl.jobDataHomePerformance.ChecklistItems[key]">
         </checklist-item>
 

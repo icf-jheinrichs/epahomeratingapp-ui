@@ -10,8 +10,13 @@ class JobChecklistController {
         this.JobDataResponseService = JobDataResponseService;
         this.RESPONSES              = RESPONSES;
 
+        //TODO: make enum w/ all messaging names.
         this.$rootScope.$on('setResponse', (event, response) => {
             this.onSetResponse(response);
+        });
+
+        this.$rootScope.$on('postComment', (event, comment) => {
+            this.onPostComment(comment);
         });
     }
 
@@ -52,6 +57,14 @@ class JobChecklistController {
         this.updateChecklistResponseTotals(response);
 
         this.jobDataResponse.ChecklistItems[response.Category][response.CategoryProgress][response.ItemId].Response = updateResponse;
+
+        this
+            .JobDataResponseService
+            .put(this.jobDataResponse);
+    }
+
+    onPostComment (comment) {
+        this.jobDataResponse.ChecklistItems[comment.Category][comment.CategoryProgress][comment.ItemId].Comments.push(comment.Comment);
 
         this
             .JobDataResponseService

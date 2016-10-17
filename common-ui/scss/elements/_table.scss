@@ -5,7 +5,7 @@ table {
 
 th,
 td {
-    padding: $padding-default $gutter-half;
+    padding: $padding-default $padding-large;
 }
 
 .table-caption {
@@ -28,6 +28,10 @@ th {
     &:last-of-type {
         border-right: $border-size-default solid $table-header-color;
     }
+}
+
+td {
+    vertical-align: top;
 }
 
 tbody {

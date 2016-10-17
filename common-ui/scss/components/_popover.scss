@@ -2,16 +2,40 @@
     background-color: $body-bg;
     border: $border-size-default solid $border-color-default;
     border-radius: $border-radius-default;
+    box-shadow: $shadow-default;
     position: absolute;
-    top: 100%;
     z-index: $zindex-popover;
+
+    &::before {
+        @include arrow-up(15px);
+
+        bottom: 100%;
+        content: '';
+        left: 25px;
+        position: absolute;
+    }
+}
+
+.popover-panel-wrapper {
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.popover-panel-header,
+.popover-panel-body {
+    padding: $padding-large;
 }
 
 .popover-panel-header {
     background-color: $brand-auxillary;
-    padding: $gutter-half;
 }
 
-.popover-pane-body {
-    padding: $gutter-half;
+.popover-panel-title {
+    font-size: $font-size-h6;
+    margin: 0;
+    text-align: center;
 }

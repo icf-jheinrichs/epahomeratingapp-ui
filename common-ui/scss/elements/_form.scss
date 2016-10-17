@@ -1,0 +1,15 @@
+.form-control {
+    border: $border-size-default solid $border-color-default;
+    max-width: 100%;
+    transition: border-color $transition-default;
+    width: 100%;
+
+    &:focus {
+        border-color: $brand-secondary;
+        outline: 0;
+    }
+
+    &.ng-invalid.ng-touched {
+        border-color: $status-error;
+    }
+}

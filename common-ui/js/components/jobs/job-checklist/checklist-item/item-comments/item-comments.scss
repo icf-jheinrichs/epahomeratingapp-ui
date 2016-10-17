@@ -3,9 +3,59 @@
 @import '../../../../../../scss/utilities';
 
 .item-comments {
-    position: relative;
-
     .popover {
+        height: 300px;
+        margin: $offset-large 0 150px;
+        right: $gutter-half;
         width: 350px;
+    }
+
+    textarea {
+        height: 125px;
+    }
+}
+
+.item-comment {
+    border-top: $border-size-default solid $border-color-default;
+    padding: $padding-default $padding-large;
+
+    .comment-image {
+        margin: 0 0 $offset-default;
+    }
+
+    .comment-timestamp {
+        color: $text-color-muted;
+        display: block;
+        font-size: $font-size-small;
+    }
+
+    .comment-body {
+        margin: 0;
+    }
+}
+
+.item-comment-add-photo {
+    margin: 0 0 $offset-default;
+    position: relative;
+    width: 90px;
+
+    img {
+        float: left;
+        width: 100%;
+    }
+
+    .btn {
+        background-color: rgba($brand-secondary, .6);
+        bottom: 0;
+        color: $text-color-inverse;
+        font-size: $font-size-small;
+        padding: $padding-default $padding-small;
+        position: absolute;
+
+        &:hover,
+        &:focus {
+            background-color: rgba($brand-secondary, 1);
+            color: $text-color-inverse;
+        }
     }
 }

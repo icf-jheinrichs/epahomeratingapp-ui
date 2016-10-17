@@ -8,6 +8,7 @@ let checklistItemComponent = {
         itemCategory         : '@',
         itemCategoryProgress : '@',
         response             : '<',
+        comments             : '<',
         homePerformance      : '<'
     },
     template,
