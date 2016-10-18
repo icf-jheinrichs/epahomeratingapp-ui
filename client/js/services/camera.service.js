@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 class CameraService {
     constructor ($q) {
         'ngInject';
@@ -8,7 +10,7 @@ class CameraService {
     getPhoto () {
         let deferred = this.$q.defer();
 
-        deferred.resolve('img/job-photo-default.jpg');
+        deferred.resolve(_.sample(['img/job-photo-default-h.jpg', 'img/job-photo-default-v.jpg']));
 
         return deferred.promise;
     }

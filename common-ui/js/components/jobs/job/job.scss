@@ -24,6 +24,7 @@ $job-photo-height:  115px;
     height: $job-photo-height;
     margin: 0 $gutter-half 0 0;
     min-width: $job-photo-width;
+    overflow: hidden;
     width: $job-photo-width;
 
     img {

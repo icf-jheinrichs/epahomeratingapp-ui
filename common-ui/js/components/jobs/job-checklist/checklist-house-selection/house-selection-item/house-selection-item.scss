@@ -37,7 +37,9 @@
 .house-photo {
     background-color: $brand-auxillary;
     margin: 0;
+    max-height: 150px;
     max-width: 150px;
+    overflow: hidden;
     position: relative;
 
     img {
@@ -54,6 +56,7 @@
     .btn {
         background-color: rgba($brand-secondary, .6);
         color: $text-color-inverse;
+        padding: $padding-large;
 
         &:hover,
         &:focus {

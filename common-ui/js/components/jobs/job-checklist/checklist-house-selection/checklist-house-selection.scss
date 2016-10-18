@@ -29,8 +29,9 @@
         background-color: $brand-tertiary;
         border-radius: $border-radius-default $border-radius-default 0 0;
         bottom: 100%;
+        padding: $padding-large $gutter-half;
         position: absolute;
-        right: 0;
+        right: $gutter-half;
 
         &:hover,
         &:focus {

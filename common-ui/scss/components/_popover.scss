@@ -16,15 +16,6 @@
     }
 }
 
-.popover-panel-wrapper {
-    bottom: 0;
-    left: 0;
-    overflow-y: auto;
-    position: absolute;
-    top: 0;
-    width: 100%;
-}
-
 .popover-panel-header,
 .popover-panel-body {
     padding: $padding-large;
@@ -32,6 +23,18 @@
 
 .popover-panel-header {
     background-color: $brand-auxillary;
+    height: 45px;
+    overflow: hidden;
+}
+
+.popover-panel-body {
+    bottom: 0;
+    left: 0;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+    position: absolute;
+    top: 45px;
+    width: 100%;
 }
 
 .popover-panel-title {

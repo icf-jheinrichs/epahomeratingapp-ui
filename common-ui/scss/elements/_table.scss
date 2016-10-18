@@ -55,6 +55,7 @@ tbody {
 .table-responsive {
     display: block;
     margin-bottom: $gutter-full;
+    -webkit-overflow-scrolling: touch;
     overflow-x: auto;
     width: 100%;
 

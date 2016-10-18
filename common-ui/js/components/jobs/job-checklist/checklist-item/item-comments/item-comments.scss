@@ -21,6 +21,10 @@
 
     .comment-image {
         margin: 0 0 $offset-default;
+
+        img {
+            max-width: 100%;
+        }
     }
 
     .comment-timestamp {
@@ -35,13 +39,15 @@
 }
 
 .item-comment-add-photo {
+    height: 90px;
     margin: 0 0 $offset-default;
+    overflow: hidden;
     position: relative;
     width: 90px;
 
     img {
         float: left;
-        width: 100%;
+        max-width: 100%;
     }
 
     .btn {
