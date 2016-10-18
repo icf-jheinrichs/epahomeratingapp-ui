@@ -25,6 +25,10 @@ $job-photo-height:  115px;
     margin: 0 $gutter-half 0 0;
     min-width: $job-photo-width;
     width: $job-photo-width;
+
+    img {
+        width: 100%;
+    }
 }
 
 .job-info {

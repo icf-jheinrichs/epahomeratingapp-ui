@@ -24,6 +24,7 @@ class checklistHouseSelectionController {
 
         this.selectedHouse      = this.houses.Primary;
         this.selectedHouseTitle = this.getSelectedHouseTitle();
+        this.selectedHousePhoto = (this.houses.Primary.Photo.length === 0) ? 'img/job-photo-default.svg' : this.houses.Primary.Photo[0];
 
         this.toggleText         = this.toggleTextEnum.less;
 
@@ -47,12 +48,15 @@ class checklistHouseSelectionController {
         this.deregisterOnFinish();
     }
 
+    //TODO: use constant for default photo
     setSelectedHouse (houseId) {
         if (houseId === this.houses.Primary.HouseId) {
             this.selectedHouse = this.houses.Primary;
         } else {
             this.selectedHouse = _.find(this.houses.Secondary, {HouseId : houseId});
         }
+
+        this.selectedHousePhoto = (this.selectedHouse.Photo.length === 0) ? 'img/job-photo-default.svg' : this.selectedHouse.Photo[0];
 
         this.selectedHouseTitle = this.getSelectedHouseTitle();
     }
