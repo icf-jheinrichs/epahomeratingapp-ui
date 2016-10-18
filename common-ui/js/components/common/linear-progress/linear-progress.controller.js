@@ -1,5 +1,7 @@
 class LinearProgressController {
     constructor ($element) {
+        'ngInject';
+
         this.$element = $element;
     }
 
