@@ -1,0 +1,47 @@
+.modal {
+    background-color: $body-bg;
+    box-shadow: $shadow-default;
+    left: 50%;
+    margin-left: ceil(-$modal-width-default / 2);
+    position: fixed;
+    top: $gutter-full;
+    width: $modal-width-default;
+    z-index: $zindex-modal;
+
+    &.modal-scroll-body {
+        height: 500px;
+    }
+}
+
+.modal-large {
+    margin-left: ceil(-$modal-width-large / 2);
+    width: $modal-width-large;
+}
+
+.modal-header {
+    background-color: $brand-auxillary;
+    height: 50px;
+    overflow: hidden;
+}
+
+.modal-title {
+    font-size: $font-size-h4;
+    font-weight: bold;
+    text-align: center;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+    padding: $padding-large;
+}
+
+.modal-scroll-body .modal-body {
+    bottom: 0;
+    left: 0;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: scroll;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+}

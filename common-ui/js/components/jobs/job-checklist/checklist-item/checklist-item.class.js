@@ -34,8 +34,6 @@ class ChecklistItemClass {
     }
 
     postComment (Comment) {
-        console.log(Comment);
-
         this.$rootScope.$emit('postComment', {
             'ItemId'           : this.itemId,
             'Category'         : this.itemCategory,

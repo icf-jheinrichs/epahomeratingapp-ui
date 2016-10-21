@@ -1,6 +1,17 @@
+.form-group {
+    margin-bottom: $offset-large;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 0 0 2px $offset-small;
+}
+
 .form-control {
     border: $border-size-default solid $border-color-default;
     max-width: 100%;
+    padding: $padding-default;
     transition: border-color $transition-default;
     width: 100%;
 

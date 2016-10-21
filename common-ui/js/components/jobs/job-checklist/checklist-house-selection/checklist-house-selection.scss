@@ -21,25 +21,23 @@
 .house-selection {
     background-color: $brand-tertiary;
     bottom: 0;
+    overflow: hidden;
     position: fixed;
     width: 100%;
     z-index: $zindex-fixed-footer;
 
     .btn-house-selection-toggle {
-        background-color: $brand-tertiary;
-        border-radius: $border-radius-default $border-radius-default 0 0;
-        bottom: 100%;
+        background-color: $button-background-color-hover-inverse;
+        border-radius: 0 0 $border-radius-default $border-radius-default;
         padding: $padding-large $gutter-half;
         position: absolute;
         right: $gutter-half;
-
-        &:hover,
-        &:focus {
-            background-color: lighten($brand-tertiary, 10%);
-        }
+        top: 0;
+        z-index: $zindex-absolute;
     }
 
     .fa-caret-down {
+        margin-left: $offset-small;
         transition: transform $transition-slow;
     }
 

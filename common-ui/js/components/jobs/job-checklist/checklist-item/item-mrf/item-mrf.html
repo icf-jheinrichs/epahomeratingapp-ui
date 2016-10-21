@@ -5,7 +5,7 @@
     </header>
 
     <section data-ng-repeat="mrfTable in checklistItemCtrl.checklistItem.Sections track by $index">
-        <h5 class="table-caption">{{::mrfTable.Name}}</h5>
+        <h5 class="table-caption">{{mrfTable.Name}}</h5>
         <div class="table-responsive">
             <table>
                 <thead>
@@ -14,7 +14,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-ng-repeat="dataRow in checklistItemCtrl.homePerformance[mrfTable.Key] track by $index">
+                    <tr data-ng-click="checklistItemCtrl.editMrfRow($index, mrfTable.Key, mrfTable.Name, mrfTable.Columns, checklistItemCtrl.homePerformance[mrfTable.Key][$index])" data-ng-repeat="dataRow in checklistItemCtrl.homePerformance[mrfTable.Key] track by $index">
                         <td data-ng-repeat="(key, value) in dataRow">{{value}}</td>
                     </tr>
                 </tbody>
@@ -37,4 +37,13 @@
             </button-group>
         </div>
     </div>
+
+    <mrf-edit
+        data-ng-repeat="row in checklistItemCtrl.editRow"
+        on-save-mrf-row="checklistItemCtrl.onSaveMrfRow(mrfRowData)"
+        on-cancel-mrf-row="checklistItemCtrl.onCancelMrfRow()"
+        title="{{row.title}}"
+        mrf-digest="row.mrfDigest"
+        mrf-data="row.mrfData">
+    </mrf-edit>
 </div> <!-- .checklist-item -->

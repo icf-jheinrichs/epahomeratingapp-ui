@@ -533,7 +533,7 @@ export default {
             },
             'Sections': [
 	            {
-	                'Name': '',
+	                'Name': 'Architectural Characteristics',
                     'Key' : 'BuildingSummary',
 	                'Columns': [
 	                    {
@@ -774,7 +774,7 @@ export default {
             },
             'Sections': [
 	            {
-	                'Name': '',
+	                'Name': 'Walls Assembly',
                     'Key' : 'Wall',
 	                'Columns': [
 	                    {
@@ -845,7 +845,7 @@ export default {
             },
             'Sections': [
 	            {
-	                'Name': '',
+	                'Name': 'Roof/ceiling assembly',
                     'Key' : 'Roof',
 	                'Columns': [
 	                    {
@@ -922,7 +922,7 @@ export default {
             },
             'Sections': [
 	            {
-	                'Name': '',
+	                'Name': 'Rim Joist',
                     'Key' : 'RimJoist',
 	                'Columns': [
 	                    {
@@ -966,7 +966,7 @@ export default {
             },
             'Sections': [
 	            {
-	                'Name': '',
+	                'Name': 'Windows',
                     'Key' : 'Window',
 	                'Columns': [
 	                    {
@@ -1028,7 +1028,7 @@ export default {
             },
             'Sections': [
 	            {
-	                'Name': '',
+	                'Name': 'Air leakage',
                     'Key' : 'AirInfiltrationMeasurement',
 	                'Columns': [
 	                    {
@@ -1066,7 +1066,7 @@ export default {
             },
             'Sections': [
 	            {
-	                'Name': '',
+	                'Name': 'Distribution system',
                     'Key' : 'DuctLeakageMeasurement',
 	                'Columns': [
 	                    {
@@ -1280,7 +1280,7 @@ export default {
             },
             'Sections': [
 	            {
-	                'Name': '',
+	                'Name': 'Control systems',
                     'Key' : 'HVACControl',
 	                'Columns': [
 	                    {
@@ -1306,7 +1306,7 @@ export default {
             },
             'Sections': [
                 {
-                    'Name': '',
+                    'Name': 'Light fixtures',
                     'Key' : 'LightingFractions',
                     'Columns': [
                         {
@@ -1338,7 +1338,7 @@ export default {
             },
             'Sections': [
                 {
-                    'Name': '',
+                    'Name': 'Refrigerators',
                     'Key' : 'Refrigerator',
                     'Columns': [
                         {
@@ -1364,7 +1364,7 @@ export default {
             },
             'Sections': [
                 {
-                    'Name': '',
+                    'Name': 'Dishwashers',
                     'Key' : 'Dishwasher',
                     'Columns': [
                         {
@@ -1393,7 +1393,7 @@ export default {
             },
             'Sections': [
                 {
-                    'Name': '',
+                    'Name': 'Range/oven',
                     'Key': 'Oven',
                     'Columns': [
                         {
@@ -1422,7 +1422,7 @@ export default {
             },
             'Sections': [
                 {
-                    'Name': '',
+                    'Name': 'Ceiling fans',
                     'Key': 'CeilingFan',
                     'Columns': [
                         {
@@ -1448,7 +1448,7 @@ export default {
             },
             'Sections': [
                 {
-                    'Name': '',
+                    'Name': 'Whole-house mechanical ventilation system',
                     'Key' : 'VentilationFan',
                     'Columns': [
                         {

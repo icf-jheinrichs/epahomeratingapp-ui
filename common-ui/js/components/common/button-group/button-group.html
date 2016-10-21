@@ -1,7 +1,7 @@
 <button
     data-ng-repeat="button in buttonGroupCtrl.buttons track by $index"
     data-ng-click="buttonGroupCtrl.handleClick(button.Key)"
-    class="btn"
+    class="btn {{button.Class}}"
     data-ng-class="{active : buttonGroupCtrl.isActive(button.Key)}">
         {{button.Name}}
 </button>

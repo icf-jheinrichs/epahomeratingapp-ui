@@ -7,6 +7,14 @@
     background-color: $brand-tertiary;
     color: $text-color-inverse;
 
+    .btn-back {
+        height: 40px;
+        margin-left: -$offset-default;
+        padding-top: $padding-large;
+        text-align: center;
+        width: 40px;
+    }
+
     .btn {
         @extend %btn-inverse;
     }
@@ -17,6 +25,7 @@
 
     .actions {
         margin-left: auto;
+        position: relative;
     }
 
     header {
@@ -25,7 +34,7 @@
 }
 
 .job-checklist-meta {
-    margin-left: $gutter-half;
+    margin-left: $offset-default;
 }
 
 .job-checklist-title {

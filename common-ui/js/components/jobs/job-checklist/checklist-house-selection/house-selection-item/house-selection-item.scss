@@ -31,6 +31,7 @@
     .house-info {
         background-color: $brand-auxillary;
         border-left: 1px solid $body-bg;
+        padding-top: ($padding-large + $offset-default);
     }
 }
 
@@ -68,7 +69,7 @@
 
 .house-info {
     font-size: $font-size-small;
-    padding: ($padding-large + $offset-default) $padding-large $padding-large;
+    padding: $padding-large;
     position: relative;
     width: 200px;
 

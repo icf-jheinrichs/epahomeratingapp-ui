@@ -42,17 +42,17 @@ export default [
                 'FileName' : 'cherry-ln-rater-review-checklist.pdf'
             }]
         }],
-        'Status'               : 'Complete',
+        'Status'               : 'Active',
         'Progress'             : {
             'PreDrywall' : {
-                'Verified'      : 100,
+                'Verified'      : 0,
                 'MustCorrect'   : 0,
-                'Total'         : 100
+                'Total'         : 22
             },
             'Final' : {
-                'Verified'      : 100,
+                'Verified'      : 0,
                 'MustCorrect'   : 0,
-                'Total'         : 100
+                'Total'         : 27
             }
         },
         'InternalReview'       : false,
@@ -65,8 +65,8 @@ export default [
         }
     },
     {
-        '_id'                  : '87654321',
-        'RatingType'           : 'hers',
+        '_id'                  : '13345678',
+        'RatingType'           : 'energy-star',
         'Primary'              : {
             'HouseId'              : '12345678',
             'BuilderId'            : '12345678',
@@ -89,14 +89,14 @@ export default [
         'Status'               : 'Active',
         'Progress'             : {
             'PreDrywall' : {
-                'Verified'      : 78,
-                'MustCorrect'   : 8,
-                'Total'         : 100
+                'Verified'      : 17,
+                'MustCorrect'   : 0,
+                'Total'         : 22
             },
             'Final' : {
-                'Verified'      : 20,
-                'MustCorrect'   : 4,
-                'Total'         : 100
+                'Verified'      : 26,
+                'MustCorrect'   : 0,
+                'Total'         : 27
             }
         },
         'InternalReview'       : false,
@@ -110,7 +110,7 @@ export default [
     },
     {
         '_id'                  : '18273645',
-        'RatingType'           : 'energy-star',
+        'RatingType'           : 'hers',
         'Primary'              : {
             'HouseId'              : '18273645',
             'BuilderId'            : '18273645',
@@ -148,16 +148,16 @@ export default [
                 'FileName' : 'cherry-ln-rater-review-checklist.pdf'
             }]
         }],
-        'Status'               : 'Active',
+        'Status'               : 'Registered',
         'Progress'             : {
             'PreDrywall' : {
-                'Verified'      : 12,
-                'MustCorrect'   : 8,
+                'Verified'      : 100,
+                'MustCorrect'   : 0,
                 'Total'         : 100
             },
             'Final' : {
-                'Verified'      : 1,
-                'MustCorrect'   : 1,
+                'Verified'      : 100,
+                'MustCorrect'   : 0,
                 'Total'         : 100
             }
         },
@@ -213,16 +213,16 @@ export default [
                 'FileName' : 'peach-ln-rater-review-checklist.pdf'
             }]
         }],
-        'Status'               : 'Active',
+        'Status'               : 'Registered',
         'Progress'             : {
             'PreDrywall' : {
-                'Verified'      : 12,
-                'MustCorrect'   : 8,
+                'Verified'      : 100,
+                'MustCorrect'   : 0,
                 'Total'         : 100
             },
             'Final' : {
-                'Verified'      : 1,
-                'MustCorrect'   : 1,
+                'Verified'      : 100,
+                'MustCorrect'   : 0,
                 'Total'         : 100
             }
         },
@@ -292,15 +292,15 @@ export default [
                 'FileName' : 'peach-ln-rater-review-checklist.pdf'
             }]
         }],
-        'Status'               : 'Active',
+        'Status'               : 'Registered',
         'Progress'             : {
             'PreDrywall' : {
-                'Verified'      : 0,
+                'Verified'      : 100,
                 'MustCorrect'   : 0,
                 'Total'         : 100
             },
             'Final' : {
-                'Verified'      : 0,
+                'Verified'      : 100,
                 'MustCorrect'   : 0,
                 'Total'         : 100
             }
@@ -335,15 +335,15 @@ export default [
             }]
         },
         'Secondary'            : [],
-        'Status'               : 'Active',
+        'Status'               : 'Registered',
         'Progress'             : {
             'PreDrywall' : {
-                'Verified'      : 0,
+                'Verified'      : 100,
                 'MustCorrect'   : 0,
                 'Total'         : 100
             },
             'Final' : {
-                'Verified'      : 0,
+                'Verified'      : 100,
                 'MustCorrect'   : 0,
                 'Total'         : 100
             }

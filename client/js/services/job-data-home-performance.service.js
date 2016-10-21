@@ -24,6 +24,33 @@ class JobDataHomePerformanceService {
 
         return deferred.promise;
     }
+
+    put (jobDataHomePerformance) {
+        let deferred = this.$q.defer();
+        let self = this;
+
+        self
+            .db
+            .get(jobDataHomePerformance._id)
+            .then(function handleGetById (doc) {
+                jobDataHomePerformance._rev = doc._rev;
+
+                let putById
+                     = self
+                        .db
+                        .put(jobDataHomePerformance);
+
+                return putById;
+            })
+            .then(function handlePut (result) {
+                deferred.resolve(result);
+            })
+            .catch(function handlePutError (err) {
+                deferred.reject(err);
+            });
+
+        return deferred.promise;
+    }
 }
 
 export default JobDataHomePerformanceService;

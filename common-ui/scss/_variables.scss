@@ -32,6 +32,7 @@ $font-family-heading: Roboto, arial, sans-serif;
 $text-color:        #262b2f;
 $text-color-inverse: #fff;
 $text-color-muted:  lighten($text-color, 25%);
+$text-color-disabled: lighten($text-color, 70%);
 
 $text-color-heading: $text-color;
 
@@ -139,7 +140,17 @@ $button-background-color-hover: darken($button-background-color-default, 10%);
 $button-background-color-active: $button-border-color-default;
 $button-background-color-inverse: transparent;
 $button-background-color-inverse-active: $border-color-inverse;
-$button-background-color-hover-inverse: rgba(255, 255, 255, .20);
+$button-background-color-hover-inverse: rgba(255, 255, 255, .2);
+
+//
+//## Modals
+//
+
+$modal-width-default:   450px;
+$modal-width-large:     650px;
+$modal-width-dialog:    200px;
+
+$overlay-modal-bg:      rgba(0, 0, 0, .5);
 
 //
 //## Labels
@@ -155,11 +166,13 @@ $label-padding:     $padding-default;
 //## Z indexes
 //
 
+$zindex-drop-down:        1150;
 $zindex-modal:            1100;
-$zindex-modal-overlay:    1050;
+$zindex-overlay:          1050;
 $zindex-fixed-header:     1000;
 $zindex-fixed-footer:      900;
 $zindex-popover:            50;
+$zindex-absolute:            5;
 
 //
 //## Screen Sizes

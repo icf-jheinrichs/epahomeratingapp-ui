@@ -4,9 +4,13 @@ class jobChecklistNavController {
 
         this.CATEGORIES = CATEGORIES;
 
-        $rootScope.$on('updateChecklistResponseTotals', (event, progress) => {
+        this.updateChecklistResponseTotalsListener = $rootScope.$on('updateChecklistResponseTotals', (event, progress) => {
             this.progress = progress;
         });
+    }
+
+    $onDestroy () {
+        this.updateChecklistResponseTotalsListener();
     }
 }
 

@@ -34,6 +34,7 @@
     &:active {
         .nav-checklist-item-description {
             background-color: $border-color-default;
+            border-color: $status-active;
         }
 
         img {
@@ -65,5 +66,6 @@
 
     span {
         display: block;
+        line-height: $line-height-small;
     }
 }

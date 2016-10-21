@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 class JobController {
     $onInit () {
         let AddressInformation = this.job.Primary.AddressInformation;
@@ -19,6 +21,8 @@ class JobController {
         this.secondaryQuantity = this.job.Secondary.length;
         this.isSample          = this.secondaryQuantity > 0;
         this.jobPhoto          = (this.job.Primary.Photo.length) ? this.job.Primary.Photo[0] : 'img/job-photo-default.svg';
+
+        this.SyncStatus        = _.sample(['Synced', 'Unsynced']);
     }
 
     getRatingTypeClass () {

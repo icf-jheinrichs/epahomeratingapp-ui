@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="59px" height="56px" viewBox="0 0 59 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-exterior-walls</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
     <g id="Exterior-Walls" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="icon-exterior-walls">
-            <polyline id="Stroke-5" stroke="#000000" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1.924,1.924" points="51.6936119 43.0387313 24.609806 35.4996269 6.01241791 45.6442537"></polyline>
-            <polygon id="window" stroke="#262B2F" stroke-width="1.105" stroke-linecap="round" stroke-linejoin="round" points="12.0634851 25.9768284 18.6388582 23.0289925 18.5633358 32.2501119 12.1390075 35.5000373"></polygon>
-            <path d="M33.9824627,29.6988507 L33.9824627,54.5465373 L53.9351493,43.6631045 L53.9351493,21.140194 L33.9824627,29.6988507 Z M41.3885821,33.5348955 L47.9647761,30.5870597 L47.8892537,40.4131791 L41.4641045,43.6631045 L41.3885821,33.5348955 Z" id="Fill-25" stroke="#000000" fill="#60BFDD"></path>
-            <polyline id="Stroke-37" stroke="#262B2F" stroke-width="1.105" stroke-linecap="round" stroke-linejoin="round" points="18.2360448 8.71569403 17.7837313 8.10248507 18.5003731 7.84226119"></polyline>
-            <path d="M17.8374023,8.09990234 L37.7787109,1.31367188" id="Stroke-38" stroke="#262B2F" stroke-width="1.105" stroke-linecap="round" stroke-linejoin="round"></path>
-            <polygon id="front-fill" stroke="#000000" fill="#60BFDD" points="4.65629851 23.4574179 4.65629851 46.384209 14.8345821 49.2294328 14.8165224 28.4016716 23.2495821 30.3603284 23.1986866 51.372791 33.982791 54.5463731 33.944209 29.907194 17.8078657 8.13950746"></polygon>
-            <polyline id="Path-2" stroke="#000000" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1.924,1.924" points="33.909668 29.8374023 38.206543 35.8408203 58.395752 26.6801758 38.0649414 0.976318359 24.6447754 14.6455078 24.6447754 17.0925293"></polyline>
-            <polyline id="Path-3" stroke="#000000" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1.924,1.924" points="4.69587054 23.3564453 0.099609375 28.7791574 4.61258371 26.8614676"></polyline>
-            <path d="M13.6635045,48.8886719 L24.1021205,51.6604353" id="Path-4" stroke="#000000" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1.924,1.924"></path>
+            <polygon id="background" fill="#FFFFFF" points="5.89428834 49.5424244 34.9349762 57.9252749 54.7026518 47.0355108 54.5683176 31.6692564 58.821576 29.7854165 38.7986654 3.96875 19.3332418 11.3674047 1.00531293 32.5511211 6.34114718 30.4930418"></polygon>
+            <polygon id="floor" stroke="#000000" stroke-width="0.4643" stroke-dasharray="1.9753,1.9753" points="5.78405526 49.5860172 34.672761 57.6534456 54.5394752 46.7944994 25.7071371 38.7881799"></polygon>
+            <polyline id="left-ceiling" stroke="#000000" stroke-width="0.4643" stroke-dasharray="1.9753,1.9753" points="18.7470441 12.2173979 0.628255208 32.901707 21.1318716 24.0651494 39.2132577 4.6420015"></polyline>
+            <path d="M35.0758691,33.2858502 L35.0758691,57.8035839 L54.4958561,47.0416744 L54.4958561,24.8705225 L35.0758691,33.2858502 L35.0758691,33.2858502 Z M48.66986,43.8050099 L42.3583642,47.0416744 L42.2774476,37.088931 L48.7507766,34.175933 L48.66986,43.8050099 L48.66986,43.8050099 Z" id="right-wall" stroke="#000000" stroke-linejoin="round" fill="#018EDC"></path>
+            <polyline id="left-wall" stroke="#000000" stroke-width="0.4643" stroke-dasharray="1.9753,1.9753" points="6.06062572 49.7408967 6.06062572 26.9071373 25.5080064 18.5195167 25.5080064 39.1435248"></polyline>
+            <polygon id="left-window" stroke="#000000" stroke-width="0.4643" stroke-dasharray="1.9753,1.9753" points="13.4769283 38.9356841 19.9560521 35.8886679 19.9560521 26.72374 13.4084442 29.587076"></polygon>
+            <polygon id="front" stroke="#000000" stroke-linejoin="round" fill="#018EDC" points="5.94588849 49.7119226 5.94588849 27.1361877 18.9734631 12.0047811 34.9140358 33.5286001 34.9140358 57.8035839 24.3139596 54.647836 24.3948762 33.9331831 16.0604651 31.9911844 15.9795485 52.544004"></polygon>
+            <polygon id="right-ceiling" stroke="#000000" stroke-width="0.4643" stroke-dasharray="1.9753,1.9753" points="38.9830457 38.6227644 58.7222741 29.7698759 38.89507 3.99403644 18.7307133 11.4825107"></polygon>
         </g>
     </g>
 </svg>

@@ -7,7 +7,7 @@ import 'normalize.css';
 import 'font-awesome/css/font-awesome.css';
 
 // Constants
-import {DB, CATEGORIES, CATEGORY_PROGRESS, RESPONSES} from './epahomeratingapp.constant';
+import {DB, JOB_STATUS, CATEGORIES, CATEGORY_PROGRESS, RESPONSES} from './epahomeratingapp.constant';
 
 // DB
 import purgeData from './services/db/purge-data';
@@ -36,6 +36,7 @@ angular
     .component(APP_NAME, epahomeratingappComponent)
     .config(epahomeratingappRoutes)
     .constant('DB', DB)
+    .constant('JOB_STATUS', JOB_STATUS)
     .constant('CATEGORIES', CATEGORIES)
     .constant('CATEGORY_PROGRESS', CATEGORY_PROGRESS)
     .constant('RESPONSES', RESPONSES);

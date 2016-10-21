@@ -3,6 +3,12 @@ class houseSelectionItemController {
         'ngInject';
 
         this.CameraService = CameraService;
+
+        //TODO: move this to constant
+        this.photoActionLabelEnum = {
+            'ADD'    : 'Add Photo',
+            'CHANGE' : 'Change Photo'
+        };
     }
 
     $onInit () {
@@ -36,6 +42,7 @@ class houseSelectionItemController {
 
                 self.house.Photo.push(photo);
                 self.photoUrl = photo;
+                self.photoActionLabel = self.photoActionLabelEnum.CHANGE;
             });
     }
 
@@ -44,8 +51,10 @@ class houseSelectionItemController {
 
         if (this.house.Photo.length === 0) {
             photoUrl = 'img/job-photo-default.svg';
+            this.photoActionLabel = this.photoActionLabelEnum.ADD;
         } else {
             photoUrl = this.house.Photo[0];
+            this.photoActionLabel = this.photoActionLabelEnum.CHANGE;
         }
 
         return photoUrl;

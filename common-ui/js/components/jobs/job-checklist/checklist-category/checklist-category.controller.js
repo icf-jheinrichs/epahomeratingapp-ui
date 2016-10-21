@@ -1,14 +1,19 @@
 import _ from 'lodash';
 
 class jobChecklistChecklistController {
-    constructor ($stateParams, JobDataHomePerformanceService, CATEGORIES, CATEGORY_PROGRESS) {
+    constructor ($rootScope, $stateParams, JobDataHomePerformanceService, CATEGORIES, CATEGORY_PROGRESS) {
         'ngInject';
 
+        this.$rootScope                    = $rootScope;
         this.$stateParams                  = $stateParams;
         this.JobDataHomePerformanceService = JobDataHomePerformanceService;
 
         this.CATEGORIES        = CATEGORIES;
         this.CATEGORY_PROGRESS = CATEGORY_PROGRESS;
+
+        this.putMrfDataListener = this.$rootScope.$on('putMrfData', (event, mrfData) => {
+            this.onPutMrfData(mrfData);
+        });
     }
 
     $onInit () {
@@ -27,6 +32,23 @@ class jobChecklistChecklistController {
 
         this.hasPredrywallItems = !_.isEmpty(this.preDrywallChecklistItems);
         this.hasFinalItems = !_.isEmpty(this.finalChecklistItems);
+    }
+
+    $onDestroy () {
+        // deregister listeners
+        this.putMrfDataListener();
+    }
+
+
+    onPutMrfData (mrfData) {
+        // this.jobDataResponse.ChecklistItems[comment.Category][comment.CategoryProgress][comment.ItemId].Comments.push(comment.Comment);
+
+        this.jobDataHomePerformance.ChecklistItems[mrfData.ItemId][mrfData.key][mrfData.index] = mrfData.mrfData;
+
+        //TODO: put this into a method
+        this
+            .JobDataHomePerformanceService
+            .put(this.jobDataHomePerformance);
     }
 }
 

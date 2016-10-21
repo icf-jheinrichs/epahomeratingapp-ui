@@ -20,9 +20,17 @@
     margin: 0;
     white-space: nowrap;
 
-    span {
-        font-weight: bold;
-        text-transform: uppercase;
+    .title-partial-energy-star {
+        display: block;
+        font-size: $font-size-small;
+    }
+
+    .title-partial-rater {
+        font-weight: normal;
+    }
+
+    .title-partial-pro {
+        font-weight: 300;
     }
 }
 

@@ -1,0 +1,27 @@
+<div class="modal modal-large modal-scroll-body" data-ng-class="{'hidden' : !checklistItemMrfEditCtrl.showMrfEditModal}">
+    <div class="modal-header flex-container">
+        <div class="flex-item-static">
+            <button class="btn btn-link" type="button" data-ng-click="checklistItemMrfEditCtrl.cancel()">Cancel</button>
+        </div>
+
+        <span class="modal-title flex-item-grow">Edit {{checklistItemMrfEditCtrl.title}}</span>
+
+        <div class="flex-item-static">
+            <button class="btn pull-right" type="button" data-ng-click="checklistItemMrfEditCtrl.save()">Save</button>
+        </div>
+    </div>
+
+    <div class="modal-body-wrapper">
+        <div class="modal-body">
+            <div class="form-group" data-ng-repeat="(key, value) in checklistItemMrfEditCtrl.editMrfData track by $index">
+                <label for="{{key}}">{{checklistItemMrfEditCtrl.mrfDigest[$index].Name}}</label>
+                <input id="{{key}}" class="form-control" type="text" data-ng-model="checklistItemMrfEditCtrl.editMrfData[key]" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div
+    class="overlay overlay-modal"
+    data-ng-class="{'hidden' : !checklistItemMrfEditCtrl.showMrfEditModal}">
+</div>

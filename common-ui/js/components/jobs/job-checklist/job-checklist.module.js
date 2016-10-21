@@ -9,6 +9,7 @@ import checklistItemComponent from './checklist-item/checklist-item.component';
 import checklistItemCommentsComponent from './checklist-item/item-comments/item-comments.component';
 import checklistItemDefaultComponent from './checklist-item/item-default/item-default.component';
 import checklistItemMrfComponent from './checklist-item/item-mrf/item-mrf.component';
+import checklistItemMrfEditComponent from './checklist-item/item-mrf-edit/item-mrf-edit.component';
 
 let jobsModule
     = angular
@@ -21,6 +22,7 @@ let jobsModule
         .component('checklistItem', checklistItemComponent)
         .component('checklistItemComments', checklistItemCommentsComponent)
         .component('checklistItemDefault', checklistItemDefaultComponent)
-        .component('checklistItemMrf', checklistItemMrfComponent);
+        .component('checklistItemMrf', checklistItemMrfComponent)
+        .component('mrfEdit', checklistItemMrfEditComponent);
 
 export default jobsModule;

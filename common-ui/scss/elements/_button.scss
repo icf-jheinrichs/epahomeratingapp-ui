@@ -77,7 +77,6 @@ $btn-comments-size: 30px;
     height: $btn-comments-size;
     margin-right: $offset-default;
     text-align: center;
-    width: $btn-comments-size;
 
     &.has-comments {
         background-color: $link-color;
@@ -87,10 +86,9 @@ $btn-comments-size: 30px;
         &:focus {
             background-color: darken($link-color, 10%);
         }
-
-        .fa {
-            margin-left: -5px;
-        }
     }
 }
 
+.btn-error.active {
+    background-color: $status-error;
+}

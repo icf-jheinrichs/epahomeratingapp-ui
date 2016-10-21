@@ -8,6 +8,16 @@ export const DB        = {
     JOB_DATA_HOME_PERFORMANCE : `${COUCH_URL}/job-data-home-performance`
 };
 
+export const JOB_STATUS = {
+    ACTIVE                : 'Active',
+    COMPLETED             : 'Completed',
+    INTERNAL_REVIEW       : 'Internal Review',
+    SUBMITTED_TO_PROVIDER : 'Submitted to Provider',
+    APPROVED              : 'Approved',
+    REGISTERED            : 'Registered',
+    DELETED               : 'Deleted'
+};
+
 export const CATEGORIES = {
     'exterior-walls' : {
         Name : 'Exterior Walls',
@@ -47,20 +57,24 @@ export const CATEGORY_PROGRESS = {
 };
 
 export const RESPONSES = {
-    RaterVerified : {
-        Name  : 'Rater Verified',
-        Key   : 'RaterVerified'
-    },
-    MustCorrect : {
-        Name  : 'Must Correct',
-        Key   : 'MustCorrect'
+    NotApplicable : {
+        Name  : 'N/A',
+        Class : 'btn-response',
+        Key   : 'NotApplicable'
     },
     BuilderVerified : {
         Name  : 'Builder Verified',
+        Class : 'btn-response',
         Key   : 'BuilderVerified'
     },
-    NotApplicable : {
-        Name  : 'N/A',
-        Key   : 'NotApplicable'
+    MustCorrect : {
+        Name  : 'Must Correct',
+        Class : 'btn-error',
+        Key   : 'MustCorrect'
+    },
+    RaterVerified : {
+        Name  : 'Rater Verified',
+        Class : 'btn-response',
+        Key   : 'RaterVerified'
     }
 };

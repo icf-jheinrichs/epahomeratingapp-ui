@@ -8,7 +8,7 @@ class RadialProgressController {
     }
 
     $onInit () {
-        this.progressTotal = this.progress.Verified + this.progress.MustCorrect;
+        this.progressTotal = Math.ceil(((this.progress.Verified + this.progress.MustCorrect) / this.progress.Total) * 100);
     }
 
     $postLink () {
@@ -28,7 +28,7 @@ class RadialProgressController {
         let cScale
             = d3
                 .scaleLinear()
-                .domain([0, 100])
+                .domain([0, this.progress.Total])
                 .range([0, 2 * Math.PI]);
 
         let mustCorrectEnd  = cScale(this.progress.MustCorrect);
