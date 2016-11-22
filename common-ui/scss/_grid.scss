@@ -1,5 +1,19 @@
-.flex-container {
+.page-container {
+    margin: 0 auto;
+    max-width: $screen-lg;
+    position: relative;
+}
+
+.page-header {
+    margin-top: $gutter-full;
+}
+
+.flex-row {
     display: flex;
+
+    &.hidden {
+        @extend %hidden;
+    }
 }
 
 .flex-justify-end {
@@ -22,16 +36,13 @@
     flex-grow: 1;
 }
 
-.fluid-container {
-    @extend %clearfix;
+.container {
+    @include make-container();
+    @include make-container-max-widths();
 }
 
-.col {
-    padding: $gutter-half;
+.row {
+    @include make-row();
 }
 
-.page-container {
-    margin: 0 auto;
-    max-width: $screen-lg;
-    position: relative;
-}
+@include make-grid-columns();

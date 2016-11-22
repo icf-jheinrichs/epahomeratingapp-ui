@@ -1,5 +1,9 @@
-.hidden {
+%hidden {
     display: none;
+}
+
+.hidden {
+    @extend %hidden;
 }
 
 body .collapse-height {

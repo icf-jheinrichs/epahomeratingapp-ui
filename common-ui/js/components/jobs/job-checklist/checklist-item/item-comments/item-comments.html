@@ -12,7 +12,7 @@
     <div class="popover" data-ng-class="{'hidden' : !checklistItemCommentsCtrl.showPopover}">
         <div class="popover-panel-wrapper">
         <section class="popover-panel" data-ng-class="{'hidden' : checklistItemCommentsCtrl.state !== 'list'}">
-            <header class="popover-panel-header flex-container flex-align-center">
+            <header class="popover-panel-header flex-row flex-align-center">
                 <div class="flex-item-static">
                     <button class="btn btn-link" data-ng-click="checklistItemCommentsCtrl.togglePopover()">
                         <i class="fa fa-close" aria-hidden="true"></i> Close
@@ -52,7 +52,7 @@
             data-ng-submit="checklistItemCommentsCtrl.postComment()"
             data-ng-class="{'hidden' : checklistItemCommentsCtrl.state !== 'post'}">
 
-            <header class="popover-panel-header flex-container flex-align-center">
+            <header class="popover-panel-header flex-row flex-align-center">
                 <div class="flex-item-static">
                     <button type="button" class="btn btn-link" data-ng-click="checklistItemCommentsCtrl.setState('list')">
                         <i class="fa fa-chevron-left fa-lg" aria-hidden="true"></i> Cancel

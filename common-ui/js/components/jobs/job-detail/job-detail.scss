@@ -1,0 +1,28 @@
+@import '../../../../scss/variables';
+@import '../../../../scss/mixins';
+@import '../../../../scss/utilities';
+@import '../../../../scss/elements/button';
+
+.address-information-separator {
+    border-top: $border-default;
+    margin: $offset-default (-$offset-small) 0;
+    padding-bottom: $offset-large;
+    position: relative;
+}
+
+.address-information-separator-title {
+    font-size: $font-size-h4;
+    height: 20px;
+    left: -40px;
+    line-height: 1em;
+    position: absolute;
+    text-align: right;
+    text-transform: uppercase;
+    top: -50%;
+    width: 30px;
+}
+
+.tabs-sample-set {
+    background: linear-gradient(to top, $brand-tertiary 1px, $brand-auxillary 1px);
+    padding: $padding-default $gutter-half 0 ($gutter-half - $tab-padding);
+}

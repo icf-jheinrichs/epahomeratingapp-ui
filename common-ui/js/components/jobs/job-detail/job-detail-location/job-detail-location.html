@@ -1,0 +1,87 @@
+<fieldset class="row">
+    <legend class="col-xs-3">House Plan</legend>
+    <div class="offset-xs-3 col-xs-9">
+        <file-manager
+            files="jobDetailLocationCtrl.housePlanFileList">
+        </file-manager>
+    </div>
+</fieldset>
+
+<fieldset class="row">
+    <legend class="col-xs-3">Builder</legend>
+    <div class="offset-xs-3 col-xs-9">
+        <div class="field">
+            <label for="Builder" class="sr-only">Builder</label>
+            <input id="Builder" placeholder="Builder" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.BuilderId" />
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="row">
+    <legend class="col-xs-3">Location</legend>
+    <div class="offset-xs-3 col-xs-9">
+        <p class="sr-only">Enter address</p>
+
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <label for="StreetAddress" class="sr-only">Street Address</label>
+                <input id="StreetAddress" placeholder="Street Address" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.Address1" />
+            </div>
+        </div>
+
+        <div class="row row-form-groups">
+            <div class="form-group col-xs-8">
+                <label for="City" class="sr-only">City</label>
+                <input id="City" placeholder="City" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.CityMunicipality" />
+            </div>
+            <div class="form-group col-xs-2">
+                <label for="State" class="sr-only">State</label>
+                <input id="State" placeholder="State" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.StateCode" />
+            </div>
+            <div class="form-group col-xs-2">
+                <label for="ZipCode" class="sr-only">Zip Code</label>
+                <input id="ZipCode" placeholder="Zip Code" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.ZipCode" />
+            </div>
+        </div>
+
+        <p class="address-information-separator"><span class="address-information-separator-title">Or</span> <span class="sr-only">Enter Community Name and Lot Number</span></p>
+
+        <div class="row row-form-groups">
+            <div class="form-group col-xs-10">
+                <label for="CommunityName" class="sr-only">Community Name</label>
+                <input id="CommunityName" placeholder="Community Name" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.CommunityName" />
+            </div>
+            <div class="form-group col-xs-2">
+                <label for="RatingType" class="sr-only">Lot #</label>
+                <input id="RatingType" placeholder="Lot #" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.LotNo" />
+            </div>
+        </div>
+
+        <p class="address-information-separator"><span class="address-information-separator-title">Or</span> <span class="sr-only">Enter Manual Identifier</span></p>
+
+        <div class="row">
+            <div class="form-group col-xs-12">
+                <label for="CommunityName" class="sr-only">Manual Identifier</label>
+                <input id="CommunityName" placeholder="Manual Identifier" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.ManualIdentifier" />
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="row">
+    <legend class="col-xs-3">HVAC Design Report</legend>
+    <div class="offset-xs-3 col-xs-9">
+        <file-manager
+            files="jobDetailLocationCtrl.location.HvacDesignReport">
+        </file-manager>
+    </div>
+</fieldset>
+
+<fieldset class="row">
+    <legend class="col-xs-3">Rater Design Review Checklist</legend>
+    <div class="offset-xs-3 col-xs-9">
+        <file-manager
+            files="jobDetailLocationCtrl.location.RaterDesignReviewChecklist">
+        </file-manager>
+    </div>
+</fieldset>

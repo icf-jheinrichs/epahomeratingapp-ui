@@ -47,6 +47,36 @@ class JobsService {
         return deferred.promise;
     }
 
+    getNewJob () {
+        let primaryHouseGuid = Date.now();
+        let jobTemplate = {
+            'RatingType'           : 'energy-star',
+            'Primary'              : {
+                'HouseId'          : primaryHouseGuid
+            },
+            'Secondary'            : [],
+            'Status'               : 'Active',
+            'Progress'             : {
+                'PreDrywall' : {
+                    'Verified'      : 0,
+                    'MustCorrect'   : 0,
+                    'Total'         : 0
+                },
+                'Final' : {
+                    'Verified'      : 0,
+                    'MustCorrect'   : 0,
+                    'Total'         : 0
+                }
+            },
+            'InternalReview'       : false,
+            'ReturnedFromInternal' : false,
+            'ReturnedFromProvider' : false,
+            'History'              : []
+        };
+
+        return this.$q.when(jobTemplate);
+    }
+
     put (job) {
         let deferred = this.$q.defer();
         let self = this;

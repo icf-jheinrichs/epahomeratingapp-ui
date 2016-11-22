@@ -1,10 +1,10 @@
-<div class="checklist-item flex-container flex-justify-between">
+<div class="checklist-item flex-row flex-justify-between">
     <header>
         <h4 class="checklist-item-title">{{::checklistItemCtrl.checklistItem.Shorthand}}</h4>
-        <button class="btn btn-link" type="button" aria-label="More Information"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+        <button class="btn btn-link btn-no-label" type="button" aria-label="More Information"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
     </header>
 
-    <div class="flex-container flex-align-center">
+    <div class="flex-row flex-align-center">
         <checklist-item-comments
             comments="checklistItemCtrl.comments"
             on-comment="checklistItemCtrl.postComment(comment)">

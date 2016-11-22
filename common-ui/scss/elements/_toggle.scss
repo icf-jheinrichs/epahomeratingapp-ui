@@ -1,0 +1,59 @@
+$toggle-size:   30px;
+
+$switch-offset: 2px;
+$switch-size:   $toggle-size - ($switch-offset * 2) - ($border-size-default * 2);
+
+$switch-delta:  $toggle-size;
+
+.toggle-control {
+    display: none;
+}
+
+.toggle-label {
+    border: $border-default;
+    border-radius: ($toggle-size / 2);
+    box-shadow: $shadow-inset;
+    cursor: pointer;
+    height: $toggle-size;
+    outline: 0;
+    overflow: hidden;
+    position: relative;
+    transition: box-shadow $transition-slow, background-color $transition-default, border-color $transition-default;
+    width: $toggle-size * 2;
+
+    &:hover,
+    &:focus {
+        border-color: darken($border-color-default, 10%);
+        box-shadow: $shadow-inset, $shadow-hover;
+    }
+
+    &::after {
+        background-color: $body-bg;
+        border: $border-default;
+        border-radius: $switch-size;
+        box-shadow: $shadow-small;
+        content: '';
+        display: block;
+        height: $switch-size;
+        left: $switch-offset;
+        position: absolute;
+        top: $switch-offset;
+        transition: transform $transition-default, border-color $transition-default;
+        width: $switch-size;
+    }
+}
+
+.toggle-control:checked + .toggle-label {
+    background-color: $status-correct;
+    border-color: darken($status-correct, 10%);
+
+    &:hover,
+    &:focus {
+        box-shadow: $shadow-inset, $shadow-correct;
+    }
+
+    &::after {
+        border-color: darken($status-correct, 10%);
+        transform: translateX($switch-delta);
+    }
+}

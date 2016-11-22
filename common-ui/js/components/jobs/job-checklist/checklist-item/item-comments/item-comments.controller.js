@@ -1,13 +1,12 @@
 import moment from 'moment';
 
 class ChecklistCommentsController {
-    constructor (CameraService) {
+    constructor (CameraService, CONFIG) {
         'ngInject';
 
         this.CameraService   = CameraService;
 
-        //TODO: move this to constant
-        this.defaultPhotoUrl = 'img/job-photo-default.svg';
+        this.defaultPhotoUrl = CONFIG.DEFAULT_PHOTO;
 
         //TODO: move this to constant
         this.photoActionLabelEnum = {

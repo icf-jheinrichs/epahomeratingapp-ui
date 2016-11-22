@@ -8,6 +8,20 @@ export const DB        = {
     JOB_DATA_HOME_PERFORMANCE : `${COUCH_URL}/job-data-home-performance`
 };
 
+export const CONFIG = {
+    DEFAULT_PHOTO : 'img/job-photo-default.svg'
+};
+
+export const MESSAGING = {
+    SET_TOP_PAD                      : 'SET_TOP_PAD',
+    SET_BOTTOM_PAD                   : 'SET_BOTTOM_PAD',
+    UPDATE_HOUSE_PHOTO               : 'UPDATE_HOUSE_PHOTO',
+    UPDATE_CHECKLIST_RESPONSE        : 'UPDATE_CHECKLIST_RESPONSE',
+    UPDATE_CHECKLIST_RESPONSE_TOTALS : 'UPDATE_CHECKLIST_RESPONSE_TOTALS',
+    UPDATE_MRF_DATA                  : 'UPDATE_MRF_DATA',
+    POST_COMMENT                     : 'POST_COMMENT'
+};
+
 export const JOB_STATUS = {
     ACTIVE                : 'Active',
     COMPLETED             : 'Completed',
@@ -42,6 +56,17 @@ export const CATEGORIES = {
     'electrical' : {
         Name : 'Plug Loads, Lighting, PV, Meters',
         Key  : 'PlugLoadsLightingPvMeters'
+    }
+};
+
+export const RATING_TYPES = {
+    'EnergyStar' : {
+        Name : 'ENERGY STAR Rating',
+        Key  : 'energy-star'
+    },
+    'HERS' : {
+        Name : 'HERS Rating Only',
+        Key  : 'hers'
     }
 };
 

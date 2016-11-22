@@ -26,21 +26,22 @@ $status-error:      #ff464b;
 //## Typography
 //
 
-$font-family-base:  Roboto, arial, sans-serif;
-$font-family-heading: Roboto, arial, sans-serif;
+$font-family-base:      Roboto, arial, sans-serif;
+$font-family-heading:   Roboto, arial, sans-serif;
 
-$text-color:        #262b2f;
-$text-color-inverse: #fff;
-$text-color-muted:  lighten($text-color, 25%);
-$text-color-disabled: lighten($text-color, 70%);
+$text-color:            #262b2f;
+$text-color-inverse:    #fff;
+$text-color-muted:      lighten($text-color, 25%);
+$text-color-disabled:   lighten($text-color, 70%);
 
-$text-color-heading: $text-color;
+$text-color-heading:    $text-color;
 
-$link-color:        $brand-secondary;
-$link-color-hover:  darken($brand-secondary, 10%);
+$link-color:            $brand-secondary;
+$link-color-hover:      darken($brand-secondary, 10%);
 
-$font-size-base:    14px;
-$font-size-small:   12px;
+$font-size-base:        14px;
+$font-size-large:       16px;
+$font-size-small:       12px;
 
 $font-size-h1:      ceil($font-size-base * 2);      // 28px
 $font-size-h2:      ceil($font-size-base * 2);      // 28px
@@ -95,6 +96,9 @@ $border-size-default:   1px;
 $border-size-medium:    ($border-size-default * 2);
 $border-size-large:     ($border-size-medium * 2);
 
+
+$border-default:        $border-size-default solid $border-color-default;
+
 //
 //## Arrows
 //
@@ -108,47 +112,72 @@ $arrow-large:           15px;
 //
 
 $shadow-color-default:  rgba(0, 0, 0, .25);
+$shadow-color-light:    rgba(0, 0, 0, .10);
+$shadow-color-inset:    rgba(0, 0, 0, .05);
+$shadow-color-hover:    rgba(0, 0, 0, .05);
+$shadow-color-active:   rgba($link-color, .25);
+$shadow-color-correct:  rgba($status-correct, .25);
+
 $shadow-default:        0 0 15px $shadow-color-default;
+$shadow-small:          1px 1px 3px  $shadow-color-light;
+$shadow-inset:          inset 1px 1px 4px $shadow-color-inset;
+
+$shadow-hover:          0 0 0 1px $body-bg, 0 0 0 3px $shadow-color-hover;
+$shadow-active:         0 0 0 1px $body-bg, 0 0 0 3px $shadow-color-active;
+$shadow-correct:        0 0 0 1px $body-bg, 0 0 0 3px $shadow-color-correct;
 
 //
 //## Animation
 //
 
 $transition-default:    300ms;
-$transition-slow:       600ms;
+$transition-slow:       500ms;
 $transition-fast:       150ms;
 
 //
 //## Tables
 //
 
-$table-header-color:    #60bfdd;
+$table-header-color:        #60bfdd;
 $table-header-border-color: #fff;
 
 //
 //## Buttons
 //
 
-$button-color-active:   #fff;
+$button-color-active:           #fff;
 
-$button-border-color-default: #60bfdd;
-$button-border-color-hover: darken($button-border-color-default, 15%);
-$button-border-color-inverse: $border-color-inverse;
+$button-border-color-default:   #60bfdd;
+$button-border-color-hover:     darken($button-border-color-default, 15%);
+$button-border-color-inverse:   $border-color-inverse;
 
-$button-background-color-default: #fff;
-$button-background-color-hover: darken($button-background-color-default, 10%);
-$button-background-color-active: $button-border-color-default;
-$button-background-color-inverse: transparent;
-$button-background-color-inverse-active: $border-color-inverse;
-$button-background-color-hover-inverse: rgba(255, 255, 255, .2);
+$button-background-color-default:           #fff;
+$button-background-color-hover:             darken($button-background-color-default, 10%);
+$button-background-color-active:            $button-border-color-default;
+$button-background-color-inverse:           transparent;
+$button-background-color-inverse-active:    $border-color-inverse;
+$button-background-color-hover-inverse:     rgba(255, 255, 255, .2);
+
+//
+//## Tabs
+//
+
+$tab-border-color-default:      lighten($brand-tertiary, 40%);
+$tab-border-color-hover:        $brand-tertiary;
+
+$tab-background-color-default:  $brand-auxillary;
+$tab-background-color-hover:    darken($body-bg, 2%);
+$tab-background-color-active:   $body-bg;
+
+$tab-padding:                   $padding-large;
 
 //
 //## Modals
 //
 
+$modal-width-dialog:    200px;
 $modal-width-default:   450px;
 $modal-width-large:     650px;
-$modal-width-dialog:    200px;
 
 $overlay-modal-bg:      rgba(0, 0, 0, .5);
 
@@ -178,14 +207,48 @@ $zindex-absolute:            5;
 //## Screen Sizes
 //
 
+$screen-sm:          640px;
+$screen-md:          768px;
 $screen-lg:         1024px;
-$screen-md:         768px;
-$screen-sm:         640px;
 
-$screen-lg-min:     ($screen-md + 1);
-$screen-md-max:     ($screen-lg - 1);
 $screen-md-min:     ($screen-sm + 1);
+$screen-md-max:     ($screen-lg - 1);
+$screen-lg-min:     ($screen-md + 1);
 
+$grid-breakpoints: (
+  xs: 0,
+  sm: ($screen-sm + 80px),
+  md: ($screen-md + 80px),
+  lg: ($screen-lg + 80px)
+) !default;
+// @include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
+// @include _assert-starts-at-zero($grid-breakpoints);
+
+
+// 7. Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+    sm: $screen-sm,
+    md: $screen-md,
+    lg: $screen-lg
+) !default;
+// @include _assert-ascending($container-max-widths, "$container-max-widths");
+
+
+// 8. Grid columns
+//
+// Set the number of columns and specify the width of the gutters.
+
+$grid-columns:               12 !default;
+$grid-gutter-width-base:     $gutter-full !default;
+$grid-gutter-widths: (
+    xs: $grid-gutter-width-base,
+    sm: $grid-gutter-width-base,
+    md: $grid-gutter-width-base,
+    lg: $grid-gutter-width-base
+) !default;
 
 //
 //## Components

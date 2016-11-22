@@ -1,15 +1,15 @@
-<a class="house-selection-list-item flex-container"
+<a class="house-selection-list-item flex-row"
    ui-sref=".category({houseId: houseSelectionItemCtrl.house.HouseId})"
    ui-sref-active="active">
 
     <figure class="house-photo">
-        <img data-ng-src="{{houseSelectionItemCtrl.photoUrl}}" />
+        <img data-ng-src="{{houseSelectionItemCtrl.getPhotoUrl()}}" />
 
         <figcaption class="house-photo-edit">
             <button
                 class="btn btn-block btn-link"
                 type="button"
-                data-ng-click="houseSelectionItemCtrl.onEditPhoto(houseSelectionItemCtrl.house.HouseId, $event)">
+                data-ng-click="houseSelectionItemCtrl.updatePhoto(houseSelectionItemCtrl.house.HouseId, $event)">
 
                 <i class="fa fa-camera" aria-hidden="true"></i> {{houseSelectionItemCtrl.photoActionLabel}}
             </button>

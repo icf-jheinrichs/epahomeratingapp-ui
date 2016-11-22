@@ -1,13 +1,13 @@
 .navbar {
     color: $text-color-inverse;
-    padding: $gutter-half;
+    padding: $gutter-half 0;
 
     .btn {
         @extend %btn-inverse;
     }
 
-    &.flex-container,
-    .flex-container {
+    &.flex-row,
+    .flex-row {
         align-items: center;
     }
 

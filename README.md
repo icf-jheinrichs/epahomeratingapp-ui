@@ -1,25 +1,32 @@
-# How to use the service template.
+# Energy Star Rater Pro - Common UI
 
-1. Clone service-template locally
+To include the Common UI in a project, add:
 
- `git clone [path-to-service-template] [path-to-new-repository]`
 
-2. Create new repository on AWS.
+"epahomeratingapp-ui": "git+https://github.com/icf-jheinrichs/epahomeratingapp-ui.git"
 
- `aws codecommit create-repository --repository-name MyProjecRepo --repository-description "Write a description about your project"`
 
- AWS will respond with information about the new repository. Copy the provided _cloneUrlHttp_.
+... to devDependancies.
 
-3. Set the remotes.
+Add  `import ComponentsModule from 'epahomeratingapp-ui';` to your webpack entry file.
 
- `cd [path-to-new-repository]`
 
- `git remote set-url origin _cloneUrlHttp_`
+To run the UI preview site, you will need to run CouchDB, and then:
 
- `git remote add service-template https://git-codecommit.us-east-1.amazonaws.com/v1/repos/service-template`
+```
+npm install
+npm run dev
+```
 
-4. Do initial push to AWS
+To check for TODO items, run:
 
-  `git push origin master`
+```
+npm run todo:client
+```
 
-When getting updates from service-template, create a feature branch first, and then only merge in desired updates to master.
+
+To lint the UI, run:
+
+```
+npm run lint:client
+```

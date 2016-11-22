@@ -5,16 +5,22 @@
     cursor: pointer;
     display: inline-block;
     line-height: $line-height-small;
+    outline: 0;
     padding: $padding-default ($padding-default * 2);
     position: relative;
     text-align: center;
     text-decoration: none;
-    transition: color $transition-default, border-color $transition-default, background $transition-default;
+    transition: box-shadow $transition-slow, color $transition-default, border-color $transition-default, background $transition-default;
 
     &:hover,
     &:focus {
         background-color: $button-background-color-hover;
         border-color: $button-border-color-hover;
+        box-shadow: $shadow-hover;
+    }
+
+    &:active {
+        box-shadow: $shadow-active;
     }
 
     &.active {
@@ -70,11 +76,17 @@
     width: 100%;
 }
 
-$btn-comments-size: 30px;
+$btn-no-label-size: 30px;
+
+.btn-no-label {
+    border-radius: ($btn-no-label-size / 2);
+    height: $btn-no-label-size;
+    width: $btn-no-label-size;
+}
 
 .btn-comments {
-    border-radius: $btn-comments-size / 2;
-    height: $btn-comments-size;
+    border-radius: ($btn-no-label-size / 2);
+    height: $btn-no-label-size;
     margin-right: $offset-default;
     text-align: center;
 

@@ -8,15 +8,15 @@
         </button>
     </div>
 
-    <section class="page-container flex-container flex-align-center house-selection-selected" data-ng-class="{'collapse-height' : checklistHouseSelectionCtrl.showNavbar}">
+    <section class="page-container flex-row flex-align-center house-selection-selected" data-ng-class="{'collapse-height' : checklistHouseSelectionCtrl.showNavbar}">
         <h3 class="house-selection-title">You Are Rating:</h3>
 
         <figure class="house-photo">
-            <img data-ng-src="{{checklistHouseSelectionCtrl.selectedHousePhoto}}" />
+            <img data-ng-src="{{checklistHouseSelectionCtrl.getSelectedHousePhoto()}}" />
         </figure>
 
         <div class="house-info flex-item-grow">
-            <h4 class="house-title">{{checklistHouseSelectionCtrl.selectedHouseTitle}}</h4>
+            <h4 class="house-title">{{checklistHouseSelectionCtrl.getSelectedHouseTitle()}}</h4>
             <span class="house-builder">Builder: {{checklistHouseSelectionCtrl.selectedHouse.BuilderId}}</span>
             <span class="house-plan">House Plan: {{checklistHouseSelectionCtrl.selectedHouse.HousePlanId[0]}}</span>
         </div>
@@ -25,16 +25,18 @@
     <nav class="navbar-house-selection page-container" data-ng-class="{'collapse-height' : !checklistHouseSelectionCtrl.showNavbar}">
         <h3 class="house-selection-title">{{::checklistHouseSelectionCtrl.sampleSize}} Addresses For This Sample Set</h3>
 
-        <div class="house-selection-list flex-container">
+        <div class="house-selection-list flex-row">
             <house-selection-item
                 house="checklistHouseSelectionCtrl.houses.Primary"
-                is-primary="true">
+                is-primary="true"
+                on-update-house-photo="checklistHouseSelectionCtrl.onUpdateHousePhoto(HouseId, photo)">
             </house-selection-item>
 
             <house-selection-item
                 data-ng-repeat="house in checklistHouseSelectionCtrl.houses.Secondary"
                 house="house"
-                is-primary="false">
+                is-primary="false"
+                on-update-house-photo="checklistHouseSelectionCtrl.onUpdateHousePhoto(HouseId, photo)">
             </house-selection-item>
         </div>
     </nav>

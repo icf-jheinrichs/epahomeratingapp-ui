@@ -1,10 +1,11 @@
 class ChecklistItemClass {
-    constructor ($rootScope, $stateParams, RESPONSES) {
+    constructor ($rootScope, $stateParams, RESPONSES, MESSAGING) {
         'ngInject';
 
         this.$rootScope   = $rootScope;
         this.$stateParams = $stateParams;
         this.RESPONSES    = RESPONSES;
+        this.MESSAGING    = MESSAGING;
     }
 
     $onInit () {
@@ -25,7 +26,7 @@ class ChecklistItemClass {
     }
 
     onSetResponse (Response) {
-        this.$rootScope.$emit('setResponse', {
+        this.$rootScope.$emit(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE, {
             'ItemId'           : this.itemId,
             'Category'         : this.itemCategory,
             'CategoryProgress' : this.itemCategoryProgress,
@@ -34,7 +35,7 @@ class ChecklistItemClass {
     }
 
     postComment (Comment) {
-        this.$rootScope.$emit('postComment', {
+        this.$rootScope.$emit(this.MESSAGING.POST_COMMENT, {
             'ItemId'           : this.itemId,
             'Category'         : this.itemCategory,
             'CategoryProgress' : this.itemCategoryProgress,

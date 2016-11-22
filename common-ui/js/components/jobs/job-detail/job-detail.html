@@ -1,38 +1,82 @@
-<form>
-    <fieldset>
-        <legend>Sample Set</legend>
-    </fieldset>
-    <fieldset>
-        <legend>House Plan</legend>
-    </fieldset>
-    <fieldset>
-        <legend>Builder</legend>
-    </fieldset>
-    <fieldset>
-        <legend>Rating Type</legend>
-        <div class="field-list">
-            <div class="field">
-                <label for="RatingType" class="sr-only">Rating Type</label>
-                <input id="RatingType" type="text" data-ng-model="jobCtrl.job.RatingType" />
-            </div>
+<form class="inline-legend">
+    <fieldset class="row">
+        <legend class="col-xs-3">Rating Type</legend>
+        <div class="offset-xs-3 col-xs-9">
+            <button-group
+                class="button-group"
+                buttons="jobDetailCtrl.ratingTypeOptions"
+                initial-value="[jobDetailCtrl.job.RatingType]"
+                allow-multiple="false"
+                on-set-value="jobDetailCtrl.setRatingType(response)">
+            </button-group>
         </div>
     </fieldset>
-    <fieldset>
-        <legend>Location</legend>
-        <div class="field-list">
-            <div class="field">
-                <label for="RatingType" class="sr-only">Location</label>
-                <input id="RatingType" type="text" data-ng-model="jobCtrl.job.AddressInformation" />
-            </div>
+
+    <fieldset class="row">
+        <legend class="col-xs-3">Sample Set</legend>
+        <div class="offset-xs-3 col-xs-9">
+            <toggle
+                toggle-value="jobDetailCtrl.isSampleset">Job is a Sample Set
+            </toggle>
         </div>
     </fieldset>
-    <fieldset>
-        <legend>House Front Photo</legend>
-    </fieldset>
-    <fieldset>
-        <legend>HVAC Design Report</legend>
-    </fieldset>
-    <fieldset>
-        <legend>Rater Design Review Checklist</legend>
-    </fieldset>
+
+    <nav class="tabs tabs-sample-set row flex-row" role="tablist" data-ng-class="{'hidden' : !jobDetailCtrl.isSampleset}">
+        <button
+            data-ng-click="jobDetailCtrl.setTab(jobDetailCtrl.job.Primary.HouseId)"
+            type="button"
+            class="tab"
+            role="tab"
+            aria-controls="tabpanel-location-{{::jobDetailCtrl.job.Primary.HouseId}}"
+            aria-selected="{{jobDetailCtrl.ariaCurrent(jobDetailCtrl.job.Primary.HouseId)}}"
+            data-ng-class="{'active' : (jobDetailCtrl.job.Primary.HouseId === jobDetailCtrl.currentLocation)}"
+            id="tab-location-{{::jobDetailCtrl.job.Primary.HouseId}}">
+
+            Sample 1 (Primary)
+        </button>
+
+        <button
+            data-ng-repeat="secondary in jobDetailCtrl.job.Secondary track by HouseId"
+            data-ng-click="jobDetailCtrl.setTab(secondary.HouseId)"
+            type="button"
+            class="tab"
+            role="tab"
+            aria-controls="tabpanel-location-{{location.HouseId}}"
+            aria-selected="{{jobDetailCtrl.ariaCurrent(location.HouseId)}}"
+            data-ng-class="{'active' : (secondary.HouseId === jobDetailCtrl.currentLocation)}"
+            id="tab-location-{{::secondary.HouseId}}">
+
+            Sample {{$index + 2}}
+        </button>
+    </nav>
+
+    <div class="tab-content">
+        <job-detail-location
+            class="tabpanel"
+            role="tabpanel"
+            aria-labelledby="tab-location-{{::jobDetailCtrl.job.Primary.HouseId}}"
+            aria-hidden="{{!jobDetailCtrl.ariaCurrent(jobDetailCtrl.job.Primary.HouseId)}}"
+            data-ng-class="{'active' : (jobDetailCtrl.job.Primary.HouseId === jobDetailCtrl.currentLocation)}"
+            id="tabpanel-location-{{jobDetailCtrl.job.Primary.HouseId}}"
+            location="jobDetailCtrl.job.Primary">
+        </job-detail-location>
+
+        <job-detail-location
+            data-ng-repeat="secondary in jobDetailCtrl.job.Secondary track by HouseId"
+            class="tabpanel"
+            role="tabpanel"
+            aria-labelledby="tab-location-{{::secondary.HouseId}}"
+            aria-hidden="{{!jobDetailCtrl.ariaCurrent(secondary.HouseId)}}"
+            data-ng-class="{'active' : (secondary.HouseId === jobDetailCtrl.currentLocation)}"
+            id="tabpanel-location-{{secondary.HouseId}}"
+            location="secondary">
+        </job-detail-location>
+    </div>
+
+    <div class="form-actions row">
+        <div class="offset-xs-3 col-xs-9">
+            <button class="btn" type="submit">{{::jobDetailCtrl.submitLabel}}</button>
+            <button class="btn btn-link" type="">Cancel</button>
+        </div>
+    </div>
 </form>

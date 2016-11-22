@@ -1,8 +1,9 @@
 class houseSelectionItemController {
-    constructor (CameraService) {
+    constructor (CameraService, CONFIG) {
         'ngInject';
 
         this.CameraService = CameraService;
+        this.DEFAULT_PHOTO = CONFIG.DEFAULT_PHOTO;
 
         //TODO: move this to constant
         this.photoActionLabelEnum = {
@@ -26,22 +27,22 @@ class houseSelectionItemController {
         } else {
             this.HouseTitle = `Manual ID: ${AddressInformation.ManualId}`;
         }
-
-        this.photoUrl = this.getPhotoUrl();
     }
 
-    onEditPhoto (HouseId, $event) {
+    updatePhoto (HouseId, $event) {
         let self = this;
+
         $event.preventDefault();
         $event.stopPropagation();
 
         this.CameraService
             .getPhoto()
             .then(function handleCamera (photo) {
-                self.checklist.onUpdateHousePhoto(HouseId, photo);
+                self.onUpdateHousePhoto({
+                    HouseId,
+                    photo
+                });
 
-                self.house.Photo.push(photo);
-                self.photoUrl = photo;
                 self.photoActionLabel = self.photoActionLabelEnum.CHANGE;
             });
     }
@@ -50,7 +51,7 @@ class houseSelectionItemController {
         let photoUrl;
 
         if (this.house.Photo.length === 0) {
-            photoUrl = 'img/job-photo-default.svg';
+            photoUrl = this.DEFAULT_PHOTO;
             this.photoActionLabel = this.photoActionLabelEnum.ADD;
         } else {
             photoUrl = this.house.Photo[0];

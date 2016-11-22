@@ -1,5 +1,20 @@
-.form-group {
-    margin-bottom: $offset-large;
+.form-actions,
+fieldset {
+    border: 0;
+    border-bottom: $border-default;
+    padding: $gutter-half;
+    position: relative;
+}
+
+.form-actions {
+    border-bottom: 0;
+}
+
+.inline-legend legend {
+    font-size: $font-size-h4;
+    left: 0;
+    position: absolute;
+    top: $gutter-half;
 }
 
 label {
@@ -8,15 +23,29 @@ label {
     margin: 0 0 2px $offset-small;
 }
 
+.form-group {
+    margin-bottom: $offset-default;
+}
+
+.row-form-groups {
+    margin: 0 (-$offset-small);
+
+    .form-group {
+        padding: 0 $offset-small;
+    }
+}
+
 .form-control {
-    border: $border-size-default solid $border-color-default;
+    border: $border-default;
+    font-size: $font-size-large;
     max-width: 100%;
     padding: $padding-default;
-    transition: border-color $transition-default;
+    transition: box-shadow $transition-slow, border-color $transition-default;
     width: 100%;
 
     &:focus {
         border-color: $brand-secondary;
+        box-shadow: $shadow-active;
         outline: 0;
     }
 

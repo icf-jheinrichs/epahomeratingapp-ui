@@ -1,6 +1,12 @@
 import _ from 'lodash';
 
 class JobController {
+    constructor (CONFIG) {
+        'ngInject';
+
+        this.DEFAULT_PHOTO = CONFIG.DEFAULT_PHOTO;
+    }
+
     $onInit () {
         let AddressInformation = this.job.Primary.AddressInformation;
 
@@ -20,7 +26,7 @@ class JobController {
         this.RatingType        = (this.job.RatingType === 'energy-star') ? 'Energy Star' : 'HERS Rating';
         this.secondaryQuantity = this.job.Secondary.length;
         this.isSample          = this.secondaryQuantity > 0;
-        this.jobPhoto          = (this.job.Primary.Photo.length) ? this.job.Primary.Photo[0] : 'img/job-photo-default.svg';
+        this.jobPhoto          = (this.job.Primary.Photo.length) ? this.job.Primary.Photo[0] : this.DEFAULT_PHOTO;
 
         this.SyncStatus        = _.sample(['Synced', 'Unsynced']);
     }

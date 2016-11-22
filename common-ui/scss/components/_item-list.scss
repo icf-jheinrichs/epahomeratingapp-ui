@@ -8,7 +8,7 @@
 }
 
 .item-list {
-    border-bottom: $border-size-default solid $border-color-default;
+    border-bottom: $border-default;
 }
 
 .list-item-activate {
@@ -16,7 +16,7 @@
 }
 
 .list-item {
-    border-top: $border-size-default solid $border-color-default;
+    border-top: $border-default;
     display: block;
     transition: background-color $transition-default ease-out;
 

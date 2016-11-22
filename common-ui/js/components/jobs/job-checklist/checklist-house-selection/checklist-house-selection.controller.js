@@ -1,13 +1,16 @@
 import _ from 'lodash';
 
 class checklistHouseSelectionController {
-    constructor ($rootScope, $stateParams, $transitions) {
+    constructor ($rootScope, $stateParams, $transitions, CONFIG, MESSAGING) {
         'ngInject';
 
         // capture DI
         this.$rootScope   = $rootScope;
         this.$stateParams = $stateParams;
         this.$transitions = $transitions;
+
+        this.DEFAULT_PHOTO = CONFIG.DEFAULT_PHOTO;
+        this.MESSAGING     = MESSAGING;
 
         // init View Labels
         this.toggleTextEnum = {
@@ -24,7 +27,7 @@ class checklistHouseSelectionController {
 
         this.selectedHouse      = this.houses.Primary;
         this.selectedHouseTitle = this.getSelectedHouseTitle();
-        this.selectedHousePhoto = (this.houses.Primary.Photo.length === 0) ? 'img/job-photo-default.svg' : this.houses.Primary.Photo[0];
+        this.selectedHousePhoto = (this.houses.Primary.Photo.length === 0) ? this.DEFAULT_PHOTO : this.houses.Primary.Photo[0];
 
         this.toggleText         = this.toggleTextEnum.less;
 
@@ -55,10 +58,6 @@ class checklistHouseSelectionController {
         } else {
             this.selectedHouse = _.find(this.houses.Secondary, {HouseId : houseId});
         }
-
-        this.selectedHousePhoto = (this.selectedHouse.Photo.length === 0) ? 'img/job-photo-default.svg' : this.selectedHouse.Photo[0];
-
-        this.selectedHouseTitle = this.getSelectedHouseTitle();
     }
 
     onHouseSelectionToggle () {
@@ -77,6 +76,10 @@ class checklistHouseSelectionController {
         this.showNavbar = false;
 
         this.setHouseSelectionState();
+    }
+
+    getSelectedHousePhoto () {
+        return (this.selectedHouse.Photo.length === 0) ? this.DEFAULT_PHOTO : this.selectedHouse.Photo[0];
     }
 
     //TODO: Move this up into service
@@ -108,7 +111,14 @@ class checklistHouseSelectionController {
     setAppBottomPad () {
         let bottomPad = (this.showNavbar) ? 250 : 100;
 
-        this.$rootScope.$emit('setBottomPad', bottomPad);
+        this.$rootScope.$emit(this.MESSAGING.SET_BOTTOM_PAD, bottomPad);
+    }
+
+    onUpdateHousePhoto (HouseId, photo) {
+        this.$rootScope.$emit(this.MESSAGING.UPDATE_HOUSE_PHOTO, {
+            HouseId,
+            photo
+        });
     }
 }
 

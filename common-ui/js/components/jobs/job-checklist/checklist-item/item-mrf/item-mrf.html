@@ -1,7 +1,7 @@
 <div class="checklist-item">
     <header>
         <h4 class="checklist-item-title">{{::checklistItemCtrl.checklistItem.Shorthand}}</h4>
-        <button class="btn btn-link text-muted" type="button"><i class="fa fa-info-circle" aria-label="More Information"></i></button>
+        <button class="btn btn-link btn-no-label text-muted" type="button"><i class="fa fa-info-circle" aria-label="More Information"></i></button>
     </header>
 
     <section data-ng-repeat="mrfTable in checklistItemCtrl.checklistItem.Sections track by $index">
@@ -22,7 +22,7 @@
         </div>
     </section>
 
-    <div class="flex-container flex-align-center flex-justify-end">
+    <div class="flex-row flex-align-center flex-justify-end">
         <checklist-item-comments
             comments="checklistItemCtrl.comments"
             on-comment="checklistItemCtrl.postComment(comment)">

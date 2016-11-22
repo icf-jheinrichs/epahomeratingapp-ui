@@ -1,23 +1,8 @@
-<section class="page-container col col-sm-12">
-    <header class="item-list-header clearfix">
-        <h2 class="pull-left item-list-title">Jobs</h2>
-        <a data-ui-sref="job-new()" class="btn pull-right"><i class="fa fa-plus" aria-hidden="true"></i> Create a Job</a>
-    </header>
+<div class="item-list-head item-list-head-jobs flex-row flex-justify-end">
+    <span>Pre-drywall</span>
+    <span>Final</span>
+</div>
 
-    <div class="jobs">
-        <list-filter
-            class="list-filter"
-            quantity="jobsCtrl.jobs.length"
-            criteria="jobsCtrl.filterCriteria">
-        </list-filter>
-
-        <div class="item-list-head item-list-head-jobs flex-container flex-justify-end">
-            <span>Pre-drywall</span>
-            <span>Final</span>
-        </div>
-
-        <div class="item-list">
-            <job data-ng-repeat="job in jobsCtrl.jobs track by $index" job="job" class="list-item list-item-job"></job>
-        </div>
-    </div>
-</section>
+<div class="item-list">
+    <job data-ng-repeat="job in jobsCtrl.jobs track by $index" job="job" class="list-item list-item-job"></job>
+</div>

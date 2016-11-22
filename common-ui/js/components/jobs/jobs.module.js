@@ -1,8 +1,9 @@
 import angular from 'angular';
 
-import jobsComponent from './jobs/jobs.component';
 import jobComponent from './job/job.component';
+import jobsComponent from './jobs/jobs.component';
 import jobDetailComponent from './job-detail/job-detail.component';
+import jobDetailLocationComponent from './job-detail/job-detail-location/job-detail-location.component';
 import jobChecklistComponent from './job-checklist/job-checklist.component';
 import JobChecklistModule from './job-checklist/job-checklist.module';
 
@@ -11,9 +12,10 @@ let jobsModule
         .module('epahomeratingapp.components.jobs', [
             JobChecklistModule.name
         ])
-        .component('jobs', jobsComponent)
         .component('job', jobComponent)
+        .component('jobs', jobsComponent)
         .component('jobDetail', jobDetailComponent)
+        .component('jobDetailLocation', jobDetailLocationComponent)
         .component('jobChecklist', jobChecklistComponent);
 
 export default jobsModule;

@@ -17,7 +17,7 @@
 .linear-verified {
     float: left;
     height: $linear-progress-thickness;
-    transition: width $transition-default;
+    transition: width $transition-slow ease-out;
 }
 
 .linear-must-correct {

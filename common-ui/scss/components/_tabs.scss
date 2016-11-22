@@ -1,0 +1,37 @@
+.tabs {
+    overflow: hidden;
+}
+
+.tab {
+    background: $tab-background-color-default;
+    border: $border-size-default solid $tab-border-color-default;
+    border-bottom-color: $tab-border-color-hover;
+    cursor: pointer;
+    outline: 0;
+    padding: $padding-default $tab-padding;
+    transition: color $transition-default, border $transition-default, background $transition-default, box-shadow $transition-default;
+
+    &:hover,
+    &:focus {
+        background-color: $tab-background-color-hover;
+        border-color: $tab-border-color-hover;
+    }
+
+    &:focus {
+        box-shadow: $shadow-hover;
+    }
+
+    &.active {
+        background: $body-bg;
+        border-color: $body-bg;
+        box-shadow: 0 0 10px $shadow-color-light;
+    }
+}
+
+.tabpanel {
+    @extend %hidden;
+
+    &.active {
+        display: block;
+    }
+}

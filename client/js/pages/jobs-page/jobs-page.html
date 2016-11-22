@@ -1,0 +1,16 @@
+<section class="page-container">
+    <header class="page-header item-list-header clearfix">
+        <h2 class="pull-left item-list-title">Jobs</h2>
+        <a data-ui-sref="job-new()" class="btn pull-right"><i class="fa fa-plus" aria-hidden="true"></i> Create a Job</a>
+    </header>
+
+    <div class="jobs">
+        <list-filter
+            class="list-filter"
+            quantity="jobsCtrl.jobs.length"
+            criteria="jobsCtrl.filterCriteria">
+        </list-filter>
+
+        <jobs jobs="jobsPageCtrl.jobs"></jobs>
+    </div>
+</section>

@@ -26,7 +26,7 @@ class ChecklistItemMrfController extends ChecklistItemClass {
         this.editRow[0].mrfData = mrfRowData;
 
         //TODO: use event constant enum
-        this.$rootScope.$emit('putMrfData', this.editRow[0]);
+        this.$rootScope.$emit(this.MESSAGING.UPDATE_MRF_DATA, this.editRow[0]);
 
         this.editRow.pop();
     }
