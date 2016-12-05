@@ -1,0 +1,13 @@
+@import '../../../../scss/variables';
+@import '../../../../scss/mixins';
+@import '../../../../scss/utilities';
+
+.house-plan {
+    border-top: $border-default;
+    padding: $gutter-half;
+
+    a {
+        color: $link-color;
+        text-decoration: underline;
+    }
+}

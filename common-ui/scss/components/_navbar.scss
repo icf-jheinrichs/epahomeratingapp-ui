@@ -1,10 +1,5 @@
 .navbar {
-    color: $text-color-inverse;
     padding: $gutter-half 0;
-
-    .btn {
-        @extend %btn-inverse;
-    }
 
     &.flex-row,
     .flex-row {
@@ -13,6 +8,15 @@
 
     .nav {
         margin-left: auto;
+    }
+}
+
+.navbar-inverse {
+    color: $text-color-inverse;
+
+
+    .btn {
+        @extend %btn-inverse;
     }
 }
 

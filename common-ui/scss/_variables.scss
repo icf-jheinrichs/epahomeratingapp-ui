@@ -159,6 +159,17 @@ $button-background-color-inverse-active:    $border-color-inverse;
 $button-background-color-hover-inverse:     rgba(255, 255, 255, .2);
 
 //
+//## Navs
+//
+
+$nav-stacked-background-color-defaut:   #bdeafc;
+$nav-stacked-background-color-active:   $brand-tertiary;
+$nav-stacked-background-color-sub:      $brand-auxillary;
+
+$nav-stacked-color-default:             $text-color;
+$nav-stacked-color-active:              $text-color-inverse;
+
+//
 //## Tabs
 //
 

@@ -16,6 +16,9 @@
     &:focus {
         background-color: $button-background-color-hover;
         border-color: $button-border-color-hover;
+    }
+
+    &:focus {
         box-shadow: $shadow-hover;
     }
 

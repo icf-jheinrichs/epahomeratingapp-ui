@@ -1,3 +1,86 @@
-.nav-flex {
+.nav-site-wrapper {
+    background: linear-gradient(to bottom, darken($brand-auxillary, 10%) 0, $brand-auxillary 10px);
+}
+
+.nav-item {
+    cursor: pointer;
+    outline: 0;
+    transition: box-shadow $transition-slow, background-color $transition-default, border $transition-default, color $transition-default;
+
+    .badge {
+        @extend %pull-right;
+    }
+}
+
+.nav-site {
     display: flex;
+
+    .nav-item {
+        border-top: $border-size-large solid rgba($link-color, 0);
+        flex-grow: 0;
+        font-size: $font-size-large;
+        padding: $gutter-half $gutter-full;
+
+        &:hover,
+        &:focus {
+            border-top: $border-size-large solid rgba($link-color, 1);
+            color: $link-color;
+        }
+
+        &.active {
+            background-color: $body-bg;
+            border-top: $border-size-large solid rgba($link-color, 1);
+            color: $text-color;
+        }
+    }
+}
+
+// $nav-stacked-background-color-defaut:   #bdeafc;
+// $nav-stacked-background-color-active:   $brand-tertiary;
+// $nav-stacked-background-color-sub:      $brand-auxillary;
+
+// $nav-stacked-color-default:             $text-color;
+// $nav-stacked-color-active:              $text-color-inverse;
+
+
+.nav-stacked {
+    .nav-item {
+        background-color: $nav-stacked-background-color-defaut;
+        border: 0;
+        display: block;
+        margin-bottom: $offset-small;
+        padding: $padding-default $padding-large;
+        text-align: left;
+        width: 100%;
+
+        &:hover,
+        &:focus {
+            background-color: darken($nav-stacked-background-color-defaut, 15%);
+        }
+
+        &:focus {
+            box-shadow: $shadow-hover;
+        }
+
+        &.active {
+            background-color: $nav-stacked-background-color-active;
+            color: $nav-stacked-color-active;
+        }
+
+        &.active:focus {
+            box-shadow: $shadow-active;
+        }
+    }
+}
+
+.sub-nav {
+    .nav-item {
+        background-color: $nav-stacked-background-color-sub;
+        padding-left: ($padding-large * 3);
+
+        &:hover,
+        &:focus {
+            background-color: darken($nav-stacked-background-color-sub, 15%);
+        }
+    }
 }

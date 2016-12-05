@@ -5,6 +5,12 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         .otherwise('/jobs');
 
     $stateProvider
+
+        .state('house-plans', {
+            url        : '/house-plans',
+            component  : 'housePlansPage'
+        })
+
         .state('jobs', {
             url        : '/jobs',
             component  : 'jobsPage',
@@ -96,6 +102,11 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         .state('job-checklist.category', {
             url        : '/{houseId}/{categoryId}',
             component  : 'checklistCategory'
+        })
+
+        .state('users', {
+            url        : '/users',
+            component  : 'usersPage'
         });
 };
 
