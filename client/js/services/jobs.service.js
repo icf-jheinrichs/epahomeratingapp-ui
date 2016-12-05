@@ -1,5 +1,5 @@
 import PouchDB from 'pouchdb';
-import _ from 'lodash';
+import _map from 'lodash/map';
 
 class JobsService {
     constructor ($q, $log, DB) {
@@ -22,7 +22,7 @@ class JobsService {
             .then(function handleGet (allDocs) {
                 let jobs = {};
 
-                jobs.data = _.map(allDocs.rows, 'doc');
+                jobs.data = _map(allDocs.rows, 'doc');
 
                 deferred.resolve(jobs);
             });

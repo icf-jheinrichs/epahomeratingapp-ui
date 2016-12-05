@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _sample from 'lodash/sample';
 
 class JobController {
     constructor (CONFIG) {
@@ -28,7 +28,8 @@ class JobController {
         this.isSample          = this.secondaryQuantity > 0;
         this.jobPhoto          = (this.job.Primary.Photo.length) ? this.job.Primary.Photo[0] : this.DEFAULT_PHOTO;
 
-        this.SyncStatus        = _.sample(['Synced', 'Unsynced']);
+        //TODO: use real data - remove import of _sample if not needed (likely not)
+        this.SyncStatus        = _sample(['Synced', 'Unsynced']);
     }
 
     getRatingTypeClass () {

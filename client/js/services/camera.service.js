@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _sample from 'lodash/sample';
 
 class CameraService {
     constructor ($q) {
@@ -10,7 +10,7 @@ class CameraService {
     getPhoto () {
         let deferred = this.$q.defer();
 
-        deferred.resolve(_.sample(['img/job-photo-default-h.jpg', 'img/job-photo-default-v.jpg']));
+        deferred.resolve(_sample(['img/job-photo-default-h.jpg', 'img/job-photo-default-v.jpg']));
 
         return deferred.promise;
     }

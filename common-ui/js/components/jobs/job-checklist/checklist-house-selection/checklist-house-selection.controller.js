@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _find from 'lodash/find';
 
 class checklistHouseSelectionController {
     constructor ($rootScope, $stateParams, $transitions, CONFIG, MESSAGING) {
@@ -56,7 +56,7 @@ class checklistHouseSelectionController {
         if (houseId === this.houses.Primary.HouseId) {
             this.selectedHouse = this.houses.Primary;
         } else {
-            this.selectedHouse = _.find(this.houses.Secondary, {HouseId : houseId});
+            this.selectedHouse = _find(this.houses.Secondary, {HouseId : houseId});
         }
     }
 

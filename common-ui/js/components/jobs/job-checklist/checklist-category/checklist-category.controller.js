@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _isEmpty from 'lodash/isEmpty';
 
 class jobChecklistChecklistController {
     constructor ($rootScope, $stateParams, JobDataHomePerformanceService, MESSAGING, CATEGORIES, CATEGORY_PROGRESS) {
@@ -31,8 +31,8 @@ class jobChecklistChecklistController {
         this.preDrywallChecklistItems = this.jobDisplayList[this.categoryKey][this.CATEGORY_PROGRESS['pre-drywall'].Key];
         this.finalChecklistItems = this.jobDisplayList[this.categoryKey][this.CATEGORY_PROGRESS['final'].Key];
 
-        this.hasPredrywallItems = !_.isEmpty(this.preDrywallChecklistItems);
-        this.hasFinalItems = !_.isEmpty(this.finalChecklistItems);
+        this.hasPredrywallItems = !_isEmpty(this.preDrywallChecklistItems);
+        this.hasFinalItems = !_isEmpty(this.finalChecklistItems);
     }
 
     $onDestroy () {

@@ -1,4 +1,5 @@
-import _ from 'lodash';
+import _findIndex from 'lodash/findIndex';
+import _forEach from 'lodash/forEach';
 
 class JobsChecklistPageController {
     constructor ($rootScope, JobsService, JobDataResponseService, MESSAGING, JOB_STATUS, RESPONSES) {
@@ -74,7 +75,7 @@ class JobsChecklistPageController {
         if (this.job.Primary.HouseId === photoData.HouseId) {
             this.job.Primary.Photo = [photoData.photo];
         } else {
-            secondaryIndex = _.findIndex(this.job.Secondary, {HouseId : photoData.HouseId});
+            secondaryIndex = _findIndex(this.job.Secondary, {HouseId : photoData.HouseId});
 
             this.job.Secondary[secondaryIndex].Photo = [photoData.photo];
         }
@@ -174,22 +175,22 @@ class JobsChecklistPageController {
         let jobChecklistResponseProgress = this.jobDataResponse.Progress;
 
         jobProgress.PreDrywall.Verified = 0;
-        _.forEach(jobChecklistResponseProgress, function sumPreDrywallVerified (value) {
+        _forEach(jobChecklistResponseProgress, function sumPreDrywallVerified (value) {
             jobProgress.PreDrywall.Verified += value.PreDrywall.Verified;
         });
 
         jobProgress.PreDrywall.MustCorrect = 0;
-        _.forEach(jobChecklistResponseProgress, function sumFinalVerified (value) {
+        _forEach(jobChecklistResponseProgress, function sumFinalVerified (value) {
             jobProgress.PreDrywall.MustCorrect += value.PreDrywall.MustCorrect;
         });
 
         jobProgress.Final.Verified = 0;
-        _.forEach(jobChecklistResponseProgress, function sumMustCorrectVerified (value) {
+        _forEach(jobChecklistResponseProgress, function sumMustCorrectVerified (value) {
             jobProgress.Final.Verified += value.Final.Verified;
         });
 
         jobProgress.Final.MustCorrect = 0;
-        _.forEach(jobChecklistResponseProgress, function sumFinalVerified (value) {
+        _forEach(jobChecklistResponseProgress, function sumFinalVerified (value) {
             jobProgress.Final.MustCorrect += value.Final.MustCorrect;
         });
     }

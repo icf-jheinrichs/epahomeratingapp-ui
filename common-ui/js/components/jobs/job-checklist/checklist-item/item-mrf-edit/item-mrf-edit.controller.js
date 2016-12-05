@@ -1,10 +1,10 @@
-import _ from 'lodash';
+import _assign from 'lodash/assign';
 
 class MrfEditController {
     constructor () {
         'ngInject';
 
-        this.editMrfData = _.assign({}, this.mrfData);
+        this.editMrfData = _assign({}, this.mrfData);
     }
 
     $onInit () {
@@ -27,7 +27,7 @@ class MrfEditController {
     }
 
     save () {
-        _.assign(this.mrfData, this.editMrfData);
+        _assign(this.mrfData, this.editMrfData);
         this.showMrfEditModal = false;
 
         this.onSaveMrfRow({

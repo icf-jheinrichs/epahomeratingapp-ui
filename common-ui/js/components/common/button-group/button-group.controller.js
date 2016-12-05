@@ -1,4 +1,6 @@
-import _ from 'lodash';
+import _indexOf from 'lodash/indexOf';
+import _union from 'lodash/union';
+import _without from 'lodash/without';
 
 class ButtonGroupController {
     constructor ($log) {
@@ -13,9 +15,9 @@ class ButtonGroupController {
 
     handleClick (buttonValue) {
         if (this.isActive(buttonValue)) {
-            this.selected  = _.without(this.selected, buttonValue);
+            this.selected  = _without(this.selected, buttonValue);
         } else if (this.allowMultiple) {
-            this.selected  = _.union(this.selected, [buttonValue]);
+            this.selected  = _union(this.selected, [buttonValue]);
         } else {
             this.selected = [buttonValue];
         }
@@ -24,7 +26,7 @@ class ButtonGroupController {
     }
 
     isActive (buttonValue) {
-        return _.indexOf(this.selected, buttonValue) >= 0;
+        return _indexOf(this.selected, buttonValue) >= 0;
     }
 }
 
