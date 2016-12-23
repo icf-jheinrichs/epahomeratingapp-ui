@@ -3,8 +3,8 @@ import controller from './list-filter.controller';
 
 let listFilterComponent = {
     bindings : {
-        'quantity' : '<',
-        'criteria' : '<'
+        'quantity' : '@',
+        'criteria' : '@'
     },
     template,
     controller,

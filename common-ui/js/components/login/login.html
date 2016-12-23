@@ -1,0 +1,19 @@
+<div class="login-container flip-container">
+    <div class="flipper" data-ng-class="{'flipped' : (loginCtrl.action === 'forgotPassword')}">
+        <login-form
+            class="login-panel flip-front flip-panel"
+            user="loginCtrl.user"
+            user-id-pattern="loginCtrl.userIdPattern"
+            login="loginCtrl.login(user)"
+            set-action="loginCtrl.setAction(action)">
+        </login-form>
+
+        <forgot-password
+            class="login-panel flip-back flip-panel"
+            user="loginCtrl.user"
+            user-id-pattern="loginCtrl.userIdPattern"
+            reset-password="loginCtrl.resetPassword(user)"
+            set-action="loginCtrl.setAction(action)">
+        </forgot-password>
+    </div>
+</div>

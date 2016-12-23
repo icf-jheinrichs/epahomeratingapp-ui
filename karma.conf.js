@@ -40,7 +40,7 @@ module.exports = function(config) {
           loader: 'raw'
         }, {
           test: /\.scss$/,
-          loader: 'style!css!scss'
+          loader: 'style!css!sass'
         }, {
           test: /\.css$/,
           loader: 'style!css'

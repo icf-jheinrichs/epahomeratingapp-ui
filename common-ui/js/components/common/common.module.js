@@ -4,6 +4,7 @@ import fileManagerComponent from './file-manager/file-manager.component';
 import listFilterComponent from './list-filter/list-filter.component';
 import linearProgressComponent from './linear-progress/linear-progress.component';
 import radialProgressComponent from './radial-progress/radial-progress.component';
+import statusMessageComponent from './status-message/status-message.component';
 import toggleComponent from './toggle/toggle.component';
 
 let commonModule
@@ -14,6 +15,7 @@ let commonModule
         .component('linearProgress', linearProgressComponent)
         .component('listFilter', listFilterComponent)
         .component('radialProgress', radialProgressComponent)
+        .component('statusMessage', statusMessageComponent)
         .component('toggle', toggleComponent);
 
 export default commonModule;

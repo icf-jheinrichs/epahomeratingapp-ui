@@ -1,0 +1,12 @@
+<div class="status-message" data-ng-class="[statusMessageCtrl.getTypeClass(), {'dismissable' : statusMessageCtrl.status.dismissable}]" data-ng-if="statusMessageCtrl.isVisible">
+    <p class="status-text">{{statusMessageCtrl.status.text}}</p>
+    <button
+        data-ng-if="statusMessageCtrl.status.dismissable"
+        data-ng-click="statusMessageCtrl.onDismiss()"
+        type="button"
+        class="btn btn-dismiss btn-link btn-no-label"
+        aria-label="Dismiss Message">
+
+        <i class="fa fa-close" aria-hidden="true"></i>
+    </button>
+</div>

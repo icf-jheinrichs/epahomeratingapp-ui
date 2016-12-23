@@ -1,0 +1,28 @@
+@import '../../../scss/variables';
+
+$login-width:       320px;
+$login-height:      320px;
+$login-background:  $body-bg;
+
+.login-container {
+    margin: $gutter-full auto 0;
+    width: $login-width;
+
+    .flipper,
+    .login-panel {
+        height: $login-height;
+        width: $login-width;
+    }
+
+    .form-actions {
+        padding: $offset-default 0 0;
+    }
+
+    .flipper {
+        box-shadow: $shadow-default;
+    }
+}
+
+.login-panel {
+    padding: $gutter-half $padding-large $padding-large;
+}

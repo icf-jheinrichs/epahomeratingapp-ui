@@ -1,0 +1,18 @@
+<nav class="nav">
+    <button
+        data-ng-if="userMenuCtrl.menuIsVisible()"
+        data-ng-click="userMenuCtrl.toggleDropDown()"
+        class="btn btn-link">
+
+        Hi <strong>{{userMenuCtrl.user.firstName}} {{userMenuCtrl.user.lastName}}</strong> <i class="fa fa-caret-down" aria-hidden="true"></i>
+    </button>
+
+    <nav class="drop-down" data-ng-class="{'hidden' : !userMenuCtrl.showActionsDropDown}">
+        <button
+            data-ng-click="userMenuCtrl.onLogout()"
+            class="drop-down-item"
+            type="button">
+            Logout
+        </button>
+    </nav>
+</nav>

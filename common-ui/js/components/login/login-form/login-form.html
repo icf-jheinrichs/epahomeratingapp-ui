@@ -1,0 +1,31 @@
+<form name="loginForm" data-ng-submit="loginFormCtrl.onSubmit()" novalidate>
+    <h2>Log In</h2>
+    <status-message status="loginFormCtrl.message"></status-message>
+    <div class="form-group">
+        <label for="loginFormUserId" class="control-label">User ID</label>
+        <input
+            name="userId"
+            data-ng-model="loginFormCtrl.user.userId"
+            required="required"
+            ng-pattern="loginFormCtrl.userIdPattern"
+            type="text"
+            maxlength="7"
+            class="form-control"
+            id="loginFormUserId" />
+    </div>
+    <div class="form-group">
+        <label for="loginFormPassword" class="control-label">Password</label>
+        <input
+            name="password"
+            data-ng-model="loginFormCtrl.user.password"
+            required="required"
+            type="password"
+            data-ng-minlength="6"
+            class="form-control"
+            id="loginFormPassword" />
+    </div>
+    <div class="form-actions">
+        <input type="submit" class="btn" value="Log In" />
+        <button class="btn btn-link pull-right" type="button" data-ng-click="loginFormCtrl.onForgotPassword()">Forgot Password?</button>
+    </div>
+</form>

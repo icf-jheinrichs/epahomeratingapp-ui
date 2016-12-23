@@ -1,0 +1,32 @@
+$status-message-border-size: 5px;
+
+.status-message {
+    border-left: $border-default;
+    border-left-width: $status-message-border-size;
+    margin: 0 0 $offset-default (-$status-message-border-size);
+    padding: $padding-small $padding-default;
+    position: relative;
+
+    &.dismissable {
+        padding-right: 30px;
+    }
+
+    &.status-error {
+        border-color: $status-error;
+    }
+
+    &.status-success {
+        border-color: $status-correct;
+    }
+
+    .status-text {
+        margin: 0;
+    }
+
+    .btn-dismiss {
+        margin-top: -15px;
+        position: absolute;
+        right: -5px;
+        top: 50%;
+    }
+}

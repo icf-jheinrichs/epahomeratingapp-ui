@@ -18,8 +18,8 @@ $brand-auxillary:   #e9e9e9; // light grey
 //### Status Colors
 //
 
-$status-active:     #f5a623;
 $status-correct:    #7ed321;
+$status-active:     #f5a623;
 $status-error:      #ff464b;
 
 //
@@ -116,6 +116,7 @@ $shadow-color-light:    rgba(0, 0, 0, .10);
 $shadow-color-inset:    rgba(0, 0, 0, .05);
 $shadow-color-hover:    rgba(0, 0, 0, .05);
 $shadow-color-active:   rgba($link-color, .25);
+$shadow-color-error:    rgba($status-error, .25);
 $shadow-color-correct:  rgba($status-correct, .25);
 
 $shadow-default:        0 0 15px $shadow-color-default;
@@ -124,6 +125,7 @@ $shadow-inset:          inset 1px 1px 4px $shadow-color-inset;
 
 $shadow-hover:          0 0 0 1px $body-bg, 0 0 0 3px $shadow-color-hover;
 $shadow-active:         0 0 0 1px $body-bg, 0 0 0 3px $shadow-color-active;
+$shadow-error:        0 0 0 1px $body-bg, 0 0 0 3px $shadow-color-error;
 $shadow-correct:        0 0 0 1px $body-bg, 0 0 0 3px $shadow-color-correct;
 
 //

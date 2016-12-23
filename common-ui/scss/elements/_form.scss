@@ -17,7 +17,7 @@ fieldset {
     top: $gutter-half;
 }
 
-label {
+.control-label {
     display: block;
     font-weight: bold;
     margin: 0 0 2px $offset-small;
@@ -49,7 +49,27 @@ label {
         outline: 0;
     }
 
+    &.ng-valid.ng-touched {
+        border-color: $status-correct;
+
+        &:focus {
+            box-shadow: $shadow-correct;
+        }
+    }
+
     &.ng-invalid.ng-touched {
         border-color: $status-error;
+
+        &:focus {
+            box-shadow: $shadow-error;
+        }
+    }
+}
+
+.ng-submitted .form-control.ng-invalid {
+    border-color: $status-error;
+
+    &:focus {
+        box-shadow: $shadow-error;
     }
 }

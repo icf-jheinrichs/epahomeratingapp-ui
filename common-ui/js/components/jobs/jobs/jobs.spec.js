@@ -10,11 +10,11 @@ describe('Jobs', function describeJobs () {
             expect(component.template).to.equal(JobsTemplate);
         });
 
-        it('uses the correct `controllerAs` label', function itIncludesTemplate () {
+        it('uses the correct `controllerAs` label', function itHasCorrectLabel () {
             expect(component.controllerAs).to.equal('jobsCtrl');
         });
 
-        it('inclues the right template', function itIncludesTemplate () {
+        it('inclues the right controller', function itIncludesController () {
             expect(component.controller).to.equal(JobsController);
         });
     });

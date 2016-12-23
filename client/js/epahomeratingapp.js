@@ -15,6 +15,7 @@ import seedData from './services/db/seed-data';
 
 // Services
 import ServicesModule from './services/services.module';
+import {authenticationHook} from './services/authentication.hook';
 
 // Routes
 import epahomeratingappRoutes from './epahomeratingapp.routes';
@@ -46,7 +47,8 @@ angular
     .constant('CATEGORIES', CATEGORIES)
     .constant('RATING_TYPES', RATING_TYPES)
     .constant('CATEGORY_PROGRESS', CATEGORY_PROGRESS)
-    .constant('RESPONSES', RESPONSES);
+    .constant('RESPONSES', RESPONSES)
+    .run(authenticationHook);
 
 angular
     .element(document)

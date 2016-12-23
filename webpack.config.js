@@ -48,20 +48,20 @@ module.exports = {
             },
             {
                 test   : /\.(svg|woff|woff2|ttf|eot)$/,
-                loader : 'url-loader?name=/font/[hash].[ext]'
+                loader : 'file?name=/font/[hash].[ext]'
             },
             // helps to load bootstrap's css.
             {
                 test   : /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-                loader : 'url-loader?limit=8192&mimetype=application/font-woff&name=/font/[hash].[ext]'
+                loader : 'file?limit=8192&mimetype=application/font-woff&name=/font/name.[hash].[ext]'
             },
             {
                 test   : /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-                loader : 'url-loader?limit=8192&mimetype=application/font-woff&name=/font/[hash].[ext]'
+                loader : 'file?limit=8192&mimetype=application/font-woff&name=/font/name.[hash].[ext]'
             },
             {
                 test   : /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                loader : 'url-loader?limit=8192&mimetype=application/octet-stream&name=/font/[hash].[ext]'
+                loader : 'file?limit=8192&mimetype=application/octet-stream&name=/font/name.[hash].[ext]'
             },
             {
                 test   : /\.eot(\?v=\d+\.\d+\.\d+)?$/,
@@ -69,7 +69,7 @@ module.exports = {
             },
             {
                 test   : /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                loader : 'url-loader?limit=8192&mimetype=image/svg+xml&name=/font/[hash].[ext]'
+                loader : 'file?limit=8192&mimetype=image/svg+xml&name=/font/name.[hash].[ext]'
             }
         ]
     },

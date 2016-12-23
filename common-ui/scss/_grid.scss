@@ -36,6 +36,10 @@
     flex-grow: 1;
 }
 
+.flex-item-pull-right {
+    margin-left: auto;
+}
+
 .container {
     @include make-container();
     @include make-container-max-widths();
