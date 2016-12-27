@@ -1,0 +1,53 @@
+<!-- TODO: replace inline styles with stylesheets appropriate to wireframes requirements -->
+
+<div class="checklist-item lala">
+    <header>
+        <h4 class="checklist-item-title">{{::checklistItemCtrl.checklistItem.Shorthand}}</h4>
+        <button class="btn btn-link btn-no-label text-muted" type="button"><i class="fa fa-info-circle" aria-label="More Information"></i></button>
+    </header>
+
+    <section data-ng-repeat="mrfTable in checklistItemCtrl.checklistItem.Sections track by $index">
+        <h5 class="table-caption">{{mrfTable.Name}}</h5>
+        <div>
+            <div style="float:left;">
+                <p data-ng-repeat="columnHeader in mrfTable.Columns track by $index" 
+                    for="columnHeader.Name.replace(' ','')">
+                    {{::columnHeader.Name}}
+                </p>
+            </div>
+            <div data-ng-repeat="dataRow in checklistItemCtrl.homePerformance[mrfTable.Key] track by $index"
+                style="float:left;">
+                <input data-ng-repeat="(key, value) in dataRow"
+                    style="display: block;" 
+                    name="{{key}}"
+                    value="{{value}}" 
+                    />
+            </div>
+        </div>
+    </section>
+
+    <div class="flex-row flex-align-center flex-justify-end">
+        <checklist-item-comments
+            comments="checklistItemCtrl.comments"
+            on-comment="checklistItemCtrl.postComment(comment)">
+        </checklist-item-comments>
+
+        <div class="verification">
+            <button-group
+                class="button-group"
+                buttons="checklistItemCtrl.responseButtons"
+                initial-value="checklistItemCtrl.response"
+                on-set-value="checklistItemCtrl.onSetResponse(response)">
+            </button-group>
+        </div>
+    </div>
+
+    <mrf-edit
+        data-ng-repeat="row in checklistItemCtrl.editRow"
+        on-save-mrf-row="checklistItemCtrl.onSaveMrfRow(mrfRowData)"
+        on-cancel-mrf-row="checklistItemCtrl.onCancelMrfRow()"
+        title="{{row.title}}"
+        mrf-digest="row.mrfDigest"
+        mrf-data="row.mrfData">
+    </mrf-edit>
+</div> <!-- .checklist-item -->

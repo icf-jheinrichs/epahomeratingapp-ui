@@ -388,6 +388,14 @@ export default [
                         'Type': 'Concrete'
                     }
                 ]
+            },
+            '105': {
+                'StaticPressure' : [
+                    {
+                        'ReturnSide': '-0.6',
+                        'SupplySide': '0.4'
+                    }
+                ]
             }
         }
     },
@@ -780,6 +788,14 @@ export default [
                         'Type': 'Concrete'
                     }
                 ]
+            },
+            '105': {
+                'StaticPressure' : [
+                    {
+                        'ReturnSide': '-0.6',
+                        'SupplySide': '0.4'
+                    }
+                ]
             }
         }
     },
@@ -1170,6 +1186,14 @@ export default [
                         'Area': '230',
                         'Thickness': '5.2',
                         'Type': 'Concrete'
+                    }
+                ]
+            },
+            '105': {
+                'StaticPressure' : [
+                    {
+                        'ReturnSide': '-0.5',
+                        'SupplySide': '0.5'
                     }
                 ]
             }
