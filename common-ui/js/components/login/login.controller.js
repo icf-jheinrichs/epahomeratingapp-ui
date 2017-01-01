@@ -35,6 +35,7 @@ class LoginController {
                 .AuthenticationService
                 .login(user)
                 .then((data) => {
+                    console.log(data);
                     // no resolve needed. handle success here.
                     resolve(data);
                     this.returnToOriginalState();
