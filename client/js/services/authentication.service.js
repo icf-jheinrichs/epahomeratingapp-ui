@@ -150,17 +150,22 @@ class AuthenticationService {
             });
         });
 
-        login
-        .then(result => {
-            this.userIDtoAWSCognitoCredentials(result);
-            this.getAttributes(result);
-            return this.$q((resolve, reject) => {
-                resolve({
-                    message : 'success',
-                    status  : 200
-                });
-            });
-        }).bind(this);
+        return this.$q((resolve, reject) => {
+            resolve(
+                login
+                .then(result => {
+                    this.userIDtoAWSCognitoCredentials(result);
+                    this.getAttributes(result); 
+                })
+                .return(
+                    resolve({
+                        message : 'success',
+                        status  : 200
+                    })
+                )
+                .bind(this)
+            )
+        })
     }
 
     resetPassword (user) {
@@ -217,6 +222,8 @@ class AuthenticationService {
     }
 
     setUser (attr) {
+        // TODO:
+        // refactor? 
         if (attr['status'] == 200) {
             delete attr.status;
             attr.userId = this.cognitoUser.getUsername();
