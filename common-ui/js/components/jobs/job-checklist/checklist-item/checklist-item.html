@@ -18,3 +18,14 @@
     comments="checklistItemStubCtrl.comments"
     home-performance="checklistItemStubCtrl.homePerformance">
 </checklist-item-mrf>
+
+<checklist-item-static-pressure
+    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'StaticPressure'"
+    item-id="{{::checklistItemStubCtrl.itemId}}"
+    item-category="{{::checklistItemStubCtrl.itemCategory}}"
+    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
+    checklist-item="checklistItemStubCtrl.checklistItem"
+    response="checklistItemStubCtrl.response"
+    comments="checklistItemStubCtrl.comments"
+    home-performance="checklistItemStubCtrl.homePerformance">
+</checklist-item-static-pressure>

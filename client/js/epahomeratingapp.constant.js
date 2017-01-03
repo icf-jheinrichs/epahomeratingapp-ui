@@ -1,4 +1,5 @@
-const COUCH_URL = 'http://127.0.0.1:5984';
+// const COUCH_URL = 'http://127.0.0.1:5984';
+const COUCH_URL = '';
 
 export const DB        = {
     DISPLAY_LOGIC_DIGEST      : `${COUCH_URL}/display-logic-digest`,

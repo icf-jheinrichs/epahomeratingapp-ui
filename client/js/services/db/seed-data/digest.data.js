@@ -1519,6 +1519,30 @@ export default {
                     ]
                 }
             ]
+        },
+        '105' : {
+            'Type': 'StaticPressure',
+            'Shorthand': 'External static pressure measured at contractor-provided test locations.',
+            'ResponseOptions': {
+                'MustCorrect': true,
+                'BuilderVerified': false,
+                'RaterVerified': true,
+                'NotApplicable': true
+            },
+            'Sections': [
+                {
+                    'Name': 'Static pressure',
+                    'Key' : 'StaticPressure',
+                    'Columns': [
+                        {
+                            'Name': 'Return Side'
+                        },
+                        {
+                            'Name': 'Supply Side'
+                        }
+                    ]
+                }
+            ]
         }
 
     }
