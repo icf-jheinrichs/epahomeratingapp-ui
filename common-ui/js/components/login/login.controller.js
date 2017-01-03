@@ -26,7 +26,7 @@ class LoginController {
         let params  = this.returnTo.params();
         let options = Object.assign({}, this.returnTo.options(), {reload : true});
 
-        this.$state.go(state, params, options);
+        this.$state.go(state.name, params, options);
     }
 
     login (user) {
@@ -37,7 +37,7 @@ class LoginController {
                 .then((data) => {
                     console.log(data);
                     // no resolve needed. handle success here.
-                    resolve(data);
+                    // resolve(data);
                     this.returnToOriginalState();
                 })
                 .catch((err) => {

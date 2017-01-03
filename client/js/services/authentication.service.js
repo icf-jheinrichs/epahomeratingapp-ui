@@ -31,6 +31,8 @@ class AuthenticationService {
         // Look to refactor?
         try {
             this.user = angular.fromJson(window.sessionStorage.getItem(USER_SESSION_ITEM)) || Object.assign({}, DEFAULT_USER);
+            this.userIsAuthenticated = this.user.userId > 0;
+
         } catch (err) {
             console.log(err);
         }
