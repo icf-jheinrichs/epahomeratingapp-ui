@@ -5,7 +5,6 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         .otherwise('/login');
 
     $stateProvider
-
         .state('login', {
             url        : '/login',
             component  : 'loginPage',

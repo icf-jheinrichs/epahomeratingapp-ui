@@ -3,6 +3,7 @@
 const path              = require('path');
 const precss            = require('precss');
 const autoprefixer      = require('autoprefixer');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry    : './client/js/epahomeratingapp.js',
@@ -76,5 +77,12 @@ module.exports = {
     postcss : function postCss () {
         return [precss, autoprefixer];
     },
-    plugins : []
+    plugins : [
+        new CopyWebpackPlugin([
+            {
+                from : 'client/img',
+                to   : 'img'
+            }
+        ])
+    ]
 };
