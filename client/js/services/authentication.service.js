@@ -12,8 +12,8 @@ const DEFAULT_USER = Object.freeze({
 });
 
 const POOL_DATA = Object.freeze({ 
-        'UserPoolId' : 'us-east-1_zKpKa1FkU',
-        'ClientId' : '2l41s1i0mm122a0ulorbea7enj'
+        'UserPoolId' : 'us-east-1_yyQUoZD72',
+        'ClientId' : '2t3nnng2lkumkb565qpjuo4qf7'
     });
 
 const AWS_KEY = "cognito-idp.<" + AMAZON_REGION + ">.amazonaws.com/<" + POOL_DATA.UserPoolId + '>';
@@ -39,7 +39,7 @@ class AuthenticationService {
 
         this.userPool = new CognitoUserPool( POOL_DATA );
         this.cognitoUser = this.userPool.getCurrentUser();
-        this.authenticateStoredUser();
+        this.authenticateLocalUser();
     }
 
     getLocalUser () {
@@ -67,7 +67,7 @@ class AuthenticationService {
         })
     }
 
-    authenticateStoredUser () {
+    authenticateLocalUser () {
         var iter = [ this.getLocalUser(), this.getCognitoToken() ];
 
         this.$q.all(iter)
@@ -101,10 +101,13 @@ class AuthenticationService {
 
         // TODO: gray out login button during this process
         return this.$q((resolve, reject) => {
-            this.cognitoUser = new CognitoUser(userData);
-            this.cognitoUser.authenticateUser(authenticationDetails, {
+            var cognitoUser = new CognitoUser( userData );
+            cognitoUser.authenticateUser(authenticationDetails, {
                 onSuccess: function (result) {
-                    resolve(result.getIdToken().getJwtToken())
+                    resolve({
+                        token       : result.getIdToken().getJwtToken(),
+                        cognitoUser : cognitoUser
+                    })
                 },
 
                 onFailure: function(err) {
@@ -128,31 +131,37 @@ class AuthenticationService {
                     //     status  : 500
                     // });
                 },
+
                 newPasswordRequired: function(userAttributes, requiredAttributes) {
                     // User was signed up by an admin and must provide new 
                     // password and required attributes, if any, to complete 
                     // authentication.
 
                     // TODO: need to come up with a screen for making new password after temp password. 
-                    var newPassword = 'tempPassword2!'
+                    var newPassword = 'tempPassword2!';
+                    
                     // creates user name or other attributes
                     var data = Object.freeze({
-                        name: 'alejandro quesada'
-                    }) 
+                        name:        'alejandro',
+                        family_name: 'quesada'
+                    });
 
-                    // Get these details and call 
-                    this.cognitoUser.completeNewPasswordChallenge(newPassword, data, this)
+                    cognitoUser.completeNewPasswordChallenge(newPassword, data, this)
 
-                    // TODO: test this - may need to have it send token to stay consistent. 
-                    // could cause issues with first login attempts from admin create user
-                    resolve(null);
+                    resolve({
+                        token       : result.getIdToken().getJwtToken(),
+                        cognitoUser : cognitoUser
+                    });
                 }
             });
         })
         .then(result => {
+            this.cognitoUser = result['cognitoUser'];
             return this.$q((resolve, reject) => {
-                this.userIDtoAWSCognitoCredentials(result);
-                resolve(this.getAttributes(result));
+                this.userIDtoAWSCognitoCredentials(result['token']);
+                resolve( 
+                    this.getAttributes(result['token'])
+                );
             })
             .then(result => {
                 return result;
@@ -205,10 +214,13 @@ class AuthenticationService {
     getAttributes (token) {
         return this.$q((resolve, reject) => {
             this.cognitoUser.getUserAttributes(function(err, result) {
+                var firstName = result[2]['Value'].charAt(0).toUpperCase() + result[2]['Value'].slice(1);
+                var lastName  = result[3]['Value'].charAt(0).toUpperCase() + result[3]['Value'].slice(1);
+                var email     = result[4]['Value'];
                 resolve({
-                    'firstName' : result[2]['Value'],
-                    'lastName'  : result[2]['Value'],
-                    'email'     : result[3]['Value'],
+                    'firstName' : firstName,
+                    'lastName'  : lastName,
+                    'email'     : email,
                     'token'     : token,
                     'status'    : 200
                 });
