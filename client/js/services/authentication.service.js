@@ -99,6 +99,7 @@ class AuthenticationService {
             'Pool'     : this.userPool
         };
 
+        // TODO: gray out login button during this process
         return this.$q((resolve, reject) => {
             this.cognitoUser = new CognitoUser(userData);
             this.cognitoUser.authenticateUser(authenticationDetails, {
@@ -154,12 +155,10 @@ class AuthenticationService {
                 resolve(this.getAttributes(result));
             })
             .then(result => {
-                console.log(result);
                 return result;
             })
         })
         .then(result => {
-            console.log('signed in');
             return {
                     message : 'success',
                     status  : 200
