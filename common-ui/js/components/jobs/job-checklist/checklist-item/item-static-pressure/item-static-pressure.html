@@ -10,15 +10,18 @@
         <h5 class="table-caption">{{mrfTable.Name}}</h5>
         <div>
             <div style="float:left;">
-                <p data-ng-repeat="columnHeader in mrfTable.Columns track by $index" 
-                    for="columnHeader.Name.replace(' ','')">
+            <!-- TODO: in-line style is temp. Add validation for numbers only. -->
+                <label data-ng-repeat="columnHeader in mrfTable.Columns track by $index" 
+                    for="{{columnHeader.Name.replace(' ','')}}"
+                    style="display: block; margin-top: .5em;">
                     {{::columnHeader.Name}}
-                </p>
+                </label>
             </div>
             <div data-ng-repeat="dataRow in checklistItemCtrl.homePerformance[mrfTable.Key] track by $index"
                 style="float:left;">
                 <input data-ng-repeat="(key, value) in dataRow"
-                    style="display: block;" 
+                    style="display: block; margin-left: 1em; margin-top: .5em;"
+                    id="{{key}}" 
                     name="{{key}}"
                     value="{{value}}" 
                     />

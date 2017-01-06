@@ -1,6 +1,5 @@
 import AWS from 'aws-sdk';
 import angular from 'angular';
-import Promise from 'bluebird';
 import { CognitoUserPool, CognitoIdentityCredentials, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 
 //TODO: finalize user data structure.
@@ -32,7 +31,6 @@ class AuthenticationService {
         try {
             this.user = angular.fromJson(window.sessionStorage.getItem(USER_SESSION_ITEM)) || Object.assign({}, DEFAULT_USER);
             this.userIsAuthenticated = this.user.userId > 0;
-
         } catch (err) {
             console.log(err);
         }
@@ -44,32 +42,36 @@ class AuthenticationService {
         this.authenticateStoredUser();
     }
 
-    setToken (res) {
-        this.token = res['token'];
+    getLocalUser () {
+        return this.$q ((resolve,reject) => {
+            resolve(angular.fromJson(window.sessionStorage.getItem(USER_SESSION_ITEM)));
+        })
+    }
+
+    getCognitoToken () {
+        return this.$q ((resolve, reject) => {
+            if (this.cognitoUser != null) {
+                this.cognitoUser
+                    .getSession(function(err, session) {
+                        if (!err) {
+                            resolve(session.getIdToken().getJwtToken());
+                        }
+                        reject(err);
+                    });
+            } else {
+                reject(null);
+            }
+        })
+        .catch(function(err) {
+            console.log(err);
+        })
     }
 
     authenticateStoredUser () {
-        var local = new Promise((resolve, reject) => {
-                resolve(angular.fromJson(window.sessionStorage.getItem(USER_SESSION_ITEM)));
-            });
+        var iter = [ this.getLocalUser(), this.getCognitoToken() ];
 
-        var token = new Promise((resolve, reject) => {
-                    if (this.cognitoUser != null) {
-                        this.cognitoUser
-                            .getSession(function(err, session) {
-                                if (!err) {
-                                    resolve(session.getIdToken().getJwtToken());
-                                }
-                                reject(err);
-                            });
-                    } else {
-                        reject(null);
-                    }
-                });
-
-        var iter = [ local, token.bind(this) ];
-
-        Promise.all(iter).then(results => {
+        this.$q.all(iter)
+        .then(function(values) {
             var localUser    = results[0];
             var localToken   = results[0].token;
             var cognitoToken = results[1];
@@ -79,10 +81,6 @@ class AuthenticationService {
                 localUser.status = 403;
             }
             this.setUser(localUser);
-        })
-        .bind(this)
-        .catch(function(err) {
-            this.setUser({'status':403});
         });
     }
 
@@ -101,7 +99,7 @@ class AuthenticationService {
             'Pool'     : this.userPool
         };
 
-        var login = new Promise((resolve, reject) => {
+        return this.$q((resolve, reject) => {
             this.cognitoUser = new CognitoUser(userData);
             this.cognitoUser.authenticateUser(authenticationDetails, {
                 onSuccess: function (result) {
@@ -129,7 +127,6 @@ class AuthenticationService {
                     //     status  : 500
                     // });
                 },
-
                 newPasswordRequired: function(userAttributes, requiredAttributes) {
                     // User was signed up by an admin and must provide new 
                     // password and required attributes, if any, to complete 
@@ -150,23 +147,26 @@ class AuthenticationService {
                     resolve(null);
                 }
             });
-        });
-
-        return this.$q((resolve, reject) => {
-            resolve(
-                login
-                .then(result => {
-                    this.userIDtoAWSCognitoCredentials(result);
-                    this.getAttributes(result); 
-                })
-                .return(
-                    resolve({
-                        message : 'success',
-                        status  : 200
-                    })
-                )
-                .bind(this)
-            )
+        })
+        .then(result => {
+            return this.$q((resolve, reject) => {
+                this.userIDtoAWSCognitoCredentials(result);
+                resolve(this.getAttributes(result));
+            })
+            .then(result => {
+                console.log(result);
+                return result;
+            })
+        })
+        .then(result => {
+            console.log('signed in');
+            return {
+                    message : 'success',
+                    status  : 200
+                }
+        })
+        .catch(function(err) {
+            console.log(err);
         })
     }
 
@@ -204,7 +204,7 @@ class AuthenticationService {
     }
 
     getAttributes (token) {
-        var attr = new Promise((resolve, reject) => {
+        return this.$q((resolve, reject) => {
             this.cognitoUser.getUserAttributes(function(err, result) {
                 resolve({
                     'firstName' : result[2]['Value'],
@@ -214,13 +214,10 @@ class AuthenticationService {
                     'status'    : 200
                 });
             });
-        });
-
-        attr
+        })
         .then(result => {
             this.setUser(result);
-        })
-        .bind(this);
+        });
     }
 
     setUser (attr) {
