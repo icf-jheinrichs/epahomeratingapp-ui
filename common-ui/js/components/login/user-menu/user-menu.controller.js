@@ -19,19 +19,7 @@ class UserMenuController {
         });
     }
 
-    //TODO: all dropdown stuff belongs in a directive
-    toggleDropDown () {
-        this.showActionsDropDown = !this.showActionsDropDown;
-    }
-
-    //TODO: all dropdown stuff belongs in a directive
-    hideDropDown () {
-        this.showActionsDropDown = false;
-    }
-
     onLogout () {
-        this.hideDropDown();
-
         this
             .AuthenticationService
             .logout()

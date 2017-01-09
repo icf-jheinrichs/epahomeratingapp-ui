@@ -1,26 +1,35 @@
 <div class="file-manager flex-row">
-    <div class="file-manager-actions flex-item-static">
-        <button type="button" class="btn" data-ng-click="fileManagerCtrl.toggleDropDown()">
+    <div class="file-manager-actions flex-item-static" dropdown="dropdown">
+        <button
+            type="button"
+            class="btn"
+            dropdown-toggle="dropdown-toggle">
+
             Add <i class="fa fa-caret-down" aria-hidden="true"></i>
         </button>
-        <nav class="drop-down" data-ng-class="{'hidden' : !fileManagerCtrl.showActionsDropDown}">
+
+        <nav
+            class="drop-down hidden"
+            dropdown-menu="dropdown-menu"
+            role="menu">
+
             <button
                 data-ng-if="fileManagerCtrl.allowFromComputer"
                 class="drop-down-item"
-                type="button">
+                type="button"
+                role="menuitem">
+
                 From Computer
             </button>
+
             <button
                 class="drop-down-item"
-                type="button">
+                type="button"
+                role="menuitem">
+
                 From {{fileManagerCtrl.libraryName}}
             </button>
         </nav>
-        <div
-            class="overlay drop-down-overlay"
-            data-ng-class="{'hidden' : !fileManagerCtrl.showActionsDropDown}"
-            data-ng-click="fileManagerCtrl.hideDropDown()">
-        </div>
     </div>
 
     <div class="file-manager-list flex-item-grow">

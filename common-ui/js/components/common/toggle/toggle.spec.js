@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Radial Progress', function testRadialProgress () {
+describe('Component: Common: Toggle', function testToggle () {
     describe('Total Progress', function testTotalProgress () {
         let progress = 10 + 51;
 
