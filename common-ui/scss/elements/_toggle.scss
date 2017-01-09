@@ -14,6 +14,7 @@ $switch-delta:  $toggle-size;
     border-radius: ($toggle-size / 2);
     box-shadow: $shadow-inset;
     cursor: pointer;
+    display: block;
     height: $toggle-size;
     outline: 0;
     overflow: hidden;
