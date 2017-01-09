@@ -30,12 +30,11 @@ class LoginController {
     }
 
     login (user) {
-        return this.$q ((resolve, reject) => {
+        return this.$q((resolve, reject) => {
             this
                 .AuthenticationService
                 .login(user)
                 .then((data) => {
-                    console.log(data);
                     // no resolve needed. handle success here.
                     // resolve(data);
                     this.returnToOriginalState();
@@ -47,7 +46,7 @@ class LoginController {
     }
 
     resetPassword (user) {
-        return this.$q ((resolve, reject) => {
+        return this.$q((resolve, reject) => {
             this
                 .AuthenticationService
                 .resetPassword(user)
