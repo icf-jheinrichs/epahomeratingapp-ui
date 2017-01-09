@@ -23,18 +23,6 @@ fieldset {
     margin: 0 0 2px $offset-small;
 }
 
-.form-group {
-    margin-bottom: $offset-default;
-}
-
-.row-form-groups {
-    margin: 0 (-$offset-small);
-
-    .form-group {
-        padding: 0 $offset-small;
-    }
-}
-
 .form-control {
     border: $border-default;
     font-size: $font-size-large;
@@ -66,10 +54,37 @@ fieldset {
     }
 }
 
+.input-unit {
+    color: $text-color-muted;
+    vertical-align: middle;
+}
+
 .ng-submitted .form-control.ng-invalid {
     border-color: $status-error;
 
     &:focus {
         box-shadow: $shadow-error;
+    }
+}
+
+.form-group {
+    margin-bottom: $offset-default;
+}
+
+.row-form-groups {
+    margin: 0 (-$offset-small);
+
+    .form-group {
+        padding: 0 $offset-small;
+    }
+}
+
+.form-group-horizontal {
+    .control-label,
+    .form-control {
+        display: inline-block;
+        margin: 0 $offset-small 0 0;
+        vertical-align: middle;
+        width: auto;
     }
 }
