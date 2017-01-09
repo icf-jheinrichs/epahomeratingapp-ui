@@ -2,49 +2,48 @@ import PouchDB from 'pouchdb';
 import _map from 'lodash/map';
 
 class JobsService {
-    constructor ($q, $log, DB) {
+    constructor ($q, DB) {
         'ngInject';
 
         this.$q    = $q;
-        this.$log  = $log;
 
         this.db    = new PouchDB(DB.JOB);
     }
 
     get () {
-        let deferred = this.$q.defer();
+        let promise = this.$q((resolve, reject) => {
+            this
+                .db
+                .allDocs({
+                    include_docs : true
+                })
+                .then((allDocs) => {
+                    let jobs = {};
 
-        this
-            .db
-            .allDocs({
-                include_docs : true
-            })
-            .then(function handleGet (allDocs) {
-                let jobs = {};
+                    jobs.data = _map(allDocs.rows, 'doc');
 
-                jobs.data = _map(allDocs.rows, 'doc');
+                    resolve(jobs);
+                });
+        });
 
-                deferred.resolve(jobs);
-            });
-
-        return deferred.promise;
+        return promise;
     }
 
     getById (_id) {
-        let deferred = this.$q.defer();
+        let promise = this.$q((resolve, reject) => {
+            this
+                .db
+                .get(_id)
+                .then((doc) => {
+                    let job = {};
 
-        this
-            .db
-            .get(_id)
-            .then(function handleGetById (doc) {
-                let job = {};
+                    job.data = doc;
 
-                job.data = doc;
+                    resolve(job);
+                });
+        });
 
-                deferred.resolve(job);
-            });
-
-        return deferred.promise;
+        return promise;
     }
 
     getNewJob () {
@@ -78,30 +77,29 @@ class JobsService {
     }
 
     put (job) {
-        let deferred = this.$q.defer();
-        let self = this;
+        let promise = this.$q((resolve, reject) => {
+            this
+                .db
+                .get(job._id)
+                .then((doc) => {
+                    job._rev = doc._rev;
 
-        self
-            .db
-            .get(job._id)
-            .then(function handleGetById (doc) {
-                job._rev = doc._rev;
+                    let putById
+                         = this
+                            .db
+                            .put(job);
 
-                let putById
-                     = self
-                        .db
-                        .put(job);
+                    return putById;
+                })
+                .then((result) => {
+                    resolve(result);
+                })
+                .catch((err) => {
+                    reject(err);
+                });
+        });
 
-                return putById;
-            })
-            .then(function handlePut (result) {
-                deferred.resolve(result);
-            })
-            .catch(function handlePutError (err) {
-                deferred.reject(err);
-            });
-
-        return deferred.promise;
+        return promise;
     }
 }
 

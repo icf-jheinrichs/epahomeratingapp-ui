@@ -10,19 +10,19 @@ class JobDisplayListService {
     }
 
     getById (_id) {
-        let deferred = this.$q.defer();
+        let promise = this.$q((resolve, reject) => {
+            this
+                .db
+                .get(_id)
+                .then((doc) => {
+                    resolve(doc);
+                })
+                .catch((err) => {
+                    reject(err);
+                });
+        });
 
-        this
-            .db
-            .get(_id)
-            .then(function handleGet (doc) {
-                deferred.resolve(doc);
-            })
-            .catch(function handleError (err) {
-                deferred.reject(err);
-            });
-
-        return deferred.promise;
+        return promise;
     }
 }
 

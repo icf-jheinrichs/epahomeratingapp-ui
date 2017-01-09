@@ -10,46 +10,45 @@ class JobDataHomePerformanceService {
     }
 
     getById (_id) {
-        let deferred = this.$q.defer();
+        let promise = this.$q((resolve, reject) => {
+            this
+                .db
+                .get(_id)
+                .then((doc) => {
+                    resolve(doc);
+                })
+                .catch((err) => {
+                    reject(err);
+                });
+        });
 
-        this
-            .db
-            .get(_id)
-            .then(function handleGet (doc) {
-                deferred.resolve(doc);
-            })
-            .catch(function handleError (err) {
-                deferred.reject(err);
-            });
-
-        return deferred.promise;
+        return promise;
     }
 
     put (jobDataHomePerformance) {
-        let deferred = this.$q.defer();
-        let self = this;
+        let promise = this.$q((resolve, reject) => {
+            this
+                .db
+                .get(jobDataHomePerformance._id)
+                .then((doc) => {
+                    jobDataHomePerformance._rev = doc._rev;
 
-        self
-            .db
-            .get(jobDataHomePerformance._id)
-            .then(function handleGetById (doc) {
-                jobDataHomePerformance._rev = doc._rev;
+                    let putById
+                         = this
+                            .db
+                            .put(jobDataHomePerformance);
 
-                let putById
-                     = self
-                        .db
-                        .put(jobDataHomePerformance);
+                    return putById;
+                })
+                .then((result) => {
+                    resolve(result);
+                })
+                .catch((err) => {
+                    reject(err);
+                });
+        });
 
-                return putById;
-            })
-            .then(function handlePut (result) {
-                deferred.resolve(result);
-            })
-            .catch(function handlePutError (err) {
-                deferred.reject(err);
-            });
-
-        return deferred.promise;
+        return promise;
     }
 }
 

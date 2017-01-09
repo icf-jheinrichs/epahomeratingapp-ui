@@ -8,11 +8,11 @@ class CameraService {
     }
 
     getPhoto () {
-        let deferred = this.$q.defer();
+        let promise = this.$q((resolve, reject) => {
+            resolve(_sample(['img/job-photo-default-h.jpg', 'img/job-photo-default-v.jpg']));
+        });
 
-        deferred.resolve(_sample(['img/job-photo-default-h.jpg', 'img/job-photo-default-v.jpg']));
-
-        return deferred.promise;
+        return promise;
     }
 }
 
