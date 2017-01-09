@@ -7,21 +7,31 @@
     </header>
 
     <section data-ng-repeat="mrfTable in checklistItemCtrl.checklistItem.Sections track by $index">
-        <h5 class="table-caption">{{mrfTable.Name}}</h5>
-        <div>
+        <!-- <h5 class="table-caption">{{mrfTable.Name}}</h5> -->
+        <div class="flex-row">
             <div style="float:left;">
-                <p data-ng-repeat="columnHeader in mrfTable.Columns track by $index" 
-                    for="columnHeader.Name.replace(' ','')">
-                    {{::columnHeader.Name}}
-                </p>
+            <!-- TODO: in-line style is temp. Add validation for numbers only. -->
+            <!-- TODO: validate supply side is always positive and return side is negative -->
+            <!-- TODO: add comment & IWC line appropriately. -->
+            <!-- TODO: make more similar to wireframes w/ validation -->
+                <label for="ReturnSide"
+                    style="display: block; margin-top: .5em;">
+                    Return Side
+                </label>
+                <label for="SupplySide"
+                    style="display: block; margin-top: .5em;">
+                    Supply Side
+                </label>
             </div>
             <div data-ng-repeat="dataRow in checklistItemCtrl.homePerformance[mrfTable.Key] track by $index"
                 style="float:left;">
                 <input data-ng-repeat="(key, value) in dataRow"
-                    style="display: block;" 
+                    style="display: block; margin-left: 1em; margin-top: .5em;"
+                    id="{{key}}" 
                     name="{{key}}"
                     value="{{value}}" 
                     />
+                <!-- <span>IWC</span> -->
             </div>
         </div>
     </section>
