@@ -1,6 +1,8 @@
 @import '../../../../../../scss/variables';
 
 .item-comments {
+    display: inline;
+    
     .popover {
         height: 300px;
         margin: $offset-large 0 150px;

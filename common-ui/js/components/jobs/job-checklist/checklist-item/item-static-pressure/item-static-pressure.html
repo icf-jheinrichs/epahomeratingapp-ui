@@ -1,55 +1,56 @@
-<!-- TODO: replace inline styles with stylesheets appropriate to wireframes requirements -->
 
-<div class="checklist-item lala">
+<div class="checklist-item">
     <header>
         <h4 class="checklist-item-title">{{::checklistItemCtrl.checklistItem.Shorthand}}</h4>
         <button class="btn btn-link btn-no-label text-muted" type="button"><i class="fa fa-info-circle" aria-label="More Information"></i></button>
     </header>
 
-    <section data-ng-repeat="mrfTable in checklistItemCtrl.checklistItem.Sections track by $index">
-        <!-- <h5 class="table-caption">{{mrfTable.Name}}</h5> -->
-        <div class="flex-row">
-            <div style="float:left;">
-            <!-- TODO: in-line style is temp. Add validation for numbers only. -->
-            <!-- TODO: validate supply side is always positive and return side is negative -->
-            <!-- TODO: add comment & IWC line appropriately. -->
-            <!-- TODO: make more similar to wireframes w/ validation -->
-                <label for="ReturnSide"
-                    style="display: block; margin-top: .5em;">
-                    Return Side
-                </label>
-                <label for="SupplySide"
-                    style="display: block; margin-top: .5em;">
-                    Supply Side
-                </label>
-            </div>
-            <div data-ng-repeat="dataRow in checklistItemCtrl.homePerformance[mrfTable.Key] track by $index"
-                style="float:left;">
-                <input data-ng-repeat="(key, value) in dataRow"
-                    style="display: block; margin-left: 1em; margin-top: .5em;"
-                    id="{{key}}"
-                    name="{{key}}"
-                    value="{{value}}"
-                    />
-                <!-- <span>IWC</span> -->
-            </div>
+    <!-- TODO: See if Jeff prefers a ngblur (saveRow), ngfocus (instantiate editRow) route.  -->
+    <section class="container">
+
+        <div class="row">
+            <label for="ReturnSide">
+                Return-Side External Static Pressure
+            </label>
+            <input
+                id="ReturnSide"
+                name="ReturnSide"
+                class="item-static-pressure-input"
+                value="{{checklistItemCtrl.homePerformance.StaticPressure[0].ReturnSide}}"
+                data-ng-click="checklistItemCtrl.editMrfRow(0, checklistItemCtrl.checklistItem.Sections[0].Key, checklistItemCtrl.checklistItem.Sections[0].Name, checklistItemCtrl.checklistItem.Sections[0].Columns, checklistItemCtrl.homePerformance.StaticPressure[0])"
+                />
+            <span class="item-static-pressure-span">
+                IWC
+            </span>
+            <checklist-item-comments
+                comments="checklistItemCtrl.comments"
+                on-comment="checklistItemCtrl.postComment(comment)">
+            </checklist-item-comments>
         </div>
 
-        <!--
-        <div class="form-group form-group-horizontal">
-            <label for="ReturnSideTemp" class="control-label">Return-Side External Static Pressure</label>
-            <input id="ReturnSideTemp" type="number" class="form-control" />
-            <span class="input-unit">IWC</span>
+        <div class="row">
+            <label for="SupplySide">
+                Supply Side External Static Pressure
+            </label>
+            <input
+                id="SupplySide"
+                name="SupplySide"
+                class="item-static-pressure-input"
+                value="{{checklistItemCtrl.homePerformance.StaticPressure[0].SupplySide}}"
+                data-ng-click="checklistItemCtrl.editMrfRow(1, checklistItemCtrl.checklistItem.Sections[0].Key, checklistItemCtrl.checklistItem.Sections[0].Name, checklistItemCtrl.checklistItem.Sections[0].Columns, checklistItemCtrl.homePerformance.StaticPressure[0])"
+                />
+            <span class="item-static-pressure-span">
+                IWC
+            </span>
+            <checklist-item-comments
+                comments="checklistItemCtrl.comments"
+                on-comment="checklistItemCtrl.postComment(comment)">
+            </checklist-item-comments>
         </div>
-        -->
+
     </section>
 
     <div class="flex-row flex-align-center flex-justify-end">
-        <checklist-item-comments
-            comments="checklistItemCtrl.comments"
-            on-comment="checklistItemCtrl.postComment(comment)">
-        </checklist-item-comments>
-
         <div class="verification">
             <button-group
                 class="button-group"
