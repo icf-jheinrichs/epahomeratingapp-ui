@@ -19,13 +19,17 @@
                 value="{{checklistItemCtrl.homePerformance.StaticPressure[0].ReturnSide}}"
                 data-ng-click="checklistItemCtrl.editMrfRow(0, checklistItemCtrl.checklistItem.Sections[0].Key, checklistItemCtrl.checklistItem.Sections[0].Name, checklistItemCtrl.checklistItem.Sections[0].Columns, checklistItemCtrl.homePerformance.StaticPressure[0])"
                 />
+             <!-- <input
+                id="ReturnSide"
+                name="ReturnSide"
+                class="item-static-pressure-input"
+                value="{{checklistItemCtrl.homePerformance.StaticPressure[0].ReturnSide}}"
+                ngblur="checklistItemCtrl.onSaveMrfRow(mrfRowData)"
+                ngfocus="checklistItemCtrl.editMrfRow(0, checklistItemCtrl.checklistItem.Sections[0].Key, checklistItemCtrl.checklistItem.Sections[0].Name, checklistItemCtrl.checklistItem.Sections[0].Columns, checklistItemCtrl.homePerformance.StaticPressure[0])"
+            /> -->
             <span class="item-static-pressure-span">
                 IWC
             </span>
-            <checklist-item-comments
-                comments="checklistItemCtrl.comments"
-                on-comment="checklistItemCtrl.postComment(comment)">
-            </checklist-item-comments>
         </div>
 
         <div class="row">
@@ -42,15 +46,15 @@
             <span class="item-static-pressure-span">
                 IWC
             </span>
-            <checklist-item-comments
-                comments="checklistItemCtrl.comments"
-                on-comment="checklistItemCtrl.postComment(comment)">
-            </checklist-item-comments>
         </div>
 
     </section>
 
     <div class="flex-row flex-align-center flex-justify-end">
+        <checklist-item-comments
+                comments="checklistItemCtrl.comments"
+                on-comment="checklistItemCtrl.postComment(comment)">
+        </checklist-item-comments>
         <div class="verification">
             <button-group
                 class="button-group"

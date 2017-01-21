@@ -4,11 +4,12 @@ import { CognitoUserPool, CognitoIdentityCredentials, CognitoUser, Authenticatio
 
 //TODO: finalize user data structure.
 const DEFAULT_USER = Object.freeze({
-    'userId'    : '',
-    'firstName' : '',
-    'lastName'  : '',
-    'email'     : '',
-    'token'     : ''
+    'userId'       : '',
+    'firstName'    : '',
+    'lastName'     : '',
+    'email'        : '',
+    'id_token'     : '',
+    'access_token' : ''
 });
 
 const POOL_DATA = Object.freeze({ 
@@ -73,7 +74,7 @@ class AuthenticationService {
         this.$q.all(iter)
         .then(function(values) {
             var localUser    = results[0];
-            var localToken   = results[0].token;
+            var localToken   = results[0].id_token;
             var cognitoToken = results[1];
             if (localToken == cognitoToken) {
                 localUser.status = 200;
@@ -105,8 +106,9 @@ class AuthenticationService {
             cognitoUser.authenticateUser(authenticationDetails, {
                 onSuccess: function (result) {
                     resolve({
-                        token       : result.getIdToken().getJwtToken(),
-                        cognitoUser : cognitoUser
+                        id_token       : result.getIdToken().getJwtToken(),
+                        access_token   : result.getAccessToken().getJwtToken(),
+                        cognitoUser    : cognitoUser
                     })
                 },
 
@@ -149,8 +151,9 @@ class AuthenticationService {
                     cognitoUser.completeNewPasswordChallenge(newPassword, data, this)
 
                     resolve({
-                        token       : result.getIdToken().getJwtToken(),
-                        cognitoUser : cognitoUser
+                        id_token       : result.getIdToken().getJwtToken(),
+                        access_token   : result.getAccessToken().getJwtToken(),
+                        cognitoUser    : cognitoUser
                     });
                 }
             });
@@ -160,7 +163,7 @@ class AuthenticationService {
             return this.$q((resolve, reject) => {
                 this.userIDtoAWSCognitoCredentials(result['token']);
                 resolve( 
-                    this.getAttributes(result['token'])
+                    this.getAttributes(result['id_token'], result['access_token'])
                 );
             })
             .then(result => {
@@ -211,18 +214,19 @@ class AuthenticationService {
         });
     }
 
-    getAttributes (token) {
+    getAttributes (id_token, access_token) {
         return this.$q((resolve, reject) => {
             this.cognitoUser.getUserAttributes(function(err, result) {
                 var firstName = result[2]['Value'].charAt(0).toUpperCase() + result[2]['Value'].slice(1);
                 var lastName  = result[3]['Value'].charAt(0).toUpperCase() + result[3]['Value'].slice(1);
                 var email     = result[4]['Value'];
                 resolve({
-                    'firstName' : firstName,
-                    'lastName'  : lastName,
-                    'email'     : email,
-                    'token'     : token,
-                    'status'    : 200
+                    'firstName'    : firstName,
+                    'lastName'     : lastName,
+                    'email'        : email,
+                    'id_token'     : id_token,
+                    'access_token' : access_token,
+                    'status'       : 200
                 });
             });
         })
@@ -255,11 +259,11 @@ class AuthenticationService {
         }
     }
 
-    userIDtoAWSCognitoCredentials (token) {
+    userIDtoAWSCognitoCredentials (id_token) {
         AWS.config.credentials = new AWS.CognitoIdentityCredentials({
             IdentityPoolId : POOL_DATA.UserPoolId,
             Logins : {
-                AWS_KEY : token
+                AWS_KEY : id_token
             }
         });
     }
