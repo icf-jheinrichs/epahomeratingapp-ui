@@ -6,6 +6,7 @@ import JobDataResponseService from './job-data-response.service';
 import JobDataHomePerformanceService from './job-data-home-performance.service';
 import DisplayLogicDigestService from './display-logic-digest.service';
 import AuthenticationService from './authentication.service';
+import HttpRequestService from './http-request.service'
 // import AWSService from './aws.service';
 
 let servicesModule
@@ -17,7 +18,8 @@ let servicesModule
             .service('JobDisplayListService', JobDisplayListService)
             .service('JobDataResponseService', JobDataResponseService)
             .service('JobDataHomePerformanceService', JobDataHomePerformanceService)
-            .service('DisplayLogicDigestService', DisplayLogicDigestService);
+            .service('DisplayLogicDigestService', DisplayLogicDigestService)
+            .service('HttpRequestService', HttpRequestService);
             // .service('AWSService', AWSService);
 
 export default servicesModule;

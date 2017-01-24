@@ -24,7 +24,7 @@ const AMAZON_REGION = 'us-east';
 const USER_SESSION_ITEM = 'user';
 
 class AuthenticationService {
-    constructor ($q) {
+    constructor ($q, HttpRequestService) {
         'ngInject';
 
         // TODO:
@@ -37,6 +37,7 @@ class AuthenticationService {
         }
 
         this.$q                  = $q;
+        this.HttpRequestService  = HttpRequestService;
 
         this.userPool = new CognitoUserPool( POOL_DATA );
         this.cognitoUser = this.userPool.getCurrentUser();
@@ -244,6 +245,13 @@ class AuthenticationService {
 
             this.userIsAuthenticated = true;
             this.user = Object.assign({}, attr);
+
+            // TODO: find a better location for instantiating http config
+            // this.HttpRequestService.config(attr.id_token, attr.access_token);
+
+            // TEST $http Service
+            // var url  = "https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev/display_logic"
+            // this.HttpRequestService.get(url);
             
             // TODO: Is there a more secure way to store persistant login?
             window.sessionStorage.setItem(USER_SESSION_ITEM, angular.toJson(this.user));
@@ -255,6 +263,10 @@ class AuthenticationService {
             }
             this.userIsAuthenticated = false;
             this.user = Object.assign({}, DEFAULT_USER);
+
+            // TODO: find a better location for removing http config
+            // this.HttpRequestService.config('', '');
+
             window.sessionStorage.setItem(USER_SESSION_ITEM, angular.toJson(DEFAULT_USER));
         }
     }
