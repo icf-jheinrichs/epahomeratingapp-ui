@@ -4,14 +4,15 @@ import { CognitoUserPool, CognitoIdentityCredentials, CognitoUser, Authenticatio
 
 //TODO: finalize user data structure.
 const DEFAULT_USER = Object.freeze({
-    'userId'    : '',
-    'firstName' : '',
-    'lastName'  : '',
-    'email'     : '',
-    'token'     : ''
+    'userId'       : '',
+    'firstName'    : '',
+    'lastName'     : '',
+    'email'        : '',
+    'id_token'     : '',
+    'access_token' : ''
 });
 
-const POOL_DATA = Object.freeze({
+const POOL_DATA = Object.freeze({ 
         'UserPoolId' : 'us-east-1_yyQUoZD72',
         'ClientId' : '2t3nnng2lkumkb565qpjuo4qf7'
     });
@@ -23,7 +24,7 @@ const AMAZON_REGION = 'us-east';
 const USER_SESSION_ITEM = 'user';
 
 class AuthenticationService {
-    constructor ($q) {
+    constructor ($q, HttpRequestService) {
         'ngInject';
 
         // TODO:
@@ -36,6 +37,7 @@ class AuthenticationService {
         }
 
         this.$q                  = $q;
+        this.HttpRequestService  = HttpRequestService;
 
         this.userPool = new CognitoUserPool( POOL_DATA );
         this.cognitoUser = this.userPool.getCurrentUser();
@@ -73,7 +75,7 @@ class AuthenticationService {
         this.$q.all(iter)
         .then(function(values) {
             var localUser    = results[0];
-            var localToken   = results[0].token;
+            var localToken   = results[0].id_token;
             var cognitoToken = results[1];
             if (localToken == cognitoToken) {
                 localUser.status = 200;
@@ -105,8 +107,9 @@ class AuthenticationService {
             cognitoUser.authenticateUser(authenticationDetails, {
                 onSuccess: function (result) {
                     resolve({
-                        token       : result.getIdToken().getJwtToken(),
-                        cognitoUser : cognitoUser
+                        id_token       : result.getIdToken().getJwtToken(),
+                        access_token   : result.getAccessToken().getJwtToken(),
+                        cognitoUser    : cognitoUser
                     })
                 },
 
@@ -114,7 +117,7 @@ class AuthenticationService {
                     console.log(err);
                     reject({
                         message : err,
-                        status  : 403
+                        status  : 403 
                     });
 
                     /* Example error cases */
@@ -133,13 +136,13 @@ class AuthenticationService {
                 },
 
                 newPasswordRequired: function(userAttributes, requiredAttributes) {
-                    // User was signed up by an admin and must provide new
-                    // password and required attributes, if any, to complete
+                    // User was signed up by an admin and must provide new 
+                    // password and required attributes, if any, to complete 
                     // authentication.
 
-                    // TODO: need to come up with a screen for making new password after temp password.
+                    // TODO: need to come up with a screen for making new password after temp password. 
                     var newPassword = 'tempPassword2!';
-
+                    
                     // creates user name or other attributes
                     var data = Object.freeze({
                         name:        'alejandro',
@@ -149,8 +152,9 @@ class AuthenticationService {
                     cognitoUser.completeNewPasswordChallenge(newPassword, data, this)
 
                     resolve({
-                        token       : result.getIdToken().getJwtToken(),
-                        cognitoUser : cognitoUser
+                        id_token       : result.getIdToken().getJwtToken(),
+                        access_token   : result.getAccessToken().getJwtToken(),
+                        cognitoUser    : cognitoUser
                     });
                 }
             });
@@ -159,8 +163,8 @@ class AuthenticationService {
             this.cognitoUser = result['cognitoUser'];
             return this.$q((resolve, reject) => {
                 this.userIDtoAWSCognitoCredentials(result['token']);
-                resolve(
-                    this.getAttributes(result['token'])
+                resolve( 
+                    this.getAttributes(result['id_token'], result['access_token'])
                 );
             })
             .then(result => {
@@ -211,18 +215,19 @@ class AuthenticationService {
         });
     }
 
-    getAttributes (token) {
+    getAttributes (id_token, access_token) {
         return this.$q((resolve, reject) => {
             this.cognitoUser.getUserAttributes(function(err, result) {
                 var firstName = result[2]['Value'].charAt(0).toUpperCase() + result[2]['Value'].slice(1);
                 var lastName  = result[3]['Value'].charAt(0).toUpperCase() + result[3]['Value'].slice(1);
                 var email     = result[4]['Value'];
                 resolve({
-                    'firstName' : firstName,
-                    'lastName'  : lastName,
-                    'email'     : email,
-                    'token'     : token,
-                    'status'    : 200
+                    'firstName'    : firstName,
+                    'lastName'     : lastName,
+                    'email'        : email,
+                    'id_token'     : id_token,
+                    'access_token' : access_token,
+                    'status'       : 200
                 });
             });
         })
@@ -233,7 +238,7 @@ class AuthenticationService {
 
     setUser (attr) {
         // TODO:
-        // refactor?
+        // refactor? 
         if (attr['status'] == 200) {
             delete attr.status;
             attr.userId = this.cognitoUser.getUsername();
@@ -241,25 +246,36 @@ class AuthenticationService {
             this.userIsAuthenticated = true;
             this.user = Object.assign({}, attr);
 
+            // TODO: find a better location for instantiating http config
+            // this.HttpRequestService.config(attr.id_token, attr.access_token);
+
+            // TEST $http Service
+            // var url  = "https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev/display_logic"
+            // this.HttpRequestService.get(url);
+            
             // TODO: Is there a more secure way to store persistant login?
             window.sessionStorage.setItem(USER_SESSION_ITEM, angular.toJson(this.user));
         } else {
-            // if there is a signed on cognitouser but a disagreeable
+            // if there is a signed on cognitouser but a disagreeable 
             // token - the cognitouser is signed out
             if (this.cognitoUser != null) {
                 this.cognitoUser.signOut();
             }
             this.userIsAuthenticated = false;
             this.user = Object.assign({}, DEFAULT_USER);
+
+            // TODO: find a better location for removing http config
+            // this.HttpRequestService.config('', '');
+
             window.sessionStorage.setItem(USER_SESSION_ITEM, angular.toJson(DEFAULT_USER));
         }
     }
 
-    userIDtoAWSCognitoCredentials (token) {
+    userIDtoAWSCognitoCredentials (id_token) {
         AWS.config.credentials = new AWS.CognitoIdentityCredentials({
             IdentityPoolId : POOL_DATA.UserPoolId,
             Logins : {
-                AWS_KEY : token
+                AWS_KEY : id_token
             }
         });
     }
