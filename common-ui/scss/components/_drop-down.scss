@@ -10,6 +10,11 @@
     z-index: $zindex-drop-down;
 }
 
+.drop-down-left {
+    left: 0;
+    right: auto;
+}
+
 .drop-down-item {
     background-color: $body-bg;
     border: 0;

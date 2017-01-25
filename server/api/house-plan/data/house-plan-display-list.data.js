@@ -1,6 +1,6 @@
 module.exports = {
     '_id'         : '12345678',
-    'PreDrywall'  : {
+    'PreDryWall'  : {
         'ExteriorWalls'        : ['1', '2'],
         'CeilingsRoofs'        : [],
         'SlabsFloorsRimJoists' : [],

@@ -1,0 +1,29 @@
+<!-- new house plan modal -->
+<form class="modal modal-large modal-scroll-body" name="housePlanNew" ng-submit="housePlanNewCtrl.onSubmit()">
+    <div class="modal-header flex-row">
+        <div class="flex-item-static">
+            <a class="btn btn-link" data-ui-sref="^">Cancel</a>
+        </div>
+
+        <span class="modal-title flex-item-grow">New House Plan</span>
+
+        <div class="flex-item-static">
+            <button class="btn pull-right" type="submit">Upload</button>
+        </div>
+    </div>
+
+    <div class="modal-body-wrapper">
+        <div class="modal-body">
+            <status-message status="housePlanNewCtrl.message"></status-message>
+
+            <fieldset>
+                <legend>File Upload</legend>
+
+                <input type="file" accept="text/xml" name="housePlanFile" id="housePlanFile" data-ng-model="housePlanNewCtrl.housePlanFile" />
+            </fieldset>
+        </div>
+    </div>
+</form>
+
+<div class="overlay overlay-modal"></div>
+<!-- end new house plan modal -->

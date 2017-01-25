@@ -3,7 +3,10 @@ import controller from './file-manager.controller';
 
 let fileManagerComponent = {
     bindings : {
-        files : '='
+        label      : '@',
+        uploadOnly : '@',
+        files      : '=',
+        library    : '<'
     },
     template,
     controller,

@@ -11,7 +11,7 @@ const DEFAULT_USER = Object.freeze({
     'token'     : ''
 });
 
-const POOL_DATA = Object.freeze({ 
+const POOL_DATA = Object.freeze({
         'UserPoolId' : 'us-east-1_yyQUoZD72',
         'ClientId' : '2t3nnng2lkumkb565qpjuo4qf7'
     });
@@ -114,7 +114,7 @@ class AuthenticationService {
                     console.log(err);
                     reject({
                         message : err,
-                        status  : 403 
+                        status  : 403
                     });
 
                     /* Example error cases */
@@ -133,13 +133,13 @@ class AuthenticationService {
                 },
 
                 newPasswordRequired: function(userAttributes, requiredAttributes) {
-                    // User was signed up by an admin and must provide new 
-                    // password and required attributes, if any, to complete 
+                    // User was signed up by an admin and must provide new
+                    // password and required attributes, if any, to complete
                     // authentication.
 
-                    // TODO: need to come up with a screen for making new password after temp password. 
+                    // TODO: need to come up with a screen for making new password after temp password.
                     var newPassword = 'tempPassword2!';
-                    
+
                     // creates user name or other attributes
                     var data = Object.freeze({
                         name:        'alejandro',
@@ -159,7 +159,7 @@ class AuthenticationService {
             this.cognitoUser = result['cognitoUser'];
             return this.$q((resolve, reject) => {
                 this.userIDtoAWSCognitoCredentials(result['token']);
-                resolve( 
+                resolve(
                     this.getAttributes(result['token'])
                 );
             })
@@ -233,18 +233,18 @@ class AuthenticationService {
 
     setUser (attr) {
         // TODO:
-        // refactor? 
+        // refactor?
         if (attr['status'] == 200) {
             delete attr.status;
             attr.userId = this.cognitoUser.getUsername();
 
             this.userIsAuthenticated = true;
             this.user = Object.assign({}, attr);
-            
+
             // TODO: Is there a more secure way to store persistant login?
             window.sessionStorage.setItem(USER_SESSION_ITEM, angular.toJson(this.user));
         } else {
-            // if there is a signed on cognitouser but a disagreeable 
+            // if there is a signed on cognitouser but a disagreeable
             // token - the cognitouser is signed out
             if (this.cognitoUser != null) {
                 this.cognitoUser.signOut();

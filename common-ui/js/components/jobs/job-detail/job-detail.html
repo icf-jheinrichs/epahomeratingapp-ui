@@ -1,4 +1,4 @@
-<form class="inline-legend">
+<form class="inline-legend" data-ng-submit="jobDetailCtrl.onSubmit()" name="jobForm">
     <fieldset class="row">
         <legend class="col-xs-3">Rating Type</legend>
         <div class="offset-xs-3 col-xs-9">
@@ -16,12 +16,12 @@
         <legend class="col-xs-3">Sample Set</legend>
         <div class="offset-xs-3 col-xs-9">
             <toggle
-                toggle-value="jobDetailCtrl.isSampleset">Job is a Sample Set
+                toggle-value="jobDetailCtrl.isSampleSet">Job is a Sample Set
             </toggle>
         </div>
     </fieldset>
 
-    <nav class="tabs tabs-sample-set row flex-row" role="tablist" data-ng-class="{'hidden' : !jobDetailCtrl.isSampleset}">
+    <nav class="tabs tabs-sample-set row flex-row" role="tablist" data-ng-class="{'hidden' : !jobDetailCtrl.isSampleSet}">
         <button
             data-ng-click="jobDetailCtrl.setTab(jobDetailCtrl.job.Primary.HouseId)"
             type="button"
@@ -36,7 +36,7 @@
         </button>
 
         <button
-            data-ng-repeat="secondary in jobDetailCtrl.job.Secondary track by HouseId"
+            data-ng-repeat="secondary in jobDetailCtrl.job.Secondary track by secondary.HouseId"
             data-ng-click="jobDetailCtrl.setTab(secondary.HouseId)"
             type="button"
             class="tab"
@@ -48,6 +48,15 @@
 
             Sample {{$index + 2}}
         </button>
+
+        <button
+            data-ng-disabled="!jobDetailCtrl.canAddSample"
+            data-ng-click="jobDetailCtrl.addSample()"
+            type="button"
+            class="btn btn-link">
+
+            <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Sample
+        </button>
     </nav>
 
     <div class="tab-content">
@@ -58,17 +67,19 @@
             aria-hidden="{{!jobDetailCtrl.ariaCurrent(jobDetailCtrl.job.Primary.HouseId)}}"
             data-ng-class="{'active' : (jobDetailCtrl.job.Primary.HouseId === jobDetailCtrl.currentLocation)}"
             id="tabpanel-location-{{jobDetailCtrl.job.Primary.HouseId}}"
+            house-plans="jobDetailCtrl.housePlans"
             location="jobDetailCtrl.job.Primary">
         </job-detail-location>
 
         <job-detail-location
-            data-ng-repeat="secondary in jobDetailCtrl.job.Secondary track by HouseId"
+            data-ng-repeat="secondary in jobDetailCtrl.job.Secondary track by secondary.HouseId"
             class="tabpanel"
             role="tabpanel"
             aria-labelledby="tab-location-{{::secondary.HouseId}}"
             aria-hidden="{{!jobDetailCtrl.ariaCurrent(secondary.HouseId)}}"
             data-ng-class="{'active' : (secondary.HouseId === jobDetailCtrl.currentLocation)}"
             id="tabpanel-location-{{secondary.HouseId}}"
+            house-plans="jobDetailCtrl.housePlans"
             location="secondary">
         </job-detail-location>
     </div>

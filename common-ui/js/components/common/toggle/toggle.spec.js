@@ -1,18 +1,16 @@
 'use strict';
 
 describe('Component: Common: Toggle', function testToggle () {
-    describe('Total Progress', function testTotalProgress () {
-        let progress = 10 + 51;
+    const CHECKED_BORDER   = '#64a71a';
+    const UNCHECKED_BORDER = '#d0d0d0';
 
-        it('should not exceed 100', function lte100 () {
-            expect(progress).to.be.most(100);
-        });
+    describe('Initialization', function testTotalProgress () {
+        it(`should have border color of ${CHECKED_BORDER} if checked`);
+        it(`should have border color of ${UNCHECKED_BORDER} if unchecked`);
+    });
 
-        it('should not be less than zero', function gte0 () {
-            expect(progress).to.be.at.least(0);
-        });
-
-        it('don\'t draw arc if verified === 0');
-        it('don\'t draw arc if must correct === 0');
+    describe('Toggle', function testTotalProgress () {
+        it(`should have border color of ${CHECKED_BORDER} if toggled on`);
+        it(`should have border color of ${UNCHECKED_BORDER} if toggled off`);
     });
 });

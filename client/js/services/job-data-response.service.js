@@ -1,21 +1,25 @@
-import PouchDB from 'pouchdb';
-
 class JobDataResponseService {
-    constructor ($q, DB) {
+    constructor ($q, $http, DB) {
         'ngInject';
 
         this.$q    = $q;
-
-        this.db    = new PouchDB(DB.JOB_DATA_RESPONSE);
+        this.$http = $http;
     }
 
     getById (_id) {
         let promise = this.$q((resolve, reject) => {
             this
-                .db
-                .get(_id)
-                .then((doc) => {
-                    resolve(doc);
+                .$http({
+                    method  : 'GET',
+                    url     : `https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev/job/response_data/${_id}`
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        resolve(response.data);
+                    } else {
+                        //TODO: make this not bad.
+                        reject('something\'s amiss');
+                    }
                 })
                 .catch((err) => {
                     reject(err);
@@ -26,29 +30,31 @@ class JobDataResponseService {
     }
 
     put (jobDataResponse) {
-        let promise = this.$q((resolve, reject) => {
-            this
-                .db
-                .get(jobDataResponse._id)
-                .then((doc) => {
-                    jobDataResponse._rev = doc._rev;
+        return this.$q.when();
 
-                    let putById
-                         = this
-                            .db
-                            .put(jobDataResponse);
+        // let promise = this.$q((resolve, reject) => {
+        //     this
+        //         .db
+        //         .get(jobDataResponse._id)
+        //         .then((doc) => {
+        //             jobDataResponse._rev = doc._rev;
 
-                    return putById;
-                })
-                .then((result) => {
-                    resolve(result);
-                })
-                .catch((err) => {
-                    reject(err);
-                });
-        });
+        //             let putById
+        //                  = this
+        //                     .db
+        //                     .put(jobDataResponse);
 
-        return promise;
+        //             return putById;
+        //         })
+        //         .then((result) => {
+        //             resolve(result);
+        //         })
+        //         .catch((err) => {
+        //             reject(err);
+        //         });
+        // });
+
+        // return promise;
     }
 }
 

@@ -2,7 +2,10 @@
     <legend class="col-xs-3">House Plan</legend>
     <div class="offset-xs-3 col-xs-9">
         <file-manager
-            files="jobDetailLocationCtrl.housePlanFileList">
+            upload-only="false"
+            label="House Plan"
+            library="jobDetailLocationCtrl.housePlans"
+            files="jobDetailLocationCtrl.location.HousePlanId">
         </file-manager>
     </div>
 </fieldset>
@@ -31,16 +34,16 @@
 
         <div class="row row-form-groups">
             <div class="form-group col-xs-8">
-                <label for="City" class="sr-only">City</label>
-                <input id="City" placeholder="City" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.CityMunicipality" />
+                <label for="CityMunicipality" class="sr-only">City</label>
+                <input id="CityMunicipality" name="CityMunicipality" placeholder="City" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.CityMunicipality" />
             </div>
             <div class="form-group col-xs-2">
-                <label for="State" class="sr-only">State</label>
-                <input id="State" placeholder="State" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.StateCode" />
+                <label for="StateCode" class="sr-only">State</label>
+                <input id="StateCode" name="StateCode" placeholder="State" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.StateCode" />
             </div>
             <div class="form-group col-xs-2">
                 <label for="ZipCode" class="sr-only">Zip Code</label>
-                <input id="ZipCode" placeholder="Zip Code" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.ZipCode" />
+                <input id="ZipCode" name="ZipCode" placeholder="Zip Code" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.ZipCode" />
             </div>
         </div>
 
@@ -49,11 +52,11 @@
         <div class="row row-form-groups">
             <div class="form-group col-xs-10">
                 <label for="CommunityName" class="sr-only">Community Name</label>
-                <input id="CommunityName" placeholder="Community Name" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.CommunityName" />
+                <input id="CommunityName" name="CommunityName" placeholder="Community Name" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.CommunityName" />
             </div>
             <div class="form-group col-xs-2">
-                <label for="RatingType" class="sr-only">Lot #</label>
-                <input id="RatingType" placeholder="Lot #" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.LotNo" />
+                <label for="LotNo" class="sr-only">Lot #</label>
+                <input id="LotNo" id="LotNo" placeholder="Lot #" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.LotNo" />
             </div>
         </div>
 
@@ -61,8 +64,8 @@
 
         <div class="row">
             <div class="form-group col-xs-12">
-                <label for="CommunityName" class="sr-only">Manual Identifier</label>
-                <input id="CommunityName" placeholder="Manual Identifier" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.ManualIdentifier" />
+                <label for="ManualIdentifier" class="sr-only">Manual Identifier</label>
+                <input id="ManualIdentifier" name="ManualIdentifier" placeholder="Manual Identifier" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.ManualIdentifier" />
             </div>
         </div>
     </div>
@@ -72,6 +75,8 @@
     <legend class="col-xs-3">HVAC Design Report</legend>
     <div class="offset-xs-3 col-xs-9">
         <file-manager
+            upload-only="true"
+            label="HVAC Design Report"
             files="jobDetailLocationCtrl.location.HvacDesignReport">
         </file-manager>
     </div>
@@ -81,6 +86,8 @@
     <legend class="col-xs-3">Rater Design Review Checklist</legend>
     <div class="offset-xs-3 col-xs-9">
         <file-manager
+            upload-only="true"
+            label="Rater Design Review Checklist"
             files="jobDetailLocationCtrl.location.RaterDesignReviewChecklist">
         </file-manager>
     </div>

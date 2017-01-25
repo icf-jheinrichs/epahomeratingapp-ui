@@ -44,7 +44,7 @@ module.exports = [
         }],
         'Status'               : 'Complete',
         'Progress'             : {
-            'PreDrywall' : {
+            'PreDryWall' : {
                 'Verified'      : 100,
                 'MustCorrect'   : 0,
                 'Total'         : 100
@@ -88,7 +88,7 @@ module.exports = [
         'Secondary'            : [],
         'Status'               : 'Active',
         'Progress'             : {
-            'PreDrywall' : {
+            'PreDryWall' : {
                 'Verified'      : 78,
                 'MustCorrect'   : 8,
                 'Total'         : 100
@@ -150,7 +150,7 @@ module.exports = [
         }],
         'Status'               : 'Active',
         'Progress'             : {
-            'PreDrywall' : {
+            'PreDryWall' : {
                 'Verified'      : 12,
                 'MustCorrect'   : 8,
                 'Total'         : 100
@@ -215,7 +215,7 @@ module.exports = [
         }],
         'Status'               : 'Active',
         'Progress'             : {
-            'PreDrywall' : {
+            'PreDryWall' : {
                 'Verified'      : 12,
                 'MustCorrect'   : 8,
                 'Total'         : 100
@@ -294,7 +294,7 @@ module.exports = [
         }],
         'Status'               : 'Active',
         'Progress'             : {
-            'PreDrywall' : {
+            'PreDryWall' : {
                 'Verified'      : 0,
                 'MustCorrect'   : 0,
                 'Total'         : 100
@@ -337,7 +337,7 @@ module.exports = [
         'Secondary'            : [],
         'Status'               : 'Active',
         'Progress'             : {
-            'PreDrywall' : {
+            'PreDryWall' : {
                 'Verified'      : 0,
                 'MustCorrect'   : 0,
                 'Total'         : 100

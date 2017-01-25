@@ -23,7 +23,7 @@ class jobChecklistChecklistController {
 
         //TODO: handle catch error.
         this.JobDataHomePerformanceService
-                .getById(`${this.$stateParams.id}:${this.$stateParams.houseId}`)
+                .getById(this.$stateParams.id, this.$stateParams.houseId)
                 .then(jobDataHomePerformance => {
                     this.jobDataHomePerformance = jobDataHomePerformance;
                 });

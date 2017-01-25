@@ -3,7 +3,7 @@ module.exports = {
     'DisplayVerion'  : '1.0',
     'ChecklistItems' : {
         '1' : {
-            'PreDrywall' : {
+            'PreDryWall' : {
                 'ExteriorWalls' : {
                     'Response' : 'RaterVerified'
                 },
@@ -13,9 +13,9 @@ module.exports = {
             }
         },
         '2' : {
-            'PreDrywall' : {
+            'PreDryWall' : {
                 'ExteriorWalls' : {
-                    'Response' : 'RaterVerified',
+                    'Response' : 'RaterVerified'
                 },
                 'CeilingsRoofs' : {
                     'Response' : ''
@@ -23,7 +23,7 @@ module.exports = {
             }
         },
         '3' : {
-            'PreDrywall' : {
+            'PreDryWall' : {
                 'SlabsFloorsRimJoists' : {
                     'Response'  : 'RaterVerified',
                     'MRFValues' : [

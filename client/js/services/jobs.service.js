@@ -1,105 +1,178 @@
-import PouchDB from 'pouchdb';
 import _map from 'lodash/map';
+import _cloneDeep from 'lodash/cloneDeep';
 
+const API_GATEWAY = 'https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev';
+
+/**
+ * JobsService is the interface for all job data.
+ */
 class JobsService {
-    constructor ($q, DB) {
+    /**
+     * Instantiate JobsService with necessary providers.
+     *
+     * @param  {function} $q        angular.$q promise providers
+     * @param  {function} $http     angular.$http ajax requests
+     * @param  {object} DB          epahomeratingapp constants - contains paths to databases
+     */
+    constructor ($q, $http, DB) {
         'ngInject';
 
         this.$q    = $q;
-
-        this.db    = new PouchDB(DB.JOB);
+        this.$http = $http;
     }
 
+    /**
+     * Gets list of jobs.
+     *
+     * @return {promise}    resolves to array of jobs
+     */
     get () {
         let promise = this.$q((resolve, reject) => {
             this
-                .db
-                .allDocs({
-                    include_docs : true
+                .$http({
+                    method  : 'GET',
+                    url     : `${API_GATEWAY}/job`
                 })
-                .then((allDocs) => {
-                    let jobs = {};
+                // .db
+                // .allDocs({
+                //     include_docs : true
+                // })
+                .then((response) => {
+                    if (response.status === 200) {
+                        let jobs = {};
 
-                    jobs.data = _map(allDocs.rows, 'doc');
+                        jobs = _map(response.data, 'doc');
 
-                    resolve(jobs);
+                        resolve(jobs);
+                    } else {
+                        //TODO: make this less bad
+                        reject('somethings amiss');
+                    }
+                })
+                .catch((error) => {
+                    reject(error);
                 });
         });
 
         return promise;
     }
 
+    /**
+     * Get job by id.
+     *
+     * @param  {string} _id     UID of job
+     * @return {promise}        resolves to
+     */
     getById (_id) {
         let promise = this.$q((resolve, reject) => {
             this
-                .db
-                .get(_id)
-                .then((doc) => {
-                    let job = {};
+                .$http({
+                    method  : 'GET',
+                    url     : `${API_GATEWAY}/job/${_id}`
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        resolve(response.data);
+                    } else {
+                        //TODO: handle this all proper like
+                        reject('something is amiss');
+                    }
 
-                    job.data = doc;
-
-                    resolve(job);
+                })
+                .catch((error) => {
+                    reject(error);
                 });
         });
 
         return promise;
     }
 
-    getNewJob () {
-        let primaryHouseGuid = Date.now();
-        let jobTemplate = {
-            'RatingType'           : 'energy-star',
-            'Primary'              : {
-                'HouseId'          : primaryHouseGuid
-            },
-            'Secondary'            : [],
-            'Status'               : 'Active',
-            'Progress'             : {
-                'PreDrywall' : {
-                    'Verified'      : 0,
-                    'MustCorrect'   : 0,
-                    'Total'         : 0
-                },
-                'Final' : {
-                    'Verified'      : 0,
-                    'MustCorrect'   : 0,
-                    'Total'         : 0
-                }
-            },
-            'InternalReview'       : false,
-            'ReturnedFromInternal' : false,
-            'ReturnedFromProvider' : false,
-            'History'              : []
+    getNewSample () {
+        let sampleGuid     = Date.now();
+        let sampleTemplate = {
+            'HouseId'                    : sampleGuid,
+            'BuilderId'                  : '',
+            'HousePlanId'                : [],
+            'AddressInformation'         : {},
+            'Photo'                      : [],
+            'HvacDesignReport'           : [],
+            'RaterDesignReviewChecklist' : []
         };
 
-        return this.$q.when(jobTemplate);
+        return _cloneDeep(sampleTemplate);
     }
 
-    put (job) {
+    /**
+     * Get a new job data object.
+     *
+     * @return {object} default job object.
+     */
+    getNewJob () {
+        let jobTemplate = {
+            'RatingType'           : 'energy-star',
+            'Primary'              : this.getNewSample(),
+            'Secondary'            : []
+        };
+
+        return _cloneDeep(jobTemplate);
+    }
+
+    post (job) {
         let promise = this.$q((resolve, reject) => {
             this
-                .db
-                .get(job._id)
-                .then((doc) => {
-                    job._rev = doc._rev;
-
-                    let putById
-                         = this
-                            .db
-                            .put(job);
-
-                    return putById;
+                .$http({
+                    method  : 'POST',
+                    url     : `${API_GATEWAY}/job`,
+                    data    : job
                 })
-                .then((result) => {
-                    resolve(result);
+                .then((response) => {
+                    if (response.status === 200) {
+                        resolve(response);
+                    } else {
+                        //TODO: make this less bad
+                        reject('somethings amiss');
+                    }
                 })
-                .catch((err) => {
-                    reject(err);
+                .catch((error) => {
+                    reject(error);
                 });
         });
 
         return promise;
+    }
+
+    /**
+     * Saves updated job data.
+     *
+     * @param  {object} job job data
+     * @return {promis}     resolves to successful save.
+     */
+    put (job) {
+        return this.$q.when();
+
+        // let promise = this.$q((resolve, reject) => {
+        //     this
+        //         .db
+        //         .get(job._id)
+        //         .then((doc) => {
+        //             job._rev = doc._rev;
+
+        //             let putById
+        //                  = this
+        //                     .db
+        //                     .put(job);
+
+        //             return putById;
+        //         })
+        //         .then((result) => {
+        //             resolve(result);
+        //         })
+        //         .catch((err) => {
+        //             reject(err);
+        //         });
+        // });
+
+        // return promise;
     }
 }
 

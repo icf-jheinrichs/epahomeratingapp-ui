@@ -1,20 +1,20 @@
-<div class="item-comments">
+<div class="item-comments" popover="popover">
     <button
         type="button"
         class="btn btn-link btn-comments"
         aria-label="{{this.comments.length}} Comments. Leave a Comment."
         data-ng-class="{'has-comments' : checklistItemCommentsCtrl.comments.length > 0}"
-        data-ng-click="checklistItemCommentsCtrl.togglePopover()">
+        popover-toggle="popover-toggle">
 
         <span data-ng-if="checklistItemCommentsCtrl.comments.length > 0">{{checklistItemCommentsCtrl.comments.length}}</span> <i class="fa fa-commenting-o fa-lg" aria-hidden="true"></i>
     </button>
 
-    <div class="popover" data-ng-class="{'hidden' : !checklistItemCommentsCtrl.showPopover}">
+    <div class="popover hidden" popover-body="popover-body">
         <div class="popover-panel-wrapper">
         <section class="popover-panel" data-ng-class="{'hidden' : checklistItemCommentsCtrl.state !== 'list'}">
             <header class="popover-panel-header flex-row flex-align-center">
                 <div class="flex-item-static">
-                    <button class="btn btn-link" data-ng-click="checklistItemCommentsCtrl.togglePopover()">
+                    <button class="btn btn-link popover-close">
                         <i class="fa fa-close" aria-hidden="true"></i> Close
                     </button>
                 </div>

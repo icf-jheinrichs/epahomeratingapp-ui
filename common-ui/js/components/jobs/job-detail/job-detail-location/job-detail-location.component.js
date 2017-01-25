@@ -3,7 +3,8 @@ import controller from './job-detail-location.controller';
 
 let jobDetailLocationComponent = {
     bindings : {
-        location : '<'
+        location   : '<',
+        housePlans : '<'
     },
     template,
     controller,

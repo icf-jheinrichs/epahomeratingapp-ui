@@ -1,21 +1,27 @@
-import PouchDB from 'pouchdb';
+const API_GATEWAY = 'https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev';
 
 class JobDataHomePerformanceService {
-    constructor ($q, DB) {
+    constructor ($q, $http, DB) {
         'ngInject';
 
         this.$q    = $q;
-
-        this.db    = new PouchDB(DB.JOB_DATA_HOME_PERFORMANCE);
+        this.$http = $http;
     }
 
-    getById (_id) {
+    getById (jobId, houseId) {
         let promise = this.$q((resolve, reject) => {
             this
-                .db
-                .get(_id)
-                .then((doc) => {
-                    resolve(doc);
+                .$http({
+                    method  : 'GET',
+                    url     : `${API_GATEWAY}/job/home_performance_data/${jobId}/${houseId}`
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        resolve(response.data);
+                    } else {
+                        //TODO: make this not bad.
+                        reject('something\'s amiss');
+                    }
                 })
                 .catch((err) => {
                     reject(err);
@@ -26,19 +32,15 @@ class JobDataHomePerformanceService {
     }
 
     put (jobDataHomePerformance) {
+        let jobId   = jobDataHomePerformance._id.split(':')[0];
+        let houseId = jobDataHomePerformance._id.split(':')[1];
+
         let promise = this.$q((resolve, reject) => {
             this
-                .db
-                .get(jobDataHomePerformance._id)
-                .then((doc) => {
-                    jobDataHomePerformance._rev = doc._rev;
-
-                    let putById
-                         = this
-                            .db
-                            .put(jobDataHomePerformance);
-
-                    return putById;
+                .$http({
+                    method  : 'PUT',
+                    url     : `${API_GATEWAY}/job/home_performance_data/${jobId}/${houseId}`,
+                    data    : jobDataHomePerformance
                 })
                 .then((result) => {
                     resolve(result);
@@ -49,6 +51,7 @@ class JobDataHomePerformanceService {
         });
 
         return promise;
+
     }
 }
 

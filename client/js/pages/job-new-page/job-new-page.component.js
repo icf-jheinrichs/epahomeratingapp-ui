@@ -3,7 +3,8 @@ import controller from './job-new-page.controller';
 
 let jobsNewPageComponent = {
     bindings : {
-        job : '<'
+        job        : '<',
+        housePlans : '<'
     },
     template,
     controller,

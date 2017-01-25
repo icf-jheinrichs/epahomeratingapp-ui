@@ -5,13 +5,13 @@
         <h3 class="checklist-section-title" id="exeterior-walls-pre-drywall">{{jobChecklistCategoryCtrl.categoryName}} - Pre-Drywall</h3>
 
         <checklist-item
-            data-ng-repeat="(key, value) in jobChecklistCategoryCtrl.preDrywallChecklistItems track by $index"
-            item-id="{{::key}}"
+            data-ng-repeat="checklistItem in jobChecklistCategoryCtrl.preDrywallChecklistItems track by $index"
+            item-id="{{::checklistItem.checklistItemRef}}"
             item-category="{{::jobChecklistCategoryCtrl.categoryKey}}"
             item-category-progress="{{::jobChecklistCategoryCtrl.CATEGORY_PROGRESS['pre-drywall'].Key}}"
-            response="jobChecklistCategoryCtrl.jobDataResponse.ChecklistItems[jobChecklistCategoryCtrl.categoryKey].PreDrywall[key].Response"
-            comments="jobChecklistCategoryCtrl.jobDataResponse.ChecklistItems[jobChecklistCategoryCtrl.categoryKey].PreDrywall[key].Comments"
-            home-performance="jobChecklistCategoryCtrl.jobDataHomePerformance.ChecklistItems[key]">
+            response="jobChecklistCategoryCtrl.jobDataResponse.ChecklistItems[jobChecklistCategoryCtrl.categoryKey].PreDrywall[checklistItem.checklistItemRef].Response"
+            comments="jobChecklistCategoryCtrl.jobDataResponse.ChecklistItems[jobChecklistCategoryCtrl.categoryKey].PreDrywall[checklistItem.checklistItemRef].Comments"
+            home-performance="jobChecklistCategoryCtrl.jobDataHomePerformance.ChecklistItems[checklistItem.checklistItemRef]">
         </checklist-item>
 
     </section>
@@ -20,13 +20,13 @@
         <h3 class="checklist-section-title" id="exeterior-walls-final">{{jobChecklistCategoryCtrl.categoryName}} - Final</h3>
 
         <checklist-item
-            data-ng-repeat="(key, value) in jobChecklistCategoryCtrl.finalChecklistItems track by $index"
-            item-id="{{::key}}"
+            data-ng-repeat="checklistItem in jobChecklistCategoryCtrl.finalChecklistItems track by $index"
+            item-id="{{::checklistItem.checklistItemRef}}"
             item-category="{{::jobChecklistCategoryCtrl.categoryKey}}"
             item-category-progress="{{::jobChecklistCategoryCtrl.CATEGORY_PROGRESS['final'].Key}}"
-            response="jobChecklistCategoryCtrl.jobDataResponse.ChecklistItems[jobChecklistCategoryCtrl.categoryKey].Final[key].Response"
-            comments="jobChecklistCategoryCtrl.jobDataResponse.ChecklistItems[jobChecklistCategoryCtrl.categoryKey].Final[key].Comments"
-            home-performance="jobChecklistCategoryCtrl.jobDataHomePerformance.ChecklistItems[key]">
+            response="jobChecklistCategoryCtrl.jobDataResponse.ChecklistItems[jobChecklistCategoryCtrl.categoryKey].Final[checklistItem.checklistItemRef].Response"
+            comments="jobChecklistCategoryCtrl.jobDataResponse.ChecklistItems[jobChecklistCategoryCtrl.categoryKey].Final[checklistItem.checklistItemRef].Comments"
+            home-performance="jobChecklistCategoryCtrl.jobDataHomePerformance.ChecklistItems[checklistItem.checklistItemRef]">
         </checklist-item>
 
     </section>

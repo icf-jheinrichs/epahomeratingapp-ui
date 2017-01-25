@@ -1,13 +1,21 @@
 class FileManagerController {
     $onInit () {
-        this.allowFromComputer = true;
+        if (!Array.isArray(this.files)) {
+            this.files = [this.files];
+        }
+
         this.libraryName = 'From House Plan Library';
     }
 
-    removeFile (FileId) {
-        this.files = this.files.filter((file) => {
-            return file.Id !== FileId;
-        });
+    addItem (item) {
+        if (this.files.indexOf(item._id) < 0) {
+            this.files.push(item._id);
+        }
+    }
+
+    removeFile (file) {
+        let index = this.files.indexOf(file);
+        this.files.splice(index, 1);
     }
 }
 

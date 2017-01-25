@@ -5,7 +5,9 @@ import './job-detail.scss';
 let jobDetailComponent = {
     bindings : {
         submitLabel : '@',
-        job         : '<'
+        submitJob   : '&',
+        job         : '<',
+        housePlans  : '<'
     },
     template,
     controller,

@@ -1,5 +1,5 @@
 // const COUCH_URL = 'http://127.0.0.1:5984';
-const COUCH_URL = '';
+const COUCH_URL = 'http://127.0.0.1:5984';
 
 export const DB        = {
     DISPLAY_LOGIC_DIGEST      : `${COUCH_URL}/display-logic-digest`,
@@ -56,18 +56,7 @@ export const CATEGORIES = {
     },
     'electrical' : {
         Name : 'Plug Loads, Lighting, PV, Meters',
-        Key  : 'PlugLoadsLightingPvMeters'
-    }
-};
-
-export const RATING_TYPES = {
-    'EnergyStar' : {
-        Name : 'ENERGY STAR Rating',
-        Key  : 'energy-star'
-    },
-    'HERS' : {
-        Name : 'HERS Rating Only',
-        Key  : 'hers'
+        Key  : 'PlugLoadsLightingPv'
     }
 };
 
@@ -79,6 +68,17 @@ export const CATEGORY_PROGRESS = {
     'final' : {
         Name : 'Final',
         Key  : 'Final'
+    }
+};
+
+export const RATING_TYPES = {
+    'EnergyStar' : {
+        Name : 'ENERGY STAR Rating',
+        Key  : 'energy-star'
+    },
+    'HERS' : {
+        Name : 'HERS Rating Only',
+        Key  : 'hers'
     }
 };
 

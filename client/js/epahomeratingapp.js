@@ -9,19 +9,14 @@ import 'font-awesome/css/font-awesome.css';
 // Constants
 import {DB, CONFIG, MESSAGING, JOB_STATUS, CATEGORIES, RATING_TYPES, CATEGORY_PROGRESS, RESPONSES} from './epahomeratingapp.constant';
 
-// DB
-import purgeData from './services/db/purge-data';
-import seedData from './services/db/seed-data';
-
 // Services
 import ServicesModule from './services/services.module';
 import {authenticationHook} from './services/authentication.hook';
 
 // Routes
 import epahomeratingappRoutes from './epahomeratingapp.routes';
-
 // Component Modules
-import ComponentsModule from '../../epahomeratingappUI.js';
+import {ComponentsModule, FiltersModule} from '../../epahomeratingappUI.js';
 
 // Pages Modules
 import PagesModule from './pages/pages.module';
@@ -35,6 +30,7 @@ angular
     .module(APP_NAME, [
         ServicesModule.name,
         ComponentsModule.name,
+        FiltersModule.name,
         PagesModule.name,
         uiRouter
     ])
@@ -53,14 +49,5 @@ angular
 angular
     .element(document)
     .ready(function handleDocumentReady () {
-        purgeData(DB)
-            .then(function handlePurge () {
-                return seedData(DB);
-            })
-            .then(function handleBootstrap () {
-                angular.bootstrap(document, [APP_NAME]);
-            })
-            .catch(function handleInfoError (err) {
-                //TODO: this
-            });
+        angular.bootstrap(document, [APP_NAME]);
     });

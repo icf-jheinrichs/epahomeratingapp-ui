@@ -1,32 +1,16 @@
 class houseSelectionItemController {
-    constructor (CameraService, CONFIG) {
+    constructor (CameraService, CONFIG, jobTitleFilter) {
         'ngInject';
 
-        this.CameraService = CameraService;
-        this.DEFAULT_PHOTO = CONFIG.DEFAULT_PHOTO;
+        this.CameraService  = CameraService;
+        this.DEFAULT_PHOTO  = CONFIG.DEFAULT_PHOTO;
+        this.jobTitleFilter = jobTitleFilter;
 
         //TODO: move this to constant
         this.photoActionLabelEnum = {
             'ADD'    : 'Add Photo',
             'CHANGE' : 'Change Photo'
         };
-    }
-
-    $onInit () {
-        let AddressInformation = this.house.AddressInformation;
-
-        //TODO: move this to service
-        if (AddressInformation.Address1) {
-            this.HouseTitle = AddressInformation.Address1;
-            this.HouseTitle += ` ${AddressInformation.CityMunicipality || ''}`;
-            this.HouseTitle += `, ${AddressInformation.StateCode || ''}`;
-            this.HouseTitle += ` ${AddressInformation.ZipCode || ''}`;
-        } else if (AddressInformation.CommunityName) {
-            this.HouseTitle = AddressInformation.CommunityName;
-            this.HouseTitle += (AddressInformation.LotNo) ? `, Lot ${AddressInformation.LotNo}` : '';
-        } else {
-            this.HouseTitle = `Manual ID: ${AddressInformation.ManualId}`;
-        }
     }
 
     updatePhoto (HouseId, $event) {
@@ -59,6 +43,10 @@ class houseSelectionItemController {
         }
 
         return photoUrl;
+    }
+
+    get HouseTitle () {
+        return this.jobTitleFilter(this.house.AddressInformation);
     }
 }
 
