@@ -3,7 +3,8 @@ import controller from './job-edit-page.controller';
 
 let jobsEditPageComponent = {
     bindings : {
-        job : '<',
+        job        : '<',
+        housePlans : '<'
     },
     template,
     controller,

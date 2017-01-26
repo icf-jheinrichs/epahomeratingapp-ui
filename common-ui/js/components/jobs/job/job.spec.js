@@ -1,4 +1,4 @@
-describe('Component: job', function testJob () {
+describe('Component: Jobs: Job', function testJob () {
     describe('rating label', function testRatingLabel () {
         it('should return class: label-energy-star if Energy Star Rating');
 

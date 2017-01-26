@@ -1,136 +1,98 @@
 <div class="file-manager flex-row">
-    <div class="file-manager-actions flex-item-static" dropdown="dropdown">
+    <div class="file-manager-actions flex-item-static">
         <button
-            type="button"
             class="btn"
-            dropdown-toggle="dropdown-toggle">
+            data-ng-if="fileManagerCtrl.uploadOnly==='true'"
+            type="button">
 
-            Add <i class="fa fa-caret-down" aria-hidden="true"></i>
+            Upload
         </button>
 
-        <nav
-            class="drop-down hidden"
-            dropdown-menu="dropdown-menu"
-            role="menu">
-
+        <!--
+        <div dropdown="dropdown" data-ng-if="fileManagerCtrl.uploadOnly==='false'">
             <button
-                data-ng-if="fileManagerCtrl.allowFromComputer"
-                class="drop-down-item"
                 type="button"
-                role="menuitem">
+                class="btn"
+                dropdown-toggle="dropdown-toggle">
 
-                From Computer
+                Add <i class="fa fa-caret-down" aria-hidden="true"></i>
             </button>
 
-            <button
-                class="drop-down-item"
-                type="button"
-                role="menuitem">
+            <nav
+                class="drop-down drop-down-left hidden"
+                dropdown-menu="dropdown-menu"
+                role="menu">
 
-                From {{fileManagerCtrl.libraryName}}
+                <button
+                    class="drop-down-item"
+                    type="button"
+                    role="menuitem">
+
+                    From Computer
+                </button>
+
+                <button
+                    class="drop-down-item"
+                    type="button"
+                    role="menuitem">
+
+                    From {{fileManagerCtrl.label}} Library
+                </button>
+            </nav>
+        </div>
+        -->
+
+        <div popover="popover" data-ng-if="fileManagerCtrl.uploadOnly==='false'">
+            <button
+                type="button"
+                popover-toggle="popover-toggle"
+                class="btn">
+                <i class="fa fa-plus" aria-hidden="true"></i> Add
             </button>
-        </nav>
+
+            <div class="popover popover-medium hidden" popover-body="popover-body">
+                <div class="popover-panel-wrapper">
+                    <section class="popover-panel">
+                        <header class="popover-panel-header flex-row flex-align-center">
+                            <div class="flex-item-static">
+                                <button type="button" class="btn btn-link popover-close">
+                                    <i class="fa fa-close" aria-hidden="true"></i> Close
+                                </button>
+                            </div>
+
+                            <h5 class="flex-item-grow popover-panel-title">Add House Plan</h5>
+                        </header>
+
+                        <div class="popover-panel-body">
+                            <button
+                                type="button"
+                                data-ng-click="fileManagerCtrl.addItem(item)"
+                                data-ng-repeat="item in fileManagerCtrl.library"
+                                class="drop-down-item popover-close">
+
+                                {{item.Name}}
+                            </button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="file-manager-list flex-item-grow">
         <ul class="list-unstyled">
             <li class="file-manager-file clearfix"
-                data-ng-repeat="file in fileManagerCtrl.files track by file.Id">
-                {{::file.FileName}}
+                data-ng-repeat="file in fileManagerCtrl.files track by file">
+                {{::file}}
                 <button
                     class="btn btn-no-label btn-link btn-remove pull-right"
                     type="button"
-                    aria-label="Remove {{::file.FileName}}"
-                    data-ng-click="fileManagerCtrl.removeFile(file.Id)">
+                    aria-label="Remove {{::file}}"
+                    data-ng-click="fileManagerCtrl.removeFile(file)">
 
                     <i class="fa fa-remove" aria-hidden="true"></i>
-
                 </button>
             </li>
         </ul>
-    </div>
-
-    <div class="popover" data-ng-class="{'hidden' : !fileManagerCtrl.showPopover}">
-        <div class="popover-panel-wrapper">
-        <section class="popover-panel" data-ng-class="{'hidden' : checklistItemCommentsCtrl.state !== 'list'}">
-            <header class="popover-panel-header flex-row flex-align-center">
-                <div class="flex-item-static">
-                    <button class="btn btn-link" data-ng-click="checklistItemCommentsCtrl.togglePopover()">
-                        <i class="fa fa-close" aria-hidden="true"></i> Close
-                    </button>
-                </div>
-
-                <h5 class="flex-item-grow popover-panel-title">Comments</h5>
-
-                <div class="flex-item-static">
-                    <button class="btn btn-link" data-ng-click="checklistItemCommentsCtrl.setState('post')">
-                        <i class="fa fa-plus" aria-hidden="true"></i> New
-                    </button>
-                </div>
-            </header>
-
-            <div class="popover-panel-body">
-                <div class="item-list item-list-comments" data-ng-if="checklistItemCommentsCtrl.comments.length > 0">
-                    <div class="item-list-item item-comment" data-ng-repeat="comment in checklistItemCommentsCtrl.comments track by $index">
-                        <figure class="comment-image" data-ng-if="comment.PhotoUrl">
-                            <img data-ng-src="{{comment.PhotoUrl}}" />
-                        </figure>
-
-                        <p class="comment-body">
-                            <span class="comment-timestamp">{{::checklistItemCommentsCtrl.formatTimestamp(comment.Timestamp)}}</span>
-                            {{::comment.Comment}}
-                        </p>
-                    </div>
-                </div>
-
-                <p data-ng-if="checklistItemCommentsCtrl.comments.length === 0">There are no comments.</p>
-            </div>
-        </section>
-
-        <form
-            name="checklistItemCommentsCtrl.postCommentForm"
-            class="popover-panel hidden"
-            data-ng-submit="checklistItemCommentsCtrl.postComment()"
-            data-ng-class="{'hidden' : checklistItemCommentsCtrl.state !== 'post'}">
-
-            <header class="popover-panel-header flex-row flex-align-center">
-                <div class="flex-item-static">
-                    <button type="button" class="btn btn-link" data-ng-click="checklistItemCommentsCtrl.setState('list')">
-                        <i class="fa fa-chevron-left fa-lg" aria-hidden="true"></i> Cancel
-                    </button>
-                </div>
-
-                <h5 class="flex-item-grow popover-panel-title">Add Comment</h5>
-
-                <div class="flex-item-static">
-                    <button type="submit" class="btn btn-link">
-                        Done
-                    </button>
-                </div>
-            </header>
-
-            <div class="popover-panel-body">
-                <figure class="item-comment-add-photo clearfix">
-                    <img class="pull-left" data-ng-src="{{checklistItemCommentsCtrl.newCommentPhotoUrl}}" />
-
-                    <figcaption>
-                        <button type="button" class="btn btn-block btn-link" data-ng-click="checklistItemCommentsCtrl.addPhoto()">
-                            <i class="fa fa-camera" aria-hidden="true"></i> {{checklistItemCommentsCtrl.photoActionLabel}}
-                        </button>
-                    </figcaption>
-                </figure>
-
-                <div class="form-group">
-                    <label for="commentText" class="sr-only">Enter Your Comment</label>
-
-                    <textarea
-                        class="form-control"
-                        id="commentText"
-                        data-ng-model="checklistItemCommentsCtrl.newCommentText">
-                    </textarea>
-                </div>
-            </div>
-        </form>
-        </div>
     </div>
 </div>

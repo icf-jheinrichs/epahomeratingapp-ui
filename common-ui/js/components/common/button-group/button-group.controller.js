@@ -3,12 +3,6 @@ import _union from 'lodash/union';
 import _without from 'lodash/without';
 
 class ButtonGroupController {
-    constructor ($log) {
-        'ngInject';
-
-        this.$log = $log;
-    }
-
     $onInit () {
         this.selected = this.initialValue || [];
     }

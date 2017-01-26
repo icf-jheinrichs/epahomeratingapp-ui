@@ -3,8 +3,12 @@
         <h2>Create a Job</h2>
     </header>
 
+    <status-message status="housePlanNewCtrl.message"></status-message>
+
     <job-detail
         submit-label="Create"
-        job="jobsNewPageCtrl.job">
+        submit-job="jobsNewPageCtrl.submitJob(job)"
+        job="jobsNewPageCtrl.job"
+        house-plans="jobsNewPageCtrl.housePlans">
     </job-detail>
 </section>

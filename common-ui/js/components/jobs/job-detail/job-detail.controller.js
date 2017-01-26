@@ -1,23 +1,18 @@
+//TODO: put this in a config somewhere.
+const MAX_SAMPLE_SIZE = 7;
+
 class JobDetailController {
-    constructor (RATING_TYPES, $element) {
+    constructor (RATING_TYPES, JobsService) {
         'ngInject';
 
         this.ratingTypeOptions = RATING_TYPES;
-        this.$element          = $element;
+        this.JobsService       = JobsService;
     }
 
     $onInit () {
-        this.isSampleset = this.job.Secondary.length > 0;
+        this.isSampleSet = this.job.Secondary.length > 0;
 
         this.currentLocation = this.job.Primary.HouseId;
-    }
-
-    validateHousePlan () {
-        return this.housePlanFileList.length > 0;
-    }
-
-    validateRatingType () {
-        return this.housePlanFileList.length > 0;
     }
 
     setTab (houseId) {
@@ -26,6 +21,20 @@ class JobDetailController {
 
     ariaCurrent (houseId) {
         return this.currentLocation === houseId;
+    }
+
+    onSubmit () {
+        this.submitJob({
+            job : this.job
+        });
+    }
+
+    addSample () {
+        this.job.Secondary.push(this.JobsService.getNewSample());
+    }
+
+    get canAddSample () {
+        return (this.isSampleSet && this.job.Secondary.length < (MAX_SAMPLE_SIZE - 1));
     }
 }
 

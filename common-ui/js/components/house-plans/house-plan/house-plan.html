@@ -1,12 +1,12 @@
 <div class="item-list-item house-plan">
-    <a href="#">
+    <a data-ui-sref="house-plans.edit({id: housePlanCtrl.housePlan._id})">
         <span class="pull-right"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</span>
         <h3 class="list-item-title house-plan-title">{{::housePlanCtrl.housePlanTitle}}</h3>
     </a>
 
     <div class="house-plan-meta row">
         <dl class="house-plan-info col-xs-6">
-            <dt>Builder:</dt> <dd>{{::housePlanCtrl.housePlan.Builder}}</dd>
+            <dt>Builder:</dt> <dd>{{::housePlanCtrl.housePlan.BuilderName}}</dd>
             <dt>Community:</dt> <dd>{{::housePlanCtrl.housePlan.CommunityName}}</dd>
         </dl>
 

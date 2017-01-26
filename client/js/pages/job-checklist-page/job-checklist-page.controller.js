@@ -113,12 +113,12 @@ class JobsChecklistPageController {
         this.showActionsDropDown = false;
     }
 
-    //TODO: all dropdown stuff belongs in a directive
+    //TODO: all modal stuff belongs in a directive
     toggleModal () {
         this.showCompleteModal = !this.showCompleteModal;
     }
 
-    //TODO: all dropdown stuff belongs in a directive
+    //TODO: all modal stuff belongs in a directive
     hideModal () {
         this.showCompleteModal = false;
     }
@@ -168,6 +168,10 @@ class JobsChecklistPageController {
         }
 
         this.$rootScope.$broadcast(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE_TOTALS, this.jobDataResponse.Progress);
+    }
+
+    get downloadUrl () {
+        return `https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev/job/rem_xml/${this.job._id}`;
     }
 
     updateJobResponseTotals (response) {

@@ -33,8 +33,9 @@ class ChecklistItemStaticPressureController extends ChecklistItemClass {
         this.editRow.pop();
     }
 
-    test(mrfRowData) {
-        console.log(this.editRow);
+    test (mrfRowData) {
+        //TODO: what is this?
+        angular.noop();
     }
 }
 

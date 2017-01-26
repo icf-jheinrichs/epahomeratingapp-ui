@@ -2,8 +2,15 @@
 
     <header class="page-header item-list-header clearfix">
         <h2 class="pull-left item-list-title">House Plans</h2>
-        <button type="button" class="btn pull-right"><i class="fa fa-plus" aria-hidden="true"></i> Add a House Plan</a>
+        <a data-ui-sref="house-plans.new()"
+            type="button"
+            class="btn pull-right">
+
+            <i class="fa fa-plus" aria-hidden="true"></i> Add a House Plan
+        </a>
     </header>
 
-    <house-plans></house-plans>
+    <div ui-view></div>
+
+    <house-plans house-plans="housePlansPageCtrl.housePlans"></house-plans>
 </section>

@@ -16,19 +16,9 @@ class ChecklistCommentsController {
     }
 
     $onInit () {
-        this.showPopover        = false;
         this.state              = 'list';
         this.newCommentPhotoUrl = this.defaultPhotoUrl;
         this.photoActionLabel   = this.photoActionLabelEnum.ADD;
-    }
-
-    //TODO: create a popover directive and move all popover logic out of this controller
-    togglePopover () {
-        if (!this.showPopover) {
-            this.state = 'list';
-        }
-
-        this.showPopover = !this.showPopover;
     }
 
     formatTimestamp (timestamp) {
@@ -57,8 +47,6 @@ class ChecklistCommentsController {
                 'User'      : '12345678',
                 'Timestamp' : moment().format()
             };
-
-            // this.comments.push(comment);
 
             this.onComment({
                 comment : comment

@@ -16,6 +16,12 @@
     }
 }
 
+.popover-medium {
+    height: 300px;
+    margin: $offset-large 0 150px;
+    width: 350px;
+}
+
 .popover-panel-header,
 .popover-panel-body {
     padding: $padding-large;

@@ -37,7 +37,7 @@ class LoginFormController {
 
     handleError (err) {
         switch (err.status) {
-        case 404:
+        case 403:
             this.message = Object.assign({}, ERROR_NOT_FOUND);
             break;
         default:

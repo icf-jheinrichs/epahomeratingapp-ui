@@ -35,7 +35,41 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
 
         .state('house-plans', {
             url        : '/house-plans',
-            component  : 'housePlansPage'
+            component  : 'housePlansPage',
+            resolve    : {
+                housePlans : (HousePlansService) => {
+                    let housePlansPromise
+                        = HousePlansService
+                            .get()
+                            .then(housePlans => {
+                                return housePlans;
+                            });
+
+                    return housePlansPromise;
+                }
+            }
+        })
+
+        .state('house-plans.new', {
+            url       : '/new',
+            component : 'housePlanNew'
+        })
+
+        .state('house-plans.edit', {
+            url       : '/{id}',
+            component : 'housePlanEdit',
+            resolve   : {
+                housePlan : (HousePlansService, $stateParams) => {
+                    let housePlanPromise
+                        = HousePlansService
+                            .getById($stateParams.id)
+                            .then(housePlan => {
+                                return housePlan;
+                            });
+
+                    return housePlanPromise;
+                }
+            }
         })
 
         .state('jobs', {
@@ -47,7 +81,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
                         = JobsService
                             .get()
                             .then(jobs => {
-                                return jobs.data;
+                                return jobs;
                             });
 
                     return jobPromise;
@@ -60,14 +94,17 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             component  : 'jobNewPage',
             resolve    : {
                 job    : (JobsService) => {
-                    let jobPromise
-                        = JobsService
-                            .getNewJob()
-                            .then(job => {
-                                return Object.assign({}, job);
+                    return JobsService.getNewJob();
+                },
+                housePlans : (HousePlansService) => {
+                    let housePlansPromise
+                        = HousePlansService
+                            .get()
+                            .then(housePlans => {
+                                return housePlans;
                             });
 
-                    return jobPromise;
+                    return housePlansPromise;
                 }
             }
         })
@@ -81,10 +118,20 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
                         = JobsService
                             .getById($stateParams.id)
                             .then(job => {
-                                return job.data;
+                                return job;
                             });
 
                     return jobPromise;
+                },
+                housePlans : (HousePlansService) => {
+                    let housePlansPromise
+                        = HousePlansService
+                            .get()
+                            .then(housePlans => {
+                                return housePlans;
+                            });
+
+                    return housePlansPromise;
                 }
             }
         })
@@ -98,15 +145,23 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
                         = JobsService
                             .getById($stateParams.id)
                             .then(job => {
-                                return job.data;
+                                return job;
                             });
 
                     return jobPromise;
                 },
-                jobDisplayList : (JobDisplayListService, $stateParams) => {
+                jobDisplayList : (job, JobDisplayListService, $stateParams) => {
+                    let houseIds = [job.Primary.HousePlanId[0]];
+
+                    if (job.Secondary.length > 0) {
+                        job.Secondary.forEach(house => {
+                            houseIds.push(house.HousePlanId[0]);
+                        });
+                    }
+
                     let jobDisplayListPromise
                         = JobDisplayListService
-                            .getById($stateParams.id)
+                            .getById(houseIds)
                             .then(jobDisplayList => {
                                 return jobDisplayList;
                             });

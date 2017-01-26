@@ -1,0 +1,70 @@
+<!-- edit house plan modal -->
+<form name="housePlanEdit" class="modal modal-large modal-scroll-body" data-ng-submit="housePlanEditCtrl.onSubmit()">
+    <div class="modal-header flex-row">
+        <div class="flex-item-static">
+            <a class="btn btn-link" data-ui-sref="^">Cancel</a>
+        </div>
+
+        <span class="modal-title flex-item-grow">Edit {{housePlanEditCtrl.housePlan.Name}}</span>
+
+        <div class="flex-item-static">
+            <button class="btn pull-right" type="submit">Save</button>
+        </div>
+    </div>
+
+    <div class="modal-body-wrapper">
+        <div class="modal-body">
+            <status-message status="housePlanEditCtrl.message"></status-message>
+
+            <fieldset class="row">
+                <legend>{{::housePlanEditCtrl.housePlan.FileName}}</legend>
+
+                <div class="row">
+                    <div class="form-group col-xs-6">
+                        <label class="control-label" for="Name">House Plan Name</label>
+                        <input class="form-control" type="text" name="Name" id="Name" data-ng-model="housePlanEditCtrl.housePlan.Name">
+                    </div>
+
+                    <div class="form-group col-xs-6">
+                        <label class="control-label" for="SubplanName">Sub-plan Name (optional)</label>
+                        <input class="form-control" type="text" name="SubplanName" id="SubplanName" data-ng-model="housePlanEditCtrl.housePlan.SubplanName">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-xs-6">
+                        <label class="control-label" for="BuilderName">Builder</label>
+                        <input class="form-control" type="text" name="BuilderName" id="BuilderName" data-ng-model="housePlanEditCtrl.housePlan.BuilderName">
+                    </div>
+
+                    <div class="form-group col-xs-6">
+                        <label class="control-label" for="CommunityName">Community Name</label>
+                        <input class="form-control" type="text" name="CommunityName" id="CommunityName" data-ng-model="housePlanEditCtrl.housePlan.CommunityName">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="row">
+                <legend>HVAC Design Report</legend>
+
+                <file-manager
+                    upload-only="true"
+                    label="HVAC Design Report"
+                    files="housePlanEditCtrl.housePlan.HvacDesignReport">
+                </file-manager>
+            </fieldset>
+            <fieldset class="row">
+                <legend>Rater Design Review Checklist</legend>
+
+                <file-manager
+                    upload-only="true"
+                    label="HVAC Design Report"
+                    files="housePlanEditCtrl.housePlan.RaterDesignReviewChecklist">
+                </file-manager>
+            </fieldset>
+        </div>
+    </div>
+</form>
+
+<div class="overlay overlay-modal"></div>
+<!-- end edit house plan modal -->
