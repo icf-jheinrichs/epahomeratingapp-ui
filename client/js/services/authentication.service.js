@@ -37,7 +37,9 @@ class AuthenticationService {
         }
 
         this.$q                  = $q;
-        this.HttpRequestService  = HttpRequestService;
+
+        // for service testing purposes only
+        // this.HttpRequestService  = HttpRequestService;
 
         this.userPool = new CognitoUserPool( POOL_DATA );
         this.cognitoUser = this.userPool.getCurrentUser();
@@ -250,7 +252,7 @@ class AuthenticationService {
             // this.HttpRequestService.config(attr.id_token, attr.access_token);
 
             // TEST $http Service
-            // var url  = "https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev/display_logic"
+            // var url  = "https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev/job";
             // this.HttpRequestService.get(url);
             
             // TODO: Is there a more secure way to store persistant login?
@@ -264,7 +266,7 @@ class AuthenticationService {
             this.userIsAuthenticated = false;
             this.user = Object.assign({}, DEFAULT_USER);
 
-            // TODO: find a better location for removing http config
+            // @todo find a better location for removing http config
             // this.HttpRequestService.config('', '');
 
             window.sessionStorage.setItem(USER_SESSION_ITEM, angular.toJson(DEFAULT_USER));

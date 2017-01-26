@@ -3,32 +3,37 @@ import AWS from 'aws-sdk';
 class HttpRequestService {
     constructor ($q, $http) {
         'ngInject';
+        // @todo best method of pulling id and access from single source?
         this.$q                    = $q;
         this.$http                 = $http;
     }
 
     config (id, access) {
-        // this.config = { headers: {
-        //         'Authorization'               : id,
-        //         'Accept'                      : 'application/json',
-        //         'Access-Control-Allow-Methods': 'GET,POST,OPTIONS', 
-        //         'Access-Control-Allow-Origin' : '*', 
-        //         'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'
-        //     }
-        // };
-        return 0;
+        // @todo including access token under what header? 
+        this.config = { headers: {
+                'Authorization'               : id
+            }
+        };
     }
 
     get (url) {
         return this.$q((resolve, reject) => {
             this.$http.get(url, this.config)
-            .success( res => {
+            .then( res => {
                 console.log(res);
                 resolve(res);
             })
-            .error(err => {
+            .catch( err => {
+                // for developmental purposes only, perhaps 
+                // log this in the future.
                 console.log(err);
+
+                // @todo enable rejection?
                 // reject(err);
+            })
+            .finally( () => {
+                // for developmental purposes only. remove on prod. 
+                console.log(`Completed HTTP Request to ${url}.`);
             })
         });
     }
