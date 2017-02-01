@@ -13,8 +13,33 @@ import {DB, CONFIG, MESSAGING, JOB_STATUS, CATEGORIES, RATING_TYPES, CATEGORY_PR
 import ServicesModule from './services/services.module';
 import {authenticationHook} from './services/authentication.hook';
 
+// Interceptor
+// @todo replace http-request service with this. import and use in module below appr.
+let interceptor = function($q) {
+    return {
+        request  : (config) => {
+            // @todo refactor
+            if (angular.fromJson(window.sessionStorage.getItem('user')) !== null) {
+                var user = angular.fromJson(window.sessionStorage.getItem('user'));
+                config.headers.Authorization = user.access_token;
+            }
+            return config;
+        },
+
+        response : (result) => {
+            return result;
+        },
+
+        responseError : (rejection) => {
+            return $q.reject(rejection);
+
+        }
+    }
+}
+
 // Routes
 import epahomeratingappRoutes from './epahomeratingapp.routes';
+
 // Component Modules
 import {ComponentsModule, FiltersModule} from '../../epahomeratingappUI.js';
 
@@ -36,6 +61,9 @@ angular
     ])
     .component(APP_NAME, epahomeratingappComponent)
     .config(epahomeratingappRoutes)
+    .config( $httpProvider => {
+        $httpProvider.interceptors.push(interceptor);
+    })
     .constant('DB', DB)
     .constant('CONFIG', CONFIG)
     .constant('MESSAGING', MESSAGING)
