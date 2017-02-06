@@ -12,13 +12,15 @@ class JobsService {
      *
      * @param  {function} $q        angular.$q promise providers
      * @param  {function} $http     angular.$http ajax requests
-     * @param  {object} DB          epahomeratingapp constants - contains paths to databases
+     * @param  {function} $sanitize angular.$sanitize html injection
+     * @param  {object}   DB        epahomeratingapp constants - contains paths to databases
      */
-    constructor ($q, $http, DB) {
+    constructor ($q, $http, $sanitize, DB) {
         'ngInject';
 
-        this.$q    = $q;
-        this.$http = $http;
+        this.$q        = $q;
+        this.$http     = $http;
+        this.$sanitize = $sanitize;
     }
 
     /**
@@ -118,6 +120,8 @@ class JobsService {
     }
 
     post (job) {
+        // @todo consider applying logic for req. fields (if this group is partly filled - return rejection, etc)
+        this.job = this.sanitize(job);
         let promise = this.$q((resolve, reject) => {
             this
                 .$http({
@@ -173,6 +177,17 @@ class JobsService {
         // });
 
         // return promise;
+    }
+
+    sanitize (job) {
+        job.Primary.BuilderId                           = this.$sanitize(job.Primary.BuilderId);
+        job.Primary.AddressInformation.Address1         = this.$sanitize(job.Primary.AddressInformation.Address1);
+        job.Primary.AddressInformation.CityMunicipality = this.$sanitize(job.Primary.AddressInformation.CityMunicipality);
+        job.Primary.AddressInformation.CommunityName    = this.$sanitize(job.Primary.AddressInformation.CommunityName);
+        job.Primary.AddressInformation.LotNo            = this.$sanitize(job.Primary.AddressInformation.LotNo);
+        job.Primary.AddressInformation.ManualIdentifier = this.$sanitize(job.Primary.AddressInformation.ManualIdentifier);
+        job.Primary.AddressInformation.StateCode        = this.$sanitize(job.Primary.AddressInformation.StateCode);
+        job.Primary.AddressInformation.ZipCode          = this.$sanitize(job.Primary.AddressInformation.ZipCode);
     }
 }
 

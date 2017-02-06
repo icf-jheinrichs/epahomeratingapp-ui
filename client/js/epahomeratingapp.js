@@ -1,5 +1,6 @@
 // Angular Library
 import angular from 'angular';
+import angularSanitize from 'angular-sanitize';
 import uiRouter from 'angular-ui-router';
 
 // Site Styles
@@ -57,7 +58,8 @@ angular
         ComponentsModule.name,
         FiltersModule.name,
         PagesModule.name,
-        uiRouter
+        uiRouter,
+        angularSanitize
     ])
     .component(APP_NAME, epahomeratingappComponent)
     .config(epahomeratingappRoutes)
