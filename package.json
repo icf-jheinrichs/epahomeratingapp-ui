@@ -34,6 +34,7 @@
     "angular": "^1.6.0",
     "angular-animate": "^1.6.0",
     "angular-mocks": "^1.6.0",
+    "angular-sanitize": "^1.6.2",
     "angular-touch": "^1.6.0",
     "angular-ui-router": "^1.0.0-beta.3",
     "autoprefixer": "^6.4.1",
