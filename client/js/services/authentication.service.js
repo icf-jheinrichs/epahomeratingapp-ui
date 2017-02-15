@@ -1,15 +1,15 @@
 import AWS from 'aws-sdk';
 import angular from 'angular';
-import { CognitoUserPool, CognitoIdentityCredentials, CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
+import {CognitoUserPool, CognitoIdentityCredentials, CognitoUser, AuthenticationDetails} from 'amazon-cognito-identity-js';
 
-//TODO: finalize user data structure.
 const DEFAULT_USER = Object.freeze({
     'userId'       : '',
     'firstName'    : '',
     'lastName'     : '',
     'email'        : '',
     'id_token'     : '',
-    'access_token' : ''
+    'access_token' : '',
+    'status'       : 403
 });
 
 const POOL_DATA = Object.freeze({
@@ -17,24 +17,11 @@ const POOL_DATA = Object.freeze({
     'ClientId' : '2t3nnng2lkumkb565qpjuo4qf7'
 });
 
-const AWS_KEY = "cognito-idp.<" + AMAZON_REGION + ">.amazonaws.com/<" + POOL_DATA.UserPoolId + '>';
-
-const AMAZON_REGION = 'us-east';
-
 const USER_SESSION_ITEM = 'user';
 
 class AuthenticationService {
     constructor ($q) {
         'ngInject';
-
-        // TODO:
-        // Look to refactor?
-        try {
-            this.user = angular.fromJson(window.sessionStorage.getItem(USER_SESSION_ITEM)) || Object.assign({}, DEFAULT_USER);
-            this.userIsAuthenticated = this.user.userId > 0;
-        } catch (err) {
-            console.log(err);
-        }
 
         this.$q                  = $q;
 
@@ -44,7 +31,7 @@ class AuthenticationService {
     }
 
     getLocalUser () {
-        return this.$q ((resolve,reject) => {
+        return this.$q ((resolve) => {
             resolve(angular.fromJson(window.sessionStorage.getItem(USER_SESSION_ITEM)));
         })
     }
@@ -64,8 +51,8 @@ class AuthenticationService {
             }
         })
             .catch(function(err) {
-                console.log(err);
-            })
+                // console.log(err);
+            });
     }
 
     authenticateLocalUser () {
@@ -73,15 +60,22 @@ class AuthenticationService {
 
         this.$q.all(iter)
             .then(function(results) {
-                var localUser    = results[0];
-                var localToken   = results[0].id_token;
-                var cognitoToken = results[1];
-                if (localToken == cognitoToken) {
-                    localUser.status = 200;
+                var localUser = results[0];
+                if (localUser === null) {
+                    localUser    = Object.assign({}, DEFAULT_USER);
                 } else {
-                    localUser.status = 403;
+                    var localToken   = localUser.id_token;
+                    var cognitoToken = results[1];
+                    if (localToken == cognitoToken) {
+                        localUser.status = 200;
+                    } else {
+                        localUser.status = 403;
+                    }
                 }
-                this.setUser(localUser);
+                return localUser;
+            })
+            .then((usr) => {
+                this.setUser(usr);
             });
     }
 

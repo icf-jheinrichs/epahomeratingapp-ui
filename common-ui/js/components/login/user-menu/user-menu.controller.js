@@ -8,7 +8,13 @@ class UserMenuController {
     }
 
     menuIsVisible () {
-        return this.user.userId.length > 0;
+        let isVisible = false;
+
+        if (this.user && this.user.userId.length > 0) {
+            isVisible = true;
+        }
+
+        return isVisible;
     }
 
     $onInit () {

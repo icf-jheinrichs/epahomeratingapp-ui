@@ -1,0 +1,70 @@
+<form class="register-panel" name="register" data-ng-submit="registerCtrl.onSubmit()" novalidate>
+    <h2>Register</h2>
+    <status-message status="registerCtrl.message"></status-message>
+    <div class="form-group">
+        <label for="loginFormUserId" class="control-label">User ID</label>
+        <input
+            name="userId"
+            data-ng-disabled="true"
+            data-ng-model="registerCtrl.user.userId"
+            required="required"
+            ng-pattern="registerCtrl.userIdPattern"
+            type="text"
+            maxlength="7"
+            class="form-control"
+            id="loginFormUserId" />
+    </div>
+
+    <div class="form-group">
+        <label for="loginFormFirstName" class="control-label">First Name</label>
+        <input
+            name="firstName"
+            data-ng-model="registerCtrl.user.firstName"
+            required="required"
+            type="text"
+            maxlength="32"
+            class="form-control"
+            id="loginFormFirstName" />
+    </div>
+
+    <div class="form-group">
+        <label for="loginFormLastName" class="control-label">Last Name</label>
+        <input
+            name="lastName"
+            data-ng-model="registerCtrl.user.lastName"
+            required="required"
+            type="text"
+            maxlength="64"
+            class="form-control"
+            id="loginFormLastName" />
+    </div>
+
+    <div class="form-group">
+        <label for="loginFormEmail" class="control-label">Email</label>
+        <input
+            name="email"
+            data-ng-model="registerCtrl.user.email"
+            required="required"
+            type="email"
+            maxlength="128"
+            class="form-control"
+            id="loginFormEmail" />
+    </div>
+
+    <div class="form-group">
+        <label for="loginFormPassword" class="control-label">Password</label>
+        <input
+            name="password"
+            data-ng-model="registerCtrl.user.password"
+            required="required"
+            type="password"
+            data-ng-pattern="registerCtrl.lastNamePattern"
+            data-ng-minlength="8"
+            class="form-control"
+            id="loginFormPassword" />
+    </div>
+
+    <div class="form-actions">
+        <input type="submit" class="btn" value="Register" />
+    </div>
+</form>

@@ -40,6 +40,7 @@ class JobsChecklistPageController {
         //TODO: this belongs in a directive
         this.showActionsDropDown = false;
         this.showCompleteModal   = false;
+        this.showDownloadModal   = false;
 
         this.checklistItemsQuantity = this.job.Progress.PreDrywall.Total + this.job.Progress.Final.Total;
         this.setProgressStatus();
@@ -123,6 +124,16 @@ class JobsChecklistPageController {
         this.showCompleteModal = false;
     }
 
+    //TODO: all modal stuff belongs in a directive
+    toggleModalDownload () {
+        this.showDownloadModal = !this.showDownloadModal;
+    }
+
+    //TODO: all modal stuff belongs in a directive
+    hideModalDownload () {
+        this.showDownloadModal = false;
+    }
+
     completeJob () {
         if (this.totalRemaining === 0 && this.mustCorrectItems === 0) {
             this.job.Status = this.JOB_STATUS.INTERNAL_REVIEW;
@@ -170,8 +181,15 @@ class JobsChecklistPageController {
         this.$rootScope.$broadcast(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE_TOTALS, this.jobDataResponse.Progress);
     }
 
-    get downloadUrl () {
-        return `https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev/job/rem_xml/${this.job._id}`;
+    onDownloadRequest () {
+        this.hideDropDown();
+
+        this.JobsService
+            .getExportSignedUrl(this.job._id)
+            .then((response) => {
+                this.downloadUrl = response;
+                this.toggleModalDownload();
+            });
     }
 
     updateJobResponseTotals (response) {

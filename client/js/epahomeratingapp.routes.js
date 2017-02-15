@@ -33,6 +33,14 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
+        .state('register', {
+            url        : '/register',
+            component  : 'registerPage',
+            data       : {
+                requiresAuth : false
+            }
+        })
+
         .state('house-plans', {
             url        : '/house-plans',
             component  : 'housePlansPage',

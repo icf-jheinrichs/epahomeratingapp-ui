@@ -35,10 +35,6 @@ class JobsService {
                     method  : 'GET',
                     url     : `${API_GATEWAY}/job`
                 })
-                // .db
-                // .allDocs({
-                //     include_docs : true
-                // })
                 .then((response) => {
                     if (response.status === 200) {
                         let jobs = {};
@@ -145,6 +141,29 @@ class JobsService {
         return promise;
     }
 
+    getExportSignedUrl (_id) {
+        let promise = this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'GET',
+                    url     : `${API_GATEWAY}/job/rem_xml/${_id}`
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        resolve(response.data.data.url);
+                    } else {
+                        //TODO: make this less bad
+                        reject('somethings amiss');
+                    }
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+
+        return promise;
+    }
+
     /**
      * Saves updated job data.
      *
@@ -152,31 +171,22 @@ class JobsService {
      * @return {promis}     resolves to successful save.
      */
     put (job) {
-        return this.$q.when();
+        let promise = this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'PUT',
+                    url     : `${API_GATEWAY}/job/${job._id}`,
+                    data    : job
+                })
+                .then((result) => {
+                    resolve(result);
+                })
+                .catch((err) => {
+                    reject(err);
+                });
+        });
 
-        // let promise = this.$q((resolve, reject) => {
-        //     this
-        //         .db
-        //         .get(job._id)
-        //         .then((doc) => {
-        //             job._rev = doc._rev;
-
-        //             let putById
-        //                  = this
-        //                     .db
-        //                     .put(job);
-
-        //             return putById;
-        //         })
-        //         .then((result) => {
-        //             resolve(result);
-        //         })
-        //         .catch((err) => {
-        //             reject(err);
-        //         });
-        // });
-
-        // return promise;
+        return promise;
     }
 
     sanitize (job) {

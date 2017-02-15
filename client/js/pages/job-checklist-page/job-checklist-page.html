@@ -24,6 +24,27 @@
     data-ng-click="jobsChecklistPageCtrl.hideModal()">
 </div>
 
+<div class="modal modal-dialog" data-ng-class="{'hidden' : !jobsChecklistPageCtrl.showDownloadModal}">
+    <div class="modal-header">
+        <span class="modal-title">Download REM XML</span>
+        <button class="btn btn-link pull-right" type="button" data-ng-click="jobsChecklistPageCtrl.hideModalDownload()" aria-label="Close"><i class="fa fa-close" aria-hidden="true"></i></button>
+    </div>
+
+    <div class="modal-body-wrapper">
+        <div class="modal-body">
+            <p>The following link will expire in 5 minutes:</p>
+            <p><a data-ng-href="{{jobsChecklistPageCtrl.downloadUrl}}" class="btn">Download</a></p>
+        </div>
+    </div>
+</div>
+
+<div
+    class="overlay overlay-modal"
+    data-ng-class="{'hidden' : !jobsChecklistPageCtrl.showDownloadModal}"
+    data-ng-click="jobsChecklistPageCtrl.hideModalDownload()">
+</div>
+
+
 <div class="job-checklist-header">
     <header class="page-container flex-row flex-align-center">
         <a class="btn-back" data-ui-sref="jobs()" aria-label="Back to Jobs">
@@ -57,12 +78,12 @@
                     class="drop-down-item">
                     Edit Job
                 </a>
-                <a
-                    data-ng-href="{{jobsChecklistPageCtrl.downloadUrl}}"
-                    target="_blank"
+                <button
+                    type="button"
+                    data-ng-click="jobsChecklistPageCtrl.onDownloadRequest()"
                     class="drop-down-item">
                     Download Job
-                </a>
+                </button>
                 <button
                     disabled="disabled"
                     class="drop-down-item"

@@ -4,6 +4,7 @@ import jobChecklistPageComponent from './job-checklist-page/job-checklist-page.c
 import jobEditPageComponent from './job-edit-page/job-edit-page.component';
 import jobNewPageComponent from './job-new-page/job-new-page.component';
 import loginPageComponent from './login-page/login-page.component';
+import registerPageComponent from './register-page/register-page.component';
 import usersPageComponent from './users-page/users-page.component';
 
 let servicesModule
@@ -15,6 +16,7 @@ let servicesModule
             .component('jobEditPage', jobEditPageComponent)
             .component('jobNewPage', jobNewPageComponent)
             .component('loginPage', loginPageComponent)
+            .component('registerPage', registerPageComponent)
             .component('usersPage', usersPageComponent);
 
 export default servicesModule;

@@ -4,8 +4,7 @@ let loginPageComponent = {
     bindings : {
         returnTo : '<'
     },
-    template,
-    controllerAs : 'loginPageCtrl'
+    template
 };
 
 export default loginPageComponent;

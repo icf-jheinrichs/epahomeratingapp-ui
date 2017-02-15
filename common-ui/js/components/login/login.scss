@@ -18,11 +18,13 @@ $login-background:  $body-bg;
         padding: $offset-default 0 0;
     }
 
-    .flipper {
+    .flipper,
+    .register-panel {
         box-shadow: $shadow-default;
     }
 }
 
-.login-panel {
+.login-panel,
+.register-panel {
     padding: $gutter-half $padding-large $padding-large;
 }

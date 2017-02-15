@@ -1,7 +1,7 @@
 import _find from 'lodash/find';
 
 class checklistHouseSelectionController {
-    constructor ($rootScope, $stateParams, $transitions, CONFIG, MESSAGING) {
+    constructor ($rootScope, $stateParams, $transitions, CONFIG, MESSAGING, jobTitleFilter) {
         'ngInject';
 
         // capture DI
@@ -9,8 +9,9 @@ class checklistHouseSelectionController {
         this.$stateParams = $stateParams;
         this.$transitions = $transitions;
 
-        this.DEFAULT_PHOTO = CONFIG.DEFAULT_PHOTO;
-        this.MESSAGING     = MESSAGING;
+        this.DEFAULT_PHOTO  = CONFIG.DEFAULT_PHOTO;
+        this.MESSAGING      = MESSAGING;
+        this.jobTitleFilter = jobTitleFilter;
 
         // init View Labels
         this.toggleTextEnum = {
@@ -26,18 +27,16 @@ class checklistHouseSelectionController {
         this.sampleSize         = this.houses.Secondary.length + 1;
 
         this.selectedHouse      = this.houses.Primary;
-        this.selectedHouseTitle = this.getSelectedHouseTitle();
         this.selectedHousePhoto = (this.houses.Primary.Photo.length === 0) ? this.DEFAULT_PHOTO : this.houses.Primary.Photo[0];
 
         this.toggleText         = this.toggleTextEnum.less;
 
         // set app bottom pad to accomodate house selector
         this.setAppBottomPad();
-
         // watch for state change, set current house and hide houseSelection
         this.deregisterOnFinish = this.$transitions.onSuccess(
             {to : 'job-checklist.category'}, () => {
-                let houseId = this.$stateParams.houseId;
+                let houseId = parseInt(this.$stateParams.houseId, 10);
 
                 this.setSelectedHouse(houseId);
                 this.hideHouseSelection();
@@ -82,26 +81,6 @@ class checklistHouseSelectionController {
         return (this.selectedHouse.Photo.length === 0) ? this.DEFAULT_PHOTO : this.selectedHouse.Photo[0];
     }
 
-    //TODO: Move this up into service
-    getSelectedHouseTitle () {
-        let AddressInformation = this.selectedHouse.AddressInformation;
-        let houseTitle         = '';
-
-        if (AddressInformation.Address1) {
-            houseTitle = AddressInformation.Address1;
-            houseTitle += ` ${AddressInformation.CityMunicipality || ''}`;
-            houseTitle += `, ${AddressInformation.StateCode || ''}`;
-            houseTitle += ` ${AddressInformation.ZipCode || ''}`;
-        } else if (AddressInformation.CommunityName) {
-            houseTitle = AddressInformation.CommunityName;
-            houseTitle += (AddressInformation.LotNo) ? `, Lot ${AddressInformation.LotNo}` : '';
-        } else {
-            houseTitle = `Manual ID: ${AddressInformation.ManualId}`;
-        }
-
-        return houseTitle;
-    }
-
     setHouseSelectionState () {
         this.toggleText = (this.showNavbar) ? this.toggleTextEnum.less : this.toggleTextEnum.more;
 
@@ -119,6 +98,10 @@ class checklistHouseSelectionController {
             HouseId,
             photo
         });
+    }
+
+    get selectedHouseTitle () {
+        return this.jobTitleFilter(this.selectedHouse.AddressInformation);
     }
 }
 
