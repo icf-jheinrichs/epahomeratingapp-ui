@@ -153,6 +153,8 @@ $button-border-color-default:   #60bfdd;
 $button-border-color-hover:     darken($button-border-color-default, 15%);
 $button-border-color-inverse:   $border-color-inverse;
 
+$button-border-color-disabled:   $brand-auxillary;
+
 $button-background-color-default:           #fff;
 $button-background-color-hover:             darken($button-background-color-default, 10%);
 $button-background-color-active:            $button-border-color-default;

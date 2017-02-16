@@ -30,6 +30,15 @@
         background-color: $button-background-color-active;
         color: $button-color-active;
     }
+
+    &[disabled='disabled'] {
+        border-color: $button-border-color-disabled;
+        cursor: not-allowed;
+
+        &:hover {
+            background-color: $button-background-color-default;
+        }
+    }
 }
 
 .btn-link {

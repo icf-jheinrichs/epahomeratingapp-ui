@@ -16,9 +16,15 @@ const ERROR_INPUT_PASSWORD = {
     dismissable : false
 };
 
+const ERROR_RESET = {
+    type        : 'error',
+    text        : 'User must reset password.',
+    dismissable : false
+};
+
 const ERROR_NOT_FOUND = {
     type        : 'error',
-    text        : 'User with provided ID and Password not found.',
+    text        : 'User or Password incorrect.',
     dismissable : false
 };
 
@@ -33,15 +39,20 @@ class LoginFormController {
         'ngInject';
 
         this.$scope = $scope;
+
+        this.isBusy = false;
     }
 
     handleError (err) {
         switch (err.status) {
-        case 403:
-            this.message = Object.assign({}, ERROR_NOT_FOUND);
+        case 400:
+            this.message = Object.assign({}, ERROR_NOT_FOUND, {text : err.message});
+            break;
+        case 401:
+            this.message = Object.assign({}, ERROR_RESET);
             break;
         default:
-            this.message = Object.assign({}, ERROR_SERVER);
+            this.message = Object.assign({}, ERROR_SERVER, {text : err.message});
             break;
         }
     }
@@ -54,6 +65,7 @@ class LoginFormController {
 
     onSubmit () {
         this.message = {};
+        this.isBusy = true;
 
         if (this.$scope.loginForm.userId.$invalid && this.$scope.loginForm.password.$invalid) {
             this.message = Object.assign({}, ERROR_INPUT);
@@ -66,6 +78,9 @@ class LoginFormController {
                 .login({user : this.user})
                 .catch((err) => {
                     this.handleError(err);
+                })
+                .finally(() => {
+                    this.isBusy = false;
                 });
         }
     }

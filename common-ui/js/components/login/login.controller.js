@@ -4,8 +4,9 @@ class LoginController {
 
         this.userIdPattern = '^[0-9]{6,7}$';
 
-        this.$state                = $state;
-        this.$q                    = $q;
+        this.$state        = $state;
+        this.$q            = $q;
+
         this.AuthenticationService = AuthenticationService;
     }
 
@@ -21,12 +22,13 @@ class LoginController {
         this.action = action;
     }
 
+    //TODO: get this to work again.
     returnToOriginalState () {
-        let state   = this.returnTo.state();
-        let params  = this.returnTo.params();
-        let options = Object.assign({}, this.returnTo.options(), {reload : true});
+        // let state   = this.returnTo.state();
+        // let params  = this.returnTo.params();
+        // let options = Object.assign({}, this.returnTo.options(), {reload : true});
 
-        this.$state.go(state.name, params, options);
+        this.$state.go('jobs');
     }
 
     login (user) {

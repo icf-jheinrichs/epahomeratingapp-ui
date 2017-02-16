@@ -1,6 +1,7 @@
-import AWS from 'aws-sdk';
 import angular from 'angular';
-import {CognitoUserPool, CognitoIdentityCredentials, CognitoUser, AuthenticationDetails} from 'amazon-cognito-identity-js';
+
+import {Config, CognitoIdentityCredentials} from 'aws-sdk';
+import {CognitoUserPool, CognitoUser, AuthenticationDetails} from 'amazon-cognito-identity-js';
 
 const DEFAULT_USER = Object.freeze({
     'userId'       : '',
@@ -14,7 +15,7 @@ const DEFAULT_USER = Object.freeze({
 
 const POOL_DATA = Object.freeze({
     'UserPoolId' : 'us-east-1_yyQUoZD72',
-    'ClientId' : '2t3nnng2lkumkb565qpjuo4qf7'
+    'ClientId'   : '2t3nnng2lkumkb565qpjuo4qf7'
 });
 
 const USER_SESSION_ITEM = 'user';
@@ -23,60 +24,50 @@ class AuthenticationService {
     constructor ($q) {
         'ngInject';
 
-        this.$q                  = $q;
+        this.$q   = $q;
 
-        this.userPool = new CognitoUserPool( POOL_DATA );
+        this.userPool    = new CognitoUserPool(POOL_DATA);
         this.cognitoUser = this.userPool.getCurrentUser();
+
         this.authenticateLocalUser();
     }
 
-    getLocalUser () {
-        return this.$q ((resolve) => {
-            resolve(angular.fromJson(window.sessionStorage.getItem(USER_SESSION_ITEM)));
-        })
-    }
-
     getCognitoToken () {
-        return this.$q ((resolve, reject) => {
-            if (this.cognitoUser != null) {
-                this.cognitoUser
-                    .getSession(function(err, session) {
-                        if (!err) {
-                            resolve(session.getIdToken().getJwtToken());
-                        }
+        return this.$q((resolve, reject) => {
+            this.cognitoUser
+                .getSession((err, session) => {
+                    if (!err) {
+                        resolve(session.getIdToken().getJwtToken());
+                    } else {
                         reject(err);
-                    });
-            } else {
-                reject(null);
-            }
-        })
-            .catch(function(err) {
-                // console.log(err);
-            });
+                    }
+                });
+        });
     }
 
     authenticateLocalUser () {
-        var iter = [ this.getLocalUser(), this.getCognitoToken() ];
+        let localUser = angular.fromJson(window.sessionStorage.getItem(USER_SESSION_ITEM));
+        let cognitoToken;
 
-        this.$q.all(iter)
-            .then(function(results) {
-                var localUser = results[0];
-                if (localUser === null) {
-                    localUser    = Object.assign({}, DEFAULT_USER);
-                } else {
-                    var localToken   = localUser.id_token;
-                    var cognitoToken = results[1];
-                    if (localToken == cognitoToken) {
+        if (localUser === null || this.cognitoUser === null) {
+            this.setUser(DEFAULT_USER);
+        } else {
+            this.getCognitoToken()
+                .then((token) => {
+                    cognitoToken = token;
+
+                    if (localUser.id_token === cognitoToken) {
                         localUser.status = 200;
                     } else {
                         localUser.status = 403;
                     }
-                }
-                return localUser;
-            })
-            .then((usr) => {
-                this.setUser(usr);
-            });
+
+                    this.setUser(localUser);
+                })
+                .catch((error) => {
+                    this.setUser(DEFAULT_USER);
+                });
+        }
     }
 
     getUser () {
@@ -84,96 +75,92 @@ class AuthenticationService {
     }
 
     login (user) {
-        var authenticationData = {
+        let authenticationData = {
             'Username' : user.userId,
-            'Password' : user.password,
+            'Password' : user.password
         };
-        var authenticationDetails = new AuthenticationDetails( authenticationData );
-        var userData = {
+        let authenticationDetails = new AuthenticationDetails(authenticationData);
+
+        let userData = {
             'Username' : user.userId,
             'Pool'     : this.userPool
         };
+        let cognitoUser = new CognitoUser(userData);
 
-        // TODO: gray out login button during this process
         return this.$q((resolve, reject) => {
-            var cognitoUser = new CognitoUser( userData );
             cognitoUser.authenticateUser(authenticationDetails, {
-                onSuccess: function (result) {
+                onSuccess : (result) => {
                     resolve({
                         id_token       : result.getIdToken().getJwtToken(),
                         access_token   : result.getAccessToken().getJwtToken(),
                         cognitoUser    : cognitoUser
-                    })
-                },
-
-                onFailure: function(err) {
-                    console.log(err);
-                    reject({
-                        message : err,
-                        status  : 403
                     });
-
-                    /* Example error cases */
-
-                    // User/ Pass don't match
-                    // reject({
-                    //     message : 'not found',
-                    //     status  : 404
-                    // });
-
-                    // Server error
-                    // reject({
-                    //     message : 'server error',
-                    //     status  : 500
-                    // });
                 },
 
-                newPasswordRequired: function(userAttributes, requiredAttributes) {
+                onFailure : (err) => {
+                    let errorMessage;
+
+                    switch (err.code) {
+                    case 'NotAuthorizedException' :
+                        errorMessage = {
+                            status  : 400,
+                            message : err.message
+                        };
+                        break;
+                    case 'PasswordResetRequiredException' :
+                        errorMessage = {
+                            status  : 401,
+                            message : err.message
+                        };
+                        break;
+                    default :
+                        errorMessage = {
+                            status  : err.statusCode,
+                            message : err.message
+                        };
+                        break;
+                    }
+
+                    reject(errorMessage);
+                },
+
+                newPasswordRequired : (userAttributes, requiredAttributes) => {
                     // User was signed up by an admin and must provide new
                     // password and required attributes, if any, to complete
                     // authentication.
 
-                    // TODO: need to come up with a screen for making new password after temp password.
-                    var newPassword = 'tempPassword2!';
+                    // // TODO: need to come up with a screen for making new password after temp password.
+                    // var newPassword = 'tempPassword2!';
 
-                    // creates user name or other attributes
-                    var data = Object.freeze({
-                        name        : 'Greg',
-                        family_name : 'Gruse',
-                        email       : 'greg.gruse@icf.com'
-                    });
+                    // // creates user name or other attributes
+                    // var data = Object.freeze({
+                    //     name        : 'Greg',
+                    //     family_name : 'Gruse',
+                    //     email       : 'greg.gruse@icf.com'
+                    // });
 
-                    cognitoUser.completeNewPasswordChallenge(newPassword, data, this);
+                    // cognitoUser.completeNewPasswordChallenge(newPassword, data, this);
 
-                    resolve({
-                        id_token       : result.getIdToken().getJwtToken(),
-                        access_token   : result.getAccessToken().getJwtToken(),
-                        cognitoUser    : cognitoUser
-                    });
+                    // resolve({
+                    //     id_token       : result.getIdToken().getJwtToken(),
+                    //     access_token   : result.getAccessToken().getJwtToken(),
+                    //     cognitoUser    : cognitoUser
+                    // });
                 }
             });
         })
-            .then(result => {
-                this.cognitoUser = result['cognitoUser'];
-                return this.$q((resolve, reject) => {
-                    this.userIDtoAWSCognitoCredentials(result['token']);
-                    resolve(
-                        this.getAttributes(result['id_token'], result['access_token'])
-                    );
-                })
-                    .then(result => {
-                        return result;
-                    })
-            })
-            .then(result => {
-                return {
-                    message : 'success',
-                    status  : 200
-                }
-            })
-            .catch(function(err) {
-                console.log(err);
-            })
+        .then(result => {
+            this.cognitoUser = result.cognitoUser;
+
+            this.userIDtoAWSCognitoCredentials(result.id_token);
+
+            return this.getAttributes(result.id_token, result.access_token);
+        })
+        .then(result => {
+            this.setUser(result);
+
+            return result;
+        });
     }
 
     resetPassword (user) {
@@ -201,39 +188,40 @@ class AuthenticationService {
 
     logout () {
         this.setUser({'status' : '403'});
-        return this.$q((resolve, reject) => {
-            resolve({
-                message : 'success',
-                status  : 200
-            });
-        });
     }
 
     getAttributes (id_token, access_token) {
         return this.$q((resolve, reject) => {
-            this.cognitoUser.getUserAttributes(function(err, result) {
-                var firstName = result[2]['Value'].charAt(0).toUpperCase() + result[2]['Value'].slice(1);
-                var lastName  = result[3]['Value'].charAt(0).toUpperCase() + result[3]['Value'].slice(1);
-                var email     = result[4]['Value'];
-                resolve({
-                    'firstName'    : firstName,
-                    'lastName'     : lastName,
-                    'email'        : email,
-                    'id_token'     : id_token,
-                    'access_token' : access_token,
-                    'status'       : 200
+            this.cognitoUser
+                .getUserAttributes((err, result) => {
+
+                    if (!err) {
+                        let firstName = result[2]['Value'].charAt(0).toUpperCase() + result[2]['Value'].slice(1);
+                        let lastName  = result[3]['Value'].charAt(0).toUpperCase() + result[3]['Value'].slice(1);
+                        let email     = result[4]['Value'];
+
+                        resolve({
+                            'firstName'    : firstName,
+                            'lastName'     : lastName,
+                            'email'        : email,
+                            'id_token'     : id_token,
+                            'access_token' : access_token,
+                            'status'       : 200
+                        });
+                    } else {
+                        reject({
+                            status  : 403,
+                            message : err
+                        });
+                    }
                 });
-            });
-        })
-            .then(result => {
-                this.setUser(result);
-            });
+        });
     }
 
     setUser (attr) {
         // TODO:
         // refactor?
-        if (attr['status'] == 200) {
+        if (attr['status'] === 200) {
             delete attr.status;
             attr.userId = this.cognitoUser.getUsername();
 
@@ -245,25 +233,26 @@ class AuthenticationService {
         } else {
             // if there is a signed on cognitouser but a disagreeable
             // token - the cognitouser is signed out
-            if (this.cognitoUser != null) {
+            if (this.cognitoUser !== null) {
                 this.cognitoUser.signOut();
             }
+
             this.userIsAuthenticated = false;
             this.user = Object.assign({}, DEFAULT_USER);
 
-            window.sessionStorage.setItem(USER_SESSION_ITEM, angular.toJson(DEFAULT_USER));
+            window.sessionStorage.setItem(USER_SESSION_ITEM, angular.toJson(this.user));
         }
     }
 
     userIDtoAWSCognitoCredentials (id_token) {
-        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        Config.credentials = new CognitoIdentityCredentials({
             IdentityPoolId : POOL_DATA.UserPoolId,
-            Logins : {
+            Logins         : {
                 AWS_KEY : id_token
             }
         });
     }
-};
+}
 
 
 export default AuthenticationService;
