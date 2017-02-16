@@ -34,28 +34,28 @@ export const JOB_STATUS = {
 };
 
 export const CATEGORIES = {
-    'exterior-walls' : {
-        Name : 'Exterior Walls',
-        Key  : 'ExteriorWalls'
+    'walls' : {
+        Name : 'Walls',
+        Key  : 'Walls'
     },
     'ceilings-roof' : {
         Name : 'Ceilings & Roofs',
         Key  : 'CeilingsRoofs'
     },
-    'slabs-floors-joists' : {
-        Name : 'Slabs, Floors & Rim Joists',
-        Key  : 'SlabsFloorsRimJoists'
+    'foundation-floors' : {
+        Name : 'Foundation & Floors',
+        Key  : 'FoundationFloors'
     },
-    'interior-walls' : {
-        Name : 'Interior Walls',
-        Key  : 'InteriorWalls'
+    'tests' : {
+        Name : 'Tests',
+        Key  : 'Tests'
     },
     'hvac-water' : {
         Name : 'HVAC & Water',
         Key  : 'HvacWater'
     },
-    'electrical' : {
-        Name : 'Plug Loads, Lighting, PV, Meters',
+    'plugloads-lighting-pv' : {
+        Name : 'Plug Loads, Lighting, PV',
         Key  : 'PlugLoadsLightingPv'
     }
 };

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-tests</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M2.30859375,55.0161133 C2.30859375,55.0161133 3.48062922,48.0210341 5.95605469,42.1367188 C8.43148015,36.2524034 10.7473546,33.8409135 12.7119141,34.3588867 C17.2788086,35.5629883 17.1547852,47.2397461 24.328125,48.4663086 C31.5014648,49.6928711 32.4472656,14.3076172 38.2988281,14.3076172 C44.1503906,14.3076172 43.565918,37.4765625 48.9472656,37.4765625 C54.3286133,37.4765625 54.4658203,18.5336914 58.7929687,18.5336914" id="path-1"></path>
+        <rect id="path-2" x="0" y="4" width="60" height="53"></rect>
+        <mask id="mask-3" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="60" height="53" fill="white">
+            <use xlink:href="#path-2"></use>
+        </mask>
+    </defs>
+    <g id="Tests" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-tests">
+            <rect id="background" fill="#FFFFFF" x="0" y="4" width="60" height="53"></rect>
+            <g id="grid-vertical" transform="translate(12.000000, 4.000000)" stroke="#E9E9E9" stroke-linecap="square">
+                <path d="M1.5,0.5 L1.5,52.509803" id="Line"></path>
+                <path d="M12.5,0.5 L12.5,52.509803" id="Line"></path>
+                <path d="M24.5,0.5 L24.5,52.509803" id="Line"></path>
+                <path d="M35.5,0.5 L35.5,52.509803" id="Line"></path>
+            </g>
+            <g id="grid-horizontal" transform="translate(30.000000, 30.500000) rotate(-270.000000) translate(-30.000000, -30.500000) translate(11.500000, 1.000000)" stroke="#E9E9E9" stroke-linecap="square">
+                <path d="M1.5,0.551886792 L1.5,57.9589335" id="Line"></path>
+                <path d="M12.5,0.551886792 L12.5,57.9589335" id="Line"></path>
+                <path d="M24.5,0.551886792 L24.5,57.9589335" id="Line"></path>
+                <path d="M35.5,0.551886792 L35.5,57.9589335" id="Line"></path>
+            </g>
+            <g id="Path-2">
+                <use stroke="#FFFFFF" stroke-width="5" xlink:href="#path-1"></use>
+                <use stroke="#00AEEF" stroke-width="2" xlink:href="#path-1"></use>
+            </g>
+            <use id="foreground" stroke="#414A51" mask="url(#mask-3)" stroke-width="4" xlink:href="#path-2"></use>
+        </g>
+    </g>
+</svg>
