@@ -1,6 +1,6 @@
 <div class="item-list">
     <house-plan
-        data-ng-repeat="housePlan in housePlansCtrl.housePlans track by $index"
+        data-ng-repeat="housePlan in housePlansCtrl.housePlans track by housePlan._id"
         house-plan="housePlan">
     </house-plan>
 </div>

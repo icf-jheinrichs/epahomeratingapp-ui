@@ -5,7 +5,7 @@
             upload-only="false"
             label="House Plan"
             library="jobDetailLocationCtrl.housePlans"
-            files="jobDetailLocationCtrl.location.HousePlanId">
+            files="jobDetailLocationCtrl.location.HousePlan">
         </file-manager>
     </div>
 </fieldset>
@@ -64,8 +64,8 @@
 
         <div class="row">
             <div class="form-group col-xs-12">
-                <label for="ManualIdentifier" class="sr-only">Manual Identifier</label>
-                <input id="ManualIdentifier" name="ManualIdentifier" placeholder="Manual Identifier" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.ManualIdentifier" />
+                <label for="ManualId" class="sr-only">Manual Identifier</label>
+                <input id="ManualId" name="ManualId" placeholder="Manual Identifier" class="form-control" type="text" data-ng-model="jobDetailLocationCtrl.location.AddressInformation.ManualId" />
             </div>
         </div>
     </div>
@@ -76,7 +76,9 @@
     <div class="offset-xs-3 col-xs-9">
         <file-manager
             upload-only="true"
+            accept="application/pdf"
             label="HVAC Design Report"
+            input-id="HvacDesignReport"
             files="jobDetailLocationCtrl.location.HvacDesignReport">
         </file-manager>
     </div>
@@ -87,7 +89,9 @@
     <div class="offset-xs-3 col-xs-9">
         <file-manager
             upload-only="true"
+            accept="application/pdf"
             label="Rater Design Review Checklist"
+            input-id="RaterDesignReviewChecklist"
             files="jobDetailLocationCtrl.location.RaterDesignReviewChecklist">
         </file-manager>
     </div>

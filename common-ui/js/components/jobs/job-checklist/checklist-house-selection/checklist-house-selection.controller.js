@@ -1,7 +1,7 @@
 import _find from 'lodash/find';
 
 class checklistHouseSelectionController {
-    constructor ($rootScope, $stateParams, $transitions, CONFIG, MESSAGING, jobTitleFilter) {
+    constructor ($rootScope, $stateParams, $transitions, UI_ENUMS, jobTitleFilter) {
         'ngInject';
 
         // capture DI
@@ -9,8 +9,8 @@ class checklistHouseSelectionController {
         this.$stateParams = $stateParams;
         this.$transitions = $transitions;
 
-        this.DEFAULT_PHOTO  = CONFIG.DEFAULT_PHOTO;
-        this.MESSAGING      = MESSAGING;
+        this.DEFAULT_PHOTO  = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
+        this.MESSAGING      = UI_ENUMS.MESSAGING;
         this.jobTitleFilter = jobTitleFilter;
 
         // init View Labels

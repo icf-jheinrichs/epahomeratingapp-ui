@@ -1,5 +1,3 @@
-const API_GATEWAY = 'https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev';
-
 /**
  * HousePlansService is the interface for all job data.
  */
@@ -11,11 +9,13 @@ class HousePlansService {
      * @param  {function} $http     angular.$http ajax requests
      * @param  {object} DB          epahomeratingapp constants - contains paths to databases
      */
-    constructor ($q, $http, DB) {
+    constructor ($q, $http, API_URL) {
         'ngInject';
 
-        this.$q    = $q;
-        this.$http = $http;
+        this.$q      = $q;
+        this.$http   = $http;
+
+        this.API_URL = API_URL;
     }
 
     /**
@@ -28,7 +28,7 @@ class HousePlansService {
             this
                 .$http({
                     method  : 'GET',
-                    url     : `${API_GATEWAY}/house_plan`
+                    url     : this.API_URL.HOUSE_PLAN
                 })
                 .then((response) => {
                     if (response.status === 200) {
@@ -57,7 +57,7 @@ class HousePlansService {
             this
                 .$http({
                     method  : 'GET',
-                    url     : `${API_GATEWAY}/house_plan/${_id}`
+                    url     : `${this.API_URL.HOUSE_PLAN}/${_id}`
                 })
                 .then((response) => {
                     if (response.status === 200) {
@@ -120,7 +120,7 @@ class HousePlansService {
             this
                 .$http({
                     method  : 'PUT',
-                    url     : `${API_GATEWAY}/house_plan/${housePlan._id}`,
+                    url     : `${this.API_URL.HOUSE_PLAN}/${housePlan._id}`,
                     data    : housePlan
                 })
                 .then((response) => {
@@ -145,7 +145,7 @@ class HousePlansService {
                 .$http({
                     method           : 'POST',
                     transformRequest : angular.identity,
-                    url              : `${API_GATEWAY}/house_plan`,
+                    url              : this.API_URL.HOUSE_PLAN,
                     headers          : {
                         'Content-Type' : undefined
                     },

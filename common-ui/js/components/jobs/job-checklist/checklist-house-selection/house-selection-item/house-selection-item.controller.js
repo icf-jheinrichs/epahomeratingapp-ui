@@ -1,9 +1,9 @@
 class houseSelectionItemController {
-    constructor (CameraService, CONFIG, jobTitleFilter) {
+    constructor (CameraService, UI_ENUMS, jobTitleFilter) {
         'ngInject';
 
         this.CameraService  = CameraService;
-        this.DEFAULT_PHOTO  = CONFIG.DEFAULT_PHOTO;
+        this.DEFAULT_PHOTO  = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
         this.jobTitleFilter = jobTitleFilter;
 
         //TODO: move this to constant

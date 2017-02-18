@@ -2,16 +2,16 @@ import _findIndex from 'lodash/findIndex';
 import _forEach from 'lodash/forEach';
 
 class JobsChecklistPageController {
-    constructor ($rootScope, JobsService, JobDataResponseService, MESSAGING, JOB_STATUS, RESPONSES) {
+    constructor ($rootScope, JobsService, JobDataResponseService, UI_ENUMS) {
         'ngInject';
 
         this.$rootScope             = $rootScope;
 
         this.JobsService            = JobsService;
         this.JobDataResponseService = JobDataResponseService;
-        this.MESSAGING              = MESSAGING;
-        this.JOB_STATUS             = JOB_STATUS;
-        this.RESPONSES              = RESPONSES;
+        this.MESSAGING              = UI_ENUMS.MESSAGING;
+        this.JOB_STATUS             = UI_ENUMS.JOB_STATUS;
+        this.RESPONSES              = UI_ENUMS.RESPONSES;
 
         this.responseListener = this.$rootScope.$on(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE, (event, response) => {
             this.updateChecklistResponse(response);
@@ -215,6 +215,11 @@ class JobsChecklistPageController {
         _forEach(jobChecklistResponseProgress, function sumFinalVerified (value) {
             jobProgress.Final.MustCorrect += value.Final.MustCorrect;
         });
+    }
+
+    //TODO: determine if we need user friendly ID in addition to DB id.
+    get id () {
+        return this.job._id.substring(0, 8).toUpperCase();
     }
 }
 

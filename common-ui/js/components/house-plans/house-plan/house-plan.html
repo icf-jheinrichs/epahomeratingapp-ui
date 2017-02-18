@@ -1,26 +1,26 @@
 <div class="item-list-item house-plan">
     <a data-ui-sref="house-plans.edit({id: housePlanCtrl.housePlan._id})">
         <span class="pull-right"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</span>
-        <h3 class="list-item-title house-plan-title">{{::housePlanCtrl.housePlanTitle}}</h3>
+        <h3 class="list-item-title house-plan-title">{{housePlanCtrl.housePlanTitle}}</h3>
     </a>
 
     <div class="house-plan-meta row">
         <dl class="house-plan-info col-xs-6">
-            <dt>Builder:</dt> <dd>{{::housePlanCtrl.housePlan.BuilderName}}</dd>
-            <dt>Community:</dt> <dd>{{::housePlanCtrl.housePlan.CommunityName}}</dd>
+            <dt>Builder:</dt> <dd>{{housePlanCtrl.housePlan.BuilderName}}</dd>
+            <dt>Community:</dt> <dd>{{housePlanCtrl.housePlan.CommunityName}}</dd>
         </dl>
 
         <div class="house-plan-associated-files col-xs-6">
             <dl>
                 <dt>HVAC Design Report:</dt>
                     <dd data-ng-repeat="hvacDesignReport in housePlanCtrl.housePlan.HvacDesignReport">
-                        <a href="https://www.energystar.gov/ia/partners/bldrs_lenders_raters/downloads/HVAC_Design_Report_v100_2015-011-20_clean_fillable.pdf?27c6-463a">{{hvacDesignReport.FileName}}</a>
+                        <a href="https://www.energystar.gov/ia/partners/bldrs_lenders_raters/downloads/HVAC_Design_Report_v100_2015-011-20_clean_fillable.pdf?27c6-463a">{{hvacDesignReport.Name}}</a>
                     </dd>
             </dl>
             <dl>
                 <dt>Rater Design Review Checklist:</dt>
                     <dd data-ng-repeat="reviewChecklist in housePlanCtrl.housePlan.RaterDesignReviewChecklist">
-                        <a href="https://www.energystar.gov/ia/partners/bldrs_lenders_raters/downloads/Rater_Checklists.pdf?27c6-463a">{{reviewChecklist.FileName}}</a>
+                        <a href="https://www.energystar.gov/ia/partners/bldrs_lenders_raters/downloads/Rater_Checklists.pdf?27c6-463a">{{reviewChecklist.Name}}</a>
                     </dd>
             </dl>
         </div>

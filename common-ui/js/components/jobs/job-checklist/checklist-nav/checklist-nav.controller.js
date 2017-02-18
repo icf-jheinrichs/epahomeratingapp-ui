@@ -1,9 +1,9 @@
 class jobChecklistNavController {
-    constructor ($rootScope, MESSAGING, CATEGORIES) {
+    constructor ($rootScope, UI_ENUMS) {
         'ngInject';
 
-        this.CATEGORIES = CATEGORIES;
-        this.MESSAGING  = MESSAGING;
+        this.CATEGORIES = UI_ENUMS.CATEGORIES;
+        this.MESSAGING  = UI_ENUMS.MESSAGING;
 
         this.updateChecklistResponseTotalsListener = $rootScope.$on(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE_TOTALS, (event, progress) => {
             this.progress = progress;

@@ -1,12 +1,14 @@
 class DisplayLogicDigestService {
-    constructor ($http, DB) {
+    constructor ($http, API_URL) {
         'ngInject';
 
         this.$http = $http;
 
+        this.API_URL = API_URL;
+
         this.digest = this.$http({
             method  : 'GET',
-            url     : 'https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev/display_logic/digest'
+            url     : this.API_URL.DISPLAY_LOGIC_DIGEST
         });
     }
 

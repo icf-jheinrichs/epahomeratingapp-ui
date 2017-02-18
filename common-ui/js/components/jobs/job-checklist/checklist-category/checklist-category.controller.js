@@ -1,16 +1,16 @@
 import _isEmpty from 'lodash/isEmpty';
 
 class jobChecklistChecklistController {
-    constructor ($rootScope, $stateParams, JobDataHomePerformanceService, MESSAGING, CATEGORIES, CATEGORY_PROGRESS) {
+    constructor ($rootScope, $stateParams, JobDataHomePerformanceService, UI_ENUMS) {
         'ngInject';
 
         this.$rootScope                    = $rootScope;
         this.$stateParams                  = $stateParams;
         this.JobDataHomePerformanceService = JobDataHomePerformanceService;
 
-        this.MESSAGING         = MESSAGING;
-        this.CATEGORIES        = CATEGORIES;
-        this.CATEGORY_PROGRESS = CATEGORY_PROGRESS;
+        this.MESSAGING         = UI_ENUMS.MESSAGING;
+        this.CATEGORIES        = UI_ENUMS.CATEGORIES;
+        this.CATEGORY_PROGRESS = UI_ENUMS.CATEGORY_PROGRESS;
 
         this.putMrfDataListener = this.$rootScope.$on(this.MESSAGING.UPDATE_MRF_DATA, (event, mrfData) => {
             this.onPutMrfData(mrfData);

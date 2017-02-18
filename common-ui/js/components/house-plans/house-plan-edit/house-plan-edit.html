@@ -8,7 +8,7 @@
         <span class="modal-title flex-item-grow">Edit {{housePlanEditCtrl.housePlan.Name}}</span>
 
         <div class="flex-item-static">
-            <button class="btn pull-right" type="submit">Save</button>
+            <button class="btn pull-right" type="submit" data-ng-disabled="housePlanEditCtrl.isBusy"><i data-ng-class="{'hidden' : !housePlanEditCtrl.isBusy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Save</button>
         </div>
     </div>
 
@@ -16,8 +16,10 @@
         <div class="modal-body">
             <status-message status="housePlanEditCtrl.message"></status-message>
 
+            <h3>{{::housePlanEditCtrl.housePlan.FileName}}</h3>
+
             <fieldset class="row">
-                <legend>{{::housePlanEditCtrl.housePlan.FileName}}</legend>
+                <legend class="sr-only">Edit House Plan Details</legend>
 
                 <div class="row">
                     <div class="form-group col-xs-6">
@@ -45,20 +47,24 @@
             </fieldset>
 
             <fieldset class="row">
-                <legend>HVAC Design Report</legend>
+                <legend class="fieldset-legend">HVAC Design Report</legend>
 
                 <file-manager
                     upload-only="true"
+                    accept="application/pdf"
                     label="HVAC Design Report"
+                    input-id="HvacDesignReport"
                     files="housePlanEditCtrl.housePlan.HvacDesignReport">
                 </file-manager>
             </fieldset>
             <fieldset class="row">
-                <legend>Rater Design Review Checklist</legend>
+                <legend class="fieldset-legend">Rater Design Review Checklist</legend>
 
                 <file-manager
                     upload-only="true"
-                    label="HVAC Design Report"
+                    accept="application/pdf"
+                    label="Rater Design Review Checklist"
+                    input-id="RaterDesignReviewChecklist"
                     files="housePlanEditCtrl.housePlan.RaterDesignReviewChecklist">
                 </file-manager>
             </fieldset>

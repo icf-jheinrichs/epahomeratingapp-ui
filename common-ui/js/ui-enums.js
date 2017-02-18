@@ -1,29 +1,20 @@
-// const COUCH_URL = 'http://127.0.0.1:5984';
-const COUCH_URL = 'http://127.0.0.1:5984';
-
-export const DB        = {
-    DISPLAY_LOGIC_DIGEST      : `${COUCH_URL}/display-logic-digest`,
-    JOB                       : `${COUCH_URL}/job`,
-    JOB_DISPLAY_LIST          : `${COUCH_URL}/job-display-list`,
-    JOB_DATA_RESPONSE         : `${COUCH_URL}/job-data-response`,
-    JOB_DATA_HOME_PERFORMANCE : `${COUCH_URL}/job-data-home-performance`
-};
-
-export const CONFIG = {
+const IMAGES = {
     DEFAULT_PHOTO : 'img/job-photo-default.svg'
 };
 
-export const MESSAGING = {
+const MESSAGING = {
     SET_TOP_PAD                      : 'SET_TOP_PAD',
     SET_BOTTOM_PAD                   : 'SET_BOTTOM_PAD',
     UPDATE_HOUSE_PHOTO               : 'UPDATE_HOUSE_PHOTO',
     UPDATE_CHECKLIST_RESPONSE        : 'UPDATE_CHECKLIST_RESPONSE',
     UPDATE_CHECKLIST_RESPONSE_TOTALS : 'UPDATE_CHECKLIST_RESPONSE_TOTALS',
     UPDATE_MRF_DATA                  : 'UPDATE_MRF_DATA',
-    POST_COMMENT                     : 'POST_COMMENT'
+    POST_COMMENT                     : 'POST_COMMENT',
+    HOUSE_PLAN_NEW                   : 'HOUSE_PLAN_NEW',
+    HOUSE_PLAN_UPDATE                : 'HOUSE_PLAN_UPDATE'
 };
 
-export const JOB_STATUS = {
+const JOB_STATUS = {
     ACTIVE                : 'Active',
     COMPLETED             : 'Completed',
     INTERNAL_REVIEW       : 'Internal Review',
@@ -33,7 +24,7 @@ export const JOB_STATUS = {
     DELETED               : 'Deleted'
 };
 
-export const CATEGORIES = {
+const CATEGORIES = {
     'walls' : {
         Name : 'Walls',
         Key  : 'Walls'
@@ -60,7 +51,7 @@ export const CATEGORIES = {
     }
 };
 
-export const CATEGORY_PROGRESS = {
+const CATEGORY_PROGRESS = {
     'pre-drywall' : {
         Name : 'Pre-Drywall',
         Key  : 'PreDrywall'
@@ -71,7 +62,7 @@ export const CATEGORY_PROGRESS = {
     }
 };
 
-export const RATING_TYPES = {
+const RATING_TYPES = {
     'EnergyStar' : {
         Name : 'ENERGY STAR Rating',
         Key  : 'energy-star'
@@ -82,7 +73,7 @@ export const RATING_TYPES = {
     }
 };
 
-export const RESPONSES = {
+const RESPONSES = {
     NotApplicable : {
         Name  : 'N/A',
         Class : 'btn-response',
@@ -104,3 +95,15 @@ export const RESPONSES = {
         Key   : 'RaterVerified'
     }
 };
+
+const UI_ENUMS = {
+    IMAGES,
+    MESSAGING,
+    JOB_STATUS,
+    CATEGORIES,
+    CATEGORY_PROGRESS,
+    RATING_TYPES,
+    RESPONSES
+};
+
+export default UI_ENUMS;

@@ -1,11 +1,11 @@
-const API_GATEWAY = 'https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev';
-
 class JobDataHomePerformanceService {
-    constructor ($q, $http, DB) {
+    constructor ($q, $http, API_URL) {
         'ngInject';
 
-        this.$q    = $q;
-        this.$http = $http;
+        this.$q        = $q;
+        this.$http     = $http;
+
+        this.API_URL   = API_URL;
     }
 
     getById (jobId, houseId) {
@@ -13,7 +13,7 @@ class JobDataHomePerformanceService {
             this
                 .$http({
                     method  : 'GET',
-                    url     : `${API_GATEWAY}/job/home_performance_data/${jobId}/${houseId}`
+                    url     : `${this.API_URL.JOB_DATA_HOME_PERFORMANCE}/${jobId}/${houseId}`
                 })
                 .then((response) => {
                     if (response.status === 200) {
@@ -39,7 +39,7 @@ class JobDataHomePerformanceService {
             this
                 .$http({
                     method  : 'PUT',
-                    url     : `${API_GATEWAY}/job/home_performance_data/${jobId}/${houseId}`,
+                    url     : `${this.API_URL.JOB_DATA_HOME_PERFORMANCE}/${jobId}/${houseId}`,
                     data    : jobDataHomePerformance
                 })
                 .then((result) => {

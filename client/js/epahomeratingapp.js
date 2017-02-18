@@ -8,7 +8,8 @@ import 'normalize.css';
 import 'font-awesome/css/font-awesome.css';
 
 // Constants
-import {DB, CONFIG, MESSAGING, JOB_STATUS, CATEGORIES, RATING_TYPES, CATEGORY_PROGRESS, RESPONSES} from './epahomeratingapp.constant';
+import {API_URL} from './epahomeratingapp.config';
+import {UI_ENUMS} from '../../epahomeratingappUI.js';
 
 // Services
 import ServicesModule from './services/services.module';
@@ -16,14 +17,16 @@ import {authenticationHook} from './services/authentication.hook';
 
 // Interceptor
 // @todo replace http-request service with this. import and use in module below appr.
-let interceptor = function($q) {
+let interceptor = ($q) => {
     return {
         request  : (config) => {
+            let user = angular.fromJson(window.sessionStorage.getItem('user'));
+
             // @todo refactor
-            if (angular.fromJson(window.sessionStorage.getItem('user')) !== null) {
-                var user = angular.fromJson(window.sessionStorage.getItem('user'));
+            if (user !== null) {
                 config.headers.Authorization = user.access_token;
             }
+
             return config;
         },
 
@@ -33,10 +36,9 @@ let interceptor = function($q) {
 
         responseError : (rejection) => {
             return $q.reject(rejection);
-
         }
-    }
-}
+    };
+};
 
 // Routes
 import epahomeratingappRoutes from './epahomeratingapp.routes';
@@ -63,17 +65,11 @@ angular
     ])
     .component(APP_NAME, epahomeratingappComponent)
     .config(epahomeratingappRoutes)
-    .config( $httpProvider => {
+    .config($httpProvider => {
         $httpProvider.interceptors.push(interceptor);
     })
-    .constant('DB', DB)
-    .constant('CONFIG', CONFIG)
-    .constant('MESSAGING', MESSAGING)
-    .constant('JOB_STATUS', JOB_STATUS)
-    .constant('CATEGORIES', CATEGORIES)
-    .constant('RATING_TYPES', RATING_TYPES)
-    .constant('CATEGORY_PROGRESS', CATEGORY_PROGRESS)
-    .constant('RESPONSES', RESPONSES)
+    .constant('API_URL', API_URL)
+    .constant('UI_ENUMS', UI_ENUMS)
     .run(authenticationHook);
 
 angular

@@ -1,10 +1,10 @@
 class ChecklistItemClass {
-    constructor ($rootScope, RESPONSES, MESSAGING) {
+    constructor ($rootScope, UI_ENUMS) {
         'ngInject';
 
         this.$rootScope   = $rootScope;
-        this.RESPONSES    = RESPONSES;
-        this.MESSAGING    = MESSAGING;
+        this.RESPONSES    = UI_ENUMS.RESPONSES;
+        this.MESSAGING    = UI_ENUMS.MESSAGING;
     }
 
     $onInit () {

@@ -1,8 +1,8 @@
 class JobDetailLocationController {
-    constructor (RATING_TYPES) {
+    constructor (UI_ENUMS) {
         'ngInject';
 
-        this.ratingTypeOptions = RATING_TYPES;
+        this.ratingTypeOptions = UI_ENUMS.RATING_TYPES;
     }
 }
 

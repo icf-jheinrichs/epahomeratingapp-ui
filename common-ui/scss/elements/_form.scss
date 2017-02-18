@@ -10,6 +10,10 @@ fieldset {
     border-bottom: 0;
 }
 
+.fieldset-legend {
+    font-weight: bold;
+}
+
 .inline-legend legend {
     font-size: $font-size-h4;
     left: 0;

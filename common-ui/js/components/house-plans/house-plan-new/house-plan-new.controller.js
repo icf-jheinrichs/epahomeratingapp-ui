@@ -11,12 +11,15 @@ const ERROR_SERVER = {
 };
 
 class HousePlanNewController {
-    constructor ($state, HousePlansService) {
+    constructor ($rootScope, $state, HousePlansService, UI_ENUMS) {
         'ngInject';
 
-        this.$state   = $state;
+        this.$state            = $state;
+        this.$rootScope        = $rootScope;
 
         this.HousePlansService = HousePlansService;
+        this.MESSAGING         = UI_ENUMS.MESSAGING;
+        this.isBusy            = false;
     }
 
     $onInit () {
@@ -34,6 +37,7 @@ class HousePlanNewController {
         this.message = {};
 
         if (this.fileInput.files.length === 1 && this.isValidFile(file)) {
+            this.isBusy  = true;
             formData = new window.FormData();
 
             formData.append('filedata', file, file.name);
@@ -42,12 +46,16 @@ class HousePlanNewController {
                 .post(formData)
                 .then((response) => {
                     if (response.code === 200 && response.data.docID) {
+                        this.$rootScope.$emit(this.MESSAGING.HOUSE_PLAN_NEW, response.data);
+
                         this.$state.go('house-plans.edit', {id : response.data.docID});
                     }
-
                 })
                 .catch((error) => {
                     this.message = Object.assign({}, ERROR_SERVER);
+                })
+                .finally(() => {
+                    this.isBusy  = false;
                 });
         } else {
             this.message = Object.assign({}, ERROR_INPUT);

@@ -1,9 +1,11 @@
 class JobDataResponseService {
-    constructor ($q, $http, DB) {
+    constructor ($q, $http, API_URL) {
         'ngInject';
 
-        this.$q    = $q;
-        this.$http = $http;
+        this.$q        = $q;
+        this.$http     = $http;
+
+        this.API_URL   = API_URL;
     }
 
     getById (_id) {
@@ -11,7 +13,7 @@ class JobDataResponseService {
             this
                 .$http({
                     method  : 'GET',
-                    url     : `https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev/job/response_data/${_id}`
+                    url     : `${this.API_URL.JOB_DATA_RESPONSE}/${_id}`
                 })
                 .then((response) => {
                     if (response.status === 200) {
@@ -34,7 +36,7 @@ class JobDataResponseService {
             this
                 .$http({
                     method  : 'PUT',
-                    url     : `https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev/job/response_data/${jobDataResponse._id}`,
+                    url     : `${this.API_URL.JOB_DATA_RESPONSE}/${jobDataResponse._id}`,
                     data    : jobDataResponse
                 })
                 .then((result) => {

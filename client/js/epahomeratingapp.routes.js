@@ -159,11 +159,11 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
                     return jobPromise;
                 },
                 jobDisplayList : (job, JobDisplayListService, $stateParams) => {
-                    let houseIds = [job.Primary.HousePlanId[0]];
+                    let houseIds = [job.Primary.HousePlan[0]._id];
 
                     if (job.Secondary.length > 0) {
                         job.Secondary.forEach(house => {
-                            houseIds.push(house.HousePlanId[0]);
+                            houseIds.push(house.HousePlan[0]._id);
                         });
                     }
 

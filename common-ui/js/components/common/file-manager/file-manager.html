@@ -1,12 +1,10 @@
 <div class="file-manager flex-row">
     <div class="file-manager-actions flex-item-static">
-        <button
-            class="btn"
-            data-ng-if="fileManagerCtrl.uploadOnly==='true'"
-            type="button">
 
-            Upload
-        </button>
+        <div data-ng-if="fileManagerCtrl.uploadOnly==='true'">
+            <label class="btn nowrap" for="{{::fileManagerCtrl.inputId}}">Upload {{::fileManagerCtrl.label}}</label>
+            <input class="hidden" accept="{{::fileManagerCtrl.accept}}" type="file" name="{{::fileManagerCtrl.inputId}}" id="{{::fileManagerCtrl.inputId}}" />
+        </div>
 
         <!--
         <div dropdown="dropdown" data-ng-if="fileManagerCtrl.uploadOnly==='false'">
@@ -60,13 +58,13 @@
                                 </button>
                             </div>
 
-                            <h5 class="flex-item-grow popover-panel-title">Add House Plan</h5>
+                            <h5 class="flex-item-grow popover-panel-title">Add {{::fileManagerCtrl.label}}</h5>
                         </header>
 
                         <div class="popover-panel-body">
                             <button
                                 type="button"
-                                data-ng-click="fileManagerCtrl.addItem(item)"
+                                data-ng-click="fileManagerCtrl.addFile(item)"
                                 data-ng-repeat="item in fileManagerCtrl.library"
                                 class="drop-down-item popover-close">
 
@@ -82,13 +80,14 @@
     <div class="file-manager-list flex-item-grow">
         <ul class="list-unstyled">
             <li class="file-manager-file clearfix"
-                data-ng-repeat="file in fileManagerCtrl.files track by file">
-                {{::file}}
+                data-ng-repeat="file in fileManagerCtrl.files track by $index">
+                {{file.Name}}
+
                 <button
                     class="btn btn-no-label btn-link btn-remove pull-right"
                     type="button"
-                    aria-label="Remove {{::file}}"
-                    data-ng-click="fileManagerCtrl.removeFile(file)">
+                    aria-label="Remove {{::file.Name}}"
+                    data-ng-click="fileManagerCtrl.removeFile(file._id)">
 
                     <i class="fa fa-remove" aria-hidden="true"></i>
                 </button>

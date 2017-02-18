@@ -1,10 +1,10 @@
 import _sample from 'lodash/sample';
 
 class JobController {
-    constructor (CONFIG, jobTitleFilter) {
+    constructor (UI_ENUMS, jobTitleFilter) {
         'ngInject';
 
-        this.DEFAULT_PHOTO     = CONFIG.DEFAULT_PHOTO;
+        this.DEFAULT_PHOTO     = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
         this.jobTitleFilter    = jobTitleFilter;
     }
 
@@ -29,6 +29,11 @@ class JobController {
 
     get JobTitle () {
         return this.jobTitleFilter(this.job.Primary.AddressInformation);
+    }
+
+    //TODO: determine if we need user friendly ID in addition to DB id.
+    get id () {
+        return this.job._id.substring(0, 8).toUpperCase();
     }
 }
 

@@ -2,14 +2,15 @@ import _map from 'lodash/map';
 import _findIndex from 'lodash/findIndex';
 
 class JobDisplayListService {
-    constructor ($q, $http, DB, CATEGORIES, CATEGORY_PROGRESS) {
+    constructor ($q, $http, API_URL, UI_ENUMS) {
         'ngInject';
 
         this.$q    = $q;
         this.$http = $http;
 
-        this.CATEGORIES        = CATEGORIES;
-        this.CATEGORY_PROGRESS = Object.assign({}, CATEGORY_PROGRESS);
+        this.API_URL           = API_URL;
+        this.CATEGORIES        = UI_ENUMS.CATEGORIES;
+        this.CATEGORY_PROGRESS = Object.assign({}, UI_ENUMS.CATEGORY_PROGRESS);
     }
 
     getById (houseIds) {
@@ -20,7 +21,7 @@ class JobDisplayListService {
             houseDisplayListPromises.push(
                 this.$http({
                     method  : 'GET',
-                    url     : `https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev/house_plan/display_list/${id}`
+                    url     : `${this.API_URL.HOUSE_PLAN}/display_list/${id}`
                 })
             );
         });

@@ -1,8 +1,6 @@
 import _map from 'lodash/map';
 import _cloneDeep from 'lodash/cloneDeep';
 
-const API_GATEWAY = 'https://37m3ie0ju8.execute-api.us-east-1.amazonaws.com/dev';
-
 /**
  * JobsService is the interface for all job data.
  */
@@ -13,14 +11,16 @@ class JobsService {
      * @param  {function} $q        angular.$q promise providers
      * @param  {function} $http     angular.$http ajax requests
      * @param  {function} $sanitize angular.$sanitize html injection
-     * @param  {object}   DB        epahomeratingapp constants - contains paths to databases
+     * @param  {object}   API_URL   epahomeratingapp constants - contains paths to API
      */
-    constructor ($q, $http, $sanitize, DB) {
+    constructor ($q, $http, $sanitize, API_URL) {
         'ngInject';
 
         this.$q        = $q;
         this.$http     = $http;
         this.$sanitize = $sanitize;
+
+        this.API_URL   = API_URL;
     }
 
     /**
@@ -33,7 +33,7 @@ class JobsService {
             this
                 .$http({
                     method  : 'GET',
-                    url     : `${API_GATEWAY}/job`
+                    url     : this.API_URL.JOB
                 })
                 .then((response) => {
                     if (response.status === 200) {
@@ -66,7 +66,7 @@ class JobsService {
             this
                 .$http({
                     method  : 'GET',
-                    url     : `${API_GATEWAY}/job/${_id}`
+                    url     : `${this.API_URL.JOB}/${_id}`
                 })
                 .then((response) => {
                     if (response.status === 200) {
@@ -90,7 +90,7 @@ class JobsService {
         let sampleTemplate = {
             'HouseId'                    : sampleGuid,
             'BuilderId'                  : '',
-            'HousePlanId'                : [],
+            'HousePlan'                  : [],
             'AddressInformation'         : {},
             'Photo'                      : [],
             'HvacDesignReport'           : [],
@@ -122,7 +122,7 @@ class JobsService {
             this
                 .$http({
                     method  : 'POST',
-                    url     : `${API_GATEWAY}/job`,
+                    url     : this.API_URL.JOB,
                     data    : job
                 })
                 .then((response) => {
@@ -146,7 +146,7 @@ class JobsService {
             this
                 .$http({
                     method  : 'GET',
-                    url     : `${API_GATEWAY}/job/rem_xml/${_id}`
+                    url     : `${this.API_URL.JOB}/rem_xml/${_id}`
                 })
                 .then((response) => {
                     if (response.status === 200) {
@@ -175,7 +175,7 @@ class JobsService {
             this
                 .$http({
                     method  : 'PUT',
-                    url     : `${API_GATEWAY}/job/${job._id}`,
+                    url     : `${this.API_URL.JOB}/${job._id}`,
                     data    : job
                 })
                 .then((result) => {

@@ -2,10 +2,10 @@
 const MAX_SAMPLE_SIZE = 7;
 
 class JobDetailController {
-    constructor (RATING_TYPES, JobsService) {
+    constructor (JobsService, UI_ENUMS) {
         'ngInject';
 
-        this.ratingTypeOptions = RATING_TYPES;
+        this.ratingTypeOptions = UI_ENUMS.RATING_TYPES;
         this.JobsService       = JobsService;
     }
 
@@ -27,6 +27,10 @@ class JobDetailController {
         this.submitJob({
             job : this.job
         });
+    }
+
+    setRatingType (ratingType) {
+        this.job.RatingType = ratingType[0];
     }
 
     addSample () {
