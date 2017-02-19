@@ -20,8 +20,8 @@
         <h4 class="house-title">{{houseSelectionItemCtrl.HouseTitle}} {{hhouseSelectionItemCtrlouse.isPrimary}}</h4>
         <span class="label label-primary" data-ng-if="houseSelectionItemCtrl.isPrimary=='true'"><i class="fa fa-star" aria-hidden="true"></i> Primary</span>
 
-        <p>Builder: The House Designers</p>
+        <p>Builder: {{::houseSelectionItemCtrl.house.BuilderId}}</p>
 
-        <p>House Plan: {{::houseSelectionItemCtrl.house.HousePlan[0]._id}}</p>
+        <p>House Plan: {{::houseSelectionItemCtrl.house.HousePlan[0].Name}}</p>
     </div>
 </a>

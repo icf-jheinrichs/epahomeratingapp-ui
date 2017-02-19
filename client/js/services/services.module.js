@@ -8,7 +8,6 @@ import JobDataHomePerformanceService from './job-data-home-performance.service';
 import HousePlansService from './house-plans.service';
 import AuthenticationService from './authentication.service';
 import HttpRequestService from './http-request.service';
-// import AWSService from './aws.service';
 
 let servicesModule
     = angular
@@ -22,6 +21,5 @@ let servicesModule
             .service('JobDataHomePerformanceService', JobDataHomePerformanceService)
             .service('HousePlansService', HousePlansService)
             .service('HttpRequestService', HttpRequestService);
-            // .service('AWSService', AWSService);
 
 export default servicesModule;

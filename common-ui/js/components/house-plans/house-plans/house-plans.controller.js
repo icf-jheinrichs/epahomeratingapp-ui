@@ -19,6 +19,7 @@ class HousePlanController {
         });
 
         this.newHousePlanListener = this.$rootScope.$on(this.MESSAGING.HOUSE_PLAN_NEW, (event, housePlan) => {
+            //TODO: Move this mapping into the house-plan service
             let newHousePlan = {
                 BuilderName                : housePlan.builder,
                 CommunityName              : housePlan.communityName,
