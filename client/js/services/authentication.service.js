@@ -196,9 +196,14 @@ class AuthenticationService {
                 .getUserAttributes((err, result) => {
 
                     if (!err) {
-                        let firstName = result[2]['Value'].charAt(0).toUpperCase() + result[2]['Value'].slice(1);
-                        let lastName  = result[3]['Value'].charAt(0).toUpperCase() + result[3]['Value'].slice(1);
-                        let email     = result[4]['Value'];
+                        let attr = {};
+                        result.map((obj) => {
+                            attr[obj.Name] = obj.Value;
+                        });
+
+                        let firstName = attr.name.charAt(0).toUpperCase() + attr.name.slice(1);
+                        let lastName  = attr.family_name.charAt(0).toUpperCase() + attr.family_name.slice(1);
+                        let email     = attr.email;
 
                         resolve({
                             'firstName'    : firstName,
