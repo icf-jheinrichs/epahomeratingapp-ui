@@ -23,7 +23,8 @@
 }
 
 .popover-panel-header,
-.popover-panel-body {
+.popover-panel-body,
+.popover-panel-search {
     padding: $padding-large;
 }
 
@@ -41,6 +42,10 @@
     position: absolute;
     top: 45px;
     width: 100%;
+}
+
+.popover-has-search .popover-panel-body {
+    top: 90px;
 }
 
 .popover-panel-title {

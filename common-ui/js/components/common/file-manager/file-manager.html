@@ -48,7 +48,7 @@
                 <i class="fa fa-plus" aria-hidden="true"></i> Add
             </button>
 
-            <div class="popover popover-medium hidden" popover-body="popover-body">
+            <div class="popover popover-has-search popover-medium hidden" popover-body="popover-body">
                 <div class="popover-panel-wrapper">
                     <section class="popover-panel">
                         <header class="popover-panel-header flex-row flex-align-center">
@@ -61,15 +61,35 @@
                             <h5 class="flex-item-grow popover-panel-title">Add {{::fileManagerCtrl.label}}</h5>
                         </header>
 
-                        <div class="popover-panel-body">
-                            <button
-                                type="button"
-                                data-ng-click="fileManagerCtrl.addFile(item)"
-                                data-ng-repeat="item in fileManagerCtrl.library"
-                                class="drop-down-item popover-close">
+                        <div class="popover-panel-search">
+                            <div class="form-group has-feedback">
+                                <label for="search_{{::fileManagerCtrl.inputId}}" class="sr-only">Search {{::fileManagerCtrl.label}}</label>
 
-                                {{item.Name}}
-                            </button>
+                                <input
+                                    data-ng-model="fileManagerCtrl.search"
+                                    ng-model-options="{debounce: 200}"
+                                    data-ng-change="fileManagerCtrl.searchFiles()"
+                                    placeholder="Search"
+                                    class="form-control"
+                                    type="text"
+                                    id="search_{{::fileManagerCtrl.inputId}}"
+                                    name="search_{{::fileManagerCtrl.inputId}}" />
+
+                                <span class="form-control-feedback"><i class="fa fa-search" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+
+                        <div class="popover-panel-body">
+                            <div>
+                                <button
+                                    type="button"
+                                    data-ng-click="fileManagerCtrl.addFile(item)"
+                                    data-ng-repeat="item in fileManagerCtrl.library | filter:fileManagerCtrl.search"
+                                    class="drop-down-item popover-close">
+
+                                    {{item.Name}}
+                                </button>
+                            </div>
                         </div>
                     </section>
                 </div>

@@ -58,6 +58,10 @@ fieldset {
     }
 }
 
+.has-feedback .form-control {
+    padding-right: 30px;
+}
+
 .input-unit {
     color: $text-color-muted;
     vertical-align: middle;
@@ -73,6 +77,7 @@ fieldset {
 
 .form-group {
     margin-bottom: $offset-default;
+    position: relative;
 }
 
 .row-form-groups {
@@ -83,6 +88,10 @@ fieldset {
     }
 }
 
+.popover-panel-search .form-group {
+    margin-bottom: 0;
+}
+
 .form-group-horizontal {
     .control-label,
     .form-control {
@@ -91,4 +100,14 @@ fieldset {
         vertical-align: middle;
         width: auto;
     }
+}
+
+.form-control-feedback {
+    bottom: 1px;
+    color: $text-color-muted;
+    font-size: $font-size-large;
+    line-height: 1em;
+    padding: $padding-default;
+    position: absolute;
+    right: 1px;
 }

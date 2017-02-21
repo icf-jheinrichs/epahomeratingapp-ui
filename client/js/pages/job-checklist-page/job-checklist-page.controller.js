@@ -11,6 +11,7 @@ class JobsChecklistPageController {
         this.JobDataResponseService = JobDataResponseService;
         this.MESSAGING              = UI_ENUMS.MESSAGING;
         this.JOB_STATUS             = UI_ENUMS.JOB_STATUS;
+        this.CATEGORY_PROGRESS      = UI_ENUMS.CATEGORY_PROGRESS;
         this.RESPONSES              = UI_ENUMS.RESPONSES;
 
         this.responseListener = this.$rootScope.$on(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE, (event, response) => {
@@ -154,6 +155,12 @@ class JobsChecklistPageController {
 
         this.mustCorrectItems = mustCorrectItems;
         this.totalRemaining   = (totalChecklistItems) - (verifiedItems + mustCorrectItems);
+
+        if (jobProgress.PreDrywall.Verified + jobProgress.PreDrywall.MustCorrect < jobProgress.PreDrywall.Total) {
+            this.job.ProgressLevel = this.CATEGORY_PROGRESS['pre-drywall'].Key;
+        } else {
+            this.job.ProgressLevel = this.CATEGORY_PROGRESS['final'].Key;
+        }
     }
 
     updateChecklistResponseTotals (response) {
