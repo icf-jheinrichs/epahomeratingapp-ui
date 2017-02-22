@@ -32,7 +32,7 @@
                 <div class="item-list item-list-comments" data-ng-if="checklistItemCommentsCtrl.comments.length > 0">
                     <div class="item-list-item item-comment" data-ng-repeat="comment in checklistItemCommentsCtrl.comments track by $index">
                         <figure class="comment-image" data-ng-if="comment.PhotoUrl">
-                            <img data-ng-src="{{comment.PhotoUrl}}" />
+                            <img data-ng-src="{{checklistItemCommentsCtrl.BASE_IMAGE_URL + comment.PhotoUrl}}" />
                         </figure>
 
                         <p class="comment-body">

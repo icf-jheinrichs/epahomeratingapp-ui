@@ -1,7 +1,7 @@
 import _find from 'lodash/find';
 
 class checklistHouseSelectionController {
-    constructor ($rootScope, $stateParams, $transitions, UI_ENUMS, jobTitleFilter) {
+    constructor ($rootScope, $stateParams, $transitions, UI_ENUMS, jobTitleFilter, BASE_IMAGE_URL) {
         'ngInject';
 
         // capture DI
@@ -10,6 +10,7 @@ class checklistHouseSelectionController {
         this.$transitions = $transitions;
 
         this.DEFAULT_PHOTO  = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
+        this.BASE_IMAGE_URL = BASE_IMAGE_URL;
         this.MESSAGING      = UI_ENUMS.MESSAGING;
         this.jobTitleFilter = jobTitleFilter;
 
@@ -22,14 +23,14 @@ class checklistHouseSelectionController {
 
     $onInit () {
         // init view variables
-        this.showNavbar         = true;
+        this.showNavbar         = false;
 
         this.sampleSize         = this.houses.Secondary.length + 1;
 
         this.selectedHouse      = this.houses.Primary;
         this.selectedHousePhoto = (this.houses.Primary.Photo.length === 0) ? this.DEFAULT_PHOTO : this.houses.Primary.Photo[0];
 
-        this.toggleText         = this.toggleTextEnum.less;
+        this.toggleText         = this.toggleTextEnum.more;
 
         // set app bottom pad to accomodate house selector
         this.setAppBottomPad();
@@ -78,7 +79,7 @@ class checklistHouseSelectionController {
     }
 
     getSelectedHousePhoto () {
-        return (this.selectedHouse.Photo.length === 0) ? this.DEFAULT_PHOTO : this.selectedHouse.Photo[0];
+        return (this.selectedHouse.Photo.length === 0) ? this.DEFAULT_PHOTO : this.BASE_IMAGE_URL + this.selectedHouse.Photo[0];
     }
 
     setHouseSelectionState () {

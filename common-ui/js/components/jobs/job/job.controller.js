@@ -1,10 +1,11 @@
 import _sample from 'lodash/sample';
 
 class JobController {
-    constructor (UI_ENUMS, jobTitleFilter) {
+    constructor (UI_ENUMS, jobTitleFilter, BASE_IMAGE_URL) {
         'ngInject';
 
         this.DEFAULT_PHOTO     = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
+        this.BASE_IMAGE_URL    = BASE_IMAGE_URL;
         this.jobTitleFilter    = jobTitleFilter;
     }
 
@@ -12,7 +13,7 @@ class JobController {
         this.RatingType        = (this.job.RatingType === 'energy-star') ? 'Energy Star' : 'HERS Rating';
         this.secondaryQuantity = this.job.Secondary.length;
         this.isSample          = this.secondaryQuantity > 0;
-        this.jobPhoto          = (this.job.Primary.Photo.length) ? this.job.Primary.Photo[0] : this.DEFAULT_PHOTO;
+        this.jobPhoto          = (this.job.Primary.Photo.length) ? this.BASE_IMAGE_URL + this.job.Primary.Photo[0] : this.DEFAULT_PHOTO;
 
         //TODO: use real data - remove import of _sample if not needed (likely not)
         this.SyncStatus        = _sample(['Synced', 'Unsynced']);

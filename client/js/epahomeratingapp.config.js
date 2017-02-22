@@ -8,3 +8,5 @@ export const API_URL = {
     JOB_DATA_HOME_PERFORMANCE : `${API_GATEWAY}/job/home_performance_data`,
     HOUSE_PLAN                : `${API_GATEWAY}/house_plan`
 };
+
+export const BASE_IMAGE_URL = 'https://s3.amazonaws.com/rating-company-images/';

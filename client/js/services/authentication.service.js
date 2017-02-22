@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import {Config, CognitoIdentityCredentials} from 'aws-sdk';
+import AWS from 'aws-sdk';
 import {CognitoUserPool, CognitoUser, AuthenticationDetails} from 'amazon-cognito-identity-js';
 
 const DEFAULT_USER = Object.freeze({
@@ -250,11 +250,12 @@ class AuthenticationService {
     }
 
     userIDtoAWSCognitoCredentials (id_token) {
-        Config.credentials = new CognitoIdentityCredentials({
-            IdentityPoolId : POOL_DATA.UserPoolId,
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+            IdentityPoolId : 'us-east-1:61624df7-6ba8-4e7c-a33a-2797580af640',
             Logins         : {
-                AWS_KEY : id_token
-            }
+                'cognito-idp.us-east-1.amazonaws.com/us-east-1_yyQUoZD72' : id_token
+            },
+            region         : 'us-east-1'
         });
     }
 }
