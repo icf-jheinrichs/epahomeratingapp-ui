@@ -1,6 +1,6 @@
 {
   "name": "epahomeratingapp-ui",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "Package of all common ui (angular components and associated styles)",
   "main": "epahomeratingappUI.js",
   "scripts": {

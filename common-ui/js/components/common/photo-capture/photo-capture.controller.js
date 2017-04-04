@@ -22,7 +22,7 @@ class PhotoCaptureController {
         this.CameraService
             .getPhoto()
             .then((photo) => {
-                this.photoUrl         = `${this.BASE_IMAGE_URL}photo`;
+                this.photoUrl         = `${this.BASE_IMAGE_URL}${photo}`;
                 this.photoActionLabel = this.photoActionLabelEnum.CHANGE;
 
                 this.onPhotoCapture({
