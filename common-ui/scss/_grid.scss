@@ -50,3 +50,10 @@
 }
 
 @include make-grid-columns();
+
+@media (max-width: $screen-lg) {
+    .page-container {
+        padding-left: $gutter-half;
+        padding-right: $gutter-half;
+    }
+}
