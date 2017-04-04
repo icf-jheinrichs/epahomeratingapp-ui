@@ -1,7 +1,8 @@
-import template from './item-static-pressure.html';
-import controller from './item-static-pressure.controller';
+import template from './item-hvac-equipment.html';
+import controller from './item-hvac-equipment.controller';
+// import './job.scss';
 
-let checklistItemMrfStaticPressureComponent = {
+let checklistItemHVACCommissioningComponent = {
     bindings : {
         itemId               : '@',
         itemCategory         : '@',
@@ -13,7 +14,7 @@ let checklistItemMrfStaticPressureComponent = {
     },
     template,
     controller,
-    controllerAs : 'checklistItemCtrl'
+    controllerAs : 'checklistItemHVACCommissioningCtrl'
 };
 
-export default checklistItemMrfStaticPressureComponent;
+export default checklistItemHVACCommissioningComponent;

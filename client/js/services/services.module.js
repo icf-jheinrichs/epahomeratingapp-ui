@@ -1,4 +1,6 @@
 import angular from 'angular';
+
+import AuthenticationService from './authentication.service';
 import CameraService from './camera.service';
 import DisplayLogicDigestService from './display-logic-digest.service';
 import JobsService from './jobs.service';
@@ -6,8 +8,7 @@ import JobDisplayListService from './job-display-list.service';
 import JobDataResponseService from './job-data-response.service';
 import JobDataHomePerformanceService from './job-data-home-performance.service';
 import HousePlansService from './house-plans.service';
-import AuthenticationService from './authentication.service';
-import HttpRequestService from './http-request.service';
+import ScannerService from './scanner.service';
 
 let servicesModule
     = angular
@@ -20,6 +21,6 @@ let servicesModule
             .service('JobDataResponseService', JobDataResponseService)
             .service('JobDataHomePerformanceService', JobDataHomePerformanceService)
             .service('HousePlansService', HousePlansService)
-            .service('HttpRequestService', HttpRequestService);
+            .service('ScannerService', ScannerService);
 
 export default servicesModule;

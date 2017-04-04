@@ -1,4 +1,5 @@
 import _sample from 'lodash/sample';
+import moment from 'moment';
 
 class JobController {
     constructor (UI_ENUMS, jobTitleFilter, BASE_IMAGE_URL) {
@@ -35,6 +36,14 @@ class JobController {
     //TODO: determine if we need user friendly ID in addition to DB id.
     get id () {
         return this.job._id.substring(0, 8).toUpperCase();
+    }
+
+    get lastUpdateTime () {
+        return moment(this.job.History[this.job.History.length - 1].DateTime).format('MMM Do YYYY, h:mm:ss a');
+    }
+
+    get lastUpdateType () {
+        return this.job.History[this.job.History.length - 1].Description;
     }
 }
 

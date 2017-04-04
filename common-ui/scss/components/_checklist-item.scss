@@ -1,14 +1,21 @@
 .checklist-item {
     border-top: $border-size-medium solid $border-color-default;
-    padding: $gutter-half;
+    padding: $gutter-half $gutter-half $gutter-half $gutter-full;
 }
 
-.checklist-item-title {
-    display: inline-block;
+.checklist-item-header {
+    position: relative;
+}
+
+.checklist-item-info-toggle {
+    font-size: $icon-font-size;
+    left: -$gutter-full;
+    position: absolute;
+    width: 20px;
 }
 
 .comments-quantity {
-    background-color: #fff;
+    background-color: $body-bg;
     border-radius: ceil($font-size-base / 2);
     color: $status-correct;
     position: absolute;

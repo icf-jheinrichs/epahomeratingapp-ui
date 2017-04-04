@@ -1,0 +1,27 @@
+.photo-capture {
+    height: $photo-capture-default;
+    margin: 0 $gutter-half 0 0;
+    overflow: hidden;
+    position: relative;
+    width: $photo-capture-default;
+
+    img {
+        float: left;
+        max-width: 100%;
+    }
+
+    .btn {
+        background-color: rgba($brand-secondary, .6);
+        bottom: 0;
+        color: $text-color-inverse;
+        font-size: $font-size-small;
+        padding: $padding-default $padding-small;
+        position: absolute;
+
+        &:hover,
+        &:focus {
+            background-color: rgba($brand-secondary, 1);
+            color: $text-color-inverse;
+        }
+    }
+}

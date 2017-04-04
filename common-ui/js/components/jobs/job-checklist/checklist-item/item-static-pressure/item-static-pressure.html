@@ -1,51 +1,41 @@
-
 <div class="checklist-item">
-    <header>
+    <header class="checklist-item-header">
+        <button class="checklist-item-info-toggle btn btn-link btn-no-label" type="button"><i class="fa fa-info-circle" aria-label="More Information"></i></button>
         <h4 class="checklist-item-title">{{::checklistItemCtrl.checklistItem.Shorthand}}</h4>
-        <button class="btn btn-link btn-no-label text-muted" type="button"><i class="fa fa-info-circle" aria-label="More Information"></i></button>
     </header>
 
-    <!-- TODO: See if Jeff prefers a ngblur (saveRow), ngfocus (instantiate editRow) route.  -->
     <section class="container">
 
-        <div class="row">
-            <label for="ReturnSide">
+        <div class="form-group form-group-horizontal">
+            <label for="ReturnSide" class="control-label">
                 Return-Side External Static Pressure
             </label>
+
             <input
                 id="ReturnSide"
                 name="ReturnSide"
-                class="item-static-pressure-input"
+                class="form-control"
                 value="{{checklistItemCtrl.homePerformance.StaticPressure[0].ReturnSide}}"
-                data-ng-click="checklistItemCtrl.editMrfRow(0, checklistItemCtrl.checklistItem.Sections[0].Key, checklistItemCtrl.checklistItem.Sections[0].Name, checklistItemCtrl.checklistItem.Sections[0].Columns, checklistItemCtrl.homePerformance.StaticPressure[0])"
-                />
-             <!-- <input
-                id="ReturnSide"
-                name="ReturnSide"
-                class="item-static-pressure-input"
-                value="{{checklistItemCtrl.homePerformance.StaticPressure[0].ReturnSide}}"
-                ngblur="checklistItemCtrl.onSaveMrfRow(mrfRowData)"
-                ngfocus="checklistItemCtrl.editMrfRow(0, checklistItemCtrl.checklistItem.Sections[0].Key, checklistItemCtrl.checklistItem.Sections[0].Name, checklistItemCtrl.checklistItem.Sections[0].Columns, checklistItemCtrl.homePerformance.StaticPressure[0])"
-            /> -->
-            <span class="item-static-pressure-span">
+                data-ng-click="checklistItemCtrl.editMrfRow(0, checklistItemCtrl.checklistItem.Sections[0].Key, checklistItemCtrl.checklistItem.Sections[0].Name, checklistItemCtrl.checklistItem.Sections[0].Columns, checklistItemCtrl.homePerformance.StaticPressure[0])" />
+            <abbr class="input-unit" title="Inches of Water Column">
                 IWC
-            </span>
+            </abbr>
         </div>
 
-        <div class="row">
-            <label for="SupplySide">
+        <div class="form-group form-group-horizontal">
+            <label for="SupplySide" class="control-label">
                 Supply Side External Static Pressure
             </label>
             <input
                 id="SupplySide"
                 name="SupplySide"
-                class="item-static-pressure-input"
+                class="form-control"
                 value="{{checklistItemCtrl.homePerformance.StaticPressure[0].SupplySide}}"
-                data-ng-click="checklistItemCtrl.editMrfRow(1, checklistItemCtrl.checklistItem.Sections[0].Key, checklistItemCtrl.checklistItem.Sections[0].Name, checklistItemCtrl.checklistItem.Sections[0].Columns, checklistItemCtrl.homePerformance.StaticPressure[0])"
-                />
-            <span class="item-static-pressure-span">
+                data-ng-click="checklistItemCtrl.editMrfRow(1, checklistItemCtrl.checklistItem.Sections[0].Key, checklistItemCtrl.checklistItem.Sections[0].Name, checklistItemCtrl.checklistItem.Sections[0].Columns, checklistItemCtrl.homePerformance.StaticPressure[0])" />
+
+            <abbr class="input-unit" title="Inches of Water Column">
                 IWC
-            </span>
+            </abbr>
         </div>
 
     </section>

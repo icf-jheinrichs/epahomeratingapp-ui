@@ -33,6 +33,15 @@ class ChecklistItemClass {
         });
     }
 
+    setItemData (ItemData) {
+        this.$rootScope.$emit(this.MESSAGING.UPDATE_CHECKLIST_ITEM_DATA, {
+            'ItemId'           : this.itemId,
+            'Category'         : this.itemCategory,
+            'CategoryProgress' : this.itemCategoryProgress,
+            'ItemData'         : ItemData
+        });
+    }
+
     postComment (Comment) {
         this.$rootScope.$emit(this.MESSAGING.POST_COMMENT, {
             'ItemId'           : this.itemId,

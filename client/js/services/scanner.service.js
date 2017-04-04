@@ -1,4 +1,4 @@
-class CameraService {
+class ScannerService {
     constructor ($q, BASE_IMAGE_URL) {
         'ngInject';
 
@@ -6,13 +6,13 @@ class CameraService {
         this.BASE_IMAGE_URL = BASE_IMAGE_URL;
     }
 
-    getPhoto () {
+    getCode () {
         let promise = this.$q((resolve, reject) => {
-            resolve(`${this.BASE_IMAGE_URL}job-photo-default.jpg`);
+            resolve('1234-5678-9012');
         });
 
         return promise;
     }
 }
 
-export default CameraService;
+export default ScannerService;

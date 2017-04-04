@@ -1,0 +1,34 @@
+<div class="checklist-item">
+    <div class="flex-row flex-justify-between">
+        <header class="checklist-item-header">
+            <button class="checklist-item-info-toggle btn btn-link btn-no-label" type="button" aria-label="More Information"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+            <h4 class="checklist-item-title">{{::checklistItemHVACCommissioningCtrl.checklistItem.Shorthand}}</h4>
+        </header>
+
+        <div class="flex-row flex-align-center">
+            <checklist-item-comments
+                comments="checklistItemHVACCommissioningCtrl.comments"
+                on-comment="checklistItemHVACCommissioningCtrl.postComment(comment)">
+            </checklist-item-comments>
+
+            <div class="verification">
+                <button-group
+                    class="button-group"
+                    buttons="checklistItemHVACCommissioningCtrl.responseButtons"
+                    initial-value="checklistItemHVACCommissioningCtrl.response"
+                    on-set-value="checklistItemHVACCommissioningCtrl.onSetResponse(response)">
+                </button-group>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex-row">
+        <photo-capture
+            class="flex-item-static"
+            photo="{{checklistItemHVACCommissioningCtrl.itemData.Photo}}"
+            on-photo-capture="checklistItemHVACCommissioningCtrl.handlePhotoCapture(photo)">
+        </photo-capture>
+
+        <p>Photograph HVAC Commissioning Checklist for records</p>
+    </div>
+</div>

@@ -19,8 +19,9 @@
     home-performance="checklistItemStubCtrl.homePerformance">
 </checklist-item-mrf>
 
-<checklist-item-static-pressure
-    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'StaticPressure'"
+<!-- checklist-item-static-pressure -->
+<checklist-item-default
+    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom3'"
     item-id="{{::checklistItemStubCtrl.itemId}}"
     item-category="{{::checklistItemStubCtrl.itemCategory}}"
     item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
@@ -28,7 +29,7 @@
     response="checklistItemStubCtrl.response"
     comments="checklistItemStubCtrl.comments"
     home-performance="checklistItemStubCtrl.homePerformance">
-</checklist-item-static-pressure>
+</checklist-item-default>
 
 <checklist-item-default
     data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom1'"
@@ -40,6 +41,7 @@
     comments="checklistItemStubCtrl.comments">
 </checklist-item-default>
 
+<!-- checklist-item-hvac-equipment -->
 <checklist-item-default
     data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom2'"
     item-id="{{::checklistItemStubCtrl.itemId}}"
@@ -50,27 +52,18 @@
     comments="checklistItemStubCtrl.comments">
 </checklist-item-default>
 
-<checklist-item-default
-    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom3'"
-    item-id="{{::checklistItemStubCtrl.itemId}}"
-    item-category="{{::checklistItemStubCtrl.itemCategory}}"
-    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
-    checklist-item="checklistItemStubCtrl.checklistItem"
-    response="checklistItemStubCtrl.response"
-    comments="checklistItemStubCtrl.comments">
-</checklist-item-default>
-
-<checklist-item-default
+<checklist-item-hvac-commissioning
     data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom4'"
     item-id="{{::checklistItemStubCtrl.itemId}}"
     item-category="{{::checklistItemStubCtrl.itemCategory}}"
     item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
     checklist-item="checklistItemStubCtrl.checklistItem"
     response="checklistItemStubCtrl.response"
+    item-data="checklistItemStubCtrl.itemData"
     comments="checklistItemStubCtrl.comments">
-</checklist-item-default>
+</checklist-item-hvac-commissioning>
 
-<checklist-item-default
+<checklist-item-measured-ventilation
     data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom5'"
     item-id="{{::checklistItemStubCtrl.itemId}}"
     item-category="{{::checklistItemStubCtrl.itemCategory}}"
@@ -78,7 +71,7 @@
     checklist-item="checklistItemStubCtrl.checklistItem"
     response="checklistItemStubCtrl.response"
     comments="checklistItemStubCtrl.comments">
-</checklist-item-default>
+</checklist-item-measured-ventilation>
 
 <checklist-item-default
     data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom6'"

@@ -1,28 +1,4 @@
-const IMAGES = {
-    DEFAULT_PHOTO : 'img/job-photo-default.svg'
-};
-
-const MESSAGING = {
-    SET_TOP_PAD                      : 'SET_TOP_PAD',
-    SET_BOTTOM_PAD                   : 'SET_BOTTOM_PAD',
-    UPDATE_HOUSE_PHOTO               : 'UPDATE_HOUSE_PHOTO',
-    UPDATE_CHECKLIST_RESPONSE        : 'UPDATE_CHECKLIST_RESPONSE',
-    UPDATE_CHECKLIST_RESPONSE_TOTALS : 'UPDATE_CHECKLIST_RESPONSE_TOTALS',
-    UPDATE_MRF_DATA                  : 'UPDATE_MRF_DATA',
-    POST_COMMENT                     : 'POST_COMMENT',
-    HOUSE_PLAN_NEW                   : 'HOUSE_PLAN_NEW',
-    HOUSE_PLAN_UPDATE                : 'HOUSE_PLAN_UPDATE'
-};
-
-const JOB_STATUS = {
-    ACTIVE                : 'Active',
-    COMPLETED             : 'Completed',
-    INTERNAL_REVIEW       : 'Internal Review',
-    SUBMITTED_TO_PROVIDER : 'Submitted to Provider',
-    APPROVED              : 'Approved',
-    REGISTERED            : 'Registered',
-    DELETED               : 'Deleted'
-};
+import MANUFACTURERS from './components/common/enums/manufacturers';
 
 const CATEGORIES = {
     'walls' : {
@@ -62,6 +38,34 @@ const CATEGORY_PROGRESS = {
     }
 };
 
+const IMAGES = {
+    DEFAULT_PHOTO : 'img/job-photo-default.svg'
+};
+
+const JOB_STATUS = {
+    ACTIVE                : 'Active',
+    COMPLETED             : 'Completed',
+    INTERNAL_REVIEW       : 'Internal Review',
+    SUBMITTED_TO_PROVIDER : 'Submitted to Provider',
+    APPROVED              : 'Approved',
+    REGISTERED            : 'Registered',
+    DELETED               : 'Deleted'
+};
+
+const MESSAGING = {
+    SET_TOP_PAD                      : 'SET_TOP_PAD',
+    SET_BOTTOM_PAD                   : 'SET_BOTTOM_PAD',
+    UPDATE_HOUSE_PHOTO               : 'UPDATE_HOUSE_PHOTO',
+    UPDATE_CHECKLIST_RESPONSE        : 'UPDATE_CHECKLIST_RESPONSE',
+    UPDATE_CHECKLIST_ITEM_DATA       : 'UPDATE_CHECKLIST_ITEM_DATA',
+    UPDATE_CHECKLIST_RESPONSE_TOTALS : 'UPDATE_CHECKLIST_RESPONSE_TOTALS',
+    UPDATE_MRF_DATA                  : 'UPDATE_MRF_DATA',
+    POST_COMMENT                     : 'POST_COMMENT',
+    VIEW_HVAC_DESIGN_REPORT          : 'VIEW_HVAC_DESIGN_REPORT',
+    HOUSE_PLAN_NEW                   : 'HOUSE_PLAN_NEW',
+    HOUSE_PLAN_UPDATE                : 'HOUSE_PLAN_UPDATE'
+};
+
 const RATING_TYPES = {
     'EnergyStar' : {
         Name : 'ENERGY STAR Rating',
@@ -96,14 +100,13 @@ const RESPONSES = {
     }
 };
 
-const UI_ENUMS = {
-    IMAGES,
-    MESSAGING,
-    JOB_STATUS,
+export default {
     CATEGORIES,
     CATEGORY_PROGRESS,
+    IMAGES,
+    JOB_STATUS,
+    MANUFACTURERS,
+    MESSAGING,
     RATING_TYPES,
     RESPONSES
 };
-
-export default UI_ENUMS;

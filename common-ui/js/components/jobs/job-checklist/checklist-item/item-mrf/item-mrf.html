@@ -1,7 +1,7 @@
 <div class="checklist-item">
-    <header>
+    <header class="checklist-item-header">
+        <button class="checklist-item-info-toggle btn btn-link btn-no-label" type="button"><i class="fa fa-info-circle" aria-label="More Information"></i></button>
         <h4 class="checklist-item-title">{{::checklistItemCtrl.checklistItem.Shorthand}}</h4>
-        <button class="btn btn-link btn-no-label text-muted" type="button"><i class="fa fa-info-circle" aria-label="More Information"></i></button>
     </header>
 
     <section data-ng-repeat="mrfTable in checklistItemCtrl.checklistItem.Sections track by $index">

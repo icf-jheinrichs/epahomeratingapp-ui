@@ -1,7 +1,8 @@
-import template from './item-static-pressure.html';
-import controller from './item-static-pressure.controller';
+import template from './item-measured-ventilation.html';
+import controller from './item-measured-ventilation.controller';
+// import './job.scss';
 
-let checklistItemMrfStaticPressureComponent = {
+let checklistItemMrfComponent = {
     bindings : {
         itemId               : '@',
         itemCategory         : '@',
@@ -16,4 +17,4 @@ let checklistItemMrfStaticPressureComponent = {
     controllerAs : 'checklistItemCtrl'
 };
 
-export default checklistItemMrfStaticPressureComponent;
+export default checklistItemMrfComponent;

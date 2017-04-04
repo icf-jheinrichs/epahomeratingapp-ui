@@ -1,3 +1,5 @@
+<!-- modal: complete job -->
+
 <div class="modal modal-dialog" data-ng-class="{'hidden' : !jobsChecklistPageCtrl.showCompleteModal}">
     <div class="modal-header">
         <span class="modal-title">Complete Job</span>
@@ -24,6 +26,8 @@
     data-ng-click="jobsChecklistPageCtrl.hideModal()">
 </div>
 
+<!-- modal: download REM XML -->
+
 <div class="modal modal-dialog" data-ng-class="{'hidden' : !jobsChecklistPageCtrl.showDownloadModal}">
     <div class="modal-header">
         <span class="modal-title">Download REM XML</span>
@@ -37,13 +41,36 @@
         </div>
     </div>
 </div>
-
 <div
     class="overlay overlay-modal"
-    data-ng-class="{'hidden' : !jobsChecklistPageCtrl.showDownloadModal}"
+    data-ng-class="{'hidden' : !jobsChecklistPageCtrl.showHvacDesignReportModal}"
     data-ng-click="jobsChecklistPageCtrl.hideModalDownload()">
 </div>
 
+<!-- modal: Download HVAC Design Report -->
+
+<div class="modal modal-dialog" data-ng-class="{'hidden' : !jobsChecklistPageCtrl.showHvacDesignReportModal}">
+    <div class="modal-header">
+        <span class="modal-title">Download HVAC Design Report</span>
+        <button class="btn btn-link pull-right" type="button" data-ng-click="jobsChecklistPageCtrl.hideModalHvacDesignReport()" aria-label="Close"><i class="fa fa-close" aria-hidden="true"></i></button>
+    </div>
+
+    <div class="modal-body-wrapper">
+        <div class="modal-body" data-ng-class="{'hidden' : jobsChecklistPageCtrl.hvacDesignReport.length === 0}">
+            <p>The following link will expire in 5 minutes:</p>
+            <p><a data-ng-href="{{jobsChecklistPageCtrl.hvacDesignReport}}" class="btn">Download</a></p>
+        </div>
+
+        <div class="modal-body" data-ng-class="{'hidden' : jobsChecklistPageCtrl.hvacDesignReport.length > 0}">
+            <p>There is no HVAC Design Report associated with this location.</p>
+        </div>
+    </div>
+</div>
+<div
+    class="overlay overlay-modal"
+    data-ng-class="{'hidden' : !jobsChecklistPageCtrl.showHvacDesignReportModal}"
+    data-ng-click="jobsChecklistPageCtrl.hideModalHvacDesignReport()">
+</div>
 
 <div class="job-checklist-header">
     <header class="page-container flex-row flex-align-center">
@@ -57,7 +84,7 @@
             </span>
 
             <h2 class="job-checklist-title">
-                ID: {{::jobsChecklistPageCtrl.id}}
+                {{::jobsChecklistPageCtrl.JobTitle}}
             </h2>
         </div>
 

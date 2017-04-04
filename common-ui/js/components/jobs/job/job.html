@@ -6,15 +6,13 @@
     <div class="job-info">
         <div class="job-meta">
             <span class="label label-rating-type" data-ng-class="jobCtrl.getRatingTypeClass()">{{::jobCtrl.RatingType}}</span>
-            <span class="job-id">{{::jobCtrl.job.JobType}} ID: {{::jobCtrl.id}}</span>
+            <span class="job-id">{{::jobCtrl.job.JobType}}</span>
         </div>
 
         <h3 class="list-item-title job-title" id="job-{{jobCtrl.job._id}}">{{::jobCtrl.JobTitle}}</h3>
 
         <div class="job-history">
-            <span class="last-update">Last {{::jobCtrl.job.History.Description}}: {{::jobCtrl.job.History.DateTime}}</span>
-            <span class="last-update-user">by {{::jobCtrl.job.History.User}}</span>
-            <span class="data-sync-status">({{::jobCtrl.SyncStatus}})</span>
+            <span class="last-update"><strong>Last {{::jobCtrl.lastUpdateType}}:</strong><br />{{::jobCtrl.lastUpdateTime}}</span>
         </div>
 
     </div>

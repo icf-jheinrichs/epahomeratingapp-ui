@@ -28,8 +28,10 @@ fieldset {
 }
 
 .form-control {
+    background-color: $body-bg;
     border: $border-default;
     font-size: $font-size-large;
+    height: $font-size-large * 2;
     max-width: 100%;
     padding: $padding-default;
     transition: box-shadow $transition-slow, border-color $transition-default;

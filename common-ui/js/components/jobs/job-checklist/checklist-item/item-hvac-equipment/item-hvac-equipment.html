@@ -1,0 +1,56 @@
+<div class="checklist-item">
+    <div class="flex-row flex-justify-between">
+        <header class="checklist-item-header form-group-horizontal">
+            <button class="checklist-item-info-toggle btn btn-link btn-no-label" type="button" aria-label="More Information"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+            <h4 class="checklist-item-title pull-left">Mfr. &amp; model of HVAC equipment matches</h4>
+            <select class="form-control">
+                <option>HVAC Design Report</option>
+                <option>Written approval from designer</option>
+            </select>
+        </header>
+
+        <div class="flex-row flex-align-center">
+            <checklist-item-comments
+                comments="checklistItemHVACCommissioningCtrl.comments"
+                on-comment="checklistItemHVACCommissioningCtrl.postComment(comment)">
+            </checklist-item-comments>
+
+            <div class="verification">
+                <button-group
+                    class="button-group"
+                    buttons="checklistItemHVACCommissioningCtrl.responseButtons"
+                    initial-value="checklistItemHVACCommissioningCtrl.response"
+                    on-set-value="checklistItemHVACCommissioningCtrl.onSetResponse(response)">
+                </button-group>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <p><button class="btn" data-ng-click="checklistItemHVACCommissioningCtrl.onViewHvacDesignReport()" type="button">View HVAC Design Report</button></p>
+
+        <ul>
+            <li data-ng-repeat="equipment in checklistItemHVACCommissioningCtrl.equipment">
+                <label for="equipment-type" class="sr-only">Equipment Type</label>
+                <select id="equipment-type">
+                    <option>Furnace</option>
+                    <option>AC</option>
+                    <option>HP</option>
+                </select>
+
+                <div>
+                    <label for="equipment-manufacturer" class="sr-only">Equipment Manufacturer</label>
+                    <select id="equipment-manufacturer">
+                        <option>Select a Manufacturer</option>
+                    </select>
+
+                    <label for="equipment-model" class="sr-only">Equipment Model</label>
+                    <input type="text" class="form-control" id="equipment-model" />
+
+                    <label for="equipment-serial-number" class="sr-only">Serial Number</label>
+                    <input type="text" class="form-control" id="equipment-serial-number" />
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
