@@ -14,7 +14,7 @@ class PhotoCaptureController {
     }
 
     $onInit () {
-        this.photoUrl         = this.photo || this.defaultPhotoUrl;
+        this.photoUrl         = `${this.BASE_IMAGE_URL}photo` || this.defaultPhotoUrl;
         this.photoActionLabel = (this.photoUrl === this.defaultPhotoUrl) ? this.photoActionLabelEnum.ADD : this.photoActionLabelEnum.CHANGE;
     }
 
@@ -22,7 +22,7 @@ class PhotoCaptureController {
         this.CameraService
             .getPhoto()
             .then((photo) => {
-                this.photoUrl         = photo;
+                this.photoUrl         = `${this.BASE_IMAGE_URL}photo`;
                 this.photoActionLabel = this.photoActionLabelEnum.CHANGE;
 
                 this.onPhotoCapture({
