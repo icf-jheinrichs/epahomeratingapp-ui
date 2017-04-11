@@ -13,6 +13,7 @@ import checklistItemMrfEditComponent from './checklist-item/item-mrf-edit/item-m
 import checklistItemStaticPressureComponent from './checklist-item/item-static-pressure/item-static-pressure.component';
 import checklistItemHvacCommissioningComponent from './checklist-item/item-hvac-commissioning/item-hvac-commissioning.component';
 import checklistItemHvacEquipmentComponent from './checklist-item/item-hvac-equipment/item-hvac-equipment.component';
+import hvacEquipmentComponent from './checklist-item/item-hvac-equipment/hvac-equipment/hvac-equipment.component';
 import checklistItemMeasuredVentilationComponent from './checklist-item/item-measured-ventilation/item-measured-ventilation.component';
 
 let jobsModule
@@ -31,6 +32,7 @@ let jobsModule
         .component('checklistItemStaticPressure', checklistItemStaticPressureComponent)
         .component('checklistItemHvacCommissioning', checklistItemHvacCommissioningComponent)
         .component('checklistItemHvacEquipment', checklistItemHvacEquipmentComponent)
+        .component('hvacEquipment', hvacEquipmentComponent)
         .component('checklistItemMeasuredVentilation', checklistItemMeasuredVentilationComponent);
 
 export default jobsModule;

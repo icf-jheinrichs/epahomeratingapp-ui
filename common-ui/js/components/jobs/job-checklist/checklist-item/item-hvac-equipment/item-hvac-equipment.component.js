@@ -9,6 +9,7 @@ let checklistItemHVACCommissioningComponent = {
         itemCategoryProgress : '@',
         checklistItem        : '<',
         response             : '<',
+        itemData             : '<',
         comments             : '<',
         homePerformance      : '<'
     },

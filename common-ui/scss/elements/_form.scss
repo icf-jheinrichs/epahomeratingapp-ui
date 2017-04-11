@@ -58,6 +58,11 @@ fieldset {
             box-shadow: $shadow-error;
         }
     }
+
+    &[disabled='disabled'] {
+        color: $text-color-muted;
+        cursor: not-allowed;
+    }
 }
 
 .has-feedback .form-control {
@@ -112,4 +117,27 @@ fieldset {
     padding: $padding-default;
     position: absolute;
     right: 1px;
+}
+
+
+.input-group {
+    display: flex;
+
+    .input-add-on {
+        background-color: $body-bg;
+        border: $border-default;
+        border-radius: $border-radius-none;
+        font-size: $font-size-large;
+        position: relative;
+
+        &:hover,
+        &:focus {
+            border-color: $brand-secondary;
+        }
+    }
+
+    .form-control + .input-add-on,
+    .input-add-on + .form-control {
+        margin-left: -1px;
+    }
 }

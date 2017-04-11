@@ -2,19 +2,11 @@
    ui-sref=".category({houseId: houseSelectionItemCtrl.house.HouseId})"
    ui-sref-active="active">
 
-    <figure class="house-photo">
-        <img data-ng-src="{{houseSelectionItemCtrl.photoUrl}}" />
-
-        <figcaption class="house-photo-edit">
-            <button
-                class="btn btn-block btn-link"
-                type="button"
-                data-ng-click="houseSelectionItemCtrl.updatePhoto(houseSelectionItemCtrl.house.HouseId, $event)">
-
-                <i class="fa fa-camera" aria-hidden="true"></i> {{houseSelectionItemCtrl.photoActionLabel}}
-            </button>
-        </figcaption>
-    </figure>
+    <photo-capture
+        class="flex-item-static"
+        photo="houseSelectionItemCtrl.house.Photo[0]"
+        on-photo-capture="houseSelectionItemCtrl.handlePhotoCapture(photo)">
+    </photo-capture>
 
     <div class="house-info">
         <h4 class="house-title">{{houseSelectionItemCtrl.HouseTitle}} {{hhouseSelectionItemCtrlouse.isPrimary}}</h4>

@@ -11,12 +11,14 @@ import toggleComponent from './toggle/toggle.component';
 
 // common directives
 import DropdownModule from './dropdown/dropdown.module';
+import LightboxModule from './lightbox/lightbox.module';
 import PopoverModule from './popover/popover.module';
 
 let commonModule
     = angular
         .module('epahomeratingapp.common', [
             DropdownModule.name,
+            LightboxModule.name,
             PopoverModule.name
         ])
             .component('buttonGroup', buttonGroupComponent)

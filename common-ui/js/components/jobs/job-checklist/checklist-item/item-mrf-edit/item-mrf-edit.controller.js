@@ -15,7 +15,7 @@ class MrfEditController {
         this.showMrfEditModal = true;
 
         //TODO: put this somewhere better;
-        angular.element(document).find('body').addClass('modal-open');
+        angular.element(document).find('body').addClass('overlay-open');
     }
 
     cancel () {
@@ -23,7 +23,7 @@ class MrfEditController {
         this.onCancelMrfRow();
 
         //TODO: put this somewhere better;
-        angular.element(document).find('body').removeClass('modal-open');
+        angular.element(document).find('body').removeClass('overlay-open');
     }
 
     save () {
@@ -35,7 +35,7 @@ class MrfEditController {
         });
 
         //TODO: put this somewhere better;
-        angular.element(document).find('body').removeClass('modal-open');
+        angular.element(document).find('body').removeClass('overlay-open');
     }
 }
 

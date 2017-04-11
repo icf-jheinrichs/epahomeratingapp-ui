@@ -10,6 +10,7 @@ $job-photo-height-small:  85px;
     cursor: pointer;
     padding: $gutter-half;
     position: relative;
+    transition: background-color $transition-default ease-out;
 
     &.job-returned {
         padding-top: $gutter-half + $offset-default;
@@ -17,6 +18,19 @@ $job-photo-height-small:  85px;
 
     .fa-chevron-right {
         color: $link-color;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: lighten($brand-auxillary, 3%);
+
+        .list-item-title {
+            text-decoration: underline;
+        }
+
+        .list-item-activate {
+            transform: translateX($offset-default);
+        }
     }
 }
 

@@ -15,21 +15,8 @@
     transition: transform $transition-default ease-out;
 }
 
-.list-item {
+.item-list-item {
     border-top: $border-default;
     display: block;
-    transition: background-color $transition-default ease-out;
-
-    &:hover,
-    &:focus {
-        background-color: lighten($brand-auxillary, 3%);
-
-        .list-item-title {
-            text-decoration: underline;
-        }
-
-        .list-item-activate {
-            transform: translateX($offset-default);
-        }
-    }
+    padding: $gutter-half;
 }

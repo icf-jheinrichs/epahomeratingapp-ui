@@ -16,7 +16,7 @@ body {
     font-size: $font-size-base;
     line-height: $line-height-base;
 
-    &.modal-open {
+    &.overlay-open {
         overflow: hidden;
     }
 }

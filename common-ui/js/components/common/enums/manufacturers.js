@@ -3,7 +3,7 @@ const MANUFACTURERS = [
         name : 'A.O. Smith Corporation',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -12,7 +12,7 @@ const MANUFACTURERS = [
         name : 'A.O. Smith Water Products Co.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -21,7 +21,7 @@ const MANUFACTURERS = [
         name : 'Aaon, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -30,7 +30,7 @@ const MANUFACTURERS = [
         name : 'AC Pro',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -39,7 +39,7 @@ const MANUFACTURERS = [
         name : 'Adams Manufacturing Company',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : true,
             waterHeater : false
         }
@@ -48,7 +48,7 @@ const MANUFACTURERS = [
         name : 'Advanced Distributor Products',
         type : {
             evaporator  : true,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : false
         }
@@ -57,7 +57,7 @@ const MANUFACTURERS = [
         name : 'Aerosys, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -66,7 +66,7 @@ const MANUFACTURERS = [
         name : 'Air-Con International, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -75,7 +75,7 @@ const MANUFACTURERS = [
         name : 'Aire-Flow',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -84,7 +84,7 @@ const MANUFACTURERS = [
         name : 'Airease',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -93,7 +93,7 @@ const MANUFACTURERS = [
         name : 'Airquest',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -102,7 +102,7 @@ const MANUFACTURERS = [
         name : 'Airtemp',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -111,7 +111,7 @@ const MANUFACTURERS = [
         name : 'Allied Air Enterprises, LLC',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : true,
             waterHeater : false
         }
@@ -120,7 +120,7 @@ const MANUFACTURERS = [
         name : 'Allstyle Coil Co., Inc.',
         type : {
             evaporator  : true,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -129,7 +129,7 @@ const MANUFACTURERS = [
         name : 'Amana Heating And Air Conditioning',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -138,7 +138,7 @@ const MANUFACTURERS = [
         name : 'American Standard',
         type : {
             evaporator  : true,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -147,7 +147,7 @@ const MANUFACTURERS = [
         name : 'American Standard Heating & Air Conditioning',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : true,
             waterHeater : false
         }
@@ -156,7 +156,7 @@ const MANUFACTURERS = [
         name : 'American Water Heater Company',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -165,7 +165,7 @@ const MANUFACTURERS = [
         name : 'American Water Heaters',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -174,7 +174,7 @@ const MANUFACTURERS = [
         name : 'Arcoaire',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -183,7 +183,7 @@ const MANUFACTURERS = [
         name : 'Armstrong Air Conditioning, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -192,7 +192,7 @@ const MANUFACTURERS = [
         name : 'Aspen Manufacturing',
         type : {
             evaporator  : true,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : false
         }
@@ -201,7 +201,7 @@ const MANUFACTURERS = [
         name : 'Bard Manufacturing Company',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : true,
             waterHeater : false
         }
@@ -210,7 +210,7 @@ const MANUFACTURERS = [
         name : 'Bock Water Heaters, Inc.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -219,7 +219,7 @@ const MANUFACTURERS = [
         name : 'Bosch Thermotechnology Corp.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -228,7 +228,7 @@ const MANUFACTURERS = [
         name : 'Boyertown Furnance Co.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : true,
             waterHeater : false
         }
@@ -237,7 +237,7 @@ const MANUFACTURERS = [
         name : 'Bradford White Corp.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -246,7 +246,7 @@ const MANUFACTURERS = [
         name : 'Broan',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : false
         }
@@ -255,7 +255,7 @@ const MANUFACTURERS = [
         name : 'Bryant Heating & Cooling Systems',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -264,7 +264,7 @@ const MANUFACTURERS = [
         name : 'Bryant Heating And Cooling Systems',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -273,7 +273,7 @@ const MANUFACTURERS = [
         name : 'Calentadores De America Sa De Cv',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -282,7 +282,7 @@ const MANUFACTURERS = [
         name : 'Carrier Air Conditioning',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -291,7 +291,7 @@ const MANUFACTURERS = [
         name : 'Carrier Corporation',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -300,7 +300,7 @@ const MANUFACTURERS = [
         name : 'Champion By Johnson Controls',
         type : {
             evaporator  : true,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -309,7 +309,7 @@ const MANUFACTURERS = [
         name : 'Chapmion, Unitary Products Group - Commercial',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -318,7 +318,7 @@ const MANUFACTURERS = [
         name : 'Coleman By Johnson Controls',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -327,7 +327,7 @@ const MANUFACTURERS = [
         name : 'Coleman, Unitarty Products Group - Commercial',
         type : {
             evaporator  : true,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -336,7 +336,7 @@ const MANUFACTURERS = [
         name : 'Colex International, S.A.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -345,7 +345,7 @@ const MANUFACTURERS = [
         name : 'Comfortmaker',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -354,7 +354,7 @@ const MANUFACTURERS = [
         name : 'Concord',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -363,7 +363,7 @@ const MANUFACTURERS = [
         name : 'Crown Boiler Co.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : true,
             waterHeater : false
         }
@@ -372,7 +372,7 @@ const MANUFACTURERS = [
         name : 'Daikin Applied Americas, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -381,7 +381,7 @@ const MANUFACTURERS = [
         name : 'Daikin Manufacturing Company, LP',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -390,7 +390,7 @@ const MANUFACTURERS = [
         name : 'Day & Night',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -399,7 +399,7 @@ const MANUFACTURERS = [
         name : 'Dettson Industries, Inc.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : true,
             waterHeater : false
         }
@@ -408,7 +408,7 @@ const MANUFACTURERS = [
         name : 'Diamondair, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -417,7 +417,7 @@ const MANUFACTURERS = [
         name : 'Direct Air',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -426,7 +426,7 @@ const MANUFACTURERS = [
         name : 'Ducane',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -435,7 +435,7 @@ const MANUFACTURERS = [
         name : 'Eair LLC',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -444,7 +444,7 @@ const MANUFACTURERS = [
         name : 'Ecosmart Us, LLC',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -453,7 +453,7 @@ const MANUFACTURERS = [
         name : 'Ecotemp',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -462,7 +462,7 @@ const MANUFACTURERS = [
         name : 'Ecr International',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -471,7 +471,7 @@ const MANUFACTURERS = [
         name : 'Eemax, Inc.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -480,7 +480,7 @@ const MANUFACTURERS = [
         name : 'Efm',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : true,
             waterHeater : false
         }
@@ -489,7 +489,7 @@ const MANUFACTURERS = [
         name : 'Evcon By Johnson Controls',
         type : {
             evaporator  : true,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -498,7 +498,7 @@ const MANUFACTURERS = [
         name : 'Evcon, Unitary Products Group - Commercial',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -507,7 +507,7 @@ const MANUFACTURERS = [
         name : 'Fraser - Johnston, Unitary Products Group - Commercial',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -516,7 +516,7 @@ const MANUFACTURERS = [
         name : 'Fraser - Johnston By Johnson Controls',
         type : {
             evaporator  : true,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -525,7 +525,7 @@ const MANUFACTURERS = [
         name : 'Frigidaire',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -534,7 +534,7 @@ const MANUFACTURERS = [
         name : 'Galpa Export Corp',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -543,7 +543,7 @@ const MANUFACTURERS = [
         name : 'Gamatec International, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -552,7 +552,7 @@ const MANUFACTURERS = [
         name : 'Gd Midea Air-Conditioning Equipment Co., Ltd.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -561,7 +561,7 @@ const MANUFACTURERS = [
         name : 'Gd Miea Heating & Ventlating Equipment Co., Ltd.',
         type : {
             evaporator  : true,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : true
         }
@@ -570,7 +570,7 @@ const MANUFACTURERS = [
         name : 'Ge Appliances, A Haier Company',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -579,7 +579,7 @@ const MANUFACTURERS = [
         name : 'Giant Factories, Inc.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -588,7 +588,7 @@ const MANUFACTURERS = [
         name : 'Gibson',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -597,7 +597,7 @@ const MANUFACTURERS = [
         name : 'Goodman Manufacturing Co., LP',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -606,7 +606,7 @@ const MANUFACTURERS = [
         name : 'Granby Furnaces, Inc.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : true,
             waterHeater : false
         }
@@ -615,7 +615,7 @@ const MANUFACTURERS = [
         name : 'Grandaire',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -624,7 +624,7 @@ const MANUFACTURERS = [
         name : 'Gsw Water Heaters',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -633,7 +633,7 @@ const MANUFACTURERS = [
         name : 'Gsw Water Heating Company',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -642,7 +642,7 @@ const MANUFACTURERS = [
         name : 'Guardian By Johnson Controls',
         type : {
             evaporator  : true,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -651,7 +651,7 @@ const MANUFACTURERS = [
         name : 'Guardian, Unitary Products Group - Commercial',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -660,7 +660,7 @@ const MANUFACTURERS = [
         name : 'Haier America',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -669,7 +669,7 @@ const MANUFACTURERS = [
         name : 'Heat Controller, Inc.',
         type : {
             evaporator  : true,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -678,7 +678,7 @@ const MANUFACTURERS = [
         name : 'Heil',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -687,7 +687,7 @@ const MANUFACTURERS = [
         name : 'Htp, Inc.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -696,7 +696,7 @@ const MANUFACTURERS = [
         name : 'Icp Commercial',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -705,7 +705,7 @@ const MANUFACTURERS = [
         name : 'Ingersoll Rand',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : true,
             waterHeater : false
         }
@@ -714,7 +714,7 @@ const MANUFACTURERS = [
         name : 'Ingersoll Rand Company',
         type : {
             evaporator  : true,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -723,7 +723,7 @@ const MANUFACTURERS = [
         name : 'Innovair Corporation',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -732,7 +732,7 @@ const MANUFACTURERS = [
         name : 'International Comfort Products',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -741,7 +741,7 @@ const MANUFACTURERS = [
         name : 'Intertherm',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -750,7 +750,7 @@ const MANUFACTURERS = [
         name : 'John Wood',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -759,7 +759,7 @@ const MANUFACTURERS = [
         name : 'Johnson Controls, Unitary Products - Commercial',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -768,7 +768,7 @@ const MANUFACTURERS = [
         name : 'Keeprite',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -777,7 +777,7 @@ const MANUFACTURERS = [
         name : 'Kelvinator',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -786,7 +786,7 @@ const MANUFACTURERS = [
         name : 'Kenmore',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -795,7 +795,7 @@ const MANUFACTURERS = [
         name : 'Klimaire Products, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -804,7 +804,7 @@ const MANUFACTURERS = [
         name : 'Lennox Industries, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -813,7 +813,7 @@ const MANUFACTURERS = [
         name : 'Lochinvar, LLC',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -822,7 +822,7 @@ const MANUFACTURERS = [
         name : 'Luxaire By Johnson Controls',
         type : {
             evaporator  : true,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -831,7 +831,7 @@ const MANUFACTURERS = [
         name : 'Luxaire, Unitary Products Group - Commercial',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -840,7 +840,7 @@ const MANUFACTURERS = [
         name : 'Mammoth, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -849,7 +849,7 @@ const MANUFACTURERS = [
         name : 'Maratherm',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -858,7 +858,7 @@ const MANUFACTURERS = [
         name : 'Maytag',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -867,7 +867,7 @@ const MANUFACTURERS = [
         name : 'Medallion',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -876,7 +876,7 @@ const MANUFACTURERS = [
         name : 'Miller',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -885,7 +885,7 @@ const MANUFACTURERS = [
         name : 'MrCool, LLC',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -894,7 +894,7 @@ const MANUFACTURERS = [
         name : 'MSH Legacy',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -903,7 +903,7 @@ const MANUFACTURERS = [
         name : 'National Comfort Products',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -912,7 +912,7 @@ const MANUFACTURERS = [
         name : 'Navien, Inc.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -921,7 +921,7 @@ const MANUFACTURERS = [
         name : 'Newmac Manufacturing',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -930,7 +930,7 @@ const MANUFACTURERS = [
         name : 'Noritz America Corporation',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : true,
             waterHeater : false
         }
@@ -939,7 +939,7 @@ const MANUFACTURERS = [
         name : 'Nortek Global Hvac, LLC',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -948,7 +948,7 @@ const MANUFACTURERS = [
         name : 'Nutone',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -957,7 +957,7 @@ const MANUFACTURERS = [
         name : 'Parker David Hvac International, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -966,7 +966,7 @@ const MANUFACTURERS = [
         name : 'Payne Heating & Cooling',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -975,7 +975,7 @@ const MANUFACTURERS = [
         name : 'Payne Heating And Cooling',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -984,7 +984,7 @@ const MANUFACTURERS = [
         name : 'Philco',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -993,7 +993,7 @@ const MANUFACTURERS = [
         name : 'Refricenter Of Miami, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -1002,7 +1002,7 @@ const MANUFACTURERS = [
         name : 'Reliance Water Heater',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -1011,7 +1011,7 @@ const MANUFACTURERS = [
         name : 'Reliance Water Heater Company',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -1020,7 +1020,7 @@ const MANUFACTURERS = [
         name : 'Reznor',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -1029,7 +1029,7 @@ const MANUFACTURERS = [
         name : 'Rheem Manufacturing Company',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : true,
             waterHeater : false
         }
@@ -1038,7 +1038,7 @@ const MANUFACTURERS = [
         name : 'Rheem Sales Company, Inc.',
         type : {
             evaporator  : true,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : true
         }
@@ -1047,7 +1047,7 @@ const MANUFACTURERS = [
         name : 'Rinnali Corporation',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -1056,7 +1056,7 @@ const MANUFACTURERS = [
         name : 'Sears Brands Management Corporation',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -1065,7 +1065,7 @@ const MANUFACTURERS = [
         name : 'Sears, Roebuck & Company',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -1074,7 +1074,7 @@ const MANUFACTURERS = [
         name : 'Shenxhen Moretrade Network Technology Co., Ltd.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -1083,7 +1083,7 @@ const MANUFACTURERS = [
         name : 'Space Pak',
         type : {
             evaporator  : true,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : false
         }
@@ -1092,7 +1092,7 @@ const MANUFACTURERS = [
         name : 'State Water Heaters',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -1101,7 +1101,7 @@ const MANUFACTURERS = [
         name : 'Style Crest, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -1110,7 +1110,7 @@ const MANUFACTURERS = [
         name : 'Summit Manufacturing, Inc.',
         type : {
             evaporator  : true,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : false
         }
@@ -1119,7 +1119,7 @@ const MANUFACTURERS = [
         name : 'Tappan',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -1128,7 +1128,7 @@ const MANUFACTURERS = [
         name : 'Tempstar',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -1137,7 +1137,7 @@ const MANUFACTURERS = [
         name : 'Thermo Products, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -1146,7 +1146,7 @@ const MANUFACTURERS = [
         name : 'Trane',
         type : {
             evaporator  : true,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -1155,7 +1155,7 @@ const MANUFACTURERS = [
         name : 'Trane U.S., Inc.',
         type : {
             evaporator  : true,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : false
         }
@@ -1164,7 +1164,7 @@ const MANUFACTURERS = [
         name : 'Triangle Tube PhaseIII, Inc.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -1173,7 +1173,7 @@ const MANUFACTURERS = [
         name : 'U.S. A/C Products',
         type : {
             evaporator  : true,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : false
         }
@@ -1182,7 +1182,7 @@ const MANUFACTURERS = [
         name : 'U.S. Craftmaster Water Heaters',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -1191,7 +1191,7 @@ const MANUFACTURERS = [
         name : 'U.S. Craftmaster',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : false
         }
@@ -1200,7 +1200,7 @@ const MANUFACTURERS = [
         name : 'Unico, Inc.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : false
         }
@@ -1209,7 +1209,7 @@ const MANUFACTURERS = [
         name : 'United Refrigeration, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -1218,7 +1218,7 @@ const MANUFACTURERS = [
         name : 'V-Aire',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -1227,7 +1227,7 @@ const MANUFACTURERS = [
         name : 'Vaughn Thermal Corp.',
         type : {
             evaporator  : false,
-            condensor   : false,
+            condenser   : false,
             furnace     : false,
             waterHeater : true
         }
@@ -1236,7 +1236,7 @@ const MANUFACTURERS = [
         name : 'Villara Corporation',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -1245,7 +1245,7 @@ const MANUFACTURERS = [
         name : 'Westinghouse',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -1254,7 +1254,7 @@ const MANUFACTURERS = [
         name : 'Williamson - Thermoflo',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -1263,7 +1263,7 @@ const MANUFACTURERS = [
         name : 'Wolf Steel, Ltd.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -1272,7 +1272,7 @@ const MANUFACTURERS = [
         name : 'Xenon',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -1281,7 +1281,7 @@ const MANUFACTURERS = [
         name : 'York By Johnson Controls',
         type : {
             evaporator  : true,
-            condensor   : true,
+            condenser   : true,
             furnace     : true,
             waterHeater : false
         }
@@ -1290,7 +1290,7 @@ const MANUFACTURERS = [
         name : 'York, Unitary Products Group - Commercial',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -1299,7 +1299,7 @@ const MANUFACTURERS = [
         name : 'Your Source Products, Inc.',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }
@@ -1308,7 +1308,7 @@ const MANUFACTURERS = [
         name : 'Zamil Air Conditioners & Home Appliances Co., LLC',
         type : {
             evaporator  : false,
-            condensor   : true,
+            condenser   : true,
             furnace     : false,
             waterHeater : false
         }

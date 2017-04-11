@@ -2,7 +2,7 @@
 
 .item-comments {
     display: inline;
-    
+
     .popover {
         height: 300px;
         margin: $offset-large 0 150px;
@@ -12,6 +12,12 @@
 
     textarea {
         height: 125px;
+    }
+
+    .photo-capture {
+        width: $photo-capture-small;
+        height: $photo-capture-small;
+        margin-bottom: $offset-default;
     }
 }
 
@@ -35,33 +41,5 @@
 
     .comment-body {
         margin: 0;
-    }
-}
-
-.item-comment-add-photo {
-    height: 90px;
-    margin: 0 0 $offset-default;
-    overflow: hidden;
-    position: relative;
-    width: 110px;
-
-    img {
-        float: left;
-        max-width: 100%;
-    }
-
-    .btn {
-        background-color: rgba($brand-secondary, .6);
-        bottom: 0;
-        color: $text-color-inverse;
-        font-size: $font-size-small;
-        padding: $padding-default $padding-small;
-        position: absolute;
-
-        &:hover,
-        &:focus {
-            background-color: rgba($brand-secondary, 1);
-            color: $text-color-inverse;
-        }
     }
 }

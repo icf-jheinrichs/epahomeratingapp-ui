@@ -64,6 +64,10 @@
     background-color: $body-bg;
     overflow-y: scroll;
     padding: $gutter-half;
+
+    .photo-capture {
+        margin-right: 0;
+    }
 }
 
 .house-selection-selected,

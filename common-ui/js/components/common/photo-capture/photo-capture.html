@@ -1,8 +1,20 @@
 <figure class="photo-capture clearfix">
-    <img class="pull-left" data-ng-src="{{photoCaptureCtrl.photoUrl}}" />
+    <button
+        aria-label="expand image"
+        can-expand="true"
+        class="btn btn-link btn-lightbox"
+        lightbox="lightbox"
+        type="button">
 
-    <figcaption>
-        <button type="button" class="btn btn-block btn-link" data-ng-click="photoCaptureCtrl.addPhoto()">
+        <img class="pull-left" data-ng-src="{{photoCaptureCtrl.photoUrl}}" alt="" />
+    </button>
+
+    <figcaption class="photo-capture-action">
+        <button
+            class="btn btn-block btn-photo-capture btn-link"
+            data-ng-click="photoCaptureCtrl.addPhoto($event)"
+            type="button">
+
             <i class="fa fa-camera" aria-hidden="true"></i> {{photoCaptureCtrl.photoActionLabel}}
         </button>
     </figcaption>

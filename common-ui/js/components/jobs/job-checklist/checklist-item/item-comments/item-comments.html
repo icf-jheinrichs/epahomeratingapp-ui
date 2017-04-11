@@ -32,7 +32,15 @@
                 <div class="item-list item-list-comments" data-ng-if="checklistItemCommentsCtrl.comments.length > 0">
                     <div class="item-list-item item-comment" data-ng-repeat="comment in checklistItemCommentsCtrl.comments track by $index">
                         <figure class="comment-image" data-ng-if="comment.PhotoUrl">
-                            <img data-ng-src="{{checklistItemCommentsCtrl.BASE_IMAGE_URL + comment.PhotoUrl}}" />
+                            <button
+                                aria-label="expand image"
+                                can-expand="true"
+                                class="btn btn-link btn-lightbox"
+                                lightbox="lightbox"
+                                type="button">
+
+                                <img data-ng-src="{{checklistItemCommentsCtrl.BASE_IMAGE_URL + comment.PhotoUrl}}" alt="" />
+                            </button>
                         </figure>
 
                         <p class="comment-body">
@@ -69,15 +77,11 @@
             </header>
 
             <div class="popover-panel-body">
-                <figure class="item-comment-add-photo clearfix">
-                    <img class="pull-left" data-ng-src="{{checklistItemCommentsCtrl.newCommentPhotoUrl}}" />
-
-                    <figcaption>
-                        <button type="button" class="btn btn-block btn-link" data-ng-click="checklistItemCommentsCtrl.addPhoto()">
-                            <i class="fa fa-camera" aria-hidden="true"></i> {{checklistItemCommentsCtrl.photoActionLabel}}
-                        </button>
-                    </figcaption>
-                </figure>
+                <photo-capture
+                    class="flex-item-static"
+                    photo="checklistItemCommentsCtrl.newCommentPhotoUrl"
+                    on-photo-capture="checklistItemCommentsCtrl.handlePhotoCapture(photo)">
+                </photo-capture>
 
                 <div class="form-group">
                     <label for="commentText" class="sr-only">Enter Your Comment</label>

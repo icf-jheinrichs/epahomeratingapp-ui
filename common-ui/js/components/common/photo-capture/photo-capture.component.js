@@ -3,7 +3,7 @@ import controller from './photo-capture.controller';
 
 let photoCaptureComponent = {
     bindings : {
-        'photo'          : '@',
+        'photo'          : '<',
         'onPhotoCapture' : '&'
     },
     template,

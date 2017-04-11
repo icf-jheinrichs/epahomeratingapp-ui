@@ -7,16 +7,14 @@
 
     img {
         float: left;
-        max-width: 100%;
+        width: 100%;
     }
 
-    .btn {
+    .btn-photo-capture {
         background-color: rgba($brand-secondary, .6);
-        bottom: 0;
         color: $text-color-inverse;
         font-size: $font-size-small;
         padding: $padding-default $padding-small;
-        position: absolute;
 
         &:hover,
         &:focus {
@@ -24,4 +22,15 @@
             color: $text-color-inverse;
         }
     }
+}
+
+.btn-lightbox {
+    padding: 0;
+}
+
+.photo-capture-action {
+    bottom: 0;
+    display: block;
+    position: absolute;
+    width: 100%;
 }

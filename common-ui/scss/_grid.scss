@@ -49,6 +49,27 @@
     @include make-row();
 }
 
+.row-condensed {
+    margin-left: -$offset-small;
+    margin-right: -$offset-small;
+
+    .col-xs-1,
+    .col-xs-2,
+    .col-xs-3,
+    .col-xs-4,
+    .col-xs-5,
+    .col-xs-6,
+    .col-xs-7,
+    .col-xs-8,
+    .col-xs-9,
+    .col-xs-10,
+    .col-xs-11,
+    .col-xs-12 {
+        padding-left: $offset-small;
+        padding-right: $offset-small;
+    }
+}
+
 @include make-grid-columns();
 
 @media (max-width: $screen-lg) {

@@ -1,14 +1,15 @@
+import _random from 'lodash/random';
+
 class ScannerService {
-    constructor ($q, BASE_IMAGE_URL) {
+    constructor ($q) {
         'ngInject';
 
         this.$q             = $q;
-        this.BASE_IMAGE_URL = BASE_IMAGE_URL;
     }
 
-    getCode () {
+    scanBarCode () {
         let promise = this.$q((resolve, reject) => {
-            resolve('1234-5678-9012');
+            resolve(`${_random(1, 9)}234-${_random(1, 9)}678-${_random(1, 9)}012`);
         });
 
         return promise;

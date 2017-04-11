@@ -1,0 +1,33 @@
+$lightbox-shadow: 0 0 25px $shadow-color-dark;
+
+.lightbox-wrapper {
+    bottom: 0;
+    left: 0;
+    overflow: scroll;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: $zindex-lightbox;
+}
+
+.lightbox {
+    margin: $gutter-full auto;
+    max-width: 90%;
+    position: relative;
+}
+
+.lightbox-image {
+    border: 8px solid $border-color-inverse;
+    box-shadow: $lightbox-shadow;
+    height: auto;
+    width: 100%;
+}
+
+
+.btn-lightbox-close {
+    border: 0;
+    box-shadow: $lightbox-shadow;
+    position: absolute;
+    right: -$offset-default;
+    top: -$offset-default;
+}

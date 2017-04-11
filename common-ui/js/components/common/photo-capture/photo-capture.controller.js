@@ -18,7 +18,10 @@ class PhotoCaptureController {
         this.photoActionLabel = (this.photoUrl === this.defaultPhotoUrl) ? this.photoActionLabelEnum.ADD : this.photoActionLabelEnum.CHANGE;
     }
 
-    addPhoto () {
+    addPhoto ($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
         this.CameraService
             .getPhoto()
             .then((photo) => {
@@ -31,6 +34,12 @@ class PhotoCaptureController {
 
                 this.photoActionLabel = this.photoActionLabelEnum.CHANGE;
             });
+    }
+
+    $onChanges (changes) {
+        if (!changes.photo.isFirstChange() && changes.photo.currentValue === '') {
+            this.photoUrl = this.defaultPhotoUrl;
+        }
     }
 }
 

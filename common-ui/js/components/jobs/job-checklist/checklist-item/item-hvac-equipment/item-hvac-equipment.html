@@ -3,9 +3,11 @@
         <header class="checklist-item-header form-group-horizontal">
             <button class="checklist-item-info-toggle btn btn-link btn-no-label" type="button" aria-label="More Information"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
             <h4 class="checklist-item-title pull-left">Mfr. &amp; model of HVAC equipment matches</h4>
-            <select class="form-control">
-                <option>HVAC Design Report</option>
-                <option>Written approval from designer</option>
+            <select
+                class="form-control hvac-equipment-matches"
+                data-ng-options="document.name for document in checklistItemHVACCommissioningCtrl.EQUIPMENT_MATCHES_DOCUMENT track by document.key"
+                data-ng-model="checklistItemHVACCommissioningCtrl.selectedEquipmentMatches"
+                data-ng-change="checklistItemHVACCommissioningCtrl.onEquipmentMatchesChange()">
             </select>
         </header>
 
@@ -29,28 +31,19 @@
     <div>
         <p><button class="btn" data-ng-click="checklistItemHVACCommissioningCtrl.onViewHvacDesignReport()" type="button">View HVAC Design Report</button></p>
 
-        <ul>
-            <li data-ng-repeat="equipment in checklistItemHVACCommissioningCtrl.equipment">
-                <label for="equipment-type" class="sr-only">Equipment Type</label>
-                <select id="equipment-type">
-                    <option>Furnace</option>
-                    <option>AC</option>
-                    <option>HP</option>
-                </select>
+        <div class="item-list item-list-equipment">
+            <hvac-equipment
+                class="item-list-item"
+                data-ng-repeat="equipment in checklistItemHVACCommissioningCtrl.itemData.Equipment track by $index"
+                delete-equipment="checklistItemHVACCommissioningCtrl.deleteEquipment(index)"
+                equipment="equipment"
+                index="{{$index}}"
+                save-equipment="checklistItemHVACCommissioningCtrl.saveEquipment(index, equipment)">
+            </hvac-equipment>
+        </div>
 
-                <div>
-                    <label for="equipment-manufacturer" class="sr-only">Equipment Manufacturer</label>
-                    <select id="equipment-manufacturer">
-                        <option>Select a Manufacturer</option>
-                    </select>
-
-                    <label for="equipment-model" class="sr-only">Equipment Model</label>
-                    <input type="text" class="form-control" id="equipment-model" />
-
-                    <label for="equipment-serial-number" class="sr-only">Serial Number</label>
-                    <input type="text" class="form-control" id="equipment-serial-number" />
-                </div>
-            </li>
-        </ul>
+        <div class="clearfix">
+            <button class="btn pull-right" data-ng-click="checklistItemHVACCommissioningCtrl.addEquipment()" type="button"><i class="fa fa-plus" aria-hidden="true"></i> Add Equipment</button>
+        </div>
     </div>
 </div>

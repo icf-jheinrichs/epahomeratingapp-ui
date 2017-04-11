@@ -41,16 +41,16 @@
     comments="checklistItemStubCtrl.comments">
 </checklist-item-default>
 
-<!-- checklist-item-hvac-equipment -->
-<checklist-item-default
+<checklist-item-hvac-equipment
     data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom2'"
     item-id="{{::checklistItemStubCtrl.itemId}}"
     item-category="{{::checklistItemStubCtrl.itemCategory}}"
     item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
     checklist-item="checklistItemStubCtrl.checklistItem"
     response="checklistItemStubCtrl.response"
+    item-data="checklistItemStubCtrl.itemData"
     comments="checklistItemStubCtrl.comments">
-</checklist-item-default>
+</checklist-item-hvac-equipment>
 
 <checklist-item-hvac-commissioning
     data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom4'"

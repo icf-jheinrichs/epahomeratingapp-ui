@@ -1,0 +1,214 @@
+<div class="flex-row">
+    <div class="equipment-type form-group flex-col flex-item-static">
+        <label for="equipment-type-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Type</label>
+        <select
+            class="form-control"
+            data-ng-options="type.name for type in hvacEquipmentCtrl.EQUIPMENT_TYPE track by type.key"
+            data-ng-model="hvacEquipmentCtrl.selectedEquipmentType"
+            data-ng-change="hvacEquipmentCtrl.onEquipmentTypeChange()"
+            data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+            id="equipment-type-{{::hvacEquipmentCtrl.index}}">
+        </select>
+    </div>
+
+    <div class="flex-col">
+        <div class="row row-condensed" data-ng-class="{'hidden' : hvacEquipmentCtrl.equipment.Type !== hvacEquipmentCtrl.EQUIPMENT_TYPE[0].key}">
+            <h5 class="col-xs-2"><span class="sr-only">Furnace</span></h5>
+
+            <div class="form-group col-xs-4">
+                <label for="furnace-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Manufacturer</label>
+
+                <select
+                    class="form-control"
+                    data-ng-change="hvacEquipmentCtrl.onEquipmentManufacturerChange('Furnace')"
+                    data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                    data-ng-options="manufacturer.name for manufacturer in hvacEquipmentCtrl.MANUFACTURERS.FURNACE track by manufacturer.name"
+                    data-ng-model="hvacEquipmentCtrl.selectedEquipmentManufacturer.Furnace"
+                    id="furnace-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}">
+                </select>
+            </div>
+
+            <div class="form-group col-xs-3">
+                <label for="furnace-equipment-model-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Model</label>
+                <input
+                    class="form-control"
+                    data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                    data-ng-model="hvacEquipmentCtrl.equipment.Furnace.Model"
+                    id="furnace-equipment-model-{{::hvacEquipmentCtrl.index}}"
+                    placeholder="Equipment Model"
+                    type="text" />
+            </div>
+
+            <div class="form-group col-xs-3">
+                <label for="furnace-equipment-serial-number-{{::hvacEquipmentCtrl.index}}" class="sr-only">Serial Number</label>
+
+                <div class="input-group">
+                    <input
+                        class="form-control"
+                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                        data-ng-model="hvacEquipmentCtrl.equipment.Furnace.SerialNumber"
+                        id="furnace-equipment-serial-number-{{::hvacEquipmentCtrl.index}}"
+                        placeholder="Serial Number"
+                        type="text" />
+
+                    <button
+                        aria-label="Scan Barcode"
+                        class="btn input-add-on"
+                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                        data-ng-click="hvacEquipmentCtrl.onScanBarcode('Furnace')"
+                        type="button">
+
+                        <i class="fa fa-barcode" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-condensed" data-ng-class="{'hidden' : hvacEquipmentCtrl.equipment.Type === hvacEquipmentCtrl.EQUIPMENT_TYPE[0].key}">
+            <h5 class="col-xs-2">Condenser</h5>
+
+            <div class="form-group col-xs-4">
+                <label for="condenser-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Manufacturer</label>
+                <select
+                    class="form-control"
+                    data-ng-change="hvacEquipmentCtrl.onEquipmentManufacturerChange('Condenser')"
+                    data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                    data-ng-options="manufacturer.name for manufacturer in hvacEquipmentCtrl.MANUFACTURERS.CONDENSER track by manufacturer.name"
+                    data-ng-model="hvacEquipmentCtrl.selectedEquipmentManufacturer.Condenser"
+                    id="condenser-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}">
+
+                </select>
+            </div>
+
+            <div class="form-group col-xs-3">
+                <label for="condenser-equipment-model-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Model</label>
+                <input
+                    class="form-control"
+                    data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                    data-ng-model="hvacEquipmentCtrl.equipment.Condenser.Model"
+                    id="condenser-equipment-model-{{::hvacEquipmentCtrl.index}}"
+                    placeholder="Equipment Model"
+                    type="text" />
+            </div>
+
+            <div class="form-group col-xs-3">
+                <label for="condenser-equipment-serial-number-{{::hvacEquipmentCtrl.index}}" class="sr-only">Serial Number</label>
+
+                <div class="input-group">
+                    <input
+                        type="text"
+                        class="form-control"
+                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                        data-ng-model="hvacEquipmentCtrl.equipment.Condenser.SerialNumber"
+                        id="condenser-equipment-serial-number-{{::hvacEquipmentCtrl.index}}"
+                        placeholder="Serial Number" />
+
+                    <button
+                        aria-label="Scan Barcode"
+                        class="btn input-add-on"
+                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                        data-ng-click="hvacEquipmentCtrl.onScanBarcode('Condenser')"
+                        type="button">
+
+                        <i class="fa fa-barcode" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row row-condensed" data-ng-class="{'hidden' : hvacEquipmentCtrl.equipment.Type === hvacEquipmentCtrl.EQUIPMENT_TYPE[0].key}">
+            <h5 class="col-xs-2">Evaporator</h5>
+
+            <div class="form-group col-xs-4">
+                <label for="evaporator-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Manufacturer</label>
+
+                <select
+                    class="form-control"
+                    data-ng-change="hvacEquipmentCtrl.onEquipmentManufacturerChange('Evaporator')"
+                    data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                    data-ng-options="manufacturer.name for manufacturer in hvacEquipmentCtrl.MANUFACTURERS.EVAPORATOR track by manufacturer.name"
+                    data-ng-model="hvacEquipmentCtrl.selectedEquipmentManufacturer.Evaporator"
+                    id="evaporator-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}">
+                </select>
+            </div>
+
+            <div class="form-group col-xs-3">
+                <label for="evaporator-equipment-model-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Model</label>
+
+                <input
+                    class="form-control"
+                    data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                    data-ng-model="hvacEquipmentCtrl.equipment.Evaporator.Model"
+                    id="evaporator-equipment-model-{{::hvacEquipmentCtrl.index}}"
+                    placeholder="Equipment Model"
+                    type="text" />
+            </div>
+
+            <div class="form-group col-xs-3">
+                <label for="evaporator-equipment-serial-number-{{::hvacEquipmentCtrl.index}}" class="sr-only">Serial Number</label>
+
+                <div class="input-group">
+                    <input
+                        class="form-control"
+                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                        data-ng-model="hvacEquipmentCtrl.equipment.Evaporator.SerialNumber"
+                        id="evaporator-equipment-serial-number-{{::hvacEquipmentCtrl.index}}"
+                        placeholder="Serial Number"
+                        type="text" />
+
+                    <button
+                        aria-label="Scan Barcode"
+                        class="btn input-add-on"
+                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                        data-ng-click="hvacEquipmentCtrl.onScanBarcode('Evaporator')"
+                        type="button">
+
+                        <i class="fa fa-barcode" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="equipment-actions flex-col flex-item-static">
+        <div data-ng-class="{'hidden' : hvacEquipmentCtrl.isEditMode}">
+            <button
+                aria-label="Edit"
+                class="btn btn-link btn-no-label"
+                data-ng-click="hvacEquipmentCtrl.toggleEditMode()"
+                type="button">
+
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+            </button>
+
+            <button
+                aria-label="Delete"
+                class="btn btn-link btn-no-label"
+                type="button"
+                data-ng-click="hvacEquipmentCtrl.onDeleteEquipment()">
+
+                <i class="fa fa-remove" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <div data-ng-class="{'hidden' : !hvacEquipmentCtrl.isEditMode}">
+            <button
+                aria-label="Save"
+                class="btn btn-link btn-no-label"
+                data-ng-click="hvacEquipmentCtrl.onSaveEquipment()"
+                type="button">
+
+                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+            </button>
+
+            <button
+                aria-label="Cancel"
+                class="btn btn-link btn-no-label"
+                data-ng-click="hvacEquipmentCtrl.toggleEditMode()"
+                type="button">
+
+                <i class="fa fa-ban" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+</div>
