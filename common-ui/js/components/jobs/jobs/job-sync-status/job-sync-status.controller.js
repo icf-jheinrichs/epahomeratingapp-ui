@@ -4,7 +4,7 @@ import moment from 'moment';
 class JobSyncStatusController {
     constructor ($log, $rootScope, UI_ENUMS) {
         this.STATUS = {
-            LAST_UPDATED    : 'Last Updated ${now}',
+            LAST_UPDATED    : 'Last Updated :now:',
             UP_TO_DATE      : 'Up to Date',
             SYNCING         : 'Syncing',
             SYNC_INCOMPLETE : 'Sync Incomplete'
@@ -48,7 +48,7 @@ class JobSyncStatusController {
             if (this.syncStatusClass === this.STATUS_CLASSNAME.ONLINE_UP_TO_DATE) {
                 let now = moment(new Date()).format('MMM Do YYYY, h:mm:ss a');
 
-                this.syncStatus      = this.STATUS.LAST_UPDATED.replace('${now}', now);
+                this.syncStatus      = this.STATUS.LAST_UPDATED.replace(':now:', now);
                 this.syncStatusClass = this.STATUS_CLASSNAME.OFFLINE;
             } else if (this.syncStatusClass === this.STATUS_CLASSNAME.SYNCING || this.syncStatusClass === this.STATUS_CLASSNAME.LOCAL_UNSYNCED) {
                 this.syncStatus      = this.STATUS.SYNC_INCOMPLETE;
@@ -65,7 +65,7 @@ class JobSyncStatusController {
             } else if (jobs.uploadingJobs.length > 0) {
                 let now = moment(new Date()).format('MMM Do YYYY, h:mm:ss a');
 
-                this.syncStatus      = this.STATUS.LAST_UPDATED.replace('${now}', now);
+                this.syncStatus      = this.STATUS.LAST_UPDATED.replace(':now:', now);
                 this.syncStatusClass = this.STATUS_CLASSNAME.LOCAL_UNSYNCED;
             } else if (this.syncStatusClass === this.STATUS_CLASSNAME.SYNC_INCOMPLETE) {
                 this.syncStatus      = this.STATUS.SYNCING;
