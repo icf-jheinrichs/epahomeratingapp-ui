@@ -1,31 +1,34 @@
-$toggle-size:   30px;
-
-$switch-offset: 2px;
-$switch-size:   $toggle-size - ($switch-offset * 2) - ($border-size-default * 2);
+$switch-offset: 4px;
+$switch-size:   $toggle-size - ($switch-offset * 2) - ($border-size-default * 2) + 1;
 
 $switch-delta:  $toggle-size;
 
 .toggle-control {
-    display: none;
+    position: absolute;
+    visibility: hidden;
 }
 
 .toggle-label {
-    border: $border-default;
+    background-color: $status-correct;
     border-radius: ($toggle-size / 2);
     box-shadow: $shadow-inset;
+    color: $body-bg;
     cursor: pointer;
     display: block;
+    font-size: $font-size-h3;
     height: $toggle-size;
     outline: 0;
-    overflow: hidden;
     position: relative;
     transition: box-shadow $transition-slow, background-color $transition-default, border-color $transition-default;
     width: $toggle-size * 2;
 
     &:hover,
     &:focus {
-        border-color: darken($border-color-default, 10%);
-        box-shadow: $shadow-inset, $shadow-hover;
+        box-shadow: $shadow-inset, $shadow-toggle;
+
+        .toggle-status-border {
+            border-color: darken($border-color-dark, 10%);
+        }
     }
 
     &::after {
@@ -39,22 +42,151 @@ $switch-delta:  $toggle-size;
         left: $switch-offset;
         position: absolute;
         top: $switch-offset;
-        transition: transform $transition-default, border-color $transition-default;
+        transition: transform $transition-default ease-out, border-color $transition-default;
         width: $switch-size;
+    }
+
+    &.sync-up {
+        background-color: $status-warning;
+    }
+
+    &.sync-down {
+        background-color: $link-color;
+    }
+
+    &.sync-error {
+        background-color: $status-error;
     }
 }
 
+.status-syncing {
+    margin: 5px 8px;
+    opacity: 0;
+    transition: opacity $transition-default, color $transition-default;
+}
+
+.toggle-status,
+.toggle-status-border {
+    border-radius: $switch-size;
+    display: block;
+    height: $toggle-size + 2;
+    position: absolute;
+    transform: scale(1);
+    transition: border-color $transition-default, transform $transition-default ease-out;
+}
+
+.toggle-status-border {
+    background-color: transparent;
+    border: 2px solid $border-color-dark;
+    height: $toggle-size + 2;
+    left: -1px;
+    top: -1px;
+    width: ($toggle-size + 1) * 2;
+}
+
+.toggle-status {
+    background-color: $body-bg;
+    height: $toggle-size - 2;
+    left: 1px;
+    top: 1px;
+    width: ($toggle-size - 1) * 2;
+}
+
 .toggle-control:checked + .toggle-label {
-    background-color: $status-correct;
     border-color: darken($status-correct, 10%);
 
     &:hover,
     &:focus {
-        box-shadow: $shadow-inset, $shadow-correct;
+        box-shadow: $shadow-inset, $shadow-toggle-on;
     }
 
     &::after {
         border-color: darken($status-correct, 10%);
         transform: translateX($switch-delta);
+    }
+
+    .toggle-status {
+        transform: scale(0);
+    }
+
+    .toggle-status-border {
+        border-color: darken($status-correct, 10%);
+
+        &:hover,
+        &:focus {
+            border-color: darken($status-correct, 20%);
+        }
+    }
+}
+
+.toggle-control:checked + .toggle-label.sync-up {
+    color: darken($status-warning, 40%);
+
+    &:hover,
+    &:focus {
+        box-shadow: $shadow-inset, $shadow-toggle-sync-up;
+    }
+
+    &::after {
+        border-color: darken($status-warning, 30%);
+        transform: translateX($switch-delta);
+    }
+
+    .toggle-status-border {
+        border-color: darken($status-warning, 30%);
+
+        &:hover,
+        &:focus {
+            border-color: darken($status-warning, 40%);
+        }
+    }
+}
+
+.toggle-control:checked + .toggle-label.sync-down {
+    &:hover,
+    &:focus {
+        box-shadow: $shadow-inset, $shadow-toggle-sync-error;
+    }
+
+    &::after {
+        border-color: darken($status-sync-down, 20%);
+        transform: translateX($switch-delta);
+    }
+
+    .toggle-status-border {
+        border-color: darken($status-sync-down, 10%);
+
+        &:hover,
+        &:focus {
+            border-color: darken($status-sync-down, 20%);
+        }
+    }
+}
+
+.toggle-control:checked + .toggle-label.sync-error {
+    &:hover,
+    &:focus {
+        box-shadow: $shadow-inset, $shadow-toggle-sync-error;
+    }
+
+    &::after {
+        border-color: darken($status-error, 30%);
+        transform: translateX($switch-delta);
+    }
+
+    .toggle-status-border {
+        border-color: darken($status-error, 20%);
+
+        &:hover,
+        &:focus {
+            border-color: darken($status-error, 30%);
+        }
+    }
+}
+
+.sync-up,
+.sync-down {
+    .status-syncing {
+        opacity: 1;
     }
 }

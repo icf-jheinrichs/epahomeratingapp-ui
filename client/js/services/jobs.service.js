@@ -1,4 +1,5 @@
 import _map from 'lodash/map';
+import _random from 'lodash/random';
 import _cloneDeep from 'lodash/cloneDeep';
 
 /**
@@ -13,9 +14,10 @@ class JobsService {
      * @param  {function} $sanitize angular.$sanitize html injection
      * @param  {object}   API_URL   epahomeratingapp constants - contains paths to API
      */
-    constructor ($q, $http, $sanitize, API_URL) {
+    constructor ($log, $q, $http, $sanitize, API_URL) {
         'ngInject';
 
+        this.$log      = $log;
         this.$q        = $q;
         this.$http     = $http;
         this.$sanitize = $sanitize;
@@ -40,6 +42,9 @@ class JobsService {
                         let jobs = {};
 
                         jobs = _map(response.data, 'doc');
+                        jobs.forEach((job) => {
+                            job.offlineAvailable = !!_random(0, 1);
+                        });
 
                         resolve(jobs);
                     } else {
@@ -187,6 +192,14 @@ class JobsService {
         });
 
         return promise;
+    }
+
+    makeAvailableOffline (job) {
+        this.$log.log(`[jobs.service.js] ${job} make available offline`);
+    }
+
+    cancelAvailableOffline (job) {
+        this.$log.log(`[jobs.service.js] ${job} cancel available offline`);
     }
 
     sanitize (job) {

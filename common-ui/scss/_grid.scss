@@ -28,6 +28,10 @@
     align-items: center;
 }
 
+.flex-align-end {
+    align-items: flex-end;
+}
+
 .flex-item-static {
     flex-grow: 0;
 }
@@ -47,6 +51,11 @@
 
 .row {
     @include make-row();
+}
+
+.section-padded {
+    border-bottom: $border-default;
+    padding: $padding-large $gutter-half;
 }
 
 .row-condensed {

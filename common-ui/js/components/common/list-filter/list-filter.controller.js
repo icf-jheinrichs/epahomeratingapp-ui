@@ -4,12 +4,16 @@ const buttons = [
         'Key'   : 'active'
     },
     {
-        'Name'  : 'In QA',
-        'Key'   : 'qa'
+        'Name'  : 'Internal Review',
+        'Key'   : 'internal-review'
     },
     {
         'Name'  : 'History',
         'Key'   : 'history'
+    },
+    {
+        'Name'  : 'Offline Jobs',
+        'Key'   : 'offline-jobs'
     }
 ];
 

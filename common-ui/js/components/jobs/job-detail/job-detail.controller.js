@@ -37,6 +37,10 @@ class JobDetailController {
         this.job.Secondary.push(this.JobsService.getNewSample());
     }
 
+    handleSampleSetToggleChange (isOn) {
+        this.isSampleSet = isOn;
+    }
+
     get canAddSample () {
         return (this.isSampleSet && this.job.Secondary.length < (MAX_SAMPLE_SIZE - 1));
     }

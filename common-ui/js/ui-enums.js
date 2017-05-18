@@ -38,6 +38,11 @@ const CATEGORY_PROGRESS = {
     }
 };
 
+const CONTEXT = {
+    'APP'   : 'app',
+    'ADMIN' : 'admin'
+};
+
 const IMAGES = {
     DEFAULT_PHOTO : 'img/job-photo-default.svg'
 };
@@ -63,7 +68,15 @@ const MESSAGING = {
     POST_COMMENT                     : 'POST_COMMENT',
     VIEW_HVAC_DESIGN_REPORT          : 'VIEW_HVAC_DESIGN_REPORT',
     HOUSE_PLAN_NEW                   : 'HOUSE_PLAN_NEW',
-    HOUSE_PLAN_UPDATE                : 'HOUSE_PLAN_UPDATE'
+    HOUSE_PLAN_UPDATE                : 'HOUSE_PLAN_UPDATE',
+    JOB_AVAILABLE_OFFLINE            : 'JOB_AVAILABLE_OFFLINE',
+    ASSET_DOWNLOADED                 : 'ASSET_DOWNLOADED',
+    ASSET_BEING_UPLOADED_FOR_JOB     : 'ASSET_BEING_UPLOADED_FOR_JOB',
+    ASSET_UPLOADED_FOR_JOB           : 'ASSET_UPLOADED_FOR_JOB',
+    DB_START_SYNC                    : 'DB_START_SYNC',
+    DB_PAUSE_SYNC                    : 'DB_PAUSE_SYNC',
+    DEVICE_OFFLINE                   : 'DEVICE_OFFLINE',
+    DEVICE_ONLINE                    : 'DEVICE_ONLINE'
 };
 
 const RATING_TYPES = {
@@ -103,6 +116,7 @@ const RESPONSES = {
 export default {
     CATEGORIES,
     CATEGORY_PROGRESS,
+    CONTEXT,
     IMAGES,
     JOB_STATUS,
     MANUFACTURERS,

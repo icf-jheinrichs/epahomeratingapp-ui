@@ -19,4 +19,8 @@
     border-top: $border-default;
     display: block;
     padding: $gutter-half;
+
+    &.flex-row {
+        display: flex;
+    }
 }

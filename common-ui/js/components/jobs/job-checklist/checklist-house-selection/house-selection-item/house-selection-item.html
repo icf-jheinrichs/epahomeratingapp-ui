@@ -9,7 +9,7 @@
     </photo-capture>
 
     <div class="house-info">
-        <h4 class="house-title">{{houseSelectionItemCtrl.HouseTitle}} {{hhouseSelectionItemCtrlouse.isPrimary}}</h4>
+        <h4 class="house-title" data-ng-bind-html="houseSelectionItemCtrl.HouseTitle"></h4>
         <span class="label label-primary" data-ng-if="houseSelectionItemCtrl.isPrimary=='true'"><i class="fa fa-star" aria-hidden="true"></i> Primary</span>
 
         <p>Builder: {{::houseSelectionItemCtrl.house.BuilderId}}</p>

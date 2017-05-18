@@ -1,4 +1,7 @@
-<input id="SampleSet" class="toggle-control" type="checkbox" data-ng-model="toggleCtrl.toggleValue" />
-<label for="SampleSet" class="toggle-label" tabindex="0">
+<input id="toggle-{{::toggleCtrl.toggleId}}" class="toggle-control" type="checkbox" data-ng-model="toggleCtrl.toggleValue" data-ng-change="toggleCtrl.onChange($event)" />
+<label for="toggle-{{::toggleCtrl.toggleId}}" class="toggle-label" data-ng-class="toggleCtrl.toggleClass" tabindex="0">
     <span class="sr-only" data-ng-transclude="data-ng-transclude"></span>
+    <i class="fa fa-spinner fa-pulse status-syncing" aria-hidden="true"></i>
+    <span class="toggle-status"></span>
+    <span class="toggle-status-border"></span>
 </label>

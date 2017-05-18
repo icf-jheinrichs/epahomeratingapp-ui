@@ -1,8 +1,9 @@
-<div class="item-list-head item-list-head-jobs flex-row flex-justify-end">
-    <span>Pre-drywall</span>
+<div class="item-list-head item-list-head-jobs flex-row flex-align-end">
+    <span data-ng-if="jobsCtrl.CONTEXT_IS_APP">Available Offline</span>
+    <span class="flex-item-pull-right">Pre-drywall</span>
     <span>Final</span>
 </div>
 
 <div class="item-list">
-    <job data-ng-repeat="job in jobsCtrl.jobs track by $index" job="job" class="item-list-item item-list-item-job"></job>
+    <job data-ng-repeat="job in jobsCtrl.jobs track by $index" job="job" class="item-list-item item-list-item-job flex-row"></job>
 </div>

@@ -71,6 +71,7 @@ angular
     .constant('API_URL', API_URL)
     .constant('BASE_IMAGE_URL', BASE_IMAGE_URL)
     .constant('UI_ENUMS', UI_ENUMS)
+    .constant('CONTEXT', UI_ENUMS.CONTEXT.APP)
     .run(authenticationHook);
 
 angular

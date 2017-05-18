@@ -15,14 +15,6 @@ $brand-tertiary:    #414a51; // dark grey
 $brand-auxillary:   #e9e9e9; // light grey
 
 //
-//### Status Colors
-//
-
-$status-correct:    #7ed321;
-$status-active:     #f5a623;
-$status-error:      #ff464b;
-
-//
 //## Typography
 //
 
@@ -58,6 +50,16 @@ $heading-font-weight: normal;
 
 $icon-font-size:    20px;
 $icon-font-size-small: $font-size-base;
+
+//
+//### Status Colors
+//
+
+$status-correct:    #7ed321;
+$status-active:     #f5a623;
+$status-sync-down:  $link-color;
+$status-warning:    #fff578;
+$status-error:      #ff464b;
 
 //
 //## Scaffolding
@@ -113,22 +115,29 @@ $arrow-large:           15px;
 //
 
 $shadow-color-default:  rgba(0, 0, 0, .25);
-$shadow-color-light:    rgba(0, 0, 0, .10);
+$shadow-color-light:    rgba(0, 0, 0, .1);
 $shadow-color-dark:     rgba(0, 0, 0, .5);
 $shadow-color-inset:    rgba(0, 0, 0, .05);
 $shadow-color-hover:    rgba(0, 0, 0, .05);
 $shadow-color-active:   rgba($link-color, .25);
 $shadow-color-error:    rgba($status-error, .25);
+$shadow-color-warning:  rgba($status-warning, .25);
 $shadow-color-correct:  rgba($status-correct, .25);
 
 $shadow-default:        0 0 15px $shadow-color-default;
 $shadow-small:          1px 1px 3px  $shadow-color-light;
 $shadow-inset:          inset 1px 1px 4px $shadow-color-inset;
 
-$shadow-hover:          0 0 0 1px $body-bg, 0 0 0 3px $shadow-color-hover;
+$shadow-hover:          0 0 0 2px $body-bg, 0 0 1px 5px $shadow-color-hover;
 $shadow-active:         0 0 0 1px $body-bg, 0 0 0 3px $shadow-color-active;
-$shadow-error:        0 0 0 1px $body-bg, 0 0 0 3px $shadow-color-error;
+$shadow-error:          0 0 0 1px $body-bg, 0 0 0 3px $shadow-color-error;
 $shadow-correct:        0 0 0 1px $body-bg, 0 0 0 3px $shadow-color-correct;
+
+$shadow-toggle:            0 0 0 3px $body-bg, 0 0 4px 4px $shadow-color-hover;
+$shadow-toggle-on:         0 0 0 3px $body-bg, 0 0 4px 4px $shadow-color-correct;
+$shadow-toggle-sync-up:    0 0 0 3px $body-bg, 0 0 4px 4px $shadow-color-warning;
+$shadow-toggle-sync-down:  0 0 0 3px $body-bg, 0 0 4px 4px $shadow-color-active;
+$shadow-toggle-sync-error: 0 0 0 3px $body-bg, 0 0 4px 4px $shadow-color-error;
 
 //
 //## Animation
@@ -213,8 +222,15 @@ $photo-capture-small:   100px;
 $label-returned:    $status-error;
 $label-energy-star: $brand-secondary;
 $label-hers:        #fff578;
+$label-sample-set:  $brand-auxillary;
 
 $label-padding:     $padding-default;
+
+
+// Toggles
+
+$toggle-size:       30px;
+$toggle-size-small: 20px;
 
 //
 //## Z indexes
@@ -243,10 +259,10 @@ $screen-md-max:     ($screen-lg - 1);
 $screen-lg-min:     ($screen-md + 1);
 
 $grid-breakpoints: (
-  xs: 0,
-  sm: ($screen-sm + 80px),
-  md: ($screen-md + 80px),
-  lg: ($screen-lg + 80px)
+    xs: 0,
+    sm: ($screen-sm + 80px),
+    md: ($screen-md + 80px),
+    lg: ($screen-lg + 80px)
 ) !default;
 // @include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
 // @include _assert-starts-at-zero($grid-breakpoints);

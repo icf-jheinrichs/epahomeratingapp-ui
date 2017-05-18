@@ -1,28 +1,116 @@
-import _sample from 'lodash/sample';
 import moment from 'moment';
 
 class JobController {
-    constructor (UI_ENUMS, jobTitleFilter, BASE_IMAGE_URL) {
+    constructor ($log, $rootScope, jobTitleFilter, CONTEXT, UI_ENUMS, BASE_IMAGE_URL) {
         'ngInject';
 
+        this.$log              = $log;
+        this.$rootScope        = $rootScope;
+
+        this.jobTitleFilter    = jobTitleFilter;
         this.DEFAULT_PHOTO     = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
         this.BASE_IMAGE_URL    = BASE_IMAGE_URL;
-        this.jobTitleFilter    = jobTitleFilter;
+
+        this.contextIsApp      = CONTEXT = UI_ENUMS.CONTEXT.APP;
+        this.MESSAGING         = UI_ENUMS.MESSAGING;
+
+        this.SYNC_STATUS       = {
+            'UP'    : 'sync-up',
+            'DOWN'  : 'sync-down',
+            'ERROR' : 'sync-error'
+        };
     }
 
     $onInit () {
-        this.RatingType        = (this.job.RatingType === 'energy-star') ? 'Energy Star' : 'HERS Rating';
-        this.secondaryQuantity = this.job.Secondary.length;
-        this.isSample          = this.secondaryQuantity > 0;
-        this.jobPhoto          = (this.job.Primary.Photo.length) ? this.BASE_IMAGE_URL + this.job.Primary.Photo[0] : this.DEFAULT_PHOTO;
+        if (this.job.RatingType === 'energy-star') {
+            this.RatingType      = 'ENERGY STAR';
+            this.RatingTypeClass = 'label-energy-star';
+        } else {
+            this.RatingType      = 'HERS Rating';
+            this.RatingTypeClass = 'label-hers-rating';
+        }
 
-        //TODO: use real data - remove import of _sample if not needed (likely not)
-        this.SyncStatus        = _sample(['Synced', 'Unsynced']);
+        this.sampleQuantity    = this.job.Secondary.length + 1;
+        this.isSample          = this.sampleQuantity > 1;
+
+        //
+        this.assetDownloadedListener = this.$rootScope.$on(this.MESSAGING.ASSET_DOWNLOADED, (event, assetStatus) => {
+            this.$log.log(`[job.controller.js] assetDownloadedListener ${assetStatus.jobID} ${assetStatus.total} ${assetStatus.missing}`);
+            if (this.job.offlineAvailable && assetStatus.missing > 0) {
+                this.toggleStatusClass = this.SYNC_STATUS.DOWN;
+            } else {
+                this.toggleStatusClass = '';
+            }
+        });
+
+        this.assetBeingUploadedForJobListener = this.$rootScope.$on(this.MESSAGING.ASSET_BEING_UPLOADED_FOR_JOB, (event, assetStatus) => {
+            this.$log.log(`[job.controller.js] assetBeingUploadedForJobListener ${assetStatus.jobID}`);
+
+            if (this.job.offlineAvailable && assetStatus.jobID === this.job._id) {
+                this.toggleStatusClass = this.SYNC_STATUS.UP;
+            }
+        });
+
+        this.assetUploadedForJobListener = this.$rootScope.$on(this.MESSAGING.ASSET_UPLOADED_FOR_JOB, (event, assetStatus) => {
+            this.$log.log(`[job.controller.js] assetUploadedForJobListener ${assetStatus.jobID}`);
+
+            if (this.job.offlineAvailable && assetStatus.jobID === this.job._id) {
+                this.toggleStatusClass = '';
+            }
+        });
+
+        this.deviceOfflineListener = this.$rootScope.$on(this.MESSAGING.DEVICE_OFFLINE, (event) => {
+            this.$log.log('[job.controller.js] deviceOfflineListener');
+
+            if (this.job.offlineAvailable && this.toggleStatusClass !== '') {
+                this.toggleStatusClass = this.SYNC_STATUS.ERROR;
+            }
+        });
+
+        this.deviceOnlineListener = this.$rootScope.$on(this.MESSAGING.DEVICE_ONLINE, (event, jobs) => {
+            this.$log.log(`[job.controller.js] deviceOnlineListener ${jobs.uploadingJobs}`);
+
+            if (this.job.offlineAvailable && this.toggleStatusClass === this.SYNC_STATUS.ERROR) {
+                if (jobs.uploadingJobs.indexOf(this.job._id) >= 0) {
+                    this.toggleStatusClass = this.SYNC_STATUS.UP;
+                } else {
+                    this.toggleStatusClass = this.SYNC_STATUS.DOWN;
+                }
+            }
+        });
     }
 
-    getRatingTypeClass () {
-        //TODO: make this better
-        return (this.job.RatingType === 'energy-star') ? 'label-energy-star' : 'label-hers-rating';
+    /**
+     * deregester all $rootScope listeners
+     */
+    $onDestroy () {
+        this.assetDownloadedListener();
+        this.assetBeingUploadedForJobListener();
+        this.assetUploadedForJobListener();
+        this.deviceOfflineListener();
+        this.deviceOnlineListener();
+    }
+
+    handleAvailableOfflineChange (isOn) {
+        if (this.job.offlineAvailable) {
+            this.job.offlineAvailable = false;
+
+            this.toggleStatusClass = '';
+
+            this.$rootScope
+                .$emit(this.MESSAGING.JOB_AVAILABLE_OFFLINE, {
+                    offlineAvailable : this.job.offlineAvailable,
+                    job              : this.job._id
+                });
+        } else {
+            this.job.offlineAvailable = true;
+
+            this.$rootScope
+                .$emit(this.MESSAGING.JOB_AVAILABLE_OFFLINE, {
+                    offlineAvailable : this.job.offlineAvailable,
+                    job              : this.job._id
+                });
+        }
     }
 
     hasStatusLabel () {
@@ -33,13 +121,8 @@ class JobController {
         return this.jobTitleFilter(this.job.Primary.AddressInformation);
     }
 
-    //TODO: determine if we need user friendly ID in addition to DB id.
-    get id () {
-        return this.job._id.substring(0, 8).toUpperCase();
-    }
-
     get lastUpdateTime () {
-        return moment(this.job.History[this.job.History.length - 1].DateTime).format('MMM Do YYYY, h:mm:ss a');
+        return moment(this.job.History[this.job.History.length - 1].DateTime).format('h:mm:ss a, MMM Do YYYY');
     }
 
     get lastUpdateType () {

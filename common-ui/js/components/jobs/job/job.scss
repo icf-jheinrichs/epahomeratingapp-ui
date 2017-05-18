@@ -8,12 +8,12 @@ $job-photo-height-small:  85px;
 
 .job {
     cursor: pointer;
-    padding: $gutter-half;
+    padding: $padding-large $gutter-half $padding-large $padding-large;
     position: relative;
     transition: background-color $transition-default ease-out;
 
     &.job-returned {
-        padding-top: $gutter-half + $offset-default;
+        padding-top: $padding-large + $offset-default;
     }
 
     .fa-chevron-right {
@@ -34,15 +34,41 @@ $job-photo-height-small:  85px;
     }
 }
 
-.job-photos {
-    align-self: flex-start;
-    height: $job-photo-height;
-    margin: 0 $gutter-half 0 0;
-    overflow: hidden;
-    width: $job-photo-width;
+.form-control-job-offline:checked + .job-offline-status .checked {
+    visibility: visible;
+}
 
-    img {
-        width: 100%;
+.job-select {
+    padding: $padding-large $padding-large $padding-large $gutter-half;
+}
+
+.job-offline-status {
+    background-color: $brand-tertiary;
+    border-radius: $toggle-size / 2;
+    display: block;
+    height: $toggle-size;
+    padding: $padding-default;
+    position: relative;
+    width: $toggle-size;
+
+    &::after {
+        background-color: $body-bg;
+        border-radius: $toggle-size / 2;
+        content: '';
+        height: $toggle-size;
+        left: 0;
+        position: absolute;
+        top: 0;
+        transform: scale(0.95);
+        transition: transform $transition-default;
+        width: $toggle-size;
+    }
+
+    .checked {
+        font-size: $toggle-size - ($padding-default * 2);
+        line-height: $line-height-none;
+        position: relative;
+        z-index: 2;
     }
 }
 
@@ -56,7 +82,7 @@ $job-photo-height-small:  85px;
 }
 
 .job-title {
-    margin: 0 0 $offset-small;
+    margin: $offset-small 0;
 }
 
 .job-history {
@@ -78,16 +104,9 @@ $job-photo-height-small:  85px;
     font-weight: bold;
 }
 
-.job-house-quantity {
-    margin: 0 $gutter-full 0 auto;
-
-    .fa {
-        margin-right: $offset-small;
-    }
-}
-
 .job-progress {
     flex-shrink: 0;
+    margin-left: auto;
     width: 200px;
 
     .radial-progress {

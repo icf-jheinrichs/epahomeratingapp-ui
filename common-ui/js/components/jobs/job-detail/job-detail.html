@@ -16,7 +16,9 @@
         <legend class="col-xs-3">Sample Set</legend>
         <div class="offset-xs-3 col-xs-9">
             <toggle
-                toggle-value="jobDetailCtrl.isSampleSet">Job is a Sample Set
+                toggle-value="jobDetailCtrl.isSampleSet"
+                toggle-id="sampleSet"
+                handle-change="jobDetailCtrl.handleSampleSetToggleChange(isOn)">Job is a Sample Set
             </toggle>
         </div>
     </fieldset>

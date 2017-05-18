@@ -6,7 +6,6 @@
     padding-right: 55px;
 
     span {
-        margin-left: $offset-default;
         text-align: center;
         width: 80px;
     }
@@ -15,3 +14,69 @@
 .item-list-item.item-list-item-job {
     padding: 0;
 }
+
+.sync-status-icon {
+    background-color: $border-color-default;
+    border: $border-size-medium solid darken($border-color-default, 10%);
+    border-radius: $font-size-large / 2;
+    display: inline-block;
+    font-size: 9px;
+    height: $font-size-large;
+    margin: 0 $offset-small;
+    padding: 1px 0 1px 2px;
+    position: relative;
+    top: 2px;
+    transition: border-color $transition-default, color $transition-default, background-color $transition-default;
+    width: $font-size-large;
+
+    .fa {
+        opacity: 0;
+        position: absolute;
+        transform: scale(.8);
+        transition: opacity $transition-default, transform $transition-default;
+    }
+
+    .fa-times,
+    .fa-minus {
+        margin-left: 1px;
+    }
+}
+
+.sync-status-offline,
+.sync-status-online {
+    .fa-check {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.sync-status-online {
+    background-color: $status-correct;
+    border-color: darken($status-correct, 20%);
+}
+
+.sync-status-syncing {
+    background-color: $body-bg;
+    border-color: $status-sync-down;
+}
+
+.sync-status-local-unsynced {
+    background-color: $status-warning;
+    border-color: darken($status-warning, 30%);
+
+    .fa-minus {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.sync-status-incomplete {
+    background-color: $status-error;
+    border-color: darken($status-error, 30%);
+
+    .fa-times {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+

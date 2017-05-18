@@ -4,10 +4,15 @@
     padding: $padding-small $padding-large;
 }
 
-.label-rating-type {
+.label-rating-type,
+.label-sample-set {
     display: inline-block;
     font-size: $font-size-small;
-    margin-right: $offset-default;
+    margin-right: 1px;
+}
+
+.label-sample-set {
+    background-color: $label-sample-set;
 }
 
 .label-energy-star {
