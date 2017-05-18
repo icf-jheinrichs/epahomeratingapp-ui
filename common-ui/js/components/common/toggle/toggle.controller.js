@@ -11,7 +11,6 @@ class ToggleController {
 
     $onChanges (changes) {
         if (changes.toggleClass && !changes.toggleClass.isFirstChange()) {
-            this.$log.log(changes.toggleClass.currentValue);
             this.toggleClass = changes.toggleClass.currentValue;
         }
     }

@@ -22,8 +22,6 @@ class JobsPageController {
         let self = this;
 
         this.filterCriteria = 'Jobs';
-        this.lastSynced     = 'Yesterday';
-        this.syncQuantity   = this.QUANTITY.ALL;
 
         this.availableOfflineListener
             = this

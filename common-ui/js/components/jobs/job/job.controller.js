@@ -34,9 +34,9 @@ class JobController {
         this.isSample          = this.sampleQuantity > 1;
 
         //
-        this.assetDownloadedListener = this.$rootScope.$on(this.MESSAGING.ASSET_DOWNLOADED, (event, assetStatus) => {
-            this.$log.log(`[job.controller.js] assetDownloadedListener ${assetStatus.jobID} ${assetStatus.total} ${assetStatus.missing}`);
-            if (this.job.offlineAvailable && assetStatus.missing > 0) {
+        this.assetDownloadedListener = this.$rootScope.$on(this.MESSAGING.ASSET_DOWNLOADED, (event, status) => {
+            this.$log.log(`[job.controller.js] assetDownloadedListener ${status.jobID} ${status.assetStatus.total} ${status.assetStatus.missing}`);
+            if (this.job.offlineAvailable && status.assetStatus.missing > 0) {
                 this.toggleStatusClass = this.SYNC_STATUS.DOWN;
             } else {
                 this.toggleStatusClass = '';
