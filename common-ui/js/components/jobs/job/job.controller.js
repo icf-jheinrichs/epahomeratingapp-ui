@@ -36,25 +36,25 @@ class JobController {
         //
         this.assetDownloadedListener = this.$rootScope.$on(this.MESSAGING.ASSET_DOWNLOADED, (event, status) => {
             this.$log.log(`[job.controller.js] assetDownloadedListener ${status.jobID} ${status.assetStatus.total} ${status.assetStatus.missing}`);
-            if (this.job.offlineAvailable && status.assetStatus.missing > 0) {
+            if (this.job.offlineAvailable && status.jobID === this.job._id && status.assetStatus.missing > 0) {
                 this.toggleStatusClass = this.SYNC_STATUS.DOWN;
             } else {
                 this.toggleStatusClass = '';
             }
         });
 
-        this.assetBeingUploadedForJobListener = this.$rootScope.$on(this.MESSAGING.ASSET_BEING_UPLOADED_FOR_JOB, (event, assetStatus) => {
-            this.$log.log(`[job.controller.js] assetBeingUploadedForJobListener ${assetStatus.jobID}`);
+        this.assetBeingUploadedForJobListener = this.$rootScope.$on(this.MESSAGING.ASSET_BEING_UPLOADED_FOR_JOB, (event, status) => {
+            this.$log.log(`[job.controller.js] assetBeingUploadedForJobListener ${status.jobID}`);
 
-            if (this.job.offlineAvailable && assetStatus.jobID === this.job._id) {
+            if (this.job.offlineAvailable && status.jobID === this.job._id) {
                 this.toggleStatusClass = this.SYNC_STATUS.UP;
             }
         });
 
-        this.assetUploadedForJobListener = this.$rootScope.$on(this.MESSAGING.ASSET_UPLOADED_FOR_JOB, (event, assetStatus) => {
-            this.$log.log(`[job.controller.js] assetUploadedForJobListener ${assetStatus.jobID}`);
+        this.assetUploadedForJobListener = this.$rootScope.$on(this.MESSAGING.ASSET_UPLOADED_FOR_JOB, (event, status) => {
+            this.$log.log(`[job.controller.js] assetUploadedForJobListener ${status.jobID}`);
 
-            if (this.job.offlineAvailable && assetStatus.jobID === this.job._id) {
+            if (this.job.offlineAvailable && status.jobID === this.job._id) {
                 this.toggleStatusClass = '';
             }
         });
