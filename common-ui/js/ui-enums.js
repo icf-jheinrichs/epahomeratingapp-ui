@@ -76,7 +76,8 @@ const MESSAGING = {
     DB_START_SYNC                    : 'DB_START_SYNC',
     DB_PAUSE_SYNC                    : 'DB_PAUSE_SYNC',
     DEVICE_OFFLINE                   : 'DEVICE_OFFLINE',
-    DEVICE_ONLINE                    : 'DEVICE_ONLINE'
+    DEVICE_ONLINE                    : 'DEVICE_ONLINE',
+    REFRESH_JOBS_LIST                : 'REFRESH_JOBS_LIST'
 };
 
 const RATING_TYPES = {

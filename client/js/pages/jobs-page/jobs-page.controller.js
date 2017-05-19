@@ -19,15 +19,13 @@ class JobsPageController {
     }
 
     $onInit () {
-        let self = this;
-
         this.filterCriteria = 'Jobs';
 
         this.availableOfflineListener
             = this
                 .$rootScope
                 .$on(this.MESSAGING.JOB_AVAILABLE_OFFLINE, (event, offline) => {
-                    let jobIndex = _findIndex(self.jobs, {_id : offline.job});
+                    let jobIndex = _findIndex(this.jobs, {_id : offline.job});
                     if (offline.offlineAvailable) {
                         this.$log.log(`[jobs-page.controller.js] Enable offline job: ${offline.job}`);
                         this.JobsService.makeAvailableOffline(offline.job);
@@ -37,13 +35,26 @@ class JobsPageController {
                     }
 
                     if (jobIndex >= 0) {
-                        self.jobs[jobIndex].offlineAvailable = offline.offlineAvailable;
+                        this.jobs[jobIndex].offlineAvailable = offline.offlineAvailable;
                     }
+                });
+
+        this.refreshJobsListener
+            = this
+                .$rootScope
+                .$on(this.MESSAGING.REFRESH_JOBS_LIST, (event) => {
+                    this.jobs = {};
+                    this.JobsService
+                        .get()
+                        .then((jobs) => {
+                            this.jobs = jobs;
+                        });
                 });
     }
 
     $onDestroy () {
         this.availableOfflineListener();
+        this.refreshJobsListener();
     }
 }
 

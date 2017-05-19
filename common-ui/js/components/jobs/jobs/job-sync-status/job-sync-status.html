@@ -1,4 +1,4 @@
-<div class="section-padded">
+<div class="section-padded clearfix">
     Sync Status:
     <span class="sync-status-icon" data-ng-class="jobSyncStatusCtrl.syncStatusClass">
         <i class="fa fa-times" aria-hidden="true"></i>
@@ -6,4 +6,8 @@
         <i class="fa fa-minus" aria-hidden="true"></i>
     </span>
      {{jobSyncStatusCtrl.syncStatus}}
+
+    <button class="btn pull-right" data-ng-click="jobSyncStatusCtrl.refreshJobList()">
+        Refresh Job List
+    </button>
 </div>

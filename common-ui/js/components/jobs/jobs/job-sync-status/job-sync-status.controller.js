@@ -3,6 +3,8 @@ import moment from 'moment';
 
 class JobSyncStatusController {
     constructor ($log, $rootScope, UI_ENUMS) {
+        'ngInject';
+
         this.STATUS = {
             LAST_UPDATED    : 'Last Updated :now:',
             UP_TO_DATE      : 'Up to Date',
@@ -79,6 +81,12 @@ class JobSyncStatusController {
         this.dbPauseSyncListener();
         this.deviceOfflineListener();
         this.deviceOnlineListener();
+    }
+
+    refreshJobList () {
+        this
+            .$rootScope
+            .$emit(this.MESSAGING.REFRESH_JOBS_LIST);
     }
 }
 
