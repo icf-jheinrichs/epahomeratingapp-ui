@@ -207,6 +207,14 @@ $modal-width-large:     650px;
 
 $overlay-modal-bg:      rgba(0, 0, 0, .5);
 
+
+//
+//## Dialogs
+//
+
+$dialog-width-default:   500px;
+$overlay-dialog-bg:      rgba(0, 0, 0, .5);
+
 //
 //## Media
 //
@@ -240,6 +248,7 @@ $zindex-lightbox:         1200;
 $zindex-lightbox-overlay: 1150;
 $zindex-drop-down:        1150;
 $zindex-popover:          1125;
+$zindex-dialog:           1100;
 $zindex-modal:            1100;
 $zindex-overlay:          1050;
 $zindex-fixed-header:     1000;

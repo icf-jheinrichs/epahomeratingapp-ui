@@ -15,6 +15,19 @@
             <job-sync-status data-ng-if="jobsPageCtrl.CONTEXT_IS_APP"></job-sync-status>
 
             <jobs jobs="jobsPageCtrl.jobs"></jobs>
+
+            <div class="dialog hidden" dialog="dialog" id="dialog-make-job-offline">
+                <div class="dialog-header">
+                    <h3 class="dialog-title">Make Job Offline</h3>
+                </div>
+                <div class="dialog-body">
+                    <p>Are you sure you want to make this job offline only? This job will no longer recieve updated Photos, HVAC Design Reports or Rater Design Review Checklists</p>
+                </div>
+                <div class="dialog-footer text-right">
+                    <button class="btn btn-link" type="button" data-ng-click="dismiss(false)">Cancel</button>
+                    <button class="btn" data-ng-click="dismiss(true)">Make Job Offline</button>
+                </div>
+            </div>
         </form>
     </div>
 </section>

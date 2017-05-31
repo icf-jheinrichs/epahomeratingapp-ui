@@ -1,0 +1,42 @@
+.dialog {
+    background-color: $body-bg;
+    box-shadow: $shadow-default;
+    left: 50%;
+    margin-left: ceil(-$dialog-width-default / 2);
+    position: fixed;
+    top: $gutter-full;
+    width: $dialog-width-default;
+    z-index: $zindex-dialog;
+
+    &.dialog-scroll-body {
+        height: 500px;
+    }
+}
+
+.dialog-header {
+    background-color: $brand-auxillary;
+    overflow: hidden;
+}
+
+.dialog-title {
+    font-size: $font-size-h4;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+}
+
+.dialog-header,
+.dialog-body,
+.dialog-footer {
+    padding: $padding-large;
+}
+
+.dialog-scroll-body .dialog-body {
+    -webkit-overflow-scrolling: touch; // sass-lint:disable-line no-vendor-prefixes, no-misspelled-properties
+    bottom: 0;
+    left: 0;
+    overflow-y: scroll;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+}

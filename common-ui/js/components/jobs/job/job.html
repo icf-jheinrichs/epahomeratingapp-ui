@@ -2,8 +2,9 @@
     <div data-ng-if="jobCtrl.contextIsApp">
         <toggle
             handle-change="jobCtrl.handleAvailableOfflineChange(isOn)"
-            toggle-id="{{jobCtrl.job._id}}"
             toggle-class="jobCtrl.toggleStatusClass"
+            toggle-confirmation-dialog="{{jobCtrl.DIALOG}}"
+            toggle-id="{{jobCtrl.job._id}}"
             toggle-value="jobCtrl.job.offlineAvailable">Make Job Available offline: <span data-ng-bind-html="jobCtrl.JobTitle"></span></span>
         </toggle>
     </div>

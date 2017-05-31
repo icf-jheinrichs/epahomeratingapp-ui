@@ -7,6 +7,7 @@
     z-index: $zindex-overlay;
 }
 
+.overlay-dialog,
 .overlay-modal,
 .overlay-lightbox {
     background-color: $overlay-modal-bg;

@@ -3,10 +3,11 @@ import controller from './toggle.controller';
 
 let toggleComponent = {
     bindings     : {
-        toggleValue    : '<',
-        toggleClass    : '<',
-        toggleId       : '@',
-        handleChange   : '&'
+        handleChange             : '&',
+        toggleClass              : '<',
+        toggleConfirmationDialog : '@',
+        toggleId                 : '@',
+        toggleValue              : '<'
     },
     transclude   : true,
     template,

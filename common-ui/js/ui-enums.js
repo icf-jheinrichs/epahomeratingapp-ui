@@ -43,6 +43,10 @@ const CONTEXT = {
     'ADMIN' : 'admin'
 };
 
+const DIALOG = {
+    MAKE_JOB_OFFLINE : 'dialog-make-job-offline'
+};
+
 const IMAGES = {
     DEFAULT_PHOTO : 'img/job-photo-default.svg'
 };
@@ -118,6 +122,7 @@ export default {
     CATEGORIES,
     CATEGORY_PROGRESS,
     CONTEXT,
+    DIALOG,
     IMAGES,
     JOB_STATUS,
     MANUFACTURERS,

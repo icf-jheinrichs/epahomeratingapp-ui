@@ -1,6 +1,7 @@
 import _map from 'lodash/map';
 import _random from 'lodash/random';
 import _cloneDeep from 'lodash/cloneDeep';
+import _sample from 'lodash/sample';
 
 /**
  * JobsService is the interface for all job data.
@@ -14,15 +15,48 @@ class JobsService {
      * @param  {function} $sanitize angular.$sanitize html injection
      * @param  {object}   API_URL   epahomeratingapp constants - contains paths to API
      */
-    constructor ($log, $q, $http, $sanitize, API_URL) {
+    constructor ($log, $q, $http, $interval, $rootScope, $sanitize, API_URL, UI_ENUMS) {
         'ngInject';
+        let self = this;
 
-        this.$log      = $log;
-        this.$q        = $q;
-        this.$http     = $http;
-        this.$sanitize = $sanitize;
+        this.$log       = $log;
+        this.$q         = $q;
+        this.$http      = $http;
+        this.$sanitize  = $sanitize;
+        this.$interval  = $interval;
+        this.$rootScope = $rootScope;
 
         this.API_URL   = API_URL;
+
+        this.MESSAGING = UI_ENUMS.MESSAGING;
+
+        // this.messages = [this.MESSAGING.DEVICE_OFFLINE, this.MESSAGING.DEVICE_ONLINE, this.MESSAGING.ASSET_DOWNLOADED, this.MESSAGING.ASSET_UPLOADED_FOR_JOB, this.MESSAGING.ASSET_BEING_UPLOADED_FOR_JOB, this.MESSAGING.DB_START_SYNC, this.MESSAGING.DB_PAUSE_SYNC];
+        // this.jobIDs   = ['1ef1c7dce98910b013b2dbc5272f57cf', '27be11354609526b241e1fa83080ac27', '2b7fef4727c30a3e29c46f84d3bfc73e', '4224198713186c7bf015b08bb8b7969b', '498915e4edeb9eb2c70ae554c1bc8553', '6c44b076d4a80b35f42a5c3e82f9a95d', '932876091b531e106a2ced4251f358bc', 'cf6e338f0f7b9851b306cb4da9c04fef'];
+
+        this.messages = [this.MESSAGING.DEVICE_ONLINE, this.MESSAGING.ASSET_DOWNLOADED];
+        this.jobIDs   = ['1ef1c7dce98910b013b2dbc5272f57cf', '27be11354609526b241e1fa83080ac27', '2b7fef4727c30a3e29c46f84d3bfc73e', '4224198713186c7bf015b08bb8b7969b', '498915e4edeb9eb2c70ae554c1bc8553', '6c44b076d4a80b35f42a5c3e82f9a95d', '932876091b531e106a2ced4251f358bc', 'cf6e338f0f7b9851b306cb4da9c04fef'];
+
+        this.messageIndex = 0;
+        this.jobIDindex   = 0;
+
+        // this.stop = this.$interval(() => {
+        //     let message = _sample(self.messages);
+        //     let jobID   = _sample(self.jobIDs);
+
+        //     let data = {
+        //         jobID,
+        //         assetStatus : {
+        //             total   : 4,
+        //             missing : _random(0, 1)
+        //         },
+        //         uploadingJobs : ['1ef1c7dce98910b013b2dbc5272f57cf', '27be11354609526b241e1fa83080ac27', '2b7fef4727c30a3e29c46f84d3bfc73e', '4224198713186c7bf015b08bb8b7969b', '498915e4edeb9eb2c70ae554c1bc8553']
+        //     };
+
+        //     self.$log.log(message, jobID);
+
+        //     self.$rootScope.$broadcast(message, data);
+
+        // }, 5000);
     }
 
     /**
@@ -43,7 +77,7 @@ class JobsService {
 
                         jobs = _map(response.data, 'doc');
                         jobs.forEach((job) => {
-                            job.offlineAvailable = !!_random(0, 1);
+                            job.offlineAvailable = true; // !!_random(0, 1);
                         });
 
                         resolve(jobs);

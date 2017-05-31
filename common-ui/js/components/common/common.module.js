@@ -10,6 +10,7 @@ import statusMessageComponent from './status-message/status-message.component';
 import toggleComponent from './toggle/toggle.component';
 
 // common directives
+import DialogModule from './dialog/dialog.module';
 import DropdownModule from './dropdown/dropdown.module';
 import LightboxModule from './lightbox/lightbox.module';
 import PopoverModule from './popover/popover.module';
@@ -18,6 +19,7 @@ let commonModule
     = angular
         .module('epahomeratingapp.common', [
             DropdownModule.name,
+            DialogModule.name,
             LightboxModule.name,
             PopoverModule.name
         ])

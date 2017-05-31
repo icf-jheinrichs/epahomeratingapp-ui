@@ -12,6 +12,7 @@ class JobController {
         this.BASE_IMAGE_URL    = BASE_IMAGE_URL;
 
         this.contextIsApp      = CONTEXT = UI_ENUMS.CONTEXT.APP;
+        this.DIALOG            = UI_ENUMS.DIALOG.MAKE_JOB_OFFLINE;
         this.MESSAGING         = UI_ENUMS.MESSAGING;
 
         this.SYNC_STATUS       = {
@@ -32,6 +33,7 @@ class JobController {
 
         this.sampleQuantity    = this.job.Secondary.length + 1;
         this.isSample          = this.sampleQuantity > 1;
+        this.toggleStatusClass = '';
 
         //
         this.assetDownloadedListener = this.$rootScope.$on(this.MESSAGING.ASSET_DOWNLOADED, (event, status) => {
@@ -92,25 +94,15 @@ class JobController {
     }
 
     handleAvailableOfflineChange (isOn) {
-        if (this.job.offlineAvailable) {
-            this.job.offlineAvailable = false;
+        this.job.offlineAvailable = isOn;
 
-            this.toggleStatusClass = '';
+        this.toggleStatusClass = '';
 
-            this.$rootScope
-                .$emit(this.MESSAGING.JOB_AVAILABLE_OFFLINE, {
-                    offlineAvailable : this.job.offlineAvailable,
-                    job              : this.job._id
-                });
-        } else {
-            this.job.offlineAvailable = true;
-
-            this.$rootScope
-                .$emit(this.MESSAGING.JOB_AVAILABLE_OFFLINE, {
-                    offlineAvailable : this.job.offlineAvailable,
-                    job              : this.job._id
-                });
-        }
+        this.$rootScope
+            .$emit(this.MESSAGING.JOB_AVAILABLE_OFFLINE, {
+                offlineAvailable : this.job.offlineAvailable,
+                job              : this.job._id
+            });
     }
 
     hasStatusLabel () {
