@@ -1,5 +1,5 @@
 <div class="job-select flex-item-static flex-row flex-align-center">
-    <div data-ng-if="jobCtrl.contextIsApp">
+    <div data-ng-if="jobCtrl.CONTEXT_IS_APP">
         <toggle
             handle-change="jobCtrl.handleAvailableOfflineChange(isOn)"
             toggle-class="jobCtrl.toggleStatusClass"
@@ -7,13 +7,6 @@
             toggle-id="{{jobCtrl.job._id}}"
             toggle-value="jobCtrl.job.offlineAvailable">Make Job Available offline: <span data-ng-bind-html="jobCtrl.JobTitle"></span></span>
         </toggle>
-    </div>
-
-    <div data-ng-if="!jobCtrl.contextIsApp">
-        <label>
-            <span class="sr-only">Select <span data-ng-bind-html="jobCtrl.JobTitle"></span></span>
-            <input type="checkbox" />
-        </label>
     </div>
 </div>
 

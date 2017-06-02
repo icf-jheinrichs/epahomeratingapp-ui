@@ -11,7 +11,7 @@ class JobController {
         this.DEFAULT_PHOTO     = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
         this.BASE_IMAGE_URL    = BASE_IMAGE_URL;
 
-        this.contextIsApp      = CONTEXT = UI_ENUMS.CONTEXT.APP;
+        this.CONTEXT_IS_APP    = CONTEXT === UI_ENUMS.CONTEXT.APP;
         this.DIALOG            = UI_ENUMS.DIALOG.MAKE_JOB_OFFLINE;
         this.MESSAGING         = UI_ENUMS.MESSAGING;
 
