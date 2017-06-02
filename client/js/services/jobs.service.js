@@ -39,24 +39,24 @@ class JobsService {
         this.messageIndex = 0;
         this.jobIDindex   = 0;
 
-        // this.stop = this.$interval(() => {
-        //     let message = _sample(self.messages);
-        //     let jobID   = _sample(self.jobIDs);
+        this.stop = this.$interval(() => {
+            let message = _sample(self.messages);
+            let jobID   = _sample(self.jobIDs);
 
-        //     let data = {
-        //         jobID,
-        //         assetStatus : {
-        //             total   : 4,
-        //             missing : _random(0, 1)
-        //         },
-        //         uploadingJobs : ['1ef1c7dce98910b013b2dbc5272f57cf', '27be11354609526b241e1fa83080ac27', '2b7fef4727c30a3e29c46f84d3bfc73e', '4224198713186c7bf015b08bb8b7969b', '498915e4edeb9eb2c70ae554c1bc8553']
-        //     };
+            let data = {
+                jobID,
+                assetStatus : {
+                    total   : 4,
+                    missing : _random(0, 1)
+                },
+                uploadingJobs : ['1ef1c7dce98910b013b2dbc5272f57cf', '27be11354609526b241e1fa83080ac27', '2b7fef4727c30a3e29c46f84d3bfc73e', '4224198713186c7bf015b08bb8b7969b', '498915e4edeb9eb2c70ae554c1bc8553']
+            };
 
-        //     self.$log.log(message, jobID);
+            self.$log.log(message, jobID);
 
-        //     self.$rootScope.$broadcast(message, data);
+            self.$rootScope.$broadcast(message, data);
 
-        // }, 5000);
+        }, 5000);
     }
 
     /**

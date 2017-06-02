@@ -17,3 +17,13 @@
         }
     }
 }
+
+.form-group .button-group {
+    width: 100%;
+
+    .btn {
+        flex-grow: 1;
+        height: $font-size-large * 2;
+        padding: $padding-default;
+    }
+}

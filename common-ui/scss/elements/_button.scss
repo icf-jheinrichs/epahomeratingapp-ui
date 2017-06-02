@@ -93,9 +93,9 @@ $btn-no-label-size: $icon-font-size + ($padding-default * 2);
 .btn-no-label {
     border-radius: ($btn-no-label-size / 2);
     font-size: $icon-font-size;
+    height: $btn-no-label-size;
     line-height: 1em;
     padding: $padding-default;
-    height: $btn-no-label-size;
     width: $btn-no-label-size;
 }
 
@@ -104,6 +104,7 @@ $btn-no-label-size: $icon-font-size + ($padding-default * 2);
     height: $btn-no-label-size;
     margin-right: $offset-default;
     text-align: center;
+    white-space: nowrap;
 
     &.has-comments {
         background-color: $link-color;

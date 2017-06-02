@@ -1,11 +1,12 @@
 import _isEmpty from 'lodash/isEmpty';
 
 class jobChecklistChecklistController {
-    constructor ($rootScope, $stateParams, JobDataHomePerformanceService, UI_ENUMS) {
+    constructor ($rootScope, $stateParams, JobChecklistStateService, JobDataHomePerformanceService, UI_ENUMS) {
         'ngInject';
 
         this.$rootScope                    = $rootScope;
         this.$stateParams                  = $stateParams;
+        this.JobChecklistStateService      = JobChecklistStateService;
         this.JobDataHomePerformanceService = JobDataHomePerformanceService;
 
         this.MESSAGING         = UI_ENUMS.MESSAGING;

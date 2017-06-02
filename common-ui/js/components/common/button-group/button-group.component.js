@@ -5,6 +5,7 @@ let buttonGroupComponent = {
     bindings : {
         buttons       : '<',
         allowMultiple : '<',
+        allowNone     : '<',
         initialValue  : '<',
         onSetValue    : '&'
     },

@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import AWS from 'aws-sdk';
+import {Config, CognitoIdentityCredentials} from 'aws-sdk';
 import {CognitoUserPool, CognitoUser, AuthenticationDetails} from 'amazon-cognito-identity-js';
 
 const DEFAULT_USER = Object.freeze({
@@ -201,17 +201,19 @@ class AuthenticationService {
                             attr[obj.Name] = obj.Value;
                         });
 
-                        let firstName = attr.name.charAt(0).toUpperCase() + attr.name.slice(1);
-                        let lastName  = attr.family_name.charAt(0).toUpperCase() + attr.family_name.slice(1);
-                        let email     = attr.email;
+                        let firstName       = attr.name.charAt(0).toUpperCase() + attr.name.slice(1);
+                        let lastName        = attr.family_name.charAt(0).toUpperCase() + attr.family_name.slice(1);
+                        let email           = attr.email;
+                        let ratingCompanyID = attr['custom:ratingCompanyID'] || '';
 
                         resolve({
-                            'firstName'    : firstName,
-                            'lastName'     : lastName,
-                            'email'        : email,
-                            'id_token'     : id_token,
-                            'access_token' : access_token,
-                            'status'       : 200
+                            status       : 200,
+                            firstName,
+                            lastName,
+                            email,
+                            id_token,
+                            access_token,
+                            ratingCompanyID
                         });
                     } else {
                         reject({
@@ -250,12 +252,11 @@ class AuthenticationService {
     }
 
     userIDtoAWSCognitoCredentials (id_token) {
-        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-            IdentityPoolId : 'us-east-1:61624df7-6ba8-4e7c-a33a-2797580af640',
+        Config.credentials = new CognitoIdentityCredentials({
+            IdentityPoolId : POOL_DATA.UserPoolId,
             Logins         : {
-                'cognito-idp.us-east-1.amazonaws.com/us-east-1_yyQUoZD72' : id_token
-            },
-            region         : 'us-east-1'
+                AWS_KEY : id_token
+            }
         });
     }
 }

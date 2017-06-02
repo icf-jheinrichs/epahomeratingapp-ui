@@ -1,15 +1,22 @@
+<checklist-item-not-applicable
+    data-ng-if="!checklistItemStubCtrl.isApplicable"
+    house-plan-ids="checklistItemStubCtrl.housePlanIds"
+    item-id="{{::checklistItemStubCtrl.itemId}}"
+    item-category="{{::checklistItemStubCtrl.itemCategory}}"
+    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
+</checklist-item-not-applicable>
+
 <checklist-item-default
-    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Default'"
+    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Default'"
     item-id="{{::checklistItemStubCtrl.itemId}}"
     item-category="{{::checklistItemStubCtrl.itemCategory}}"
     item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
-    checklist-item="checklistItemStubCtrl.checklistItem"
     response="checklistItemStubCtrl.response"
     comments="checklistItemStubCtrl.comments">
 </checklist-item-default>
 
 <checklist-item-mrf
-    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'MRF'"
+    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'MRF'"
     item-id="{{::checklistItemStubCtrl.itemId}}"
     item-category="{{::checklistItemStubCtrl.itemCategory}}"
     item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
@@ -21,7 +28,7 @@
 
 <!-- checklist-item-static-pressure -->
 <checklist-item-default
-    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom3'"
+    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom3'"
     item-id="{{::checklistItemStubCtrl.itemId}}"
     item-category="{{::checklistItemStubCtrl.itemCategory}}"
     item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
@@ -32,7 +39,7 @@
 </checklist-item-default>
 
 <checklist-item-default
-    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom1'"
+    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom1'"
     item-id="{{::checklistItemStubCtrl.itemId}}"
     item-category="{{::checklistItemStubCtrl.itemCategory}}"
     item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
@@ -42,7 +49,7 @@
 </checklist-item-default>
 
 <checklist-item-hvac-equipment
-    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom2'"
+    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom2'"
     item-id="{{::checklistItemStubCtrl.itemId}}"
     item-category="{{::checklistItemStubCtrl.itemCategory}}"
     item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
@@ -53,7 +60,7 @@
 </checklist-item-hvac-equipment>
 
 <checklist-item-hvac-commissioning
-    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom4'"
+    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom4'"
     item-id="{{::checklistItemStubCtrl.itemId}}"
     item-category="{{::checklistItemStubCtrl.itemCategory}}"
     item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
@@ -64,7 +71,7 @@
 </checklist-item-hvac-commissioning>
 
 <checklist-item-measured-ventilation
-    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom5'"
+    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom5'"
     item-id="{{::checklistItemStubCtrl.itemId}}"
     item-category="{{::checklistItemStubCtrl.itemCategory}}"
     item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
@@ -74,7 +81,7 @@
 </checklist-item-measured-ventilation>
 
 <checklist-item-default
-    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom6'"
+    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom6'"
     item-id="{{::checklistItemStubCtrl.itemId}}"
     item-category="{{::checklistItemStubCtrl.itemCategory}}"
     item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
@@ -84,7 +91,7 @@
 </checklist-item-default>
 
 <checklist-item-default
-    data-ng-if="checklistItemStubCtrl.checklistItem.Type === 'Custom7'"
+    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom7'"
     item-id="{{::checklistItemStubCtrl.itemId}}"
     item-category="{{::checklistItemStubCtrl.itemCategory}}"
     item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"

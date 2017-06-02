@@ -10,6 +10,9 @@ import checklistItemCommentsComponent from './checklist-item/item-comments/item-
 import checklistItemDefaultComponent from './checklist-item/item-default/item-default.component';
 import checklistItemMrfComponent from './checklist-item/item-mrf/item-mrf.component';
 import checklistItemMrfEditComponent from './checklist-item/item-mrf-edit/item-mrf-edit.component';
+import checklistItemMrfEditFieldBooleanComponent from './checklist-item/item-mrf-edit/field-boolean/field-boolean.component';
+import checklistItemMrfEditFieldEnumComponent from './checklist-item/item-mrf-edit/field-enum/field-enum.component';
+import checklistItemNotApplicableComponent from './checklist-item/item-not-applicable/item-not-applicable.component';
 import checklistItemStaticPressureComponent from './checklist-item/item-static-pressure/item-static-pressure.component';
 import checklistItemHvacCommissioningComponent from './checklist-item/item-hvac-commissioning/item-hvac-commissioning.component';
 import checklistItemHvacEquipmentComponent from './checklist-item/item-hvac-equipment/item-hvac-equipment.component';
@@ -29,6 +32,9 @@ let jobsModule
         .component('checklistItemDefault', checklistItemDefaultComponent)
         .component('checklistItemMrf', checklistItemMrfComponent)
         .component('mrfEdit', checklistItemMrfEditComponent)
+        .component('mrfEditFieldBoolean', checklistItemMrfEditFieldBooleanComponent)
+        .component('mrfEditFieldEnum', checklistItemMrfEditFieldEnumComponent)
+        .component('checklistItemNotApplicable', checklistItemNotApplicableComponent)
         .component('checklistItemStaticPressure', checklistItemStaticPressureComponent)
         .component('checklistItemHvacCommissioning', checklistItemHvacCommissioningComponent)
         .component('checklistItemHvacEquipment', checklistItemHvacEquipmentComponent)

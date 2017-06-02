@@ -185,13 +185,29 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
                             });
 
                     return jobDataResponsePromise;
+                },
+                jobChecklistState : (JobChecklistStateService, $stateParams) => {
+                    let jobChecklistStatePromise
+                        = JobChecklistStateService
+                            .setJobState($stateParams.id, $stateParams.houseId);
+
+                    return jobChecklistStatePromise;
                 }
             }
         })
 
         .state('job-checklist.category', {
             url        : '/{houseId}/{categoryId}',
-            component  : 'checklistCategory'
+            component  : 'checklistCategory',
+            resolve    : {
+                jobChecklistState : (JobChecklistStateService, $stateParams) => {
+                    let jobChecklistStatePromise
+                        = JobChecklistStateService
+                            .setJobHouseState($stateParams.id, $stateParams.houseId);
+
+                    return jobChecklistStatePromise;
+                }
+            }
         })
 
         .state('users', {

@@ -3,8 +3,9 @@ import controller from './checklist-category.controller';
 
 let jobChecklistCategoryComponent = {
     bindings : {
-        jobDisplayList  : '<',
-        jobDataResponse : '<'
+        jobDisplayList    : '<',
+        jobChecklistState : '<',
+        jobDataResponse   : '<'
     },
     template,
     controller,

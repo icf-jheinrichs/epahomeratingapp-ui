@@ -1,8 +1,9 @@
 class DisplayLogicDigestService {
-    constructor ($http, API_URL) {
+    constructor ($http, $q, API_URL) {
         'ngInject';
 
         this.$http = $http;
+        this.$q    = $q;
 
         this.API_URL = API_URL;
 
@@ -20,6 +21,19 @@ class DisplayLogicDigestService {
 
 
         return checklistItemDisplay;
+    }
+
+    getEnum (Name) {
+        return this.$q((resolve, reject) => {
+            this.digest
+                .then(digest => {
+                    if (digest.data.Enums[Name]) {
+                        resolve(digest.data.Enums[Name]);
+                    } else {
+                        reject('Not Found');
+                    }
+                });
+        });
     }
 }
 

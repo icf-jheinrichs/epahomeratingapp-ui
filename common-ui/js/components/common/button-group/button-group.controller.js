@@ -5,11 +5,15 @@ import _without from 'lodash/without';
 class ButtonGroupController {
     $onInit () {
         this.selected = this.initialValue || [];
+
+        this.allowNone = this.allowNone === undefined ? true : this.allowNone;
     }
 
     handleClick (buttonValue) {
-        if (this.isActive(buttonValue)) {
+        if (this.isActive(buttonValue) && this.allowNone) {
             this.selected  = _without(this.selected, buttonValue);
+        } else if (this.isActive(buttonValue) && !this.allowNone) {
+            this.selected  = this.selected;
         } else if (this.allowMultiple) {
             this.selected  = _union(this.selected, [buttonValue]);
         } else {

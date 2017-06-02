@@ -1,0 +1,28 @@
+<div class="checklist-item flex-row flex-justify-between checklist-item-not-applicable">
+    <header class="checklist-item-header">
+        <h4 class="checklist-item-title">{{::checklistItemCtrl.display.Shorthand}}</h4>
+    </header>
+
+    <div data-ng-if="checklistItemCtrl.applicableHouses.length === 1">
+        Applicable to <a class="btn btn-link" data-ui-sref=".({houseId: checklistItemCtrl.applicableHouses[0].HouseId})">{{checklistItemCtrl.applicableHouses[0].title}}</a>
+    </div>
+
+    <div data-ng-if="checklistItemCtrl.applicableHouses.length > 1" dropdown="dropdown">
+        Applicable to
+        <button
+            type="button"
+            class="btn btn-link"
+            dropdown-toggle="dropdown-toggle">
+
+            {{::checklistItemCtrl.applicableHouses.length}} Other Houses
+        </button>
+
+        <nav
+            class="list-unstyled drop-down hidden"
+            dropdown-menu="dropdown-menu">
+            <a data-ui-sref=".({houseId: house.HouseId})" class="drop-down-item" data-ng-repeat="house in checklistItemCtrl.applicableHouses">{{::house.title}}</a>
+        </nav>
+    </div>
+</nav>
+
+</div>

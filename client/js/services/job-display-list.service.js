@@ -13,11 +13,11 @@ class JobDisplayListService {
         this.CATEGORY_PROGRESS = Object.assign({}, UI_ENUMS.CATEGORY_PROGRESS);
     }
 
-    getById (houseIds) {
+    getById (housePlanIds) {
         let promise;
         let houseDisplayListPromises = [];
 
-        houseIds.forEach(id => {
+        housePlanIds.forEach(id => {
             houseDisplayListPromises.push(
                 this.$http({
                     method  : 'GET',

@@ -25,6 +25,10 @@ fieldset {
     display: block;
     font-weight: bold;
     margin: 0 0 2px $offset-small;
+
+    &.status-error {
+        color: $status-error;
+    }
 }
 
 .form-control {
@@ -63,6 +67,17 @@ fieldset {
         color: $text-color-muted;
         cursor: not-allowed;
     }
+}
+
+.form-control-static {
+    font-size: $font-size-large;
+    height: $font-size-large * 2;
+    margin: 0;
+    max-width: 100%;
+    overflow: hidden;
+    padding: $padding-default;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .has-feedback .form-control {

@@ -1,15 +1,32 @@
 class ChecklistItemClass {
-    constructor ($q, $rootScope, UI_ENUMS) {
+    constructor ($q, $rootScope, $stateParams, UI_ENUMS, DisplayLogicDigestService, JobChecklistStateService) {
         'ngInject';
 
         this.$q           = $q;
         this.$rootScope   = $rootScope;
+        this.$stateParams = $stateParams;
+
         this.RESPONSES    = UI_ENUMS.RESPONSES;
         this.MESSAGING    = UI_ENUMS.MESSAGING;
+
+        this.DisplayLogicDigestService = DisplayLogicDigestService;
+        this.JobChecklistStateService  = JobChecklistStateService;
     }
 
     $onInit () {
-        this.responseButtons = this.getResponseOptions();
+        this.DisplayLogicDigestService
+            .get(this.itemId)
+            .then(display => {
+                this.display = display;
+
+                this.responseButtons = this.getResponseOptions();
+            });
+
+        this.JobChecklistStateService
+            .getChecklistItemResponse(this.itemId, this.itemCategory, this.itemCategoryProgress)
+            .then(response => {
+                this.response = response;
+            });
     }
 
     getResponseOptions () {
@@ -17,7 +34,7 @@ class ChecklistItemClass {
         let key;
 
         for (key in this.RESPONSES) {
-            if (this.checklistItem.ResponseOptions[this.RESPONSES[key].Key]) {
+            if (this.display.ResponseOptions[this.RESPONSES[key].Key]) {
                 responseOptions.push(this.RESPONSES[key]);
             }
         }

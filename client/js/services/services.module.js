@@ -3,6 +3,7 @@ import angular from 'angular';
 import AuthenticationService from './authentication.service';
 import CameraService from './camera.service';
 import DisplayLogicDigestService from './display-logic-digest.service';
+import JobChecklistStateService from './job-checklist-state.service';
 import JobsService from './jobs.service';
 import JobDisplayListService from './job-display-list.service';
 import JobDataResponseService from './job-data-response.service';
@@ -17,6 +18,7 @@ let servicesModule
             .service('AuthenticationService', AuthenticationService)
             .service('CameraService', CameraService)
             .service('DisplayLogicDigestService', DisplayLogicDigestService)
+            .service('JobChecklistStateService', JobChecklistStateService)
             .service('JobsService', JobsService)
             .service('JobDisplayListService', JobDisplayListService)
             .service('JobDataResponseService', JobDataResponseService)
