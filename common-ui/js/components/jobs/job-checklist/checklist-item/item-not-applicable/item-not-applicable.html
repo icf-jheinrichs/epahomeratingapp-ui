@@ -3,15 +3,15 @@
         <h4 class="checklist-item-title">{{::checklistItemCtrl.display.Shorthand}}</h4>
     </header>
 
-    <div data-ng-if="checklistItemCtrl.applicableHouses.length === 1">
-        Applicable to <a class="btn btn-link" data-ui-sref=".({houseId: checklistItemCtrl.applicableHouses[0].HouseId})">{{checklistItemCtrl.applicableHouses[0].title}}</a>
+    <div data-ng-if="checklistItemCtrl.applicableHouses.length === 1" class="nowrap">
+        Applicable to <a class="btn btn-link applicable-sample-item ellipsis" data-ui-sref=".({houseId: checklistItemCtrl.applicableHouses[0].HouseId})" data-ng-bind-html="checklistItemCtrl.applicableHouses[0].title"></a>
     </div>
 
     <div data-ng-if="checklistItemCtrl.applicableHouses.length > 1" dropdown="dropdown">
         Applicable to
         <button
             type="button"
-            class="btn btn-link"
+            class="btn btn-link ellipsis"
             dropdown-toggle="dropdown-toggle">
 
             {{::checklistItemCtrl.applicableHouses.length}} Other Houses
@@ -20,7 +20,7 @@
         <nav
             class="list-unstyled drop-down hidden"
             dropdown-menu="dropdown-menu">
-            <a data-ui-sref=".({houseId: house.HouseId})" class="drop-down-item" data-ng-repeat="house in checklistItemCtrl.applicableHouses">{{::house.title}}</a>
+            <a data-ui-sref=".({houseId: house.HouseId})" class="drop-down-item applicable-sample-item ellipsis" data-ng-repeat="house in checklistItemCtrl.applicableHouses" data-ng-bind-html="house.title"></a>
         </nav>
     </div>
 </nav>
