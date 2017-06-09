@@ -18,6 +18,7 @@ import checklistItemHvacCommissioningComponent from './checklist-item/item-hvac-
 import checklistItemHvacEquipmentComponent from './checklist-item/item-hvac-equipment/item-hvac-equipment.component';
 import hvacEquipmentComponent from './checklist-item/item-hvac-equipment/hvac-equipment/hvac-equipment.component';
 import checklistItemMeasuredVentilationComponent from './checklist-item/item-measured-ventilation/item-measured-ventilation.component';
+import checklistItemAirInletLocationsComponent from './checklist-item/item-air-inlet-locations/item-air-inlet-locations.component';
 
 let jobsModule
     = angular
@@ -39,6 +40,7 @@ let jobsModule
         .component('checklistItemHvacCommissioning', checklistItemHvacCommissioningComponent)
         .component('checklistItemHvacEquipment', checklistItemHvacEquipmentComponent)
         .component('hvacEquipment', hvacEquipmentComponent)
-        .component('checklistItemMeasuredVentilation', checklistItemMeasuredVentilationComponent);
+        .component('checklistItemMeasuredVentilation', checklistItemMeasuredVentilationComponent)
+        .component('checklistItemAirInletLocations', checklistItemAirInletLocationsComponent);
 
 export default jobsModule;

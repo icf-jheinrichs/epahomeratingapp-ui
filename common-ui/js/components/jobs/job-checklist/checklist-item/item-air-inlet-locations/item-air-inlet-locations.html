@@ -1,0 +1,44 @@
+<div class="checklist-item">
+    <div class="flex-row flex-justify-between">
+        <header class="checklist-item-header form-group-horizontal">
+            <button class="checklist-item-info-toggle btn btn-link btn-no-label" type="button" aria-label="More Information"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+            <h4 class="checklist-item-title pull-left">{{::checklistItemAirInletLocationsCtrl.display.Shorthand}}</h4>
+            <select
+                class="form-control specified-in-hvac-report"
+                data-ng-options="document.name for document in checklistItemAirInletLocationsCtrl.SPECIFIED_IN_HVAC_REPORT track by document.key"
+                data-ng-model="checklistItemAirInletLocationsCtrl.selectedSpecifiedInHvacReport"
+                data-ng-change="checklistItemAirInletLocationsCtrl.onSpecifiedInHvacReportChange()">
+            </select>
+        </header>
+    </div>
+
+    <div>
+        <p><button class="btn" data-ng-click="checklistItemAirInletLocationsCtrl.onViewHvacDesignReport()" type="button">View HVAC Design Report</button></p>
+    </div>
+
+    <div>
+        <div ng-repeat="subList in checklistItemAirInletLocationsCtrl.SUB_LIST track by $index"
+            ng-show="checklistItemAirInletLocationsCtrl.subListShow">
+
+            <div class="sublist-item flex-row flex-justify-between">
+                <h4 class="checklist-item-title pull-left">{{::subList.display.Shorthand}}</h4>
+
+                <div class="flex-row flex-align-center">
+                    <checklist-item-comments
+                        comments="checklistItemAirInletLocationsCtrl.SUB_LIST[$index].comments"
+                        on-comment="checklistItemAirInletLocationsCtrl.postComment(comment, subList.itemId)">
+                    </checklist-item-comments>
+
+                    <div class="verification">
+                        <button-group
+                            class="button-group"
+                            buttons="checklistItemAirInletLocationsCtrl.SUB_LIST[$index].responseButtons"
+                            initial-value="checklistItemAirInletLocationsCtrl.SUB_LIST[$index].response"
+                            on-set-value="checklistItemAirInletLocationsCtrl.onSetResponse(response, subList.itemId)">
+                        </button-group>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
