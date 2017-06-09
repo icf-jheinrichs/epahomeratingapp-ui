@@ -46,6 +46,16 @@ $switch-delta:  $toggle-size;
         width: $switch-size;
     }
 
+    // this is needed because for some reason the child elements of the label elements prevent click event on parent.
+    &::before {
+        background-color: transparent;
+        bottom: 0;
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
     &.sync-up {
         background-color: $status-warning;
     }
