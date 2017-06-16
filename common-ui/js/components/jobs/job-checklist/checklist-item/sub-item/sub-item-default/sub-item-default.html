@@ -1,0 +1,21 @@
+<div class="flex-row flex-justify-between sublist-item">
+    <header class="checklist-item-header">
+        <h4 class="checklist-item-title pull-left">{{::subItemDefaultController.display.Shorthand}}</h4>
+    </header>
+
+    <div class="flex-row flex-align-center">
+        <checklist-item-comments
+            comments="subItemDefaultController.response.Comments"
+            on-comment="subItemDefaultController.postComment(comment)">
+        </checklist-item-comments>
+        <div class="verification">
+            <button-group
+                class="button-group"
+                buttons="subItemDefaultController.responseButtons"
+                initial-value="subItemDefaultController.response"
+                on-set-value="subItemDefaultController.onSetResponse(response)">
+            </button-group>
+        </div>
+    </div>
+
+</div>

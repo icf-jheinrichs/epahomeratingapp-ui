@@ -1,7 +1,7 @@
 // Angular Library
 import angular from 'angular';
 import angularSanitize from 'angular-sanitize';
-import uiRouter from 'angular-ui-router';
+import uiRouter from '@uirouter/angularjs';
 
 // Site Styles
 import 'normalize.css';

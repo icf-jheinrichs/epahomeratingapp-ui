@@ -146,6 +146,48 @@ class JobChecklistState {
     getChecklistItemHouseTitles (houseIds) {
         return houseIds[0];
     }
+
+    getChecklistItemOptions (checklistItemId) {
+        // TODO - move to display logic digest
+
+        let options = [
+            {
+                text : 'Advanced Framing',
+                show : ['3.4.3a-A', '3.4.3b-A', '3.4.3c-A', '3.4.3d-A', '3.4.3e-A']
+            },
+            {
+                text : 'Countinuous Insulation',
+                show : ['3.4.1-A']
+            },
+            {
+                text : 'Advanced Assembly',
+                show : ['3.4.2-A']
+            }
+        ];
+
+        // let options = [
+        //     {
+        //         text : 'Advanced Framing',
+        //         show : [
+        //             {itemId : '3.4.3a-A', type : 'Default'},
+        //             {itemId : '3.4.3b-A', type : 'Default'},
+        //             {itemId : '3.4.3c-A', type : 'Default'},
+        //             {itemId : '3.4.3d-A', type : 'Default'},
+        //             {itemid : '3.4.3e-A', type : 'Default'}
+        //         ]
+        //     },
+        //     {
+        //         text : 'Countinuous Insulation',
+        //         show : [{itemId : '3.4.1-A', type : 'Defualt'}]
+        //     },
+        //     {
+        //         text : 'Advanced Assembly',
+        //         show : [{itemId : '3.4.2-A', type : 'Default'}]
+        //     }
+        // ];
+
+        return options;
+    }
 }
 
 export default JobChecklistState;
