@@ -99,3 +99,13 @@
     response="checklistItemStubCtrl.response"
     comments="checklistItemStubCtrl.comments">
 </checklist-item-default>
+
+<sub-item-default
+    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'SubItem-Default'"
+    item-id="{{::checklistItemStubCtrl.itemId}}"
+    item-category="{{::checklistItemStubCtrl.itemCategory}}"
+    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
+    checklist-item="checklistItemStubCtrl.checklistItem"
+    response="checklistItemStubCtrl.response"
+    comments="checklistItemStubCtrl.comments">
+</sub-item-default>

@@ -2,7 +2,7 @@ import _findIndex from 'lodash/findIndex';
 import _forOwn from 'lodash/forOwn';
 
 class JobChecklistState {
-    constructor ($log, $q, jobTitleFilter, JobsService, JobDisplayListService, JobDataResponseService, JobDataHomePerformanceService) {
+    constructor ($log, $q, jobTitleFilter, JobsService, JobDisplayListService, JobDataResponseService, JobDataHomePerformanceService, DisplayLogicDigestService) {
         'ngInject';
 
         this.$log                          = $log;
@@ -11,8 +11,11 @@ class JobChecklistState {
         this.JobDisplayListService         = JobDisplayListService;
         this.JobDataResponseService        = JobDataResponseService;
         this.JobDataHomePerformanceService = JobDataHomePerformanceService;
+        this.DisplayLogicDigestService     = DisplayLogicDigestService;
 
         this.jobTitleFilter                = jobTitleFilter;
+
+        this.subItemTable                  = [];
 
         this.clearState();
     }
@@ -147,46 +150,27 @@ class JobChecklistState {
         return houseIds[0];
     }
 
-    getChecklistItemOptions (checklistItemId) {
-        // TODO - move to display logic digest
+    getChecklistItemOptions (itemId) {
+        return this.$q((resolve, reject) => {
+            this.DisplayLogicDigestService
+                .get(itemId)
+                .then((result) => {
+                    resolve(result.Options);
+                });
+        });
+    }
 
-        let options = [
-            {
-                text : 'Advanced Framing',
-                show : ['3.4.3a-A', '3.4.3b-A', '3.4.3c-A', '3.4.3d-A', '3.4.3e-A']
-            },
-            {
-                text : 'Countinuous Insulation',
-                show : ['3.4.1-A']
-            },
-            {
-                text : 'Advanced Assembly',
-                show : ['3.4.2-A']
+    registerSubItem (itemId, showHideCallback) {
+        this.subItemTable[itemId] = showHideCallback;
+    }
+
+    showSubItem (itemId, show) {
+        for (let index in itemId) {
+            let callback = this.subItemTable[itemId[index]];
+            if (callback !== undefined) {
+                callback(show);
             }
-        ];
-
-        // let options = [
-        //     {
-        //         text : 'Advanced Framing',
-        //         show : [
-        //             {itemId : '3.4.3a-A', type : 'Default'},
-        //             {itemId : '3.4.3b-A', type : 'Default'},
-        //             {itemId : '3.4.3c-A', type : 'Default'},
-        //             {itemId : '3.4.3d-A', type : 'Default'},
-        //             {itemid : '3.4.3e-A', type : 'Default'}
-        //         ]
-        //     },
-        //     {
-        //         text : 'Countinuous Insulation',
-        //         show : [{itemId : '3.4.1-A', type : 'Defualt'}]
-        //     },
-        //     {
-        //         text : 'Advanced Assembly',
-        //         show : [{itemId : '3.4.2-A', type : 'Default'}]
-        //     }
-        // ];
-
-        return options;
+        }
     }
 }
 

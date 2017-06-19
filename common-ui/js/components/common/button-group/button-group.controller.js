@@ -9,13 +9,6 @@ class ButtonGroupController {
         this.allowNone = this.allowNone === undefined ? true : this.allowNone;
     }
 
-    $onChanges (changes) {
-        let response = changes.initialValue.currentValue;
-        if (response !== undefined) {
-            this.selected = response.Response !== undefined ? response.Response : response;
-        }
-    }
-
     handleClick (buttonValue) {
         if (this.isActive(buttonValue) && this.allowNone) {
             this.selected  = _without(this.selected, buttonValue);

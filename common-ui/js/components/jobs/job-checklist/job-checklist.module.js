@@ -20,7 +20,7 @@ import hvacEquipmentComponent from './checklist-item/item-hvac-equipment/hvac-eq
 import checklistItemMeasuredVentilationComponent from './checklist-item/item-measured-ventilation/item-measured-ventilation.component';
 import checklistItemAirInletLocationsComponent from './checklist-item/item-air-inlet-locations/item-air-inlet-locations.component';
 import checklistItemSelectThermalStrategyComponent from './checklist-item/item-select-thermal-strategy/item-select-thermal-strategy.component';
-import subItemDefaultComponent from './checklist-item/sub-item/sub-item-default/sub-item-default.component';
+import subItemDefaultComponent from './checklist-item/sub-item-default/sub-item-default.component';
 
 let jobsModule
     = angular

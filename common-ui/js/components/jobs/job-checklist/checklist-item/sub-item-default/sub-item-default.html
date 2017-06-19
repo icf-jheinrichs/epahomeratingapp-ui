@@ -1,11 +1,11 @@
-<div class="flex-row flex-justify-between sublist-item">
+<div class="checklist-item flex-row flex-justify-between" ng-show="subItemDefaultController.show">
     <header class="checklist-item-header">
-        <h4 class="checklist-item-title pull-left">{{::subItemDefaultController.display.Shorthand}}</h4>
+    <h4 class="checklist-item-title pull-left">{{::subItemDefaultController.display.Shorthand}}</h4>
     </header>
 
     <div class="flex-row flex-align-center">
         <checklist-item-comments
-            comments="subItemDefaultController.response.Comments"
+            comments="subItemDefaultController.comments"
             on-comment="subItemDefaultController.postComment(comment)">
         </checklist-item-comments>
         <div class="verification">
@@ -17,5 +17,4 @@
             </button-group>
         </div>
     </div>
-
 </div>

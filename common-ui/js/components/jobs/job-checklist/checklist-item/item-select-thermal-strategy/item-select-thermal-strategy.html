@@ -5,20 +5,10 @@
             <h4 class="checklist-item-title pull-left">{{::checklistItemSelectThermalStrategyController.display.Shorthand}}</h4>
             <select
                 class="form-control specified-in-hvac-report"
-                data-ng-options="document.text for document in checklistItemSelectThermalStrategyController.DROPDOWN_OPTIONS"
+                data-ng-options="document.Text for document in checklistItemSelectThermalStrategyController.DROPDOWN_OPTIONS"
                 data-ng-model="checklistItemSelectThermalStrategyController.selectedOption"
                 data-ng-change="checklistItemSelectThermalStrategyController.onSelectOption()">
             </select>
         </header>
     </div>
-    <div ng-repeat="subItem in checklistItemSelectThermalStrategyController.selectedOption.show">
-        <sub-item-default
-            item-id="{{subItem}}"
-            item-category="{{::checklistItemSelectThermalStrategyController.itemCategory}}"
-            item-category-progress="{{::checklistItemSelectThermalStrategyController.itemCategoryProgress}}"
-            response="checklistItemStubCtrl.response"
-            comments="checklistItemStubCtrl.comments">
-        </sub-item-default>
-    </div>
-
 </div>
