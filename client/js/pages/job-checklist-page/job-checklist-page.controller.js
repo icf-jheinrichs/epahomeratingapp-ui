@@ -2,7 +2,7 @@ import _findIndex from 'lodash/findIndex';
 import _forEach from 'lodash/forEach';
 
 class JobsChecklistPageController {
-    constructor ($rootScope, $stateParams, JobsService, JobDataResponseService, UI_ENUMS, jobTitleFilter) {
+    constructor ($rootScope, $stateParams, JobsService, JobDataResponseService, PDFService, UI_ENUMS, jobTitleFilter) {
         'ngInject';
 
         this.$rootScope             = $rootScope;
@@ -10,6 +10,7 @@ class JobsChecklistPageController {
 
         this.JobsService            = JobsService;
         this.JobDataResponseService = JobDataResponseService;
+        this.PDFService             = PDFService;
         this.MESSAGING              = UI_ENUMS.MESSAGING;
         this.JOB_STATUS             = UI_ENUMS.JOB_STATUS;
         this.CATEGORY_PROGRESS      = UI_ENUMS.CATEGORY_PROGRESS;
@@ -226,6 +227,28 @@ class JobsChecklistPageController {
             .then((response) => {
                 this.downloadUrl = response;
                 this.toggleModalDownload();
+            });
+    }
+
+    onNotifyBuilder () {
+        this
+            .PDFService
+            .generateBuilderNotification(this.jobDataResponse)
+            .then((builderNotificationBlob) => {
+                let anchor = document.createElement('a');
+                let url = window.URL.createObjectURL(builderNotificationBlob);
+
+                document
+                    .body
+                    .appendChild(anchor);
+
+                anchor.className = 'hidden';
+                anchor.href      = url;
+                anchor.download  = 'builder-notification.pdf';
+
+                anchor.click();
+
+                window.URL.revokeObjectURL(url);
             });
     }
 

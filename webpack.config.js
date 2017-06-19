@@ -80,6 +80,14 @@ module.exports = {
             {
                 test   : /\.svg(\?v=\d+\.\d+\.\d+)?$/,
                 use    : 'file-loader?limit=8192&mimetype=image/svg+xml&name=/font/[name].[hash].[ext]'
+            },
+            {
+                test   : /pdfkit|png-js|fontkit|linebreak|unicode-properties|brotli/,
+                loader : 'transform-loader?brfs'
+            },
+            {
+                test   : /\.json$/,
+                loader : 'json-loader'
             }
         ]
     },

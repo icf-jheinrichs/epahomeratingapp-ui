@@ -210,6 +210,20 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
+        .state('job-checklist.progress', {
+            url        : '/{houseId}/{categoryId}/progress',
+            component  : 'checklistCategoryProgress',
+            resolve    : {
+                jobChecklistState : (JobChecklistStateService, $stateParams) => {
+                    let jobChecklistStatePromise
+                        = JobChecklistStateService
+                            .setJobHouseState($stateParams.id, $stateParams.houseId);
+
+                    return jobChecklistStatePromise;
+                }
+            }
+        })
+
         .state('users', {
             url        : '/users',
             component  : 'usersPage'

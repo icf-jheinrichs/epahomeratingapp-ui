@@ -72,6 +72,8 @@
     data-ng-click="jobsChecklistPageCtrl.hideModalHvacDesignReport()">
 </div>
 
+<!-- end modal -->
+
 <div class="job-checklist-header">
     <header class="page-container flex-row flex-align-center">
         <a class="btn-back" data-ui-sref="jobs()" aria-label="Back to Jobs">
@@ -110,8 +112,8 @@
                     Download Job
                 </button>
                 <button
-                    disabled="disabled"
                     class="drop-down-item"
+                    data-ng-click="jobsChecklistPageCtrl.onNotifyBuilder()"
                     type="button">
                     Notify Builder
                 </button>

@@ -4,6 +4,7 @@ import checklistNavComponent from './checklist-nav/checklist-nav.component';
 import checklistHouseSelectionComponent from './checklist-house-selection/checklist-house-selection.component';
 import houseSelectionItemComponent from './checklist-house-selection/house-selection-item/house-selection-item.component';
 import checklistCategoryComponent from './checklist-category/checklist-category.component';
+import checklistProgressComponent from './checklist-progress/checklist-progress.component';
 import checklistFilterComponent from './checklist-filter/checklist-filter.component';
 import checklistItemComponent from './checklist-item/checklist-item.component';
 import checklistItemCommentsComponent from './checklist-item/item-comments/item-comments.component';
@@ -11,6 +12,7 @@ import checklistItemDefaultComponent from './checklist-item/item-default/item-de
 import checklistItemMrfComponent from './checklist-item/item-mrf/item-mrf.component';
 import checklistItemMrfEditComponent from './checklist-item/item-mrf-edit/item-mrf-edit.component';
 import checklistItemMrfEditFieldBooleanComponent from './checklist-item/item-mrf-edit/field-boolean/field-boolean.component';
+import checklistItemMrfEditFieldDecimalComponent from './checklist-item/item-mrf-edit/field-decimal/field-decimal.component';
 import checklistItemMrfEditFieldEnumComponent from './checklist-item/item-mrf-edit/field-enum/field-enum.component';
 import checklistItemNotApplicableComponent from './checklist-item/item-not-applicable/item-not-applicable.component';
 import checklistItemStaticPressureComponent from './checklist-item/item-static-pressure/item-static-pressure.component';
@@ -26,6 +28,7 @@ let jobsModule
         .component('checklistHouseSelection', checklistHouseSelectionComponent)
         .component('houseSelectionItem', houseSelectionItemComponent)
         .component('checklistCategory', checklistCategoryComponent)
+        .component('checklistProgress', checklistProgressComponent)
         .component('checklistFilter', checklistFilterComponent)
         .component('checklistItem', checklistItemComponent)
         .component('checklistItemComments', checklistItemCommentsComponent)
@@ -33,6 +36,7 @@ let jobsModule
         .component('checklistItemMrf', checklistItemMrfComponent)
         .component('mrfEdit', checklistItemMrfEditComponent)
         .component('mrfEditFieldBoolean', checklistItemMrfEditFieldBooleanComponent)
+        .component('mrfEditFieldDecimal', checklistItemMrfEditFieldDecimalComponent)
         .component('mrfEditFieldEnum', checklistItemMrfEditFieldEnumComponent)
         .component('checklistItemNotApplicable', checklistItemNotApplicableComponent)
         .component('checklistItemStaticPressure', checklistItemStaticPressureComponent)

@@ -67,7 +67,6 @@ class ChecklistItemClass {
             'CategoryProgress' : this.itemCategoryProgress,
             'Comment'          : Comment
         });
-
     }
 }
 

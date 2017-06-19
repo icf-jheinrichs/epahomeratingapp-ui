@@ -1,4 +1,4 @@
-<div class="modal modal-large modal-scroll-body" data-ng-class="{'hidden' : !checklistItemMrfEditCtrl.showMrfEditModal}">
+<form class="modal modal-large modal-scroll-body" name="mrf-edit" data-ng-class="{'hidden' : !checklistItemMrfEditCtrl.showMrfEditModal}">
     <div class="modal-header flex-row">
         <div class="flex-item-static">
             <button class="btn btn-link" type="button" data-ng-click="checklistItemMrfEditCtrl.cancel()">Cancel</button>
@@ -7,7 +7,7 @@
         <span class="modal-title flex-item-grow">Edit {{checklistItemMrfEditCtrl.title}}</span>
 
         <div class="flex-item-static">
-            <button class="btn pull-right" type="button" data-ng-click="checklistItemMrfEditCtrl.save()">Save</button>
+            <button class="btn pull-right" type="submit" data-ng-click="checklistItemMrfEditCtrl.save()">Save</button>
         </div>
     </div>
 
@@ -42,6 +42,15 @@
                         </mrf-edit-field-enum>
                     </div>
 
+                     <div ng-switch-when="Decimal">
+                        <mrf-edit-field-decimal
+                            decimal-name="{{field.DataType.Name}}"
+                            key="{{field.Key}}"
+                            label="{{checklistItemMrfEditCtrl.mrfDigest[$index].Name}}"
+                            value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
+                        </mrf-edit-field-decimal>
+                    </div>
+
                      <div ng-switch-default>
                         <label for="{{field.Key}}" class="control-label">{{checklistItemMrfEditCtrl.mrfDigest[$index].Name}}</label>
                         <input id="{{field.Key}}" class="form-control" type="text" data-ng-model="checklistItemMrfEditCtrl.editMrfData[field.Key]" />
@@ -50,7 +59,7 @@
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <div
     class="overlay overlay-modal"

@@ -35,6 +35,19 @@ class DisplayLogicDigestService {
                 });
         });
     }
+
+    getDecimal (Name) {
+        return this.$q((resolve, reject) => {
+            this.digest
+                .then(digest => {
+                    if (digest.data.Decimals[Name]) {
+                        resolve(digest.data.Decimals[Name]);
+                    } else {
+                        reject('Not Found');
+                    }
+                });
+        });
+    }
 }
 
 export default DisplayLogicDigestService;
