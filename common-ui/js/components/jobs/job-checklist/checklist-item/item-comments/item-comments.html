@@ -44,9 +44,11 @@
                         </figure>
 
                         <p class="comment-body">
-                            <span class="comment-timestamp">{{::checklistItemCommentsCtrl.formatTimestamp(comment.Timestamp)}}</span>
+                            <span class="comment-user">{{comment.User.firstName}} {{comment.User.lastName}}</span> &bull; <span class="comment-timestamp">{{::checklistItemCommentsCtrl.formatTimestamp(comment.Timestamp)}}</span><br />
                             {{::comment.Comment}}
                         </p>
+
+
                     </div>
                 </div>
 

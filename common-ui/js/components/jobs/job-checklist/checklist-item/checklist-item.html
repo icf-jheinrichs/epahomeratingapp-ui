@@ -1,102 +1,103 @@
-<checklist-item-not-applicable
-    data-ng-if="!checklistItemStubCtrl.isApplicable"
-    house-plan-ids="checklistItemStubCtrl.housePlanIds"
-    item-id="{{::checklistItemStubCtrl.itemId}}"
-    item-category="{{::checklistItemStubCtrl.itemCategory}}"
-    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
-</checklist-item-not-applicable>
+<div data-ng-class="{'hidden' : checklistItemStubCtrl.hide}">
+    <checklist-item-not-applicable
+        data-ng-if="!checklistItemStubCtrl.isApplicable"
+        house-plan-ids="checklistItemStubCtrl.housePlanIds"
+        item-id="{{::checklistItemStubCtrl.itemId}}"
+        item-category="{{::checklistItemStubCtrl.itemCategory}}"
+        item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
+    </checklist-item-not-applicable>
 
-<checklist-item-default
-    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Default'"
-    item-id="{{::checklistItemStubCtrl.itemId}}"
-    item-category="{{::checklistItemStubCtrl.itemCategory}}"
-    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
-    response="checklistItemStubCtrl.response"
-    comments="checklistItemStubCtrl.comments">
-</checklist-item-default>
+    <checklist-item-default
+        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Default'"
+        item-id="{{::checklistItemStubCtrl.itemId}}"
+        item-category="{{::checklistItemStubCtrl.itemCategory}}"
+        item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
+        response="checklistItemStubCtrl.response"
+        comments="checklistItemStubCtrl.comments">
+    </checklist-item-default>
 
-<checklist-item-mrf
-    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'MRF'"
-    item-id="{{::checklistItemStubCtrl.itemId}}"
-    item-category="{{::checklistItemStubCtrl.itemCategory}}"
-    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
-    checklist-item="checklistItemStubCtrl.checklistItem"
-    response="checklistItemStubCtrl.response"
-    comments="checklistItemStubCtrl.comments"
-    home-performance="checklistItemStubCtrl.homePerformance">
-</checklist-item-mrf>
+    <checklist-item-mrf
+        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'MRF'"
+        item-id="{{::checklistItemStubCtrl.itemId}}"
+        item-category="{{::checklistItemStubCtrl.itemCategory}}"
+        item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
+        checklist-item="checklistItemStubCtrl.checklistItem"
+        response="checklistItemStubCtrl.response"
+        comments="checklistItemStubCtrl.comments"
+        home-performance="checklistItemStubCtrl.homePerformance">
+    </checklist-item-mrf>
 
-<!-- checklist-item-static-pressure -->
-<checklist-item-default
-    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom3'"
-    item-id="{{::checklistItemStubCtrl.itemId}}"
-    item-category="{{::checklistItemStubCtrl.itemCategory}}"
-    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
-    checklist-item="checklistItemStubCtrl.checklistItem"
-    response="checklistItemStubCtrl.response"
-    comments="checklistItemStubCtrl.comments"
-    home-performance="checklistItemStubCtrl.homePerformance">
-</checklist-item-default>
+    <!-- checklist-item-static-pressure -->
+    <checklist-item-default
+        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom3'"
+        item-id="{{::checklistItemStubCtrl.itemId}}"
+        item-category="{{::checklistItemStubCtrl.itemCategory}}"
+        item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
+        checklist-item="checklistItemStubCtrl.checklistItem"
+        response="checklistItemStubCtrl.response"
+        comments="checklistItemStubCtrl.comments"
+        home-performance="checklistItemStubCtrl.homePerformance">
+    </checklist-item-default>
 
-<checklist-item-default
-    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom1'"
-    item-id="{{::checklistItemStubCtrl.itemId}}"
-    item-category="{{::checklistItemStubCtrl.itemCategory}}"
-    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
-    checklist-item="checklistItemStubCtrl.checklistItem"
-    response="checklistItemStubCtrl.response"
-    comments="checklistItemStubCtrl.comments">
-</checklist-item-default>
+    <checklist-item-default
+        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom1'"
+        item-id="{{::checklistItemStubCtrl.itemId}}"
+        item-category="{{::checklistItemStubCtrl.itemCategory}}"
+        item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
+        checklist-item="checklistItemStubCtrl.checklistItem"
+        response="checklistItemStubCtrl.response"
+        comments="checklistItemStubCtrl.comments">
+    </checklist-item-default>
 
-<checklist-item-hvac-equipment
-    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom2'"
-    item-id="{{::checklistItemStubCtrl.itemId}}"
-    item-category="{{::checklistItemStubCtrl.itemCategory}}"
-    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
-    checklist-item="checklistItemStubCtrl.checklistItem"
-    response="checklistItemStubCtrl.response"
-    item-data="checklistItemStubCtrl.itemData"
-    comments="checklistItemStubCtrl.comments">
-</checklist-item-hvac-equipment>
+    <checklist-item-hvac-equipment
+        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom2'"
+        item-id="{{::checklistItemStubCtrl.itemId}}"
+        item-category="{{::checklistItemStubCtrl.itemCategory}}"
+        item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
+        checklist-item="checklistItemStubCtrl.checklistItem"
+        response="checklistItemStubCtrl.response"
+        item-data="checklistItemStubCtrl.itemData"
+        comments="checklistItemStubCtrl.comments">
+    </checklist-item-hvac-equipment>
 
-<checklist-item-hvac-commissioning
-    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom4'"
-    item-id="{{::checklistItemStubCtrl.itemId}}"
-    item-category="{{::checklistItemStubCtrl.itemCategory}}"
-    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
-    checklist-item="checklistItemStubCtrl.checklistItem"
-    response="checklistItemStubCtrl.response"
-    item-data="checklistItemStubCtrl.itemData"
-    comments="checklistItemStubCtrl.comments">
-</checklist-item-hvac-commissioning>
+    <checklist-item-hvac-commissioning
+        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom4'"
+        item-id="{{::checklistItemStubCtrl.itemId}}"
+        item-category="{{::checklistItemStubCtrl.itemCategory}}"
+        item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
+        checklist-item="checklistItemStubCtrl.checklistItem"
+        response="checklistItemStubCtrl.response"
+        item-data="checklistItemStubCtrl.itemData"
+        comments="checklistItemStubCtrl.comments">
+    </checklist-item-hvac-commissioning>
 
-<checklist-item-measured-ventilation
-    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom5'"
-    item-id="{{::checklistItemStubCtrl.itemId}}"
-    item-category="{{::checklistItemStubCtrl.itemCategory}}"
-    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
-    checklist-item="checklistItemStubCtrl.checklistItem"
-    response="checklistItemStubCtrl.response"
-    comments="checklistItemStubCtrl.comments">
-</checklist-item-measured-ventilation>
+    <checklist-item-measured-ventilation
+        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom5'"
+        item-id="{{::checklistItemStubCtrl.itemId}}"
+        item-category="{{::checklistItemStubCtrl.itemCategory}}"
+        item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
+        checklist-item="checklistItemStubCtrl.checklistItem"
+        response="checklistItemStubCtrl.response"
+        comments="checklistItemStubCtrl.comments">
+    </checklist-item-measured-ventilation>
 
-<checklist-item-default
-    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom6'"
-    item-id="{{::checklistItemStubCtrl.itemId}}"
-    item-category="{{::checklistItemStubCtrl.itemCategory}}"
-    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
-    checklist-item="checklistItemStubCtrl.checklistItem"
-    response="checklistItemStubCtrl.response"
-    comments="checklistItemStubCtrl.comments">
-</checklist-item-default>
+    <checklist-item-default
+        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom6'"
+        item-id="{{::checklistItemStubCtrl.itemId}}"
+        item-category="{{::checklistItemStubCtrl.itemCategory}}"
+        item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
+        checklist-item="checklistItemStubCtrl.checklistItem"
+        response="checklistItemStubCtrl.response"
+        comments="checklistItemStubCtrl.comments">
+    </checklist-item-default>
 
-<checklist-item-default
-    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom7'"
-    item-id="{{::checklistItemStubCtrl.itemId}}"
-    item-category="{{::checklistItemStubCtrl.itemCategory}}"
-    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
-    checklist-item="checklistItemStubCtrl.checklistItem"
-    response="checklistItemStubCtrl.response"
-    comments="checklistItemStubCtrl.comments">
-</checklist-item-default>
-
+    <checklist-item-default
+        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom7'"
+        item-id="{{::checklistItemStubCtrl.itemId}}"
+        item-category="{{::checklistItemStubCtrl.itemCategory}}"
+        item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
+        checklist-item="checklistItemStubCtrl.checklistItem"
+        response="checklistItemStubCtrl.response"
+        comments="checklistItemStubCtrl.comments">
+    </checklist-item-default>
+</div>

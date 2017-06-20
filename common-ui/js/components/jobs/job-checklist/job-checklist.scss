@@ -88,3 +88,22 @@
         display: none;
     }
 }
+
+.checklist-filter-popover-wrapper {
+    position: relative;
+}
+
+.checklist-filter-popover {
+    right: 0;
+    top: 100%;
+}
+
+.checklist-stage-title {
+    background-color: $brand-auxillary;
+    margin-bottom: 0;
+    padding: $padding-default;
+
+    img {
+        vertical-align: middle;
+    }
+}

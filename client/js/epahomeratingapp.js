@@ -1,6 +1,7 @@
 // Angular Library
 import angular from 'angular';
 import angularSanitize from 'angular-sanitize';
+import angularMessages from 'angular-messages';
 import uiRouter from '@uirouter/angularjs';
 
 // Site Styles
@@ -62,7 +63,8 @@ angular
         FiltersModule.name,
         PagesModule.name,
         uiRouter,
-        angularSanitize
+        angularSanitize,
+        angularMessages
     ])
     .component(APP_NAME, epahomeratingappComponent)
     .config(epahomeratingappRoutes)

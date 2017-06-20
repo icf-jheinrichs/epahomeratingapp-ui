@@ -1,6 +1,4 @@
-import _isEmpty from 'lodash/isEmpty';
-
-class jobChecklistChecklistController {
+class jobChecklistStageController {
     constructor ($rootScope, $stateParams, JobChecklistStateService, JobDataHomePerformanceService, UI_ENUMS) {
         'ngInject';
 
@@ -14,27 +12,20 @@ class jobChecklistChecklistController {
         this.CATEGORIES        = UI_ENUMS.CATEGORIES;
         this.CATEGORY_PROGRESS = UI_ENUMS.CATEGORY_PROGRESS;
 
+        this.stageKey          = this.CATEGORY_PROGRESS[$stateParams.stageId].Key;
+
         this.putMrfDataListener = this.$rootScope.$on(this.MESSAGING.UPDATE_MRF_DATA, (event, mrfData) => {
             this.onPutMrfData(mrfData);
         });
     }
 
     $onInit () {
-        this.categoryKey  = this.CATEGORIES[this.$stateParams.categoryId].Key;
-        this.categoryName = this.CATEGORIES[this.$stateParams.categoryId].Name;
-
         //TODO: handle catch error.
         this.JobDataHomePerformanceService
                 .getById(this.$stateParams.id, this.$stateParams.houseId)
                 .then(jobDataHomePerformance => {
                     this.jobDataHomePerformance = jobDataHomePerformance;
                 });
-
-        this.preDrywallChecklistItems = this.jobDisplayList[this.categoryKey][this.CATEGORY_PROGRESS['pre-drywall'].Key];
-        this.finalChecklistItems = this.jobDisplayList[this.categoryKey][this.CATEGORY_PROGRESS['final'].Key];
-
-        this.hasPredrywallItems = !_isEmpty(this.preDrywallChecklistItems);
-        this.hasFinalItems = !_isEmpty(this.finalChecklistItems);
     }
 
     $onDestroy () {
@@ -54,4 +45,4 @@ class jobChecklistChecklistController {
     }
 }
 
-export default jobChecklistChecklistController;
+export default jobChecklistStageController;

@@ -1,7 +1,9 @@
-<div class="filter-summary ellipsis">
-    <span class="filter-results-quantity">{{::jobChecklistFilterCtrl.checklistItemsQuantity}}</span>
-    <span class="filter-criteria">checklist items for pre-drywall and final, any status</span>
-    <div popover="popover">
+<div class="filter-summary flex-row">
+    <div class="ellipsis flex-item-grow">
+        <span class="filter-results-quantity">{{::jobChecklistFilterCtrl.checklistItemsQuantity}}</span>
+        <span class="filter-criteria">checklist items for pre-drywall and final, any status</span>
+    </div>
+    <div popover="popover" class="checklist-filter-popover-wrapper flex-pull-right flex-item-static">
         <button
             popover-toggle="popover-toggle"
             class="btn btn-link btn-sort pull-right"
@@ -10,7 +12,7 @@
             <i class="fa fa-sliders fa-lg" aria-hidden="true"></i> Filter
         </button>
 
-        <div class="popover popover-medium hidden" popover-body="popover-body">
+        <div class="popover popover-medium checklist-filter-popover hidden" popover-body="popover-body">
             <div class="popover-panel-wrapper">
                 <section class="popover-panel">
                     <header class="popover-panel-header">
@@ -18,25 +20,39 @@
                             <i class="fa fa-close" aria-hidden="true"></i> Close
                         </button>
 
-                        <button type="button" class="btn btn-link popover-close pull-right">
+                        <button
+                            class="btn btn-link popover-close pull-right"
+                            data-ng-click="jobChecklistFilterCtrl.onFilter()"
+                            type="button">
+
                             Done
                         </button>
                     </header>
 
                     <div class="popover-panel-body">
-                        <p class="control-label">Inspection Stage</p>
-                        <button-group
-                            class="button-group"
-                            buttons="jobChecklistFilterCtrl.inspectionStageFilters"
-                            allow-multiple="false">
-                        </button-group>
+                        <div class="form-group">
+                            <p class="control-label">Inspection Stage</p>
 
-                        <p class="control-label">Status</p>
-                        <button-group
-                            class="button-group"
-                            buttons="jobChecklistFilterCtrl.statusFilters"
-                            allow-multiple="false">
-                        </button-group>
+                            <button-group
+                                allow-multiple="false"
+                                buttons="jobChecklistFilterCtrl.inspectionStageFilters"
+                                class="button-group"
+                                on-set-value="jobChecklistFilterCtrl.setInspectionStageFilter(response)"
+                                initial-value="jobChecklistFilterCtrl.inspectionStageFilter">
+                            </button-group>
+                        </div>
+
+                        <div class="form-group">
+                            <p class="control-label">Status</p>
+
+                            <button-group
+                                allow-multiple="false"
+                                buttons="jobChecklistFilterCtrl.statusFilters"
+                                class="button-group"
+                                on-set-value="jobChecklistFilterCtrl.setStatusFilter(response)"
+                                initial-value="jobChecklistFilterCtrl.statusFilter">
+                            </button-group>
+                        </div>
                     </div>
                 </section>
             </div>

@@ -74,6 +74,15 @@ class AuthenticationService {
         return this.user;
     }
 
+    getUserInfo () {
+        return {
+            userId    : this.user.userId,
+            firstName : this.user.firstName,
+            lastName  : this.user.lastName,
+            email     : this.user.email
+        };
+    }
+
     login (user) {
         let authenticationData = {
             'Username' : user.userId,

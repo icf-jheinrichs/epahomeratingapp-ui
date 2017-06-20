@@ -6,7 +6,8 @@ class MrfEditFieldDecimalController {
     }
 
     $onInit () {
-        this.value = parseFloat(this.value);
+        this.value   = parseFloat(this.value);
+        this.invalid = false;
 
         this.DisplayLogicDigestService
             .getDecimal(this.decimalName)
@@ -22,17 +23,77 @@ class MrfEditFieldDecimalController {
     configureValidation (decimal) {
         this.decimalType = decimal;
 
+        this.decimalType.step            = this.setStep();
+        this.decimalType.roundMultiplier = this.setRoundMultiplier();
+
         this.errorMessages = {
-            overMax  : `Please enter a value less than ${decimal.maxInclusive}`,
-            underMin : `Please enter a value more than ${decimal.minInclusive}`,
-            notValid : 'Please enter a valid number'
+            overMax  : `Please enter a value no larger than ${decimal.maxInclusive}.`,
+            underMin : `Please enter a value that's at least ${decimal.minInclusive}.`,
+            notValid : 'Please enter a valid number.'
         };
     }
 
-    setPrecision () {
-        if (this.decimalFound) {
-            // this.value = this.value.toPrecision(this.decimalType.fractionDigits + 1);
+    validate () {
+        if (!this.decimalFound) {
+            return; // this.value = this.value.toPrecision(this.decimalType.fractionDigits + 1);
         }
+
+        if (this.value > this.decimalType.maxInclusive) {
+            this.errorMessage = this.errorMessages.overMax;
+            this.invalid      = true;
+        } else if (this.value < this.decimalType.minInclusive) {
+            this.errorMessage = this.errorMessages.underMin;
+            this.invalid      = true;
+        } else if (this.value === undefined) {
+            this.errorMessage = this.errorMessages.notValid;
+            this.invalid      = true;
+        } else {
+            this.value = this.setPrecision();
+            this.errorMessage = '';
+            this.invalid      = false;
+        }
+    }
+
+    setStep () {
+        let step  = 1;
+        let index = this.decimalType.fractionDigits;
+
+        while (index) {
+            step = step / 10;
+
+            index -= 1;
+        }
+
+        return step.toString();
+    }
+
+    setRoundMultiplier () {
+        let roundMultiplier  = 1;
+        let index            = this.decimalType.fractionDigits;
+
+        while (index) {
+            roundMultiplier = roundMultiplier * 10;
+
+            index -= 1;
+        }
+
+        return roundMultiplier;
+    }
+
+    setPrecision () {
+        if (this.value === null) {
+            return this.value;
+        }
+
+        let decimal   = this.value.toString().split('.')[1];
+        let precision = (decimal) ? decimal.length : 0;
+        let value     = this.value;
+
+        if (precision > this.decimalType.fractionDigits) {
+            value = Math.round(value * this.decimalType.roundMultiplier) / this.decimalType.roundMultiplier;
+        }
+
+        return value;
     }
 }
 

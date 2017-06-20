@@ -1,21 +1,23 @@
-<label for="{{::fieldEnumCtrl.key}}" class="control-label" data-ng-class="{'status-error' : fieldEnumCtrl.enumNotFound}">{{::fieldEnumCtrl.label}}</label>
-<p data-ng-if="fieldEnumCtrl.enumNotFound" class="form-control-static">{{::fieldEnumCtrl.value}}</p>
+<div class="form-group">
+    <label for="{{::fieldEnumCtrl.key}}" class="control-label" data-ng-class="{'status-error' : fieldEnumCtrl.enumNotFound}">{{::fieldEnumCtrl.label}}</label>
+    <p data-ng-if="fieldEnumCtrl.enumNotFound" class="form-control-static">{{::fieldEnumCtrl.value}}</p>
 
-<select
-    data-ng-if="!fieldEnumCtrl.enumNotFound && fieldEnumCtrl.displayType === 'select'"
-    class="form-control"
-    id="{{::fieldEnumCtrl.key}}"
-    data-ng-change="fieldEnumCtrl.onSelect()"
-    data-ng-model="fieldEnumCtrl.selected"
-    data-ng-options="value for (key , value) in fieldEnumCtrl.options">
-</select>
+    <select
+        data-ng-if="!fieldEnumCtrl.enumNotFound && fieldEnumCtrl.displayType === 'select'"
+        class="form-control"
+        id="{{::fieldEnumCtrl.key}}"
+        data-ng-change="fieldEnumCtrl.onSelect()"
+        data-ng-model="fieldEnumCtrl.selected"
+        data-ng-options="value for (key , value) in fieldEnumCtrl.options">
+    </select>
 
-<button-group
-    allow-multiple="false"
-    allow-none="false"
-    class="button-group"
-    data-ng-if="!fieldEnumCtrl.enumNotFound && fieldEnumCtrl.displayType === 'toggle'"
-    on-set-value="fieldEnumCtrl.onToggle(response)"
-    initial-value="fieldEnumCtrl.selected"
-    buttons="fieldEnumCtrl.buttons">
-</button-group>
+    <button-group
+        allow-multiple="false"
+        allow-none="false"
+        class="button-group"
+        data-ng-if="!fieldEnumCtrl.enumNotFound && fieldEnumCtrl.displayType === 'toggle'"
+        on-set-value="fieldEnumCtrl.onToggle(response)"
+        initial-value="fieldEnumCtrl.selected"
+        buttons="fieldEnumCtrl.buttons">
+    </button-group>
+</div>

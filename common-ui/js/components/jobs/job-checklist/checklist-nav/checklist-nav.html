@@ -1,4 +1,4 @@
-<nav class="nav nav-checklist-sections flex-row">
+<nav class="nav nav-checklist-sections flex-row" data-ng-class="{'hidden' : jobChecklistNavCtrl.hide}">
     <a data-ng-repeat="(key, value) in jobChecklistNavCtrl.CATEGORIES"
        ui-sref=".category({categoryId: key})"
        ui-sref-active="active"

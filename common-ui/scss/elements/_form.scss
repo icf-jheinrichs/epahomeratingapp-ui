@@ -67,7 +67,31 @@ fieldset {
         color: $text-color-muted;
         cursor: not-allowed;
     }
+
 }
+
+.has-error {
+    .control-label {
+        color: $status-error;
+    }
+
+    .form-control.ng-touched {
+        border-color: $status-error;
+
+        &:focus {
+            box-shadow: $shadow-error;
+        }
+    }
+
+    .form-control-error {
+        font-size: $font-size-small;
+        margin: -$padding-small 0 0;
+        padding-left: $padding-default;
+        position: absolute;
+        width: 100%;
+    }
+}
+
 
 .form-control-static {
     font-size: $font-size-large;
@@ -98,7 +122,7 @@ fieldset {
 }
 
 .form-group {
-    margin-bottom: $offset-default;
+    margin-bottom: 15px;
     position: relative;
 }
 

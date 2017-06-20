@@ -1,10 +1,11 @@
 import moment from 'moment';
 
 class ChecklistCommentsController {
-    constructor (BASE_IMAGE_URL) {
+    constructor (BASE_IMAGE_URL, AuthenticationService) {
         'ngInject';
 
         this.BASE_IMAGE_URL  = BASE_IMAGE_URL;
+        this.user            = AuthenticationService.getUserInfo();
     }
 
     $onInit () {
@@ -29,10 +30,10 @@ class ChecklistCommentsController {
     postComment () {
         if (this.newCommentText || this.newCommentPhotoUrl !== '') {
             //TODO: make a stub user service that provides user id.
-            let comment = {
+            const comment = {
                 'PhotoUrl'  : this.newCommentPhotoUrl,
                 'Comment'   : this.newCommentText,
-                'User'      : '12345678',
+                'User'      : this.user,
                 'Timestamp' : moment().format()
             };
 

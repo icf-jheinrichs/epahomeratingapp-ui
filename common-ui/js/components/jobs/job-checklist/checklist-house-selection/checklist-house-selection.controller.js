@@ -36,7 +36,7 @@ class checklistHouseSelectionController {
         this.setAppBottomPad();
         // watch for state change, set current house and hide houseSelection
         this.deregisterOnFinish = this.$transitions.onSuccess(
-            {to : 'job-checklist.category'}, () => {
+            {to : 'job-checklist.*'}, () => {
                 let houseId = parseInt(this.$stateParams.houseId, 10);
 
                 this.setSelectedHouse(houseId);

@@ -1,6 +1,8 @@
 class ChecklistItemController {
-    constructor (DisplayLogicDigestService, JobChecklistStateService) {
+    constructor ($stateParams, DisplayLogicDigestService, JobChecklistStateService) {
         'ngInject';
+
+        this.$stateParams = $stateParams;
 
         this.DisplayLogicDigestService = DisplayLogicDigestService;
         this.JobChecklistStateService  = JobChecklistStateService;
@@ -8,6 +10,7 @@ class ChecklistItemController {
 
     $onInit () {
         let currentHousePlanId = this.JobChecklistStateService.currentHouse.HousePlan[0]._id;
+        let filterStatus       = this.$stateParams.status || '';
         this
             .DisplayLogicDigestService
             .get(this.itemId)
@@ -17,6 +20,18 @@ class ChecklistItemController {
 
         this.housePlanIds = this.JobChecklistStateService.getChecklistItemHouseplanIds(this.itemId, this.itemCategory, this.itemCategoryProgress);
         this.isApplicable = this.housePlanIds.indexOf(currentHousePlanId) >= 0;
+
+        this.hide = false;
+
+        if (filterStatus === 'Any') {
+            this.hide = false;
+        } else if (filterStatus === 'to-do') {
+            this.hide = this.response !== undefined;
+        } else if (filterStatus === 'must-correct') {
+            this.hide = this.response === undefined || this.response[0] !== 'MustCorrect';
+        } else {
+            this.hide = false;
+        }
     }
 }
 

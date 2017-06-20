@@ -1,4 +1,4 @@
-<form class="modal modal-large modal-scroll-body" name="mrf-edit" data-ng-class="{'hidden' : !checklistItemMrfEditCtrl.showMrfEditModal}">
+<form class="modal modal-large modal-scroll-body" novalidate name="checklistItemMrfEditCtrl.mrfEdit" data-ng-class="{'hidden' : !checklistItemMrfEditCtrl.showMrfEditModal}">
     <div class="modal-header flex-row">
         <div class="flex-item-static">
             <button class="btn btn-link" type="button" data-ng-click="checklistItemMrfEditCtrl.cancel()">Cancel</button>
@@ -7,7 +7,14 @@
         <span class="modal-title flex-item-grow">Edit {{checklistItemMrfEditCtrl.title}}</span>
 
         <div class="flex-item-static">
-            <button class="btn pull-right" type="submit" data-ng-click="checklistItemMrfEditCtrl.save()">Save</button>
+            <button
+                class="btn pull-right"
+                data-ng-click="checklistItemMrfEditCtrl.save()"
+                data-ng-disabled="checklistItemMrfEditCtrl.mrfEdit.$invalid"
+                type="submit">
+
+                Save
+            </button>
         </div>
     </div>
 
@@ -21,9 +28,8 @@
                     <p class="form-control-static">{{checklistItemMrfEditCtrl.editMrfData[field.Key]}}</p>
                 </div>
 
-                <div class="form-group"
-                    data-ng-if="!field.Locked || field.DataType.Type === 'ENUM'"
-                    data-ng-switch on="field.DataType.Type">
+                <div data-ng-if="!field.Locked || field.DataType.Type === 'ENUM'"
+                     data-ng-switch on="field.DataType.Type">
 
                      <div ng-switch-when="Boolean">
                         <mrf-edit-field-boolean

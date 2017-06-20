@@ -15,9 +15,9 @@
     }
 
     .photo-capture {
-        width: $photo-capture-small;
         height: $photo-capture-small;
         margin-bottom: $offset-default;
+        width: $photo-capture-small;
     }
 }
 
@@ -35,11 +35,14 @@
 
     .comment-timestamp {
         color: $text-color-muted;
-        display: block;
         font-size: $font-size-small;
     }
 
     .comment-body {
         margin: 0;
+    }
+
+    .comment-user {
+        font-size: $font-size-small;
     }
 }
