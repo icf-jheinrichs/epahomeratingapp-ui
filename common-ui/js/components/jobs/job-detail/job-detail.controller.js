@@ -29,6 +29,10 @@ class JobDetailController {
         });
     }
 
+    onCancel () {
+        window.history.back();
+    }
+
     setRatingType (ratingType) {
         this.job.RatingType = ratingType[0];
     }
