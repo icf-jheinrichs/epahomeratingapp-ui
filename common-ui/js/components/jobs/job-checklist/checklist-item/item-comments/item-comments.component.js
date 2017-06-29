@@ -8,7 +8,8 @@ import './item-comments.scss';
 let checklistItemCommentsComponent = {
     bindings : {
         comments             : '<',
-        onComment            : '&'
+        onComment            : '&',
+        itemId               : '@'
     },
     template,
     controller,
