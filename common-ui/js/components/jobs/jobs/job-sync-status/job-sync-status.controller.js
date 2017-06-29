@@ -1,40 +1,43 @@
 import moment from 'moment';
+import _defer from 'lodash/defer';
 
 
 class JobSyncStatusController {
-    constructor ($log, $rootScope, UI_ENUMS) {
+    constructor ($log, $rootScope, $scope, UI_ENUMS, SyncService) {
         'ngInject';
 
-        this.STATUS = {
-            LAST_UPDATED    : 'Last Updated :now:',
-            UP_TO_DATE      : 'Up to Date',
-            SYNCING         : 'Syncing',
-            SYNC_INCOMPLETE : 'Sync Incomplete'
-        };
+        this.STATUS = UI_ENUMS.STATUS;
+        this.STATUS_CLASSNAME = UI_ENUMS.STATUS_CLASSNAME;
 
-        this.STATUS_CLASSNAME = {
-            OFFLINE           : 'sync-status-offline',              // grey w/ checkmark
-            ONLINE_UP_TO_DATE : 'sync-status-online',               // green w/ checkmark
-            SYNCING           : 'sync-status-syncing',              // blue border
-            LOCAL_UNSYNCED    : 'sync-status-local-unsynced',       // yellow with -
-            SYNC_INCOMPLETE   : 'sync-status-incomplete'            // red with x
-        };
-
-        this.$log       = $log;
-        this.$rootScope = $rootScope;
+        this.$log        = $log;
+        this.$rootScope  = $rootScope;
+        this.$scope      = $scope;
+        this.syncService = SyncService;
 
         this.MESSAGING  = UI_ENUMS.MESSAGING;
     }
 
     $onInit () {
-        this.syncStatus = '';
-        this.syncStatusClass = '';
+        let status = this.syncService.getOverallStatus();
+
+        this.syncStatus = status.syncStatus;
+        this.syncStatusClass = status.syncStatusClass;
+
+        if (this.syncStatus === this.STATUS.LAST_UPDATED) {
+            let now = moment(new Date()).format('MMM Do YYYY, h:mm:ss a');
+            this.syncStatus = this.STATUS.LAST_UPDATED.replace(':now:', now);
+        }
 
         this.dbStartSyncListener = this.$rootScope.$on(this.MESSAGING.DB_START_SYNC, (event) => {
             this.$log.log('[job-sync-status.controller.js] dbStartSyncListener');
 
             this.syncStatus      = this.STATUS.SYNCING;
             this.syncStatusClass = this.STATUS_CLASSNAME.SYNCING;
+
+            let self = this;
+            _defer(function afterDigest () {
+                self.$scope.$apply();
+            });
         });
 
         this.dbPauseSyncListener = this.$rootScope.$on(this.MESSAGING.DB_PAUSE_SYNC, (event) => {
@@ -42,6 +45,11 @@ class JobSyncStatusController {
 
             this.syncStatus      = this.STATUS.UP_TO_DATE;
             this.syncStatusClass = this.STATUS_CLASSNAME.ONLINE_UP_TO_DATE;
+
+            let self = this;
+            _defer(function afterDigest () {
+                self.$scope.$apply();
+            });
         });
 
         this.deviceOfflineListener = this.$rootScope.$on(this.MESSAGING.DEVICE_OFFLINE, (event) => {
@@ -56,6 +64,11 @@ class JobSyncStatusController {
                 this.syncStatus      = this.STATUS.SYNC_INCOMPLETE;
                 this.syncStatusClass = this.STATUS_CLASSNAME.SYNC_INCOMPLETE;
             }
+
+            let self = this;
+            _defer(function afterDigest () {
+                self.$scope.$apply();
+            });
         });
 
         this.deviceOnlineListener = this.$rootScope.$on(this.MESSAGING.DEVICE_ONLINE, (event, jobs) => {
@@ -73,6 +86,11 @@ class JobSyncStatusController {
                 this.syncStatus      = this.STATUS.SYNCING;
                 this.syncStatusClass = this.STATUS_CLASSNAME.SYNCING;
             }
+
+            let self = this;
+            _defer(function afterDigest () {
+                self.$scope.$apply();
+            });
         });
     }
 

@@ -12,6 +12,7 @@ import HousePlansService from './house-plans.service';
 import ManufacturersService from './manufacturers.service';
 import PDFService from './pdf.service';
 import ScannerService from './scanner.service';
+import SyncService from './sync.service';
 
 let servicesModule
     = angular
@@ -27,6 +28,7 @@ let servicesModule
             .service('ManufacturersService', ManufacturersService)
             .service('HousePlansService', HousePlansService)
             .service('PDFService', PDFService)
-            .service('ScannerService', ScannerService);
+            .service('ScannerService', ScannerService)
+            .service('SyncService', SyncService);
 
 export default servicesModule;
