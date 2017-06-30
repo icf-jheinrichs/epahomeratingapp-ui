@@ -6,6 +6,7 @@ let fileManagerComponent = {
         accept     : '@',
         label      : '@',
         uploadOnly : '@',
+        enabled    : '=',
         inputId    : '@',
         files      : '=',
         library    : '<'
