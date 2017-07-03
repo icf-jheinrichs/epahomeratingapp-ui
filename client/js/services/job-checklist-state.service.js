@@ -99,6 +99,10 @@ class JobChecklistState {
         this.currentHouse           = {};
     }
 
+    getJob () {
+        return this.job;
+    }
+
     getHouse (HouseId) {
         return this.jobHouses[HouseId];
     }
