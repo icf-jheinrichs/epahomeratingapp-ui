@@ -22,11 +22,17 @@ class LoginController {
             .then((userData) => {
                 // no resolve needed. handle success here.
                 // resolve(data);
+                this.$log.log('Check login complete:' + JSON.stringify(userData));
                 let userInfo = angular.fromJson(userData);
 
                 this.user.userId = userInfo.userId;
                 this.user.password = userInfo.password;
 
+                return (this.user);
+            })
+            .then((data) => {
+                this.$log.log('Attempting Login');
+                this.login(data);
             });
     }
 
