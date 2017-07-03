@@ -1,4 +1,4 @@
-const API_GATEWAY = 'https://stage-api.raterpro.icfcloud.com';
+const API_GATEWAY = 'https://dev-api.raterpro.icfcloud.com';
 
 export const API_URL = {
     DISPLAY_LOGIC_DIGEST      : `${API_GATEWAY}/display_logic/digest`,
