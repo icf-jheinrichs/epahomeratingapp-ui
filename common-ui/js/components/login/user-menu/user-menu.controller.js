@@ -28,9 +28,10 @@ class UserMenuController {
     onLogout () {
         this
             .AuthenticationService
-            .logout();
-
-        this.$state.go('login');
+            .logout()
+            .then(() => {
+                this.$state.go('login');
+            });
     }
 }
 

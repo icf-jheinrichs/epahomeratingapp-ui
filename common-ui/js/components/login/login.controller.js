@@ -16,13 +16,13 @@ class LoginController {
             'userId'   : '',
             'password' : ''
         };
+        this.isBusy = false;
         this
             .AuthenticationService
             .checkLogin()
             .then((userData) => {
                 // no resolve needed. handle success here.
                 // resolve(data);
-                this.$log.log('Check login complete:' + JSON.stringify(userData));
                 let userInfo = angular.fromJson(userData);
 
                 this.user.userId = userInfo.userId;
@@ -31,8 +31,12 @@ class LoginController {
                 return (this.user);
             })
             .then((data) => {
-                this.$log.log('Attempting Login');
+                this.isBusy = true;
                 this.login(data);
+            })
+            .catch((error) => {
+                this.isBusy = false;
+                return;
             });
     }
 
