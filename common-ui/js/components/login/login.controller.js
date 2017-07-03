@@ -1,9 +1,9 @@
 class LoginController {
-    constructor ($state, $q, AuthenticationService) {
+    constructor ($state, $q, $log, AuthenticationService) {
         'ngInject';
 
         this.userIdPattern = '^[0-9]{6,7}$';
-
+        this.$log          = $log;
         this.$state        = $state;
         this.$q            = $q;
 
@@ -16,6 +16,18 @@ class LoginController {
             'userId'   : '',
             'password' : ''
         };
+        this
+            .AuthenticationService
+            .checkLogin()
+            .then((userData) => {
+                // no resolve needed. handle success here.
+                // resolve(data);
+                let userInfo = angular.fromJson(userData);
+
+                this.user.userId = userInfo.userId;
+                this.user.password = userInfo.password;
+
+            });
     }
 
     setAction (action) {
@@ -39,6 +51,7 @@ class LoginController {
                 .then((data) => {
                     // no resolve needed. handle success here.
                     // resolve(data);
+                    this.$log.log('Login returning:' + JSON.stringify(data));
                     this.returnToOriginalState();
                 })
                 .catch((err) => {
