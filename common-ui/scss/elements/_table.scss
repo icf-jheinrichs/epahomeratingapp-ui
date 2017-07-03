@@ -63,13 +63,17 @@ tbody {
 }
 
 .table-responsive {
+    -webkit-overflow-scrolling: touch;  // sass-lint:disable-line no-vendor-prefixes, no-misspelled-properties
     display: block;
     margin-bottom: $gutter-full;
-    -webkit-overflow-scrolling: touch;
     overflow-x: auto;
     width: 100%;
 
     table {
         margin-bottom: 0;
     }
+}
+
+.empty-table-text {
+    margin-bottom: $gutter-full;
 }
