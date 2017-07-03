@@ -14,8 +14,8 @@ const DEFAULT_USER = Object.freeze({
 });
 
 const POOL_DATA = Object.freeze({
-    'UserPoolId' : 'us-east-1_LwHr7HNEF',
-    'ClientId'   : '7j99asi1s82vv7c6ma97sqa1hg'
+    'UserPoolId' : 'us-east-1_yyQUoZD72',
+    'ClientId'   : '2t3nnng2lkumkb565qpjuo4qf7'
 });
 
 const USER_SESSION_ITEM = 'user';
