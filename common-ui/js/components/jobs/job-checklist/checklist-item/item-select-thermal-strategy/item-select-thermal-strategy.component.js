@@ -9,6 +9,7 @@ let checklistItemSelectThermalStrategyComponent = {
         itemCategoryProgress : '@',
         checklistItem        : '<',
         response             : '<',
+        itemData             : '<',
         comments             : '<'
     },
     template,
