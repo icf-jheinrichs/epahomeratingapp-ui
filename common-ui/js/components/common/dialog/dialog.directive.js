@@ -8,6 +8,10 @@ function dialog () {
         link     : (scope, element, attrs, dialogCtrl) => {
             if (attrs.id.length > 0) {
                 dialogCtrl.register(attrs.id);
+
+                scope.$on('$destroy', () => {
+                    dialogCtrl.deregister(attrs.id);
+                });
             }
         }
     };
