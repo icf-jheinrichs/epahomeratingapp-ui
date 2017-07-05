@@ -82,6 +82,11 @@ class AuthenticationService {
             email     : this.user.email
         };
     }
+    checkLogin () {
+        return this.$q((resolve, reject) => {
+            reject('not supported');
+        });
+    }
 
     login (user) {
         let authenticationData = {
