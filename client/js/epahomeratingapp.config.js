@@ -1,12 +1,17 @@
-const API_GATEWAY = 'https://dev-api.raterpro.icfcloud.com';
+const APIGATEWAY_URI = process.env.APIGATEWAY_URI;
 
 export const API_URL = {
-    DISPLAY_LOGIC_DIGEST      : `${API_GATEWAY}/display_logic/digest`,
-    JOB                       : `${API_GATEWAY}/job`,
-    JOB_DISPLAY_LIST          : `${API_GATEWAY}/job-display-list`,
-    JOB_DATA_RESPONSE         : `${API_GATEWAY}/job/response_data`,
-    JOB_DATA_HOME_PERFORMANCE : `${API_GATEWAY}/job/home_performance_data`,
-    HOUSE_PLAN                : `${API_GATEWAY}/house_plan`
+    DISPLAY_LOGIC_DIGEST      : `${APIGATEWAY_URI}/display_logic/digest`,
+    JOB                       : `${APIGATEWAY_URI}/job`,
+    JOB_DISPLAY_LIST          : `${APIGATEWAY_URI}/job-display-list`,
+    JOB_DATA_RESPONSE         : `${APIGATEWAY_URI}/job/response_data`,
+    JOB_DATA_HOME_PERFORMANCE : `${APIGATEWAY_URI}/job/home_performance_data`,
+    HOUSE_PLAN                : `${APIGATEWAY_URI}/house_plan`
 };
 
-export const BASE_IMAGE_URL = 'https://s3.amazonaws.com/dev-company-images/';
+export const BASE_IMAGE_URL = process.env.S3_PREFIX;
+
+export const COGNITO = {
+    POOL_ID   : process.env.COGNITO_POOL_ID,
+    CLIENT_ID : process.env.COGNITO_CLIENT_ID
+};

@@ -2,6 +2,7 @@
 
 const path              = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Dotenv            = require('dotenv-webpack');
 
 module.exports = {
     entry    : './client/js/epahomeratingapp.js',
@@ -100,6 +101,7 @@ module.exports = {
             {
                 from : 'client/favicon.ico'
             }
-        ])
+        ]),
+        new Dotenv()
     ]
 };

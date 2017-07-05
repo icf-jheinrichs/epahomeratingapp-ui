@@ -9,7 +9,7 @@ import 'normalize.css';
 import 'font-awesome/css/font-awesome.css';
 
 // Constants
-import {API_URL, BASE_IMAGE_URL} from './epahomeratingapp.config';
+import {API_URL, BASE_IMAGE_URL, COGNITO} from './epahomeratingapp.config';
 import {UI_ENUMS} from '../../epahomeratingappUI.js';
 
 // Services
@@ -73,6 +73,7 @@ angular
     })
     .constant('API_URL', API_URL)
     .constant('BASE_IMAGE_URL', BASE_IMAGE_URL)
+    .constant('COGNITO', COGNITO)
     .constant('UI_ENUMS', UI_ENUMS)
     .constant('CONTEXT', UI_ENUMS.CONTEXT.APP)
     .run(authenticationHook);

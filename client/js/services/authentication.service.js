@@ -13,20 +13,22 @@ const DEFAULT_USER = Object.freeze({
     'status'       : 403
 });
 
-const POOL_DATA = Object.freeze({
-    'UserPoolId' : 'us-east-1_LwHr7HNEF',
-    'ClientId'   : '7j99asi1s82vv7c6ma97sqa1hg'
-});
 
 const USER_SESSION_ITEM = 'user';
 
 class AuthenticationService {
-    constructor ($q) {
+    constructor ($q, COGNITO) {
         'ngInject';
 
         this.$q   = $q;
 
-        this.userPool    = new CognitoUserPool(POOL_DATA);
+        this.POOL_DATA = {
+            'UserPoolId' : COGNITO.POOL_ID,
+            'ClientId'   : COGNITO.CLIENT_ID
+        };
+
+        this.userPool    = new CognitoUserPool(this.POOL_DATA);
+
         this.cognitoUser = this.userPool.getCurrentUser();
 
         this.authenticateLocalUser();
@@ -139,18 +141,21 @@ class AuthenticationService {
                 },
 
                 newPasswordRequired : (userAttributes, requiredAttributes) => {
-                    // User was signed up by an admin and must provide new
-                    // password and required attributes, if any, to complete
-                    // authentication.
+                    // // User was signed up by an admin and must provide new
+                    // // password and required attributes, if any, to complete
+                    // // authentication.
 
                     // // TODO: need to come up with a screen for making new password after temp password.
-                    // var newPassword = 'tempPassword2!';
+
+                    // const newPassword = 'TempPass2@';
 
                     // // creates user name or other attributes
-                    // var data = Object.freeze({
-                    //     name        : 'Greg',
-                    //     family_name : 'Gruse',
-                    //     email       : 'greg.gruse@icf.com'
+                    // const data = Object.freeze({
+                    //     name                     : 'Jeff',
+                    //     family_name              : 'Heinrichs',
+                    //     email                    : 'jeff.heinrichs@icf.com',
+                    //     'custom:ratingCompanyID' : '000',
+                    //     'custom:ratingUserID'    : '1224444'
                     // });
 
                     // cognitoUser.completeNewPasswordChallenge(newPassword, data, this);
@@ -267,7 +272,7 @@ class AuthenticationService {
 
     userIDtoAWSCognitoCredentials (id_token) {
         Config.credentials = new CognitoIdentityCredentials({
-            IdentityPoolId : POOL_DATA.UserPoolId,
+            IdentityPoolId : this.POOL_DATA.UserPoolId,
             Logins         : {
                 AWS_KEY : id_token
             }
