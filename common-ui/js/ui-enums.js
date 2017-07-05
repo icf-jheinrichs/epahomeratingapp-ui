@@ -118,6 +118,27 @@ const RESPONSES = {
     }
 };
 
+const STATUS = {
+    LAST_UPDATED    : 'Last Updated :now:',
+    UP_TO_DATE      : 'Up to Date',
+    SYNCING         : 'Syncing',
+    SYNC_INCOMPLETE : 'Sync Incomplete'
+};
+
+const STATUS_CLASSNAME = {
+    OFFLINE           : 'sync-status-offline',              // grey w/ checkmark
+    ONLINE_UP_TO_DATE : 'sync-status-online',               // green w/ checkmark
+    SYNCING           : 'sync-status-syncing',              // blue border
+    LOCAL_UNSYNCED    : 'sync-status-local-unsynced',       // yellow with -
+    SYNC_INCOMPLETE   : 'sync-status-incomplete'            // red with x
+};
+
+const SYNC_STATUS = {
+    UP    : 'sync-up',
+    DOWN  : 'sync-down',
+    ERROR : 'sync-error'
+};
+
 export default {
     CATEGORIES,
     CATEGORY_PROGRESS,
@@ -128,5 +149,8 @@ export default {
     MANUFACTURERS,
     MESSAGING,
     RATING_TYPES,
-    RESPONSES
+    RESPONSES,
+    STATUS,
+    STATUS_CLASSNAME,
+    SYNC_STATUS
 };

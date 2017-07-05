@@ -1,11 +1,13 @@
 import moment from 'moment';
+import _defer from 'lodash/defer';
 
 class JobController {
-    constructor ($log, $rootScope, jobTitleFilter, CONTEXT, UI_ENUMS, BASE_IMAGE_URL) {
+    constructor ($log, $rootScope, $scope, jobTitleFilter, CONTEXT, UI_ENUMS, BASE_IMAGE_URL, SyncService) {
         'ngInject';
 
         this.$log              = $log;
         this.$rootScope        = $rootScope;
+        this.$scope            = $scope;
 
         this.jobTitleFilter    = jobTitleFilter;
         this.DEFAULT_PHOTO     = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
@@ -15,11 +17,9 @@ class JobController {
         this.DIALOG            = UI_ENUMS.DIALOG.MAKE_JOB_OFFLINE;
         this.MESSAGING         = UI_ENUMS.MESSAGING;
 
-        this.SYNC_STATUS       = {
-            'UP'    : 'sync-up',
-            'DOWN'  : 'sync-down',
-            'ERROR' : 'sync-error'
-        };
+        this.syncService       = SyncService;
+
+        this.SYNC_STATUS       = UI_ENUMS.SYNC_STATUS;
     }
 
     $onInit () {
@@ -33,16 +33,22 @@ class JobController {
 
         this.sampleQuantity    = this.job.Secondary.length + 1;
         this.isSample          = this.sampleQuantity > 1;
-        this.toggleStatusClass = '';
+
+        this.toggleStatusClass = this.job.offlineAvailable ? this.syncService.getJobStatus(this.job._id) : '';
 
         //
         this.assetDownloadedListener = this.$rootScope.$on(this.MESSAGING.ASSET_DOWNLOADED, (event, status) => {
             this.$log.log(`[job.controller.js] assetDownloadedListener ${status.jobID} ${status.assetStatus.total} ${status.assetStatus.missing}`);
             if (this.job.offlineAvailable && status.jobID === this.job._id && status.assetStatus.missing > 0) {
                 this.toggleStatusClass = this.SYNC_STATUS.DOWN;
-            } else {
+            } else if (this.job.offlineAvailable && status.jobID === this.job._id && status.assetStatus.missing === 0) {
                 this.toggleStatusClass = '';
             }
+
+            let self = this;
+            _defer(function afterDigest () {
+                self.$scope.$apply();
+            });
         });
 
         this.assetBeingUploadedForJobListener = this.$rootScope.$on(this.MESSAGING.ASSET_BEING_UPLOADED_FOR_JOB, (event, status) => {
@@ -51,6 +57,11 @@ class JobController {
             if (this.job.offlineAvailable && status.jobID === this.job._id) {
                 this.toggleStatusClass = this.SYNC_STATUS.UP;
             }
+
+            let self = this;
+            _defer(function afterDigest () {
+                self.$scope.$apply();
+            });
         });
 
         this.assetUploadedForJobListener = this.$rootScope.$on(this.MESSAGING.ASSET_UPLOADED_FOR_JOB, (event, status) => {
@@ -59,14 +70,24 @@ class JobController {
             if (this.job.offlineAvailable && status.jobID === this.job._id) {
                 this.toggleStatusClass = '';
             }
+
+            let self = this;
+            _defer(function afterDigest () {
+                self.$scope.$apply();
+            });
         });
 
         this.deviceOfflineListener = this.$rootScope.$on(this.MESSAGING.DEVICE_OFFLINE, (event) => {
-            this.$log.log('[job.controller.js] deviceOfflineListener');
+            this.$log.log(`[job.controller.js] deviceOfflineListener ${this.toggleStatusClass}`);
 
             if (this.job.offlineAvailable && this.toggleStatusClass !== '') {
                 this.toggleStatusClass = this.SYNC_STATUS.ERROR;
             }
+
+            let self = this;
+            _defer(function afterDigest () {
+                self.$scope.$apply();
+            });
         });
 
         this.deviceOnlineListener = this.$rootScope.$on(this.MESSAGING.DEVICE_ONLINE, (event, jobs) => {
@@ -79,6 +100,11 @@ class JobController {
                     this.toggleStatusClass = this.SYNC_STATUS.DOWN;
                 }
             }
+
+            let self = this;
+            _defer(function afterDigest () {
+                self.$scope.$apply();
+            });
         });
     }
 
