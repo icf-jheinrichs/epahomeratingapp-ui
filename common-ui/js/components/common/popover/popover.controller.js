@@ -1,11 +1,12 @@
 const HIDDEN_CLASS = 'hidden';
 
 class PopoverController {
-    constructor ($element) {
+    constructor ($element, PopoverService) {
         'ngInject';
 
-        // this.isOpen = false;
-        this.$element = $element;
+        this.$element       = $element;
+
+        this.PopoverService = PopoverService;
 
         this.overlayElement = angular.element('<div class="overlay drop-down-overlay hidden"></div>');
         $element.append(this.overlayElement);
@@ -19,18 +20,30 @@ class PopoverController {
         });
     }
 
-    toggle () {
-        this.isOpen = !this.isOpen;
+    open () {
+        this.isOpen = true;
 
-        if (this.isOpen) {
-            this.bodyElement.removeClass(HIDDEN_CLASS);
-            this.overlayElement.removeClass(HIDDEN_CLASS);
-        } else {
-            this.bodyElement.addClass(HIDDEN_CLASS);
-            this.overlayElement.addClass(HIDDEN_CLASS);
-        }
+        this.bodyElement.removeClass(HIDDEN_CLASS);
+        this.overlayElement.removeClass(HIDDEN_CLASS);
 
         this.toggleElement.attr('aria-expanded', this.isOpen);
+    }
+
+    close () {
+        this.isOpen = false;
+
+        this.bodyElement.addClass(HIDDEN_CLASS);
+        this.overlayElement.addClass(HIDDEN_CLASS);
+
+        this.toggleElement.attr('aria-expanded', this.isOpen);
+    }
+
+    toggle () {
+        if (this.isOpen) {
+            this.close();
+        } else {
+            this.open();
+        }
     }
 
     setToggleElement (element) {
@@ -39,6 +52,22 @@ class PopoverController {
 
     setBodyElement (element) {
         this.bodyElement = element;
+    }
+
+    register (id) {
+        this
+            .PopoverService
+            .registerPopover({
+                id         : id,
+                open       : this.open.bind(this),
+                close      : this.close.bind(this)
+            });
+    }
+
+    deregister (id) {
+        this
+            .PopoverService
+            .deregisterPopover(id);
     }
 }
 

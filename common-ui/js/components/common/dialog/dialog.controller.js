@@ -24,11 +24,19 @@ class DialogController {
     register (id) {
         this.id = id;
 
-        this.DialogService.registerDialog({
-            id         : id,
-            open       : this.open.bind(this),
-            close      : this.close.bind(this)
-        });
+        this
+            .DialogService
+            .registerDialog({
+                id         : id,
+                open       : this.open.bind(this),
+                close      : this.close.bind(this)
+            });
+    }
+
+    deregister (id) {
+        this
+            .DialogService
+            .deregisterDialog(this.id);
     }
 
     open (promise) {

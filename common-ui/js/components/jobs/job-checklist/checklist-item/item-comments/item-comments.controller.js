@@ -9,7 +9,8 @@ class ChecklistCommentsController {
     }
 
     $onInit () {
-        this.state              = 'list';
+        this.state = 'list';
+        this.id    = this.itemId.replace(/\s/g, '_');
     }
 
     formatTimestamp (timestamp) {

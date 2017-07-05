@@ -7,7 +7,6 @@ let checklistItemMrfComponent = {
         itemId               : '@',
         itemCategory         : '@',
         itemCategoryProgress : '@',
-        checklistItem        : '<',
         response             : '<',
         comments             : '<',
         homePerformance      : '<'

@@ -16,6 +16,7 @@ class LoginController {
             'userId'   : '',
             'password' : ''
         };
+        this.isBusy = false;
         this
             .AuthenticationService
             .checkLogin()
@@ -27,6 +28,15 @@ class LoginController {
                 this.user.userId = userInfo.userId;
                 this.user.password = userInfo.password;
 
+                return (this.user);
+            })
+            .then((data) => {
+                this.isBusy = true;
+                this.login(data);
+            })
+            .catch((error) => {
+                this.isBusy = false;
+                return;
             });
     }
 

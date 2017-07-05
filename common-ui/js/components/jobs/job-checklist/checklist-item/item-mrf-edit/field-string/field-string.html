@@ -1,0 +1,15 @@
+<div class="form-group" data-ng-class="{'has-error' : fieldStringCtrl.invalid}">
+    <label for="{{fieldStringCtrl.Key}}" class="control-label">{{fieldStringCtrl.label}}</label>
+    <input
+        id="{{fieldStringCtrl.Key}}"
+        name="{{fieldStringCtrl.Key}}"
+        class="form-control"
+        type="text"
+        maxlength="{{fieldStringCtrl.stringType.maxLength}}"
+        data-ng-model="fieldStringCtrl.value" />
+
+
+    <p class="form-control-error" role="alert" data-ng-class="{'has-error' : fieldStringCtrl.invalid}">
+        {{fieldStringCtrl.errorMessage}}
+    </p>
+</div>

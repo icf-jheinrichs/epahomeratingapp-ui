@@ -21,7 +21,6 @@
         item-id="{{::checklistItemStubCtrl.itemId}}"
         item-category="{{::checklistItemStubCtrl.itemCategory}}"
         item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
-        checklist-item="checklistItemStubCtrl.checklistItem"
         response="checklistItemStubCtrl.response"
         comments="checklistItemStubCtrl.comments"
         home-performance="checklistItemStubCtrl.homePerformance">
@@ -71,7 +70,6 @@
         comments="checklistItemStubCtrl.comments">
     </checklist-item-measured-ventilation>
 
-<<<<<<< HEAD
     <checklist-item-air-inlet-locations
         data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom6'"
         item-id="{{::checklistItemStubCtrl.itemId}}"
@@ -79,20 +77,9 @@
         item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
         checklist-item="checklistItemStubCtrl.checklistItem"
         response="checklistItemStubCtrl.response"
+        item-data="checklistItemStubCtrl.itemData"
         comments="checklistItemStubCtrl.comments">
     </checklist-item-air-inlet-locations>
-=======
-<checklist-item-air-inlet-locations
-    data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom6'"
-    item-id="{{::checklistItemStubCtrl.itemId}}"
-    item-category="{{::checklistItemStubCtrl.itemCategory}}"
-    item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}"
-    checklist-item="checklistItemStubCtrl.checklistItem"
-    response="checklistItemStubCtrl.response"
-    item-data="checklistItemStubCtrl.itemData"
-    comments="checklistItemStubCtrl.comments">
-</checklist-item-air-inlet-locations>
->>>>>>> epasp-40
 
     <checklist-item-default
         data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom7'"

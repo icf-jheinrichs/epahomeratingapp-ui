@@ -27,15 +27,17 @@ class MrfEditController {
     }
 
     save () {
-        _assign(this.mrfData, this.editMrfData);
-        this.showMrfEditModal = false;
+        if (!this.mrfEditForm.$invalid) {
+            _assign(this.mrfData, this.editMrfData);
+            this.showMrfEditModal = false;
 
-        this.onSaveMrfRow({
-            mrfRowData : this.editMrfData
-        });
+            this.onSaveMrfRow({
+                mrfRowData : this.editMrfData
+            });
 
-        //TODO: put this somewhere better;
-        angular.element(document).find('body').removeClass('overlay-open');
+            //TODO: put this somewhere better;
+            angular.element(document).find('body').removeClass('overlay-open');
+        }
     }
 }
 

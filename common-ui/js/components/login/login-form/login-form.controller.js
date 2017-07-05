@@ -85,6 +85,13 @@ class LoginFormController {
         }
     }
 
+    $onChanges (changes) {
+        if (changes.isBusy) {
+            this.isBusy = angular.copy(this.isBusy);
+            this.isBusy = angular.copy(changes.isBusy.currentValue);
+        }
+    }
+
 }
 
 export default LoginFormController;

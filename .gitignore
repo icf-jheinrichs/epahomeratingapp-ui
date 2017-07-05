@@ -49,3 +49,6 @@ coverage
 # Build directories
 build
 dist
+
+# environment variables
+.env
