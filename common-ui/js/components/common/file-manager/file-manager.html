@@ -44,7 +44,9 @@
             <button
                 type="button"
                 popover-toggle="popover-toggle"
-                class="btn">
+                class="btn"
+                ng-disabled="!fileManagerCtrl.enabled"
+                >
                 <i class="fa fa-plus" aria-hidden="true"></i> Add
             </button>
 
