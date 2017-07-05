@@ -9,4 +9,4 @@ export const API_URL = {
     HOUSE_PLAN                : `${API_GATEWAY}/house_plan`
 };
 
-export const BASE_IMAGE_URL = 'https://s3.amazonaws.com/rating-company-images/';
+export const BASE_IMAGE_URL = 'https://s3.amazonaws.com/dev-company-images/';
