@@ -1,12 +1,12 @@
 <div class="checklist-item">
     <header class="checklist-item-header">
         <button class="checklist-item-info-toggle btn btn-link btn-no-label" type="button"><i class="fa fa-info-circle" aria-label="More Information"></i></button>
-        <h4 class="checklist-item-title">{{::checklistItemCtrl.checklistItem.Shorthand}}</h4>
+        <h4 class="checklist-item-title">{{::checklistItemCtrl.display.Shorthand}}</h4>
     </header>
 
-    <section data-ng-repeat="mrfTable in checklistItemCtrl.checklistItem.Sections track by $index">
+    <section data-ng-repeat="mrfTable in checklistItemCtrl.display.Sections track by $index">
         <h5 class="table-caption">{{mrfTable.Name}}</h5>
-        <div class="table-responsive">
+        <div class="table-responsive"  data-ng-if="checklistItemCtrl.hasRows(checklistItemCtrl.homePerformance[mrfTable.Key])">
             <table>
                 <thead>
                     <tr>
@@ -19,7 +19,9 @@
                     </tr>
                 </tbody>
             </table>
+
         </div>
+        <p class="empty-table-text" data-ng-if="!checklistItemCtrl.hasRows(checklistItemCtrl.homePerformance[mrfTable.Key])">{{mrfTable.EmptyTableText}}</p>
     </section>
 
     <div class="flex-row flex-align-center flex-justify-end">
