@@ -8,6 +8,9 @@ let mrfEditFieldDecimalComponent = {
         label       : '@',
         value       : '='
     },
+    require : {
+        model : 'ngModel'
+    },
     template,
     controller,
     controllerAs : 'fieldDecimalCtrl'

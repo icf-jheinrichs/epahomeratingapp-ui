@@ -1,0 +1,15 @@
+<div class="form-group" data-ng-class="{'has-error' : fieldIntegerCtrl.invalid}">
+    <label for="{{fieldIntegerCtrl.Key}}" class="control-label">{{fieldIntegerCtrl.label}}</label>
+    <input
+        id="{{fieldIntegerCtrl.Key}}"
+        name="{{fieldIntegerCtrl.Key}}"
+        class="form-control"
+        type="number"
+        data-ng-blur="fieldIntegerCtrl.validate()"
+        data-ng-model="fieldIntegerCtrl.value" />
+
+
+    <p class="form-control-error" role="alert" data-ng-class="{'has-error' : fieldIntegerCtrl.invalid}">
+        {{fieldIntegerCtrl.errorMessage}}
+    </p>
+</div>

@@ -48,6 +48,32 @@ class DisplayLogicDigestService {
                 });
         });
     }
+
+    getInteger (Name) {
+        return this.$q((resolve, reject) => {
+            this.digest
+                .then(digest => {
+                    if (digest.data.Integers[Name]) {
+                        resolve(digest.data.Integers[Name]);
+                    } else {
+                        reject('Not Found');
+                    }
+                });
+        });
+    }
+
+    getString (Name) {
+        return this.$q((resolve, reject) => {
+            this.digest
+                .then(digest => {
+                    if (digest.data.Strings[Name]) {
+                        resolve(digest.data.Strings[Name]);
+                    } else {
+                        reject('Not Found');
+                    }
+                });
+        });
+    }
 }
 
 export default DisplayLogicDigestService;

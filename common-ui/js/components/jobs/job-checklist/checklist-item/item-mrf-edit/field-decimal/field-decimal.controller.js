@@ -35,7 +35,7 @@ class MrfEditFieldDecimalController {
 
     validate () {
         if (!this.decimalFound) {
-            return; // this.value = this.value.toPrecision(this.decimalType.fractionDigits + 1);
+            return;
         }
 
         if (this.value > this.decimalType.maxInclusive) {
@@ -52,6 +52,8 @@ class MrfEditFieldDecimalController {
             this.errorMessage = '';
             this.invalid      = false;
         }
+
+        this.model.$setValidity('isValidDecimal', !this.invalid);
     }
 
     setStep () {
