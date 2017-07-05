@@ -14,6 +14,8 @@ import checklistItemMrfEditComponent from './checklist-item/item-mrf-edit/item-m
 import checklistItemMrfEditFieldBooleanComponent from './checklist-item/item-mrf-edit/field-boolean/field-boolean.component';
 import checklistItemMrfEditFieldDecimalComponent from './checklist-item/item-mrf-edit/field-decimal/field-decimal.component';
 import checklistItemMrfEditFieldEnumComponent from './checklist-item/item-mrf-edit/field-enum/field-enum.component';
+import checklistItemMrfEditFieldIntegerComponent from './checklist-item/item-mrf-edit/field-integer/field-integer.component';
+import checklistItemMrfEditFieldStringComponent from './checklist-item/item-mrf-edit/field-string/field-string.component';
 import checklistItemNotApplicableComponent from './checklist-item/item-not-applicable/item-not-applicable.component';
 import checklistItemStaticPressureComponent from './checklist-item/item-static-pressure/item-static-pressure.component';
 import checklistItemHvacCommissioningComponent from './checklist-item/item-hvac-commissioning/item-hvac-commissioning.component';
@@ -41,6 +43,8 @@ let jobsModule
         .component('mrfEditFieldBoolean', checklistItemMrfEditFieldBooleanComponent)
         .component('mrfEditFieldDecimal', checklistItemMrfEditFieldDecimalComponent)
         .component('mrfEditFieldEnum', checklistItemMrfEditFieldEnumComponent)
+        .component('mrfEditFieldInteger', checklistItemMrfEditFieldIntegerComponent)
+        .component('mrfEditFieldString', checklistItemMrfEditFieldStringComponent)
         .component('checklistItemNotApplicable', checklistItemNotApplicableComponent)
         .component('checklistItemStaticPressure', checklistItemStaticPressureComponent)
         .component('checklistItemHvacCommissioning', checklistItemHvacCommissioningComponent)
