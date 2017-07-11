@@ -10,12 +10,15 @@ class JobsPageController {
         this.JobsService    = JobsService;
 
         this.CONTEXT_IS_APP = CONTEXT === UI_ENUMS.CONTEXT.APP;
+        this.JOB_PAGE_TAB   = UI_ENUMS.JOB_PAGE_TAB;
         this.MESSAGING      = UI_ENUMS.MESSAGING;
 
         this.QUANTITY = {
             'ALL'      : 'All',
             'SELECTED' : 'Selected'
         };
+
+        this.currentJobTab = this.JOB_PAGE_TAB.ACTIVE;
     }
 
     $onInit () {
@@ -42,14 +45,29 @@ class JobsPageController {
         this.refreshJobsListener
             = this
                 .$rootScope
-                .$on(this.MESSAGING.REFRESH_JOBS_LIST, (event) => {
+                .$on(this.MESSAGING.REFRESH_JOBS_LIST, (event, tab) => {
+                    if (tab !== undefined) {
+                        this.currentJobTab = tab;
+                    }
+
                     this.jobs = {};
                     this.JobsService
                         .get()
                         .then((jobs) => {
-                            this.jobs = jobs;
+                            this.jobs = this.filterJobs(jobs);
                         });
                 });
+    }
+
+    filterJobs (jobs) {
+        for (let index in jobs) {
+            // logic for display job in tab
+            if (this.currentJobTab === this.JOB_PAGE_TAB.OFFLINE_JOBS && jobs[index].offlineAvailable === false) {
+                jobs.splice(index, 1);
+            }
+        }
+
+        return jobs;
     }
 
     $onDestroy () {
