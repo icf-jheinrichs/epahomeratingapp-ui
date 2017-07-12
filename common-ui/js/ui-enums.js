@@ -43,6 +43,13 @@ const CONTEXT = {
     'ADMIN' : 'admin'
 };
 
+const USER_TYPE = {
+    ADMIN       : 'ADMIN',
+    RATER       : 'RATER',
+    PROVIDER    : 'PROVIDER',
+    QA          : 'QA'
+};
+
 const DIALOG = {
     MAKE_JOB_OFFLINE : 'dialog-make-job-offline'
 };
@@ -152,5 +159,6 @@ export default {
     RESPONSES,
     STATUS,
     STATUS_CLASSNAME,
-    SYNC_STATUS
+    SYNC_STATUS,
+    USER_TYPE
 };
