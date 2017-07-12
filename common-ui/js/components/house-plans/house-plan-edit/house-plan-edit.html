@@ -6,10 +6,6 @@
         </div>
 
         <span class="modal-title flex-item-grow">Edit {{housePlanEditCtrl.housePlan.Name}}</span>
-
-        <div class="flex-item-static">
-            <button class="btn pull-right" type="submit" data-ng-disabled="housePlanEditCtrl.isBusy"><i data-ng-class="{'hidden' : !housePlanEditCtrl.isBusy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Save</button>
-        </div>
     </div>
 
     <div class="modal-body-wrapper">
@@ -67,6 +63,13 @@
                     input-id="RaterDesignReviewChecklist"
                     files="housePlanEditCtrl.housePlan.RaterDesignReviewChecklist">
                 </file-manager>
+            </fieldset>
+
+            <fieldset class="row">
+                <div class="flex-item-static">
+                    <button class="btn pull-left" type="submit" data-ng-disabled="housePlanEditCtrl.isBusy"><i data-ng-class="{'hidden' : !housePlanEditCtrl.isBusy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Save</button>
+                </div>
+                <a class="btn btn-link" ng-click="housePlanEditCtrl.deleteHousePlan()">Delete this house plan</a>
             </fieldset>
         </div>
     </div>

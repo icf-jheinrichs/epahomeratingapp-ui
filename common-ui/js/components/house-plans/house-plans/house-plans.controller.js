@@ -33,6 +33,14 @@ class HousePlanController {
 
             this.housePlans.housePlan.unshift(newHousePlan);
         });
+
+        this.deleteHousePlanListener = this.$rootScope.$on(this.MESSAGING.HOUSE_PLAN_DELETE, (event, housePlan) => {
+            let housePlanIndex = _findIndex(this.housePlans.housePlan, {_id : housePlan._id});
+
+            if (housePlanIndex >= 0) {
+                this.housePlans.housePlan.splice(housePlanIndex, 1);
+            }
+        });
     }
 
     $onDestroy () {

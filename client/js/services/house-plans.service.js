@@ -166,6 +166,29 @@ class HousePlansService {
 
         return promise;
     }
+
+    delete (housePlan) {
+        let promise = this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'DELETE',
+                    url     : `${this.API_URL.HOUSE_PLAN}/${housePlan._id}`
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        resolve(response.data);
+                    } else {
+                        //TODO: make this less bad
+                        reject('somethings amiss');
+                    }
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+
+        return promise;
+    }
 }
 
 export default HousePlansService;

@@ -34,6 +34,25 @@ class HousePlanController {
                 this.isBusy = false;
             });
     }
+
+    deleteHousePlan () {
+        this.message = {};
+        this.isBusy  = true;
+
+        this.HousePlansService
+            .delete(this.housePlan)
+            .then((response) => {
+                this.$rootScope.$emit(this.MESSAGING.HOUSE_PLAN_DELETE, this.housePlan);
+
+                this.$state.go('^');
+            })
+            .catch((error) => {
+                this.message = Object.assign({}, ERROR_SERVER);
+            })
+            .finally(() => {
+                this.isBusy = false;
+            });
+    }
 }
 
 export default HousePlanController;
