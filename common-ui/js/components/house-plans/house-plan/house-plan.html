@@ -1,8 +1,19 @@
 <div class="item-list-item house-plan">
-    <a data-ui-sref="house-plans.edit({id: housePlanCtrl.housePlan._id})">
-        <span class="pull-right"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</span>
-        <h3 class="list-item-title house-plan-title">{{housePlanCtrl.housePlanTitle}}</h3>
-    </a>
+    <div class="flex-row">
+        <div class="flex-item-static">
+            <a data-ui-sref="" ng-click="housePlanCtrl.onDownloadRequest()">
+                <h3 class="list-item-title house-plan-title">{{housePlanCtrl.housePlanTitle}}</h3>
+            </a>
+        </div>
+
+        <span class="flex-item-grow"></span>
+
+        <div class="flex-item-static">
+            <a data-ui-sref="house-plans.edit({id: housePlanCtrl.housePlan._id})">
+                <span class="pull-right"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</span>
+            </a>
+        </div>
+    </div>
 
     <div class="house-plan-meta row">
         <dl class="house-plan-info col-xs-6">
@@ -23,6 +34,20 @@
                         <a href="https://www.energystar.gov/ia/partners/bldrs_lenders_raters/downloads/Rater_Checklists.pdf?27c6-463a">{{reviewChecklist.Name}}</a>
                     </dd>
             </dl>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-dialog" data-ng-class="{'hidden' : !housePlanCtrl.showDownloadModal}">
+    <div class="modal-header">
+        <span class="modal-title">Download REM XML</span>
+        <button class="btn btn-link pull-right" type="button" data-ng-click="housePlanCtrl.hideModalDownload()" aria-label="Close"><i class="fa fa-close" aria-hidden="true"></i></button>
+    </div>
+
+    <div class="modal-body-wrapper">
+        <div class="modal-body">
+            <p>The following link will expire in 5 minutes:</p>
+            <p><a data-ng-href="{{housePlanCtrl.downloadUrl}}" class="btn">Download</a></p>
         </div>
     </div>
 </div>
