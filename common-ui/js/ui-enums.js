@@ -147,6 +147,13 @@ const SYNC_STATUS = {
     ERROR : 'sync-error'
 };
 
+const JOB_PAGE_TAB = {
+    ACTIVE          : 'Active',
+    INTERNAL_REVIEW : 'Internal Review',
+    HISTORY         : 'History',
+    OFFLINE_JOBS    : 'Offline Jobs'
+};
+
 export default {
     CATEGORIES,
     CATEGORY_PROGRESS,
@@ -161,5 +168,6 @@ export default {
     STATUS,
     STATUS_CLASSNAME,
     SYNC_STATUS,
-    USER_TYPE
+    USER_TYPE,
+    JOB_PAGE_TAB
 };
