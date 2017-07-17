@@ -1,8 +1,8 @@
 function typeAheadInput () {
     return {
         restrict : 'A',
-        require  : ['?^typeAhead', 'ngModel'],
-        link     : (scope, element, attrs, [typeAheadCtrl, model]) => {
+        require  : '?^typeAhead',
+        link     : (scope, element, attrs, typeAheadCtrl) => {
             if (!typeAheadCtrl) {
                 return;
             }
