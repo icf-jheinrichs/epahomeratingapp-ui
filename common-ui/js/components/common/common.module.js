@@ -14,6 +14,7 @@ import DialogModule from './dialog/dialog.module';
 import DropdownModule from './dropdown/dropdown.module';
 import LightboxModule from './lightbox/lightbox.module';
 import PopoverModule from './popover/popover.module';
+import TypeAheadModule from './type-ahead/type-ahead.module';
 
 let commonModule
     = angular
@@ -21,7 +22,8 @@ let commonModule
             DropdownModule.name,
             DialogModule.name,
             LightboxModule.name,
-            PopoverModule.name
+            PopoverModule.name,
+            TypeAheadModule.name
         ])
             .component('buttonGroup', buttonGroupComponent)
             .component('fileManager', fileManagerComponent)

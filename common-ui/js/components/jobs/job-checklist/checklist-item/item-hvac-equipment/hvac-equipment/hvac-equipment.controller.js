@@ -19,19 +19,21 @@ class HVACEquipmentController {
             }
         ];
 
-        this.MANUFACTURERS  = {
-            EVAPORATOR   : ManufacturersService.evaporatorManufacturers(),
-            CONDENSER    : ManufacturersService.condenserManufacturers(),
-            FURNACE      : ManufacturersService.furnaceManufacturers()
-        };
-        this.ScannerService = ScannerService;
+        this.ManufacturersService = ManufacturersService;
+        this.ScannerService       = ScannerService;
     }
 
     $onInit () {
         let equipmentIndex;
-        let furnaceManufacturerIndex;
-        let condenserManufacturerIndex;
-        let evaporatorManufacturerIndex;
+        // let furnaceManufacturerIndex;
+        // let condenserManufacturerIndex;
+        // let evaporatorManufacturerIndex;
+
+        this.filteredManufacturers  = {
+            EVAPORATOR   : this.getFilteredManufacturers('EVAPORATOR'),
+            CONDENSER    : this.getFilteredManufacturers('CONDENSER'),
+            FURNACE      : this.getFilteredManufacturers('FURNACE')
+        };
 
         this.index = parseInt(this.index, 10);
         this.selectedEquipmentManufacturer = {};
@@ -50,38 +52,18 @@ class HVACEquipmentController {
             this.isEditMode = false;
         }
 
-        //TODO: find a better solution
-        if (this.equipment.Furnace.Manufacturer === '') {
-            this.selectedEquipmentManufacturer.Furnace = this.MANUFACTURERS.FURNACE[0];
+    }
 
-            this.equipment.Furnace.Manufacturer = this.MANUFACTURERS.FURNACE[0].name;
-        } else {
-            furnaceManufacturerIndex = _findIndex(this.MANUFACTURERS.FURNACE, {name : this.equipment.Furnace.Manufacturer});
+    getFilteredManufacturers (equipmentType, filter = '') {
+        return this.ManufacturersService.getFilteredManufacturers(equipmentType, filter);
+    }
 
-            this.selectedEquipmentManufacturer.Furnace = this.MANUFACTURERS.FURNACE[furnaceManufacturerIndex];
-        }
+    setEquipmentManfacturer (equipmentType, value) {
+        this.equipment[equipmentType].Manufacturer = value;
+    }
 
-        //TODO: find a better solution
-        if (this.equipment.Condenser.Manufacturer === '') {
-            this.selectedEquipmentManufacturer.Condenser = this.MANUFACTURERS.CONDENSER[0];
-
-            this.equipment.Condenser.Manufacturer = this.MANUFACTURERS.CONDENSER[0].name;
-        } else {
-            condenserManufacturerIndex = _findIndex(this.MANUFACTURERS.CONDENSER, {name : this.equipment.Condenser.Manufacturer});
-
-            this.selectedEquipmentManufacturer.Condenser = this.MANUFACTURERS.CONDENSER[condenserManufacturerIndex];
-        }
-
-        //TODO: find a better solution
-        if (this.equipment.Evaporator.Manufacturer === '') {
-            this.selectedEquipmentManufacturer.Evaporator = this.MANUFACTURERS.EVAPORATOR[0];
-
-            this.equipment.Evaporator.Manufacturer = this.MANUFACTURERS.EVAPORATOR[0].name;
-        } else {
-            evaporatorManufacturerIndex = _findIndex(this.MANUFACTURERS.EVAPORATOR, {name : this.equipment.Evaporator.Manufacturer});
-
-            this.selectedEquipmentManufacturer.Evaporator = this.MANUFACTURERS.EVAPORATOR[evaporatorManufacturerIndex];
-        }
+    updatedFilteredEquipment (equipmentType, typeaheadValue) {
+        this.filteredManufacturers[equipmentType] = this.getFilteredManufacturers(equipmentType, typeaheadValue);
     }
 
     onScanBarcode (equipmentType) {
