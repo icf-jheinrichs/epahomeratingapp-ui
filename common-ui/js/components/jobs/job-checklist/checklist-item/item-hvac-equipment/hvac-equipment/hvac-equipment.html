@@ -43,7 +43,7 @@
                         type-ahead-results="type-ahead-results">
                             <button
                                 class="btn btn-link btn-block type-ahead-result"
-                                data-ng-mousedown="hvacEquipmentCtrl.setEquipmentManfacturer('Furnace', manufacturer.name)"
+                                data-ng-click="hvacEquipmentCtrl.setEquipmentManfacturer('Furnace', manufacturer.name)"
                                 data-ng-repeat="manufacturer in hvacEquipmentCtrl.filteredManufacturers.FURNACE track by manufacturer.name"
                                 type="button">
                                 {{manufacturer.name}}

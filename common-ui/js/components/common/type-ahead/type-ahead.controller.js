@@ -2,10 +2,11 @@ const OPEN_CLASS        = 'open';
 const MAX_RESULTS_CLASS = 'max-results';
 
 class TypeAheadController {
-    constructor ($element) {
+    constructor ($element, $timeout) {
         'ngInject';
 
         this.$element = $element;
+        this.$timeout = $timeout;
     }
 
     setOptions (options) {
@@ -27,7 +28,9 @@ class TypeAheadController {
     }
 
     hideTypeahead () {
-        this.$element.removeClass(OPEN_CLASS);
+        this.$timeout(()=> {
+            this.$element.removeClass(OPEN_CLASS);
+        }, 175);
     }
 
     setMaxResultDisplay (resultQuantity) {
