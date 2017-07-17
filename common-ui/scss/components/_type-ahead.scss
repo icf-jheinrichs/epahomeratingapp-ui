@@ -1,0 +1,63 @@
+$type-ahead-closed-height:  ($font-size-large + $padding-default + $border-size-default) * 2;
+$type-ahead-results-height: 200px;
+
+.type-ahead-results {
+    display: none;
+    padding: $padding-default 0;
+}
+
+.type-ahead-result {
+    padding: $padding-default;
+    text-align: left;
+
+    &:hover,
+    &:focus,
+    &.focus {
+        background-color: $button-background-color-hover;
+    }
+}
+
+.type-ahead {
+    // sass-lint:disable-block no-color-literals
+
+    background-color: rgba($body-bg, 0);
+    border: 1px solid rgba($border-color-default, 0);
+    border-radius: $border-radius-default;
+    // height: $type-ahead-closed-height + $type-ahead-results-height + $padding-default;
+    left: 0;
+    overflow: hidden;
+    padding: $padding-default;
+    position: absolute;
+    right: 0;
+    top: -($padding-default + $border-size-default);
+    transition: height $transition-default, border $transition-default, background-color $transition-default;
+
+    &.open {
+        background-color: rgba($body-bg, 1);
+        border-color: rgba($border-color-default, 1);
+        z-index: $zindex-absolute;
+
+        .type-ahead-results {
+            display: block;
+
+            &.hidden {
+                display: none;
+            }
+        }
+    }
+}
+
+.type-ahead.max-results {
+    height: $type-ahead-closed-height + $type-ahead-results-height;
+
+    .type-ahead-results {
+        -webkit-overflow-scrolling: touch;  // sass-lint:disable-line no-vendor-prefixes, no-misspelled-properties
+        height: $type-ahead-results-height;
+        left: 0;
+        overflow-y: scroll;
+        padding: $padding-default;
+        position: absolute;
+        right: 0;
+        top: $type-ahead-closed-height - $padding-default + ($border-size-default * 2);
+    }
+}

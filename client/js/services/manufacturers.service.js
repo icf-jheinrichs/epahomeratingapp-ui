@@ -20,20 +20,18 @@ class ManufacturersService {
         };
     }
 
-    evaporatorManufacturers () {
-        return this.FILTERED_MANUFACTURERS.EVAPORATOR;
+    getFilteredManufacturers (equipmentType, filter) {
+        if (filter === '') {
+            return this.FILTERED_MANUFACTURERS[equipmentType];
+        } else {
+            return this.filterManufacturers(equipmentType, filter);
+        }
     }
 
-    condenserManufacturers () {
-        return this.FILTERED_MANUFACTURERS.CONDENSER;
-    }
-
-    furnaceManufacturers () {
-        return this.FILTERED_MANUFACTURERS.FURNACE;
-    }
-
-    waterHeaterManufacturers () {
-        return this.FILTERED_MANUFACTURERS.WATER_HEATER;
+    filterManufacturers (equipmentType, filter) {
+        return _filter(this.FILTERED_MANUFACTURERS[equipmentType], (manufacturer) => {
+            return manufacturer.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
+        });
     }
 }
 

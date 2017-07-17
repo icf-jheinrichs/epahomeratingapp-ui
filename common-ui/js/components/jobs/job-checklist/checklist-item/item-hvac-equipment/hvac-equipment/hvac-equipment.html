@@ -11,21 +11,45 @@
         </select>
     </div>
 
-    <div class="flex-col">
+    <div class="flex-col flex-item-grow">
         <div class="row row-condensed" data-ng-class="{'hidden' : hvacEquipmentCtrl.equipment.Type !== hvacEquipmentCtrl.EQUIPMENT_TYPE[0].key}">
             <h5 class="col-xs-2"><span class="sr-only">Furnace</span></h5>
 
             <div class="form-group col-xs-4">
+
                 <label for="furnace-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Manufacturer</label>
 
-                <select
-                    class="form-control"
-                    data-ng-change="hvacEquipmentCtrl.onEquipmentManufacturerChange('Furnace')"
-                    data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
-                    data-ng-options="manufacturer.name for manufacturer in hvacEquipmentCtrl.MANUFACTURERS.FURNACE track by manufacturer.name"
-                    data-ng-model="hvacEquipmentCtrl.selectedEquipmentManufacturer.Furnace"
-                    id="furnace-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}">
-                </select>
+                <div
+                    class="type-ahead"
+                    type-ahead="type-ahead"
+                    type-ahead-delay="125"
+                    type-ahead-min-input-lenght="0"
+                    type-ahead-max-results="5">
+
+                    <input
+                        class="form-control"
+                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                        data-ng-model="hvacEquipmentCtrl.equipment.Furnace.Manufacturer"
+                        data-ng-model-options="{debounce: 125}"
+                        data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('FURNACE', hvacEquipmentCtrl.equipment.Furnace.Manufacturer)"
+                        id="furnace-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}"
+                        name="Furnace"
+                        type="text"
+                        type-ahead-input="type-ahead-input" />
+
+                    <div
+                        class="type-ahead-results"
+                        type-ahead-result-data="hvacEquipmentCtrl.filteredManufacturers.FURNACE"
+                        type-ahead-results="type-ahead-results">
+                            <button
+                                class="btn btn-link btn-block type-ahead-result"
+                                data-ng-mousedown="hvacEquipmentCtrl.setEquipmentManfacturer('Furnace', manufacturer.name)"
+                                data-ng-repeat="manufacturer in hvacEquipmentCtrl.filteredManufacturers.FURNACE track by manufacturer.name"
+                                type="button">
+                                {{manufacturer.name}}
+                            </button>
+                    </div>
+                </div>
             </div>
 
             <div class="form-group col-xs-3">
@@ -69,15 +93,38 @@
 
             <div class="form-group col-xs-4">
                 <label for="condenser-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Manufacturer</label>
-                <select
-                    class="form-control"
-                    data-ng-change="hvacEquipmentCtrl.onEquipmentManufacturerChange('Condenser')"
-                    data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
-                    data-ng-options="manufacturer.name for manufacturer in hvacEquipmentCtrl.MANUFACTURERS.CONDENSER track by manufacturer.name"
-                    data-ng-model="hvacEquipmentCtrl.selectedEquipmentManufacturer.Condenser"
-                    id="condenser-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}">
 
-                </select>
+                <div
+                    class="type-ahead"
+                    type-ahead="type-ahead"
+                    type-ahead-delay="125"
+                    type-ahead-min-input-lenght="0"
+                    type-ahead-max-results="5">
+
+                    <input
+                        class="form-control"
+                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                        data-ng-model="hvacEquipmentCtrl.equipment.Condenser.Manufacturer"
+                        data-ng-model-options="{debounce: 125}"
+                        data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('CONDENSER', hvacEquipmentCtrl.equipment.Condenser.Manufacturer)"
+                        id="condenser-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}"
+                        name="Condenser"
+                        type="text"
+                        type-ahead-input="type-ahead-input" />
+
+                    <div
+                        class="type-ahead-results"
+                        type-ahead-result-data="hvacEquipmentCtrl.filteredManufacturers.CONDENSER"
+                        type-ahead-results="type-ahead-results">
+                            <button
+                                class="btn btn-link btn-block type-ahead-result"
+                                data-ng-mousedown="hvacEquipmentCtrl.setEquipmentManfacturer('Condenser', manufacturer.name)"
+                                data-ng-repeat="manufacturer in hvacEquipmentCtrl.filteredManufacturers.CONDENSER track by manufacturer.name"
+                                type="button">
+                                {{manufacturer.name}}
+                            </button>
+                    </div>
+                </div>
             </div>
 
             <div class="form-group col-xs-3">
@@ -122,14 +169,39 @@
             <div class="form-group col-xs-4">
                 <label for="evaporator-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Manufacturer</label>
 
-                <select
-                    class="form-control"
-                    data-ng-change="hvacEquipmentCtrl.onEquipmentManufacturerChange('Evaporator')"
-                    data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
-                    data-ng-options="manufacturer.name for manufacturer in hvacEquipmentCtrl.MANUFACTURERS.EVAPORATOR track by manufacturer.name"
-                    data-ng-model="hvacEquipmentCtrl.selectedEquipmentManufacturer.Evaporator"
-                    id="evaporator-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}">
-                </select>
+                <div
+                    class="type-ahead"
+                    type-ahead="type-ahead"
+                    type-ahead-delay="125"
+                    type-ahead-min-input-lenght="0"
+                    type-ahead-max-results="5">
+
+                    <input
+                        class="form-control"
+                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
+                        data-ng-model="hvacEquipmentCtrl.equipment.Evaporator.Manufacturer"
+                        data-ng-model-options="{debounce: 125}"
+                        data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('EVAPORATOR', hvacEquipmentCtrl.equipment.Evaporator.Manufacturer)"
+                        id="evaporator-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}"
+                        name="Evaporator"
+                        type="text"
+                        type-ahead-input="type-ahead-input" />
+
+                    <div
+                        class="type-ahead-results"
+                        type-ahead-result-data="hvacEquipmentCtrl.filteredManufacturers.EVAPORATOR"
+                        type-ahead-results="type-ahead-results">
+                            <button
+                                class="btn btn-link btn-block type-ahead-result"
+                                data-ng-mousedown="hvacEquipmentCtrl.setEquipmentManfacturer('Evaporator', manufacturer.name)"
+                                data-ng-repeat="manufacturer in hvacEquipmentCtrl.filteredManufacturers.EVAPORATOR track by manufacturer.name"
+                                type="button">
+                                {{manufacturer.name}}
+                            </button>
+                    </div>
+                </div>
+
+
             </div>
 
             <div class="form-group col-xs-3">
