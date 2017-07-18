@@ -1,6 +1,8 @@
 class HousePlanController {
 
     constructor (HousePlansService) {
+        'ngInject';
+
         this.HousePlansService = HousePlansService;
     }
 
@@ -24,11 +26,9 @@ class HousePlanController {
     }
 
     onDownloadRequest () {
-        console.log('download called');
         this.HousePlansService
             .downloadRemXml(this.housePlan)
             .then((response) => {
-                console.log(response);
                 this.downloadUrl = response;
                 this.showDownloadModal = true;
             });
