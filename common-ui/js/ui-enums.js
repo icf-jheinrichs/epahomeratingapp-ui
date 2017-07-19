@@ -43,6 +43,13 @@ const CONTEXT = {
     'ADMIN' : 'admin'
 };
 
+const USER_TYPE = {
+    ADMIN       : 'ADMIN',
+    RATER       : 'RATER',
+    PROVIDER    : 'PROVIDER',
+    QA          : 'QA'
+};
+
 const DIALOG = {
     MAKE_JOB_OFFLINE : 'dialog-make-job-offline'
 };
@@ -73,6 +80,7 @@ const MESSAGING = {
     VIEW_HVAC_DESIGN_REPORT          : 'VIEW_HVAC_DESIGN_REPORT',
     HOUSE_PLAN_NEW                   : 'HOUSE_PLAN_NEW',
     HOUSE_PLAN_UPDATE                : 'HOUSE_PLAN_UPDATE',
+    HOUSE_PLAN_DELETE                : 'HOUSE_PLAN_DELETE',
     JOB_AVAILABLE_OFFLINE            : 'JOB_AVAILABLE_OFFLINE',
     ASSET_DOWNLOADED                 : 'ASSET_DOWNLOADED',
     ASSET_BEING_UPLOADED_FOR_JOB     : 'ASSET_BEING_UPLOADED_FOR_JOB',
@@ -160,5 +168,6 @@ export default {
     STATUS,
     STATUS_CLASSNAME,
     SYNC_STATUS,
+    USER_TYPE,
     JOB_PAGE_TAB
 };

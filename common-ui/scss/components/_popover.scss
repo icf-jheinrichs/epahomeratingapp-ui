@@ -35,9 +35,9 @@
 }
 
 .popover-panel-body {
+    -webkit-overflow-scrolling: touch; // sass-lint:disable-line no-vendor-prefixes, no-misspelled-properties
     bottom: 0;
     left: 0;
-    -webkit-overflow-scrolling: touch;
     overflow-y: scroll;
     position: absolute;
     top: 45px;

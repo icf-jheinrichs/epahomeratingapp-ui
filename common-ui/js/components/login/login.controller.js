@@ -27,12 +27,11 @@ class LoginController {
 
                 this.user.userId = userInfo.userId;
                 this.user.password = userInfo.password;
-
-                return (this.user);
+                this.isBusy = true;
+                return (this.login(this.user));
             })
             .then((data) => {
-                this.isBusy = true;
-                this.login(data);
+                return;
             })
             .catch((error) => {
                 this.isBusy = false;
@@ -59,10 +58,8 @@ class LoginController {
                 .AuthenticationService
                 .login(user)
                 .then((data) => {
-                    // no resolve needed. handle success here.
-                    // resolve(data);
-                    this.$log.log('Login returning:' + JSON.stringify(data));
                     this.returnToOriginalState();
+                    resolve(data);
                 })
                 .catch((err) => {
                     reject(err);
