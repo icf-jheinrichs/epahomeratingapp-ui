@@ -75,7 +75,7 @@ class JobsService {
                     if (response.status === 200) {
                         let jobs = {};
 
-                        jobs = _map(response.data, 'doc');
+                        jobs = response.data;
                         jobs.forEach((job) => {
                             job.offlineAvailable = true; // !!_random(0, 1);
                         });
