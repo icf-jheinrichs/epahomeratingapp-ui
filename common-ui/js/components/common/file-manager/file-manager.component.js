@@ -3,13 +3,14 @@ import controller from './file-manager.controller';
 
 let fileManagerComponent = {
     bindings : {
-        accept     : '@',
-        label      : '@',
-        uploadOnly : '@',
-        enabled    : '=',
-        inputId    : '@',
-        files      : '=',
-        library    : '<'
+        accept           : '@',
+        label            : '@',
+        uploadOnly       : '@',
+        enabled          : '=',
+        inputId          : '@',
+        files            : '=',
+        library          : '<',
+        selectedCallback : '<'
     },
     template,
     controller,

@@ -40,6 +40,8 @@ class FileManagerController {
                 Name : file.name
             });
         }
+
+        this.onChangeCallback();
     }
 
     addFile (file) {
