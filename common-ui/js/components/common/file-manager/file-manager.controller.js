@@ -41,7 +41,7 @@ class FileManagerController {
             });
         }
 
-        this.onChangeCallback();
+        this.selectCallback();
     }
 
     addFile (file) {
