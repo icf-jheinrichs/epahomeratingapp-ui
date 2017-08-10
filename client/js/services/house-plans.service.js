@@ -156,11 +156,17 @@ class HousePlansService {
                         resolve(response.data);
                     } else {
                         //TODO: make this less bad
-                        reject('somethings amiss');
+                        reject({
+                            message : response.error.message,
+                            reason  : response.error.error
+                        });
                     }
                 })
                 .catch((error) => {
-                    reject(error);
+                    reject({
+                        message : error.data.error.message,
+                        reason  : error.data.error.error
+                    });
                 });
         });
 

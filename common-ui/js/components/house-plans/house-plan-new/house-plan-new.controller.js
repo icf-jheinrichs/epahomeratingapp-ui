@@ -52,6 +52,9 @@ class HousePlanNewController {
                     }
                 })
                 .catch((error) => {
+                    this.errorReason  = Object.assign({}, ERROR_SERVER);
+                    this.errorReason.text = error.reason;
+
                     this.message = Object.assign({}, ERROR_SERVER);
                 })
                 .finally(() => {
