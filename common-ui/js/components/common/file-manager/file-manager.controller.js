@@ -32,6 +32,8 @@ class FileManagerController {
     handleFileChange (event) {
         let file;
 
+        console.log('handle file change');
+
         if (event.target.files.length > 0) {
             file = event.target.files[0];
 
@@ -54,9 +56,16 @@ class FileManagerController {
             });
         }
 
+        console.log('add file');
+
         if (this.uploadOnly === 'true') {
             this.$scope.$apply();
         }
+    }
+
+    addFileFromLocal () {
+        console.log('add file from local');
+        console.log(selectedFileFromLocal);
     }
 
     removeFile (_id) {

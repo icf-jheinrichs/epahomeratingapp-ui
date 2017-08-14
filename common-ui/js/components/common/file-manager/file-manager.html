@@ -6,7 +6,6 @@
             <input class="hidden" accept="{{::fileManagerCtrl.accept}}" type="file" name="{{::fileManagerCtrl.inputId}}" id="{{::fileManagerCtrl.inputId}}" />
         </div>
 
-        <!--
         <div dropdown="dropdown" data-ng-if="fileManagerCtrl.uploadOnly==='false'">
             <button
                 type="button"
@@ -19,12 +18,19 @@
             <nav
                 class="drop-down drop-down-left hidden"
                 dropdown-menu="dropdown-menu"
-                role="menu">
+                role="menu"
+                popover="popover"
+                >
+<!--style="display:none;" -->
+                <input id="fileInput" type="file"
+                    ng-model="fileManagerCtrl.selectedFileFromLocal" ng-select="fileManagerCtrl.addFileFromLocal()" />
 
                 <button
                     class="drop-down-item"
                     type="button"
-                    role="menuitem">
+                    role="menuitem"
+                    accept="text/xml"
+                    onclick="document.getElementById('fileInput').click()">
 
                     From Computer
                 </button>
@@ -32,70 +38,59 @@
                 <button
                     class="drop-down-item"
                     type="button"
-                    role="menuitem">
+                    role="menuitem"
+                    popover-toggle="popover-toggle">
 
                     From {{fileManagerCtrl.label}} Library
                 </button>
-            </nav>
-        </div>
-        -->
 
-        <div popover="popover" data-ng-if="fileManagerCtrl.uploadOnly==='false'">
-            <button
-                type="button"
-                popover-toggle="popover-toggle"
-                class="btn"
-                ng-disabled="!fileManagerCtrl.enabled"
-                >
-                <i class="fa fa-plus" aria-hidden="true"></i> Add
-            </button>
+                <div class="popover popover-has-search popover-medium hidden" popover-body="popover-body">
+                    <div class="popover-panel-wrapper">
+                        <section class="popover-panel">
+                            <header class="popover-panel-header flex-row flex-align-center">
+                                <div class="flex-item-static">
+                                    <button type="button" class="btn btn-link popover-close">
+                                        <i class="fa fa-close" aria-hidden="true"></i> Close
+                                    </button>
+                                </div>
 
-            <div class="popover popover-has-search popover-medium hidden" popover-body="popover-body">
-                <div class="popover-panel-wrapper">
-                    <section class="popover-panel">
-                        <header class="popover-panel-header flex-row flex-align-center">
-                            <div class="flex-item-static">
-                                <button type="button" class="btn btn-link popover-close">
-                                    <i class="fa fa-close" aria-hidden="true"></i> Close
-                                </button>
+                                <h5 class="flex-item-grow popover-panel-title">Add {{::fileManagerCtrl.label}}</h5>
+                            </header>
+
+                            <div class="popover-panel-search">
+                                <div class="form-group has-feedback">
+                                    <label for="search_{{::fileManagerCtrl.inputId}}" class="sr-only">Search {{::fileManagerCtrl.label}}</label>
+
+                                    <input
+                                        data-ng-model="fileManagerCtrl.search"
+                                        ng-model-options="{debounce: 200}"
+                                        data-ng-change="fileManagerCtrl.searchFiles()"
+                                        placeholder="Search"
+                                        class="form-control"
+                                        type="text"
+                                        id="search_{{::fileManagerCtrl.inputId}}"
+                                        name="search_{{::fileManagerCtrl.inputId}}" />
+
+                                    <span class="form-control-feedback"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                </div>
                             </div>
 
-                            <h5 class="flex-item-grow popover-panel-title">Add {{::fileManagerCtrl.label}}</h5>
-                        </header>
+                            <div class="popover-panel-body">
+                                <div>
+                                    <button
+                                        type="button"
+                                        data-ng-click="fileManagerCtrl.addFile(item)"
+                                        data-ng-repeat="item in fileManagerCtrl.library | filter:fileManagerCtrl.search"
+                                        class="drop-down-item popover-close">
 
-                        <div class="popover-panel-search">
-                            <div class="form-group has-feedback">
-                                <label for="search_{{::fileManagerCtrl.inputId}}" class="sr-only">Search {{::fileManagerCtrl.label}}</label>
-
-                                <input
-                                    data-ng-model="fileManagerCtrl.search"
-                                    ng-model-options="{debounce: 200}"
-                                    data-ng-change="fileManagerCtrl.searchFiles()"
-                                    placeholder="Search"
-                                    class="form-control"
-                                    type="text"
-                                    id="search_{{::fileManagerCtrl.inputId}}"
-                                    name="search_{{::fileManagerCtrl.inputId}}" />
-
-                                <span class="form-control-feedback"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                        {{item.Name}}
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="popover-panel-body">
-                            <div>
-                                <button
-                                    type="button"
-                                    data-ng-click="fileManagerCtrl.addFile(item)"
-                                    data-ng-repeat="item in fileManagerCtrl.library | filter:fileManagerCtrl.search"
-                                    class="drop-down-item popover-close">
-
-                                    {{item.Name}}
-                                </button>
-                            </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 </div>
-            </div>
+            </nav>
         </div>
     </div>
 
