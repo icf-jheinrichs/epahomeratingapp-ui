@@ -35,6 +35,7 @@ class jobChecklistChecklistController {
                 this.hasPredrywallItems       = !_isEmpty(this.preDrywallChecklistItems);
                 this.hasFinalItems            = !_isEmpty(this.finalChecklistItems);
 
+                this.$rootScope.$emit(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE_TOTALS);
             });
     }
 

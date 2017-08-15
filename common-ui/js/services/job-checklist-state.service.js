@@ -1,7 +1,7 @@
 import _findIndex from 'lodash/findIndex';
 import _forOwn from 'lodash/forOwn';
 import _forEach from 'lodash/forEach';
-// import _size from 'lodash/size';
+import _cloneDeep from 'lodash/cloneDeep';
 
 class JobChecklistState {
     constructor ($log,
@@ -116,11 +116,12 @@ class JobChecklistState {
         let setJobHouseStatePromise = this.$q((resolve, reject) => {
             if (this.jobDataHomePerformance[HouseId] !== undefined) {
                 resolve(this.jobDataHomePerformance[HouseId]);
+                this.itemStatusQuery = {};
             } else {
                 this.JobDataHomePerformanceService
                     .getById(jobId, HouseId)
                     .then((jobDataHomePerformance) => {
-
+                        this.itemStatusQuery = {};
                         this.jobDataHomePerformance[HouseId] = jobDataHomePerformance;
                         resolve(this.jobDataHomePerformance[HouseId]);
                     })
@@ -287,7 +288,9 @@ class JobChecklistState {
             this
                 .jobChecklistStatePromise
                 .then((status) => {
-                    resolve(this.jobDataResponse.Progress);
+                    let progress = _cloneDeep(this.jobDataResponse.Progress);
+
+                    resolve(progress);
                 })
                 .catch((error)=> {
                     reject(error);
@@ -380,64 +383,10 @@ class JobChecklistState {
         this.putJobDataResponse();
     }
 
-    updateChecklistResponseTotals (response) {
-        let currentResponse = this.jobDataResponse.ChecklistItems[response.Category][response.CategoryProgress][response.ItemId].Response;
-        let currentResponseValue = (currentResponse === undefined) ? currentResponse : currentResponse[0];
-
-        let updateResponse = response.Response[0];
-
-        if (currentResponseValue === undefined && updateResponse === this.RESPONSES.MustCorrect.Key) {
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].MustCorrect += 1;
-        } else if (currentResponseValue === undefined) {
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].Verified += 1;
-        } else if (currentResponseValue === this.RESPONSES.MustCorrect.Key && updateResponse !== this.RESPONSES.MustCorrect.Key) {
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].MustCorrect -= 1;
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].Verified += 1;
-        } else if (currentResponseValue !== this.RESPONSES.MustCorrect.Key && updateResponse === this.RESPONSES.MustCorrect.Key) {
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].Verified -= 1;
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].MustCorrect += 1;
-        } else if (currentResponseValue === this.RESPONSES.MustCorrect.Key && updateResponse === undefined) {
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].MustCorrect -= 1;
-        } else if (currentResponseValue !== this.RESPONSES.MustCorrect.Key && updateResponse === undefined) {
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].Verified -= 1;
-        }
-    }
-
-    updateJobResponseTotals (response) {
-        let jobProgress                  = this.job.Progress;
-        let jobChecklistResponseProgress = this.jobDataResponse.Progress;
-
-        jobProgress.PreDrywall.Verified = 0;
-        _forEach(jobChecklistResponseProgress, function sumPreDrywallVerified (value) {
-            jobProgress.PreDrywall.Verified += value.PreDrywall.Verified;
-        });
-
-        jobProgress.PreDrywall.MustCorrect = 0;
-        _forEach(jobChecklistResponseProgress, function sumFinalVerified (value) {
-            jobProgress.PreDrywall.MustCorrect += value.PreDrywall.MustCorrect;
-        });
-
-        jobProgress.Final.Verified = 0;
-        _forEach(jobChecklistResponseProgress, function sumMustCorrectVerified (value) {
-            jobProgress.Final.Verified += value.Final.Verified;
-        });
-
-        jobProgress.Final.MustCorrect = 0;
-        _forEach(jobChecklistResponseProgress, function sumFinalVerified (value) {
-            jobProgress.Final.MustCorrect += value.Final.MustCorrect;
-        });
-    }
-
     completeJob () {
         this.job.Status = this.JOB_STATUS.INTERNAL_REVIEW;
 
         this.putJobData();
-    }
-
-    initializeCategoryProgress (callback) {
-        this.currentCategory     = this.CATEGORIES[this.$stateParams.categoryId].Key;
-        this.itemStatusQuery     = {};
-        this.categoryProgressCallback = callback;
     }
 
     registerItemStatusQuery (id, query) {
