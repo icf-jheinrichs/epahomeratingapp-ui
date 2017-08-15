@@ -10,8 +10,13 @@ class jobChecklistNavController {
 
         this.JobChecklistStateService = JobChecklistStateService;
 
-        this.updateChecklistResponseTotalsListener = $rootScope.$on(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE_TOTALS, (event, progress) => {
-            this.progress   = progress;
+        this.updateChecklistResponseTotalsListener = $rootScope.$on(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE_TOTALS, () => {
+            this
+                .JobChecklistStateService
+                .getJobProgress()
+                .then((progress)=> {
+                    this.progress = progress;
+                });
         });
     }
 
