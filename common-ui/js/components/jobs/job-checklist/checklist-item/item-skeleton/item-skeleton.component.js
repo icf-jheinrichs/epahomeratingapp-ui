@@ -5,7 +5,11 @@ let checklistItemMrfStaticPressureComponent = {
     bindings : {
         itemId               : '@',
         itemCategory         : '@',
-        itemCategoryProgress : '@'
+        itemCategoryProgress : '@',
+        checklistItem        : '<',
+        response             : '<',
+        comments             : '<',
+        homePerformance      : '<'
     },
     template,
     controller,

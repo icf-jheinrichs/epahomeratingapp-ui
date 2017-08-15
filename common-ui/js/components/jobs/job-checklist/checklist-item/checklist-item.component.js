@@ -6,11 +6,7 @@ let checklistItemComponent = {
     bindings     : {
         itemId               : '@',
         itemCategory         : '@',
-        itemCategoryProgress : '@',
-        response             : '<',
-        itemData             : '<',
-        comments             : '<',
-        homePerformance      : '<'
+        itemCategoryProgress : '@'
     },
     template,
     controller,

@@ -46,7 +46,7 @@ let interceptor = ($q) => {
 import epahomeratingappRoutes from './epahomeratingapp.routes';
 
 // Component Modules
-import {ComponentsModule, FiltersModule} from '../../epahomeratingappUI.js';
+import {ComponentsModule, FiltersModule, UIServicesModule} from '../../epahomeratingappUI.js';
 
 // Pages Modules
 import PagesModule from './pages/pages.module';
@@ -61,6 +61,7 @@ angular
         ServicesModule.name,
         ComponentsModule.name,
         FiltersModule.name,
+        UIServicesModule.name,
         PagesModule.name,
         uiRouter,
         angularSanitize,

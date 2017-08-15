@@ -23,18 +23,19 @@ class jobChecklistChecklistController {
         this.categoryKey  = this.CATEGORIES[this.$stateParams.categoryId].Key;
         this.categoryName = this.CATEGORIES[this.$stateParams.categoryId].Name;
 
-        //TODO: handle catch error.
-        this.JobDataHomePerformanceService
-                .getById(this.$stateParams.id, this.$stateParams.houseId)
-                .then(jobDataHomePerformance => {
-                    this.jobDataHomePerformance = jobDataHomePerformance;
-                });
+        this
+            .JobChecklistStateService
+            .getJobDisplayList()
+            .then(jobDisplayList => {
+                this.jobDisplayList = jobDisplayList;
 
-        this.preDrywallChecklistItems = this.jobDisplayList[this.categoryKey][this.CATEGORY_PROGRESS['pre-drywall'].Key];
-        this.finalChecklistItems = this.jobDisplayList[this.categoryKey][this.CATEGORY_PROGRESS['final'].Key];
+                this.preDrywallChecklistItems = this.jobDisplayList[this.categoryKey][this.CATEGORY_PROGRESS['pre-drywall'].Key];
+                this.finalChecklistItems      = this.jobDisplayList[this.categoryKey][this.CATEGORY_PROGRESS['final'].Key];
 
-        this.hasPredrywallItems = !_isEmpty(this.preDrywallChecklistItems);
-        this.hasFinalItems = !_isEmpty(this.finalChecklistItems);
+                this.hasPredrywallItems       = !_isEmpty(this.preDrywallChecklistItems);
+                this.hasFinalItems            = !_isEmpty(this.finalChecklistItems);
+
+            });
     }
 
     $onDestroy () {

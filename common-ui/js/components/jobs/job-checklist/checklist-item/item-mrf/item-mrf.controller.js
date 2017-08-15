@@ -5,6 +5,13 @@ class ChecklistItemMrfController extends ChecklistItemClass {
     $onInit () {
         super.$onInit();
 
+        this
+            .JobChecklistStateService
+            .getChecklistItemHomePerformance(this.itemId)
+            .then(homePerformance => {
+                this.homePerformance = homePerformance;
+            });
+
         this.editRow = [];
     }
 

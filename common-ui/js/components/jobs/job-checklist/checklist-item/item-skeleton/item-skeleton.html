@@ -1,0 +1,66 @@
+<div class="checklist-item item-skeleton">
+    <header class="checklist-item-header">
+        <button class="checklist-item-info-toggle btn btn-link btn-no-label" type="button"><i class="fa fa-info-circle" aria-label="More Information"></i></button>
+        <h4 class="checklist-item-title">{{::checklistItemCtrl.checklistItem.Shorthand}}</h4>
+    </header>
+
+    <section class="container">
+
+        <div class="form-group form-group-horizontal">
+            <label for="ReturnSide" class="control-label">
+                Return-Side External Static Pressure
+            </label>
+
+            <input
+                id="ReturnSide"
+                name="ReturnSide"
+                class="form-control"
+                value="{{checklistItemCtrl.homePerformance.StaticPressure[0].ReturnSide}}"
+                data-ng-click="checklistItemCtrl.editMrfRow(0, checklistItemCtrl.checklistItem.Sections[0].Key, checklistItemCtrl.checklistItem.Sections[0].Name, checklistItemCtrl.checklistItem.Sections[0].Columns, checklistItemCtrl.homePerformance.StaticPressure[0])" />
+            <abbr class="input-unit" title="Inches of Water Column">
+                IWC
+            </abbr>
+        </div>
+
+        <div class="form-group form-group-horizontal">
+            <label for="SupplySide" class="control-label">
+                Supply Side External Static Pressure
+            </label>
+            <input
+                id="SupplySide"
+                name="SupplySide"
+                class="form-control"
+                value="{{checklistItemCtrl.homePerformance.StaticPressure[0].SupplySide}}"
+                data-ng-click="checklistItemCtrl.editMrfRow(1, checklistItemCtrl.checklistItem.Sections[0].Key, checklistItemCtrl.checklistItem.Sections[0].Name, checklistItemCtrl.checklistItem.Sections[0].Columns, checklistItemCtrl.homePerformance.StaticPressure[0])" />
+
+            <abbr class="input-unit" title="Inches of Water Column">
+                IWC
+            </abbr>
+        </div>
+
+    </section>
+
+    <div class="flex-row flex-align-center flex-justify-end">
+        <checklist-item-comments
+                comments="checklistItemCtrl.comments"
+                on-comment="checklistItemCtrl.postComment(comment)">
+        </checklist-item-comments>
+        <div class="verification">
+            <button-group
+                class="button-group"
+                buttons="checklistItemCtrl.responseButtons"
+                initial-value="checklistItemCtrl.response"
+                on-set-value="checklistItemCtrl.onSetResponse(response)">
+            </button-group>
+        </div>
+    </div>
+
+    <mrf-edit
+        data-ng-repeat="row in checklistItemCtrl.editRow"
+        on-save-mrf-row="checklistItemCtrl.onSaveMrfRow(mrfRowData)"
+        on-cancel-mrf-row="checklistItemCtrl.onCancelMrfRow()"
+        title="{{row.title}}"
+        mrf-digest="row.mrfDigest"
+        mrf-data="row.mrfData">
+    </mrf-edit>
+</div> <!-- .checklist-item -->
