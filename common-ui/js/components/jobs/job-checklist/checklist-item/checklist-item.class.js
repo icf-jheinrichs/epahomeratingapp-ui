@@ -63,6 +63,8 @@ class ChecklistItemClass {
                 });
         }
 
+        this.response = Response;
+
         this.$rootScope.$emit(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE, {
             'ItemId'           : this.itemId,
             'Category'         : this.itemCategory,
