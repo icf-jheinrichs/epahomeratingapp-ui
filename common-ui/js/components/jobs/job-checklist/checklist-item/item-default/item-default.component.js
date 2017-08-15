@@ -6,10 +6,7 @@ let checklistItemDefaultComponent = {
     bindings : {
         itemId               : '@',
         itemCategory         : '@',
-        itemCategoryProgress : '@',
-        checklistItem        : '<',
-        response             : '<',
-        comments             : '<'
+        itemCategoryProgress : '@'
     },
     template,
     controller,

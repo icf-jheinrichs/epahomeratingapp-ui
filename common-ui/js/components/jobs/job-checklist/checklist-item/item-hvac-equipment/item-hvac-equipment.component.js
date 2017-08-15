@@ -6,12 +6,7 @@ let checklistItemHVACCommissioningComponent = {
     bindings : {
         itemId               : '@',
         itemCategory         : '@',
-        itemCategoryProgress : '@',
-        checklistItem        : '<',
-        response             : '<',
-        itemData             : '<',
-        comments             : '<',
-        homePerformance      : '<'
+        itemCategoryProgress : '@'
     },
     template,
     controller,

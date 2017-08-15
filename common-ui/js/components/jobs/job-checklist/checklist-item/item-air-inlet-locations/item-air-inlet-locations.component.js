@@ -7,11 +7,7 @@ let checklistItemAirInletLocationsComponent = {
     bindings : {
         itemId               : '@',
         itemCategory         : '@',
-        itemCategoryProgress : '@',
-        checklistItem        : '<',
-        response             : '<',
-        itemData             : '<',
-        comments             : '<'
+        itemCategoryProgress : '@'
     },
     template,
     controller,

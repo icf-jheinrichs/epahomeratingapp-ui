@@ -148,45 +148,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             url        : '/jobs/{id}',
             component  : 'jobChecklistPage',
             resolve    : {
-                job : (JobsService, $stateParams) => {
-                    let jobPromise
-                        = JobsService
-                            .getById($stateParams.id)
-                            .then(job => {
-                                return job;
-                            });
-
-                    return jobPromise;
-                },
-                jobDisplayList : (job, JobDisplayListService, $stateParams) => {
-                    let houseIds = [job.Primary.HousePlan[0]._id];
-
-                    if (job.Secondary.length > 0) {
-                        job.Secondary.forEach(house => {
-                            houseIds.push(house.HousePlan[0]._id);
-                        });
-                    }
-
-                    let jobDisplayListPromise
-                        = JobDisplayListService
-                            .getById(houseIds)
-                            .then(jobDisplayList => {
-                                return jobDisplayList;
-                            });
-
-                    return jobDisplayListPromise;
-                },
-                jobDataResponse : (JobDataResponseService, $stateParams) => {
-                    let jobDataResponsePromise
-                        = JobDataResponseService
-                            .getById($stateParams.id)
-                            .then(jobDataResponse => {
-                                return jobDataResponse;
-                            });
-
-                    return jobDataResponsePromise;
-                },
-                jobChecklistState : (JobChecklistStateService, $stateParams) => {
+                job : (JobChecklistStateService, $stateParams) => {
                     let jobChecklistStatePromise
                         = JobChecklistStateService
                             .setJobState($stateParams.id, $stateParams.houseId);

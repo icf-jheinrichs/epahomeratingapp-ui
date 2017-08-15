@@ -6,11 +6,7 @@ let checklistItemMrfComponent = {
     bindings : {
         itemId               : '@',
         itemCategory         : '@',
-        itemCategoryProgress : '@',
-        checklistItem        : '<',
-        response             : '<',
-        comments             : '<',
-        homePerformance      : '<'
+        itemCategoryProgress : '@'
     },
     template,
     controller,

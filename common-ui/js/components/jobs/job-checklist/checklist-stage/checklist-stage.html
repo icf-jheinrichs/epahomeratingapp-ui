@@ -8,10 +8,6 @@
         data-ng-repeat="checklistItem in jobChecklistStageCtrl.jobDisplayList[value.Key][jobChecklistStageCtrl.stageKey] track by $index"
         item-id="{{::checklistItem.checklistItemRef}}"
         item-category="{{::value.Key}}"
-        item-category-progress="{{::jobChecklistStageCtrl.stageKey}}"
-        response="jobChecklistStageCtrl.jobDataResponse.ChecklistItems[value.Key][jobChecklistStageCtrl.stageKey][checklistItem.checklistItemRef].Response"
-        item-data="jobChecklistStageCtrl.jobDataResponse.ChecklistItems[value.Key][jobChecklistStageCtrl.stageKey][checklistItem.checklistItemRef].ItemData"
-        comments="jobChecklistStageCtrl.jobDataResponse.ChecklistItems[value.Key][jobChecklistStageCtrl.stageKey][checklistItem.checklistItemRef].Comments"
-        home-performance="jobChecklistStageCtrl.jobDataHomePerformance.ChecklistItems[checklistItem.checklistItemRef]">
+        item-category-progress="{{::jobChecklistStageCtrl.stageKey}}">
     </checklist-item>
 </section>

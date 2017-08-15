@@ -26,3 +26,7 @@
 .checklist-item-not-applicable .checklist-item-title {
     color: $text-color-muted;
 }
+
+.checklist-sub-item {
+    margin-left: $gutter-full;
+}

@@ -9,6 +9,12 @@ class ButtonGroupController {
         this.allowNone = this.allowNone === undefined ? true : this.allowNone;
     }
 
+    $onChanges (changes) {
+        if (changes.initialValue && !changes.initialValue.isFirstChange()) {
+            this.selected = changes.initialValue.currentValue;
+        }
+    }
+
     handleClick (buttonValue) {
         if (this.isActive(buttonValue) && this.allowNone) {
             this.selected  = _without(this.selected, buttonValue);
