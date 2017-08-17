@@ -5,26 +5,34 @@ class ChecklistItemAirInletLocationsController extends ChecklistItemClass {
         super
             .$onInit()
             .then(() => {
-                this.JobChecklistStateService
-                    .getChecklistItemOptions(this.itemId)
-                    .then((options) => {
-                        this.DROPDOWN_OPTIONS = options;
-                        this.itemData = this.itemData || {selectedOptionIndex : 0};
-                        this.selectedOption = this.DROPDOWN_OPTIONS[this.itemData.selectedOptionIndex];
-                        this.onSelectOption();
-                    });
+                this.itemData       = this.itemData || {selectedOptionIndex : 0};
+                this.selectedOption = this.display.Options[this.itemData.selectedOptionIndex];
+                this.onSelectOption(false);
             });
     }
 
-    onSelectOption () {
-        for (let index in this.DROPDOWN_OPTIONS) {
-            if (this.selectedOption === this.DROPDOWN_OPTIONS[index]) {
-                this.JobChecklistStateService.omitSubItem(this.DROPDOWN_OPTIONS[index].Show, false);
+    onSelectOption (setItemData) {
+        for (let index in this.display.Options) {
+            let omitItem = true;
+
+            if (this.selectedOption === this.display.Options[index]) {
                 this.itemData.selectedOptionIndex = index;
-                this.setItemData(this.itemData);
-            } else {
-                this.JobChecklistStateService.omitSubItem(this.DROPDOWN_OPTIONS[index].Show, true);
+                omitItem = false;
             }
+
+            this.JobChecklistStateService.omitSubItem(
+                setItemData,
+                this.display.Options[index].Show,
+                {
+                    'Category'         : this.itemCategory,
+                    'CategoryProgress' : this.itemCategoryProgress,
+                },
+                omitItem
+            );
+        }
+
+        if (setItemData) {
+            this.setItemData(this.itemData);
         }
     }
 }

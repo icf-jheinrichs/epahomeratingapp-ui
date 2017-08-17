@@ -5,7 +5,8 @@ let subItemDefaultComponent = {
     bindings : {
         itemId               : '@',
         itemCategory         : '@',
-        itemCategoryProgress : '@'
+        itemCategoryProgress : '@',
+        isOmitted            : '<'
     },
     template,
     controller,

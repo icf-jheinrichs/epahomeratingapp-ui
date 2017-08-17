@@ -43,6 +43,8 @@ class JobChecklistState {
     }
 
     setJobState (jobId) {
+        this.clearState();
+
         this.jobStatePromise
             = this.$q((resolve, reject) => {
                 this
@@ -220,16 +222,6 @@ class JobChecklistState {
         return houseIds[0];
     }
 
-    getChecklistItemOptions (itemId) {
-        return this.$q((resolve, reject) => {
-            this.DisplayLogicDigestService
-                .get(itemId)
-                .then((result) => {
-                    resolve(result.Options);
-                });
-        });
-    }
-
     getJobCompleteStatus () {
         let status
             = this
@@ -274,11 +266,17 @@ class JobChecklistState {
         this.subItemTable[itemId] = showHideCallback;
     }
 
-    omitSubItem (itemId, isOmitted) {
+    omitSubItem (setItemData, itemId, itemInfo, isOmitted) {
         for (let index in itemId) {
-            let callback = this.subItemTable[itemId[index]];
+            let callback      = this.subItemTable[itemId[index]];
+            let checklistItem = this.jobDataResponse.ChecklistItems[itemInfo.Category][itemInfo.CategoryProgress][itemId[index]];
+
             if (callback !== undefined) {
                 callback(isOmitted);
+            }
+
+            if (isOmitted && checklistItem !== undefined) {
+                checklistItem.Response = [];
             }
         }
     }

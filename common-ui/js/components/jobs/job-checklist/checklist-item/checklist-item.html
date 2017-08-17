@@ -74,6 +74,7 @@
     <sub-item-default
         data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'SubItem-Default'"
         item-id="{{::checklistItemStubCtrl.itemId}}"
+        is-omitted="checklistItemStubCtrl.isOmitted"
         item-category="{{::checklistItemStubCtrl.itemCategory}}"
         item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
     </sub-item-default>

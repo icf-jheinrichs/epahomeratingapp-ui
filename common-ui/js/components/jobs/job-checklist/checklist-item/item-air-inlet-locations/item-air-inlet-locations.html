@@ -5,9 +5,9 @@
             <h4 class="checklist-item-title pull-left">{{::checklistItemAirInletLocationsCtrl.display.Shorthand}}</h4>
             <select
                 class="form-control specified-in-hvac-report"
-                data-ng-options="document.Text for document in checklistItemAirInletLocationsCtrl.DROPDOWN_OPTIONS"
+                data-ng-options="document.Text for document in checklistItemAirInletLocationsCtrl.display.Options"
                 data-ng-model="checklistItemAirInletLocationsCtrl.selectedOption"
-                data-ng-change="checklistItemAirInletLocationsCtrl.onSelectOption()">
+                data-ng-change="checklistItemAirInletLocationsCtrl.onSelectOption(true)">
             </select>
         </header>
     </div>

@@ -102,6 +102,8 @@ class JobsChecklistPageController {
         this
             .JobChecklistStateService
             .updateChecklistItemData(update);
+
+        this.$rootScope.$emit(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE_TOTALS);
     }
 
     postComment (comment) {
