@@ -15,7 +15,7 @@
                 </thead>
                 <tbody>
                     <tr data-ng-click="checklistItemCtrl.editMrfRow($index, mrfTable.Key, mrfTable.Name, mrfTable.Columns, checklistItemCtrl.homePerformance[mrfTable.Key][$index])" data-ng-repeat="dataRow in checklistItemCtrl.homePerformance[mrfTable.Key] track by $index">
-                        <td data-ng-repeat="(key, value) in dataRow track by $index">{{value}}</td>
+                        <td data-ng-repeat="(key, value) in dataRow track by $index" ng-if="key !== 'Id'">{{value}}</td>
                     </tr>
                 </tbody>
             </table>
