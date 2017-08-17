@@ -23,7 +23,9 @@
                 >
 <!--style="display:none;" -->
                 <input id="fileInput" type="file"
-                    ng-model="fileManagerCtrl.selectedFileFromLocal" ng-select="fileManagerCtrl.addFileFromLocal()" />
+                    accept="text/xml"
+                    data-ng-model="fileManagerCtrl.selectedFile"
+                    select-local-file />
 
                 <button
                     class="drop-down-item"
@@ -93,6 +95,8 @@
             </nav>
         </div>
     </div>
+
+    {{fileManagerCtrl.localFiles}}
 
     <div class="file-manager-list flex-item-grow">
         <ul class="list-unstyled">

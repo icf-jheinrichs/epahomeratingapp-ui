@@ -13,6 +13,8 @@ class FileManagerController {
             this.files = [this.files];
         }
 
+        this.localFiles = [];
+
         this.libraryName   = 'From House Plan Library';
         this.eventListener = this.handleFileChange.bind(this);
     }
@@ -42,8 +44,6 @@ class FileManagerController {
                 Name : file.name
             });
         }
-
-        this.selectCallback();
     }
 
     addFile (file) {
@@ -56,16 +56,9 @@ class FileManagerController {
             });
         }
 
-        console.log('add file');
-
         if (this.uploadOnly === 'true') {
             this.$scope.$apply();
         }
-    }
-
-    addFileFromLocal () {
-        console.log('add file from local');
-        console.log(selectedFileFromLocal);
     }
 
     removeFile (_id) {
@@ -73,6 +66,35 @@ class FileManagerController {
 
         let index = _findIndex(this.files, {_id : _id});
         this.files.splice(index, 1);
+    }
+
+    addLocalFile (file) {
+        console.log('adding local file');
+
+        for (let index in this.localFiles) {
+            if (this.localFiles[index].name === file.name
+             && this.localFiles[index].lastModified === file.lastModified) {
+                return;
+            }
+        }
+
+        this.localFiles.push(file);
+
+        console.log(this.files);
+        console.log(this.localFiles);
+
+        this.$scope.$apply();
+    }
+
+    removeLocalFile (file) {
+        console.log('remove local file');
+
+        for (let index in this.localFiles) {
+            if (this.localFiles[index].name === file.name
+             && this.localFiles[index].lastModified === file.lastModified) {
+                this.localFiles.splice(index, 1);
+            }
+        }
     }
 }
 
