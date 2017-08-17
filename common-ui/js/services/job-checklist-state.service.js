@@ -276,7 +276,7 @@ class JobChecklistState {
             }
 
             if (isOmitted && checklistItem !== undefined) {
-                checklistItem.Response = [];
+                checklistItem.Response = undefined;
             }
         }
     }
