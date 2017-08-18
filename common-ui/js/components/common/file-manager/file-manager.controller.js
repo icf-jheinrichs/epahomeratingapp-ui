@@ -40,18 +40,17 @@ class FileManagerController {
                 Name : file.name
             });
         }
-
-        this.selectCallback();
     }
 
     addFile (file) {
         // debugger;
-
         if (_findIndex(this.files, {_id : file._id}) < 0) {
             this.files.push({
                 _id  : file._id,
                 Name : file.Name
             });
+
+            this.selectedCallback();
         }
 
         if (this.uploadOnly === 'true') {
