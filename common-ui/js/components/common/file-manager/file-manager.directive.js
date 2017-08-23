@@ -1,21 +1,21 @@
-import controller from './file-manager.controller';
 
 function fileManager () {
     return {
-        controller,
-        scope    : true,
+        scope    : {
+            LocalFiles : '='
+        },
         restrict : 'A',
         link     : (scope, element, attrs, fileManagerCtrl) => {
-            element.on('change', function onChange (event) {
-                console.log(scope);
-                console.log(fileManagerCtrl);
-                console.log(element);
 
-                fileManagerCtrl.addLocalFile(element[0].files[0]);
-            });
-
-            scope.$on('$destroy', function onDestroy () {
-                element.off();
+            // angular not support ngchange for input type file
+            // this is a work around
+            // may need to make this better...
+            element.bind('change', function onChange (event) {
+                let parentScope = scope.$parent.$parent;
+                parentScope.$apply(function updateLocalfiles () {
+                    parentScope.LocalFiles = event.target.files;
+                    console.log(parentScope.LocalFiles);
+                });
             });
         }
     };

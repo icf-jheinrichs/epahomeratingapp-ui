@@ -9,7 +9,7 @@ let fileManagerComponent = {
         enabled          : '=',
         inputId          : '@',
         files            : '=',
-        library          : '<',
+        library          : '<'
     },
     template,
     controller,

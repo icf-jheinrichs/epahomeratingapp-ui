@@ -1,11 +1,14 @@
 import _findIndex from 'lodash/findIndex';
+import _defer from 'lodash/defer';
 
 class FileManagerController {
     constructor ($element, $scope) {
         'ngInject';
 
-        this.$element = $element;
-        this.$scope   = $scope;
+        this.$element  = $element;
+        this.$scope    = $scope;
+
+        $scope.LocalFile = [];
     }
 
     $onInit () {
@@ -13,9 +16,6 @@ class FileManagerController {
             this.files = [this.files];
         }
 
-        this.localFiles = [];
-
-        this.libraryName   = 'From House Plan Library';
         this.eventListener = this.handleFileChange.bind(this);
     }
 
@@ -34,8 +34,6 @@ class FileManagerController {
     handleFileChange (event) {
         let file;
 
-        console.log('handle file change');
-
         if (event.target.files.length > 0) {
             file = event.target.files[0];
 
@@ -47,8 +45,11 @@ class FileManagerController {
     }
 
     addFile (file) {
-        // debugger;
+        if (this.$scope.LocalFiles.length !== 0) {
+            return; // don't allow select local and library at the same time
+        }
 
+        // debugger;
         if (_findIndex(this.files, {_id : file._id}) < 0) {
             this.files.push({
                 _id  : file._id,
@@ -68,33 +69,17 @@ class FileManagerController {
         this.files.splice(index, 1);
     }
 
-    addLocalFile (file) {
-        console.log('adding local file');
+    removeLocalFile (name, lastModified) {
+        this.$scope.LocalFiles = {};
 
-        for (let index in this.localFiles) {
-            if (this.localFiles[index].name === file.name
-             && this.localFiles[index].lastModified === file.lastModified) {
-                return;
-            }
-        }
-
-        this.localFiles.push(file);
-
-        console.log(this.files);
-        console.log(this.localFiles);
-
-        this.$scope.$apply();
-    }
-
-    removeLocalFile (file) {
-        console.log('remove local file');
-
-        for (let index in this.localFiles) {
-            if (this.localFiles[index].name === file.name
-             && this.localFiles[index].lastModified === file.lastModified) {
-                this.localFiles.splice(index, 1);
-            }
-        }
+        // TODO - remove single file from asset
+        // for (let fileIndex in this.$scope.LocalFiles) {
+        //     let file = this.$scope.LocalFiles[fileIndex];
+        //     if (file.name === name && file.lastModified === lastModified) {
+        //         console.log('delete ' + fileIndex);
+        //         delete this.$scope.LocalFiles[fileIndex];
+        //     }
+        // }
     }
 }
 

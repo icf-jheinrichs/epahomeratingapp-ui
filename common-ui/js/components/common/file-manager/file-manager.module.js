@@ -4,9 +4,9 @@ import angular from 'angular';
 // directives
 import fileManagerDirective from './file-manager.directive';
 
-let dialogModule
+let fileManagerModule
     = angular
         .module('epahomeratingapp.common.file-manger', [])
-            .directive('selectLocalFile', fileManagerDirective);
+        .directive('selectLocalFile', fileManagerDirective);
 
-export default dialogModule;
+export default fileManagerModule;

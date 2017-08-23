@@ -21,11 +21,12 @@
                 role="menu"
                 popover="popover"
                 >
-<!--style="display:none;" -->
+
                 <input id="fileInput" type="file"
                     accept="text/xml"
-                    data-ng-model="fileManagerCtrl.selectedFile"
-                    select-local-file />
+                    select-local-file="LocalFiles"
+                    style="display:none;"
+                    multiple />
 
                 <button
                     class="drop-down-item"
@@ -96,8 +97,6 @@
         </div>
     </div>
 
-    {{fileManagerCtrl.localFiles}}
-
     <div class="file-manager-list flex-item-grow">
         <ul class="list-unstyled">
             <li class="file-manager-file clearfix"
@@ -109,6 +108,22 @@
                     type="button"
                     aria-label="Remove {{::file.Name}}"
                     data-ng-click="fileManagerCtrl.removeFile(file._id)">
+
+                    <i class="fa fa-remove" aria-hidden="true"></i>
+                </button>
+            </li>
+        </ul>
+
+        <ul class="list-unstyled">
+            <li class="file-manager-file clearfix"
+                data-ng-repeat="file in LocalFiles track by $index">
+                {{file.name}}
+
+                <button
+                    class="btn btn-no-label btn-link btn-remove pull-right"
+                    type="button"
+                    aria-label="Remove {{::file.Name}}"
+                    data-ng-click="fileManagerCtrl.removeLocalFile(file.name, file.lastModified)">
 
                     <i class="fa fa-remove" aria-hidden="true"></i>
                 </button>

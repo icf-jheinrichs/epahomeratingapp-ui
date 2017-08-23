@@ -9,6 +9,8 @@ class JobDetailLocationController {
     }
 
     housePlanOnSelect () {
+        console.log('house plan on select called');
+
         // auto pop builder name
         if (this.location.HousePlan.length === 0) {
             return;
