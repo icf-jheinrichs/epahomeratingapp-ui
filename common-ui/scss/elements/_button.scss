@@ -31,6 +31,7 @@
         color: $button-color-active;
     }
 
+    &.drop-down-item-disabled,
     &[disabled='disabled'] {
         border-color: $button-border-color-disabled;
         cursor: not-allowed;

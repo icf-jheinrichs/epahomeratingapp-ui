@@ -10,8 +10,9 @@
         <div class="modal-body">
             <p>The job cannot be completed until the following issues are resolved:</p>
             <ul>
-                <li data-ng-if="jobsChecklistPageCtrl.mustCorrectItems > 0">There are {{jobsChecklistPageCtrl.mustCorrectItems}} items that must be corrected.</li>
-                <li data-ng-if="jobsChecklistPageCtrl.totalRemaining !== 0">There are {{jobsChecklistPageCtrl.totalRemaining}} items remaining.</li>
+                <li data-ng-if="jobsChecklistPageCtrl.jobCompleteStatus.MustCorrect > 0">There are {{jobsChecklistPageCtrl.jobCompleteStatus.MustCorrect}} items that must be corrected.</li>
+                <li data-ng-if="jobsChecklistPageCtrl.jobCompleteStatus.BuilderVerified > 8">There are are {{jobsChecklistPageCtrl.jobCompleteStatus.BuilderVerified}} flagged as builder verified. The maximum is eight.</li>
+                <li data-ng-if="jobsChecklistPageCtrl.jobCompleteStatus.Remaining !== 0">There are {{jobsChecklistPageCtrl.jobCompleteStatus.Remaining}} items remaining.</li>
             </ul>
         </div>
     </div>
@@ -97,6 +98,7 @@
                     data-ng-click="jobsChecklistPageCtrl.hideDropDown(); jobsChecklistPageCtrl.completeJob()"
                     data-ng-disabled="!jobsChecklistPageCtrl.jobIsActive"
                     class="drop-down-item"
+                    data-ng-class="{'drop-down-item-disabled' : !jobsChecklistPageCtrl.canCompleteJob()}"
                     type="button">
                     Complete
                 </button>
@@ -136,13 +138,9 @@
 <checklist-house-selection houses="jobsChecklistPageCtrl.houses"></checklist-house-selection>
 
 <div class="page-container">
-    <checklist-nav progress="jobsChecklistPageCtrl.jobDataResponse.Progress"></checklist-nav>
+    <checklist-nav></checklist-nav>
 
-    <checklist-filter checklist-items-quantity="{{jobsChecklistPageCtrl.checklistItemsQuantity}}"></checklist-filter>
+    <checklist-filter></checklist-filter>
 
-    <job-checklist
-        job="jobsChecklistPageCtrl.job"
-        job-display-list="jobsChecklistPageCtrl.jobDisplayList"
-        job-data-response="jobsChecklistPageCtrl.jobDataResponse">
-    </job-checklist>
+    <div ui-view></div>
 </div>

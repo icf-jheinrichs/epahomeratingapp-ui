@@ -139,7 +139,7 @@ class HousePlansService {
         return promise;
     }
 
-    post (formData) {
+    post (formData, tmpHousePlan) {
         let promise = this.$q((resolve, reject) => {
             this
                 .$http({
@@ -147,7 +147,8 @@ class HousePlansService {
                     transformRequest : angular.identity,
                     url              : this.API_URL.HOUSE_PLAN,
                     headers          : {
-                        'Content-Type' : undefined
+                        'Content-Type' : undefined,
+                        'uploadType'   : tmpHousePlan === 'temporary' ? 'temporary' : undefined
                     },
                     data : formData
                 })

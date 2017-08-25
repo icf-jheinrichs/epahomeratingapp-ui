@@ -1,12 +1,14 @@
 import _findKey from 'lodash/findKey';
 
 class ChecklistFilterController {
-    constructor ($log, UI_ENUMS, $state, $stateParams, $location) {
+    constructor ($state, $stateParams, JobChecklistStateService, UI_ENUMS) {
         'ngInject';
 
         this.$state       = $state;
         this.$stateParams = $stateParams;
-        this.CATEGORIES   = UI_ENUMS.CATEGORIES;
+
+        this.JobChecklistStateService = JobChecklistStateService;
+        this.CATEGORIES               = UI_ENUMS.CATEGORIES;
 
         this.inspectionStageFilters
             = Object.assign(
@@ -37,8 +39,15 @@ class ChecklistFilterController {
     }
 
     $onInit () {
-        this.inspectionStageFilter = this.getCurrentInspectionStageFilter();
-        this.statusFilter          = this.getCurrentStatusFilter();
+        this.inspectionStageFilter  = this.getCurrentInspectionStageFilter();
+        this.statusFilter           = this.getCurrentStatusFilter();
+
+        this
+            .JobChecklistStateService
+            .getChecklistItemsQuantity()
+            .then((checklistItemsQuantity) => {
+                this.checklistItemsQuantity = checklistItemsQuantity;
+            });
     }
 
     getCurrentInspectionStageFilter () {
@@ -59,6 +68,31 @@ class ChecklistFilterController {
         }
 
         return [statusFilter];
+    }
+
+    getCurrentInspectionStageFilterName () {
+        if (this.$state.current.name === 'job-checklist.stage') {
+            return this.inspectionStageFilters[this.$stateParams.stageId].Name;
+        } else {
+            return 'Any';
+        }
+    }
+
+    getCurrentStatusFilterName () {
+        let statusFilter;
+
+        if (this.$stateParams.status) {
+            statusFilter = this.statusFilters[this.$stateParams.status].Name;
+        } else {
+            statusFilter = 'Any Status';
+        }
+
+        //TODO: fix this
+        if (statusFilter === 'Any') {
+            statusFilter = 'Any Status';
+        }
+
+        return statusFilter;
     }
 
     setInspectionStageFilter (response) {
@@ -86,6 +120,13 @@ class ChecklistFilterController {
                 status     : statusId
             });
         }
+    }
+
+    get checklistFilterCriteria () {
+        let plural         = this.checklistItemsQuantity > 1 ? 's' : '';
+        let inpectionStage = `${this.getCurrentInspectionStageFilterName()} Inspection Stage`;
+
+        return `checklist item${plural} for ${inpectionStage}, ${this.getCurrentStatusFilterName()}`;
     }
 }
 

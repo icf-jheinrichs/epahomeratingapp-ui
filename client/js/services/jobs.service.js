@@ -1,7 +1,7 @@
-import _map from 'lodash/map';
-import _random from 'lodash/random';
 import _cloneDeep from 'lodash/cloneDeep';
-import _sample from 'lodash/sample';
+// import _map from 'lodash/map';
+// import _random from 'lodash/random';
+// import _sample from 'lodash/sample';
 
 /**
  * JobsService is the interface for all job data.
@@ -17,7 +17,7 @@ class JobsService {
      */
     constructor ($log, $q, $http, $interval, $rootScope, $sanitize, API_URL, UI_ENUMS) {
         'ngInject';
-        let self = this;
+        // let self = this;
 
         this.$log       = $log;
         this.$q         = $q;

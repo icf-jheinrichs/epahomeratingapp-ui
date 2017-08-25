@@ -23,9 +23,6 @@ const NEW_EQUIPMENT = {
 
 class ChecklistItemHVACCommissioningController extends ChecklistItemClass {
     $onInit () {
-        let documentIndex;
-
-        super.$onInit();
 
         this.EQUIPMENT_MATCHES_DOCUMENT = [
             {
@@ -38,14 +35,20 @@ class ChecklistItemHVACCommissioningController extends ChecklistItemClass {
             }
         ];
 
-        this.itemData = this.itemData || {
-            EquipmentMatches : this.EQUIPMENT_MATCHES_DOCUMENT[0].key,
-            Equipment        : []
-        };
+        super
+            .$onInit()
+            .then(() => {
+                let documentIndex;
 
-        documentIndex = _findIndex(this.EQUIPMENT_MATCHES_DOCUMENT, {key : this.itemData.EquipmentMatches});
+                this.itemData = this.itemData || {
+                    EquipmentMatches : this.EQUIPMENT_MATCHES_DOCUMENT[0].key,
+                    Equipment        : []
+                };
 
-        this.selectedEquipmentMatches = this.EQUIPMENT_MATCHES_DOCUMENT[documentIndex];
+                documentIndex = _findIndex(this.EQUIPMENT_MATCHES_DOCUMENT, {key : this.itemData.EquipmentMatches});
+
+                this.selectedEquipmentMatches = this.EQUIPMENT_MATCHES_DOCUMENT[documentIndex];
+            });
     }
 
     onViewHvacDesignReport () {

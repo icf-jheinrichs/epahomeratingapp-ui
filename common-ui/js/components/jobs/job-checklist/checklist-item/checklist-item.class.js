@@ -16,19 +16,28 @@ class ChecklistItemClass {
     }
 
     $onInit () {
-        this.DisplayLogicDigestService
-            .get(this.itemId)
-            .then(display => {
-                this.display = display;
+        return this.$q((resolve, reject) => {
+            this
+                .JobChecklistStateService
+                .getChecklistItemResponse(this.itemId, this.itemCategory, this.itemCategoryProgress)
+                .then(response => {
+                    this.response = response.Response;
+                    this.comments = response.Comments;
+                    this.itemData = response.ItemData;
 
-                this.responseButtons = this.getResponseOptions();
-            });
+                    return this.DisplayLogicDigestService.get(this.itemId);
+                })
+                .then(display => {
+                    this.display = display;
 
-        // this.JobChecklistStateService
-        //     .getChecklistItemResponse(this.itemId, this.itemCategory, this.itemCategoryProgress)
-        //     .then(response => {
-        //         this.response = response;
-        //     });
+                    this.responseButtons = this.getResponseOptions();
+
+                    resolve({'status' : 'success'});
+                })
+                .catch(error => {
+                    reject(error);
+                });
+        });
     }
 
     getResponseOptions () {
@@ -53,6 +62,8 @@ class ChecklistItemClass {
                     this.$log.log(error);
                 });
         }
+
+        this.response = Response;
 
         this.$rootScope.$emit(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE, {
             'ItemId'           : this.itemId,

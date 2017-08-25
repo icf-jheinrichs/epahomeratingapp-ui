@@ -23,12 +23,12 @@
             <div class="form-group col-xs-6"
                  data-ng-repeat="field in checklistItemMrfEditCtrl.mrfDigest track by $index">
                 <div class="form-group"
-                    data-ng-if="field.Locked && field.DataType.Type !== 'ENUM'">
+                    data-ng-if="field.Locked">
                     <span class="control-label">{{checklistItemMrfEditCtrl.mrfDigest[$index].Name}}</span>
                     <p class="form-control-static">{{checklistItemMrfEditCtrl.editMrfData[field.Key]}}</p>
                 </div>
 
-                <div data-ng-if="!field.Locked || field.DataType.Type === 'ENUM'"
+                <div data-ng-if="!field.Locked"
                      data-ng-switch on="field.DataType.Type">
 
                      <div ng-switch-when="Boolean">

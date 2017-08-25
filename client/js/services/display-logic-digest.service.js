@@ -11,6 +11,14 @@ class DisplayLogicDigestService {
             method  : 'GET',
             url     : this.API_URL.DISPLAY_LOGIC_DIGEST
         });
+
+        this.digest.then((digest) => {
+            this.syncDigest = digest;
+        });
+    }
+
+    getPromise () {
+        return this.digest;
     }
 
     get (id) {
@@ -19,8 +27,11 @@ class DisplayLogicDigestService {
                 return digest.data.ChecklistItems[id];
             });
 
-
         return checklistItemDisplay;
+    }
+
+    getSync (id) {
+        return this.syncDigest.data.ChecklistItems[id];
     }
 
     getEnum (Name) {

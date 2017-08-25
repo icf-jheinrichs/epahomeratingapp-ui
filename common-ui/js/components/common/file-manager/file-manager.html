@@ -28,15 +28,17 @@
                     style="display:none;"
                     multiple />
 
-                <button
-                    class="drop-down-item"
-                    type="button"
-                    role="menuitem"
-                    accept="text/xml"
-                    onclick="document.getElementById('fileInput').click()">
+                <div data-ng-if="fileManagerCtrl.CONTEXT_IS_ADMIN">
+                    <button
+                        class="drop-down-item"
+                        type="button"
+                        role="menuitem"
+                        accept="text/xml"
+                        onclick="document.getElementById('fileInput').click()">
 
-                    From Computer
-                </button>
+                        From Computer
+                    </button>
+                </div>
 
                 <button
                     class="drop-down-item"
@@ -101,6 +103,7 @@
         <ul class="list-unstyled">
             <li class="file-manager-file clearfix"
                 data-ng-repeat="file in fileManagerCtrl.files track by $index">
+                {{file.name}}
                 {{file.Name}}
 
                 <button
@@ -108,22 +111,6 @@
                     type="button"
                     aria-label="Remove {{::file.Name}}"
                     data-ng-click="fileManagerCtrl.removeFile(file._id)">
-
-                    <i class="fa fa-remove" aria-hidden="true"></i>
-                </button>
-            </li>
-        </ul>
-
-        <ul class="list-unstyled">
-            <li class="file-manager-file clearfix"
-                data-ng-repeat="file in LocalFiles track by $index">
-                {{file.name}}
-
-                <button
-                    class="btn btn-no-label btn-link btn-remove pull-right"
-                    type="button"
-                    aria-label="Remove {{::file.Name}}"
-                    data-ng-click="fileManagerCtrl.removeLocalFile(file.name, file.lastModified)">
 
                     <i class="fa fa-remove" aria-hidden="true"></i>
                 </button>

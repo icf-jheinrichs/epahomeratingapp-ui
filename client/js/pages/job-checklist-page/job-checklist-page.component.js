@@ -3,9 +3,7 @@ import controller from './job-checklist-page.controller';
 
 let jobsChecklistPageComponent = {
     bindings : {
-        job             : '<',
-        jobDisplayList  : '<',
-        jobDataResponse : '<'
+        job             : '<'
     },
     template,
     controller,

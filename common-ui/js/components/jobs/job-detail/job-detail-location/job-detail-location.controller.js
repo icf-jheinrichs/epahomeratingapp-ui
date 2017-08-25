@@ -1,16 +1,16 @@
 import _find from 'lodash/find';
 
 class JobDetailLocationController {
-    constructor (UI_ENUMS) {
+    constructor (UI_ENUMS, $scope) {
         'ngInject';
 
         this.ratingTypeOptions = UI_ENUMS.RATING_TYPES;
         this.selectHousePlanEnabled = true;
+
+        this.$scope = $scope;
     }
 
-    housePlanOnSelect () {
-        console.log('house plan on select called');
-
+    libraryHousePlanOnSelect () {
         // auto pop builder name
         if (this.location.HousePlan.length === 0) {
             return;

@@ -1,4 +1,6 @@
 
+import _values from 'lodash/values';
+
 function fileManager () {
     return {
         scope    : {
@@ -13,8 +15,7 @@ function fileManager () {
             element.bind('change', function onChange (event) {
                 let parentScope = scope.$parent.$parent;
                 parentScope.$apply(function updateLocalfiles () {
-                    parentScope.LocalFiles = event.target.files;
-                    console.log(parentScope.LocalFiles);
+                    parentScope.fileManagerCtrl.files = _values(event.target.files);
                 });
             });
         }

@@ -1,22 +1,22 @@
 import _findIndex from 'lodash/findIndex';
-import _forEach from 'lodash/forEach';
 
 class JobsChecklistPageController {
-    constructor ($rootScope, $stateParams, JobsService, JobDataResponseService, PDFService, UI_ENUMS, jobTitleFilter) {
+    constructor ($rootScope, $stateParams, JobChecklistStateService, JobsService, JobDataResponseService, PDFService, UI_ENUMS, jobTitleFilter) {
         'ngInject';
 
-        this.$rootScope             = $rootScope;
-        this.$stateParams           = $stateParams;
+        this.$rootScope               = $rootScope;
+        this.$stateParams             = $stateParams;
 
-        this.JobsService            = JobsService;
-        this.JobDataResponseService = JobDataResponseService;
-        this.PDFService             = PDFService;
-        this.MESSAGING              = UI_ENUMS.MESSAGING;
-        this.JOB_STATUS             = UI_ENUMS.JOB_STATUS;
-        this.CATEGORY_PROGRESS      = UI_ENUMS.CATEGORY_PROGRESS;
-        this.RESPONSES              = UI_ENUMS.RESPONSES;
+        this.JobChecklistStateService = JobChecklistStateService;
+        this.JobsService              = JobsService;
+        this.JobDataResponseService   = JobDataResponseService;
+        this.PDFService               = PDFService;
+        this.MESSAGING                = UI_ENUMS.MESSAGING;
+        this.JOB_STATUS               = UI_ENUMS.JOB_STATUS;
+        this.CATEGORY_PROGRESS        = UI_ENUMS.CATEGORY_PROGRESS;
+        this.RESPONSES                = UI_ENUMS.RESPONSES;
 
-        this.jobTitleFilter         = jobTitleFilter;
+        this.jobTitleFilter           = jobTitleFilter;
 
         this.responseListener = this.$rootScope.$on(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE, (event, response) => {
             this.updateChecklistResponse(response);
@@ -56,8 +56,18 @@ class JobsChecklistPageController {
         this.showDownloadModal         = false;
         this.showHvacDesignReportModal = false;
 
-        this.checklistItemsQuantity = this.job.Progress.PreDrywall.Total + this.job.Progress.Final.Total;
-        this.setProgressStatus();
+        this.jobCompleteStatus = {
+            MustCorrect     : 0,
+            BuilderVerified : 0,
+            Remaining       : 0
+        };
+
+        this
+            .JobChecklistStateService
+            .setJobDisplayListState()
+            .then(()=> {
+                this.jobCompleteStatus = this.JobChecklistStateService.getJobCompleteStatus();
+            });
     }
 
     $onDestroy () {
@@ -69,65 +79,42 @@ class JobsChecklistPageController {
         this.viewHvacDesignReportListener();
     }
 
-    putJobData () {
-        this
-            .JobsService
-            .put(this.job);
-    }
-
-    putJobDataResponse () {
-        this
-            .JobDataResponseService
-            .put(this.jobDataResponse);
-    }
-
     getRatingTypeClass () {
         //TODO: make this better
         return (this.job.RatingType === 'energy-star') ? 'label-energy-star' : 'label-hers-rating';
     }
 
     updateHousePhoto (photoData) {
-        let secondaryIndex;
-
-        if (this.job.Primary.HouseId === photoData.HouseId) {
-            this.job.Primary.Photo = [photoData.photo];
-        } else {
-            secondaryIndex = _findIndex(this.job.Secondary, {HouseId : photoData.HouseId});
-
-            this.job.Secondary[secondaryIndex].Photo = [photoData.photo];
-        }
-
-        this.putJobData();
+        this
+            .JobChecklistStateService
+            .updateHousePhoto(photoData);
     }
 
     updateChecklistResponse (response) {
-        let updateResponse = (response.Response.length === 0) ? undefined : response.Response;
+        this
+            .JobChecklistStateService
+            .updateChecklistResponse(response);
 
-        this.updateChecklistResponseTotals(response);
-        this.updateJobResponseTotals();
-        this.setProgressStatus();
-
-        this.jobDataResponse.ChecklistItems[response.Category][response.CategoryProgress][response.ItemId].Response = updateResponse;
-
-        this.putJobDataResponse();
-
-        this.putJobData();
+        this.$rootScope.$emit(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE_TOTALS);
     }
 
     updateChecklistItemData (update) {
-        this.jobDataResponse.ChecklistItems[update.Category][update.CategoryProgress][update.ItemId].ItemData = update.ItemData;
+        this
+            .JobChecklistStateService
+            .updateChecklistItemData(update);
 
-        this.putJobDataResponse();
+        this.$rootScope.$emit(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE_TOTALS);
     }
 
     postComment (comment) {
-        this.jobDataResponse.ChecklistItems[comment.Category][comment.CategoryProgress][comment.ItemId].Comments.push(comment.Comment);
-
-        this.putJobDataResponse();
+        this
+            .JobChecklistStateService
+            .postComment(comment);
     }
 
     //TODO: all dropdown stuff belongs in a directive
     toggleDropDown () {
+        this.jobCompleteStatus = this.JobChecklistStateService.getJobCompleteStatus();
         this.showActionsDropDown = !this.showActionsDropDown;
     }
 
@@ -167,56 +154,16 @@ class JobsChecklistPageController {
     }
 
     completeJob () {
-        if (this.totalRemaining === 0 && this.mustCorrectItems === 0) {
-            this.job.Status = this.JOB_STATUS.INTERNAL_REVIEW;
+        if (this.canCompleteJob()) {
             this.jobIsActive = false;
+            this.job.Status = this.JOB_STATUS.INTERNAL_REVIEW;
 
-            this.putJobData();
+            this
+                .JobChecklistStateService
+                .completeJob();
         } else {
             this.showCompleteModal = true;
         }
-    }
-
-    setProgressStatus () {
-        let jobProgress = this.job.Progress;
-
-        let totalChecklistItems   = jobProgress.PreDrywall.Total + jobProgress.Final.Total;
-        let verifiedItems         = jobProgress.PreDrywall.Verified + jobProgress.Final.Verified;
-        let mustCorrectItems      = jobProgress.PreDrywall.MustCorrect + jobProgress.Final.MustCorrect;
-
-        this.mustCorrectItems = mustCorrectItems;
-        this.totalRemaining   = (totalChecklistItems) - (verifiedItems + mustCorrectItems);
-
-        if (jobProgress.PreDrywall.Verified + jobProgress.PreDrywall.MustCorrect < jobProgress.PreDrywall.Total) {
-            this.job.ProgressLevel = this.CATEGORY_PROGRESS['pre-drywall'].Key;
-        } else {
-            this.job.ProgressLevel = this.CATEGORY_PROGRESS['final'].Key;
-        }
-    }
-
-    updateChecklistResponseTotals (response) {
-        let currentResponse = this.jobDataResponse.ChecklistItems[response.Category][response.CategoryProgress][response.ItemId].Response;
-        let currentResponseValue = (currentResponse === undefined) ? currentResponse : currentResponse[0];
-
-        let updateResponse = response.Response[0];
-
-        if (currentResponseValue === undefined && updateResponse === this.RESPONSES.MustCorrect.Key) {
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].MustCorrect += 1;
-        } else if (currentResponseValue === undefined) {
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].Verified += 1;
-        } else if (currentResponseValue === this.RESPONSES.MustCorrect.Key && updateResponse !== this.RESPONSES.MustCorrect.Key) {
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].MustCorrect -= 1;
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].Verified += 1;
-        } else if (currentResponseValue !== this.RESPONSES.MustCorrect.Key && updateResponse === this.RESPONSES.MustCorrect.Key) {
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].Verified -= 1;
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].MustCorrect += 1;
-        } else if (currentResponseValue === this.RESPONSES.MustCorrect.Key && updateResponse === undefined) {
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].MustCorrect -= 1;
-        } else if (currentResponseValue !== this.RESPONSES.MustCorrect.Key && updateResponse === undefined) {
-            this.jobDataResponse.Progress[response.Category][response.CategoryProgress].Verified -= 1;
-        }
-
-        this.$rootScope.$broadcast(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE_TOTALS, this.jobDataResponse.Progress);
     }
 
     onDownloadRequest () {
@@ -252,31 +199,6 @@ class JobsChecklistPageController {
             });
     }
 
-    updateJobResponseTotals (response) {
-        let jobProgress = this.job.Progress;
-        let jobChecklistResponseProgress = this.jobDataResponse.Progress;
-
-        jobProgress.PreDrywall.Verified = 0;
-        _forEach(jobChecklistResponseProgress, function sumPreDrywallVerified (value) {
-            jobProgress.PreDrywall.Verified += value.PreDrywall.Verified;
-        });
-
-        jobProgress.PreDrywall.MustCorrect = 0;
-        _forEach(jobChecklistResponseProgress, function sumFinalVerified (value) {
-            jobProgress.PreDrywall.MustCorrect += value.PreDrywall.MustCorrect;
-        });
-
-        jobProgress.Final.Verified = 0;
-        _forEach(jobChecklistResponseProgress, function sumMustCorrectVerified (value) {
-            jobProgress.Final.Verified += value.Final.Verified;
-        });
-
-        jobProgress.Final.MustCorrect = 0;
-        _forEach(jobChecklistResponseProgress, function sumFinalVerified (value) {
-            jobProgress.Final.MustCorrect += value.Final.MustCorrect;
-        });
-    }
-
     viewHvacDesignReport () {
         let secondaryIndex;
         let houseId           = parseInt(this.$stateParams.houseId, 10);
@@ -300,6 +222,10 @@ class JobsChecklistPageController {
 
     get JobTitle () {
         return this.jobTitleFilter(this.job.Primary.AddressInformation);
+    }
+
+    canCompleteJob () {
+        return this.jobCompleteStatus.Remaining === 0 && this.jobCompleteStatus.MustCorrect === 0 && this.jobCompleteStatus.BuilderVerified <= 8;
     }
 }
 

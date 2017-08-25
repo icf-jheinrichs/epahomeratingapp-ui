@@ -1,14 +1,14 @@
 import _findIndex from 'lodash/findIndex';
-import _defer from 'lodash/defer';
+import _isEmpty from 'lodash/isEmpty';
 
 class FileManagerController {
-    constructor ($element, $scope) {
+    constructor ($element, $scope, CONTEXT, UI_ENUMS) {
         'ngInject';
 
         this.$element  = $element;
         this.$scope    = $scope;
 
-        $scope.LocalFile = [];
+        this.CONTEXT_IS_ADMIN = CONTEXT !== UI_ENUMS.CONTEXT.APP;
     }
 
     $onInit () {
@@ -45,7 +45,7 @@ class FileManagerController {
     }
 
     addFile (file) {
-        if (this.$scope.LocalFiles.length !== 0) {
+        if (this.$scope.LocalFiles !== undefined && !_isEmpty(this.$scope.LocalFiles)) {
             return; // don't allow select local and library at the same time
         }
 
@@ -55,6 +55,8 @@ class FileManagerController {
                 _id  : file._id,
                 Name : file.Name
             });
+
+            this.librarySelectedCallback();
         }
 
         if (this.uploadOnly === 'true') {
@@ -67,19 +69,6 @@ class FileManagerController {
 
         let index = _findIndex(this.files, {_id : _id});
         this.files.splice(index, 1);
-    }
-
-    removeLocalFile (name, lastModified) {
-        this.$scope.LocalFiles = {};
-
-        // TODO - remove single file from asset
-        // for (let fileIndex in this.$scope.LocalFiles) {
-        //     let file = this.$scope.LocalFiles[fileIndex];
-        //     if (file.name === name && file.lastModified === lastModified) {
-        //         console.log('delete ' + fileIndex);
-        //         delete this.$scope.LocalFiles[fileIndex];
-        //     }
-        // }
     }
 }
 

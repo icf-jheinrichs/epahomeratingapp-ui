@@ -2,10 +2,11 @@ import ChecklistItemClass from '../checklist-item.class';
 
 class ChecklistItemHVACCommissioningController extends ChecklistItemClass {
     $onInit () {
-        super.$onInit();
-
-
-        this.itemData = this.itemData || {};
+        super
+            .$onInit()
+            .then(() => {
+                this.itemData = this.itemData || {};
+            });
     }
 
     handlePhotoCapture (photo) {
