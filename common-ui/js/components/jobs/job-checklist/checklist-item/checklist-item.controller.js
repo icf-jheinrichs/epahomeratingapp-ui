@@ -39,7 +39,7 @@ class ChecklistItemController {
                     this.isFiltered = false;
                 }
 
-                if (this.jobRatingType === this.RATING_TYPES.HERS.Key && this.checklistItem.RatingType === this.RATING_TYPES.EnergyStar.Key) {
+                if (this.omitRatingType()) {
                     this.isOmitted = true;
                 }
 
@@ -60,8 +60,17 @@ class ChecklistItemController {
         this.isApplicable = this.housePlanIds.indexOf(currentHousePlanId) >= 0;
     }
 
+    // callback for subitems to change if ommitted via a parent selection. still need to account for hers, so re-apply that filter
     omitItem (isOmitted) {
         this.isOmitted = isOmitted;
+
+        if (this.omitRatingType()) {
+            this.isOmitted = true;
+        }
+    }
+
+    omitRatingType () {
+        return this.jobRatingType === this.RATING_TYPES.HERS.Key && this.checklistItem.RatingType === this.RATING_TYPES.EnergyStar.Key;
     }
 
     statusQuery () {
