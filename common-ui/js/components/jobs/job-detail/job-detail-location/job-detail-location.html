@@ -8,7 +8,8 @@
             label="House Plan"
             library="jobDetailLocationCtrl.housePlans.housePlan"
             files="jobDetailLocationCtrl.location.HousePlan"
-            selected-callback="jobDetailLocationCtrl.housePlanOnSelect()">
+            library-selected-callback="jobDetailLocationCtrl.libraryHousePlanOnSelect()"
+            local-selected-callback="jobDetailLocationCtrl.localHousePlanOnSelect(files)">
         </file-manager>
     </div>
 </fieldset>

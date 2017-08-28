@@ -1,11 +1,14 @@
 import _findIndex from 'lodash/findIndex';
+import _isEmpty from 'lodash/isEmpty';
 
 class FileManagerController {
-    constructor ($element, $scope) {
+    constructor ($element, $scope, CONTEXT, UI_ENUMS) {
         'ngInject';
 
-        this.$element = $element;
-        this.$scope   = $scope;
+        this.$element  = $element;
+        this.$scope    = $scope;
+
+        this.CONTEXT_IS_ADMIN = CONTEXT !== UI_ENUMS.CONTEXT.APP;
     }
 
     $onInit () {
@@ -13,7 +16,6 @@ class FileManagerController {
             this.files = [this.files];
         }
 
-        this.libraryName   = 'From House Plan Library';
         this.eventListener = this.handleFileChange.bind(this);
     }
 
@@ -43,6 +45,10 @@ class FileManagerController {
     }
 
     addFile (file) {
+        if (this.$scope.LocalFiles !== undefined && !_isEmpty(this.$scope.LocalFiles)) {
+            return; // don't allow select local and library at the same time
+        }
+
         // debugger;
         if (_findIndex(this.files, {_id : file._id}) < 0) {
             this.files.push({
@@ -50,7 +56,7 @@ class FileManagerController {
                 Name : file.Name
             });
 
-            this.selectedCallback();
+            this.librarySelectedCallback();
         }
 
         if (this.uploadOnly === 'true') {
