@@ -10,7 +10,7 @@ let fileManagerComponent = {
         inputId          : '@',
         files            : '=',
         library          : '<',
-        selectedCallback : '<'
+        selectedCallback : '&'
     },
     template,
     controller,
