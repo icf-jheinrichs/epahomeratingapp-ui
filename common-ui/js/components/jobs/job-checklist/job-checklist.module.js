@@ -12,6 +12,8 @@ import checklistItemDefaultComponent from './checklist-item/item-default/item-de
 
 import checklistItemMrfComponent from './checklist-item/item-mrf/item-mrf.component';
 import checklistItemMrfEditComponent from './checklist-item/item-mrf-edit/item-mrf-edit.component';
+import checklistItemMrfEditDuctSystemComponent from './checklist-item/item-mrf-edit-duct-system/item-mrf-edit-duct-system.component';
+import checklistItemMrfEditInfiltrationComponent from './checklist-item/item-mrf-edit-infiltration/item-mrf-edit-infiltration.component';
 import checklistItemMrfEditFieldBooleanComponent from './checklist-item/item-mrf-edit/field-boolean/field-boolean.component';
 import checklistItemMrfEditFieldDecimalComponent from './checklist-item/item-mrf-edit/field-decimal/field-decimal.component';
 import checklistItemMrfEditFieldDefaultComponent from './checklist-item/item-mrf-edit/field-default/field-default.component';
@@ -44,6 +46,8 @@ let jobsModule
         .component('checklistItemDefault', checklistItemDefaultComponent)
         .component('checklistItemMrf', checklistItemMrfComponent)
         .component('mrfEdit', checklistItemMrfEditComponent)
+        .component('mrfEditDuctSystem', checklistItemMrfEditDuctSystemComponent)
+        .component('mrfEditInfiltration', checklistItemMrfEditInfiltrationComponent)
         .component('mrfEditFieldBoolean', checklistItemMrfEditFieldBooleanComponent)
         .component('mrfEditFieldDecimal', checklistItemMrfEditFieldDecimalComponent)
         .component('mrfEditFieldDefault', checklistItemMrfEditFieldDefaultComponent)

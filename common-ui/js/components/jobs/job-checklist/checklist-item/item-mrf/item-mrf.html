@@ -53,4 +53,24 @@
         mrf-data="row.mrfData"
         library-type-name-key="{{row.LibraryTypeNameKey}}">
     </mrf-edit>
+
+    <mrf-edit-duct-system
+        data-ng-repeat="row in checklistItemCtrl.editDuctSystemRow"
+        on-save-mrf-row="checklistItemCtrl.onSaveDuctSystemMrfRow(mrfRowEditData)"
+        on-cancel-mrf-row="checklistItemCtrl.onCancelDuctSystemMrfRow()"
+        title="{{row.title}}"
+        mrf-digest="row.mrfDigest"
+        mrf-data="row.mrfData"
+        library-type-name-key="{{row.LibraryTypeNameKey}}">
+    </mrf-edit-duct-system>
+
+    <mrf-edit-infiltration
+        data-ng-repeat="row in checklistItemCtrl.editInfiltrationRow"
+        on-save-mrf-row="checklistItemCtrl.onSaveInfiltrationMrfRow(mrfRowEditData)"
+        on-cancel-mrf-row="checklistItemCtrl.onCancelInfiltrationMrfRow()"
+        title="{{row.title}}"
+        mrf-digest="row.mrfDigest"
+        mrf-data="row.mrfData"
+        library-type-name-key="{{row.LibraryTypeNameKey}}">
+    </mrf-edit-infiltration>
 </div> <!-- .checklist-item -->

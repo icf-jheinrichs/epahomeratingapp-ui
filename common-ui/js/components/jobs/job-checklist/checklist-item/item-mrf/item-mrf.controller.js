@@ -22,22 +22,63 @@ class ChecklistItemMrfController extends ChecklistItemClass {
             });
 
         this.editRow = [];
+        this.editDuctSystemRow = [];
+        this.editInfiltrationRow = [];
     }
 
     editMrfRow (index, key, title, digest, data) {
-        this.editRow.push({
-            ItemId             : this.itemId,
-            key                : key,
-            index              : index,
-            title              : title || 'Edit',
-            mrfDigest          : digest,
-            mrfData            : data
-        });
+        switch (key) {
+        case 'DuctLeakageMeasurement' :
+            this.editDuctSystemRow.push({
+                ItemId             : this.itemId,
+                key                : key,
+                index              : index,
+                title              : title || 'Edit',
+                mrfDigest          : digest,
+                mrfData            : data
+            });
+
+            break;
+        case 'Infiltration' :
+            this.editInfiltrationRow.push({
+                ItemId             : this.itemId,
+                key                : key,
+                index              : index,
+                title              : title || 'Edit',
+                mrfDigest          : digest,
+                mrfData            : data
+            });
+
+            break;
+        default :
+            this.editRow.push({
+                ItemId             : this.itemId,
+                key                : key,
+                index              : index,
+                title              : title || 'Edit',
+                mrfDigest          : digest,
+                mrfData            : data
+            });
+
+            break;
+        }
     }
 
     onCancelMrfRow () {
         this
             .editRow
+            .pop();
+    }
+
+    onCancelDuctSystemMrfRow () {
+        this
+            .editDuctSystemRow
+            .pop();
+    }
+
+    onCancelInfiltrationMrfRow () {
+        this
+            .editInfiltrationRow
             .pop();
     }
 
@@ -68,8 +109,6 @@ class ChecklistItemMrfController extends ChecklistItemClass {
                 .$rootScope
                 .$emit(this.MESSAGING.UPDATE_MRF_DATA, this.editRow[0]);
 
-            console.dir(this.itemData);
-
             this
                 .$rootScope
                 .$emit(this.MESSAGING.UPDATE_CHECKLIST_ITEM_DATA, {
@@ -82,6 +121,90 @@ class ChecklistItemMrfController extends ChecklistItemClass {
 
         this
             .editRow
+            .pop();
+    }
+
+    onSaveDuctSystemMrfRow (mrfRowData) {
+        this.editDuctSystemRow[0].mrfData = mrfRowData;
+
+        let editMeta = this.getEditMeta(this.editDuctSystemRow[0]);
+
+        if (editMeta.editedMetaIds.length) {
+            if (editMeta.libraryAttributeEdited) {
+                let libraryTypeNameKey     = this.display.Sections[editMeta.sectionIndex].LibraryTypeNameKey;
+                let currentLibraryTypeName = this.editDuctSystemRow[0].mrfData[libraryTypeNameKey];
+
+                let newLibraryTypeName     = this.getLibraryTypeName({
+                    sectionIndex : editMeta.sectionIndex,
+                    editRowIndex : this.editDuctSystemRow[0].index
+                });
+
+                if (currentLibraryTypeName !== newLibraryTypeName) {
+                    this.editDuctSystemRow[0].mrfData[libraryTypeNameKey] = newLibraryTypeName;
+                    editMeta.editedMetaIds.push([this.editDuctSystemRow[0].key, this.editDuctSystemRow[0].index, libraryTypeNameKey].join(':'));
+                }
+            }
+
+            this.updateItemData(editMeta.editedMetaIds);
+
+            this
+                .$rootScope
+                .$emit(this.MESSAGING.UPDATE_MRF_DATA, this.editDuctSystemRow[0]);
+
+            this
+                .$rootScope
+                .$emit(this.MESSAGING.UPDATE_CHECKLIST_ITEM_DATA, {
+                    'ItemId'           : this.itemId,
+                    'Category'         : this.itemCategory,
+                    'CategoryProgress' : this.itemCategoryProgress,
+                    'ItemData'         : this.itemData
+                });
+        }
+
+        this
+            .editDuctSystemRow
+            .pop();
+    }
+
+    onSaveInfiltrationMrfRow (mrfRowData) {
+        this.editInfiltrationRow[0].mrfData = mrfRowData;
+
+        let editMeta = this.getEditMeta(this.editInfiltrationRow[0]);
+
+        if (editMeta.editedMetaIds.length) {
+            if (editMeta.libraryAttributeEdited) {
+                let libraryTypeNameKey     = this.display.Sections[editMeta.sectionIndex].LibraryTypeNameKey;
+                let currentLibraryTypeName = this.editInfiltrationRow[0].mrfData[libraryTypeNameKey];
+
+                let newLibraryTypeName     = this.getLibraryTypeName({
+                    sectionIndex : editMeta.sectionIndex,
+                    editRowIndex : this.editInfiltrationRow[0].index
+                });
+
+                if (currentLibraryTypeName !== newLibraryTypeName) {
+                    this.editInfiltrationRow[0].mrfData[libraryTypeNameKey] = newLibraryTypeName;
+                    editMeta.editedMetaIds.push([this.editInfiltrationRow[0].key, this.editInfiltrationRow[0].index, libraryTypeNameKey].join(':'));
+                }
+            }
+
+            this.updateItemData(editMeta.editedMetaIds);
+
+            this
+                .$rootScope
+                .$emit(this.MESSAGING.UPDATE_MRF_DATA, this.editInfiltrationRow[0]);
+
+            this
+                .$rootScope
+                .$emit(this.MESSAGING.UPDATE_CHECKLIST_ITEM_DATA, {
+                    'ItemId'           : this.itemId,
+                    'Category'         : this.itemCategory,
+                    'CategoryProgress' : this.itemCategoryProgress,
+                    'ItemData'         : this.itemData
+                });
+        }
+
+        this
+            .editInfiltrationRow
             .pop();
     }
 

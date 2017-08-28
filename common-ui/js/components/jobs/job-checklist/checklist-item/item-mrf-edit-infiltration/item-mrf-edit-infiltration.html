@@ -1,0 +1,64 @@
+<form class="modal modal-large modal-scroll-body" novalidate name="checklistItemMrfEditCtrl.mrfEditForm" data-ng-class="{'hidden' : !checklistItemMrfEditCtrl.showMrfEditModal}">
+    <div class="modal-header flex-row">
+        <div class="flex-item-static">
+            <button class="btn btn-link" type="button" data-ng-click="checklistItemMrfEditCtrl.cancel()">Cancel</button>
+        </div>
+
+        <span class="modal-title flex-item-grow">Edit {{checklistItemMrfEditCtrl.title}}</span>
+
+        <div class="flex-item-static">
+            <button
+                class="btn pull-right"
+                data-ng-click="checklistItemMrfEditCtrl.save()"
+                data-ng-disabled="checklistItemMrfEditCtrl.mrfEditForm.$invalid"
+                type="submit">
+
+                Save
+            </button>
+        </div>
+    </div>
+
+    <div class="modal-body-wrapper">
+        <div class="modal-body">
+            <div class="clearfix">
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-default
+                        field="checklistItemMrfEditCtrl.mrfDigest[1]"
+                        value="checklistItemMrfEditCtrl.editMrfData['HeatingSeasonValue']">
+                    </mrf-edit-field-default>
+                </div>
+
+
+                <div class="form-group col-xs-6">
+                    <p class="control-label">&nbsp;</p>
+                    <button type="button" class="btn">Launch Testing App</button>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="form-group col-xs-6 form-group-horizontal">
+                    <input
+                        id="ACH50"
+                        name="ACH50"
+                        class="form-control"
+                        disabled="disabled"
+                        type="number" /> <span class="input-unit">ACH50</span>
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-enum
+                        field="checklistItemMrfEditCtrl.mrfDigest[4]"
+                        value="checklistItemMrfEditCtrl.editMrfData['ShelterClass']">
+                    </mrf-edit-field-enum>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div
+    class="overlay overlay-modal"
+    data-ng-class="{'hidden' : !checklistItemMrfEditCtrl.showMrfEditModal}">
+</div>
