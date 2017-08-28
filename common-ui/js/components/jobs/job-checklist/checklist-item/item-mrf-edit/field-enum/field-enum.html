@@ -1,11 +1,14 @@
 <div class="form-group">
-    <label for="{{::fieldEnumCtrl.key}}" class="control-label" data-ng-class="{'status-error' : fieldEnumCtrl.enumNotFound}">{{::fieldEnumCtrl.label}}</label>
+    <label for="{{::fieldEnumCtrl.field.Key}}" class="control-label" data-ng-class="{'status-error' : fieldEnumCtrl.enumNotFound}">
+        <i class="fa fa-list-alt" aria-hidden="true" data-ng-if="fieldEnumCtrl.field.IsLibraryAttribute"></i>
+        {{::fieldEnumCtrl.field.Name}}
+    </label>
     <p data-ng-if="fieldEnumCtrl.enumNotFound" class="form-control-static">{{::fieldEnumCtrl.value}}</p>
 
     <select
         data-ng-if="!fieldEnumCtrl.enumNotFound && fieldEnumCtrl.displayType === 'select'"
         class="form-control"
-        id="{{::fieldEnumCtrl.key}}"
+        id="{{::fieldEnumCtrl.field.Key}}"
         data-ng-change="fieldEnumCtrl.onSelect()"
         data-ng-model="fieldEnumCtrl.selected"
         data-ng-options="value for (key , value) in fieldEnumCtrl.options">

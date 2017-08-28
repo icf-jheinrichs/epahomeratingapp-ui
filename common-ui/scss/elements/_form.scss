@@ -25,9 +25,18 @@ fieldset {
     display: block;
     font-weight: bold;
     margin: 0 0 2px $offset-small;
+    position: relative;
+
 
     &.status-error {
         color: $status-error;
+    }
+
+    .fa {
+        color: $brand-secondary;
+        margin: 3px $offset-small 0 0;
+        position: absolute;
+        right: 100%;
     }
 }
 

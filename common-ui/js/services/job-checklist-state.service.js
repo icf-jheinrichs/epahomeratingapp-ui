@@ -322,6 +322,16 @@ class JobChecklistState {
         this.putJobData();
     }
 
+    updateMrfData (mrfEditData) {
+        this
+            .jobDataHomePerformance[this.currentHouse.HouseId]
+            .ChecklistItems[mrfEditData.ItemId][mrfEditData.key][mrfEditData.index] = mrfEditData.mrfData;
+
+        this
+            .JobDataHomePerformanceService
+            .put(this.jobDataHomePerformance[this.currentHouse.HouseId]);
+    }
+
     updateChecklistResponse (response) {
         let updateResponse = (response.Response.length === 0) ? undefined : response.Response;
 

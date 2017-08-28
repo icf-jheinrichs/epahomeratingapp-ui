@@ -47,12 +47,8 @@ class jobChecklistChecklistController {
 
     onPutMrfData (mrfData) {
         this
-            .jobDataHomePerformance
-            .ChecklistItems[mrfData.ItemId][mrfData.key][mrfData.index] = mrfData.mrfData;
-
-        this
-            .JobDataHomePerformanceService
-            .put(this.jobDataHomePerformance);
+            .JobChecklistStateService
+            .updateMrfData(mrfData);
     }
 }
 

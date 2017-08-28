@@ -1,16 +1,12 @@
-class MrfEditFieldDecimalController {
-    constructor (DisplayLogicDigestService) {
-        'ngInject';
+import MrfEditField from '../field.class.js';
 
-        this.DisplayLogicDigestService = DisplayLogicDigestService;
-    }
-
+class MrfEditFieldDecimalController extends MrfEditField {
     $onInit () {
         this.value   = parseFloat(this.value);
         this.invalid = false;
 
         this.DisplayLogicDigestService
-            .getDecimal(this.decimalName)
+            .getDecimal(this.field.DataType.Name)
             .then((decimal) => {
                 this.configureValidation(decimal);
                 this.decimalFound = true;

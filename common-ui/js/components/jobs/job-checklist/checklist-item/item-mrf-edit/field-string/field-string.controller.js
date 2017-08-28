@@ -1,10 +1,6 @@
-class MrfEditFieldStringController {
-    constructor (DisplayLogicDigestService) {
-        'ngInject';
+import MrfEditField from '../field.class.js';
 
-        this.DisplayLogicDigestService = DisplayLogicDigestService;
-    }
-
+class MrfEditFieldStringController extends MrfEditField {
     $onInit () {
         this.DisplayLogicDigestService
             .getString(this.stringName)

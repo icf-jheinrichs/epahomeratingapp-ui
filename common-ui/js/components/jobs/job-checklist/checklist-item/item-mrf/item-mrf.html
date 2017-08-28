@@ -14,8 +14,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-ng-click="checklistItemCtrl.editMrfRow($index, mrfTable.Key, mrfTable.Name, mrfTable.Columns, checklistItemCtrl.homePerformance[mrfTable.Key][$index])" data-ng-repeat="dataRow in checklistItemCtrl.homePerformance[mrfTable.Key] track by $index">
-                        <td data-ng-repeat="(key, value) in dataRow track by $index">{{value}}</td>
+                    <tr
+                        data-ng-repeat="dataRow in checklistItemCtrl.homePerformance[mrfTable.Key] track by $index"
+                        data-ng-click="checklistItemCtrl.editMrfRow($index, mrfTable.Key, mrfTable.Name, mrfTable.Columns, checklistItemCtrl.homePerformance[mrfTable.Key][$index])">
+
+                        <td data-ng-repeat="(key, value) in dataRow track by $index" data-ng-class="{'td-edited' : checklistItemCtrl.attributeIsEdited(mrfTable.Key, $parent.$index, key)}">{{value}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -43,10 +46,11 @@
 
     <mrf-edit
         data-ng-repeat="row in checklistItemCtrl.editRow"
-        on-save-mrf-row="checklistItemCtrl.onSaveMrfRow(mrfRowData)"
+        on-save-mrf-row="checklistItemCtrl.onSaveMrfRow(mrfRowEditData)"
         on-cancel-mrf-row="checklistItemCtrl.onCancelMrfRow()"
         title="{{row.title}}"
         mrf-digest="row.mrfDigest"
-        mrf-data="row.mrfData">
+        mrf-data="row.mrfData"
+        library-type-name-key="{{row.LibraryTypeNameKey}}">
     </mrf-edit>
 </div> <!-- .checklist-item -->

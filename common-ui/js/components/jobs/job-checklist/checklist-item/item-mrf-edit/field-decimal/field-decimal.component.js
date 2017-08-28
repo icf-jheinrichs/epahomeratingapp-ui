@@ -3,10 +3,8 @@ import controller from './field-decimal.controller';
 
 let mrfEditFieldDecimalComponent = {
     bindings : {
-        decimalName : '@',
-        key         : '@',
-        label       : '@',
-        value       : '='
+        field : '<',
+        value : '='
     },
     require : {
         model : 'ngModel'

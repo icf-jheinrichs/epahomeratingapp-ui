@@ -15,7 +15,10 @@ class MrfEditController {
         this.showMrfEditModal = true;
 
         //TODO: put this somewhere better;
-        angular.element(document).find('body').addClass('overlay-open');
+        angular
+            .element(document)
+            .find('body')
+            .addClass('overlay-open');
     }
 
     cancel () {
@@ -23,20 +26,25 @@ class MrfEditController {
         this.onCancelMrfRow();
 
         //TODO: put this somewhere better;
-        angular.element(document).find('body').removeClass('overlay-open');
+        angular
+            .element(document)
+            .find('body')
+            .removeClass('overlay-open');
     }
 
     save () {
         if (!this.mrfEditForm.$invalid) {
-            _assign(this.mrfData, this.editMrfData);
             this.showMrfEditModal = false;
 
             this.onSaveMrfRow({
-                mrfRowData : this.editMrfData
+                mrfRowEditData : this.editMrfData
             });
 
             //TODO: put this somewhere better;
-            angular.element(document).find('body').removeClass('overlay-open');
+            angular
+                .element(document)
+                .find('body')
+                .removeClass('overlay-open');
         }
     }
 }

@@ -3,11 +3,12 @@ import controller from './item-mrf-edit.controller';
 
 let checklistItemMrfEditComponent = {
     bindings : {
-        mrfDigest      : '<',
-        mrfData        : '<',
-        title          : '@',
-        onSaveMrfRow   : '&',
-        onCancelMrfRow : '&'
+        mrfDigest          : '<',
+        mrfData            : '<',
+        title              : '@',
+        onSaveMrfRow       : '&',
+        onCancelMrfRow     : '&',
+        libraryTypeNameKey : '@'
     },
     template,
     controller,

@@ -1,5 +1,9 @@
 <div class="form-group">
-    <span class="control-label">{{fieldBooleanCtrl.label}}</span>
+    <span class="control-label">
+        <i class="fa fa-list-alt" aria-hidden="true" data-ng-if="fieldBooleanCtrl.field.IsLibraryAttribute"></i>
+        {{::fieldBooleanCtrl.field.Name}}
+    </span>
+
     <button-group
         class="button-group"
         buttons="fieldBooleanCtrl.buttons"
