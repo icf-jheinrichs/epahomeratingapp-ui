@@ -22,37 +22,33 @@
         <div class="modal-body">
             <div class="form-group col-xs-6"
                  data-ng-repeat="field in checklistItemMrfEditCtrl.mrfDigest track by $index">
-                <div class="form-group"
-                    data-ng-if="field.Locked">
-                    <span class="control-label">{{checklistItemMrfEditCtrl.mrfDigest[$index].Name}}</span>
-                    <p class="form-control-static">{{checklistItemMrfEditCtrl.editMrfData[field.Key]}}</p>
-                </div>
+
+                <mrf-edit-field-locked
+                    data-ng-if="field.Locked"
+                    field="field"
+                    value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
+                </mrf-edit-field-locked>
 
                 <div data-ng-if="!field.Locked"
                      data-ng-switch on="field.DataType.Type">
 
                      <div ng-switch-when="Boolean">
                         <mrf-edit-field-boolean
-                            key="{{field.Key}}"
-                            label="{{checklistItemMrfEditCtrl.mrfDigest[$index].Name}}"
+                            field="field"
                             value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
                         </mrf-edit-field-boolean>
                     </div>
 
                      <div ng-switch-when="ENUM">
                         <mrf-edit-field-enum
-                            enum-name="{{field.DataType.Name}}"
-                            key="{{field.Key}}"
-                            label="{{checklistItemMrfEditCtrl.mrfDigest[$index].Name}}"
+                            field="field"
                             value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
                         </mrf-edit-field-enum>
                     </div>
 
                      <div ng-switch-when="Decimal">
                         <mrf-edit-field-decimal
-                            decimal-name="{{field.DataType.Name}}"
-                            key="{{field.Key}}"
-                            label="{{checklistItemMrfEditCtrl.mrfDigest[$index].Name}}"
+                            field="field"
                             ng-model="checklistItemMrfEditCtrl.mrfEditForm[field.Key]"
                             value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
                         </mrf-edit-field-decimal>
@@ -60,9 +56,7 @@
 
                      <div ng-switch-when="Integer">
                         <mrf-edit-field-integer
-                            integer-name="{{field.DataType.Name}}"
-                            key="{{field.Key}}"
-                            label="{{checklistItemMrfEditCtrl.mrfDigest[$index].Name}}"
+                            field="field"
                             ng-model="checklistItemMrfEditCtrl.mrfEditForm[field.Key]"
                             value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
                         </mrf-edit-field-integer>
@@ -70,16 +64,16 @@
 
                      <div ng-switch-when="String">
                         <mrf-edit-field-string
-                            string-name="{{field.DataType.Name}}"
-                            key="{{field.Key}}"
-                            label="{{checklistItemMrfEditCtrl.mrfDigest[$index].Name}}"
+                            field="field"
                             value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
                         </mrf-edit-field-string>
                     </div>
 
                      <div ng-switch-default>
-                        <label for="{{field.Key}}" class="control-label">{{checklistItemMrfEditCtrl.mrfDigest[$index].Name}}</label>
-                        <input id="{{field.Key}}" class="form-control" type="text" data-ng-model="checklistItemMrfEditCtrl.editMrfData[field.Key]" />
+                        <mrf-edit-field-default
+                            field="field"
+                            value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
+                        </mrf-edit-field-default>
                     </div>
                 </div>
             </div>

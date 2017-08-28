@@ -1,8 +1,6 @@
-class MrfEditFieldBooleanController {
-    constructor () {
-        'ngInject';
-    }
+import MrfEditField from '../field.class.js';
 
+class MrfEditFieldBooleanController extends MrfEditField {
     $onInit () {
         this.buttons = [
             {

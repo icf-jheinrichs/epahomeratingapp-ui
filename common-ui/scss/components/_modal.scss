@@ -37,11 +37,17 @@
 }
 
 .modal-scroll-body .modal-body {
+    -webkit-overflow-scrolling: touch;  // sass-lint:disable-line no-vendor-prefixes, no-misspelled-properties
     bottom: 0;
     left: 0;
-    -webkit-overflow-scrolling: touch;
     overflow-y: scroll;
     position: absolute;
     top: 50px;
     width: 100%;
+}
+
+.modal-body-section {
+    border-top: $border-default;
+    margin-top: $gutter-half;
+    padding-top: $gutter-half;
 }

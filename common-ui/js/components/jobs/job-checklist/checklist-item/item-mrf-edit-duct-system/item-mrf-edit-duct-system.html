@@ -1,0 +1,426 @@
+<form class="modal modal-large modal-scroll-body" novalidate name="checklistItemMrfEditCtrl.mrfEditForm" data-ng-class="{'hidden' : !checklistItemMrfEditCtrl.showMrfEditModal}">
+    <div class="modal-header flex-row">
+        <div class="flex-item-static">
+            <button class="btn btn-link" type="button" data-ng-click="checklistItemMrfEditCtrl.cancel()">Cancel</button>
+        </div>
+
+        <span class="modal-title flex-item-grow">Edit {{checklistItemMrfEditCtrl.title}}</span>
+
+        <div class="flex-item-static">
+            <button
+                class="btn pull-right"
+                data-ng-click="checklistItemMrfEditCtrl.save()"
+                data-ng-disabled="checklistItemMrfEditCtrl.mrfEditForm.$invalid"
+                type="submit">
+
+                Save
+            </button>
+        </div>
+    </div>
+
+    <div class="modal-body-wrapper">
+        <div class="modal-body">
+            <div class="clearfix">
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-locked
+                        field="checklistItemMrfEditCtrl.mrfDigest[0]"
+                        value="checklistItemMrfEditCtrl.editMrfData['Name']">
+                    </mrf-edit-field-locked>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-decimal
+                        field="checklistItemMrfEditCtrl.mrfDigest[3]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['CondFloorArea']"
+                        value="checklistItemMrfEditCtrl.editMrfData['CondFloorArea']">
+                    </mrf-edit-field-decimal>
+                </div>
+
+                <div class="form-group col-xs-6">
+                      <mrf-edit-field-locked
+                        field="checklistItemMrfEditCtrl.mrfDigest[1]"
+                        value="checklistItemMrfEditCtrl.editMrfData['Htgequipidref']">
+                    </mrf-edit-field-locked>
+                </div>
+
+                <div class="form-group col-xs-6">
+                      <mrf-edit-field-locked
+                        field="checklistItemMrfEditCtrl.mrfDigest[2]"
+                        value="checklistItemMrfEditCtrl.editMrfData['Clgequipidref']">
+                    </mrf-edit-field-locked>
+                </div>
+            </div>
+
+            <div class="modal-body-section clearfix">
+                <h3 class="col-xs-12">Leakage To Outside</h3>
+
+                <div class="clearfix">
+                    <div class="form-group col-xs-6">
+                        <mrf-edit-field-default
+                            field="checklistItemMrfEditCtrl.mrfDigest[8]"
+                            value="checklistItemMrfEditCtrl.editMrfData['DuctLeakTotal']">
+                        </mrf-edit-field-default>
+                    </div>
+
+                    <div class="form-group col-xs-6">
+                        <p class="control-label">&nbsp;</p>
+                        <button type="button" class="btn">Launch Testing App</button>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="form-group form-group-horizontal col-xs-12">
+                        <input
+                            id="CFM25-outside"
+                            name="CFM25-outside"
+                            class="form-control"
+                            disabled="disabled"
+                            type="number" /> <span class="input-unit">CFM25 per 100 sq.ft. of CFA</span>
+
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="form-group col-xs-6">
+                        <mrf-edit-field-boolean
+                            field="checklistItemMrfEditCtrl.mrfDigest[10]"
+                            value="checklistItemMrfEditCtrl.editMrfData['DuctLeakTestExemption']">
+                        </mrf-edit-field-boolean>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body-section">
+                <h3 class="col-xs-12">Total Leakage</h3>
+
+                <div class="clearfix">
+                    <div class="form-group col-xs-6">
+                        <mrf-edit-field-enum
+                            field="checklistItemMrfEditCtrl.mrfDigest[11]"
+                            value="checklistItemMrfEditCtrl.editMrfData['DuctLeakTightTest']">
+                        </mrf-edit-field-enum>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="form-group col-xs-6">
+                        <mrf-edit-field-default
+                            field="checklistItemMrfEditCtrl.mrfDigest[12]"
+                            value="checklistItemMrfEditCtrl.editMrfData['DuctLeakRealTotal']">
+                        </mrf-edit-field-default>
+                    </div>
+
+                    <div class="form-group col-xs-6">
+                        <p class="control-label">&nbsp;</p>
+                        <button type="button" class="btn">Launch Testing App</button>
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <div class="form-group form-group-horizontal col-xs-12">
+                        <input
+                            id="CFM25-total"
+                            name="CFM25-total"
+                            class="form-control"
+                            disabled="disabled"
+                            type="number" /> <span class="input-unit">CFM25 per 100 sq.ft. of CFA</span>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body-section">
+                <div class="clearfix">
+                    <div class="form-group col-xs-6">
+                        <mrf-edit-field-integer
+                            field="checklistItemMrfEditCtrl.mrfDigest[13]"
+                            ng-model="checklistItemMrfEditCtrl.mrfEditForm['NumReturnRegisters']"
+                            value="checklistItemMrfEditCtrl.editMrfData['NumReturnRegisters']">
+                        </mrf-edit-field-integer>
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-decimal
+                        field="checklistItemMrfEditCtrl.mrfDigest[14]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['SupplyArea']"
+                        value="checklistItemMrfEditCtrl.editMrfData['SupplyArea']">
+                    </mrf-edit-field-decimal>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-decimal
+                        field="checklistItemMrfEditCtrl.mrfDigest[15]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['ReturnArea']"
+                        value="checklistItemMrfEditCtrl.editMrfData['ReturnArea']">
+                    </mrf-edit-field-decimal>
+                </div>
+
+            </div>
+
+            <div>
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-enum
+                        field="checklistItemMrfEditCtrl.mrfDigest[16]"
+                        value="checklistItemMrfEditCtrl.editMrfData['Location1']">
+                    </mrf-edit-field-enum>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-integer
+                        field="checklistItemMrfEditCtrl.mrfDigest[17]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['DuctType1']"
+                        value="checklistItemMrfEditCtrl.editMrfData['DuctType1']">
+                    </mrf-edit-field-integer>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-integer
+                        field="checklistItemMrfEditCtrl.mrfDigest[18]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['FractionDuctArea1']"
+                        value="checklistItemMrfEditCtrl.editMrfData['FractionDuctArea1']">
+                    </mrf-edit-field-integer>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-decimal
+                        field="checklistItemMrfEditCtrl.mrfDigest[19]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['DuctInsulationRValue1']"
+                        value="checklistItemMrfEditCtrl.editMrfData['DuctInsulationRValue1']">
+                    </mrf-edit-field-decimal>
+                </div>
+            </div>
+
+            <div>
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-enum
+                        field="checklistItemMrfEditCtrl.mrfDigest[20]"
+                        value="checklistItemMrfEditCtrl.editMrfData['Location2']">
+                    </mrf-edit-field-enum>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-integer
+                        field="checklistItemMrfEditCtrl.mrfDigest[21]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['DuctType2']"
+                        value="checklistItemMrfEditCtrl.editMrfData['DuctType2']">
+                    </mrf-edit-field-integer>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-integer
+                        field="checklistItemMrfEditCtrl.mrfDigest[22]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['FractionDuctArea2']"
+                        value="checklistItemMrfEditCtrl.editMrfData['FractionDuctArea2']">
+                    </mrf-edit-field-integer>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-decimal
+                        field="checklistItemMrfEditCtrl.mrfDigest[23]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['DuctInsulationRValue2']"
+                        value="checklistItemMrfEditCtrl.editMrfData['DuctInsulationRValue2']">
+                    </mrf-edit-field-decimal>
+                </div>
+            </div>
+
+            <div>
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-enum
+                        field="checklistItemMrfEditCtrl.mrfDigest[24]"
+                        value="checklistItemMrfEditCtrl.editMrfData['Location3']">
+                    </mrf-edit-field-enum>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-integer
+                        field="checklistItemMrfEditCtrl.mrfDigest[25]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['DuctType3']"
+                        value="checklistItemMrfEditCtrl.editMrfData['DuctType3']">
+                    </mrf-edit-field-integer>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-integer
+                        field="checklistItemMrfEditCtrl.mrfDigest[26]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['FractionDuctArea3']"
+                        value="checklistItemMrfEditCtrl.editMrfData['FractionDuctArea3']">
+                    </mrf-edit-field-integer>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-decimal
+                        field="checklistItemMrfEditCtrl.mrfDigest[27]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['DuctInsulationRValue3']"
+                        value="checklistItemMrfEditCtrl.editMrfData['DuctInsulationRValue3']">
+                    </mrf-edit-field-decimal>
+                </div>
+            </div>
+
+            <div>
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-enum
+                        field="checklistItemMrfEditCtrl.mrfDigest[28]"
+                        value="checklistItemMrfEditCtrl.editMrfData['Location4']">
+                    </mrf-edit-field-enum>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-integer
+                        field="checklistItemMrfEditCtrl.mrfDigest[29]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['DuctType4']"
+                        value="checklistItemMrfEditCtrl.editMrfData['DuctType4']">
+                    </mrf-edit-field-integer>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-integer
+                        field="checklistItemMrfEditCtrl.mrfDigest[30]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['FractionDuctArea4']"
+                        value="checklistItemMrfEditCtrl.editMrfData['FractionDuctArea4']">
+                    </mrf-edit-field-integer>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-decimal
+                        field="checklistItemMrfEditCtrl.mrfDigest[31]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['DuctInsulationRValue4']"
+                        value="checklistItemMrfEditCtrl.editMrfData['DuctInsulationRValue4']">
+                    </mrf-edit-field-decimal>
+                </div>
+            </div>
+
+            <div>
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-enum
+                        field="checklistItemMrfEditCtrl.mrfDigest[32]"
+                        value="checklistItemMrfEditCtrl.editMrfData['Location5']">
+                    </mrf-edit-field-enum>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-integer
+                        field="checklistItemMrfEditCtrl.mrfDigest[33]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['DuctType5']"
+                        value="checklistItemMrfEditCtrl.editMrfData['DuctType5']">
+                    </mrf-edit-field-integer>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-integer
+                        field="checklistItemMrfEditCtrl.mrfDigest[34]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['FractionDuctArea5']"
+                        value="checklistItemMrfEditCtrl.editMrfData['FractionDuctArea5']">
+                    </mrf-edit-field-integer>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-decimal
+                        field="checklistItemMrfEditCtrl.mrfDigest[35]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['DuctInsulationRValue5']"
+                        value="checklistItemMrfEditCtrl.editMrfData['DuctInsulationRValue5']">
+                    </mrf-edit-field-decimal>
+                </div>
+            </div>
+
+            <div>
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-enum
+                        field="checklistItemMrfEditCtrl.mrfDigest[36]"
+                        value="checklistItemMrfEditCtrl.editMrfData['Location6']">
+                    </mrf-edit-field-enum>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-integer
+                        field="checklistItemMrfEditCtrl.mrfDigest[37]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['DuctType6']"
+                        value="checklistItemMrfEditCtrl.editMrfData['DuctType6']">
+                    </mrf-edit-field-integer>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-integer
+                        field="checklistItemMrfEditCtrl.mrfDigest[38]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['FractionDuctArea6']"
+                        value="checklistItemMrfEditCtrl.editMrfData['FractionDuctArea6']">
+                    </mrf-edit-field-integer>
+                </div>
+
+                <div class="form-group col-xs-6">
+                    <mrf-edit-field-decimal
+                        field="checklistItemMrfEditCtrl.mrfDigest[39]"
+                        ng-model="checklistItemMrfEditCtrl.mrfEditForm['DuctInsulationRValue6']"
+                        value="checklistItemMrfEditCtrl.editMrfData['DuctInsulationRValue6']">
+                    </mrf-edit-field-decimal>
+                </div>
+            </div>
+
+<!--
+            <div class="form-group col-xs-6"
+                 data-ng-repeat="field in checklistItemMrfEditCtrl.mrfDigest track by $index">
+
+                <mrf-edit-field-locked
+                    data-ng-if="field.Locked"
+                    field="field"
+                    value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
+                </mrf-edit-field-locked>
+
+                <div data-ng-if="!field.Locked"
+                     data-ng-switch on="field.DataType.Type">
+
+                     <div ng-switch-when="Boolean">
+                        <mrf-edit-field-boolean
+                            field="field"
+                            value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
+                        </mrf-edit-field-boolean>
+                    </div>
+
+                     <div ng-switch-when="ENUM">
+                        <mrf-edit-field-enum
+                            field="field"
+                            value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
+                        </mrf-edit-field-enum>
+                    </div>
+
+                     <div ng-switch-when="Decimal">
+                        <mrf-edit-field-decimal
+                            field="field"
+                            ng-model="checklistItemMrfEditCtrl.mrfEditForm[field.Key]"
+                            value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
+                        </mrf-edit-field-decimal>
+                    </div>
+
+                     <div ng-switch-when="Integer">
+                        <mrf-edit-field-integer
+                            field="field"
+                            ng-model="checklistItemMrfEditCtrl.mrfEditForm[field.Key]"
+                            value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
+                        </mrf-edit-field-integer>
+                    </div>
+
+                     <div ng-switch-when="String">
+                        <mrf-edit-field-string
+                            field="field"
+                            value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
+                        </mrf-edit-field-string>
+                    </div>
+
+                     <div ng-switch-default>
+                        <mrf-edit-field-default
+                            field="field"
+                            value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
+                        </mrf-edit-field-default>
+                    </div>
+                </div>
+            </div>
+-->
+        </div>
+    </div>
+</form>
+
+<div
+    class="overlay overlay-modal"
+    data-ng-class="{'hidden' : !checklistItemMrfEditCtrl.showMrfEditModal}">
+</div>

@@ -3,10 +3,8 @@ import controller from './field-string.controller';
 
 let mrfEditFieldStringComponent = {
     bindings : {
-        stringName : '@',
-        key         : '@',
-        label       : '@',
-        value       : '='
+        field : '<',
+        value : '='
     },
     template,
     controller,

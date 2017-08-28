@@ -1,8 +1,12 @@
 <div class="form-group" data-ng-class="{'has-error' : fieldDecimalCtrl.invalid}">
-    <label for="{{fieldDecimalCtrl.Key}}" class="control-label">{{fieldDecimalCtrl.label}}</label>
+    <label for="{{::fieldDecimalCtrl.field.Key}}" class="control-label">
+        <i class="fa fa-list-alt" aria-hidden="true" data-ng-if="fieldDecimalCtrl.field.IsLibraryAttribute"></i>
+        {{::fieldDecimalCtrl.field.Name}}
+    </label>
+
     <input
-        id="{{fieldDecimalCtrl.Key}}"
-        name="{{fieldDecimalCtrl.Key}}"
+        id="{{::fieldDecimalCtrl.field.Key}}"
+        name="{{fieldDecimalCtrl.field.Key}}"
         class="form-control"
         type="number"
         data-ng-blur="fieldDecimalCtrl.validate()"

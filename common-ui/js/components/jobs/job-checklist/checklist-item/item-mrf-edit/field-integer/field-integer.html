@@ -1,8 +1,12 @@
 <div class="form-group" data-ng-class="{'has-error' : fieldIntegerCtrl.invalid}">
-    <label for="{{fieldIntegerCtrl.Key}}" class="control-label">{{fieldIntegerCtrl.label}}</label>
+    <label for="{{::fieldIntegerCtrl.field.Key}}" class="control-label">
+        <i class="fa fa-list-alt" aria-hidden="true" data-ng-if="fieldIntegerCtrl.field.IsLibraryAttribute"></i>
+        {{::fieldIntegerCtrl.field.Name}}
+    </label>
+
     <input
-        id="{{fieldIntegerCtrl.Key}}"
-        name="{{fieldIntegerCtrl.Key}}"
+        id="{{::fieldIntegerCtrl.field.Key}}"
+        name="{{::fieldIntegerCtrl.field.Key}}"
         class="form-control"
         type="number"
         data-ng-blur="fieldIntegerCtrl.validate()"

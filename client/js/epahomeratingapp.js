@@ -77,7 +77,16 @@ angular
     .constant('COGNITO', COGNITO)
     .constant('UI_ENUMS', UI_ENUMS)
     .constant('CONTEXT', UI_ENUMS.CONTEXT.APP)
-    .run(authenticationHook);
+    .run(authenticationHook)
+    .run(($transitions) => {
+        'ngInject';
+
+        $transitions.onSuccess(
+            {to : '*'}, () => {
+                document.body.scrollTop = document.documentElement.scrollTop = 0;
+            }
+        );
+    });
 
 angular
     .element(document)

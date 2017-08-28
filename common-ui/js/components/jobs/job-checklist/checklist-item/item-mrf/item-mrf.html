@@ -14,8 +14,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-ng-click="checklistItemCtrl.editMrfRow($index, mrfTable.Key, mrfTable.Name, mrfTable.Columns, checklistItemCtrl.homePerformance[mrfTable.Key][$index])" data-ng-repeat="dataRow in checklistItemCtrl.homePerformance[mrfTable.Key] track by $index">
-                        <td data-ng-repeat="(key, value) in dataRow track by $index" ng-if="key !== 'Id'">{{value}}</td>
+                    <tr
+                        data-ng-repeat="dataRow in checklistItemCtrl.homePerformance[mrfTable.Key] track by $index"
+                        data-ng-click="checklistItemCtrl.editMrfRow($index, mrfTable.Key, mrfTable.Name, mrfTable.Columns, checklistItemCtrl.homePerformance[mrfTable.Key][$index])">
+
+                        <td data-ng-repeat="(key, value) in dataRow track by $index" ng-if="key !== 'Id'" data-ng-class="{'td-edited' : checklistItemCtrl.attributeIsEdited(mrfTable.Key, $parent.$parent.$index, key)}">{{value}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -43,10 +46,31 @@
 
     <mrf-edit
         data-ng-repeat="row in checklistItemCtrl.editRow"
-        on-save-mrf-row="checklistItemCtrl.onSaveMrfRow(mrfRowData)"
+        on-save-mrf-row="checklistItemCtrl.onSaveMrfRow(mrfRowEditData)"
         on-cancel-mrf-row="checklistItemCtrl.onCancelMrfRow()"
         title="{{row.title}}"
         mrf-digest="row.mrfDigest"
-        mrf-data="row.mrfData">
+        mrf-data="row.mrfData"
+        library-type-name-key="{{row.LibraryTypeNameKey}}">
     </mrf-edit>
+
+    <mrf-edit-duct-system
+        data-ng-repeat="row in checklistItemCtrl.editDuctSystemRow"
+        on-save-mrf-row="checklistItemCtrl.onSaveDuctSystemMrfRow(mrfRowEditData)"
+        on-cancel-mrf-row="checklistItemCtrl.onCancelDuctSystemMrfRow()"
+        title="{{row.title}}"
+        mrf-digest="row.mrfDigest"
+        mrf-data="row.mrfData"
+        library-type-name-key="{{row.LibraryTypeNameKey}}">
+    </mrf-edit-duct-system>
+
+    <mrf-edit-infiltration
+        data-ng-repeat="row in checklistItemCtrl.editInfiltrationRow"
+        on-save-mrf-row="checklistItemCtrl.onSaveInfiltrationMrfRow(mrfRowEditData)"
+        on-cancel-mrf-row="checklistItemCtrl.onCancelInfiltrationMrfRow()"
+        title="{{row.title}}"
+        mrf-digest="row.mrfDigest"
+        mrf-data="row.mrfData"
+        library-type-name-key="{{row.LibraryTypeNameKey}}">
+    </mrf-edit-infiltration>
 </div> <!-- .checklist-item -->

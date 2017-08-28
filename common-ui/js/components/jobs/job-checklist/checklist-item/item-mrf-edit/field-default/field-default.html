@@ -1,0 +1,11 @@
+<div class="form-group">
+    <label for="{{fieldCtrl.field.Key}}" class="control-label">
+        <i class="fa fa-list-alt" aria-hidden="true" data-ng-if="fieldCtrl.field.IsLibraryAttribute"></i>
+        {{fieldCtrl.field.Name}}
+    </label>
+
+    <input
+        id="{{fieldCtrl.field.Key}}"
+        class="form-control"
+        type="text" data-ng-model="fieldCtrl.value" />
+</div>

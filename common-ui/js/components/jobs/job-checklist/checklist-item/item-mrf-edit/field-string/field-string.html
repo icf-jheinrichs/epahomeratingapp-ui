@@ -1,8 +1,12 @@
 <div class="form-group" data-ng-class="{'has-error' : fieldStringCtrl.invalid}">
-    <label for="{{fieldStringCtrl.Key}}" class="control-label">{{fieldStringCtrl.label}}</label>
+    <label for="{{::fieldStringCtrl.field.Key}}" class="control-label">
+        <i class="fa fa-list-alt" aria-hidden="true" data-ng-if="fieldStringCtrl.field.IsLibraryAttribute"></i>
+        {{::fieldStringCtrl.field.Name}}
+    </label>
+
     <input
-        id="{{fieldStringCtrl.Key}}"
-        name="{{fieldStringCtrl.Key}}"
+        id="{{::fieldStringCtrl.field.Key}}"
+        name="{{::fieldStringCtrl.field.Key}}"
         class="form-control"
         type="text"
         maxlength="{{fieldStringCtrl.stringType.maxLength}}"

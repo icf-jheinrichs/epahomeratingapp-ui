@@ -60,6 +60,11 @@ tbody {
     > tr:last-of-type td {
         border-bottom: $border-size-default solid $border-color-dark;
     }
+
+    > tr:nth-child(odd) .td-edited,
+    > tr:nth-child(even) .td-edited {
+        background-color: desaturate($status-warning, 10%);
+    }
 }
 
 .table-responsive {

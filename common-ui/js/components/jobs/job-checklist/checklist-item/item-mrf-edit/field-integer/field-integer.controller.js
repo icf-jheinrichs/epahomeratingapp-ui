@@ -1,16 +1,12 @@
-class MrfEditFieldIntegerController {
-    constructor (DisplayLogicDigestService) {
-        'ngInject';
+import MrfEditField from '../field.class.js';
 
-        this.DisplayLogicDigestService = DisplayLogicDigestService;
-    }
-
+class MrfEditFieldIntegerController extends MrfEditField {
     $onInit () {
         this.value   = parseInt(this.value, 10);
         this.invalid = false;
 
         this.DisplayLogicDigestService
-            .getInteger(this.integerName)
+            .getInteger(this.field.DataType.Name)
             .then((integer) => {
                 this.configureValidation(integer);
                 this.integerFound = true;

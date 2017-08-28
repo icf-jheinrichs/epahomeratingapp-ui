@@ -1,7 +1,7 @@
-import template from './item-mrf-edit.html';
-import controller from './item-mrf-edit.controller';
+import template from './item-mrf-edit-duct-system.html';
+import controller from './item-mrf-edit-duct-system.controller';
 
-let checklistItemMrfEditComponent = {
+let checklistItemMrfEditDuctSystemComponent = {
     bindings : {
         mrfDigest          : '<',
         mrfData            : '<',
@@ -15,4 +15,4 @@ let checklistItemMrfEditComponent = {
     controllerAs : 'checklistItemMrfEditCtrl'
 };
 
-export default checklistItemMrfEditComponent;
+export default checklistItemMrfEditDuctSystemComponent;

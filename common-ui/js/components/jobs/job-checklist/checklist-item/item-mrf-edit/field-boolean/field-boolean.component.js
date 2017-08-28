@@ -3,7 +3,7 @@ import controller from './field-boolean.controller';
 
 let mrfEditFieldBooleanComponent = {
     bindings : {
-        label : '@',
+        field : '<',
         value : '='
     },
     template,

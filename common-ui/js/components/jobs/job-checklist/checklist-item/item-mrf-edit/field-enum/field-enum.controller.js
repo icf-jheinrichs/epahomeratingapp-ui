@@ -1,19 +1,15 @@
+import MrfEditField from '../field.class.js';
+
 import _forOwn from 'lodash/forOwn';
 import _size from 'lodash/size';
 
 const MAX_SIZE   = 4;
 const MAX_LENGTH = 35;
 
-class MrfEditFieldEnumController {
-    constructor (DisplayLogicDigestService) {
-        'ngInject';
-
-        this.DisplayLogicDigestService = DisplayLogicDigestService;
-    }
-
+class MrfEditFieldEnumController extends MrfEditField {
     $onInit () {
         this.DisplayLogicDigestService
-            .getEnum(this.enumName)
+            .getEnum(this.field.DataType.Name)
             .then((ENUM) => {
                 this.configureDisplay(ENUM);
             })

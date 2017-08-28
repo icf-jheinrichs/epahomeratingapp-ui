@@ -4,10 +4,10 @@
     display: inline;
 
     .popover {
-        height: 300px;
-        margin: $offset-large 0 150px;
+        height: $popover-height-default;
+        margin: $offset-large 0 ($popover-height-default / 2);
         right: $gutter-half;
-        width: 350px;
+        width: $popover-width-default;
     }
 
     textarea {

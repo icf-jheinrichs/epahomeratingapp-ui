@@ -3,10 +3,8 @@ import controller from './field-enum.controller';
 
 let mrfEditFieldEnumComponent = {
     bindings : {
-        enumName : '@',
-        key      : '@',
-        label    : '@',
-        value    : '='
+        field : '<',
+        value : '='
     },
     template,
     controller,

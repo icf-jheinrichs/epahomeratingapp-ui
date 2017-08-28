@@ -1,4 +1,4 @@
-<div data-ng-class="{'hidden' : checklistItemStubCtrl.isFiltered}" data-ng-show="!checklistItemStubCtrl.isOmitted">
+<div data-ng-class="{'hidden' : checklistItemStubCtrl.isFiltered || checklistItemStubCtrl.isOmitted}">
     <checklist-item-not-applicable
         data-ng-if="!checklistItemStubCtrl.isApplicable"
         house-plan-ids="checklistItemStubCtrl.housePlanIds"
