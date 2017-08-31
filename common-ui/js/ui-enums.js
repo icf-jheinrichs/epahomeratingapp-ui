@@ -143,9 +143,10 @@ const STATUS_CLASSNAME = {
 };
 
 const SYNC_STATUS = {
-    UP    : 'sync-up',
-    DOWN  : 'sync-down',
-    ERROR : 'sync-error'
+    UP      : 'sync-up',
+    DOWN    : 'sync-down',
+    ERROR   : 'sync-error',
+    OFFLINE : 'sync-offline'
 };
 
 const JOB_PAGE_TAB = {

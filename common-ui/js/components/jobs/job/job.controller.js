@@ -82,6 +82,8 @@ class JobController {
 
             if (this.job.offlineAvailable && this.toggleStatusClass !== '') {
                 this.toggleStatusClass = this.SYNC_STATUS.ERROR;
+            } else if (this.job.offlineAvailable && this.toggleStatusClass === '') {
+                this.toggleStatusClass = this.SYNC_STATUS.OFFLINE;
             }
 
             let self = this;
@@ -99,6 +101,8 @@ class JobController {
                 } else {
                     this.toggleStatusClass = this.SYNC_STATUS.DOWN;
                 }
+            } else if (this.job.offlineAvailable && this.toggleStatusClass === this.SYNC_STATUS.OFFLINE) {
+                this.toggleStatusClass = '';
             }
 
             let self = this;
