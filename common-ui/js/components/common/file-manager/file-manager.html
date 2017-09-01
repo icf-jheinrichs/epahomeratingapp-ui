@@ -69,7 +69,6 @@
                                     <input
                                         data-ng-model="fileManagerCtrl.search"
                                         ng-model-options="{debounce: 200}"
-                                        data-ng-change="fileManagerCtrl.searchFiles()"
                                         placeholder="Search"
                                         class="form-control"
                                         type="text"
@@ -87,8 +86,13 @@
                                         data-ng-click="fileManagerCtrl.addFile(item)"
                                         data-ng-repeat="item in fileManagerCtrl.library | filter:fileManagerCtrl.search"
                                         class="drop-down-item popover-close">
-
-                                        {{item.Name}}
+                                        <div ng-if="fileManagerCtrl.showDetails === 'HousePlanLibrary'">
+                                            {{item.Name}} - subplan {{item.SubplanName}}
+                                            <br>
+                                            <span>
+                                                <div class="popover-panel-subtext">Builder: {{item.BuilderName}}</div><div class="popover-panel-subtext">Community: {{item.CommunityName}}</div>
+                                            </span>
+                                        </div>
                                     </button>
                                 </div>
                             </div>

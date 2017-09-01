@@ -9,6 +9,7 @@ let fileManagerComponent = {
         enabled                 : '=',
         inputId                 : '@',
         files                   : '=',
+        showDetails             : '<',
         library                 : '<',
         librarySelectedCallback : '&',
     },

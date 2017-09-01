@@ -19,7 +19,7 @@
 .popover-medium {
     height: 300px;
     margin: $offset-large 0 150px;
-    width: 350px;
+    width: 500px;
 }
 
 .popover-panel-header,
@@ -42,6 +42,15 @@
     position: absolute;
     top: 45px;
     width: 100%;
+}
+
+.popover-panel-subtext {
+    padding-top: 10px;
+    width: 50%;
+    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .popover-has-search .popover-panel-body {
