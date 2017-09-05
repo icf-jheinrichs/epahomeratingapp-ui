@@ -4,38 +4,80 @@ import ChecklistItemClass from '../checklist-item.class';
 
 class ChecklistItemStaticPressureController extends ChecklistItemClass {
     $onInit () {
-        super.$onInit();
+        const INCHES_WATER_COLUMN = {
+            'Abbr'  : 'IWC',
+            'Title' : 'Inches of Water Column'
+        };
 
-        this.editRow = [];
+        super
+            .$onInit()
+            .then(() => {
+                this.itemData = this.itemData || {
+                    'ReturnSideExternalStaticPressure' : undefined,
+                    'SupplySideExternalStaticPressure' : undefined
+                };
+            });
+
+        this.editRow  = [];
+        this.mrfTable = {
+            'Name'           : 'External Static Pressure',
+            'EmptyTableText' : 'No External static pressure modeled',
+            'Key'            : 'ExternalStaticPressur',
+            'Columns'        : [
+                {
+                    'Name'               : 'Return-Side External Static Pressure',
+                    'Unit'               : INCHES_WATER_COLUMN,
+                    'ConnectedAttribute' : false,
+                    'DataType'           : {
+                        'Type' : 'Decimal',
+                        'Name' : 'decimal_-1.0'
+                    },
+                    'Key'                : 'ReturnSideExternalStaticPressure',
+                    'Locked'             : false,
+                    'IsLibraryAttribute' : false
+                },
+                {
+                    'Name'               : 'Supply Side External Static Pressure',
+                    'Unit'               : INCHES_WATER_COLUMN,
+                    'ConnectedAttribute' : false,
+                    'DataType'           : {
+                        'Type' : 'Decimal',
+                        'Name' : 'decimal_1.0'
+                    },
+                    'Key'                : 'SupplySideExternalStaticPressure',
+                    'Locked'             : false,
+                    'IsLibraryAttribute' : false
+                }
+            ]
+        };
     }
 
-    editMrfRow (index, key, title, digest, data) {
-        this.editRow.push({
-            ItemId    : this.itemId,
-            key       : key,
-            index     : index,
-            title     : title || 'Edit',
-            mrfDigest : digest,
-            mrfData   : data
-        });
+    editMrfRow () {
+        this
+            .editRow
+            .push({
+                title     : 'External Static Pressure',
+                mrfDigest : this.mrfTable.Columns,
+                mrfData   : this.itemData
+            });
     }
 
     onCancelMrfRow () {
-        this.editRow.pop();
+        this
+            .editRow
+            .pop();
     }
 
     onSaveMrfRow (mrfRowData) {
-        this.editRow[0].mrfData = mrfRowData;
+        this
+            .itemData = mrfRowData;
 
-        //TODO: use event constant enum
-        this.$rootScope.$emit(this.MESSAGING.UPDATE_MRF_DATA, this.editRow[0]);
+        this
+            .setItemData(this.itemData);
 
-        this.editRow.pop();
-    }
-
-    test (mrfRowData) {
-        //TODO: what is this?
-        angular.noop();
+        this
+            .editRow
+            .pop();
     }
 }
 

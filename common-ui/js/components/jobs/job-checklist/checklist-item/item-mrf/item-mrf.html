@@ -6,7 +6,7 @@
 
     <section data-ng-repeat="mrfTable in checklistItemCtrl.display.Sections track by $index">
         <h5 class="table-caption">{{mrfTable.Name}}</h5>
-        <div class="table-responsive"  data-ng-if="checklistItemCtrl.hasRows(checklistItemCtrl.homePerformance[mrfTable.Key])">
+        <div class="table-responsive" data-ng-if="checklistItemCtrl.hasRows(checklistItemCtrl.homePerformance[mrfTable.Key])">
             <table>
                 <thead>
                     <tr>
@@ -18,7 +18,11 @@
                         data-ng-repeat="dataRow in checklistItemCtrl.homePerformance[mrfTable.Key] track by $index"
                         data-ng-click="checklistItemCtrl.editMrfRow($index, mrfTable.Key, mrfTable.Name, mrfTable.Columns, checklistItemCtrl.homePerformance[mrfTable.Key][$index])">
 
-                        <td data-ng-repeat="(key, value) in dataRow track by $index" ng-if="key !== 'Id'" data-ng-class="{'td-edited' : checklistItemCtrl.attributeIsEdited(mrfTable.Key, $parent.$parent.$index, key)}">{{value}}</td>
+                        <td data-ng-repeat="(key, value) in dataRow track by $index" ng-if="key !== 'Id'"
+                            data-ng-class="{'td-edited' : checklistItemCtrl.attributeIsEdited(mrfTable.Key, $parent.$parent.$index, key)}">
+
+                            {{value}}
+                        </td>
                     </tr>
                 </tbody>
             </table>
