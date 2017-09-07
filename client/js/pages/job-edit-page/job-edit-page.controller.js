@@ -54,7 +54,7 @@ class JobsEditPageController {
                 .put(job)
                 .then(response => {
                     this.message = Object.assign({}, SUCCESS);
-                    this.$state.go('jobs');
+                    window.history.back();
                 })
                 .catch(error => {
                     this.message = Object.assign({}, ERROR_SERVER);
