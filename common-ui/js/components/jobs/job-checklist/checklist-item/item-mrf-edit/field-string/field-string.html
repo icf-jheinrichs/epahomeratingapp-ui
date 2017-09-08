@@ -5,12 +5,13 @@
     </label>
 
     <input
+        class="form-control"
+        data-ng-model="fieldStringCtrl.value"
+        data-ng-change="fieldStringCtrl.onChange(fieldStringCtrl.value)"
         id="{{::fieldStringCtrl.field.Key}}"
         name="{{::fieldStringCtrl.field.Key}}"
-        class="form-control"
-        type="text"
         maxlength="{{fieldStringCtrl.stringType.maxLength}}"
-        data-ng-model="fieldStringCtrl.value" />
+        type="text" />
 
 
     <p class="form-control-error" role="alert" data-ng-class="{'has-error' : fieldStringCtrl.invalid}">

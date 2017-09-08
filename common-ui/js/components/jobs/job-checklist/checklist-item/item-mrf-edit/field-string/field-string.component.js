@@ -3,8 +3,9 @@ import controller from './field-string.controller';
 
 let mrfEditFieldStringComponent = {
     bindings : {
-        field : '<',
-        value : '='
+        field        : '<',
+        value        : '=',
+        handleChange : '&'
     },
     template,
     controller,

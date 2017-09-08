@@ -14,6 +14,8 @@ class MrfEditFieldDecimalController extends MrfEditField {
             .catch((error) => {
                 this.decimalFound = false;
             });
+
+        this.disabled = this.disabled || false;
     }
 
     configureValidation (decimal) {
@@ -27,6 +29,12 @@ class MrfEditFieldDecimalController extends MrfEditField {
             underMin : `Please enter a value that's at least ${decimal.minInclusive}.`,
             notValid : 'Please enter a valid number.'
         };
+    }
+
+    $onChanges (changes) {
+        if (!changes.disabled.isFirstChange()) {
+            this.disabled = changes.disabled.currentValue;
+        }
     }
 
     validate () {
@@ -45,6 +53,7 @@ class MrfEditFieldDecimalController extends MrfEditField {
             this.invalid      = true;
         } else {
             this.value = this.setPrecision();
+            this.onChange(this.value);
             this.errorMessage = '';
             this.invalid      = false;
         }

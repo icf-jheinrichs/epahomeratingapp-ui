@@ -42,6 +42,7 @@ class MrfEditFieldIntegerController extends MrfEditField {
             this.invalid      = true;
         } else {
             this.value = this.setPrecision();
+            this.onChange(this.value);
             this.errorMessage = '';
             this.invalid      = false;
         }
