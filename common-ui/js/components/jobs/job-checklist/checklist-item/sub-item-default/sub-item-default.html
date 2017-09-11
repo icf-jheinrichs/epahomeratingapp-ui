@@ -17,7 +17,8 @@
             edit-response="subItemDefaultController.onEditResponse()">
         </checklist-item-response>
 
-        <div class="verification">
+        <div class="verification"
+             data-ng-hide="!subItemDefaultController.showResponseButtons">
             <button-group
                 class="button-group"
                 buttons="subItemDefaultController.responseButtons"
