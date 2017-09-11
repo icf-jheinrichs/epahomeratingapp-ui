@@ -1,0 +1,14 @@
+<div class="checklist-item">
+    <div class="flex-row flex-justify-between">
+        <header class="checklist-item-header form-group-horizontal">
+            <button class="checklist-item-info-toggle btn btn-link btn-no-label" type="button" aria-label="More Information"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+            <h4 class="checklist-item-title pull-left">{{::checklistItemTotalDuctLeakageTestStrategyController.display.Shorthand}}</h4>
+            <select
+                class="form-control specified-in-hvac-report"
+                data-ng-options="document.Text for document in checklistItemTotalDuctLeakageTestStrategyController.display.Options"
+                data-ng-model="checklistItemTotalDuctLeakageTestStrategyController.selectedOption"
+                data-ng-change="checklistItemTotalDuctLeakageTestStrategyController.onSelectOption(true)">
+            </select>
+        </header>
+    </div>
+</div>
