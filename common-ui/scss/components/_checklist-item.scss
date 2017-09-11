@@ -30,3 +30,17 @@
 .checklist-sub-item {
     margin-left: $gutter-full;
 }
+
+.checklist-item-response {
+    width: 200px;
+
+    .house-title {
+        display: block;
+    }
+}
+
+.checklist-item-response-edit {
+    border-left: $border-default;
+    margin-left: $gutter-half;
+    padding: $offset-default 0 $offset-default $gutter-half;
+}

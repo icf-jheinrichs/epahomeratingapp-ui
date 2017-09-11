@@ -8,9 +8,16 @@
         <div class="flex-row flex-align-center">
             <checklist-item-comments
                 comments="checklistItemHVACCommissioningCtrl.comments"
-                item-id="{{checklistItemCtrl.itemId}}"
+                item-id="{{checklistItemHVACCommissioningCtrl.itemId}}"
                 on-comment="checklistItemHVACCommissioningCtrl.postComment(comment)">
             </checklist-item-comments>
+
+            <checklist-item-response
+                response="checklistItemHVACCommissioningCtrl.response"
+                response-house-id="checklistItemHVACCommissioningCtrl.responseHouseId"
+                data-ng-hide="checklistItemHVACCommissioningCtrl.showResponseButtons"
+                edit-response="checklistItemHVACCommissioningCtrl.onEditResponse()">
+            </checklist-item-response>
 
             <div class="verification">
                 <button-group

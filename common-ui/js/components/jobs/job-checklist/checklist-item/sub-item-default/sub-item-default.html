@@ -9,6 +9,14 @@
             item-id="{{subItemDefaultController.itemId}}"
             on-comment="subItemDefaultController.postComment(comment)">
         </checklist-item-comments>
+
+        <checklist-item-response
+            response="subItemDefaultController.response"
+            response-house-id="subItemDefaultController.responseHouseId"
+            data-ng-hide="subItemDefaultController.showResponseButtons"
+            edit-response="subItemDefaultController.onEditResponse()">
+        </checklist-item-response>
+
         <div class="verification">
             <button-group
                 class="button-group"
