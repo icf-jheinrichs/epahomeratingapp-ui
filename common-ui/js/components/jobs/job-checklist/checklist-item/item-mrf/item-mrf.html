@@ -45,7 +45,8 @@
             edit-response="checklistItemCtrl.onEditResponse()">
         </checklist-item-response>
 
-        <div class="verification">
+        <div class="verification"
+             data-ng-hide="!checklistItemCtrl.showResponseButtons">
             <button-group
                 class="button-group"
                 buttons="checklistItemCtrl.responseButtons"

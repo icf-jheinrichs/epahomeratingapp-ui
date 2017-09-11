@@ -19,7 +19,8 @@
                 edit-response="checklistItemHVACCommissioningCtrl.onEditResponse()">
             </checklist-item-response>
 
-            <div class="verification">
+            <div class="verification"
+                 data-ng-hide="!checklistItemHVACCommissioningCtrl.showResponseButtons">
                 <button-group
                     class="button-group"
                     buttons="checklistItemHVACCommissioningCtrl.responseButtons"
