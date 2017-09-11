@@ -1,0 +1,17 @@
+<div class="flex-row flex-align-center">
+    <div class="checklist-item-response">
+        <span class="label" data-ng-class="checklistItemResponseCtrl.responseClass">{{checklistItemResponseCtrl.responseName}}</span>
+
+        <span class="ellipsis house-title" data-ng-bind-html="checklistItemResponseCtrl.house.title"></span>
+    </div>
+
+    <div class="checklist-item-response-edit">
+        <button
+            class="btn btn-default"
+            data-ng-click="checklistItemResponseCtrl.editResponse()"
+            type="button">
+
+            Edit
+        </button>
+    </div>
+</div>

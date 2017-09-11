@@ -21,9 +21,12 @@ class ChecklistItemClass {
                 .JobChecklistStateService
                 .getChecklistItemResponse(this.itemId, this.itemCategory, this.itemCategoryProgress)
                 .then(response => {
-                    this.response = response.Response;
-                    this.comments = response.Comments;
-                    this.itemData = response.ItemData;
+                    this.response        = response.Response;
+                    this.responseHouseId = response.ResponseHouseId;
+                    this.comments        = response.Comments;
+                    this.itemData        = response.ItemData;
+
+                    this.showResponseButtons = (this.responseHouseId === undefined || this.responseHouseId === parseInt(this.$stateParams.houseId, 10));
 
                     return this.DisplayLogicDigestService.get(this.itemId);
                 })
@@ -38,6 +41,10 @@ class ChecklistItemClass {
                     reject(error);
                 });
         });
+    }
+
+    onEditResponse () {
+        this.showResponseButtons = true;
     }
 
     getResponseOptions () {

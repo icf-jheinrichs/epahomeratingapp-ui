@@ -34,6 +34,13 @@
             on-comment="checklistItemCtrl.postComment(comment)">
         </checklist-item-comments>
 
+        <checklist-item-response
+            response="checklistItemCtrl.response"
+            response-house-id="checklistItemCtrl.responseHouseId"
+            data-ng-hide="checklistItemCtrl.showResponseButtons"
+            edit-response="checklistItemCtrl.onEditResponse()">
+        </checklist-item-response>
+
         <div class="verification">
             <button-group
                 class="button-group"

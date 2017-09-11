@@ -45,3 +45,13 @@
         border-radius: 0 0 $border-radius-default;
     }
 }
+
+.label-response {
+    background-color: $label-response;
+    color: $text-color-inverse;
+}
+
+.label-error {
+    background-color: $label-error;
+    color: $text-color-inverse;
+}

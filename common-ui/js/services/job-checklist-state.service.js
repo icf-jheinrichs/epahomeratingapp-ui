@@ -342,6 +342,11 @@ class JobChecklistState {
 
         this
             .jobDataResponse
+            .ChecklistItems[response.Category][response.CategoryProgress][response.ItemId]
+            .ResponseHouseId = this.currentHouse.HouseId;
+
+        this
+            .jobDataResponse
             .Progress[response.Category]
             = this.JobChecklistProgressService.calculateCategoryProgress(this.jobDataResponse, this.itemStatusQuery);
 

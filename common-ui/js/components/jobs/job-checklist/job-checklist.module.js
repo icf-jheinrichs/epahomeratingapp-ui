@@ -9,6 +9,7 @@ import checklistFilterComponent from './checklist-filter/checklist-filter.compon
 import checklistItemComponent from './checklist-item/checklist-item.component';
 import checklistItemCommentsComponent from './checklist-item/item-comments/item-comments.component';
 import checklistItemDefaultComponent from './checklist-item/item-default/item-default.component';
+import checklistItemResponseComponent from './checklist-item/item-response/item-response.component';
 
 import checklistItemMrfComponent from './checklist-item/item-mrf/item-mrf.component';
 import checklistItemMrfEditComponent from './checklist-item/item-mrf-edit/item-mrf-edit.component';
@@ -45,6 +46,7 @@ let jobsModule
         .component('checklistItem', checklistItemComponent)
         .component('checklistItemComments', checklistItemCommentsComponent)
         .component('checklistItemDefault', checklistItemDefaultComponent)
+        .component('checklistItemResponse', checklistItemResponseComponent)
         .component('checklistItemMrf', checklistItemMrfComponent)
         .component('mrfEdit', checklistItemMrfEditComponent)
         .component('mrfEditDuctSystem', checklistItemMrfEditDuctSystemComponent)
