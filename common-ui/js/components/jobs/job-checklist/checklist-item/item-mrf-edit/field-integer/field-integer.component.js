@@ -3,8 +3,9 @@ import controller from './field-integer.controller';
 
 let mrfEditFieldIntegerComponent = {
     bindings : {
-        field : '<',
-        value : '='
+        field        : '<',
+        value        : '=',
+        handleChange : '&'
     },
     require : {
         model : 'ngModel'

@@ -51,7 +51,8 @@ const USER_TYPE = {
 };
 
 const DIALOG = {
-    MAKE_JOB_OFFLINE : 'dialog-make-job-offline'
+    MAKE_JOB_OFFLINE       : 'dialog-make-job-offline',
+    LEAKAGE_TEST_EXEMPTION : 'dialog-leakage-test-exemption'
 };
 
 const IMAGES = {
