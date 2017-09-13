@@ -397,7 +397,7 @@ class JobChecklistState {
     }
 
     completeJob () {
-        this.job.Status = this.JOB_STATUS.INTERNAL_REVIEW;
+        this.job.Status = this.JOB_STATUS.COMPLETED;
 
         this.putJobData();
     }
