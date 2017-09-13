@@ -11,11 +11,11 @@
         </select>
     </div>
 
-    <div class="flex-col flex-item-grow">
+    <div class="equipment-details flex-col flex-item-grow">
         <div class="row row-condensed" data-ng-class="{'hidden' : hvacEquipmentCtrl.equipment.Type !== hvacEquipmentCtrl.EQUIPMENT_TYPE[0].key}">
-            <h5 class="col-xs-2"><span class="sr-only">Furnace</span></h5>
+            <h5 class="col-xs-2 title-furnace"><span class="sr-only">Furnace</span></h5>
 
-            <div class="form-group col-xs-4">
+            <div class="form-group col-xs-4 furnace-equipment-manufacturer">
 
                 <label for="furnace-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Manufacturer</label>
 
@@ -34,6 +34,7 @@
                         data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('FURNACE', hvacEquipmentCtrl.equipment.Furnace.Manufacturer)"
                         id="furnace-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}"
                         name="Furnace"
+                        placeholder="Manufacturer"
                         type="text"
                         type-ahead-input="type-ahead-input" />
 
@@ -109,6 +110,7 @@
                         data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('CONDENSER', hvacEquipmentCtrl.equipment.Condenser.Manufacturer)"
                         id="condenser-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}"
                         name="Condenser"
+                        placeholder="Manufacturer"
                         type="text"
                         type-ahead-input="type-ahead-input" />
 
@@ -184,6 +186,7 @@
                         data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('EVAPORATOR', hvacEquipmentCtrl.equipment.Evaporator.Manufacturer)"
                         id="evaporator-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}"
                         name="Evaporator"
+                        placeholder="Manufacturer"
                         type="text"
                         type-ahead-input="type-ahead-input" />
 
