@@ -16,6 +16,7 @@ function fileManager () {
                 let parentScope = scope.$parent.$parent;
                 parentScope.$apply(function updateLocalfiles () {
                     parentScope.fileManagerCtrl.files = _values(event.target.files);
+                    parentScope.fileManagerCtrl.localSelectedCallback();
                 });
             });
         }
