@@ -9,6 +9,7 @@ import checklistFilterComponent from './checklist-filter/checklist-filter.compon
 import checklistItemComponent from './checklist-item/checklist-item.component';
 import checklistItemCommentsComponent from './checklist-item/item-comments/item-comments.component';
 import checklistItemDefaultComponent from './checklist-item/item-default/item-default.component';
+import checklistItemResponseComponent from './checklist-item/item-response/item-response.component';
 
 import checklistItemMrfComponent from './checklist-item/item-mrf/item-mrf.component';
 import checklistItemMrfEditComponent from './checklist-item/item-mrf-edit/item-mrf-edit.component';
@@ -30,6 +31,7 @@ import hvacEquipmentComponent from './checklist-item/item-hvac-equipment/hvac-eq
 import checklistItemMeasuredVentilationComponent from './checklist-item/item-measured-ventilation/item-measured-ventilation.component';
 import checklistItemAirInletLocationsComponent from './checklist-item/item-air-inlet-locations/item-air-inlet-locations.component';
 import checklistItemSelectThermalStrategyComponent from './checklist-item/item-select-thermal-strategy/item-select-thermal-strategy.component';
+import checklistItemTotalDuctLeakageTestStrategyComponent from './checklist-item/item-total-duct-leakage-test-strategy/item-total-duct-leakage-test-strategy.component';
 import subItemDefaultComponent from './checklist-item/sub-item-default/sub-item-default.component';
 
 let jobsModule
@@ -44,6 +46,7 @@ let jobsModule
         .component('checklistItem', checklistItemComponent)
         .component('checklistItemComments', checklistItemCommentsComponent)
         .component('checklistItemDefault', checklistItemDefaultComponent)
+        .component('checklistItemResponse', checklistItemResponseComponent)
         .component('checklistItemMrf', checklistItemMrfComponent)
         .component('mrfEdit', checklistItemMrfEditComponent)
         .component('mrfEditDuctSystem', checklistItemMrfEditDuctSystemComponent)
@@ -63,6 +66,7 @@ let jobsModule
         .component('checklistItemMeasuredVentilation', checklistItemMeasuredVentilationComponent)
         .component('checklistItemAirInletLocations', checklistItemAirInletLocationsComponent)
         .component('checklistItemSelectThermalStrategy', checklistItemSelectThermalStrategyComponent)
+        .component('checklistItemTotalDuctLeakageTestStrategy', checklistItemTotalDuctLeakageTestStrategyComponent)
         .component('subItemDefault', subItemDefaultComponent);
 
 export default jobsModule;

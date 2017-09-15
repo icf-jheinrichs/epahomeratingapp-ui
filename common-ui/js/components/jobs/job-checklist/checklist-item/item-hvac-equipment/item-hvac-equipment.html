@@ -14,11 +14,19 @@
         <div class="flex-row flex-align-center">
             <checklist-item-comments
                 comments="checklistItemHVACCommissioningCtrl.comments"
-                item-id="{{checklistItemCtrl.itemId}}"
+                item-id="{{checklistItemHVACCommissioningCtrl.itemId}}"
                 on-comment="checklistItemHVACCommissioningCtrl.postComment(comment)">
             </checklist-item-comments>
 
-            <div class="verification">
+            <checklist-item-response
+                response="checklistItemHVACCommissioningCtrl.response"
+                response-house-id="checklistItemHVACCommissioningCtrl.responseHouseId"
+                data-ng-hide="checklistItemHVACCommissioningCtrl.showResponseButtons"
+                edit-response="checklistItemHVACCommissioningCtrl.onEditResponse()">
+            </checklist-item-response>
+
+            <div class="verification"
+                 data-ng-hide="!checklistItemHVACCommissioningCtrl.showResponseButtons">
                 <button-group
                     class="button-group"
                     buttons="checklistItemHVACCommissioningCtrl.responseButtons"
@@ -30,7 +38,7 @@
     </div>
 
     <div>
-        <p><button class="btn" data-ng-click="checklistItemHVACCommissioningCtrl.onViewHvacDesignReport()" type="button">View HVAC Design Report</button></p>
+        <!-- <p><button class="btn" data-ng-click="checklistItemHVACCommissioningCtrl.onViewHvacDesignReport()" type="button">View HVAC Design Report</button></p> -->
 
         <div class="item-list item-list-equipment">
             <hvac-equipment

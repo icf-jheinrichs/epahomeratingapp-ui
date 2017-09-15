@@ -22,14 +22,17 @@
         <div class="modal-body">
             <div class="clearfix">
                 <div class="form-group col-xs-6">
-                    <mrf-edit-field-default
-                        field="checklistItemMrfEditCtrl.mrfDigest[1]"
-                        value="checklistItemMrfEditCtrl.editMrfData['HeatingSeasonValue']">
-                    </mrf-edit-field-default>
+                    <mrf-edit-field-decimal
+                        data-ng-model="checklistItemMrfEditCtrl.infiltrationValue"
+                        field="checklistItemMrfEditCtrl.infiltrationDisplayData"
+                        handle-change="checklistItemMrfEditCtrl.calculateInfiltrationValue()"
+                        unit="checklistItemMrfEditCtrl.infiltrationDisplayData.Unit"
+                        value="checklistItemMrfEditCtrl.infiltrationValue">
+                    </mrf-edit-field-decimal>
                 </div>
 
 
-                <div class="form-group col-xs-6">
+                <div class="form-group col-xs-6" data-ng-if="false">
                     <p class="control-label">&nbsp;</p>
                     <button type="button" class="btn">Launch Testing App</button>
                 </div>
@@ -38,11 +41,12 @@
             <div class="clearfix">
                 <div class="form-group col-xs-6 form-group-horizontal">
                     <input
-                        id="ACH50"
-                        name="ACH50"
                         class="form-control"
                         disabled="disabled"
-                        type="number" /> <span class="input-unit">ACH50</span>
+                        data-ng-model="checklistItemMrfEditCtrl.ACH50"
+                        id="ACH50"
+                        name="ACH50"
+                        type="number" /> <abbr class="input-unit" title="air changes per hour at 50 Pascals of pressure">ACH50</span>
                 </div>
             </div>
 

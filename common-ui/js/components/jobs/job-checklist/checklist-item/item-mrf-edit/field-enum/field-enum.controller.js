@@ -53,6 +53,7 @@ class MrfEditFieldEnumController extends MrfEditField {
 
     onSelect () {
         this.value = this.selected;
+        this.onChange(this.value);
     }
 
     onToggle (response) {

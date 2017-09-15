@@ -13,6 +13,10 @@
     background-color: $overlay-modal-bg;
 }
 
+.overlay-dialog {
+    z-index: $zindex-dialog-overlay;
+}
+
 .overlay-lightbox {
     z-index: $zindex-lightbox-overlay;
 }

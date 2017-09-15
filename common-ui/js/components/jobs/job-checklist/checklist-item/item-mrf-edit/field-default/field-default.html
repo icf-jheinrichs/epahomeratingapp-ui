@@ -5,7 +5,8 @@
     </label>
 
     <input
-        id="{{fieldCtrl.field.Key}}"
         class="form-control"
+        id="{{fieldCtrl.field.Key}}"
+        data-ng-change="fieldCtrl.onChange(fieldCtrl.value)"
         type="text" data-ng-model="fieldCtrl.value" />
 </div>
