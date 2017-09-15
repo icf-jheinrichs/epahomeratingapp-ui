@@ -20,11 +20,11 @@ class ChecklistItemResponseController {
     }
 
     get responseName () {
-        return this.response ? this.RESPONSES[this.response].Name : '';
+        return this.response && this.response.length ? this.RESPONSES[this.response].Name : '';
     }
 
     get responseClass () {
-        return this.response ? this.RESPONSES[this.response].Class.replace('btn', 'label') : '';
+        return this.response && this.response.length ? this.RESPONSES[this.response].Class.replace('btn', 'label') : '';
     }
 }
 
