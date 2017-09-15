@@ -10,8 +10,8 @@ class MrfEditController {
             'Name'               : 'Infiltration Value',
             'ConnectedAttribute' : true,
             'DataType'           : {
-                'Type' : 'Decimal',
-                'Name' : 'decimal_9999.99'
+                'Type' : 'Integer',
+                'Name' : 'int_99999'
             },
             'Key'                : 'InfiltrationValue',
             'Locked'             : false,
@@ -21,24 +21,32 @@ class MrfEditController {
                 'Title' : 'cubic feet per minute needed needed to create a change in building pressure of 50 Pascals'
             }
         };
+
+        this.PRECISION = {
+            ACH50     : 100
+        };
     }
 
     $onInit () {
         const ACHITECTURAL_CHARACTERISTICS_ID = 'BE 1';
+
+        this.editMrfData       = _assign({}, this.mrfData);
+
+        this.showMrfEditModal  = false;
 
         this
             .JobChecklistStateService
             .getChecklistItemHomePerformance(ACHITECTURAL_CHARACTERISTICS_ID)
             .then((mrfData) => {
                 this.BuildingVolume = mrfData.BuildingSummary[0].BuildingVolume;
-                this.calculateInfiltrationValue();
+
+                this.unitsAreCfm       = this.editMrfData.Units === 'CFM @ 50 Pascals';
+
+                let heatingSeasonValue = parseFloat(this.editMrfData.HeatingSeasonValue);
+
+                this.infiltrationValue = (this.unitsAreCfm) ? heatingSeasonValue : this.calculateInitialInfiltrationValue();
+                this.ACH50             = (!this.unitsAreCfm) ? heatingSeasonValue : this.calculateAch50();
             });
-
-        this.editMrfData = _assign({}, this.mrfData);
-
-        this.showMrfEditModal = false;
-
-        this.infiltrationValue = this.editMrfData.HeatingSeasonValue;
     }
 
     $postLink () {
@@ -51,17 +59,25 @@ class MrfEditController {
             .addClass('overlay-open');
     }
 
-    calculateInfiltrationValue () {
+    calculateInitialInfiltrationValue () {
+        let infiltration = (this.mrfData.HeatingSeasonValue * this.BuildingVolume) / 60;
+
+        return Math.round(infiltration);
+    }
+
+    calculateAch50 () {
         let ach50 = (this.infiltrationValue / this.BuildingVolume) * 60;
 
-        ach50 = Math.round(ach50 * 100) / 100;
+        return Math.round(ach50 * this.PRECISION.ACH50) / this.PRECISION.ACH50;
+    }
 
-        this.ACH50 = ach50;
+    calculateInfiltrationValue () {
+        this.ACH50 = this.calculateAch50();
 
-        if (this.editMrfData.Units === 'CFM @ 50 Pascals') {
+        if (this.unitsAreCfm) {
             this.editMrfData.HeatingSeasonValue = this.infiltrationValue;
             this.editMrfData.CoolingSeasonValue = this.infiltrationValue;
-        } else if (this.editMrfData.Units === 'ACH @ 50 Pascals') {
+        } else if (!this.unitsAreCfm) {
             this.editMrfData.HeatingSeasonValue = this.ACH50;
             this.editMrfData.CoolingSeasonValue = this.ACH50;
         }

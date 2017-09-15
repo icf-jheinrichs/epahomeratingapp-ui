@@ -13,6 +13,11 @@ class MrfEditController {
                 Title : 'cubic feet per minute needed to create a 25 Pascal pressure change'
             }
         };
+
+        this.PRECISION = {
+            CFM25     : 100,
+            CFM25_CFA : 10000
+        };
     }
 
     $onInit () {
@@ -21,16 +26,10 @@ class MrfEditController {
         this.showMrfEditModal = false;
 
         this.leakageTestIsExempt = this.editMrfData.DuctLeakTestExemption === 'true';
+        this.unitsAreCfm25cfa    = this.editMrfData.DuctLeakUnits === 'CFM25 / CFA';
 
-        this.leakageToOutside = {
-            total      : this.editMrfData.DuctLeakTotal,
-            cfm25ofCFA : 0
-        };
-
-        this.leakageTotal = {
-            total      : this.editMrfData.DuctLeakRealTotal,
-            cfm25ofCFA : 0
-        };
+        this.leakageToOutside    = this.initLeakageToOutside();
+        this.leakageTotal        = this.initLeakageTotal();
 
         this.calculateLeakageOutside();
         this.calculateLeakageTotal();
@@ -46,12 +45,44 @@ class MrfEditController {
             .addClass('overlay-open');
     }
 
+    initLeakageToOutside () {
+        let ductLeakTotal = parseFloat(this.editMrfData.DuctLeakTotal);
+
+        let total         = (!this.unitsAreCfm25cfa) ? ductLeakTotal : this.calculateInitialLeakageTotal(ductLeakTotal, this.PRECISION.CFM25);
+        let cfm25ofCFA    = (this.unitsAreCfm25cfa) ? ductLeakTotal : this.calculateLeakageCfm25ofCFA(ductLeakTotal, this.PRECISION.CFM25_CFA);
+
+        return {
+            total,
+            cfm25ofCFA
+        };
+    }
+
+    initLeakageTotal () {
+        let ductLeakRealTotal = parseFloat(this.editMrfData.DuctLeakRealTotal);
+
+        let total             = (!this.unitsAreCfm25cfa) ? ductLeakRealTotal : this.calculateInitialLeakageTotal(ductLeakRealTotal, this.PRECISION.CFM25);
+        let cfm25ofCFA        = (this.unitsAreCfm25cfa) ? ductLeakRealTotal : this.calculateLeakageCfm25ofCFA(ductLeakRealTotal, this.PRECISION.CFM25_CFA);
+
+        return {
+            total,
+            cfm25ofCFA
+        };
+    }
+
+    calculateInitialLeakageTotal (cfm25ofCFA, PRECISION_MULTIPLIER) {
+        let total = cfm25ofCFA * this.editMrfData.CondFloorArea;
+
+        return Math.round(total * PRECISION_MULTIPLIER) / PRECISION_MULTIPLIER;
+    }
+
+    calculateLeakageCfm25ofCFA (total, PRECISION_MULTIPLIER) {
+        let cfm25ofCFA = total / this.editMrfData.CondFloorArea;
+
+        return Math.round(cfm25ofCFA * PRECISION_MULTIPLIER) / PRECISION_MULTIPLIER;
+    }
+
     calculateLeakageOutside () {
-        let cfm25ofCFA = (this.leakageToOutside.total / this.editMrfData.CondFloorArea) * 100;
-
-        cfm25ofCFA = Math.round(cfm25ofCFA * 100) / 100;
-
-        this.leakageToOutside.cfm25ofCFA = cfm25ofCFA;
+        this.leakageToOutside.cfm25ofCFA = this.calculateLeakageCfm25ofCFA(this.leakageToOutside.total, this.PRECISION.CFM25_CFA);
 
         if (this.editMrfData.DuctLeakUnits === 'CFM @ 25 Pascals') {
             this.editMrfData.DuctLeakTotal = this.leakageToOutside.total;
@@ -61,11 +92,7 @@ class MrfEditController {
     }
 
     calculateLeakageTotal () {
-        let cfm25ofCFA = (this.leakageTotal.total / this.editMrfData.CondFloorArea) * 100;
-
-        cfm25ofCFA = Math.round(cfm25ofCFA * 100) / 100;
-
-        this.leakageTotal.cfm25ofCFA = cfm25ofCFA;
+        this.leakageTotal.cfm25ofCFA = this.calculateLeakageCfm25ofCFA(this.leakageTotal.total, this.PRECISION.CFM25_CFA);
 
         if (this.editMrfData.DuctLeakUnits === 'CFM @ 25 Pascals') {
             this.editMrfData.DuctLeakRealTotal = this.leakageTotal.total;
@@ -86,7 +113,7 @@ class MrfEditController {
                 .openDialog(this.DIALOG)
                 .then((confirmed) => {
                     if (confirmed) {
-                        this.leakageTestIsExempt = true;
+                        this.leakageTestIsExempt       = true;
                         this.editMrfData.DuctLeakTotal = this.leakageToOutside.total = 0;
                         this.calculateLeakageOutside();
                     } else {
