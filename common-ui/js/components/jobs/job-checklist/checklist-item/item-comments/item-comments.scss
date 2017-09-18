@@ -4,14 +4,22 @@
     display: inline;
 
     .popover {
-        height: $popover-height-default;
-        margin: $offset-large 0 ($popover-height-default / 2);
+        height: $popover-height-large;
+        margin: $offset-large 0 ($popover-height-large / 2);
         right: $gutter-half;
-        width: $popover-width-default;
+        width: $popover-width-large;
+
+        &::before {
+            left: 50%;
+        }
     }
 
-    textarea {
-        height: 125px;
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    .comment-input {
+        height: 215px;
     }
 
     .photo-capture {
