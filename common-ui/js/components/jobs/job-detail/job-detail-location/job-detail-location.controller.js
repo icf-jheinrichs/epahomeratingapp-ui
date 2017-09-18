@@ -1,6 +1,8 @@
+/* global File, FileReader */
+
 import _find from 'lodash/find';
 import _isEmpty from 'lodash/isEmpty';
-import xmlToJSON from 'xmlToJSON';
+import xmlToJSON from 'xmltojson';
 
 class JobDetailLocationController {
     constructor (UI_ENUMS, $scope, $timeout) {
