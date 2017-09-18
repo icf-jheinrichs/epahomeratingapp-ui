@@ -3,6 +3,7 @@ import controller from './item-mrf-edit.controller';
 
 let checklistItemMrfEditComponent = {
     bindings : {
+        focus              : '@',
         mrfDigest          : '<',
         mrfData            : '<',
         title              : '@',

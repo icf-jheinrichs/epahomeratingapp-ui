@@ -8,6 +8,8 @@
         id="{{::fieldDecimalCtrl.field.Key}}"
         name="{{fieldDecimalCtrl.field.Key}}"
         class="form-control"
+        input-focus
+        focus-on-init="{{fieldDecimalCtrl.focus}}"
         type="number"
         data-ng-blur="fieldDecimalCtrl.validate()"
         data-ng-disabled="fieldDecimalCtrl.disabled"

@@ -5,6 +5,7 @@ let mrfEditFieldDecimalComponent = {
     bindings : {
         disabled     : '<',
         field        : '<',
+        focus        : '@',
         value        : '=',
         handleChange : '&',
         unit         : '<'

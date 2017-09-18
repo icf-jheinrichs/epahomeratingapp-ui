@@ -52,10 +52,11 @@ class ChecklistItemStaticPressureController extends ChecklistItemClass {
         };
     }
 
-    editMrfRow () {
+    editMrfRow (focus) {
         this
             .editRow
             .push({
+                focus     : focus,
                 title     : 'External Static Pressure',
                 mrfDigest : this.mrfTable.Columns,
                 mrfData   : this.itemData
