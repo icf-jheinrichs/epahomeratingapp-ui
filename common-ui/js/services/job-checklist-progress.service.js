@@ -93,6 +93,44 @@ class JobChecklistProgressService {
         return categoryProgress;
     }
 
+    /**
+     * Triggered after a checklist item is responded to, or if checklist item data is changed
+     * @param  {object} jobDataResponse      job response data
+     * @param  {object} itemStatusQueries    object containing function calls to query a checklist item to see if it's omitted from the job
+     * @return {object}                      updated progress data object
+     */
+    calculateStageProgress (jobDataResponse, itemStatusQueries, stageId) {
+        let jobProgress = _cloneDeep(jobDataResponse.Progress);
+        let STAGE    = this.CATEGORY_PROGRESS[stageId].Key;
+
+        _forEach(jobProgress, (value, key) => {
+            jobProgress[key][STAGE] = {
+                'Total'       : 0,
+                'Verified'    : 0,
+                'MustCorrect' : 0
+            };
+        });
+
+        _forEach(itemStatusQueries, (query, key) => {
+            let [category, progress, id] = key.split(':');
+            let itemStatus = query();
+
+            if (!itemStatus.isOmitted) {
+                jobProgress[category][progress].Total += 1;
+
+                let response = jobDataResponse.ChecklistItems[category][progress][id].Response;
+
+                if (response !== undefined && response[0] === this.RESPONSES.MustCorrect.Key) {
+                    jobProgress[category][progress].MustCorrect += 1;
+                } else if (response !== undefined) {
+                    jobProgress[category][progress].Verified += 1;
+                }
+            }
+        });
+
+        return jobProgress;
+    }
+
     calculateJobProgress (jobChecklistResponseProgress) {
         let jobProgress = {
             'PreDrywall' : {

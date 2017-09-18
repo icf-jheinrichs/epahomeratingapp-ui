@@ -5,6 +5,7 @@ import _cloneDeep from 'lodash/cloneDeep';
 
 class JobChecklistState {
     constructor ($log,
+                 $state,
                  $stateParams,
                  $q,
                  DisplayLogicDigestService,
@@ -19,6 +20,7 @@ class JobChecklistState {
         'ngInject';
 
         this.$log                          = $log;
+        this.$state                        = $state;
         this.$stateParams                  = $stateParams;
         this.$q                            = $q;
 
@@ -345,10 +347,17 @@ class JobChecklistState {
             .ChecklistItems[response.Category][response.CategoryProgress][response.ItemId]
             .ResponseHouseId = this.currentHouse.HouseId;
 
-        this
-            .jobDataResponse
-            .Progress[response.Category]
-            = this.JobChecklistProgressService.calculateCategoryProgress(this.jobDataResponse, this.itemStatusQuery);
+        if (this.$state.current.name === 'job-checklist.category') {
+            this
+                .jobDataResponse
+                .Progress[response.Category]
+                = this.JobChecklistProgressService.calculateCategoryProgress(this.jobDataResponse, this.itemStatusQuery);
+        } else if (this.$state.current.name === 'job-checklist.stage') {
+            this
+                .jobDataResponse
+                .Progress
+                = this.JobChecklistProgressService.calculateStageProgress(this.jobDataResponse, this.itemStatusQuery, this.$stateParams.stageId);
+        }
 
         this
             .job
