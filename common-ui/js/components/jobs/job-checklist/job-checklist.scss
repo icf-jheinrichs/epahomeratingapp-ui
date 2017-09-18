@@ -57,30 +57,6 @@
     margin-left: $offset-default;
 }
 
-.item-list-equipment {
-    margin: $offset-large 0;
-
-    h5 {
-        font-weight: normal;
-    }
-
-    .flex-row {
-        margin: 0 (-$offset-default);
-    }
-
-    .flex-col {
-        margin: 0 $offset-small;
-    }
-
-    .equipment-type {
-        min-width: 135px;
-    }
-
-    .equipment-actions {
-        white-space: nowrap;
-    }
-}
-
 .applicable-sample-item {
     max-width: 295px;
 
@@ -105,5 +81,60 @@
 
     img {
         vertical-align: middle;
+    }
+}
+
+.item-list-equipment {
+    margin: $offset-large 0;
+
+    h5 {
+        font-weight: normal;
+    }
+
+    .flex-row {
+        margin: 0 (-$offset-default);
+    }
+
+    .flex-col {
+        margin: 0 $offset-small;
+    }
+
+    .equipment-type {
+        min-width: 135px;
+    }
+
+    .equipment-actions {
+        white-space: nowrap;
+    }
+}
+
+@media screen and (max-width: $screen-md) {
+    .item-list-equipment {
+        .title-furnace {
+            display: none;
+        }
+
+        .flex-row {
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .equipment-type {
+            order: 1;
+        }
+
+        .equipment-actions {
+            order: 2;
+        }
+
+        .equipment-details {
+            margin-top: $gutter-half;
+            order: 3;
+            width: 100%;
+        }
+
+        .furnace-equipment-manufacturer {
+            width: 50%;
+        }
     }
 }
