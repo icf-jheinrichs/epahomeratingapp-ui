@@ -120,7 +120,7 @@
                         type-ahead-results="type-ahead-results">
                             <button
                                 class="btn btn-link btn-block type-ahead-result"
-                                data-ng-mousedown="hvacEquipmentCtrl.setEquipmentManfacturer('Condenser', manufacturer.name)"
+                                data-ng-click="hvacEquipmentCtrl.setEquipmentManfacturer('Condenser', manufacturer.name)"
                                 data-ng-repeat="manufacturer in hvacEquipmentCtrl.filteredManufacturers.CONDENSER track by manufacturer.name"
                                 type="button">
                                 {{manufacturer.name}}
@@ -196,7 +196,7 @@
                         type-ahead-results="type-ahead-results">
                             <button
                                 class="btn btn-link btn-block type-ahead-result"
-                                data-ng-mousedown="hvacEquipmentCtrl.setEquipmentManfacturer('Evaporator', manufacturer.name)"
+                                data-ng-click="hvacEquipmentCtrl.setEquipmentManfacturer('Evaporator', manufacturer.name)"
                                 data-ng-repeat="manufacturer in hvacEquipmentCtrl.filteredManufacturers.EVAPORATOR track by manufacturer.name"
                                 type="button">
                                 {{manufacturer.name}}
