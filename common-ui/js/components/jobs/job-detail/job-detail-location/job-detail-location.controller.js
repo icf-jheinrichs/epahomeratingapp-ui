@@ -1,4 +1,5 @@
 import _find from 'lodash/find';
+import _isEmpty from 'lodash/isEmpty';
 import xmlToJSON from 'xmlToJSON';
 
 class JobDetailLocationController {
@@ -24,12 +25,12 @@ class JobDetailLocationController {
             return o._id === self.location.HousePlan[0]._id;
         });
 
-        this.location.Builder                             = selectedHousePlan.BuilderName;
-        this.location.AddressInformation.CommunityName    = selectedHousePlan.CommunityName;
-        this.location.AddressInformation.Address1         = selectedHousePlan.StreetAddress;
-        this.location.AddressInformation.CityMunicipality = selectedHousePlan.City;
-        this.location.AddressInformation.StateCode        = selectedHousePlan.State;
-        this.location.AddressInformation.ZipCode          = selectedHousePlan.ZipCode;
+        this.location.Builder                             = _isEmpty(selectedHousePlan.BuilderName) ? '' : selectedHousePlan.BuilderName;
+        this.location.AddressInformation.CommunityName    = _isEmpty(selectedHousePlan.CommunityName) ? '' : selectedHousePlan.CommunityName;
+        this.location.AddressInformation.Address1         = _isEmpty(selectedHousePlan.StreetAddress) ? '' : selectedHousePlan.StreetAddress;
+        this.location.AddressInformation.CityMunicipality = _isEmpty(selectedHousePlan.City) ? '' : selectedHousePlan.City;
+        this.location.AddressInformation.StateCode        = _isEmpty(selectedHousePlan.State) ? '' : selectedHousePlan.State;
+        this.location.AddressInformation.ZipCode          = _isEmpty(selectedHousePlan.ZipCode) ? '' : selectedHousePlan.ZipCode;
     }
 
     localHousePlanOnSelect () {
@@ -44,12 +45,12 @@ class JobDetailLocationController {
                 reader.onloadend = function readXMLSuccess () {
                     let remJSON = xmlToJSON.parseString(reader.result, {childrenAsArray : false});
 
-                    self.location.Builder                             = remJSON.buildingfile.building.projectinfo.buildername._text || '';
-                    self.location.AddressInformation.CommunityName    = remJSON.buildingfile.building.projectinfo.developmentname._text || '';
-                    self.location.AddressInformation.Address1         = remJSON.buildingfile.building.projectinfo.propertyaddress._text || '';
-                    self.location.AddressInformation.CityMunicipality = remJSON.buildingfile.building.projectinfo.propertycity._text || '';
-                    self.location.AddressInformation.StateCode        = remJSON.buildingfile.building.projectinfo.propertystate._text || '';
-                    self.location.AddressInformation.ZipCode          = remJSON.buildingfile.building.projectinfo.propertyzip._text || '';
+                    self.location.Builder                             = _isEmpty(remJSON.buildingfile.building.projectinfo.buildername._text) ? '' : remJSON.buildingfile.building.projectinfo.buildername._text;
+                    self.location.AddressInformation.CommunityName    = _isEmpty(remJSON.buildingfile.building.projectinfo.developmentname._text) ? '' : remJSON.buildingfile.building.projectinfo.developmentname._text;
+                    self.location.AddressInformation.Address1         = _isEmpty(remJSON.buildingfile.building.projectinfo.propertyaddress._text) ? '' : remJSON.buildingfile.building.projectinfo.propertyaddress._text;
+                    self.location.AddressInformation.CityMunicipality = _isEmpty(remJSON.buildingfile.building.projectinfo.propertycity._text) ? '' : remJSON.buildingfile.building.projectinfo.propertycity._text;
+                    self.location.AddressInformation.StateCode        = _isEmpty(remJSON.buildingfile.building.projectinfo.propertystate._text) ? '' : remJSON.buildingfile.building.projectinfo.propertystate._text;
+                    self.location.AddressInformation.ZipCode          = _isEmpty(remJSON.buildingfile.building.projectinfo.propertyzip._text) ? '' : remJSON.buildingfile.building.projectinfo.propertyzip._text;
 
                     self.$scope.$apply();
                 };
