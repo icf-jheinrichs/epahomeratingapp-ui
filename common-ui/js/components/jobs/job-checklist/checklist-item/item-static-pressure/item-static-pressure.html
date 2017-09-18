@@ -16,7 +16,8 @@
                 name="{{::staticPressure.Key}}"
                 class="form-control"
                 value="{{checklistItemCtrl.itemData[staticPressure.Key]}}"
-                data-ng-focus="checklistItemCtrl.editMrfRow()" />
+                data-ng-click="checklistItemCtrl.editMrfRow(staticPressure.Key)" />
+
             <abbr class="input-unit" title="{{::staticPressure.Unit.Title}}">
                 {{::staticPressure.Unit.Abbr}}
             </abbr>
@@ -53,6 +54,7 @@
         data-ng-repeat="row in checklistItemCtrl.editRow"
         on-save-mrf-row="checklistItemCtrl.onSaveMrfRow(mrfRowEditData)"
         on-cancel-mrf-row="checklistItemCtrl.onCancelMrfRow()"
+        focus="{{row.focus}}"
         title="{{row.title}}"
         mrf-digest="row.mrfDigest"
         mrf-data="row.mrfData">

@@ -16,6 +16,7 @@ import LightboxModule from './lightbox/lightbox.module';
 import PopoverModule from './popover/popover.module';
 import TypeAheadModule from './type-ahead/type-ahead.module';
 import FileManagerModule from './file-manager/file-manager.module';
+import inputFocusDirective from './input-focus/input-focus.directive.js';
 
 let commonModule
     = angular
@@ -34,6 +35,7 @@ let commonModule
             .component('photoCapture', photoCaptureComponent)
             .component('radialProgress', radialProgressComponent)
             .component('statusMessage', statusMessageComponent)
-            .component('toggle', toggleComponent);
+            .component('toggle', toggleComponent)
+            .directive('inputFocus', inputFocusDirective);
 
 export default commonModule;

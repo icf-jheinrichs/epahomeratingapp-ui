@@ -49,6 +49,7 @@
                      <div ng-switch-when="Decimal">
                         <mrf-edit-field-decimal
                             field="field"
+                            focus="{{checklistItemMrfEditCtrl.focus === field.Key}}"
                             ng-model="checklistItemMrfEditCtrl.mrfEditForm[field.Key]"
                             value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
                         </mrf-edit-field-decimal>
