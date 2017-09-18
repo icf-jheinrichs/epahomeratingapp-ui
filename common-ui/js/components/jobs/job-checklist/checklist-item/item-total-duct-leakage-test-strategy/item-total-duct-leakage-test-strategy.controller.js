@@ -41,6 +41,10 @@ class ChecklistTotalDuctLeakageTestStrategyController extends ChecklistItemClass
     }
 
     onSiblingSetItemData (response) {
+        if (response.ItemId !== this.itemId) {
+            return;
+        }
+
         if (response.CategoryProgress !== this.itemCategoryProgress && response.ItemData.selectedOptionIndex !== this.itemData.selectedOptionIndex) {
             this.itemData.selectedOptionIndex = response.ItemData.selectedOptionIndex;
             this.selectedOption = this.display.Options[this.itemData.selectedOptionIndex];
