@@ -8,12 +8,12 @@
         <span class="modal-title flex-item-grow">New House Plan</span>
 
         <div class="flex-item-static">
-            <button class="btn pull-right" type="submit" data-ng-disabled="housePlanNewCtrl.isBusy"><i data-ng-class="{'hidden' : !housePlanNewCtrl.isBusy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Upload</button>
+            <button class="btn pull-right" type="submit" data-ng-disabled="housePlanNewCtrl.uploadStage != 'select'"><i data-ng-class="{'hidden' : housePlanNewCtrl.uploadStage == 'select'}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Upload</button>
         </div>
     </div>
 
     <div class="modal-body-wrapper">
-        <div class="modal-body">
+        <div class="modal-body" ng-show="housePlanNewCtrl.uploadStage == 'select'">
             <status-message status="housePlanNewCtrl.message" id="house-plan-new-status-message"></status-message>
             <status-message ng-if="housePlanNewCtrl.message" status="housePlanNewCtrl.errorReason" id="house-plan-new-error-reason"></status-message>
 
@@ -21,8 +21,17 @@
                 <legend class="fieldset-legend">Upload House Plan</legend>
 
                 <label class="sr-only" for="housePlanFile">Choose a file to upload</label>
-                <input type="file" accept="text/xml" name="housePlanFile" id="housePlanFile" data-ng-model="housePlanNewCtrl.housePlanFile" />
+                <input type="file" accept="text/xml" multiple name="housePlanFile" id="housePlanFile" data-ng-model="housePlanNewCtrl.housePlanFile" />
             </fieldset>
+        </div>
+
+        <div class="modal-body" ng-show="housePlanNewCtrl.uploadStage == 'uploading'">
+            uploading...
+        </div>
+
+        <div class="modal-body" ng-show="housePlanNewCtrl.uploadStage == 'report'">
+            Uploaded!
+            <button class="btn pull-left" type="submit">Continue</button>
         </div>
     </div>
 </form>
