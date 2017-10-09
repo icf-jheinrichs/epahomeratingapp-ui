@@ -1,16 +1,18 @@
 import moment from 'moment';
 
 class ChecklistCommentsController {
-    constructor (BASE_IMAGE_URL, AuthenticationService) {
+    constructor (UI_ENUMS, BASE_IMAGE_URL, CONTEXT, AuthenticationService) {
         'ngInject';
 
         this.BASE_IMAGE_URL  = BASE_IMAGE_URL;
         this.user            = AuthenticationService.getUserInfo();
+        this.CONTEXT_IS_APP  = CONTEXT === UI_ENUMS.CONTEXT.APP;
     }
 
     $onInit () {
-        this.state = 'list';
-        this.id    = this.itemId.replace(/\s/g, '_');
+        this.state             = 'list';
+        this.id                = this.itemId.replace(/\s/g, '_');
+        this.allowPhotoCapture = this.CONTEXT_IS_APP;
     }
 
     formatTimestamp (timestamp) {

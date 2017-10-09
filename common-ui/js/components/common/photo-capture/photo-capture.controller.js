@@ -1,5 +1,5 @@
 class PhotoCaptureController {
-    constructor (CameraService, UI_ENUMS, BASE_IMAGE_URL) {
+    constructor (CameraService, UI_ENUMS, BASE_IMAGE_URL, CONTEXT) {
         'ngInject';
 
         this.CameraService   = CameraService;
@@ -11,9 +11,12 @@ class PhotoCaptureController {
             'ADD'    : 'Add Photo',
             'CHANGE' : 'Change Photo'
         };
+
+        this.CONTEXT_IS_APP = CONTEXT === UI_ENUMS.CONTEXT.APP;
     }
 
     $onInit () {
+        this.allowAddPhoto    = this.CONTEXT_IS_APP;
         this.photoUrl         = (this.photo) ? `${this.BASE_IMAGE_URL}${this.photo}` : this.defaultPhotoUrl;
         this.photoActionLabel = (this.photoUrl === this.defaultPhotoUrl) ? this.photoActionLabelEnum.ADD : this.photoActionLabelEnum.CHANGE;
     }
