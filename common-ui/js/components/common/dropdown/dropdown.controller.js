@@ -1,11 +1,11 @@
 const HIDDEN_CLASS = 'hidden';
 
 class DropdownController {
-    constructor ($element) {
+    constructor ($element, DropdownService) {
         'ngInject';
 
-        // this.isOpen = false;
-        this.$element = $element;
+        this.$element        = $element;
+        this.DropdownService = DropdownService;
 
         this.overlayElement = angular.element('<div class="overlay drop-down-overlay hidden"></div>');
         $element.append(this.overlayElement);
@@ -19,18 +19,58 @@ class DropdownController {
         });
     }
 
-    toggle () {
-        this.isOpen = !this.isOpen;
+    register (id) {
+        this.id = id;
 
-        if (this.isOpen) {
-            this.menuElement.removeClass(HIDDEN_CLASS);
-            this.overlayElement.removeClass(HIDDEN_CLASS);
-        } else {
-            this.menuElement.addClass(HIDDEN_CLASS);
-            this.overlayElement.addClass(HIDDEN_CLASS);
-        }
+        this
+            .DropdownService
+            .registerDropdown({
+                id         : id,
+                open       : this.open.bind(this),
+                close      : this.close.bind(this)
+            });
+    }
+
+    deregister (id) {
+        this
+            .DropdownService
+            .deregisterDropdown(this.id);
+    }
+
+    open () {
+        this.isOpen = true;
+
+        this
+            .menuElement
+            .removeClass(HIDDEN_CLASS);
+
+        this
+            .overlayElement
+            .removeClass(HIDDEN_CLASS);
 
         this.toggleElement.attr('aria-expanded', this.isOpen);
+    }
+
+    close () {
+        this.isOpen = false;
+
+        this
+            .menuElement
+            .addClass(HIDDEN_CLASS);
+
+        this
+            .overlayElement
+            .addClass(HIDDEN_CLASS);
+
+        this.toggleElement.attr('aria-expanded', this.isOpen);
+    }
+
+    toggle () {
+        if (this.isOpen) {
+            this.close();
+        } else {
+            this.open();
+        }
     }
 
     setToggleElement (element) {
