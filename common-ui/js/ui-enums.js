@@ -55,6 +55,10 @@ const DIALOG = {
     LEAKAGE_TEST_EXEMPTION : 'dialog-leakage-test-exemption'
 };
 
+const DROPDOWN = {
+    USER_MENU : 'user-menu'
+};
+
 const IMAGES = {
     DEFAULT_PHOTO : 'img/job-photo-default.svg'
 };
@@ -138,11 +142,11 @@ const STATUS = {
 };
 
 const STATUS_CLASSNAME = {
-    OFFLINE           : 'sync-status-offline',              // grey w/ checkmark
-    ONLINE_UP_TO_DATE : 'sync-status-online',               // green w/ checkmark
-    SYNCING           : 'sync-status-syncing',              // blue border
-    LOCAL_UNSYNCED    : 'sync-status-local-unsynced',       // yellow with -
-    SYNC_INCOMPLETE   : 'sync-status-incomplete'            // red with x
+    OFFLINE           : 'sync-status-offline', // grey w/ checkmark
+    ONLINE_UP_TO_DATE : 'sync-status-online', // green w/ checkmark
+    SYNCING           : 'sync-status-syncing', // blue border
+    LOCAL_UNSYNCED    : 'sync-status-local-unsynced', // yellow with -
+    SYNC_INCOMPLETE   : 'sync-status-incomplete' // red with x
 };
 
 const SYNC_STATUS = {
@@ -164,6 +168,7 @@ export default {
     CATEGORY_PROGRESS,
     CONTEXT,
     DIALOG,
+    DROPDOWN,
     IMAGES,
     JOB_STATUS,
     MANUFACTURERS,

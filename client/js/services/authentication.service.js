@@ -52,7 +52,7 @@ class AuthenticationService {
         let cognitoToken;
 
         if (localUser === null || this.cognitoUser === null) {
-            this.setUser(DEFAULT_USER);
+            this.user = Object.assign({}, DEFAULT_USER);
         } else {
             this.getCognitoToken()
                 .then((token) => {
@@ -67,7 +67,7 @@ class AuthenticationService {
                     this.setUser(localUser);
                 })
                 .catch((error) => {
-                    this.setUser(DEFAULT_USER);
+                    this.user = Object.assign({}, DEFAULT_USER);
                 });
         }
     }
@@ -84,6 +84,7 @@ class AuthenticationService {
             email     : this.user.email
         };
     }
+
     checkLogin () {
         return this.$q((resolve, reject) => {
             reject('not supported');
@@ -206,7 +207,10 @@ class AuthenticationService {
     }
 
     logout () {
-        this.setUser({'status' : '403'});
+        return this.$q((resolve, reject) => {
+            this.user = Object.assign({}, DEFAULT_USER);
+            resolve(this.user);
+        });
     }
 
     getAttributes (id_token, access_token) {

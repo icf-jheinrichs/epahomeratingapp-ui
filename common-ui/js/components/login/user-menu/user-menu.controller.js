@@ -1,10 +1,12 @@
 class UserMenuController {
-    constructor ($state, $transitions, AuthenticationService) {
+    constructor ($state, $transitions, AuthenticationService, DropdownService, UI_ENUMS) {
         'ngInject';
 
         this.$state                = $state;
         this.$transitions          = $transitions;
         this.AuthenticationService = AuthenticationService;
+        this.DropdownService       = DropdownService;
+        this.DROPDOWN_USER_MENU    = UI_ENUMS.DROPDOWN.USER_MENU;
     }
 
     menuIsVisible () {
@@ -21,7 +23,10 @@ class UserMenuController {
         this.user = this.AuthenticationService.getUser();
         //TODO: see if there's a better way to do this - maybe w/ broadcast or emit.
         this.$transitions.onSuccess(true, (redirectToLogin) => {
-            this.user = this.AuthenticationService.getUser();
+            this.user
+                = this
+                    .AuthenticationService
+                    .getUser();
         });
     }
 
@@ -30,7 +35,13 @@ class UserMenuController {
             .AuthenticationService
             .logout()
             .then(() => {
-                this.$state.go('login');
+                this
+                    .DropdownService
+                    .closeDropdown(this.DROPDOWN_USER_MENU);
+
+                this
+                    .$state
+                    .go('login');
             });
     }
 }
