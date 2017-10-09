@@ -89,9 +89,11 @@ const MESSAGING = {
     ASSET_UPLOADED_FOR_JOB           : 'ASSET_UPLOADED_FOR_JOB',
     DB_START_SYNC                    : 'DB_START_SYNC',
     DB_PAUSE_SYNC                    : 'DB_PAUSE_SYNC',
+    DB_ERROR_SYNC                    : 'DB_ERROR_SYNC',
     DEVICE_OFFLINE                   : 'DEVICE_OFFLINE',
     DEVICE_ONLINE                    : 'DEVICE_ONLINE',
-    REFRESH_JOBS_LIST                : 'REFRESH_JOBS_LIST'
+    REFRESH_JOBS_LIST                : 'REFRESH_JOBS_LIST',
+    REFRESH_JOBS_LIST_FINISH         : 'REFRESH_JOBS_LIST_FINISH'
 };
 
 const RATING_TYPES = {
