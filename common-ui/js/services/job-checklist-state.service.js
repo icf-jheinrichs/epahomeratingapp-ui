@@ -414,7 +414,31 @@ class JobChecklistState {
     registerItemStatusQuery (id, query) {
         this.itemStatusQuery[id] = query;
     }
+    getCheckListElementsForBuilderReport () {
 
+        let elements = [];
+        let checklist = this.jobDataResponse.ChecklistItems;
+
+        for (let category in checklist) {
+            for (let stage in checklist[category]) {
+                for (let element in checklist[category][stage]) {
+                    let checklistElement = checklist[category][stage][element];
+
+                    for (let response in checklistElement.Response) {
+                        let responseStr = checklistElement.Response[response];
+
+                        if (responseStr === 'MustCorrect' || responseStr === 'BuilderVerified') {
+                            checklistElement['category'] = category;
+                            checklistElement['stage'] = stage;
+                            checklistElement['element'] = element;
+                            elements.push(checklistElement);
+                        }
+                    }
+                }
+            }
+        }
+        return elements;
+    }
 }
 
 export default JobChecklistState;
