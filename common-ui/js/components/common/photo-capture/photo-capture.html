@@ -9,7 +9,7 @@
         <img class="pull-left" data-ng-src="{{photoCaptureCtrl.photoUrl}}" alt="" />
     </button>
 
-    <figcaption class="photo-capture-action">
+    <figcaption class="photo-capture-action" data-ng-if="photoCaptureCtrl.allowAddPhoto">
         <button
             class="btn btn-block btn-photo-capture btn-link"
             data-ng-click="photoCaptureCtrl.addPhoto($event)"

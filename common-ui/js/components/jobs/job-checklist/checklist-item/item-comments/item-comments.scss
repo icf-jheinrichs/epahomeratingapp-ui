@@ -29,6 +29,10 @@
     }
 }
 
+.panel-no-photo-capture .comment-input {
+    height: 325px;
+}
+
 .item-comment {
     border-top: $border-default;
     padding: $padding-default $padding-large;
