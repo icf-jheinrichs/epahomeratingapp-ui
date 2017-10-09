@@ -7,7 +7,7 @@
     </span>
      {{jobSyncStatusCtrl.syncStatus}}
 
-    <button class="btn pull-right" data-ng-click="jobSyncStatusCtrl.refreshJobList()">
-        Refresh Job List
+    <button class="btn pull-right" data-ng-click="jobSyncStatusCtrl.refreshJobList()" ng-disabled="!jobSyncStatusCtrl.needRefresh">
+        {{jobSyncStatusCtrl.refreshButtonText}}
     </button>
 </div>
