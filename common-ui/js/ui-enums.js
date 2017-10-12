@@ -55,6 +55,10 @@ const DIALOG = {
     LEAKAGE_TEST_EXEMPTION : 'dialog-leakage-test-exemption'
 };
 
+const DROPDOWN = {
+    USER_MENU : 'user-menu'
+};
+
 const IMAGES = {
     DEFAULT_PHOTO : 'img/job-photo-default.svg'
 };
@@ -89,9 +93,11 @@ const MESSAGING = {
     ASSET_UPLOADED_FOR_JOB           : 'ASSET_UPLOADED_FOR_JOB',
     DB_START_SYNC                    : 'DB_START_SYNC',
     DB_PAUSE_SYNC                    : 'DB_PAUSE_SYNC',
+    DB_ERROR_SYNC                    : 'DB_ERROR_SYNC',
     DEVICE_OFFLINE                   : 'DEVICE_OFFLINE',
     DEVICE_ONLINE                    : 'DEVICE_ONLINE',
-    REFRESH_JOBS_LIST                : 'REFRESH_JOBS_LIST'
+    REFRESH_JOBS_LIST                : 'REFRESH_JOBS_LIST',
+    REFRESH_JOBS_LIST_FINISH         : 'REFRESH_JOBS_LIST_FINISH'
 };
 
 const RATING_TYPES = {
@@ -136,17 +142,18 @@ const STATUS = {
 };
 
 const STATUS_CLASSNAME = {
-    OFFLINE           : 'sync-status-offline',              // grey w/ checkmark
-    ONLINE_UP_TO_DATE : 'sync-status-online',               // green w/ checkmark
-    SYNCING           : 'sync-status-syncing',              // blue border
-    LOCAL_UNSYNCED    : 'sync-status-local-unsynced',       // yellow with -
-    SYNC_INCOMPLETE   : 'sync-status-incomplete'            // red with x
+    OFFLINE           : 'sync-status-offline', // grey w/ checkmark
+    ONLINE_UP_TO_DATE : 'sync-status-online', // green w/ checkmark
+    SYNCING           : 'sync-status-syncing', // blue border
+    LOCAL_UNSYNCED    : 'sync-status-local-unsynced', // yellow with -
+    SYNC_INCOMPLETE   : 'sync-status-incomplete' // red with x
 };
 
 const SYNC_STATUS = {
-    UP    : 'sync-up',
-    DOWN  : 'sync-down',
-    ERROR : 'sync-error'
+    UP      : 'sync-up',
+    DOWN    : 'sync-down',
+    ERROR   : 'sync-error',
+    OFFLINE : 'sync-offline'
 };
 
 const JOB_PAGE_TAB = {
@@ -161,6 +168,7 @@ export default {
     CATEGORY_PROGRESS,
     CONTEXT,
     DIALOG,
+    DROPDOWN,
     IMAGES,
     JOB_STATUS,
     MANUFACTURERS,

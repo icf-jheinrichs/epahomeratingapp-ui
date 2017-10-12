@@ -23,9 +23,12 @@ class JobSyncStatusController {
         this.syncStatus = status.syncStatus;
         this.syncStatusClass = status.syncStatusClass;
 
+        this.dbRefreshed();
         if (this.syncStatus === this.STATUS.LAST_UPDATED) {
             let now = moment(new Date()).format('MMM Do YYYY, h:mm:ss a');
             this.syncStatus = this.STATUS.LAST_UPDATED.replace(':now:', now);
+        } else if (this.syncStatus === this.STATUS.SYNCING) {
+            this.dbRefreshing();
         }
 
         this.dbStartSyncListener = this.$rootScope.$on(this.MESSAGING.DB_START_SYNC, (event) => {
@@ -33,6 +36,9 @@ class JobSyncStatusController {
 
             this.syncStatus      = this.STATUS.SYNCING;
             this.syncStatusClass = this.STATUS_CLASSNAME.SYNCING;
+
+            // disable the refresh button
+            this.dbRefreshing();
 
             let self = this;
             _defer(function afterDigest () {
@@ -46,6 +52,25 @@ class JobSyncStatusController {
             this.syncStatus      = this.STATUS.UP_TO_DATE;
             this.syncStatusClass = this.STATUS_CLASSNAME.ONLINE_UP_TO_DATE;
 
+            this.dbRefreshed();
+
+            let self = this;
+            _defer(function afterDigest () {
+                self.$scope.$apply();
+            });
+        });
+
+        this.dbErrorSyncListener = this.$rootScope.$on(this.MESSAGING.DB_ERROR_SYNC, (event) => {
+            this.$log.log('[job-sync-status.controller.js] dbErrorSyncListener');
+
+            if (this.syncStatusClass !== this.STATUS_CLASSNAME.OFFLINE) {
+                this.syncStatus      = this.STATUS.SYNC_INCOMPLETE;
+                this.syncStatusClass = this.STATUS_CLASSNAME.SYNC_INCOMPLETE;
+            }
+
+            // enable the refresh button
+            this.dbRefreshed();
+
             let self = this;
             _defer(function afterDigest () {
                 self.$scope.$apply();
@@ -55,7 +80,7 @@ class JobSyncStatusController {
         this.deviceOfflineListener = this.$rootScope.$on(this.MESSAGING.DEVICE_OFFLINE, (event) => {
             this.$log.log('[job-sync-status.controller.js] deviceOfflineListener');
 
-            if (this.syncStatusClass === this.STATUS_CLASSNAME.ONLINE_UP_TO_DATE) {
+            if (this.syncStatusClass === this.STATUS_CLASSNAME.ONLINE_UP_TO_DATE || this.syncStatusClass === this.STATUS_CLASSNAME.SYNC_INCOMPLETE) {
                 let now = moment(new Date()).format('MMM Do YYYY, h:mm:ss a');
 
                 this.syncStatus      = this.STATUS.LAST_UPDATED.replace(':now:', now);
@@ -92,6 +117,18 @@ class JobSyncStatusController {
                 self.$scope.$apply();
             });
         });
+
+        this.jobListFinishRefreshListener = this.$rootScope.$on(this.MESSAGING.REFRESH_JOBS_LIST_FINISH, (event) => {
+            this.$log.log('[job-sync-status.controller.js] jobListFinishRefreshListener');
+            if (this.syncStatus !== this.STATUS.SYNCING) {
+                this.listRefreshed();
+            }
+
+            let self = this;
+            _defer(function afterDigest () {
+                self.$scope.$apply();
+            });
+        });
     }
 
     $onDestroy () {
@@ -102,9 +139,30 @@ class JobSyncStatusController {
     }
 
     refreshJobList () {
-        this
-            .$rootScope
-            .$emit(this.MESSAGING.REFRESH_JOBS_LIST);
+        this.dbRefreshing();
+
+        this.$rootScope.$emit(this.MESSAGING.REFRESH_JOBS_LIST);
+    }
+
+    // the pouchdb is refreshing
+    dbRefreshing () {
+        this.$log.log('refreshing');
+        this.refreshButtonText = 'Refreshing';
+        this.needRefresh       = false;
+    }
+
+    // pouchdb just got updated
+    dbRefreshed () {
+        this.$log.log('refreshed');
+        this.refreshButtonText = 'Refresh Job List';
+        this.needRefresh       = true;
+    }
+
+    // everything is refreshed
+    listRefreshed () {
+        this.$log.log('listRefreshed');
+        this.refreshButtonText = 'Refresh Job List';
+        this.needRefresh       = false;
     }
 }
 

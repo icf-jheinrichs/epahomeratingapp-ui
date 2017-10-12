@@ -60,7 +60,7 @@
             name="checklistItemCommentsCtrl.postCommentForm"
             class="popover-panel hidden"
             data-ng-submit="checklistItemCommentsCtrl.postComment()"
-            data-ng-class="{'hidden' : checklistItemCommentsCtrl.state !== 'post'}">
+            data-ng-class="{'hidden' : checklistItemCommentsCtrl.state !== 'post', 'panel-no-photo-capture' : !checklistItemCommentsCtrl.allowPhotoCapture}">
 
             <header class="popover-panel-header flex-row flex-align-center">
                 <div class="flex-item-static">
@@ -82,7 +82,8 @@
                 <photo-capture
                     class="flex-item-static"
                     photo="checklistItemCommentsCtrl.newCommentPhotoUrl"
-                    on-photo-capture="checklistItemCommentsCtrl.handlePhotoCapture(photo)">
+                    on-photo-capture="checklistItemCommentsCtrl.handlePhotoCapture(photo)"
+                    data-ng-if="checklistItemCommentsCtrl.allowPhotoCapture">
                 </photo-capture>
 
                 <div class="form-group">

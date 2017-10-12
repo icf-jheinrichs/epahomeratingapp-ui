@@ -68,6 +68,10 @@ $switch-delta:  $toggle-size;
     &.sync-error {
         background-color: $status-error;
     }
+
+    &.sync-offline {
+        background-color: $status-offline;
+    }
 }
 
 .status-syncing {
@@ -191,6 +195,27 @@ $switch-delta:  $toggle-size;
         &:hover,
         &:focus {
             border-color: darken($status-error, 30%);
+        }
+    }
+}
+
+.toggle-control:checked + .toggle-label.sync-offline {
+    &:hover,
+    &:focus {
+        box-shadow: $shadow-inset, $shadow-toggle-sync-error;
+    }
+
+    &::after {
+        border-color: darken($status-offline, 30%);
+        transform: translateX($switch-delta);
+    }
+
+    .toggle-status-border {
+        border-color: darken($status-offline, 20%);
+
+        &:hover,
+        &:focus {
+            border-color: darken($status-offline, 30%);
         }
     }
 }
