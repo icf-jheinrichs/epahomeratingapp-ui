@@ -80,6 +80,14 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
+        .state('house-plans.edit-bulk', {
+            url       : '/edit-bulk',
+            component : 'housePlanEditBulk',
+            params    : {
+                housePlanIDs : null
+            }
+        })
+
         .state('jobs', {
             url        : '/jobs',
             component  : 'jobsPage',

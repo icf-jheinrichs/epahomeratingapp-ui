@@ -85,6 +85,7 @@ const MESSAGING = {
     POST_COMMENT                     : 'POST_COMMENT',
     VIEW_HVAC_DESIGN_REPORT          : 'VIEW_HVAC_DESIGN_REPORT',
     HOUSE_PLAN_NEW                   : 'HOUSE_PLAN_NEW',
+    HOUSE_PLAN_NEW_BULK              : 'HOUSE_PLAN_NEW_BULK',
     HOUSE_PLAN_UPDATE                : 'HOUSE_PLAN_UPDATE',
     HOUSE_PLAN_DELETE                : 'HOUSE_PLAN_DELETE',
     JOB_AVAILABLE_OFFLINE            : 'JOB_AVAILABLE_OFFLINE',
