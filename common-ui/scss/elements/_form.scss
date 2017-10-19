@@ -74,6 +74,8 @@ fieldset {
 
     &[disabled='disabled'],
     &[disabled='disabled'].ng-touched {
+        -webkit-opacity: 1; // sass-lint:disable-line no-vendor-prefixes, no-misspelled-properties
+        -webkit-text-fill-color: $text-color-muted; // sass-lint:disable-line no-vendor-prefixes, no-misspelled-properties
         border: $border-default;
         color: $text-color-muted;
         cursor: not-allowed;
