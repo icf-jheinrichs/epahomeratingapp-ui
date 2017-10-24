@@ -1,6 +1,15 @@
 <div class="checklist-item flex-row flex-justify-between">
     <header class="checklist-item-header">
-        <button class="checklist-item-info-toggle btn btn-link btn-no-label" type="button" aria-label="More Information"><i class="fa fa-info-circle" aria-hidden="true"></i></button>
+        <button
+            aria-label="More Information"
+            class="checklist-item-info-toggle btn btn-link btn-no-label"
+            ng-class="{'has-footnote' : checklistItemCtrl.hasFootnote}"
+            ng-click="checklistItemCtrl.showFootnote()"
+            type="button">
+
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+        </button>
+
         <h4 class="checklist-item-title">{{::checklistItemCtrl.display.Shorthand}}</h4>
     </header>
 

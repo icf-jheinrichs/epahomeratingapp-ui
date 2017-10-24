@@ -9,9 +9,14 @@
 }
 
 .checklist-item-info-toggle {
+    color: $status-offline;
     font-size: $icon-font-size;
     left: -$gutter-full;
     position: absolute;
+
+    &.has-footnote {
+        color: $link-color;
+    }
 }
 
 .comments-quantity {

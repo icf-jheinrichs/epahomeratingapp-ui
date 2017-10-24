@@ -23,4 +23,19 @@
             item-category-progress="{{::jobChecklistCategoryCtrl.CATEGORY_PROGRESS['final'].Key}}">
         </checklist-item>
     </section>
+
+    <div class="modal modal-large modal-scroll-body hidden" modal="modal" id="modal-show-footnote">
+        <div class="modal-header flex-row">
+            <div class="flex-item-static">
+                <button class="btn btn-link btn-modal-close" type="button">Close</button>
+            </div>
+
+            <span class="modal-title flex-item-grow">{{jobChecklistCategoryCtrl.checklistItemFootnote.title}}</span>
+        </div>
+
+        <div class="modal-body-wrapper">
+            <div class="modal-body modal-body-footnote" data-ng-bind-html="jobChecklistCategoryCtrl.checklistItemFootnote.footnote">
+            </div>
+        </div>
+    </div>
 </section>
