@@ -1,7 +1,7 @@
 import _isEmpty from 'lodash/isEmpty';
 
 class jobChecklistChecklistController {
-    constructor ($rootScope, $stateParams, JobChecklistStateService, JobDataHomePerformanceService, UI_ENUMS) {
+    constructor ($rootScope, $stateParams, JobChecklistStateService, JobDataHomePerformanceService, ModalService, UI_ENUMS) {
         'ngInject';
 
         this.$rootScope                    = $rootScope;
@@ -9,13 +9,20 @@ class jobChecklistChecklistController {
         this.JobChecklistStateService      = JobChecklistStateService;
         this.JobDataHomePerformanceService = JobDataHomePerformanceService;
         this.JobChecklistStateService      = JobChecklistStateService;
+        this.ModalService                  = ModalService;
 
-        this.MESSAGING         = UI_ENUMS.MESSAGING;
-        this.CATEGORIES        = UI_ENUMS.CATEGORIES;
-        this.CATEGORY_PROGRESS = UI_ENUMS.CATEGORY_PROGRESS;
+        this.MESSAGING          = UI_ENUMS.MESSAGING;
+        this.CATEGORIES         = UI_ENUMS.CATEGORIES;
+        this.CATEGORY_PROGRESS  = UI_ENUMS.CATEGORY_PROGRESS;
+
+        this.MODAL_SHOW_FOOTNOTE = UI_ENUMS.MODAL.SHOW_FOOTNOTE;
 
         this.putMrfDataListener = this.$rootScope.$on(this.MESSAGING.UPDATE_MRF_DATA, (event, mrfData) => {
             this.onPutMrfData(mrfData);
+        });
+
+        this.showFootnoteListener = this.$rootScope.$on(this.MESSAGING.SHOW_FOOTNOTE, (event, footnoteData) => {
+            this.showFootnote(footnoteData);
         });
     }
 
@@ -42,6 +49,7 @@ class jobChecklistChecklistController {
     $onDestroy () {
         // deregister listeners
         this.putMrfDataListener();
+        this.showFootnoteListener();
     }
 
 
@@ -49,6 +57,19 @@ class jobChecklistChecklistController {
         this
             .JobChecklistStateService
             .updateMrfData(mrfData);
+    }
+
+    showFootnote (footnoteData) {
+        const FOOTNOTE_NOT_FOUND = 'There is no additional information available for this checklist item.';
+
+        let footnote = footnoteData.footnote.length ? footnoteData.footnote : FOOTNOTE_NOT_FOUND;
+
+        this.checklistItemFootnote = {
+            title    : footnoteData.title,
+            footnote
+        };
+
+        this.ModalService.openModal(this.MODAL_SHOW_FOOTNOTE);
     }
 }
 

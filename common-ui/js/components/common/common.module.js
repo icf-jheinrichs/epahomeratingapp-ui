@@ -13,6 +13,7 @@ import toggleComponent from './toggle/toggle.component';
 import DialogModule from './dialog/dialog.module';
 import DropdownModule from './dropdown/dropdown.module';
 import LightboxModule from './lightbox/lightbox.module';
+import ModalModule from './modal/modal.module';
 import PopoverModule from './popover/popover.module';
 import TypeAheadModule from './type-ahead/type-ahead.module';
 import FileManagerModule from './file-manager/file-manager.module';
@@ -23,19 +24,20 @@ let commonModule
         .module('epahomeratingapp.common', [
             DropdownModule.name,
             DialogModule.name,
+            FileManagerModule.name,
             LightboxModule.name,
+            ModalModule.name,
             PopoverModule.name,
-            TypeAheadModule.name,
-            FileManagerModule.name
+            TypeAheadModule.name
         ])
-            .component('buttonGroup', buttonGroupComponent)
-            .component('fileManager', fileManagerComponent)
-            .component('linearProgress', linearProgressComponent)
-            .component('listFilter', listFilterComponent)
-            .component('photoCapture', photoCaptureComponent)
-            .component('radialProgress', radialProgressComponent)
-            .component('statusMessage', statusMessageComponent)
-            .component('toggle', toggleComponent)
-            .directive('inputFocus', inputFocusDirective);
+        .component('buttonGroup', buttonGroupComponent)
+        .component('fileManager', fileManagerComponent)
+        .component('linearProgress', linearProgressComponent)
+        .component('listFilter', listFilterComponent)
+        .component('photoCapture', photoCaptureComponent)
+        .component('radialProgress', radialProgressComponent)
+        .component('statusMessage', statusMessageComponent)
+        .component('toggle', toggleComponent)
+        .directive('inputFocus', inputFocusDirective);
 
 export default commonModule;

@@ -63,6 +63,13 @@ const IMAGES = {
     DEFAULT_PHOTO : 'img/job-photo-default.svg'
 };
 
+const JOB_PAGE_TAB = {
+    ACTIVE          : 'Active',
+    INTERNAL_REVIEW : 'Internal Review',
+    HISTORY         : 'History',
+    OFFLINE_JOBS    : 'Offline Jobs'
+};
+
 const JOB_STATUS = {
     ACTIVE                : 'Active',
     COMPLETED             : 'Completed',
@@ -77,6 +84,7 @@ const MESSAGING = {
     SET_TOP_PAD                      : 'SET_TOP_PAD',
     SET_BOTTOM_PAD                   : 'SET_BOTTOM_PAD',
     UPDATE_HOUSE_PHOTO               : 'UPDATE_HOUSE_PHOTO',
+    SHOW_FOOTNOTE                    : 'SHOW_FOOTNOTE',
     UPDATE_CHECKLIST_RESPONSE        : 'UPDATE_CHECKLIST_RESPONSE',
     UPDATE_CHECKLIST_ITEM_DATA       : 'UPDATE_CHECKLIST_ITEM_DATA',
     SET_CHECKLIST_RESPONSE_TOTALS    : 'SET_CHECKLIST_RESPONSE_TOTALS',
@@ -99,6 +107,10 @@ const MESSAGING = {
     DEVICE_ONLINE                    : 'DEVICE_ONLINE',
     REFRESH_JOBS_LIST                : 'REFRESH_JOBS_LIST',
     REFRESH_JOBS_LIST_FINISH         : 'REFRESH_JOBS_LIST_FINISH'
+};
+
+const MODAL = {
+    SHOW_FOOTNOTE : 'modal-show-footnote'
 };
 
 const RATING_TYPES = {
@@ -157,13 +169,6 @@ const SYNC_STATUS = {
     OFFLINE : 'sync-offline'
 };
 
-const JOB_PAGE_TAB = {
-    ACTIVE          : 'Active',
-    INTERNAL_REVIEW : 'Internal Review',
-    HISTORY         : 'History',
-    OFFLINE_JOBS    : 'Offline Jobs'
-};
-
 export default {
     CATEGORIES,
     CATEGORY_PROGRESS,
@@ -171,14 +176,15 @@ export default {
     DIALOG,
     DROPDOWN,
     IMAGES,
+    JOB_PAGE_TAB,
     JOB_STATUS,
     MANUFACTURERS,
     MESSAGING,
+    MODAL,
     RATING_TYPES,
     RESPONSES,
     STATUS,
     STATUS_CLASSNAME,
     SYNC_STATUS,
-    USER_TYPE,
-    JOB_PAGE_TAB
+    USER_TYPE
 };

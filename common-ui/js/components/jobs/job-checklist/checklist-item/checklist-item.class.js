@@ -97,6 +97,18 @@ class ChecklistItemClass {
             'Comment'          : Comment
         });
     }
+
+    get hasFootnote () {
+        return this.display.Footnotes.length > 0;
+    }
+
+    showFootnote () {
+        this.$rootScope.$emit(this.MESSAGING.SHOW_FOOTNOTE, {
+            'item'     : this.display.Item,
+            'title'    : this.display.Shorthand,
+            'footnote' : this.display.Footnotes
+        });
+    }
 }
 
 export default ChecklistItemClass;

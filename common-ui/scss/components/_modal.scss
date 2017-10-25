@@ -46,6 +46,21 @@
     width: 100%;
 }
 
+.modal-body-footnote {
+    padding: $gutter-half;
+
+    a {
+        color: $link-color;
+        text-decoration: underline;
+        transition: color $transition-default;
+
+        &:hover,
+        &:focus {
+            color: $link-color-hover;
+        }
+    }
+}
+
 .modal-body-section {
     border-top: $border-default;
     margin-top: $gutter-half;
