@@ -4,7 +4,6 @@ class HousePlanController {
     constructor ($rootScope, UI_ENUMS) {
         'ngInject';
 
-
         this.$rootScope = $rootScope;
         this.MESSAGING  = UI_ENUMS.MESSAGING;
     }
@@ -32,6 +31,24 @@ class HousePlanController {
             };
 
             this.housePlans.housePlan.unshift(newHousePlan);
+        });
+
+        this.newHousePlanListener = this.$rootScope.$on(this.MESSAGING.HOUSE_PLAN_NEW_BULK, (event, housePlans) => {
+            for (let index in housePlans) {
+                let housePlan = housePlans[index];
+                let newHousePlan = {
+                    BuilderName                : housePlan.builder,
+                    CommunityName              : housePlan.communityName,
+                    FileName                   : '',
+                    HvacDesignReport           : [],
+                    Name                       : housePlan.buildingName,
+                    RaterDesignReviewChecklist : [],
+                    SubplanName                : housePlan.subPlanName,
+                    _id                        : housePlan.docID
+                };
+
+                this.housePlans.housePlan.unshift(newHousePlan);
+            }
         });
 
         this.deleteHousePlanListener = this.$rootScope.$on(this.MESSAGING.HOUSE_PLAN_DELETE, (event, housePlan) => {

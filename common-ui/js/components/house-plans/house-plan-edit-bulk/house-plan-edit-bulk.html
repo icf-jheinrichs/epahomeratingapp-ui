@@ -1,0 +1,90 @@
+<!-- edit house plan modal -->
+<form name="housePlanEdit" class="modal modal-large modal-scroll-body" data-ng-submit="housePlanEditBulkCtrl.acceptAll()">
+    <div class="modal-header flex-row">
+        <span class="modal-title flex-item-grow">House Plan Information</span>
+
+        <div class="modal-title pull-right">
+            {{housePlanEditBulkCtrl.currentIndex + 1}}/{{housePlanEditBulkCtrl.$stateParams.housePlanIDs.length}}
+        </div>
+    </div>
+
+    <div class="modal-body-wrapper">
+        <div class="modal-body">
+            <status-message status="housePlanEditBulkCtrl.message"></status-message>
+
+            <h3>{{::housePlanEditBulkCtrl.housePlan.FileName}}</h3>
+
+            <fieldset class="row">
+                <legend class="sr-only">Edit House Plan Details</legend>
+
+                <div class="row">
+                    <div class="form-group col-xs-6">
+                        <label class="control-label" for="Name">House Plan Name</label>
+                        <input class="form-control" type="text" name="Name" id="Name" data-ng-model="housePlanEditBulkCtrl.housePlan.Name" ng-required=true>
+                    </div>
+
+                    <div class="form-group col-xs-6">
+                        <label class="control-label" for="SubplanName">Sub-plan Name (optional)</label>
+                        <input class="form-control" type="text" name="SubplanName" id="SubplanName" data-ng-model="housePlanEditBulkCtrl.housePlan.SubplanName">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-xs-6">
+                        <label class="control-label" for="BuilderName">Builder</label>
+                        <input class="form-control" type="text" name="BuilderName" id="BuilderName" data-ng-model="housePlanEditBulkCtrl.housePlan.BuilderName" ng-required=true>
+                    </div>
+
+                    <div class="form-group col-xs-6">
+                        <label class="control-label" for="CommunityName">Community Name</label>
+                        <input class="form-control" type="text" name="CommunityName" id="CommunityName" data-ng-model="housePlanEditBulkCtrl.housePlan.CommunityName">
+                    </div>
+                </div>
+            </fieldset>
+
+            <!-- <fieldset class="row">
+                <legend class="fieldset-legend">HVAC Design Report</legend>
+
+                <file-manager
+                    upload-only="true"
+                    accept="application/pdf"
+                    label="HVAC Design Report"
+                    input-id="HvacDesignReport"
+                    files="housePlanEditBulkCtrl.housePlan.HvacDesignReport">
+                </file-manager>
+            </fieldset>
+
+            <fieldset class="row">
+                <legend class="fieldset-legend">Rater Design Review Checklist</legend>
+
+                <file-manager
+                    upload-only="true"
+                    accept="application/pdf"
+                    label="Rater Design Review Checklist"
+                    input-id="RaterDesignReviewChecklist"
+                    files="housePlanEditBulkCtrl.housePlan.RaterDesignReviewChecklist">
+                </file-manager>
+            </fieldset> -->
+
+            <fieldset class="row">
+                <a ng-if="housePlanEditBulkCtrl.currentIndex!=0" class="btn btn-link pull-left" data-ng-disabled="housePlanEditBulkCtrl.isBusy" ng-click="housePlanEditBulkCtrl.previousHousePlan()">Previous</a>
+
+                <div class="flex-item-static">
+                    <div ng-if="housePlanEditBulkCtrl.currentIndex!=housePlanEditBulkCtrl.$stateParams.housePlanIDs.length" class="pull-right">
+                        <button class="btn" type="submit" data-ng-disabled="housePlanEditBulkCtrl.isBusy"><i data-ng-class="{'hidden' : !housePlanEditBulkCtrl.isBusy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Accept All</button>
+                        <button class="btn" type="button" data-ng-click="housePlanEditBulkCtrl.nextHousePlan()" data-ng-disabled="housePlanEditBulkCtrl.isBusy"><i data-ng-class="{'hidden' : !housePlanEditBulkCtrl.isBusy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Save and Continue</button>
+                    </div>
+
+                    <div ng-if="housePlanEditBulkCtrl.currentIndex==housePlanEditBulkCtrl.$stateParams.housePlanIDs.length" class="pull-right">
+                        <button class="btn" type="submit" data-ng-disabled="housePlanEditBulkCtrl.isBusy"><i data-ng-class="{'hidden' : !housePlanEditBulkCtrl.isBusy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Finish</button>
+                    </div>
+
+                    <a class="btn btn-link pull-right" ng-click="housePlanEditBulkCtrl.deleteHousePlan()" data-ng-disabled="housePlanEditBulkCtrl.isBusy">Delete this house plan</a>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</form>
+
+<div class="overlay overlay-modal"></div>
+<!-- end edit house plan modal -->

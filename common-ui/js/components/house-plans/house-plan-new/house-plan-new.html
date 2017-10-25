@@ -8,20 +8,45 @@
         <span class="modal-title flex-item-grow">New House Plan</span>
 
         <div class="flex-item-static">
-            <button class="btn pull-right" type="submit" data-ng-disabled="housePlanNewCtrl.isBusy"><i data-ng-class="{'hidden' : !housePlanNewCtrl.isBusy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Upload</button>
+            <button class="btn pull-right" type="submit" data-ng-disabled="housePlanNewCtrl.uploadStage != 'select'"><i data-ng-class="{'hidden' : housePlanNewCtrl.uploadStage != 'uploading'}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Upload</button>
         </div>
     </div>
 
     <div class="modal-body-wrapper">
-        <div class="modal-body">
+        <div class="modal-body" ng-show="housePlanNewCtrl.uploadStage == 'select'">
             <status-message status="housePlanNewCtrl.message" id="house-plan-new-status-message"></status-message>
-            <status-message ng-if="housePlanNewCtrl.message" status="housePlanNewCtrl.errorReason" id="house-plan-new-error-reason"></status-message>
 
             <fieldset>
                 <legend class="fieldset-legend">Upload House Plan</legend>
 
                 <label class="sr-only" for="housePlanFile">Choose a file to upload</label>
-                <input type="file" accept="text/xml" name="housePlanFile" id="housePlanFile" data-ng-model="housePlanNewCtrl.housePlanFile" />
+                <input type="file" accept="text/xml" multiple name="housePlanFile" id="housePlanFile" data-ng-model="housePlanNewCtrl.housePlanFile" />
+                <br>
+            </fieldset>
+        </div>
+
+        <div class="modal-body" ng-show="housePlanNewCtrl.uploadStage == 'uploading'">
+            <fieldset>
+                <legend class="fieldset-legend">uploading... {{housePlanNewCtrl.uploadProgress.progress}} / {{housePlanNewCtrl.uploadProgress.total}}</legend>
+                <progress class="progress-linear" value="{{housePlanNewCtrl.uploadProgress.progress}}" max="{{housePlanNewCtrl.uploadProgress.total}}"></progress>
+            </fieldset>
+        </div>
+
+        <div class="modal-body" ng-show="housePlanNewCtrl.uploadStage == 'report'">
+            <fieldset>
+                <div ng-show="housePlanNewCtrl.uploadReport.length == 0">
+                    <legend class="fieldset-legend">All files uploaded successfully</legend>
+                </div>
+
+                <div ng-show="housePlanNewCtrl.uploadReport.length != 0">
+                    <legend class="fieldset-legend">{{housePlanNewCtrl.uploadReport.length}} files did not uploaded successfully.</legend>
+                    <br>
+                    <div ng-repeat="failedHousePlan in housePlanNewCtrl.uploadReport track by $index">
+                        <li>{{failedHousePlan.fileName}}. {{failedHousePlan.errorReason}}</li>
+                    </div>
+                </div>
+
+                <button type="button" class="btn pull-right" data-ng-click="housePlanNewCtrl.goToBulkEdit()">Continue</button>
             </fieldset>
         </div>
     </div>
