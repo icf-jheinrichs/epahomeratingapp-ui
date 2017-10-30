@@ -25,7 +25,11 @@ let interceptor = ($q) => {
 
             // @todo refactor
             if (user !== null) {
-                config.headers.Authorization      = user.access_token;
+                if (!config.headers.Authorization) {
+                    config.headers.Authorization = user.access_token;
+                } else {
+                    config.headers.Authorization = undefined;
+                }
                 config.headers['RatingCompanyID'] = user.ratingCompanyID;
             }
 
