@@ -4,8 +4,8 @@
     <span>Final</span>
 </div>
 
-<div data-ng-if="jobsCtrl.CONTEXT_IS_APP">
-    <input type="checkbox" ng-model="jobsCtrl.checkAll" data-ng-change="jobsCtrl.selectAllJobs()">Select All
+<div class="bulk-operation-bar" data-ng-if="jobsCtrl.CONTEXT_IS_ADMIN">
+    <input type="checkbox" ng-model="jobsCtrl.checkAll" data-ng-change="jobsCtrl.selectAllJobs()">&nbspSelect All&nbsp
 
     <button class="btn" type="button" data-ng-click="jobsCtrl.flagForQA()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">Flag for QA</button>
 

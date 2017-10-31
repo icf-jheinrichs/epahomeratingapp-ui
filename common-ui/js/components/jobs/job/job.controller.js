@@ -14,6 +14,7 @@ class JobController {
         this.BASE_IMAGE_URL    = BASE_IMAGE_URL;
 
         this.CONTEXT_IS_APP    = CONTEXT === UI_ENUMS.CONTEXT.APP;
+        this.CONTEXT_IS_ADMIN  = CONTEXT === UI_ENUMS.CONTEXT.ADMIN;
         this.DIALOG            = UI_ENUMS.DIALOG.MAKE_JOB_OFFLINE;
         this.MESSAGING         = UI_ENUMS.MESSAGING;
 

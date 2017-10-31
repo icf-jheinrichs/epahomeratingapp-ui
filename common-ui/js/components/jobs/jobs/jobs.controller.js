@@ -7,7 +7,7 @@ class JobsController {
     constructor (CONTEXT, UI_ENUMS, $http, $window, JobsService) {
         'ngInject';
 
-        this.CONTEXT_IS_APP = CONTEXT === UI_ENUMS.CONTEXT.APP;
+        this.CONTEXT_IS_ADMIN = CONTEXT === UI_ENUMS.CONTEXT.ADMIN;
 
         this.JobsService = JobsService;
         this.$window     = $window;
@@ -93,25 +93,39 @@ class JobsController {
             });
     }
 
-    changeStatus (job, status) {
-        job.Status = status;
-        this.JobsService.put(job);
+    changeStatus (jobs, status) {
+        let self = this;
+        _forEach (jobs, function updateJob (job) {
+            job.Status = status;
+            self.JobsService.put(job);
+        });
+    }
+
+    getSelectedJobs () {
+        let changeJobs = [];
+        let remainJobs = [];
+        for (let i = 0; i < this.markedJobs.length; i++) {
+            if (this.markedJobs[i] === true) {
+                changeJobs.push(this.jobs[i]);
+            } else {
+                remainJobs.push(this.jobs[i]);
+            }
+        }
+        return {changeJobs : changeJobs, remainJobs : remainJobs};
     }
 
     flagForQA () {
-        for (let i = 0; i < this.markedJobs.length; i++) {
-            if (this.markedJobs[i] === true) {
-                this.changeStatus(this.jobs[i], this.JOB_STATUS.INTERNAL_REVIEW);
-            }
-        }
+        let selectedJobs = this.getSelectedJobs();
+        this.changeStatus(selectedJobs.changeJobs, this.JOB_STATUS.INTERNAL_REVIEW);
+        this.jobs = selectedJobs.remainJobs;
+        this.markedJobs = [];
     }
 
     submitToProvider () {
-        for (let i = 0; i < this.markedJobs.length; i++) {
-            if (this.markedJobs[i] === true) {
-                this.changeStatus(this.jobs[i], this.JOB_STATUS.SUBMITTED_TO_PROVIDER);
-            }
-        }
+        let selectedJobs = this.getSelectedJobs();
+        this.changeStatus(selectedJobs.changeJobs, this.JOB_STATUS.SUBMITTED_TO_PROVIDER);
+        this.jobs = selectedJobs.remainJobs;
+        this.markedJobs = [];
     }
 
     jobsAreSelected () {
