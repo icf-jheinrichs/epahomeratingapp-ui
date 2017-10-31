@@ -63,8 +63,6 @@ class JobsPageController {
     filterJobs (jobs) {
         let filteredJobs = [];
 
-        console.log(this.currentJobTab);
-
         for (let index in jobs) {
             let job = jobs[index];
             switch (this.currentJobTab) {
