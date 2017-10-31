@@ -64,10 +64,12 @@ const IMAGES = {
 };
 
 const JOB_PAGE_TAB = {
-    ACTIVE          : 'Active',
-    INTERNAL_REVIEW : 'Internal Review',
-    HISTORY         : 'History',
-    OFFLINE_JOBS    : 'Offline Jobs'
+    ACTIVE                : 'Active',
+    INTERNAL_REVIEW       : 'Internal Review',
+    HISTORY               : 'History',
+    OFFLINE_JOBS          : 'Offline Jobs',
+    SUBMITTED_TO_PROVIDER : 'Submitted to Provider',
+    COMPLETED             : 'Completed'
 };
 
 const JOB_STATUS = {

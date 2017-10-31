@@ -11,6 +11,7 @@ class JobsPageController {
 
         this.CONTEXT_IS_APP = CONTEXT === UI_ENUMS.CONTEXT.APP;
         this.JOB_PAGE_TAB   = UI_ENUMS.JOB_PAGE_TAB;
+        this.JOB_STATUS     = UI_ENUMS.JOB_STATUS;
         this.MESSAGING      = UI_ENUMS.MESSAGING;
 
         this.QUANTITY = {
@@ -60,14 +61,44 @@ class JobsPageController {
     }
 
     filterJobs (jobs) {
+        let filteredJobs = [];
+
+        console.log(this.currentJobTab);
+
         for (let index in jobs) {
-            // logic for display job in tab
-            if (this.currentJobTab === this.JOB_PAGE_TAB.OFFLINE_JOBS && jobs[index].offlineAvailable === false) {
-                jobs.splice(index, 1);
+            let job = jobs[index];
+            switch (this.currentJobTab) {
+            case this.JOB_PAGE_TAB.OFFLINE_JOBS:
+                if (jobs[index].offlineAvailable) {
+                    filteredJobs.push(job);
+                }
+                break;
+            case this.JOB_PAGE_TAB.ACTIVE:
+                if (jobs[index].Status === this.JOB_STATUS.ACTIVE) {
+                    filteredJobs.push(job);
+                }
+                break;
+            case this.JOB_PAGE_TAB.COMPLETED:
+                if (jobs[index].Status === this.JOB_STATUS.COMPLETED) {
+                    filteredJobs.push(job);
+                }
+                break;
+            case this.JOB_PAGE_TAB.INTERNAL_REVIEW:
+                if (jobs[index].Status === this.JOB_STATUS.INTERNAL_REVIEW) {
+                    filteredJobs.push(job);
+                }
+                break;
+            case this.JOB_PAGE_TAB.SUBMITTED_TO_PROVIDER:
+                if (jobs[index].Status === this.JOB_STATUS.SUBMITTED_TO_PROVIDER) {
+                    filteredJobs.push(job);
+                }
+                break;
+            default:
+
             }
         }
 
-        return jobs;
+        return filteredJobs;
     }
 
     $onDestroy () {

@@ -70,12 +70,12 @@
                 <a ng-if="housePlanEditBulkCtrl.currentIndex!=0" class="btn btn-link pull-left" data-ng-disabled="housePlanEditBulkCtrl.isBusy" ng-click="housePlanEditBulkCtrl.previousHousePlan()">Previous</a>
 
                 <div class="flex-item-static">
-                    <div ng-if="housePlanEditBulkCtrl.currentIndex!=housePlanEditBulkCtrl.$stateParams.housePlanIDs.length" class="pull-right">
+                    <div ng-if="housePlanEditBulkCtrl.currentIndex!=housePlanEditBulkCtrl.$stateParams.housePlanIDs.length-1" class="pull-right">
                         <button class="btn" type="submit" data-ng-disabled="housePlanEditBulkCtrl.isBusy"><i data-ng-class="{'hidden' : !housePlanEditBulkCtrl.isBusy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Accept All</button>
                         <button class="btn" type="button" data-ng-click="housePlanEditBulkCtrl.nextHousePlan()" data-ng-disabled="housePlanEditBulkCtrl.isBusy"><i data-ng-class="{'hidden' : !housePlanEditBulkCtrl.isBusy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Save and Continue</button>
                     </div>
 
-                    <div ng-if="housePlanEditBulkCtrl.currentIndex==housePlanEditBulkCtrl.$stateParams.housePlanIDs.length" class="pull-right">
+                    <div ng-if="housePlanEditBulkCtrl.currentIndex==housePlanEditBulkCtrl.$stateParams.housePlanIDs.length-1" class="pull-right">
                         <button class="btn" type="submit" data-ng-disabled="housePlanEditBulkCtrl.isBusy"><i data-ng-class="{'hidden' : !housePlanEditBulkCtrl.isBusy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Finish</button>
                     </div>
 
