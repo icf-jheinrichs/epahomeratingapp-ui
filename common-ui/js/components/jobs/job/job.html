@@ -8,6 +8,10 @@
             toggle-value="jobCtrl.job.offlineAvailable">Make Job Available offline: <span data-ng-bind-html="jobCtrl.JobTitle"></span></span>
         </toggle>
     </div>
+
+    <div data-ng-if="jobCtrl.CONTEXT_IS_ADMIN">
+        <input type="checkbox" ng-model="jobCtrl.marked">
+    </div>
 </div>
 
 <a aria-labelledby="job-{{jobCtrl.job._id}}"
@@ -26,7 +30,6 @@
         <div class="job-history">
             <span class="last-update small"><strong>{{::jobCtrl.lastUpdateType}}:</strong> {{::jobCtrl.lastUpdateTime}}</span>
         </div>
-
     </div>
 
     <div class="job-status">

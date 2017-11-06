@@ -4,16 +4,24 @@ const buttons = [
         'Key'   : 'active'
     },
     // {
-    //     'Name'  : 'Internal Review',
-    //     'Key'   : 'internal-review'
-    // },
-    // {
     //     'Name'  : 'History',
     //     'Key'   : 'history'
     // },
     {
         'Name'  : 'Offline Jobs',
         'Key'   : 'offline-jobs'
+    },
+    {
+        'Name'  : 'Internal Review',
+        'Key'   : 'internal-review'
+    },
+    {
+        'Name'  : 'Submitted',
+        'Key'   : 'submitted'
+    },
+    {
+        'Name'  : 'Completed',
+        'Key'   : 'completed'
     }
 ];
 
@@ -37,10 +45,6 @@ class ListFilterController {
             this
                 .$rootScope
                 .$emit(this.MESSAGING.REFRESH_JOBS_LIST, this.JOB_PAGE_TAB.OFFLINE_JOBS);
-        } else if (selected[0] === 'internal-review') {
-            this
-                .$rootScope
-                .$emit(this.MESSAGING.REFRESH_JOBS_LIST, this.JOB_PAGE_TAB.INTERNAL_REVIEW);
         } else if (selected[0] === 'history') {
             this
                 .$rootScope
@@ -49,6 +53,18 @@ class ListFilterController {
             this
                 .$rootScope
                 .$emit(this.MESSAGING.REFRESH_JOBS_LIST, this.JOB_PAGE_TAB.ACTIVE);
+        } else if (selected[0] === 'internal-review') {
+            this
+                .$rootScope
+                .$emit(this.MESSAGING.REFRESH_JOBS_LIST, this.JOB_PAGE_TAB.INTERNAL_REVIEW);
+        } else if (selected[0] === 'submitted') {
+            this
+                .$rootScope
+                .$emit(this.MESSAGING.REFRESH_JOBS_LIST, this.JOB_PAGE_TAB.SUBMITTED_TO_PROVIDER);
+        } else if (selected[0] === 'completed') {
+            this
+                .$rootScope
+                .$emit(this.MESSAGING.REFRESH_JOBS_LIST, this.JOB_PAGE_TAB.COMPLETED);
         }
     }
 }

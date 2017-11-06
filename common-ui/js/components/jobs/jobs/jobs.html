@@ -4,6 +4,16 @@
     <span>Final</span>
 </div>
 
+<div class="bulk-operation-bar" data-ng-if="jobsCtrl.CONTEXT_IS_ADMIN">
+    <input type="checkbox" ng-model="jobsCtrl.checkAll" data-ng-change="jobsCtrl.selectAllJobs()">&nbspSelect All&nbsp
+
+    <button class="btn" type="button" data-ng-click="jobsCtrl.flagForQA()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">Flag for QA</button>
+
+    <button class="btn" type="button" data-ng-click="jobsCtrl.submitToProvider()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">Submit to Provider</button>
+
+    <button class="btn" type="button" data-ng-click="jobsCtrl.bulkDownload()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">Download REM XML</button>
+</div>
+
 <div class="item-list">
-    <job data-ng-repeat="job in jobsCtrl.jobs track by $index" job="job" class="item-list-item item-list-item-job flex-row"></job>
+    <job data-ng-repeat="job in jobsCtrl.jobs track by $index" job="job" marked="jobsCtrl.markedJobs[$index]" class="item-list-item item-list-item-job flex-row"></job>
 </div>

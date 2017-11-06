@@ -4,7 +4,8 @@ import './job.scss';
 
 let jobComponent = {
     bindings : {
-        job : '<'
+        job    : '<',
+        marked : '='
     },
     template,
     controller,
