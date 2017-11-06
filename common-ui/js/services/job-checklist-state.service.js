@@ -414,8 +414,8 @@ class JobChecklistState {
     registerItemStatusQuery (id, query) {
         this.itemStatusQuery[id] = query;
     }
-    getCheckListElementsForBuilderReport () {
 
+    getCheckListElementsForBuilderReport () {
         let elements = [];
         let checklist = this.jobDataResponse.ChecklistItems;
 

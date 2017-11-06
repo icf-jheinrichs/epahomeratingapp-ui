@@ -1,0 +1,33 @@
+@import '../../../../scss/variables';
+
+.search-meta {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.jobs-search {
+    border-bottom: 3px solid $border-color-default;
+    padding: 10px 10px 0;
+    position: relative;
+}
+
+.popover-jobs-search {
+    .popover-panel-body {
+        padding: 0;
+    }
+
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    .item-list-item {
+        padding-bottom: $padding-large;
+        padding-top: $padding-large;
+    }
+
+    .form-group .button-group .btn {
+        flex: 1;
+        height: auto;
+    }
+}

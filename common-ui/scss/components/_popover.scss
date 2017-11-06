@@ -16,10 +16,15 @@
     }
 }
 
+.popover-small {
+    height: $popover-height-small;
+    width: $popover-width-small;
+}
+
 .popover-medium {
-    height: 300px;
+    height: $popover-height-default;
     margin: $offset-large 0 150px;
-    width: 500px;
+    width: $popover-width-default;
 }
 
 .popover-panel-header,
@@ -45,12 +50,12 @@
 }
 
 .popover-panel-subtext {
-    padding-top: 10px;
-    width: 50%;
     float: left;
-    white-space: nowrap;
     overflow: hidden;
+    padding-top: 10px;
     text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 50%;
 }
 
 .popover-has-search .popover-panel-body {
