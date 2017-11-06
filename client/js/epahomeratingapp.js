@@ -19,6 +19,8 @@ import {authenticationHook} from './services/authentication.hook';
 // Interceptor
 // @todo replace http-request service with this. import and use in module below appr.
 let interceptor = ($q) => {
+    'ngInject';
+
     return {
         request  : (config) => {
             let user = angular.fromJson(window.sessionStorage.getItem('user'));

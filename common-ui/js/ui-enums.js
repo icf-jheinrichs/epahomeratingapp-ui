@@ -82,6 +82,37 @@ const JOB_STATUS = {
     DELETED               : 'Deleted'
 };
 
+const JOB_PROGRESS = {
+    'active' : {
+        Name : 'Active',
+        Key  : 'Active'
+    },
+    'completed' : {
+        Name : 'Completed',
+        Key  : 'Completed'
+    },
+    'internal-review' : {
+        Name : 'Internal Review',
+        Key  : 'InternalReview'
+    },
+    'submitted-to-provider' : {
+        Name : 'Submitted to Provider',
+        Key  : 'SubmittedToProvider'
+    },
+    'approved' : {
+        Name : 'Approved',
+        Key  : 'Approved'
+    },
+    'registered' : {
+        Name : 'Registered',
+        Key  : 'Registered'
+    },
+    'deleted' : {
+        Name : 'Deleted',
+        Key  : 'Deleted'
+    }
+};
+
 const MESSAGING = {
     SET_TOP_PAD                      : 'SET_TOP_PAD',
     SET_BOTTOM_PAD                   : 'SET_BOTTOM_PAD',
@@ -113,6 +144,17 @@ const MESSAGING = {
 
 const MODAL = {
     SHOW_FOOTNOTE : 'modal-show-footnote'
+};
+
+const POPOVER = {
+    JOB_SEARCH : 'job-search-popover'
+};
+
+const ANY = {
+    'Any' : {
+        Name : 'Any',
+        Key  : 'any'
+    },
 };
 
 const RATING_TYPES = {
@@ -149,6 +191,20 @@ const RESPONSES = {
     }
 };
 
+const SEARCH_PARAMS = {
+    PROGRESS_LEVEL                : 'progressLevel',
+    STATUS                        : 'status',
+    KEYWORDS                      : 'keywords',
+    BUILDER                       : 'builder',
+    INSPECTION_STAGE              : 'inspectionStage',
+    HOUSE_PLAN                    : 'housePlan',
+    JOB_TYPE                      : 'jobType',
+    RATING_TYPE                   : 'ratingType',
+    MUST_CORRECT                  : 'mustCorrect',
+    RETURNED_FROM_INTERNAL_REVIEW : 'returnedFromInternalReview',
+    RETURNED_FROM_PROVIDER_REVIEW : 'returnedFromProviderReview'
+};
+
 const STATUS = {
     LAST_UPDATED    : 'Last Updated :now:',
     UP_TO_DATE      : 'Up to Date',
@@ -180,11 +236,15 @@ export default {
     IMAGES,
     JOB_PAGE_TAB,
     JOB_STATUS,
+    JOB_PROGRESS,
     MANUFACTURERS,
     MESSAGING,
     MODAL,
+    POPOVER,
+    ANY,
     RATING_TYPES,
     RESPONSES,
+    SEARCH_PARAMS,
     STATUS,
     STATUS_CLASSNAME,
     SYNC_STATUS,

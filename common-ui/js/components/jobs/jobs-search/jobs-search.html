@@ -1,0 +1,61 @@
+<form class="jobs-search flex-row">
+    <p class="search-meta">
+        <strong>{{jobsSearchCtrl.quantity}} Jobs</strong> {{jobsSearchCtrl.filterTextString}}
+    </p>
+
+    <div
+        class="job-search-popover-wrapper flex-item-pull-right flex-item-static  flex-item-fixed-width"
+        id="job-search-popover"
+        popover="popover" >
+
+        <button
+            popover-toggle="popover-toggle"
+            class="btn btn-link btn-search"
+            type="button">
+
+            <i class="fa fa-search fa-lg" aria-hidden="true"></i> Search
+        </button>
+
+        <div class="popover popover-small popover-jobs-search checklist-filter-popover hidden" popover-body="popover-body">
+            <div class="popover-panel-wrapper">
+                <section class="popover-panel">
+                    <header class="popover-panel-header flex-row">
+                        <button
+                            class="btn btn-link flex-item-static"
+                            ng-click="jobsSearchCtrl.reset()"
+                            type="button">
+                            Clear
+                        </button>
+
+                        <h5 class="popover-panel-title flex-item-grow">Search</h5>
+
+                        <button
+                            class="btn btn-link popover-close flex-item-static"
+                            data-ng-click="jobsSearchCtrl.search()"
+                            type="button">
+
+                            Search
+                        </button>
+                    </header>
+
+                    <div class="popover-panel-body item-list">
+                        <search-filter-keywords class="item-list-item" register-filter="jobsSearchCtrl.registerFilter(filter)">
+                        </search-filter-keywords>
+
+                        <search-filter-rating-type class="item-list-item" register-filter="jobsSearchCtrl.registerFilter(filter)">
+                        </search-filter-rating-type>
+
+                        <search-filter-must-correct class="item-list-item" register-filter="jobsSearchCtrl.registerFilter(filter)">
+                        </search-filter-must-correct>
+
+                        <search-filter-returned-from-internal class="item-list-item" register-filter="jobsSearchCtrl.registerFilter(filter)">
+                        </search-filter-returned-from-internal>
+
+                        <search-filter-returned-from-provider class="item-list-item" register-filter="jobsSearchCtrl.registerFilter(filter)">
+                        </search-filter-returned-from-provider>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</form>

@@ -99,7 +99,7 @@ class ChecklistItemClass {
     }
 
     get hasFootnote () {
-        return this.display.Footnotes.length > 0;
+        return this.display !== undefined && this.display.Footnotes.length > 0;
     }
 
     showFootnote () {

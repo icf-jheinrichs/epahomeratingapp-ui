@@ -1,0 +1,14 @@
+<div class="form-group has-feedback">
+    <label for="search_searchFilterKeywords" class="sr-only">Search Address, Community, Manual ID</label>
+
+    <input
+        data-ng-model="searchFilterKeywordsCtrl.keywords"
+        ng-model-options="{debounce: 200}"
+        placeholder="Search Address, Community, Manual ID"
+        class="form-control"
+        type="text"
+        id="search_searchFilterKeywords"
+        name="search_searchFilterKeywords" />
+
+    <span class="form-control-feedback"><i class="fa fa-search" aria-hidden="true"></i></span>
+</div>

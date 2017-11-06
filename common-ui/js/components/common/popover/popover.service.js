@@ -29,6 +29,19 @@ class PopoverService {
             }
         });
     }
+
+    closePopover (popoverId) {
+        return this.$q((resolve, reject) => {
+            if (this.popovers[popoverId]) {
+                this.popovers[popoverId].open({
+                    resolve,
+                    reject
+                });
+            } else {
+                reject(`popover ${popoverId} not registered`);
+            }
+        });
+    }
 }
 
 export default PopoverService;
