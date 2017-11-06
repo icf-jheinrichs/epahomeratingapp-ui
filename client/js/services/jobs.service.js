@@ -180,6 +180,12 @@ class JobsService {
         return promise;
     }
 
+    getAllIDs () {
+        return this.$q((resolve, reject) => {
+            resolve(['1192b1b221febf2f478b45d6f5bd27d6', '317946647f1087c0d7277b26093e5212']);
+        });
+    }
+
     getExportSignedUrl (_id) {
         let promise = this.$q((resolve, reject) => {
             this

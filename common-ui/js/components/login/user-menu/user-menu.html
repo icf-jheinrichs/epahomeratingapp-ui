@@ -21,5 +21,15 @@
 
             Logout
         </button>
+
+        <button
+            data-ng-if="userMenuCtrl.CONTEXT_IS_APP"
+            data-ng-click="userMenuCtrl.onDiagnostics()"
+            class="drop-down-item"
+            type="button"
+            role="menuitem">
+
+            Diagnostics & Feedback
+        </button>
     </nav>
 </nav>

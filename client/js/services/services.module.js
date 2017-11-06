@@ -12,21 +12,25 @@ import ManufacturersService from './manufacturers.service';
 import PDFService from './pdf.service';
 import ScannerService from './scanner.service';
 import SyncService from './sync.service';
+import AssetCacheService from './asset-cache.service';
+import PouchDBService from './pouchDB.service';
 
 let servicesModule
     = angular
         .module('epahomeratingapp.services', [])
-            .service('AuthenticationService', AuthenticationService)
-            .service('CameraService', CameraService)
-            .service('DisplayLogicDigestService', DisplayLogicDigestService)
-            .service('JobsService', JobsService)
-            .service('JobDisplayListService', JobDisplayListService)
-            .service('JobDataResponseService', JobDataResponseService)
-            .service('JobDataHomePerformanceService', JobDataHomePerformanceService)
-            .service('ManufacturersService', ManufacturersService)
-            .service('HousePlansService', HousePlansService)
-            .service('PDFService', PDFService)
-            .service('ScannerService', ScannerService)
-            .service('SyncService', SyncService);
+        .service('AuthenticationService', AuthenticationService)
+        .service('CameraService', CameraService)
+        .service('DisplayLogicDigestService', DisplayLogicDigestService)
+        .service('JobsService', JobsService)
+        .service('JobDisplayListService', JobDisplayListService)
+        .service('JobDataResponseService', JobDataResponseService)
+        .service('JobDataHomePerformanceService', JobDataHomePerformanceService)
+        .service('ManufacturersService', ManufacturersService)
+        .service('HousePlansService', HousePlansService)
+        .service('PDFService', PDFService)
+        .service('ScannerService', ScannerService)
+        .service('SyncService', SyncService)
+        .service('AssetCacheService', AssetCacheService)
+        .service('PouchDBService', PouchDBService);
 
 export default servicesModule;

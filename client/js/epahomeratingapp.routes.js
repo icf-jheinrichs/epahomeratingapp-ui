@@ -197,6 +197,11 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         .state('users', {
             url        : '/users',
             component  : 'usersPage'
+        })
+
+        .state('diagnostics', {
+            url        : '/diagnostics',
+            component  : 'diagnosticsPage'
         });
 };
 
