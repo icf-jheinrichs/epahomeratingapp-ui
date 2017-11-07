@@ -97,7 +97,7 @@ const JOB_PROGRESS = {
     },
     'submitted-to-provider' : {
         Name : 'Submitted to Provider',
-        Key  : 'SubmittedToProvider'
+        Key  : 'Submitted to Provider'
     },
     'approved' : {
         Name : 'Approved',

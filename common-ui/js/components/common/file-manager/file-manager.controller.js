@@ -49,7 +49,6 @@ class FileManagerController {
             return; // don't allow select local and library at the same time
         }
 
-        // debugger;
         if (_findIndex(this.files, {_id : file._id}) < 0) {
             this.files.push({
                 _id  : file._id,
@@ -65,8 +64,6 @@ class FileManagerController {
     }
 
     removeFile (_id) {
-        // debugger;
-
         let index = _findIndex(this.files, {_id : _id});
         this.files.splice(index, 1);
     }

@@ -119,10 +119,7 @@ class JobsService {
                             return param === undefined || param === null;
                         });
 
-                        // debugger;
-
                         filteredJobs = _pickBy(allJobs, (job) => {
-                            // debugger;
                             let pick          = true;
                             let jobTitle      = this.jobTitleFilter(job.Primary.AddressInformation).toLowerCase();
                             let progressLevel = stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL];

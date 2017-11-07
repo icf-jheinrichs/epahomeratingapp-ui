@@ -20,12 +20,13 @@ class JobsSearchBarController {
     $onInit () {
         if (this.$stateParams[this.SEARCH_PARAMS.STATUS]) {
             let jobProgressObject;
+            let jobStatus = decodeURIComponent(this.$stateParams[this.SEARCH_PARAMS.STATUS]);
 
             jobProgressObject = _find(this.JOB_PROGRESS, (progress) => {
-                return progress.Key === this.$stateParams[this.SEARCH_PARAMS.STATUS];
+                return progress.Key === jobStatus;
             });
 
-            this.filterText[this.SEARCH_PARAMS.STATUS] = jobProgressObject.Name;
+            this.filterText[jobStatus] = jobProgressObject.Name;
         }
 
         if (this.$stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL]) {
