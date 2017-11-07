@@ -7,18 +7,18 @@
     <div class="jobs">
         <list-filter
             class="list-filter"
-            quantity="{{jobsPageCtrl.jobs.length}}"
-            criteria="{{jobsPageCtrl.filterCriteria}}">
+            quantity="{{jobsSearchPageCtrl.jobs.length}}"
+            criteria="{{jobsSearchPageCtrl.filterCriteria}}">
         </list-filter>
 
         <jobs-search
-            quantity="jobsPageCtrl.jobs.length">
+            quantity="jobsSearchPageCtrl.jobs.length">
         </jobs-search>
 
         <form name="jobs">
-            <job-sync-status data-ng-if="jobsPageCtrl.CONTEXT_IS_APP"></job-sync-status>
+            <job-sync-status data-ng-if="jobsSearchPageCtrl.CONTEXT_IS_APP"></job-sync-status>
 
-            <jobs jobs="jobsPageCtrl.jobs"></jobs>
+            <jobs jobs="jobsSearchPageCtrl.jobs"></jobs>
 
             <div class="dialog hidden" dialog="dialog" id="dialog-make-job-offline">
                 <div class="dialog-header">

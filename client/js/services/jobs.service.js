@@ -1,4 +1,8 @@
 import _cloneDeep from 'lodash/cloneDeep';
+import _orderBy from 'lodash/orderBy';
+import _omitBy from 'lodash/omitBy';
+import _pickBy from 'lodash/pickBy';
+import _forOwn from 'lodash/forOwn';
 // import _map from 'lodash/map';
 // import _random from 'lodash/random';
 // import _sample from 'lodash/sample';
@@ -15,7 +19,7 @@ class JobsService {
      * @param  {function} $sanitize angular.$sanitize html injection
      * @param  {object}   API_URL   epahomeratingapp constants - contains paths to API
      */
-    constructor ($log, $q, $http, $interval, $rootScope, $sanitize, API_URL, UI_ENUMS) {
+    constructor ($log, $q, $http, $interval, $rootScope, $sanitize, UI_ENUMS, API_URL, jobTitleFilter) {
         'ngInject';
         // let self = this;
 
@@ -26,7 +30,9 @@ class JobsService {
         this.$interval  = $interval;
         this.$rootScope = $rootScope;
 
-        this.API_URL   = API_URL;
+        this.SEARCH_PARAMS  = UI_ENUMS.SEARCH_PARAMS;
+        this.API_URL        = API_URL;
+        this.jobTitleFilter = jobTitleFilter;
 
         this.MESSAGING = UI_ENUMS.MESSAGING;
 
@@ -81,6 +87,98 @@ class JobsService {
                         });
 
                         resolve(jobs);
+                    } else {
+                        //TODO: make this less bad
+                        reject('somethings amiss');
+                    }
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+
+        return promise;
+    }
+
+    //TODO : move some of this server side
+    search (stateParams) {
+        let promise = this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'GET',
+                    url     : this.API_URL.JOB
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        let allJobs = response.data;
+                        let filteredJobs;
+
+                        let searchParams = Object.assign({}, stateParams);
+
+                        searchParams = _omitBy(searchParams, (param) => {
+                            return param === undefined || param === null;
+                        });
+
+                        // debugger;
+
+                        filteredJobs = _pickBy(allJobs, (job) => {
+                            // debugger;
+                            let pick          = true;
+                            let jobTitle      = this.jobTitleFilter(job.Primary.AddressInformation).toLowerCase();
+                            let progressLevel = stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL];
+
+                            _forOwn(searchParams, (value, key) => {
+
+                                switch (key) {
+                                case this.SEARCH_PARAMS.KEYWORDS :
+                                    if (jobTitle.indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
+                                        pick = false;
+                                    }
+                                    break;
+                                case this.SEARCH_PARAMS.RATING_TYPE :
+                                    if (job.RatingType !== searchParams[this.SEARCH_PARAMS.RATING_TYPE]) {
+                                        pick = false;
+                                    }
+                                    break;
+                                case this.SEARCH_PARAMS.MUST_CORRECT :
+                                    if ((job.Progress.Final.MustCorrect + job.Progress.PreDrywall.MustCorrect) === 0) {
+                                        pick = false;
+                                    }
+                                    break;
+                                case this.SEARCH_PARAMS.RETURNED_FROM_INTERNAL_REVIEW :
+                                    if (!job.ReturnedFromInternal) {
+                                        pick = false;
+                                    }
+                                    break;
+                                case this.SEARCH_PARAMS.RETURNED_FROM_PROVIDER_REVIEW :
+                                    if (!job.ReturnedFromProvider) {
+                                        pick = false;
+                                    }
+                                    break;
+                                case this.SEARCH_PARAMS.STATUS :
+                                    if (progressLevel !== undefined && progressLevel !== job.ProgressLevel) {
+                                        pick = false;
+                                    } else if (searchParams[this.SEARCH_PARAMS.STATUS] !== job.Status) {
+                                        pick = false;
+                                    }
+                                    break;
+                                case this.SEARCH_PARAMS.INTERNAL_REVIEW :
+                                    if (!job.InternalReview) {
+                                        pick = false;
+                                    }
+                                    break;
+                                }
+
+                            });
+
+                            return pick;
+                        });
+
+                        filteredJobs = _orderBy(filteredJobs, [function sortByCreateDate (o) {
+                            return new Date(o.History[0].DateTime);
+                        }], ['desc']);
+
+                        resolve(filteredJobs);
                     } else {
                         //TODO: make this less bad
                         reject('somethings amiss');

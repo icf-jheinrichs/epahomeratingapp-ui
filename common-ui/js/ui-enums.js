@@ -192,17 +192,19 @@ const RESPONSES = {
 };
 
 const SEARCH_PARAMS = {
-    PROGRESS_LEVEL                : 'progressLevel',
-    STATUS                        : 'status',
-    KEYWORDS                      : 'keywords',
+    AVAILABLE_OFFLINE             : 'availableOffline',
     BUILDER                       : 'builder',
-    INSPECTION_STAGE              : 'inspectionStage',
     HOUSE_PLAN                    : 'housePlan',
+    INSPECTION_STAGE              : 'inspectionStage',
+    INTERNAL_REVIEW               : 'internalReview',
     JOB_TYPE                      : 'jobType',
-    RATING_TYPE                   : 'ratingType',
+    KEYWORDS                      : 'keywords',
     MUST_CORRECT                  : 'mustCorrect',
+    PROGRESS_LEVEL                : 'progressLevel',
+    RATING_TYPE                   : 'ratingType',
     RETURNED_FROM_INTERNAL_REVIEW : 'returnedFromInternalReview',
-    RETURNED_FROM_PROVIDER_REVIEW : 'returnedFromProviderReview'
+    RETURNED_FROM_PROVIDER_REVIEW : 'returnedFromProviderReview',
+    STATUS                        : 'status'
 };
 
 const STATUS = {

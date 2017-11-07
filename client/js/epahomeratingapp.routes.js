@@ -1,3 +1,12 @@
+import {UI_ENUMS} from '../../epahomeratingappUI.js';
+import _forOwn from 'lodash/forOwn';
+
+let searchParams = [];
+
+_forOwn(UI_ENUMS.SEARCH_PARAMS, (value, key) => {
+    searchParams.push(value);
+});
+
 let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $urlRouterProvider) {
     'ngInject';
 
@@ -96,6 +105,23 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
                     let jobPromise
                         = JobsService
                             .get()
+                            .then(jobs => {
+                                return jobs;
+                            });
+
+                    return jobPromise;
+                }
+            }
+        })
+
+        .state('jobs-search', {
+            url        : `/jobs?${searchParams.join('&')}`,
+            component  : 'jobsSearchPage',
+            resolve    : {
+                jobs   : (JobsService, $stateParams) => {
+                    let jobPromise
+                        = JobsService
+                            .search($stateParams)
                             .then(jobs => {
                                 return jobs;
                             });

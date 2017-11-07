@@ -1,28 +1,21 @@
-<div class="filters flex-row flex-justify-between">
-    <div class="sort">
-        <button class="btn btn-link btn-sort" type="button" data-ng-if="false">
-            <i class="fa fa-sort fa-lg" aria-hidden="true"></i> Sort
-        </button>
-    </div>
-
-    <div class="quick-filter">
-        <button-group
+<div class="filters flex-row flex-justify-center">
+    <div class="quick-filter ">
+        <div
             class="button-group"
             buttons="listFilterCtrl.buttons"
             allow-multiple="false"
             initial-value="listFilterCtrl.initialSelected"
             on-set-value="listFilterCtrl.switchPage(response)">
-        </button-group>
-    </div>
 
-    <div class="search">
-        <button class="btn btn-link btn-search" type="button" data-ng-if="false">
-            <i class="fa fa-search fa-lg" aria-hidden="true"></i> Search
-        </button>
-    </div>
-</div>
+            <a
+                class="btn"
+                ng-class="{'active' : (listFilterCtrl.currentFilter === button.Key)}"
+                ng-repeat="button in listFilterCtrl.buttons"
+                ui-sref="jobs-search(button.params)"
+                ui-sref-opts="{inherit: false}">
 
-<div class="filter-summary ellipsis">
-    <span class="filter-results-quantity">{{listFilterCtrl.quantity}}</span>
-    <span class="filter-criteria">{{listFilterCtrl.criteria}}</span>
+                {{::button.Name}}
+            </a>
+        </div>
+    </div>
 </div>

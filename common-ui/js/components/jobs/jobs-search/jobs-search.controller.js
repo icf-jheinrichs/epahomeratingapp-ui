@@ -37,6 +37,14 @@ class JobsSearchBarController {
 
             this.filterText[this.SEARCH_PARAMS.PROGRESS_LEVEL] = categoryProgressObject.Name;
         }
+
+        if (this.$stateParams[this.SEARCH_PARAMS.AVAILABLE_OFFLINE]) {
+            this.filterText[this.SEARCH_PARAMS.AVAILABLE_OFFLINE] = 'Available Offline';
+        }
+
+        if (this.$stateParams[this.SEARCH_PARAMS.INTERNAL_REVIEW]) {
+            this.filterText[this.SEARCH_PARAMS.INTERNAL_REVIEW] = 'Internal Review';
+        }
     }
 
     get filterTextString () {
@@ -74,6 +82,20 @@ class JobsSearchBarController {
             progressLevel[this.SEARCH_PARAMS.PROGRESS_LEVEL] = this.$stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL];
 
             Object.assign(searchParams, progressLevel);
+        }
+
+        if (this.$stateParams[this.SEARCH_PARAMS.AVAILABLE_OFFLINE]) {
+            let availableOffline                                   = {};
+            availableOffline[this.SEARCH_PARAMS.AVAILABLE_OFFLINE] = this.$stateParams[this.SEARCH_PARAMS.AVAILABLE_OFFLINE];
+
+            Object.assign(searchParams, availableOffline);
+        }
+
+        if (this.$stateParams[this.SEARCH_PARAMS.INTERNAL_REVIEW]) {
+            let internalReview                                 = {};
+            internalReview[this.SEARCH_PARAMS.INTERNAL_REVIEW] = this.$stateParams[this.SEARCH_PARAMS.INTERNAL_REVIEW];
+
+            Object.assign(searchParams, internalReview);
         }
 
         this

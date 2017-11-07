@@ -1,70 +1,49 @@
-const buttons = [
-    {
-        'Name'  : 'Active',
-        'Key'   : 'active'
-    },
-    // {
-    //     'Name'  : 'History',
-    //     'Key'   : 'history'
-    // },
-    {
-        'Name'  : 'Offline Jobs',
-        'Key'   : 'offline-jobs'
-    },
-    {
-        'Name'  : 'Internal Review',
-        'Key'   : 'internal-review'
-    },
-    {
-        'Name'  : 'Submitted',
-        'Key'   : 'submitted'
-    },
-    {
-        'Name'  : 'Completed',
-        'Key'   : 'completed'
-    }
-];
-
 class ListFilterController {
-    constructor ($log, $rootScope, UI_ENUMS) {
+    constructor ($stateParams, UI_ENUMS) {
         'ngInject';
 
-        this.$rootScope   = $rootScope;
-        this.MESSAGING    = UI_ENUMS.MESSAGING;
-        this.JOB_PAGE_TAB = UI_ENUMS.JOB_PAGE_TAB;
+        this.$stateParams  = $stateParams;
+
+        this.MESSAGING     = UI_ENUMS.MESSAGING;
+        this.JOB_PAGE_TAB  = UI_ENUMS.JOB_PAGE_TAB;
+        this.SEARCH_PARAMS = UI_ENUMS.SEARCH_PARAMS;
     }
 
     $onInit () {
-        this.buttons  = buttons;
-        this.initialSelected = buttons[0];
-    }
+        this.buttons = [
+            {
+                'Name'   : 'Active',
+                'Key'    : 'statusActive',
+                'params' : {'status' : 'Active'}
+            },
+            {
+                'Name'   : 'Offline Jobs',
+                'Key'    : this.SEARCH_PARAMS.AVAILABLE_OFFLINE,
+                'params' : {'availableOffline' : 'true'}
+            },
+            {
+                'Name'   : 'Internal Review',
+                'Key'    : this.SEARCH_PARAMS.INTERNAL_REVIEW,
+                'params' : {'internalReview' : 'true'}
+            },
+            {
+                'Name'   : 'Submitted',
+                'Key'    : 'statusSubmitted',
+                'params' : {'status' : 'Submitted'}
+            },
+            {
+                'Name'   : 'Completed',
+                'Key'    : 'statusCompleted',
+                'params' : {'status' : 'Completed'}
+            }
+        ];
 
-    switchPage (selected) {
-        // TODO: Make this thing general
-        if (selected[0] === 'offline-jobs') {
-            this
-                .$rootScope
-                .$emit(this.MESSAGING.REFRESH_JOBS_LIST, this.JOB_PAGE_TAB.OFFLINE_JOBS);
-        } else if (selected[0] === 'history') {
-            this
-                .$rootScope
-                .$emit(this.MESSAGING.REFRESH_JOBS_LIST, this.JOB_PAGE_TAB.HISTORY);
-        } else if (selected[0] === 'active') {
-            this
-                .$rootScope
-                .$emit(this.MESSAGING.REFRESH_JOBS_LIST, this.JOB_PAGE_TAB.ACTIVE);
-        } else if (selected[0] === 'internal-review') {
-            this
-                .$rootScope
-                .$emit(this.MESSAGING.REFRESH_JOBS_LIST, this.JOB_PAGE_TAB.INTERNAL_REVIEW);
-        } else if (selected[0] === 'submitted') {
-            this
-                .$rootScope
-                .$emit(this.MESSAGING.REFRESH_JOBS_LIST, this.JOB_PAGE_TAB.SUBMITTED_TO_PROVIDER);
-        } else if (selected[0] === 'completed') {
-            this
-                .$rootScope
-                .$emit(this.MESSAGING.REFRESH_JOBS_LIST, this.JOB_PAGE_TAB.COMPLETED);
+        if (this.$stateParams[this.SEARCH_PARAMS.STATUS]) {
+            this.currentFilter = this.SEARCH_PARAMS.STATUS + this.$stateParams[this.SEARCH_PARAMS.STATUS];
+        } else if (this.$stateParams[this.SEARCH_PARAMS.AVAILABLE_OFFLINE]) {
+            this.currentFilter = this.SEARCH_PARAMS.AVAILABLE_OFFLINE;
+        } else if (this.$stateParams[this.SEARCH_PARAMS.INTERNAL_REVIEW]) {
+            this.currentFilter = this.SEARCH_PARAMS.INTERNAL_REVIEW;
         }
     }
 }
