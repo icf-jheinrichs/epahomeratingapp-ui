@@ -18,8 +18,6 @@ class JobsPageController {
             'ALL'      : 'All',
             'SELECTED' : 'Selected'
         };
-
-        this.currentJobTab = this.JOB_PAGE_TAB.ACTIVE;
     }
 
     $onInit () {
@@ -43,60 +41,11 @@ class JobsPageController {
                     }
                 });
 
-        this.refreshJobsListener
-            = this
-                .$rootScope
-                .$on(this.MESSAGING.REFRESH_JOBS_LIST, (event, tab) => {
-                    if (tab !== undefined) {
-                        this.currentJobTab = tab;
-                    }
-
-                    this.jobs = {};
-                    this.JobsService
-                        .get()
-                        .then((jobs) => {
-                            this.jobs = this.filterJobs(jobs);
-                        });
-                });
-    }
-
-    filterJobs (jobs) {
-        let filteredJobs = [];
-
-        for (let index in jobs) {
-            let job = jobs[index];
-            switch (this.currentJobTab) {
-            case this.JOB_PAGE_TAB.OFFLINE_JOBS:
-                if (jobs[index].offlineAvailable) {
-                    filteredJobs.push(job);
-                }
-                break;
-            case this.JOB_PAGE_TAB.ACTIVE:
-                if (jobs[index].Status === this.JOB_STATUS.ACTIVE) {
-                    filteredJobs.push(job);
-                }
-                break;
-            case this.JOB_PAGE_TAB.COMPLETED:
-                if (jobs[index].Status === this.JOB_STATUS.COMPLETED) {
-                    filteredJobs.push(job);
-                }
-                break;
-            case this.JOB_PAGE_TAB.INTERNAL_REVIEW:
-                if (jobs[index].Status === this.JOB_STATUS.INTERNAL_REVIEW) {
-                    filteredJobs.push(job);
-                }
-                break;
-            case this.JOB_PAGE_TAB.SUBMITTED_TO_PROVIDER:
-                if (jobs[index].Status === this.JOB_STATUS.SUBMITTED_TO_PROVIDER) {
-                    filteredJobs.push(job);
-                }
-                break;
-            default:
-
-            }
-        }
-
-        return filteredJobs;
+        this.JobsService
+            .get()
+            .then((jobs) => {
+                this.jobs = jobs;
+            });
     }
 
     $onDestroy () {

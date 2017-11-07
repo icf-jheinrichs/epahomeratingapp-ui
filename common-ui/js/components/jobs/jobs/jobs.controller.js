@@ -4,15 +4,17 @@ let JSZip      = require('jszip');
 let FileSaver  = require('file-saver');
 
 class JobsController {
-    constructor (CONTEXT, UI_ENUMS, $http, $window, JobsService) {
+    constructor (CONTEXT, UI_ENUMS, $window, $state, $http, $rootScope, JobsService) {
         'ngInject';
 
         this.CONTEXT_IS_ADMIN = CONTEXT === UI_ENUMS.CONTEXT.ADMIN;
 
         this.JobsService = JobsService;
-        this.$window     = $window;
         this.$http       = $http;
+        this.$state      = $state;
+        this.$rootScope  = $rootScope;
         this.JOB_STATUS  = UI_ENUMS.JOB_STATUS;
+        this.MESSAGING   = UI_ENUMS.MESSAGING;
 
         this.checkAll   = false;
         this.markedJobs = [];
@@ -93,14 +95,6 @@ class JobsController {
             });
     }
 
-    changeStatus (jobs, status) {
-        let self = this;
-        _forEach (jobs, function updateJob (job) {
-            job.Status = status;
-            self.JobsService.put(job);
-        });
-    }
-
     getSelectedJobs () {
         let changeJobs = [];
         let remainJobs = [];
@@ -114,18 +108,34 @@ class JobsController {
         return {changeJobs : changeJobs, remainJobs : remainJobs};
     }
 
-    flagForQA () {
-        let selectedJobs = this.getSelectedJobs();
-        this.changeStatus(selectedJobs.changeJobs, this.JOB_STATUS.INTERNAL_REVIEW);
-        this.jobs = selectedJobs.remainJobs;
-        this.markedJobs = [];
+    flagForReview () {
+        for (let i = 0; i < this.markedJobs.length; i++) {
+            if (this.markedJobs[i] === true) {
+                let job = this.jobs[i];
+                if (job.Status === this.JOB_STATUS.COMPLETED) {
+                    job.InternalReview = true;
+                    this.JobsService.put(job);
+                }
+            }
+        }
+
+        this.$state.go('jobs');
     }
 
     submitToProvider () {
-        let selectedJobs = this.getSelectedJobs();
-        this.changeStatus(selectedJobs.changeJobs, this.JOB_STATUS.SUBMITTED_TO_PROVIDER);
-        this.jobs = selectedJobs.remainJobs;
-        this.markedJobs = [];
+        for (let i = 0; i < this.markedJobs.length; i++) {
+            if (this.markedJobs[i] === true) {
+                let job = this.jobs[i];
+                if (job.Status === this.JOB_STATUS.COMPLETED) {
+                    // TODO - Pop error message to user
+                    job.Status = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
+                    this.JobsService.put(job);
+                }
+            }
+        }
+
+        // TODO - Keep the current tab
+        this.$state.go('jobs');
     }
 
     jobsAreSelected () {

@@ -7,7 +7,7 @@
 <div class="bulk-operation-bar" data-ng-if="jobsCtrl.CONTEXT_IS_ADMIN">
     <input type="checkbox" ng-model="jobsCtrl.checkAll" data-ng-change="jobsCtrl.selectAllJobs()">&nbspSelect All&nbsp
 
-    <button class="btn" type="button" data-ng-click="jobsCtrl.flagForQA()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">Flag for QA</button>
+    <button class="btn" type="button" data-ng-click="jobsCtrl.flagForReview()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">Flag for Review</button>
 
     <button class="btn" type="button" data-ng-click="jobsCtrl.submitToProvider()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">Submit to Provider</button>
 

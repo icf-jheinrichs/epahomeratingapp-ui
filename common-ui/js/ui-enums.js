@@ -75,7 +75,6 @@ const JOB_PAGE_TAB = {
 const JOB_STATUS = {
     ACTIVE                : 'Active',
     COMPLETED             : 'Completed',
-    INTERNAL_REVIEW       : 'Internal Review',
     SUBMITTED_TO_PROVIDER : 'Submitted to Provider',
     APPROVED              : 'Approved',
     REGISTERED            : 'Registered',
