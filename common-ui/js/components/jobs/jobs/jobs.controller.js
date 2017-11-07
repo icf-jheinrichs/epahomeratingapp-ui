@@ -82,7 +82,7 @@ class JobsController {
             });
         };
 
-        _forEach(downloadJobs, function downloadJob (downloadJob) {
+        _forEach(downloadJobs, (downloadJob) => {
             getURLPromise.push(downloadPromise(downloadJob.id, downloadJob.fileName));
         });
 

@@ -18,6 +18,7 @@ class JobsSearchBarController {
     }
 
     $onInit () {
+        // Add status name to filter text (e.g. active, complete, submitted to provider)
         if (this.$stateParams[this.SEARCH_PARAMS.STATUS]) {
             let jobProgressObject;
             let jobStatus = decodeURIComponent(this.$stateParams[this.SEARCH_PARAMS.STATUS]);
@@ -29,6 +30,7 @@ class JobsSearchBarController {
             this.filterText[jobStatus] = jobProgressObject.Name;
         }
 
+        // Add progress level to filter text (pre-drywall or final)
         if (this.$stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL]) {
             let categoryProgressObject;
 
@@ -39,10 +41,12 @@ class JobsSearchBarController {
             this.filterText[this.SEARCH_PARAMS.PROGRESS_LEVEL] = categoryProgressObject.Name;
         }
 
+        // Add offline status to filter text (pre-drywall or final)
         if (this.$stateParams[this.SEARCH_PARAMS.AVAILABLE_OFFLINE]) {
             this.filterText[this.SEARCH_PARAMS.AVAILABLE_OFFLINE] = 'Available Offline';
         }
 
+        // Add internal review to filter text (pre-drywall or final)
         if (this.$stateParams[this.SEARCH_PARAMS.INTERNAL_REVIEW]) {
             this.filterText[this.SEARCH_PARAMS.INTERNAL_REVIEW] = 'Internal Review';
         }
