@@ -1,10 +1,11 @@
+import _defer from 'lodash/defer';
 
 let _forEach   = require('lodash/forEach');
 let JSZip      = require('jszip');
 let FileSaver  = require('file-saver');
 
 class JobsController {
-    constructor (CONTEXT, UI_ENUMS, $window, $state, $http, $rootScope, JobsService) {
+    constructor (CONTEXT, UI_ENUMS, $window, $scope, $state, $http, $rootScope, JobsService) {
         'ngInject';
 
         this.CONTEXT_IS_ADMIN = CONTEXT === UI_ENUMS.CONTEXT.ADMIN;
@@ -12,12 +13,15 @@ class JobsController {
         this.JobsService = JobsService;
         this.$http       = $http;
         this.$state      = $state;
+        this.$scope      = $scope;
         this.$rootScope  = $rootScope;
         this.JOB_STATUS  = UI_ENUMS.JOB_STATUS;
         this.MESSAGING   = UI_ENUMS.MESSAGING;
 
         this.checkAll   = false;
         this.markedJobs = [];
+
+        this.downloadingRem = false;
     }
 
     $onInit () {
@@ -41,9 +45,10 @@ class JobsController {
     bulkDownload () {
         let downloadJobs = [];
         let self = this;
-        let getURLPromise = [];
         let zip = new JSZip();
         let zipFilename = 'ExportedXML.zip';
+
+        this.downloadingRem = true;
 
         function getNumOfDupFiles (exportFileName) {
             let numOfDup = 0;
@@ -69,44 +74,44 @@ class JobsController {
             }
         }
 
-        let downloadPromise = function downloadPromise (jobID, fileName, fileNameDup) {
-            return new Promise ((resolve, reject) => {
-                self.JobsService
-                    .getExportSignedUrl(jobID)
-                    .then((url) => {
-                        let config = {
-                            method  : 'GET',
-                            url     : url,
-                            headers : {
-                                Authorization : 'Remove in Interceptor'
-                            }
-                        };
-                        return self.$http(config);
-                    })
-                    .then((response) => {
-                        if (fileNameDup !== 0) {
-                            fileName = `${fileName} (${fileNameDup})`;
-                        }
-                        zip.file(fileName + '.xml', response.data, {binary : false});
-                        resolve(response.data);
-                    })
-                    .catch((error) => {
-                        reject(error);
-                    });
-            });
-        };
+        // download the files async to get rid of the same export-file-name issue
+        // rem-xml-outbound service save the exported name to S3, same file name will overwrite
+        // TODO - This might need server change?
+        let sequence = Promise.resolve();
 
-        _forEach(downloadJobs, (downloadJob) => {
-            getURLPromise.push(downloadPromise(downloadJob.id, downloadJob.fileName, downloadJob.fileNameDup));
+        downloadJobs.forEach(function downloadJob (downloadJob) {
+            sequence = sequence
+                .then(() => {
+                    return self.JobsService.getExportSignedUrl(downloadJob.id);
+                })
+                .then((url) => {
+                    let config = {
+                        method  : 'GET',
+                        url     : url,
+                        headers : {
+                            Authorization : 'Remove in Interceptor'
+                        }
+                    };
+                    return self.$http(config);
+                })
+                .then((response) => {
+                    if (downloadJob.fileNameDup !== 0) {
+                        downloadJob.fileName = `${downloadJob.fileName} (${downloadJob.fileNameDup})`;
+                    }
+
+                    zip.file(downloadJob.fileName + '.xml', response.data, {binary : false});
+                });
         });
 
-        Promise.all(getURLPromise)
-            .then((result) => {
-                zip.generateAsync({type : 'Blob'})
-                    .then(function download (base64) {
-                        FileSaver.saveAs(base64, zipFilename);
-                    });
+        sequence.then(() => {
+            self.downloadingRem = false;
+            _defer(function afterDigest () {
+                self.$scope.$apply();
             });
+            return zip.generateAsync({type : 'Blob'});
+        }).then((base64) => {
+            FileSaver.saveAs(base64, zipFilename);
+        });
     }
 
     getSelectedJobs () {
