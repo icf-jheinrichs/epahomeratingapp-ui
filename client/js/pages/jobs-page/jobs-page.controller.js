@@ -50,7 +50,6 @@ class JobsPageController {
 
     $onDestroy () {
         this.availableOfflineListener();
-        this.refreshJobsListener();
     }
 }
 

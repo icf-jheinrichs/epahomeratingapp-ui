@@ -116,7 +116,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
 
         .state('jobs-search', {
             url        : `/jobs?${searchParams.join('&')}`,
-            component  : 'jobsSearchPage',
+            component  : 'jobsPage',
             resolve    : {
                 jobs   : (JobsService, $stateParams) => {
                     let jobPromise
