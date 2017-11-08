@@ -45,6 +45,16 @@ class JobsController {
         let zip = new JSZip();
         let zipFilename = 'ExportedXML.zip';
 
+        function getNumOfDupFiles (exportFileName) {
+            let numOfDup = 0;
+            _forEach(downloadJobs, (job) => {
+                if (job.fileName === exportFileName) {
+                    numOfDup++;
+                }
+            });
+            return numOfDup;
+        }
+
         for (let i = 0; i < this.markedJobs.length; i++) {
             if (this.markedJobs[i] === true) {
                 let exportFileName = this.jobs[i].Primary.ExportFilename;
@@ -52,13 +62,14 @@ class JobsController {
                     exportFileName = this.generateFileName(this.jobs[i]);
                 }
                 downloadJobs.push({
-                    id       : this.jobs[i]._id,
-                    fileName : exportFileName
+                    id          : this.jobs[i]._id,
+                    fileName    : exportFileName,
+                    fileNameDup : getNumOfDupFiles(exportFileName)
                 });
             }
         }
 
-        let downloadPromise = function downloadPromise (jobID, fileName) {
+        let downloadPromise = function downloadPromise (jobID, fileName, fileNameDup) {
             return new Promise ((resolve, reject) => {
                 self.JobsService
                     .getExportSignedUrl(jobID)
@@ -73,6 +84,9 @@ class JobsController {
                         return self.$http(config);
                     })
                     .then((response) => {
+                        if (fileNameDup !== 0) {
+                            fileName = `${fileName} (${fileNameDup})`;
+                        }
                         zip.file(fileName + '.xml', response.data, {binary : false});
                         resolve(response.data);
                     })
@@ -83,7 +97,7 @@ class JobsController {
         };
 
         _forEach(downloadJobs, (downloadJob) => {
-            getURLPromise.push(downloadPromise(downloadJob.id, downloadJob.fileName));
+            getURLPromise.push(downloadPromise(downloadJob.id, downloadJob.fileName, downloadJob.fileNameDup));
         });
 
         Promise.all(getURLPromise)
