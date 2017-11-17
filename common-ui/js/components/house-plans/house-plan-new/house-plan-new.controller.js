@@ -4,9 +4,9 @@ const ERROR_INPUT = {
     dismissable : false
 };
 
-const ERROR_SERVER = {
+const ERROR_MAX_FILES = {
     type        : 'error',
-    text        : 'There was an error processing your request. Please try again.',
+    text        : 'Please select equal or less than 50 files',
     dismissable : false
 };
 
@@ -15,6 +15,8 @@ const UPLOAD_STAGE = {
     uploading : 'uploading',
     report    : 'report'
 };
+
+const MAX_NUM_OF_FILE_UPLOAD = 50;
 
 import _isEmpty from 'lodash/isEmpty';
 import _defer from 'lodash/defer';
@@ -61,6 +63,10 @@ class HousePlanNewController {
         if (_isEmpty(this.fileInput.files)) {
             this.errorReason  = Object.assign({}, ERROR_INPUT);
             this.message = Object.assign({}, ERROR_INPUT);
+            return;
+        } else if (this.fileInput.files.length > MAX_NUM_OF_FILE_UPLOAD) {
+            this.errorReason  = Object.assign({}, ERROR_MAX_FILES);
+            this.message = Object.assign({}, ERROR_MAX_FILES);
             return;
         }
 
