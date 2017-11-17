@@ -178,12 +178,15 @@ $button-background-color-hover-inverse:     rgba(255, 255, 255, .2);
 //## Navs
 //
 
-$nav-stacked-background-color-defaut:   #bdeafc;
+$nav-stacked-background-color-defaut:   $brand-auxillary;
 $nav-stacked-background-color-active:   $brand-tertiary;
-$nav-stacked-background-color-sub:      $brand-auxillary;
+$nav-stacked-background-color-sub:      lighten($brand-auxillary, 5%);
 
 $nav-stacked-color-default:             $text-color;
 $nav-stacked-color-active:              $text-color-inverse;
+
+$nav-stacked-link-background:           $body-bg;
+$nav-stacked-link-background-hover:     darken($body-bg, 10%);
 
 //
 //## Tabs
@@ -223,7 +226,7 @@ $overlay-dialog-bg:      rgba(0, 0, 0, .5);
 $popover-height-default:  300px;
 $popover-width-default:   500px;
 
-$popover-height-small:  300px;
+$popover-height-small:  400px;
 $popover-width-small:   400px;
 
 $popover-height-large:  400px;

@@ -1,21 +1,22 @@
 <div class="filters flex-row flex-justify-center">
-    <div class="quick-filter ">
-        <div
-            class="button-group"
-            buttons="listFilterCtrl.buttons"
-            allow-multiple="false"
-            initial-value="listFilterCtrl.initialSelected"
-            on-set-value="listFilterCtrl.switchPage(response)">
+    <div class="button-group">
+        <a
+            class="btn"
+            ng-class="{'active' : (listFilterCtrl.currentFilter === button.Key)}"
+            ng-repeat="button in listFilterCtrl.buttons"
+            ui-sref="jobs-search(button.params)"
+            ui-sref-opts="{inherit: false}">
 
-            <a
-                class="btn"
-                ng-class="{'active' : (listFilterCtrl.currentFilter === button.Key)}"
-                ng-repeat="button in listFilterCtrl.buttons"
-                ui-sref="jobs-search(button.params)"
-                ui-sref-opts="{inherit: false}">
+            {{::button.Name}}
+        </a>
+    </div>
 
-                {{::button.Name}}
-            </a>
-        </div>
+    <div class="button-group">
+        <a class="btn"
+           ng-class="{'active' : (listFilterCtrl.currentFilter === button.Key)}"
+           ui-sref="jobs-search({'availableOffline' : 'true'})">
+
+           Offline Jobs
+        </a>
     </div>
 </div>

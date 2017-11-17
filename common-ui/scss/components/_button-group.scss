@@ -15,6 +15,10 @@
         &:last-of-type {
             border-radius: 0 $border-radius-default $border-radius-default 0;
         }
+
+        &:only-of-type {
+            border-radius: $border-radius-default;
+        }
     }
 }
 
@@ -26,4 +30,8 @@
         height: $font-size-large * 2;
         padding: $padding-default;
     }
+}
+
+.button-group + .button-group {
+    margin-left: $offset-default;
 }

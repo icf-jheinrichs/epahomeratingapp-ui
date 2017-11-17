@@ -18,14 +18,9 @@ class ListFilterController {
                 'params' : {'status' : 'Active'}
             },
             {
-                'Name'   : 'Offline Jobs',
-                'Key'    : this.SEARCH_PARAMS.AVAILABLE_OFFLINE,
-                'params' : {'availableOffline' : 'true'}
-            },
-            {
-                'Name'   : 'Internal Review',
-                'Key'    : this.SEARCH_PARAMS.INTERNAL_REVIEW,
-                'params' : {'internalReview' : 'true'}
+                'Name'   : 'Completed',
+                'Key'    : 'statusCompleted',
+                'params' : {'status' : encodeURIComponent(this.JOB_STATUS.COMPLETED)}
             },
             {
                 'Name'   : 'Submitted',
@@ -33,9 +28,9 @@ class ListFilterController {
                 'params' : {'status' : encodeURIComponent(this.JOB_STATUS.SUBMITTED_TO_PROVIDER)}
             },
             {
-                'Name'   : 'Completed',
-                'Key'    : 'statusCompleted',
-                'params' : {'status' : encodeURIComponent(this.JOB_STATUS.COMPLETED)}
+                'Name'   : 'Registered',
+                'Key'    : 'statusRegistered',
+                'params' : {'status' : encodeURIComponent(this.JOB_STATUS.REGISTERED)}
             }
         ];
 

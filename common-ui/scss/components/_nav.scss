@@ -63,6 +63,15 @@
             box-shadow: $shadow-active;
         }
     }
+
+    .nav-item-link {
+        background-color: $nav-stacked-link-background;
+
+        &:hover,
+        &:focus {
+            background-color: $nav-stacked-link-background-hover;
+        }
+    }
 }
 
 .sub-nav {
@@ -75,4 +84,8 @@
             background-color: darken($nav-stacked-background-color-sub, 15%);
         }
     }
+}
+
+.nav-stacked + .nav-stacked {
+    margin-top: $offset-large;
 }
