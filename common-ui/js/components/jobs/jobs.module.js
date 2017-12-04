@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import jobComponent from './job/job.component';
+import jobModule from './job/job.module';
 import jobsComponent from './jobs/jobs.component';
 import jobDetailComponent from './job-detail/job-detail.component';
 import jobDetailLocationComponent from './job-detail/job-detail-location/job-detail-location.component';
@@ -12,10 +12,10 @@ import jobSyncStatusComponent from './jobs/job-sync-status/job-sync-status.compo
 let jobsModule
     = angular
         .module('epahomeratingapp.components.jobs', [
+            jobModule.name,
             JobChecklistModule.name,
             jobsSearchModule.name
         ])
-        .component('job', jobComponent)
         .component('jobs', jobsComponent)
         .component('jobDetail', jobDetailComponent)
         .component('jobDetailLocation', jobDetailLocationComponent)

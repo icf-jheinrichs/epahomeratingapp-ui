@@ -4,8 +4,8 @@
             <button
                 aria-label="More Information"
                 class="checklist-item-info-toggle btn btn-link btn-no-label"
-                ng-class="{'has-footnote' : checklistItemHVACCommissioningCtrl.hasFootnote}"
-                ng-click="checklistItemHVACCommissioningCtrl.showFootnote()"
+                ng-class="{'has-footnote' : checklistItemHVACEquipmentCtrl.hasFootnote}"
+                ng-click="checklistItemHVACEquipmentCtrl.showFootnote()"
                 type="button">
 
                 <i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -14,54 +14,55 @@
             <h4 class="checklist-item-title pull-left">Mfr. &amp; model of HVAC equipment matches</h4>
             <select
                 class="form-control hvac-equipment-matches"
-                data-ng-options="document.name for document in checklistItemHVACCommissioningCtrl.EQUIPMENT_MATCHES_DOCUMENT track by document.key"
-                data-ng-model="checklistItemHVACCommissioningCtrl.selectedEquipmentMatches"
-                data-ng-change="checklistItemHVACCommissioningCtrl.onEquipmentMatchesChange()">
+                data-ng-options="document.name for document in checklistItemHVACEquipmentCtrl.EQUIPMENT_MATCHES_DOCUMENT track by document.key"
+                data-ng-model="checklistItemHVACEquipmentCtrl.selectedEquipmentMatches"
+                data-ng-change="checklistItemHVACEquipmentCtrl.onEquipmentMatchesChange()">
             </select>
         </header>
 
         <div class="flex-row flex-align-center flex-item-fixed-width">
             <checklist-item-comments
-                comments="checklistItemHVACCommissioningCtrl.comments"
-                item-id="{{checklistItemHVACCommissioningCtrl.itemId}}"
-                on-comment="checklistItemHVACCommissioningCtrl.postComment(comment)">
+                data-ng-if="!checklistItemHVACEquipmentCtrl.isReview"
+                comments="checklistItemHVACEquipmentCtrl.comments"
+                item-id="{{checklistItemHVACEquipmentCtrl.itemId}}"
+                on-comment="checklistItemHVACEquipmentCtrl.postComment(comment)">
             </checklist-item-comments>
 
             <checklist-item-response
-                response="checklistItemHVACCommissioningCtrl.response"
-                response-house-id="checklistItemHVACCommissioningCtrl.responseHouseId"
-                data-ng-hide="checklistItemHVACCommissioningCtrl.showResponseButtons"
-                edit-response="checklistItemHVACCommissioningCtrl.onEditResponse()">
+                response="checklistItemHVACEquipmentCtrl.response"
+                response-house-id="checklistItemHVACEquipmentCtrl.responseHouseId"
+                data-ng-hide="checklistItemHVACEquipmentCtrl.showResponseButtons"
+                edit-response="checklistItemHVACEquipmentCtrl.onEditResponse()">
             </checklist-item-response>
 
             <div class="verification"
-                 data-ng-hide="!checklistItemHVACCommissioningCtrl.showResponseButtons">
+                 data-ng-hide="!checklistItemHVACEquipmentCtrl.showResponseButtons">
                 <button-group
                     class="button-group"
-                    buttons="checklistItemHVACCommissioningCtrl.responseButtons"
-                    initial-value="checklistItemHVACCommissioningCtrl.response"
-                    on-set-value="checklistItemHVACCommissioningCtrl.onSetResponse(response)">
+                    buttons="checklistItemHVACEquipmentCtrl.responseButtons"
+                    initial-value="checklistItemHVACEquipmentCtrl.response"
+                    on-set-value="checklistItemHVACEquipmentCtrl.onSetResponse(response)">
                 </button-group>
             </div>
         </div>
     </div>
 
     <div>
-        <!-- <p><button class="btn" data-ng-click="checklistItemHVACCommissioningCtrl.onViewHvacDesignReport()" type="button">View HVAC Design Report</button></p> -->
+        <!-- <p><button class="btn" data-ng-click="checklistItemHVACEquipmentCtrl.onViewHvacDesignReport()" type="button">View HVAC Design Report</button></p> -->
 
         <div class="item-list item-list-equipment">
             <hvac-equipment
                 class="item-list-item"
-                data-ng-repeat="equipment in checklistItemHVACCommissioningCtrl.itemData.Equipment track by $index"
-                delete-equipment="checklistItemHVACCommissioningCtrl.deleteEquipment(index)"
+                data-ng-repeat="equipment in checklistItemHVACEquipmentCtrl.itemData.Equipment track by $index"
+                delete-equipment="checklistItemHVACEquipmentCtrl.deleteEquipment(index)"
                 equipment="equipment"
                 index="{{$index}}"
-                save-equipment="checklistItemHVACCommissioningCtrl.saveEquipment(index, equipment)">
+                save-equipment="checklistItemHVACEquipmentCtrl.saveEquipment(index, equipment)">
             </hvac-equipment>
         </div>
 
         <div class="clearfix">
-            <button class="btn pull-right" data-ng-click="checklistItemHVACCommissioningCtrl.addEquipment()" type="button"><i class="fa fa-plus" aria-hidden="true"></i> Add Equipment</button>
+            <button class="btn pull-right" data-ng-click="checklistItemHVACEquipmentCtrl.addEquipment()" type="button"><i class="fa fa-plus" aria-hidden="true"></i> Add Equipment</button>
         </div>
     </div>
 </div>

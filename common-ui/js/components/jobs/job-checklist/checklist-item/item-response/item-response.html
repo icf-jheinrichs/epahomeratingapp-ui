@@ -1,11 +1,11 @@
 <div class="flex-row flex-align-center">
-    <div class="checklist-item-response">
+    <div class="checklist-item-response" data-ng-class="{'checklist-item-review-response' : checklistItemResponseCtrl.isReview}">
         <span class="label" data-ng-class="checklistItemResponseCtrl.responseClass">{{checklistItemResponseCtrl.responseName}}</span>
 
-        <span class="ellipsis house-title" data-ng-bind-html="checklistItemResponseCtrl.house.title"></span>
+        <span data-ng-if="!checklistItemResponseCtrl.isReview" class="ellipsis house-title" data-ng-bind-html="checklistItemResponseCtrl.house.title"></span>
     </div>
 
-    <div class="checklist-item-response-edit">
+    <div class="checklist-item-response-edit" data-ng-if="!checklistItemResponseCtrl.isReview">
         <button
             class="btn btn-default"
             data-ng-click="checklistItemResponseCtrl.editResponse()"

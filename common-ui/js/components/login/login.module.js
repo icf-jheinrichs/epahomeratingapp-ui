@@ -5,6 +5,7 @@ import loginComponent from './login.component';
 import loginFormComponent from './login-form/login-form.component';
 import registerComponent from './register/register.component';
 import userMenuComponent from './user-menu/user-menu.component';
+import userCompaniesMenuComponent from './user-companies-menu/user-companies-menu.component';
 
 let loginModule
     = angular
@@ -13,6 +14,7 @@ let loginModule
         .component('login', loginComponent)
         .component('loginForm', loginFormComponent)
         .component('register', registerComponent)
-        .component('userMenu', userMenuComponent);
+        .component('userMenu', userMenuComponent)
+        .component('userCompaniesMenu', userCompaniesMenuComponent);
 
 export default loginModule;

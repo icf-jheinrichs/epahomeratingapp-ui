@@ -56,7 +56,12 @@ class ChecklistItemController {
                 }
             });
 
-        this.housePlanIds = this.JobChecklistStateService.getChecklistItemHouseplanIds(this.itemId, this.itemCategory, this.itemCategoryProgress);
+        this.housePlanIds
+             = this
+                .JobChecklistStateService
+                .getChecklistItemHouseplanIds(this.itemId, this.itemCategory, this.itemCategoryProgress);
+
+
         this.isApplicable = this.housePlanIds.indexOf(currentHousePlanId) >= 0;
     }
 

@@ -89,6 +89,7 @@ $padding-large:     10px;
 
 $border-color-default:  $brand-auxillary;
 $border-color-dark:     darken($brand-auxillary, 10%);
+$border-color-light:    lighten($brand-auxillary, 2%);
 $border-color-inverse:  #fff;
 
 $border-radius-default: 4px;
@@ -102,6 +103,7 @@ $border-size-large:     ($border-size-medium * 2);
 
 
 $border-default:        $border-size-default solid $border-color-default;
+$border-light:          $border-size-default solid $border-color-light;
 
 //
 //## Arrows

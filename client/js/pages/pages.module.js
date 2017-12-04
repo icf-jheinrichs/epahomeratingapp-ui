@@ -1,26 +1,24 @@
+import homePageComponent from './home-page/home-page.component';
 import housePlansPageComponent from './house-plans-page/house-plans-page.component';
 import jobsPageComponent from './jobs-page/jobs-page.component';
-import jobsSearchPageComponent from './jobs-search-page/jobs-search-page.component';
 import jobChecklistPageComponent from './job-checklist-page/job-checklist-page.component';
 import jobEditPageComponent from './job-edit-page/job-edit-page.component';
 import jobNewPageComponent from './job-new-page/job-new-page.component';
+import jobsProviderPageComponent from './jobs-provider-page/jobs-provider-page.component';
 import loginPageComponent from './login-page/login-page.component';
-import registerPageComponent from './register-page/register-page.component';
 import usersPageComponent from './users-page/users-page.component';
-import diagnosticsPageComponent from './diagnostics-page/diagnostics-page.component';
 
 let servicesModule
     = angular
         .module('epahomeratingapp.pages', [])
+        .component('homePage', homePageComponent)
         .component('housePlansPage', housePlansPageComponent)
         .component('jobsPage', jobsPageComponent)
-        .component('jobsSearchPage', jobsSearchPageComponent)
         .component('jobChecklistPage', jobChecklistPageComponent)
         .component('jobEditPage', jobEditPageComponent)
         .component('jobNewPage', jobNewPageComponent)
+        .component('jobsProviderPage', jobsProviderPageComponent)
         .component('loginPage', loginPageComponent)
-        .component('registerPage', registerPageComponent)
-        .component('usersPage', usersPageComponent)
-        .component('diagnosticsPage', diagnosticsPageComponent);
+        .component('usersPage', usersPageComponent);
 
 export default servicesModule;

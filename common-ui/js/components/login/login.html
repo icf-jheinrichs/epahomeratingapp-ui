@@ -1,5 +1,5 @@
 <div class="login-container flip-container">
-    <div class="flipper" data-ng-class="{'flipped' : (loginCtrl.action === 'forgotPassword')}">
+    <div class="flipper" data-ng-class="{'flipped' : (loginCtrl.action !== 'login')}">
         <login-form
             class="login-panel flip-front flip-panel"
             user="loginCtrl.user"
@@ -10,11 +10,19 @@
         </login-form>
 
         <forgot-password
+            data-ng-hide="loginCtrl.action !== 'forgotPassword'"
             class="login-panel flip-back flip-panel"
             user="loginCtrl.user"
             user-id-pattern="loginCtrl.userIdPattern"
             reset-password="loginCtrl.resetPassword(user)"
             set-action="loginCtrl.setAction(action)">
         </forgot-password>
+
+        <div
+            data-ng-hide="loginCtrl.action !== 'authorization'"
+            class="login-panel flip-back flip-panel">
+
+            <p>Logging in</p>
+        </div>
     </div>
 </div>

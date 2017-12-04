@@ -1,6 +1,8 @@
 import angular from 'angular';
 
 import jobsSearchComponent from './jobs-search.component';
+import searchFilterBuilderComponent from './search-filter-builder/search-filter-builder.component';
+import searchFilterHousePlanComponent from './search-filter-house-plan/search-filter-house-plan.component';
 import searchFilterInspectionStageComponent from './search-filter-inspection-stage/search-filter-inspection-stage.component';
 import searchFilterKeywordsComponent from './search-filter-keywords/search-filter-keywords.component';
 import searchFilterMustCorrectComponent from './search-filter-must-correct/search-filter-must-correct.component';
@@ -12,6 +14,8 @@ let jobsModule
     = angular
         .module('epahomeratingapp.components.jobs.search', [])
         .component('jobsSearch', jobsSearchComponent)
+        .component('searchFilterBuilder', searchFilterBuilderComponent)
+        .component('searchFilterHousePlan', searchFilterHousePlanComponent)
         .component('searchFilterInspectionStage', searchFilterInspectionStageComponent)
         .component('searchFilterKeywords', searchFilterKeywordsComponent)
         .component('searchFilterMustCorrect', searchFilterMustCorrectComponent)

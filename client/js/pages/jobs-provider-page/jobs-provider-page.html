@@ -1,0 +1,41 @@
+<section class="page-container">
+    <header class="page-header item-list-header clearfix">
+        <h2 class="pull-left item-list-title">Provider Jobs</h2>
+    </header>
+
+    <div class="row">
+        <div class="col-xs-3">
+            <nav class="nav nav-stacked ">
+                <a data-ui-sref="jobs-search({status : 'Submitted to Provider'})" ui-sref-opts="{inherit: false}" class="nav-item">Submitted to Provider</a>
+                <a data-ui-sref="jobs-search({status : 'Submitted to Provider', registered : 'true'})" ui-sref-opts="{inherit: false}" class="nav-item">Registered</a>
+            </nav>
+
+            <nav class="nav nav-stacked">
+                <a href="#" class="nav-item nav-item-link">Archived</a>
+                <a href="#" class="nav-item nav-item-link">Deleted</a>
+            </nav>
+        </div>
+
+        <div class="col-xs-9 jobs">
+            <jobs-search
+                quantity="jobsProviderPageCtrl.jobs.length">
+            </jobs-search>
+
+            <div class="bulk-operation-bar">
+                <label><input type="checkbox" ng-model="jobsCtrl.checkAll" data-ng-change="jobsCtrl.selectAllJobs()"> Select All</label>
+
+                <button class="btn" type="button" data-ng-click="jobsCtrl.submitToProvider()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">Submit to Provider</button>
+
+                <button class="btn" type="button" data-ng-click="jobsCtrl.bulkDownload()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">
+                    <i ng-show="jobsCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i>Download REM XML
+                </button>
+
+                <button class="btn" type="button" data-ng-click="jobsCtrl.flagForReview()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">
+                    Archive
+                </button>
+            </div>
+
+            <jobs jobs="jobsProviderPageCtrl.jobs"></jobs>
+        </div>
+    </div>
+</section>

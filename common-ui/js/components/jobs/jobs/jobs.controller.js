@@ -1,8 +1,8 @@
-import _defer from 'lodash/defer';
+// import _defer from 'lodash/defer';
 
-let _forEach   = require('lodash/forEach');
-let JSZip      = require('jszip');
-let FileSaver  = require('file-saver');
+// let _forEach   = require('lodash/forEach');
+// let JSZip      = require('jszip');
+// let FileSaver  = require('file-saver');
 
 class JobsController {
     constructor (CONTEXT, UI_ENUMS, $window, $scope, $state, $http, $rootScope, JobsService) {
@@ -10,18 +10,21 @@ class JobsController {
 
         this.CONTEXT_IS_ADMIN = CONTEXT === UI_ENUMS.CONTEXT.ADMIN;
 
-        this.JobsService = JobsService;
-        this.$http       = $http;
-        this.$state      = $state;
-        this.$scope      = $scope;
-        this.$rootScope  = $rootScope;
-        this.JOB_STATUS  = UI_ENUMS.JOB_STATUS;
-        this.MESSAGING   = UI_ENUMS.MESSAGING;
+        this.JobsService      = JobsService;
+        this.$http            = $http;
+        this.$state           = $state;
+        this.$scope           = $scope;
+        this.$rootScope       = $rootScope;
+        this.JOB_STATUS       = UI_ENUMS.JOB_STATUS;
+        this.MESSAGING        = UI_ENUMS.MESSAGING;
 
-        this.checkAll   = false;
-        this.markedJobs = [];
+        this.checkAll         = false;
+        this.markedJobs       = [];
 
-        this.downloadingRem = false;
+        this.downloadingRem   = false;
+
+        this.STATE_NAME       = UI_ENUMS.STATE_NAME;
+        this.currentStateName = this.$state.current.name;
     }
 
     $onInit () {
@@ -30,7 +33,10 @@ class JobsController {
         for (let i = 0; i < this.jobs.length; i++) {
             this.markedJobs.push(false);
         }
+
     }
+
+    /*
 
     generateFileName (job) {
         let housePlanName = job.Primary.HousePlan[0].Name;
@@ -39,6 +45,7 @@ class JobsController {
 
         housePlanName = housePlanName.replace(/[^\w\s]/gi, '-');
         address       = address.replace(/[^\w\s]/gi, '-');
+
         return `${housePlanName}${address}`;
     }
 
@@ -114,19 +121,6 @@ class JobsController {
         });
     }
 
-    getSelectedJobs () {
-        let changeJobs = [];
-        let remainJobs = [];
-        for (let i = 0; i < this.markedJobs.length; i++) {
-            if (this.markedJobs[i] === true) {
-                changeJobs.push(this.jobs[i]);
-            } else {
-                remainJobs.push(this.jobs[i]);
-            }
-        }
-        return {changeJobs : changeJobs, remainJobs : remainJobs};
-    }
-
     flagForReview () {
         for (let i = 0; i < this.markedJobs.length; i++) {
             if (this.markedJobs[i] === true) {
@@ -156,6 +150,8 @@ class JobsController {
         // TODO - Keep the current tab
         this.$state.go('jobs');
     }
+
+    */
 
     jobsAreSelected () {
         for (let i = 0; i < this.markedJobs.length; i++) {

@@ -1,6 +1,7 @@
 .checklist-item {
     border-top: $border-size-medium solid $border-color-default;
     padding: $gutter-half $gutter-half $gutter-half $gutter-full;
+    position: relative;
 }
 
 .checklist-item-header {
@@ -42,6 +43,13 @@
     .house-title {
         display: block;
     }
+}
+
+.checklist-item-review-response {
+    position: absolute;
+    right: $gutter-half;
+    top: 0;
+    width: auto;
 }
 
 .checklist-item-response-edit {

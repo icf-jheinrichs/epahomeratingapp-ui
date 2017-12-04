@@ -51,12 +51,14 @@ const USER_TYPE = {
 };
 
 const DIALOG = {
-    MAKE_JOB_OFFLINE       : 'dialog-make-job-offline',
-    LEAKAGE_TEST_EXEMPTION : 'dialog-leakage-test-exemption'
+    MAKE_JOB_OFFLINE          : 'dialog-make-job-offline',
+    LEAKAGE_TEST_EXEMPTION    : 'dialog-leakage-test-exemption',
+    SAVE_USER_COMPANIES_ERROR : 'dialog-save-user-companies-error'
 };
 
 const DROPDOWN = {
-    USER_MENU : 'user-menu'
+    USER_MENU           : 'user-menu',
+    USER_COMPANIES_MENU : 'user-companies-menu'
 };
 
 const IMAGES = {
@@ -142,7 +144,8 @@ const MESSAGING = {
 };
 
 const MODAL = {
-    SHOW_FOOTNOTE : 'modal-show-footnote'
+    SHOW_FOOTNOTE : 'modal-show-footnote',
+    SHOW_HISTORY  : 'modal-show-history'
 };
 
 const POPOVER = {
@@ -221,6 +224,29 @@ const STATUS_CLASSNAME = {
     SYNC_INCOMPLETE   : 'sync-status-incomplete' // red with x
 };
 
+const STATE_NAME = {
+    LOGIN                         : 'login',
+    REGISTER                      : 'register',
+    PROGRESS                      : 'progress',
+    HOUSE_LIBRARY                 : 'house-library',
+    HOUSE_LIBRARY_NEW             : 'house-library.new',
+    HOUSE_LIBRARY_EDIT            : 'house-library.edit',
+    HOUSE_LIBRARY_EDIT_BULK       : 'house-library.edit-bulk',
+    JOBS                          : 'jobs',
+    JOBS_SEARCH                   : 'jobs-search',
+    JOBS_PROVIDER                 : 'jobs-provider',
+    JOBS_PROVIDER_SEARCH          : 'jobs-provider-search',
+    JOB_NEW                       : 'job-new',
+    JOB_EDIT                      : 'job-edit',
+    JOB_CHECKLIST                 : 'job-checklist',
+    JOB_CHECKLIST_CATEGORY        : 'job-checklist.category',
+    JOB_CHECKLIST_STAGE           : 'job-checklist.stage',
+    JOB_CHECKLIST_REVIEW          : 'job-checklist-review',
+    JOB_CHECKLIST_REVIEW_CATEGORY : 'job-checklist-review.category',
+    USERS                         : 'users',
+    DIAGNOSTICS                   : 'diagnostics'
+};
+
 const SYNC_STATUS = {
     UP      : 'sync-up',
     DOWN    : 'sync-down',
@@ -246,6 +272,7 @@ export default {
     RATING_TYPES,
     RESPONSES,
     SEARCH_PARAMS,
+    STATE_NAME,
     STATUS,
     STATUS_CLASSNAME,
     SYNC_STATUS,

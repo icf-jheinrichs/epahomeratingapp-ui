@@ -1,8 +1,9 @@
 class CameraService {
-    constructor ($q) {
+    constructor ($q, BASE_IMAGE_URL) {
         'ngInject';
 
         this.$q             = $q;
+        this.BASE_IMAGE_URL = BASE_IMAGE_URL;
     }
 
     getPhoto () {

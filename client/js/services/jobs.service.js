@@ -2,10 +2,9 @@ import _cloneDeep from 'lodash/cloneDeep';
 import _orderBy from 'lodash/orderBy';
 import _omitBy from 'lodash/omitBy';
 import _pickBy from 'lodash/pickBy';
+import _map from 'lodash/map';
 import _forOwn from 'lodash/forOwn';
-// import _map from 'lodash/map';
-// import _random from 'lodash/random';
-// import _sample from 'lodash/sample';
+import _intersection from 'lodash/intersection';
 
 /**
  * JobsService is the interface for all job data.
@@ -19,50 +18,17 @@ class JobsService {
      * @param  {function} $sanitize angular.$sanitize html injection
      * @param  {object}   API_URL   epahomeratingapp constants - contains paths to API
      */
-    constructor ($log, $q, $http, $interval, $rootScope, $sanitize, UI_ENUMS, API_URL, jobTitleFilter) {
+    constructor ($q, $http, $stateParams, $sanitize, UI_ENUMS, API_URL, jobTitleFilter) {
         'ngInject';
-        // let self = this;
 
-        this.$log       = $log;
-        this.$q         = $q;
-        this.$http      = $http;
-        this.$sanitize  = $sanitize;
-        this.$interval  = $interval;
-        this.$rootScope = $rootScope;
+        this.$q           = $q;
+        this.$http        = $http;
+        this.$sanitize    = $sanitize;
+        this.$stateParams = $stateParams;
 
         this.SEARCH_PARAMS  = UI_ENUMS.SEARCH_PARAMS;
         this.API_URL        = API_URL;
         this.jobTitleFilter = jobTitleFilter;
-
-        this.MESSAGING = UI_ENUMS.MESSAGING;
-
-        // this.messages = [this.MESSAGING.DEVICE_OFFLINE, this.MESSAGING.DEVICE_ONLINE, this.MESSAGING.ASSET_DOWNLOADED, this.MESSAGING.ASSET_UPLOADED_FOR_JOB, this.MESSAGING.ASSET_BEING_UPLOADED_FOR_JOB, this.MESSAGING.DB_START_SYNC, this.MESSAGING.DB_PAUSE_SYNC];
-        // this.jobIDs   = ['1ef1c7dce98910b013b2dbc5272f57cf', '27be11354609526b241e1fa83080ac27', '2b7fef4727c30a3e29c46f84d3bfc73e', '4224198713186c7bf015b08bb8b7969b', '498915e4edeb9eb2c70ae554c1bc8553', '6c44b076d4a80b35f42a5c3e82f9a95d', '932876091b531e106a2ced4251f358bc', 'cf6e338f0f7b9851b306cb4da9c04fef'];
-
-        this.messages = [this.MESSAGING.DEVICE_ONLINE, this.MESSAGING.ASSET_DOWNLOADED];
-        this.jobIDs   = ['1ef1c7dce98910b013b2dbc5272f57cf', '27be11354609526b241e1fa83080ac27', '2b7fef4727c30a3e29c46f84d3bfc73e', '4224198713186c7bf015b08bb8b7969b', '498915e4edeb9eb2c70ae554c1bc8553', '6c44b076d4a80b35f42a5c3e82f9a95d', '932876091b531e106a2ced4251f358bc', 'cf6e338f0f7b9851b306cb4da9c04fef'];
-
-        this.messageIndex = 0;
-        this.jobIDindex   = 0;
-
-        // this.stop = this.$interval(() => {
-        //     let message = _sample(self.messages);
-        //     let jobID   = _sample(self.jobIDs);
-        //
-        //     let data = {
-        //         jobID,
-        //         assetStatus : {
-        //             total   : 4,
-        //             missing : _random(0, 1)
-        //         },
-        //         uploadingJobs : ['1ef1c7dce98910b013b2dbc5272f57cf', '27be11354609526b241e1fa83080ac27', '2b7fef4727c30a3e29c46f84d3bfc73e', '4224198713186c7bf015b08bb8b7969b', '498915e4edeb9eb2c70ae554c1bc8553']
-        //     };
-        //
-        //     self.$log.log(message, jobID);
-        //
-        //     self.$rootScope.$broadcast(message, data);
-        //
-        // }, 5000);
     }
 
     /**
@@ -79,12 +45,11 @@ class JobsService {
                 })
                 .then((response) => {
                     if (response.status === 200) {
-                        let jobs = {};
+                        let jobs = response.data;
 
-                        jobs = response.data;
-                        jobs.forEach((job) => {
-                            job.offlineAvailable = true; // !!_random(0, 1);
-                        });
+                        jobs = _orderBy(jobs, [function sortByCreateDate (o) {
+                            return new Date(o.History[0].DateTime);
+                        }], ['desc']);
 
                         resolve(jobs);
                     } else {
@@ -98,6 +63,18 @@ class JobsService {
         });
 
         return promise;
+    }
+
+    reduceHousePlans (samples) {
+        let housePlans = [];
+
+        samples.forEach((sample) => {
+            let sampleHousePlans = _map(sample.HousePlan, '_id');
+
+            housePlans = housePlans.concat(housePlans, sampleHousePlans);
+        });
+
+        return housePlans;
     }
 
     //TODO : move some of this server side
@@ -119,14 +96,31 @@ class JobsService {
                             return param === undefined || param === null;
                         });
 
+                        // debugger;
+
                         filteredJobs = _pickBy(allJobs, (job) => {
+                            // debugger;
                             let pick          = true;
                             let jobTitle      = this.jobTitleFilter(job.Primary.AddressInformation).toLowerCase();
+                            let samples       = job.Secondary.concat([job.Primary]);
+                            let jobBuilders   = samples.reduce((jobBuilderList, sample) => {
+                                return jobBuilderList + ` ${sample.Builder}`;
+                            }, '');
                             let progressLevel = stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL];
+                            let jobHousePlans = this.reduceHousePlans(samples);
 
                             _forOwn(searchParams, (value, key) => {
-
                                 switch (key) {
+                                case this.SEARCH_PARAMS.BUILDER :
+                                    if (jobBuilders.toLowerCase().indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
+                                        pick = false;
+                                    }
+                                    break;
+                                case this.SEARCH_PARAMS.HOUSE_PLAN :
+                                    if (_intersection(jobHousePlans, value.split(',')).length === 0) {
+                                        pick = false;
+                                    }
+                                    break;
                                 case this.SEARCH_PARAMS.KEYWORDS :
                                     if (jobTitle.indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
                                         pick = false;
@@ -163,7 +157,6 @@ class JobsService {
                                     if (!job.InternalReview) {
                                         pick = false;
                                     }
-                                    break;
                                 }
 
                             });
@@ -241,6 +234,7 @@ class JobsService {
      */
     getNewJob () {
         let jobTemplate = {
+            'ProgressLevel'        : 'PreDrywall',
             'RatingType'           : 'energy-star',
             'Primary'              : this.getNewSample(),
             'Secondary'            : []
@@ -273,12 +267,6 @@ class JobsService {
         });
 
         return promise;
-    }
-
-    getAllIDs () {
-        return this.$q((resolve, reject) => {
-            resolve(['1192b1b221febf2f478b45d6f5bd27d6', '317946647f1087c0d7277b26093e5212']);
-        });
     }
 
     getExportSignedUrl (_id) {
@@ -327,14 +315,6 @@ class JobsService {
         });
 
         return promise;
-    }
-
-    makeAvailableOffline (job) {
-        this.$log.log(`[jobs.service.js] ${job} make available offline`);
-    }
-
-    cancelAvailableOffline (job) {
-        this.$log.log(`[jobs.service.js] ${job} cancel available offline`);
     }
 
     sanitize (job) {

@@ -1,0 +1,45 @@
+<div class="job-select flex-item-static flex-row flex-align-center">
+    <label aria-labelledby="job-{{jobAdminCtrl.job._id}}">
+        <span class="sr-only">Mark job for bulk operations.</span>
+        <input type="checkbox" ng-model="jobAdminCtrl.marked">
+    </label>
+</div>
+
+<div class="flex-item-grow">
+    <a aria-labelledby="job-{{jobAdminCtrl.job._id}}"
+       class="job job-admin flex-row flex-align-center"
+       data-ng-class="{'job-returned': jobAdminCtrl.hasStatusLabel()}"
+       data-ui-sref="job-checklist-review.category({id: jobAdminCtrl.job._id, houseId: jobAdminCtrl.job.Primary.HouseId, categoryId: 'walls', role: 'admin'})">
+
+        <div class="job-info">
+            <div class="job-meta">
+                <span class="label label-rating-type" data-ng-class="jobAdminCtrl.RatingTypeClass">{{::jobAdminCtrl.RatingType}}</span>
+                <span class="label label-sample-set" data-ng-if="jobAdminCtrl.isSample">Sample Set: {{::jobAdminCtrl.sampleQuantity}} <i class="fa fa-map-marker" aria-hidden="true"></i></span>
+            </div>
+
+            <h3 class="list-item-title job-title" id="job-{{jobAdminCtrl.job._id}}" data-ng-bind-html="jobAdminCtrl.JobTitle"></h3>
+
+            <div class="job-history">
+                <span class="last-update small"><strong>{{::jobAdminCtrl.lastUpdateType}}:</strong> {{::jobAdminCtrl.lastUpdateTime}}</span>
+            </div>
+        </div>
+
+        <div class="job-status">
+            <span class="label label-job-status label-status-returned" data-ng-if="jobAdminCtrl.job.ReturnedFromInternal">Returned from QA</span>
+            <span class="label label-job-status label-status-returned" data-ng-if="jobAdminCtrl.job.ReturnedFromProvider">Returned from Provider</span>
+        </div>
+
+        <div class="job-progress">
+            <div class="radial-progress"><radial-progress title="Pre-drywall" progress="jobAdminCtrl.job.Progress.PreDrywall" /></radial-progress></div>
+            <div class="radial-progress"><radial-progress title="Final" progress="jobAdminCtrl.job.Progress.Final" /></radial-progress></div>
+        </div>
+
+        <i class="list-item-activate fa fa-chevron-right fa-lg" aria-hidden="true"></i>
+    </a>
+
+    <div class="job-actions">
+        <a data-ui-sref="job-edit({id : jobAdminCtrl.job._id})" class="btn btn-sm">Edit Profile</a>
+        <button class="btn btn-sm" type="button">Download XML</button>
+        <button class="btn btn-sm pull-right" type="button">Delete</button>
+    </div>
+</div>

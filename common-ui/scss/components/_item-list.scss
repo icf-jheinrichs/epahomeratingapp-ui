@@ -23,4 +23,8 @@
     &.flex-row {
         display: flex;
     }
+
+    &.drop-down-item {
+        padding: $padding-large;
+    }
 }

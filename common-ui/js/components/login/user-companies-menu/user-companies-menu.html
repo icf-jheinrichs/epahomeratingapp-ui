@@ -1,0 +1,30 @@
+<nav class="nav" dropdown="dropdown" id="user-companies-menu">
+    <p data-ng-if="userCompaniesMenuCtrl.userCompanies.length === 1" class="text-right">{{userCompaniesMenuCtrl.currentOrganization.Name}}</p>
+
+    <div data-ng-if="userCompaniesMenuCtrl.userCompanies.length > 1">
+        <button
+            data-ng-if="userCompaniesMenuCtrl.menuIsVisible()"
+            data-ng-click="userCompaniesMenuCtrl.toggleDropDown()"
+            class="btn btn-link"
+            dropdown-toggle="dropdown-toggle">
+
+            {{userCompaniesMenuCtrl.currentOrganization.Name}} <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </button>
+
+        <nav
+            class="drop-down hidden"
+            dropdown-menu="dropdown-menu"
+            role="menu">
+
+            <button
+                data-ng-repeat="userCompany in userCompaniesMenuCtrl.userCompanies"
+                data-ng-click="userCompaniesMenuCtrl.setCurrentOrganization(userCompany.O_ID)"
+                class="drop-down-item"
+                type="button"
+                role="menuitem">
+
+                {{::userCompany.Name}}
+            </button>
+        </nav>
+    </div>
+</nav>

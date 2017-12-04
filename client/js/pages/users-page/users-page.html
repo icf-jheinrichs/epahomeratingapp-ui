@@ -1,24 +1,26 @@
 <section class="page-container">
-
     <header class="page-header item-list-header clearfix">
         <h2 class="pull-left item-list-title">Users</h2>
-        <button type="button" class="btn pull-right"><i class="fa fa-plus" aria-hidden="true"></i> Add an User</a>
     </header>
 
     <div class="row">
-        <div class="col-xs-3">
-            <nav class="nav nav-stacked">
-                <button class="nav-item active" type="button">Active Raters<span class="badge">27</span></button>
-                <button class="nav-item" type="button">Inactive Raters <span class="badge">137</span></button>
-                <button class="nav-item" type="button">Suspended Raters <span class="badge">12</span></button>
-                <button class="nav-item" type="button">Rating Company Admins <span class="badge">4</span></button>
-                <button class="nav-item" type="button">Active Providers <span class="badge">6</span></button>
-                <button class="nav-item" type="button">Suspended Providers <span class="badge">0</span></button>
-            </nav>
-        </div>
-
-        <div class="col-xs-9 users">
-            <users></users>
+        <div class="col-xs-12 users">
+            <users users="usersPageCtrl.users" on-save-users="usersPageCtrl.saveUsers(users)"></users>
         </div>
     </div>
 </section>
+
+<div class="dialog hidden" dialog="dialog" id="dialog-save-user-companies-error">
+    <div class="dialog-header">
+        <h3 class="dialog-title">Unable to Save</h3>
+    </div>
+    <div class="dialog-body">
+        <ul>
+            <li>There must be at least one active Admin.</li>
+            <li>For Provider Organizations, there must be at least one active Provider</li>
+        </ul>
+    </div>
+    <div class="dialog-footer text-right">
+        <button class="btn" data-ng-click="dismiss(true)">Okay</button>
+    </div>
+</div>

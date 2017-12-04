@@ -1,0 +1,5 @@
+@import '../../../../common-ui/scss/variables';
+
+#admin-head {
+    background: linear-gradient(to bottom, $brand-secondary 0, darken($brand-secondary, 5%) $border-radius-large, $body-bg $border-radius-large);
+}

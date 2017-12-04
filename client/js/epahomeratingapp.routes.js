@@ -7,14 +7,16 @@ _forOwn(UI_ENUMS.SEARCH_PARAMS, (value, key) => {
     searchParams.push(value);
 });
 
+const STATE_NAME = UI_ENUMS.STATE_NAME;
+
 let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $urlRouterProvider) {
     'ngInject';
 
     $urlRouterProvider
-        .otherwise('/login');
+        .otherwise(STATE_NAME.LOGIN);
 
     $stateProvider
-        .state('login', {
+        .state(STATE_NAME.LOGIN, {
             url        : '/login',
             component  : 'loginPage',
             data       : {
@@ -42,7 +44,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state('register', {
+        .state(STATE_NAME.REGISTER, {
             url        : '/register',
             component  : 'registerPage',
             data       : {
@@ -50,8 +52,8 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state('house-plans', {
-            url        : '/house-plans',
+        .state(STATE_NAME.HOUSE_LIBRARY, {
+            url        : '/house-library',
             component  : 'housePlansPage',
             resolve    : {
                 housePlans : (HousePlansService) => {
@@ -67,12 +69,12 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state('house-plans.new', {
+        .state(STATE_NAME.HOUSE_LIBRARY_NEW, {
             url       : '/new',
             component : 'housePlanNew'
         })
 
-        .state('house-plans.edit', {
+        .state(STATE_NAME.HOUSE_LIBRARY_EDIT, {
             url       : '/{id}',
             component : 'housePlanEdit',
             resolve   : {
@@ -89,7 +91,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state('house-plans.edit-bulk', {
+        .state(STATE_NAME.HOUSE_LIBRARY_EDIT_BULK, {
             url       : '/edit-bulk',
             component : 'housePlanEditBulk',
             params    : {
@@ -97,7 +99,42 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state('jobs', {
+        .state(STATE_NAME.JOBS_PROVIDER, {
+            url        : '/jobs/submitted',
+            component  : 'jobsProviderPage',
+            resolve    : {
+                jobs   : (JobsService) => {
+                    let jobPromise
+                        = JobsService
+                            .get()
+                            .then(jobs => {
+                                return jobs;
+                            });
+
+                    return jobPromise;
+                }
+            }
+        })
+
+        .state(STATE_NAME.JOBS_PROVIDER_SEARCH, {
+            url        : `/jobs/submitted?${searchParams.join('&')}`,
+            component  : 'jobsProviderPage',
+            resolve    : {
+                jobs   : (JobsService, $stateParams) => {
+                    let jobPromise
+                        = JobsService
+                            .search($stateParams)
+                            .then(jobs => {
+                                return jobs;
+                            });
+
+                    return jobPromise;
+                }
+            }
+        })
+
+
+        .state(STATE_NAME.JOBS, {
             url        : '/jobs',
             component  : 'jobsPage',
             resolve    : {
@@ -114,7 +151,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state('jobs-search', {
+        .state(STATE_NAME.JOBS_SEARCH, {
             url        : `/jobs?${searchParams.join('&')}`,
             component  : 'jobsPage',
             resolve    : {
@@ -131,7 +168,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state('job-new', {
+        .state(STATE_NAME.JOB_NEW, {
             url        : '/jobs/new/',
             component  : 'jobNewPage',
             resolve    : {
@@ -151,7 +188,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state('job-edit', {
+        .state(STATE_NAME.JOB_EDIT, {
             url        : '/jobs/edit/{id}',
             component  : 'jobEditPage',
             resolve    : {
@@ -178,7 +215,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state('job-checklist', {
+        .state(STATE_NAME.JOB_CHECKLIST, {
             url        : '/jobs/{id}',
             component  : 'jobChecklistPage',
             resolve    : {
@@ -192,7 +229,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state('job-checklist.category', {
+        .state(STATE_NAME.JOB_CHECKLIST_CATEGORY, {
             url        : '/{houseId}/{categoryId}?status',
             component  : 'checklistCategory',
             resolve    : {
@@ -206,7 +243,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state('job-checklist.stage', {
+        .state(STATE_NAME.JOB_CHECKLIST_STAGE, {
             url        : '/{houseId}/stage/{stageId}?status',
             component  : 'checklistStage',
             resolve    : {
@@ -220,12 +257,40 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state('users', {
+        .state(STATE_NAME.JOB_CHECKLIST_REVIEW, {
+            url        : '/jobs/review/{id}?role',
+            component  : 'jobChecklistPage',
+            resolve    : {
+                job : (JobChecklistStateService, $stateParams) => {
+                    let jobChecklistStatePromise
+                        = JobChecklistStateService
+                            .setJobState($stateParams.id, $stateParams.houseId);
+
+                    return jobChecklistStatePromise;
+                }
+            }
+        })
+
+        .state(STATE_NAME.JOB_CHECKLIST_REVIEW_CATEGORY, {
+            url        : '/{houseId}/{categoryId}?status',
+            component  : 'checklistCategory',
+            resolve    : {
+                jobChecklistState : (JobChecklistStateService, $stateParams) => {
+                    let jobChecklistStatePromise
+                        = JobChecklistStateService
+                            .setJobHouseState($stateParams.id, $stateParams.houseId);
+
+                    return jobChecklistStatePromise;
+                }
+            }
+        })
+
+        .state(STATE_NAME.USERS, {
             url        : '/users',
             component  : 'usersPage'
         })
 
-        .state('diagnostics', {
+        .state(STATE_NAME.DIAGNOSTICS, {
             url        : '/diagnostics',
             component  : 'diagnosticsPage'
         });

@@ -10,9 +10,9 @@ import PopoverService from './popover.service';
 let popoverModule
     = angular
         .module('epahomeratingapp.common.popover', [])
-            .directive('popover', popoverDirective)
-            .directive('popoverToggle', popoverToggleDirective)
-            .directive('popoverBody', popoverBodyDirective)
-            .service('PopoverService', PopoverService);
+        .directive('popover', popoverDirective)
+        .directive('popoverToggle', popoverToggleDirective)
+        .directive('popoverBody', popoverBodyDirective)
+        .service('PopoverService', PopoverService);
 
 export default popoverModule;

@@ -2,7 +2,7 @@ import template from './item-hvac-equipment.html';
 import controller from './item-hvac-equipment.controller';
 // import './job.scss';
 
-let checklistItemHVACCommissioningComponent = {
+let checklistItemHVACEquipmentComponent = {
     bindings : {
         itemId               : '@',
         itemCategory         : '@',
@@ -10,7 +10,7 @@ let checklistItemHVACCommissioningComponent = {
     },
     template,
     controller,
-    controllerAs : 'checklistItemHVACCommissioningCtrl'
+    controllerAs : 'checklistItemHVACEquipmentCtrl'
 };
 
-export default checklistItemHVACCommissioningComponent;
+export default checklistItemHVACEquipmentComponent;

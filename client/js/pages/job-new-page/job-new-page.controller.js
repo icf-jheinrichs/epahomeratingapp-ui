@@ -102,6 +102,14 @@ class JobsNewPageController {
                 this.$log.log('Create job with local house plan error');
                 this.$log.log(error);
                 this.message = Object.assign({}, ERROR_SERVER);
+
+                if (error.message) {
+                    this.message.text = error.message;
+                }
+
+                if (error.reason) {
+                    this.message.text += '. ' + error.reason;
+                }
             });
     }
 

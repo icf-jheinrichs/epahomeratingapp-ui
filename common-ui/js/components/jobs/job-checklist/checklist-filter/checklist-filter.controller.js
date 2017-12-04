@@ -6,6 +6,7 @@ class ChecklistFilterController {
 
         this.$state       = $state;
         this.$stateParams = $stateParams;
+        this.STATE_NAME   = UI_ENUMS.STATE_NAME;
 
         this.JobChecklistStateService = JobChecklistStateService;
         this.CATEGORIES               = UI_ENUMS.CATEGORIES;
@@ -51,7 +52,7 @@ class ChecklistFilterController {
     }
 
     getCurrentInspectionStageFilter () {
-        if (this.$state.current.name === 'job-checklist.stage') {
+        if (this.$state.current.name === this.STATE_NAME.JOB_CHECKLIST) {
             return [this.inspectionStageFilters[this.$stateParams.stageId].Key];
         } else {
             return ['Any'];
@@ -71,7 +72,7 @@ class ChecklistFilterController {
     }
 
     getCurrentInspectionStageFilterName () {
-        if (this.$state.current.name === 'job-checklist.stage') {
+        if (this.$state.current.name === this.STATE_NAME.JOB_CHECKLIST) {
             return this.inspectionStageFilters[this.$stateParams.stageId].Name;
         } else {
             return 'Any';

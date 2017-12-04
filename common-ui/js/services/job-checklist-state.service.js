@@ -4,25 +4,28 @@ import _forEach from 'lodash/forEach';
 import _cloneDeep from 'lodash/cloneDeep';
 
 class JobChecklistState {
-    constructor ($log,
-                 $state,
-                 $stateParams,
-                 $q,
-                 DisplayLogicDigestService,
-                 JobChecklistProgressService,
-                 JobDataHomePerformanceService,
-                 JobDataResponseService,
-                 JobDisplayListService,
-                 JobsService,
-                 jobTitleFilter,
-                 UI_ENUMS) {
+    constructor (
+        $log,
+        $state,
+        $stateParams,
+        $q,
+        DisplayLogicDigestService,
+        JobChecklistProgressService,
+        JobDataHomePerformanceService,
+        JobDataResponseService,
+        JobDisplayListService,
+        JobsService,
+        jobTitleFilter,
+        UI_ENUMS
+    ) {
 
         'ngInject';
 
+        this.$q                            = $q;
         this.$log                          = $log;
         this.$state                        = $state;
         this.$stateParams                  = $stateParams;
-        this.$q                            = $q;
+        this.STATE_NAME                    = UI_ENUMS.STATE_NAME;
 
         this.DisplayLogicDigestService     = DisplayLogicDigestService;
         this.JobChecklistProgressService   = JobChecklistProgressService;
@@ -44,6 +47,13 @@ class JobChecklistState {
         this.clearState();
     }
 
+    /**
+     * Completely clear all state, then request job data.
+     *
+     * Resolved by the router.
+     *
+     * @param {string} jobId ID of job to refresh checklist state with
+     */
     setJobState (jobId) {
         this.clearState();
 
@@ -68,6 +78,13 @@ class JobChecklistState {
         return this.jobStatePromise;
     }
 
+    /**
+     * Requests the display list for the job,
+     * then ensures the display logic digest is resolved,
+     * then finally recalculates job progress if the job is a HERS rating type and job has not been responded to.
+     *
+     * Sets a instance property, jobChecklistStatePromise, to a promise if state has resolved
+     */
     setJobDisplayListState () {
         let job          = this.job;
         const jobId      = job._id;
@@ -84,17 +101,16 @@ class JobChecklistState {
                 .JobDisplayListService
                 .getById(housePlanIds)
                 .then((jobDisplayList) => {
-                    this.$log.log('JobDisplayListService Success');
                     this.jobDisplayList = jobDisplayList;
 
                     let JobDataResponsePromise
-                        = this.JobDataResponseService
+                        = this
+                            .JobDataResponseService
                             .getById(jobId);
 
                     return JobDataResponsePromise;
                 })
                 .then((jobDataResponse) => {
-                    this.$log.log('JobDataResponseService Success');
                     this.jobDataResponse = jobDataResponse;
 
                     return this.DisplayLogicDigestService.getPromise();
@@ -113,6 +129,14 @@ class JobChecklistState {
         return this.jobChecklistStatePromise;
     }
 
+    /**
+     * Set state for requested house, or if state already exists, return existing state.
+     *
+     * Resolved by route.
+     *
+     * @param {string} jobId   ID of current job
+     * @param {string} HouseId ID of house to retrieve home performance (MRF) data for
+     */
     setJobHouseState (jobId, HouseId) {
         this.currentHouse    = this.getHouse(parseInt(HouseId, 10));
 
@@ -138,6 +162,9 @@ class JobChecklistState {
         return setJobHouseStatePromise;
     }
 
+    /**
+     * completely clears the state
+     */
     clearState () {
         this.job                    = {};
         this.jobHouses              = {};
@@ -150,10 +177,18 @@ class JobChecklistState {
         this.currentHouse           = {};
     }
 
+    /**
+     * Get reference to job object
+     * @return {object} job data object
+     */
     getJob () {
         return this.job;
     }
 
+    /**
+     * Used by job checklist page controller to satisfy a race condition.
+     * @return {promise}
+     */
     getJobDisplayList () {
         return this.$q((resolve, reject) => {
             this
@@ -167,10 +202,19 @@ class JobChecklistState {
         });
     }
 
+    /**
+     * Get house data
+     * @param  {string} HouseId ID of house
+     * @return {object}         House data object
+     */
     getHouse (HouseId) {
         return this.jobHouses[HouseId];
     }
 
+    /**
+     * Create an easily queriable object of the houses in the job. Mitigates the Primay / Secondary props in the job data.
+     * @return {object} key indexed object of the houses in the job
+     */
     getJobHouses () {
         let houses = {};
 
@@ -185,6 +229,11 @@ class JobChecklistState {
         return houses;
     }
 
+    /**
+     * Used by non-applicable checklist item. Given an array of ids for houses that do apply, return their titles and IDs
+     * @param  {array} housePlanIds  array of applicable house IDs
+     * @return {array}               array of titles and IDs of applicable houses
+     */
     getApplicableHouses (housePlanIds) {
         let houses = [];
 
@@ -200,18 +249,37 @@ class JobChecklistState {
         return houses;
     }
 
+    /**
+     * Return the response for a given checklist item
+     * @param  {string} itemId               ID of checklist item
+     * @param  {string} itemCategory         category of checklist item (Walls, CeilingsRoofs, etc.)
+     * @param  {string} itemCategoryProgress progress of checklist item (PreDrywall or Final)
+     * @return {[type]}                      [description]
+     */
     getChecklistItemResponse (itemId, itemCategory, itemCategoryProgress) {
         return this.$q((resolve, reject) => {
             resolve(this.jobDataResponse.ChecklistItems[itemCategory][itemCategoryProgress][itemId]);
         });
     }
 
+    /**
+     * Return home performance (MRF) data for checklist item in the current house
+     * @param  {string} itemId ID of checklist item
+     * @return {object}        home performance (MRF) data
+     */
     getChecklistItemHomePerformance (itemId) {
         return this.$q((resolve, reject) => {
             resolve(this.jobDataHomePerformance[this.currentHouse.HouseId].ChecklistItems[itemId]);
         });
     }
 
+    /**
+     * Get array of house plan IDs that checklist item applies to.
+     * @param  {string} itemId               id of checklist item
+     * @param  {string} itemCategory         category of checklist item (Walls, CeilingsRoofs, etc.)
+     * @param  {string} itemCategoryProgress progress of checklist item (PreDrywall or Final)
+     * @return {array}                       array of house plan IDs that checklist item applies to
+     */
     getChecklistItemHouseplanIds (itemId, itemCategory, itemCategoryProgress) {
         let checklistItems     = this.jobDisplayList[itemCategory][itemCategoryProgress];
         let checklistItemIndex = _findIndex(checklistItems, {checklistItemRef : itemId});
@@ -220,10 +288,10 @@ class JobChecklistState {
         return houseplanIds;
     }
 
-    getChecklistItemHouseTitles (houseIds) {
-        return houseIds[0];
-    }
-
+    /**
+     * Use the progress service to tally the job data complete status to check if a job can be completed.
+     * @return {object} object with keys MustCorrect, BuilderVerified, and remaining.
+     */
     getJobCompleteStatus () {
         let status
             = this
@@ -259,15 +327,21 @@ class JobChecklistState {
     }
 
     /**
-     * Register a sub-item
-     * @param  {[type]} itemId           [description]
-     * @param  {[type]} showHideCallback [description]
-     * @return {[type]}                  [description]
+     * Register a sub checklist item
+     * @param  {string}   itemId           id of sub sub checklist item
+     * @param  {function} showHideCallback function to call if sub checklist item should change visiblity
      */
     registerSubItem (itemId, showHideCallback) {
         this.subItemTable[itemId] = showHideCallback;
     }
 
+    /**
+     * Toggle status of sub checklist items when dropdown selection is changed
+     * @param  {boolean} setItemData used to prevent cyclical calls to setItemData on page init
+     * @param  {array}  itemId       ids of checklist items that should be shown
+     * @param  {object}  itemInfo    Category and CategoryProgress of checklist item
+     * @param  {Boolean} isOmitted   wether to show or hide sub item
+     */
     omitSubItem (setItemData, itemId, itemInfo, isOmitted) {
         for (let index in itemId) {
             let callback      = this.subItemTable[itemId[index]];
@@ -283,6 +357,10 @@ class JobChecklistState {
         }
     }
 
+    /**
+     * First wait for checklist state to resolve, then resolve with cloned copy of job progress
+     * @return {promise} used to prevent race conditions. wait for all of checklist state to resolve.
+     */
     getJobProgress () {
         return this.$q((resolve, reject) => {
             this
@@ -298,18 +376,28 @@ class JobChecklistState {
         });
     }
 
+    /**
+     * Save job data to DB (typically for progress  or status updates)
+     */
     putJobData () {
         this
             .JobsService
             .put(this.job);
     }
 
+    /**
+     * Save job checklist response data to DB
+     */
     putJobDataResponse () {
         this
             .JobDataResponseService
             .put(this.jobDataResponse);
     }
 
+    /**
+     * Update state with photo for house, then call putJobData
+     * @param  {object} photoData ID of house to update, URL of photo
+     */
     updateHousePhoto (photoData) {
         let secondaryIndex;
 
@@ -324,6 +412,11 @@ class JobChecklistState {
         this.putJobData();
     }
 
+    /**
+     * Update state of current house with home performance (MRF) data, then put home performance data to DB
+     * @param  {object} mrfEditData home performance (MRF) data
+     * @return {[type]}             [description]
+     */
     updateMrfData (mrfEditData) {
         this
             .jobDataHomePerformance[this.currentHouse.HouseId]
@@ -334,6 +427,19 @@ class JobChecklistState {
             .put(this.jobDataHomePerformance[this.currentHouse.HouseId]);
     }
 
+    /**
+     * Update state of current job:
+     * - checklist item response
+     * - house id that checklist item was responded on
+     * - updated job data response progress
+     * - updated job progress
+     * - updated job progress level (pre-drywall or final)
+     *
+     * Put job response data to DB
+     * Put job data to DB
+     *
+     * @param  {object} response [selected response meta and response]
+     */
     updateChecklistResponse (response) {
         let updateResponse = (response.Response.length === 0) ? undefined : response.Response;
 
@@ -347,12 +453,12 @@ class JobChecklistState {
             .ChecklistItems[response.Category][response.CategoryProgress][response.ItemId]
             .ResponseHouseId = this.currentHouse.HouseId;
 
-        if (this.$state.current.name === 'job-checklist.category') {
+        if (this.$state.current.name === this.STATE_NAME.JOB_CHECKLIST_CATEGORY) {
             this
                 .jobDataResponse
                 .Progress[response.Category]
                 = this.JobChecklistProgressService.calculateCategoryProgress(this.jobDataResponse, this.itemStatusQuery);
-        } else if (this.$state.current.name === 'job-checklist.stage') {
+        } else if (this.$state.current.name === this.STATE_NAME.JOB_CHECKLIST_STAGE) {
             this
                 .jobDataResponse
                 .Progress
@@ -374,6 +480,17 @@ class JobChecklistState {
         this.putJobData();
     }
 
+    /**
+     * Update state of current job with:
+     * - item data
+     * - job progress, specific to current category, in the case item data update has changed progress
+     * - job progress in the case item data update has changed progress
+     *
+     * Put job response data to DB
+     * Put job data to DB
+     *
+     * @param  {object} update [item data meta and updated item data]
+     */
     updateChecklistItemData (update) {
         this
             .jobDataResponse
@@ -395,6 +512,10 @@ class JobChecklistState {
         this.putJobData();
     }
 
+    /**
+     * Update job response state with checklist item comment, then call putJobData
+     * @param  {object} photoData ID of house to update, URL of photo
+     */
     postComment (comment) {
         this
             .jobDataResponse
@@ -405,16 +526,28 @@ class JobChecklistState {
         this.putJobDataResponse();
     }
 
+    /**
+     * Update job state as complete, then call putJobData
+     */
     completeJob () {
         this.job.Status = this.JOB_STATUS.COMPLETED;
 
         this.putJobData();
     }
 
+    /**
+     * Create objects of callbacks to get data from checklist item
+     * @param  {string}   id    id of the checklist item in the format of "itemCategory:itemCategoryProgress:itemId"
+     * @param  {function} query callback to get checklist item status
+     */
     registerItemStatusQuery (id, query) {
         this.itemStatusQuery[id] = query;
     }
 
+    /**
+     * Get list of must correct and builder verified items for the builder report PDF
+     * @return {array} array of checklist element objects
+     */
     getCheckListElementsForBuilderReport () {
         let elements = [];
         let checklist = this.jobDataResponse.ChecklistItems;
@@ -438,6 +571,11 @@ class JobChecklistState {
             }
         }
         return elements;
+    }
+
+    get isReview () {
+        const currentState = this.$state.current.name;
+        return currentState === this.STATE_NAME.JOB_CHECKLIST_REVIEW || currentState === this.STATE_NAME.JOB_CHECKLIST_REVIEW_CATEGORY;
     }
 }
 
