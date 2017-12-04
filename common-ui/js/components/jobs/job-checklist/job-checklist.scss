@@ -33,9 +33,15 @@
 
 .job-checklist-meta {
     margin-left: $offset-default;
+
+    .drop-down {
+        left: 0;
+        right: auto;
+    }
 }
 
 .job-checklist-title {
+    display: inline;
     font-size: $font-size-h4;
     margin-bottom: 0;
 }

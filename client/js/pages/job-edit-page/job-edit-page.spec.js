@@ -1,10 +1,9 @@
-import template from './jobs-page.html';
-import controller from './jobs-page.controller';
+describe('Page: Job Edit', function testHomePage () {
+    describe('Component Tests', function testComponent () {
+        it('includes the right template');
 
-let jobsPageComponent = {
-    template,
-    controller,
-    controllerAs : 'jobsPageCtrl'
-};
+        it('uses the correct `controllerAs` label');
 
-export default jobsPageComponent;
+        it('inclues the right controller');
+    });
+});

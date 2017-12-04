@@ -1,3 +1,5 @@
+/* global File */
+
 const ERROR_INPUT = {
     type        : 'error',
     text        : 'Please select valid house plan. File extension must be .xml and file should be no larger than 200kb.',
@@ -26,6 +28,7 @@ class HousePlanNewController {
         'ngInject';
 
         this.$state            = $state;
+        this.STATE_NAME        = UI_ENUMS.STATE_NAME;
         this.$rootScope        = $rootScope;
         this.$scope            = $scope;
 
@@ -147,7 +150,7 @@ class HousePlanNewController {
         if (this.uploadedHousePlanIDs.length === 0) {
             this.$state.go('^');
         } else {
-            this.$state.go('house-plans.edit-bulk', {housePlanIDs : this.uploadedHousePlanIDs});
+            this.$state.go(this.STATE_NAME.HOUSE_LIBRARY_EDIT_BULK, {housePlanIDs : this.uploadedHousePlanIDs});
         }
     }
 }

@@ -1,0 +1,65 @@
+<button class="btn btn-link flex-row popover-sub-panel-trigger" data-ng-click="searchFilterHousePlanCtrl.showPanel(true)">
+    <span>House Plan</span>
+
+    <span class="flex-item-pull-right">
+        {{searchFilterHousePlanCtrl.selectedQuantity}} <i class="fa fa-lg fa-angle-right" aria-hidden="true"></i>
+    </span>
+</button>
+
+<section class="popover-panel popover-has-search sub-panel" data-ng-hide="!searchFilterHousePlanCtrl.showSubPanel">
+    <header class="popover-panel-header flex-row flex-align-center">
+        <div class="flex-item-static">
+            <button type="button" class="btn btn-link" data-ng-click="searchFilterHousePlanCtrl.showPanel(false)">
+                <i class="fa fa-lg fa-angle-left" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <h5 class="flex-item-grow popover-panel-title">House Plan</h5>
+    </header>
+
+    <div class="popover-panel-search">
+        <div class="form-group has-feedback">
+            <label for="search_{{::searchFilterHousePlanCtrl.inputId}}" class="sr-only">Search {{::searchFilterHousePlanCtrl.label}}</label>
+
+            <input
+                data-ng-model="searchFilterHousePlanCtrl.search"
+                ng-model-options="{debounce: 200}"
+                placeholder="Search"
+                class="form-control"
+                type="text"
+                id="search_{{::searchFilterHousePlanCtrl.inputId}}"
+                name="search_{{::searchFilterHousePlanCtrl.inputId}}" />
+
+            <span class="form-control-feedback"><i class="fa fa-search" aria-hidden="true"></i></span>
+        </div>
+    </div>
+
+    <div class="popover-panel-body">
+        <div class="item-list">
+            <button
+                type="button"
+                data-ng-click="searchFilterHousePlanCtrl.toggleHousePlan(item._id)"
+                data-ng-repeat="item in searchFilterHousePlanCtrl.housePlans | filter:searchFilterHousePlanCtrl.search track by item._id"
+                class="drop-down-item item-list-item">
+
+                <div class="flex-row">
+                    <div>
+                        <strong>{{item.Name}} - subplan {{item.SubplanName}}</strong>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="ellipsis">Builder: {{item.BuilderName}}</div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="ellipsis">Community: {{item.CommunityName}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex-item-pull-right">
+                        <i class="fa fa-lg fa-check" aria-hidden="true" data-ng-hide="!searchFilterHousePlanCtrl.housePlanIsSelected(item._id);"></i>
+                    </div>
+                </div>
+            </button>
+        </div>
+    </div>
+</section>
+

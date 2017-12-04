@@ -1,5 +1,5 @@
 class LoginController {
-    constructor ($state, $q, $log, AuthenticationService) {
+    constructor ($state, $q, $log, AuthenticationService, AuthorizationService, UI_ENUMS) {
         'ngInject';
 
         this.userIdPattern = '^[0-9]{6,7}$';
@@ -8,6 +8,9 @@ class LoginController {
         this.$q            = $q;
 
         this.AuthenticationService = AuthenticationService;
+        this.AuthorizationService  = AuthorizationService;
+
+        this.STATE_NAME            = UI_ENUMS.STATE_NAME;
     }
 
     $onInit () {
@@ -23,11 +26,11 @@ class LoginController {
             .then((userData) => {
                 // no resolve needed. handle success here.
                 // resolve(data);
-                let userInfo = angular.fromJson(userData);
+                let userInfo       = angular.fromJson(userData);
 
-                this.user.userId = userInfo.userId;
+                this.user.userId   = userInfo.userId;
                 this.user.password = userInfo.password;
-                this.isBusy = true;
+                this.isBusy        = true;
                 return (this.login(this.user));
             })
             .then((data) => {
@@ -48,8 +51,7 @@ class LoginController {
         // let state   = this.returnTo.state();
         // let params  = this.returnTo.params();
         // let options = Object.assign({}, this.returnTo.options(), {reload : true});
-
-        this.$state.go('jobs');
+        this.$state.go(this.STATE_NAME.JOBS);
     }
 
     login (user) {
@@ -57,9 +59,12 @@ class LoginController {
             this
                 .AuthenticationService
                 .login(user)
-                .then((data) => {
+                .then((user) => {
+                    return this.AuthorizationService.setUserAuthorization(user.userId);
+                })
+                .then((user) => {
                     this.returnToOriginalState();
-                    resolve(data);
+                    resolve(user);
                 })
                 .catch((err) => {
                     reject(err);

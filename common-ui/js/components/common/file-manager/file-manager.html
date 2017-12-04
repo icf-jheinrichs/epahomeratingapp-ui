@@ -80,18 +80,22 @@
                             </div>
 
                             <div class="popover-panel-body">
-                                <div>
+                                <div class="item-list">
                                     <button
                                         type="button"
                                         data-ng-click="fileManagerCtrl.addFile(item)"
                                         data-ng-repeat="item in fileManagerCtrl.library | filter:fileManagerCtrl.search"
-                                        class="drop-down-item popover-close">
+                                        class="drop-down-item popover-close item-list-item">
                                         <div ng-if="fileManagerCtrl.showDetails === 'HousePlanLibrary'">
-                                            {{item.Name}} - subplan {{item.SubplanName}}
-                                            <br>
-                                            <span>
-                                                <div class="popover-panel-subtext">Builder: {{item.BuilderName}}</div><div class="popover-panel-subtext">Community: {{item.CommunityName}}</div>
-                                            </span>
+                                            <strong>{{item.Name}} - subplan {{item.SubplanName}}</strong>
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <div class="ellipsis">Builder: {{item.BuilderName}}</div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="ellipsis">Community: {{item.CommunityName}}</div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </button>
                                 </div>

@@ -4,6 +4,7 @@ class jobChecklistNavController {
 
         this.$state       = $state;
         this.$transitions = $transitions;
+        this.STATE_NAME   = UI_ENUMS.STATE_NAME;
 
         this.CATEGORIES   = UI_ENUMS.CATEGORIES;
         this.MESSAGING    = UI_ENUMS.MESSAGING;
@@ -39,7 +40,7 @@ class jobChecklistNavController {
     }
 
     setHidden () {
-        if (this.$state.current.name === 'job-checklist.stage') {
+        if (this.$state.current.name === this.STATE_NAME.JOB_CHECKLIST_STAGE) {
             this.hide = true;
         } else {
             this.hide = false;

@@ -1,27 +1,26 @@
 <table class="table-full-width">
     <thead>
         <tr>
-            <th>Rater ID</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Role</th>
-            <th>Status</th>
-            <th>Version 3<br />Trained?</th>
-            <th><span class="sr-only">Actions</span></th>
+            <th data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">Rater ID</th>
+            <th data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">Rater</th>
+            <th data-ng-if="usersCtrl.organizaitonTypes.RaterOrg"></th>
+            <th data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">Rater Admin</th>
+            <th data-ng-if="usersCtrl.organizaitonTypes.ProviderOrg">Provider</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>12345678</td>
-            <td>Jeff Jefferson</td>
-            <td>jeff.jefferson@ratingcompany.com</td>
-            <td>Rater</td>
-            <td>Active</td>
-            <td>Yes</td>
-            <td>
-                <button class="btn btn-link btn-no-label" type="button" aria-label="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                <button class="btn btn-link btn-no-label" type="button" aria-label="Remove"><i class="fa fa-remove" aria-hidden="true"></i></button>
-            </td>
+        <tr data-ng-repeat="user in usersCtrl.users">
+            <td>{{::usersCtrl.formatName(user)}}</td>
+            <td>{{::user.Email}}</td>
+            <td data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">{{::user.RESNET_ID}}</td>
+            <td data-ng-if="usersCtrl.organizaitonTypes.RaterOrg"><input data-ng-if="user.authorizations.OrgTypeRater" data-ng-model="user.authorizations.Rater" type="checkbox" /></td>
+            <td data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">{{::user.Eligibility}}</td>
+            <td data-ng-if="usersCtrl.organizaitonTypes.RaterOrg"><input type="checkbox" data-ng-model="user.authorizations.Admin" /></td>
+            <td data-ng-if="usersCtrl.organizaitonTypes.ProviderOrg"><input data-ng-if="user.authorizations.OrgTypeProvider" data-ng-model="user.authorizations.Provider" type="checkbox" /></td>
         </tr>
     </tbody>
 </table>
+
+<button class="btn" data-ng-click="usersCtrl.handleSaveUsers()">Save</button>

@@ -13,6 +13,7 @@
 
             <h4 class="checklist-item-title pull-left">{{::checklistItemTotalDuctLeakageTestStrategyController.display.Shorthand}}</h4>
             <select
+                data-ng-disabled="checklistItemTotalDuctLeakageTestStrategyController.isReview"
                 class="form-control specified-in-hvac-report"
                 data-ng-options="document.Text for document in checklistItemTotalDuctLeakageTestStrategyController.display.Options"
                 data-ng-model="checklistItemTotalDuctLeakageTestStrategyController.selectedOption"

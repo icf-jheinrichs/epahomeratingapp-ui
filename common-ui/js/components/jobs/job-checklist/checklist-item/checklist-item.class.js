@@ -1,5 +1,14 @@
 class ChecklistItemClass {
-    constructor ($log, $q, $rootScope, $stateParams, UI_ENUMS, DisplayLogicDigestService, JobChecklistStateService, PopoverService) {
+    constructor (
+        $log,
+        $q,
+        $rootScope,
+        $stateParams,
+        UI_ENUMS,
+        DisplayLogicDigestService,
+        JobChecklistStateService,
+        PopoverService) {
+
         'ngInject';
 
         this.$log         = $log;
@@ -13,6 +22,8 @@ class ChecklistItemClass {
         this.DisplayLogicDigestService = DisplayLogicDigestService;
         this.JobChecklistStateService  = JobChecklistStateService;
         this.PopoverService            = PopoverService;
+
+        this.isReview                  = this.JobChecklistStateService.isReview;
     }
 
     $onInit () {
@@ -26,7 +37,7 @@ class ChecklistItemClass {
                     this.comments        = response.Comments;
                     this.itemData        = response.ItemData;
 
-                    this.showResponseButtons = (this.responseHouseId === undefined || this.responseHouseId === parseInt(this.$stateParams.houseId, 10));
+                    this.showResponseButtons = (!this.isReview && (this.responseHouseId === undefined || this.responseHouseId === parseInt(this.$stateParams.houseId, 10)));
 
                     return this.DisplayLogicDigestService.get(this.itemId);
                 })

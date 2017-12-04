@@ -42,6 +42,7 @@
 
     <div class="flex-row flex-align-center flex-justify-end flex-item-fixed-width">
         <checklist-item-comments
+            data-ng-if="!checklistItemCtrl.isReview"
             comments="checklistItemCtrl.comments"
             item-id="{{checklistItemCtrl.itemId}}"
             on-comment="checklistItemCtrl.postComment(comment)">

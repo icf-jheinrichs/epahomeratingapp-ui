@@ -1,4 +1,3 @@
-
 import _values from 'lodash/values';
 
 function fileManager () {

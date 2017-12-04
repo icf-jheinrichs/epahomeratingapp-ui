@@ -4,6 +4,8 @@ class ChecklistItemResponseController {
 
         this.JobChecklistStateService = JobChecklistStateService;
         this.RESPONSES                = UI_ENUMS.RESPONSES;
+
+        this.isReview                 = this.JobChecklistStateService.isReview;
     }
 
     $onChanges (changes) {

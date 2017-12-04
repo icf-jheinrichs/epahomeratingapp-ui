@@ -1,7 +1,7 @@
 import _findIndex from 'lodash/findIndex';
 
 class JobsChecklistPageController {
-    constructor ($rootScope, $stateParams, JobChecklistStateService, JobsService, JobDataResponseService, PDFService, UI_ENUMS, jobTitleFilter) {
+    constructor ($rootScope, $stateParams, AuthenticationService, JobChecklistStateService, JobsService, JobDataResponseService, UI_ENUMS, jobTitleFilter, ModalService) {
         'ngInject';
 
         this.$rootScope               = $rootScope;
@@ -10,13 +10,17 @@ class JobsChecklistPageController {
         this.JobChecklistStateService = JobChecklistStateService;
         this.JobsService              = JobsService;
         this.JobDataResponseService   = JobDataResponseService;
-        this.PDFService               = PDFService;
+        this.ModalService             = ModalService;
         this.MESSAGING                = UI_ENUMS.MESSAGING;
         this.JOB_STATUS               = UI_ENUMS.JOB_STATUS;
         this.CATEGORY_PROGRESS        = UI_ENUMS.CATEGORY_PROGRESS;
         this.RESPONSES                = UI_ENUMS.RESPONSES;
+        this.USER_TYPE                = UI_ENUMS.USER_TYPE;
+        this.MODAL                    = UI_ENUMS.MODAL;
 
         this.jobTitleFilter           = jobTitleFilter;
+
+        this.AuthenticationService    = AuthenticationService;
 
         this.responseListener = this.$rootScope.$on(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE, (event, response) => {
             this.updateChecklistResponse(response);
@@ -55,12 +59,20 @@ class JobsChecklistPageController {
         this.showCompleteModal         = false;
         this.showDownloadModal         = false;
         this.showHvacDesignReportModal = false;
+        this.user = this.AuthenticationService.getUser();
+        if (this.user.userType === this.USER_TYPE.ADMIN) {
+            this.showEditJobOption = true;
+        } else {
+            this.showEditJobOption = false;
+        }
 
         this.jobCompleteStatus = {
             MustCorrect     : 0,
             BuilderVerified : 0,
             Remaining       : 0
         };
+
+        this.role = this.$stateParams.role;
 
         this
             .JobChecklistStateService
@@ -177,26 +189,9 @@ class JobsChecklistPageController {
             });
     }
 
-    onNotifyBuilder () {
-        this
-            .PDFService
-            .generateBuilderNotification(this.jobDataResponse)
-            .then((builderNotificationBlob) => {
-                let anchor = document.createElement('a');
-                let url = window.URL.createObjectURL(builderNotificationBlob);
-
-                document
-                    .body
-                    .appendChild(anchor);
-
-                anchor.className = 'hidden';
-                anchor.href      = url;
-                anchor.download  = 'builder-notification.pdf';
-
-                anchor.click();
-
-                window.URL.revokeObjectURL(url);
-            });
+    showHistory () {
+        this.hideDropDown();
+        this.ModalService.openModal(this.MODAL.SHOW_HISTORY);
     }
 
     viewHvacDesignReport () {

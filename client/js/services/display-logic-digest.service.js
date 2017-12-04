@@ -27,6 +27,7 @@ class DisplayLogicDigestService {
                 return digest.data.ChecklistItems[id];
             });
 
+
         return checklistItemDisplay;
     }
 

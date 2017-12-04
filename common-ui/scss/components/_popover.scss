@@ -47,6 +47,10 @@
     position: absolute;
     top: 45px;
     width: 100%;
+
+    &.popover-subpanel-active {
+        top: 0;
+    }
 }
 
 .popover-panel-subtext {
@@ -66,4 +70,22 @@
     font-size: $font-size-h6;
     margin: 0;
     text-align: center;
+}
+
+.sub-panel {
+    background-color: $body-bg;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+}
+
+.popover-sub-panel-trigger {
+    color: $text-color;
+    display: flex;
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
 }

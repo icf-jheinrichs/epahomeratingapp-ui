@@ -7,6 +7,6 @@ import lightboxDirective from './lightbox.directive';
 let lightboxModule
     = angular
         .module('epahomeratingapp.common.lightbox', [])
-            .directive('lightbox', lightboxDirective);
+        .directive('lightbox', lightboxDirective);
 
 export default lightboxModule;

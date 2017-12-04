@@ -3,7 +3,8 @@ import controller from './users.controller';
 
 let usersComponent = {
     bindings : {
-        users : '<'
+        users       : '<',
+        onSaveUsers : '&'
     },
     template,
     controller,

@@ -5,22 +5,26 @@ import {CognitoUserPool, CognitoUser, AuthenticationDetails} from 'amazon-cognit
 
 const DEFAULT_USER = Object.freeze({
     'userId'       : '',
+    'password'     : '',
     'firstName'    : '',
     'lastName'     : '',
+    'userType'     : '',
     'email'        : '',
     'id_token'     : '',
     'access_token' : '',
     'status'       : 403
 });
 
-
 const USER_SESSION_ITEM = 'user';
 
 class AuthenticationService {
-    constructor ($q, COGNITO) {
+    constructor ($q, AuthorizationService, COGNITO, UI_ENUMS) {
         'ngInject';
 
-        this.$q   = $q;
+        this.$q                   = $q;
+
+        this.AuthorizationService = AuthorizationService;
+        this.USER_TYPES           = UI_ENUMS.USER_TYPE;
 
         this.POOL_DATA = {
             'UserPoolId' : COGNITO.POOL_ID,
@@ -52,7 +56,7 @@ class AuthenticationService {
         let cognitoToken;
 
         if (localUser === null || this.cognitoUser === null) {
-            this.user = Object.assign({}, DEFAULT_USER);
+            this.setUser(DEFAULT_USER);
         } else {
             this.getCognitoToken()
                 .then((token) => {
@@ -67,7 +71,7 @@ class AuthenticationService {
                     this.setUser(localUser);
                 })
                 .catch((error) => {
-                    this.user = Object.assign({}, DEFAULT_USER);
+                    this.setUser(DEFAULT_USER);
                 });
         }
     }
@@ -81,6 +85,7 @@ class AuthenticationService {
             userId    : this.user.userId,
             firstName : this.user.firstName,
             lastName  : this.user.lastName,
+            userType  : this.user.userType,
             email     : this.user.email
         };
     }
@@ -169,18 +174,18 @@ class AuthenticationService {
                 }
             });
         })
-        .then(result => {
-            this.cognitoUser = result.cognitoUser;
+            .then(result => {
+                this.cognitoUser = result.cognitoUser;
 
-            this.userIDtoAWSCognitoCredentials(result.id_token);
+                this.userIDtoAWSCognitoCredentials(result.id_token);
 
-            return this.getAttributes(result.id_token, result.access_token);
-        })
-        .then(result => {
-            this.setUser(result);
+                return this.getAttributes(result.id_token, result.access_token);
+            })
+            .then(result => {
+                this.setUser(result);
 
-            return result;
-        });
+                return result;
+            });
     }
 
     resetPassword (user) {
@@ -208,7 +213,7 @@ class AuthenticationService {
 
     logout () {
         return this.$q((resolve, reject) => {
-            this.user = Object.assign({}, DEFAULT_USER);
+            this.setUser(DEFAULT_USER);
             resolve(this.user);
         });
     }
@@ -227,6 +232,7 @@ class AuthenticationService {
                         let firstName       = attr.name.charAt(0).toUpperCase() + attr.name.slice(1);
                         let lastName        = attr.family_name.charAt(0).toUpperCase() + attr.family_name.slice(1);
                         let email           = attr.email;
+                        let userType        = attr['custom:userType'] || '';
                         let ratingCompanyID = attr['custom:ratingCompanyID'] || '';
 
                         resolve({
@@ -234,6 +240,7 @@ class AuthenticationService {
                             firstName,
                             lastName,
                             email,
+                            userType,
                             id_token,
                             access_token,
                             ratingCompanyID
@@ -256,6 +263,8 @@ class AuthenticationService {
             attr.userId = this.cognitoUser.getUsername();
 
             this.userIsAuthenticated = true;
+
+            attr.userType = this.USER_TYPES.PROVIDER;
             this.user = Object.assign({}, attr);
 
             // TODO: Is there a more secure way to store persistant login?

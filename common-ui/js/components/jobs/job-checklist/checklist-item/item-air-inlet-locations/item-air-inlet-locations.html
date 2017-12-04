@@ -13,6 +13,7 @@
 
             <h4 class="checklist-item-title pull-left">{{::checklistItemAirInletLocationsCtrl.display.Shorthand}}</h4>
             <select
+                data-ng-disabled="checklistItemAirInletLocationsCtrl.isReview"
                 class="form-control specified-in-hvac-report"
                 data-ng-options="document.Text for document in checklistItemAirInletLocationsCtrl.display.Options"
                 data-ng-model="checklistItemAirInletLocationsCtrl.selectedOption"

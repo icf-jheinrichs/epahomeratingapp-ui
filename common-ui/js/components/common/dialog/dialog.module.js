@@ -8,7 +8,7 @@ import DialogService from './dialog.service';
 let dialogModule
     = angular
         .module('epahomeratingapp.common.dialog', [])
-            .directive('dialog', dialogDirective)
-            .service('DialogService', DialogService);
+        .directive('dialog', dialogDirective)
+        .service('DialogService', DialogService);
 
 export default dialogModule;

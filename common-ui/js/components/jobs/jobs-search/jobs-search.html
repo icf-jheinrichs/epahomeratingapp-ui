@@ -38,14 +38,31 @@
                         </button>
                     </header>
 
-                    <div class="popover-panel-body item-list">
-                        <search-filter-keywords class="item-list-item" register-filter="jobsSearchCtrl.registerFilter(filter)">
+                    <div class="popover-panel-body item-list" data-ng-class="{'popover-subpanel-active' : jobsSearchCtrl.subPanelActive}">
+                        <search-filter-builder
+                            class="item-list-item"
+                            register-filter="jobsSearchCtrl.registerFilter(filter)">
+                        </search-filter-builder>
+
+                        <search-filter-house-plan
+                            class="item-list-item"
+                            register-filter="jobsSearchCtrl.registerFilter(filter)"
+                            on-show-sub-panel="jobsSearchCtrl.showSubPanel(show)">
+                        </search-filter-house-plan>
+
+                        <search-filter-keywords
+                            class="item-list-item"
+                            register-filter="jobsSearchCtrl.registerFilter(filter)">
                         </search-filter-keywords>
 
-                        <search-filter-rating-type class="item-list-item" register-filter="jobsSearchCtrl.registerFilter(filter)">
+                        <search-filter-rating-type
+                            class="item-list-item"
+                            register-filter="jobsSearchCtrl.registerFilter(filter)">
                         </search-filter-rating-type>
 
-                        <search-filter-must-correct class="item-list-item" register-filter="jobsSearchCtrl.registerFilter(filter)">
+                        <search-filter-must-correct
+                            class="item-list-item"
+                            register-filter="jobsSearchCtrl.registerFilter(filter)">
                         </search-filter-must-correct>
                     </div>
                 </section>

@@ -1,13 +1,16 @@
 class UserMenuController {
-    constructor ($state, $transitions, AuthenticationService, DropdownService, CONTEXT, UI_ENUMS) {
+    constructor ($state, $transitions, AuthenticationService, AuthorizationService, DropdownService, CONTEXT, UI_ENUMS) {
         'ngInject';
 
-        this.$state                = $state;
-        this.$transitions          = $transitions;
-        this.AuthenticationService = AuthenticationService;
-        this.DropdownService       = DropdownService;
-        this.DROPDOWN_USER_MENU    = UI_ENUMS.DROPDOWN.USER_MENU;
-        this.CONTEXT_IS_APP = CONTEXT === UI_ENUMS.CONTEXT.APP;
+        this.$state                 = $state;
+        this.$transitions           = $transitions;
+        this.AuthenticationService  = AuthenticationService;
+        this.AuthorizationService   = AuthorizationService;
+        this.DropdownService        = DropdownService;
+        this.DROPDOWN_USER_MENU     = UI_ENUMS.DROPDOWN.USER_MENU;
+        this.CONTEXT_IS_APP         = CONTEXT === UI_ENUMS.CONTEXT.APP;
+
+        this.DIAGNOSTICS_STATE_NAME = UI_ENUMS.STATE_NAME.DIAGNOSTICS;
     }
 
     menuIsVisible () {
@@ -33,6 +36,10 @@ class UserMenuController {
 
     onLogout () {
         this
+            .AuthorizationService
+            .clearState();
+
+        this
             .AuthenticationService
             .logout()
             .then(() => {
@@ -53,7 +60,7 @@ class UserMenuController {
 
         this
             .$state
-            .go('diagnostics');
+            .go(this.DIAGNOSTICS_STATE_NAME);
     }
 }
 

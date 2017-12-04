@@ -5,6 +5,7 @@
 
     <div class="flex-row flex-align-center flex-item-fixed-width">
         <checklist-item-comments
+            data-ng-if="!subItemDefaultController.isReview"
             comments="subItemDefaultController.comments"
             item-id="{{subItemDefaultController.itemId}}"
             on-comment="subItemDefaultController.postComment(comment)">

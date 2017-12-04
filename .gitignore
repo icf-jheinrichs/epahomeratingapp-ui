@@ -52,3 +52,5 @@ dist
 
 # environment variables
 .env
+
+client-old

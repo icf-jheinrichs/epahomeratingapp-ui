@@ -23,18 +23,18 @@ let interceptor = ($q) => {
 
     return {
         request  : (config) => {
-            let user = angular.fromJson(window.sessionStorage.getItem('user'));
-
             // @todo refactor
-            if (user !== null) {
+            if (angular.fromJson(window.sessionStorage.getItem('user')) !== null) {
+                let user = angular.fromJson(window.sessionStorage.getItem('user'));
+                let ratingCompanyID = angular.fromJson(window.sessionStorage.getItem('userAuthentication')).currentOrganization;
+
                 if (!config.headers.Authorization) {
                     config.headers.Authorization = user.access_token;
                 } else {
                     config.headers.Authorization = undefined;
                 }
-                config.headers['RatingCompanyID'] = user.ratingCompanyID;
+                config.headers['RatingCompanyID'] = ratingCompanyID;
             }
-
             return config;
         },
 
@@ -44,6 +44,7 @@ let interceptor = ($q) => {
 
         responseError : (rejection) => {
             return $q.reject(rejection);
+
         }
     };
 };
@@ -53,6 +54,7 @@ import epahomeratingappRoutes from './epahomeratingapp.routes';
 
 // Component Modules
 import {ComponentsModule, FiltersModule, UIServicesModule} from '../../epahomeratingappUI.js';
+import AdminComponentsModule from './components/components.module.js';
 
 // Pages Modules
 import PagesModule from './pages/pages.module';
@@ -68,6 +70,7 @@ angular
         ComponentsModule.name,
         FiltersModule.name,
         UIServicesModule.name,
+        AdminComponentsModule.name,
         PagesModule.name,
         uiRouter,
         angularSanitize,
@@ -76,13 +79,15 @@ angular
     .component(APP_NAME, epahomeratingappComponent)
     .config(epahomeratingappRoutes)
     .config($httpProvider => {
+        'ngInject';
+
         $httpProvider.interceptors.push(interceptor);
     })
     .constant('API_URL', API_URL)
     .constant('BASE_IMAGE_URL', BASE_IMAGE_URL)
     .constant('COGNITO', COGNITO)
     .constant('UI_ENUMS', UI_ENUMS)
-    .constant('CONTEXT', UI_ENUMS.CONTEXT.APP)
+    .constant('CONTEXT', UI_ENUMS.CONTEXT.ADMIN)
     .run(authenticationHook)
     .run(($transitions) => {
         'ngInject';

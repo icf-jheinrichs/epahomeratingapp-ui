@@ -1,0 +1,14 @@
+@import '../../../../../epahomeratingapp-ui/common-ui/scss/variables';
+
+.jobs {
+    .item-list-head {
+        margin: 0;
+        padding-bottom: $padding-large;
+        padding-top: $padding-large;
+    }
+
+    .item-list {
+        border: $border-default;
+        border-top: 0;
+    }
+}

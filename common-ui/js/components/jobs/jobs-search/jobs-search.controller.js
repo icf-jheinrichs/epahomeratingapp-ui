@@ -12,6 +12,7 @@ class JobsSearchBarController {
         this.SEARCH_PARAMS     = UI_ENUMS.SEARCH_PARAMS;
         this.JOB_PROGRESS      = UI_ENUMS.JOB_PROGRESS;
         this.CATEGORY_PROGRESS = UI_ENUMS.CATEGORY_PROGRESS;
+        this.STATE_NAME        = UI_ENUMS.STATE_NAME;
 
         this.filters = [];
         this.filterText = [];
@@ -50,6 +51,8 @@ class JobsSearchBarController {
         if (this.$stateParams[this.SEARCH_PARAMS.INTERNAL_REVIEW]) {
             this.filterText[this.SEARCH_PARAMS.INTERNAL_REVIEW] = 'Internal Review';
         }
+
+        this.subPanelActive = false;
     }
 
     get filterTextString () {
@@ -105,7 +108,11 @@ class JobsSearchBarController {
 
         this
             .$state
-            .go('jobs-search', searchParams, {inherit : false});
+            .go(this.STATE_NAME.JOBS_SEARCH, searchParams, {inherit : false});
+    }
+
+    showSubPanel (show) {
+        this.subPanelActive = show;
     }
 
     reset () {
