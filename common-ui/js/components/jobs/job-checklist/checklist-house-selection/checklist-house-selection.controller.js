@@ -1,18 +1,22 @@
 import _find from 'lodash/find';
 
 class checklistHouseSelectionController {
-    constructor ($rootScope, $stateParams, $transitions, UI_ENUMS, jobTitleFilter, BASE_IMAGE_URL) {
+    constructor ($rootScope, $stateParams, $sanitize, $transitions, JobChecklistStateService, ModalService, BASE_IMAGE_URL, UI_ENUMS, jobTitleFilter) {
         'ngInject';
 
         // capture DI
         this.$rootScope   = $rootScope;
         this.$stateParams = $stateParams;
+        this.$sanitize    = $sanitize;
         this.$transitions = $transitions;
 
-        this.DEFAULT_PHOTO  = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
-        this.BASE_IMAGE_URL = BASE_IMAGE_URL;
-        this.MESSAGING      = UI_ENUMS.MESSAGING;
-        this.jobTitleFilter = jobTitleFilter;
+        this.DEFAULT_PHOTO               = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
+        this.BASE_IMAGE_URL              = BASE_IMAGE_URL;
+        this.MESSAGING                   = UI_ENUMS.MESSAGING;
+        this.JobChecklistStateService    = JobChecklistStateService;
+        this.ModalService                = ModalService;
+        this.jobTitleFilter              = jobTitleFilter;
+        this.MODAL_PROVIDER_JOB_COMMENTS = UI_ENUMS.MODAL.PROVIDER_JOB_COMMENTS;
 
         // init View Labels
         this.toggleTextEnum = {
@@ -45,6 +49,8 @@ class checklistHouseSelectionController {
                 return houseId;
             }
         );
+
+        this.providerComment = this.JobChecklistStateService.getProviderComment();
     }
 
     $onDestroy () {
@@ -78,6 +84,10 @@ class checklistHouseSelectionController {
         this.setHouseSelectionState();
     }
 
+    showComments () {
+        this.ModalService.openModal(this.MODAL_PROVIDER_JOB_COMMENTS);
+    }
+
     getSelectedHousePhoto () {
         return (this.selectedHouse.Photo.length === 0) ? this.DEFAULT_PHOTO : this.BASE_IMAGE_URL + this.selectedHouse.Photo[0];
     }
@@ -101,8 +111,16 @@ class checklistHouseSelectionController {
         });
     }
 
+    saveProviderComment () {
+        this.JobChecklistStateService.putProviderComment(JSON.stringify(this.$sanitize(this.providerComment)));
+    }
+
     get selectedHouseTitle () {
         return this.jobTitleFilter(this.selectedHouse.AddressInformation);
+    }
+
+    get isProviderRole () {
+        return this.$stateParams.role === 'provider';
     }
 }
 

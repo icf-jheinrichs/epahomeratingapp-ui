@@ -36,6 +36,16 @@ class Job {
         return (this.job.ReturnedFromInternal || this.job.ReturnedFromProvider);
     }
 
+    setBulkOperationStatus () {
+        this.onSetBulkOperationStatus();
+    }
+
+    downloadXML (jobId) {
+        this.onDownloadXml({
+            jobId
+        });
+    }
+
     get JobTitle () {
         return this.jobTitleFilter(this.job.Primary.AddressInformation);
     }

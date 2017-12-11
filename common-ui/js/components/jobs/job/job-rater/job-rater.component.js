@@ -4,8 +4,7 @@ import './job-rater.scss';
 
 let jobRaterComponent = {
     bindings : {
-        job    : '<',
-        marked : '='
+        job    : '<'
     },
     template,
     controller,

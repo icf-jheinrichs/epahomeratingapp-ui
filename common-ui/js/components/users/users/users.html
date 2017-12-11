@@ -1,26 +1,50 @@
-<table class="table-full-width">
+<table class="table-full-width table-users">
     <thead>
         <tr>
             <th>Name</th>
             <th>Email</th>
-            <th data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">Rater ID</th>
-            <th data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">Rater</th>
+            <th class="authorization-checkbox" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">Rater ID</th>
+            <th class="authorization-checkbox" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">Rater</th>
             <th data-ng-if="usersCtrl.organizaitonTypes.RaterOrg"></th>
-            <th data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">Rater Admin</th>
-            <th data-ng-if="usersCtrl.organizaitonTypes.ProviderOrg">Provider</th>
+            <th class="authorization-checkbox" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">Rater Admin</th>
+            <th class="authorization-checkbox" data-ng-if="usersCtrl.organizaitonTypes.ProviderOrg">Provider</th>
         </tr>
     </thead>
     <tbody>
         <tr data-ng-repeat="user in usersCtrl.users">
-            <td>{{::usersCtrl.formatName(user)}}</td>
-            <td>{{::user.Email}}</td>
+            <td class="ellipsis">{{::usersCtrl.formatName(user)}}</td>
+
+            <td class="ellipsis">{{::user.Email}}</td>
+
             <td data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">{{::user.RESNET_ID}}</td>
-            <td data-ng-if="usersCtrl.organizaitonTypes.RaterOrg"><input data-ng-if="user.authorizations.OrgTypeRater" data-ng-model="user.authorizations.Rater" type="checkbox" /></td>
-            <td data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">{{::user.Eligibility}}</td>
-            <td data-ng-if="usersCtrl.organizaitonTypes.RaterOrg"><input type="checkbox" data-ng-model="user.authorizations.Admin" /></td>
-            <td data-ng-if="usersCtrl.organizaitonTypes.ProviderOrg"><input data-ng-if="user.authorizations.OrgTypeProvider" data-ng-model="user.authorizations.Provider" type="checkbox" /></td>
+
+            <td data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">
+                <div class="tooltip-wrapper" data-ng-class="{'tooltip-enabled' : user.CognitoId === usersCtrl.currentUserCognitoId}">
+                    <input data-ng-disabled="user.CognitoId === usersCtrl.currentUserCognitoId" data-ng-if="user.authorizations.OrgTypeRater" data-ng-model="user.authorizations.Rater" type="checkbox" />
+                    <p class="tooltip">You cannot change your own rater status. Please have another admin make this change.</p>
+                </div>
+            </td>
+
+            <td class="ellipsis" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">{{::user.Eligibility}}</td>
+
+            <td data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">
+                <div class="tooltip-wrapper" data-ng-class="{'tooltip-enabled' : user.CognitoId === usersCtrl.currentUserCognitoId}">
+                    <input data-ng-disabled="user.CognitoId === usersCtrl.currentUserCognitoId"  type="checkbox" data-ng-model="user.authorizations.Admin" />
+                    <p class="tooltip">You cannot change your own admin status. Please have another admin make this change.</p>
+                </div>
+            </td>
+
+            <td data-ng-if="usersCtrl.organizaitonTypes.ProviderOrg">
+                <div class="tooltip-wrapper" data-ng-class="{'tooltip-enabled' : user.CognitoId === usersCtrl.currentUserCognitoId}">
+                    <input data-ng-disabled="user.CognitoId === usersCtrl.currentUserCognitoId"  data-ng-if="user.authorizations.OrgTypeProvider" data-ng-model="user.authorizations.Provider" type="checkbox" />
+                    <p class="tooltip">You cannot change your own provider status. Please have another provider make this change.</p>
+                </div>
+            </td>
         </tr>
     </tbody>
 </table>
 
-<button class="btn" data-ng-click="usersCtrl.handleSaveUsers()">Save</button>
+<div class="flex-row save-users">
+    <button class="btn flex-item-static btn-save-users" data-ng-click="usersCtrl.handleSaveUsers()">Save</button>
+    <status-message class="flex-item-grow" status="usersCtrl.message"></status-message>
+</div>

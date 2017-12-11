@@ -1,0 +1,33 @@
+@import '../../../../../../scss/variables';
+
+.item-comments-review {
+    background-color: lighten($brand-auxillary, 5%);
+    border-radius: $border-radius-large;
+    padding: $padding-large;
+
+    .item-list-comments {
+        border-bottom: 0;
+    }
+
+    .item-comment {
+        border-top: 0;
+        padding: $padding-large;
+    }
+
+    .item-comment + .item-comment {
+        border-top: 1px solid $brand-tertiary;
+    }
+
+    .comment-input {
+        height: 200px;
+        margin-top: $gutter-half;
+    }
+
+    .fa-lg {
+        vertical-align: 0;
+    }
+}
+
+.item-comments-review-title {
+    margin: 0;
+}

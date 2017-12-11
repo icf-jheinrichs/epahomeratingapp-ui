@@ -8,6 +8,7 @@ import checklistStageComponent from './checklist-stage/checklist-stage.component
 import checklistFilterComponent from './checklist-filter/checklist-filter.component';
 import checklistItemComponent from './checklist-item/checklist-item.component';
 import checklistItemCommentsComponent from './checklist-item/item-comments/item-comments.component';
+import checklistItemCommentsReviewComponent from './checklist-item/item-comments-review/item-comments-review.component';
 import checklistItemDefaultComponent from './checklist-item/item-default/item-default.component';
 import checklistItemResponseComponent from './checklist-item/item-response/item-response.component';
 
@@ -45,6 +46,7 @@ let jobsModule
         .component('checklistFilter', checklistFilterComponent)
         .component('checklistItem', checklistItemComponent)
         .component('checklistItemComments', checklistItemCommentsComponent)
+        .component('checklistItemCommentsReview', checklistItemCommentsReviewComponent)
         .component('checklistItemDefault', checklistItemDefaultComponent)
         .component('checklistItemResponse', checklistItemResponseComponent)
         .component('checklistItemMrf', checklistItemMrfComponent)

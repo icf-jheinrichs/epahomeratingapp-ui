@@ -1,22 +1,27 @@
 <div class="item-list">
     <job-admin
-        data-ng-if="jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS"
+        data-ng-if="jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS || jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS_SEARCH"
         class="item-list-item item-list-item-job flex-row"
         data-ng-repeat="job in jobsCtrl.jobs track by $index"
         job="job"
-        marked="jobsCtrl.markedJobs[$index]">
+        marked="jobsCtrl.markedJobs[$index]"
+        on-set-bulk-operation-status="jobsCtrl.setBulkOperationStatus()"
+        on-download-xml="jobsCtrl.downloadXml(jobId)">
     </job-admin>
 
     <job-provider
-        data-ng-if="jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS_PROVIDER"
+        data-ng-if="jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS_PROVIDER || jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS_PROVIDER_SEARCH"
         class="item-list-item item-list-item-job flex-row"
         data-ng-repeat="job in jobsCtrl.jobs track by $index"
         job="job"
-        marked="jobsCtrl.markedJobs[$index]">
+        marked="jobsCtrl.markedJobs[$index]"
+        on-mark-job-registered="jobsCtrl.markJobRegisterd(jobId)"
+        on-set-bulk-operation-status="jobsCtrl.setBulkOperationStatus()"
+        on-download-xml="jobsCtrl.downloadXml(jobId)">
     </job-provider>
 
     <job-rater
-        data-ng-if="jobsCtrl.currentStateName !== jobsCtrl.STATE_NAME.JOBS && jobsCtrl.currentStateName !== jobsCtrl.STATE_NAME.JOBS_PROVIDER"
+        data-ng-if="jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS && !jobsCtrl.CONTEXT_IS_ADMIN"
         class="item-list-item item-list-item-job flex-row"
         data-ng-repeat="job in jobsCtrl.jobs track by $index"
         job="job"

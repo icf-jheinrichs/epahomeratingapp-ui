@@ -4,8 +4,10 @@ import './job-admin.scss';
 
 let jobAdminComponent = {
     bindings : {
-        job    : '<',
-        marked : '='
+        job                      : '<',
+        marked                   : '=',
+        onSetBulkOperationStatus : '&',
+        onDownloadXml            : '&'
     },
     template,
     controller,

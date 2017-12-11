@@ -1,4 +1,5 @@
 import _map from 'lodash/map';
+import _filter from 'lodash/filter';
 
 class UserCompanyService {
     constructor ($http, $log, $q, UI_ENUMS, API_URL) {
@@ -95,6 +96,28 @@ class UserCompanyService {
         return this.$q.all(userCompanyRequests);
     }
 
+    putCompany (company) {
+        return this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'PUT',
+                    url     : `${this.API_URL.COMPANY}/${company._id}`,
+                    data    : company
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        resolve('success');
+                    } else {
+                        //TODO: make this less bad
+                        reject('somethings amiss');
+                    }
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
+
     /**
      * get company data
      * @param  {string} O_ID organization ID (from iStar)
@@ -109,8 +132,30 @@ class UserCompanyService {
                 })
                 .then((response) => {
                     if (response.status === 200) {
-
                         resolve(response.data.data);
+                    } else {
+                        //TODO: make this less bad
+                        reject('somethings amiss');
+                    }
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
+
+    getProviderCompanies () {
+        return this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'GET',
+                    url     : `${this.API_URL.COMPANY}`
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        let providers = response.data.data;
+
+                        resolve(_filter(providers, {ProviderOrg : true}));
                     } else {
                         //TODO: make this less bad
                         reject('somethings amiss');

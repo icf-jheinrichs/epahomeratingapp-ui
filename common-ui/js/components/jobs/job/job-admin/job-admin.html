@@ -1,7 +1,7 @@
 <div class="job-select flex-item-static flex-row flex-align-center">
     <label aria-labelledby="job-{{jobAdminCtrl.job._id}}">
         <span class="sr-only">Mark job for bulk operations.</span>
-        <input type="checkbox" ng-model="jobAdminCtrl.marked">
+        <input type="checkbox" ng-model="jobAdminCtrl.marked" ng-click="jobAdminCtrl.setBulkOperationStatus()" />
     </label>
 </div>
 
@@ -24,11 +24,6 @@
             </div>
         </div>
 
-        <div class="job-status">
-            <span class="label label-job-status label-status-returned" data-ng-if="jobAdminCtrl.job.ReturnedFromInternal">Returned from QA</span>
-            <span class="label label-job-status label-status-returned" data-ng-if="jobAdminCtrl.job.ReturnedFromProvider">Returned from Provider</span>
-        </div>
-
         <div class="job-progress">
             <div class="radial-progress"><radial-progress title="Pre-drywall" progress="jobAdminCtrl.job.Progress.PreDrywall" /></radial-progress></div>
             <div class="radial-progress"><radial-progress title="Final" progress="jobAdminCtrl.job.Progress.Final" /></radial-progress></div>
@@ -39,7 +34,7 @@
 
     <div class="job-actions">
         <a data-ui-sref="job-edit({id : jobAdminCtrl.job._id})" class="btn btn-sm">Edit Profile</a>
-        <button class="btn btn-sm" type="button">Download XML</button>
-        <button class="btn btn-sm pull-right" type="button">Delete</button>
+        <button data-ng-click="jobAdminCtrl.downloadXML(jobAdminCtrl.job._id)" class="btn btn-sm" type="button">Download XML</button>
+        <!-- <button class="btn btn-sm pull-right" type="button">Delete</button> -->
     </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="house-selection">
+<div class="house-selection" data-ng-class="{'show-job-comments-button' : checklistHouseSelectionCtrl.isProviderRole}">
     <div class="page-container house-selection-toggle">
         <button
             type="button"
@@ -9,6 +9,14 @@
     </div>
 
     <section class="page-container flex-row flex-align-center house-selection-selected" data-ng-class="{'collapse-height' : checklistHouseSelectionCtrl.showNavbar}">
+        <button
+            class="btn btn-job-comments"
+            data-ng-if="checklistHouseSelectionCtrl.isProviderRole"
+            data-ng-click="checklistHouseSelectionCtrl.showComments()">
+
+            Job Comments
+        </button>
+
         <h3 class="house-selection-title">You Are Rating:</h3>
 
         <figure class="house-photo">
@@ -41,3 +49,32 @@
         </div>
     </nav>
 </div>
+
+<!-- modal: history -->
+
+<form class="modal modal-large modal-scroll-body hidden" modal="modal" id="modal-provider-job-comments" data-ng-submit="checklistHouseSelectionCtrl.saveProviderComment()">
+    <div class="modal-header flex-row">
+        <div class="flex-item-static">
+            <button class="btn btn-link btn-modal-close" type="button">Close</button>
+        </div>
+
+        <span class="modal-title flex-item-grow">Comments</span>
+
+        <div class="flex-item-static">
+            <button class="btn btn-link btn-modal btn-modal-close" type="submit">Save</button>
+        </div>
+    </div>
+
+    <div class="modal-body-wrapper">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="providerComment" class="sr-only">Job Comments</label>
+                <textarea
+                    data-ng-model="checklistHouseSelectionCtrl.providerComment"
+                    id="providerComment"
+                    class="form-control job-comments-textarea">
+                </textarea>
+            </div>
+        </div>
+    </div>
+</form>

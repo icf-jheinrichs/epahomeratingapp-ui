@@ -26,13 +26,18 @@ let interceptor = ($q) => {
             // @todo refactor
             if (angular.fromJson(window.sessionStorage.getItem('user')) !== null) {
                 let user = angular.fromJson(window.sessionStorage.getItem('user'));
-                let ratingCompanyID = angular.fromJson(window.sessionStorage.getItem('userAuthentication')).currentOrganization;
+                let ratingCompanyID = (window.sessionStorage.getItem('userAuthentication') === 'undefined' || window.sessionStorage.getItem('userAuthentication') === null) ? '' : angular.fromJson(window.sessionStorage.getItem('userAuthentication')).currentOrganization;
 
                 if (!config.headers.Authorization) {
                     config.headers.Authorization = user.access_token;
                 } else {
                     config.headers.Authorization = undefined;
                 }
+
+                if (config.data && config.data.RatingCompanyID) {
+                    ratingCompanyID = config.data.RatingCompanyID;
+                }
+
                 config.headers['RatingCompanyID'] = ratingCompanyID;
             }
             return config;

@@ -4,7 +4,11 @@ import './jobs.scss';
 
 let jobsComponent = {
     bindings : {
-        jobs : '<'
+        jobs                     : '<',
+        registerHandlers         : '&',
+        onSetBulkOperationStatus : '&',
+        onDownloadXml            : '&',
+        onMarkJobAsRegistered    : '&'
     },
     template,
     controller,

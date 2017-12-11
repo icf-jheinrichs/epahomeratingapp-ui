@@ -6,36 +6,59 @@
     <div class="row">
         <div class="col-xs-3">
             <nav class="nav nav-stacked ">
-                <a data-ui-sref="jobs-search({status : 'Submitted to Provider'})" ui-sref-opts="{inherit: false}" class="nav-item">Submitted to Provider</a>
-                <a data-ui-sref="jobs-search({status : 'Submitted to Provider', registered : 'true'})" ui-sref-opts="{inherit: false}" class="nav-item">Registered</a>
+                <a data-ui-sref="jobs-provider-search({status : 'Submitted to Provider'})" ui-sref-opts="{inherit: false}" class="nav-item">Submitted to Provider</a>
+                <a data-ui-sref="jobs-provider-search({status : 'Registered'})" ui-sref-opts="{inherit: false}" class="nav-item">Registered</a>
             </nav>
 
+            <!--
             <nav class="nav nav-stacked">
                 <a href="#" class="nav-item nav-item-link">Archived</a>
                 <a href="#" class="nav-item nav-item-link">Deleted</a>
             </nav>
+            -->
         </div>
 
         <div class="col-xs-9 jobs">
+            <div>
+                <div class="form-group">
+                    <label for="selectedRater" class="control-label">Select Rating Company</label>
+                    <select
+                        class="form-control"
+                        data-ng-model="jobsProviderPageCtrl.selectedRater"
+                        id="selectedRater"
+                        data-ng-change="jobsProviderPageCtrl.handleRatingCompanyChange()"
+                        data-ng-options="rater.Name for rater in jobsProviderPageCtrl.company.RelatedRaterCompanys track by rater.ProviderRESNETId">
+                    </select>
+                </div>
+            </div>
+
             <jobs-search
                 quantity="jobsProviderPageCtrl.jobs.length">
             </jobs-search>
 
             <div class="bulk-operation-bar">
-                <label><input type="checkbox" ng-model="jobsCtrl.checkAll" data-ng-change="jobsCtrl.selectAllJobs()"> Select All</label>
+                <label><input type="checkbox" ng-model="jobsProviderPageCtrl.checkAll" data-ng-change="jobsProviderPageCtrl.toggleAllJobs()"> Select All</label>
 
-                <button class="btn" type="button" data-ng-click="jobsCtrl.submitToProvider()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">Submit to Provider</button>
+                <button class="btn" type="button" data-ng-click="jobsProviderPageCtrl.markAsRegistered()" data-ng-disabled="!jobsProviderPageCtrl.bulkOperationsAreEnabled">Mark as Registered</button>
 
-                <button class="btn" type="button" data-ng-click="jobsCtrl.bulkDownload()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">
-                    <i ng-show="jobsCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i>Download REM XML
+                <button class="btn" type="button" data-ng-click="jobsProviderPageCtrl.bulkDownload()" data-ng-disabled="!jobsProviderPageCtrl.bulkOperationsAreEnabled">
+                    <i ng-show="jobsProviderPageCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i>Download REM XML
                 </button>
 
-                <button class="btn" type="button" data-ng-click="jobsCtrl.flagForReview()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">
+                <!--
+                <button class="btn" type="button" data-ng-click="jobsProviderPageCtrl.flagForReview()" data-ng-disabled="!jobsProviderPageCtrl.bulkOperationsAreEnabled">
                     Archive
                 </button>
+                -->
             </div>
 
-            <jobs jobs="jobsProviderPageCtrl.jobs"></jobs>
+            <jobs
+                jobs="jobsProviderPageCtrl.jobs"
+                register-handlers="jobsProviderPageCtrl.registerHandlers(toggleAllJobs, getSelectedJobs)"
+                on-mark-job-as-registered="jobsProviderPageCtrl.markJobRegistered(jobId)"
+                on-download-xml="jobsProviderPageCtrl.downloadXml(jobId)"
+                on-set-bulk-operation-status="jobsProviderPageCtrl.setBulkOperationStatus(status)">
+            </jobs>
         </div>
     </div>
 </section>

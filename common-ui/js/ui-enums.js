@@ -51,9 +51,10 @@ const USER_TYPE = {
 };
 
 const DIALOG = {
+    ADD_PROVIDER_COMPANY      : 'dialog-add-provider-company',
     MAKE_JOB_OFFLINE          : 'dialog-make-job-offline',
     LEAKAGE_TEST_EXEMPTION    : 'dialog-leakage-test-exemption',
-    SAVE_USER_COMPANIES_ERROR : 'dialog-save-user-companies-error'
+    SUBMIT_TO_PROVIDER        : 'dialog-submit-to-provider'
 };
 
 const DROPDOWN = {
@@ -140,12 +141,14 @@ const MESSAGING = {
     DEVICE_OFFLINE                   : 'DEVICE_OFFLINE',
     DEVICE_ONLINE                    : 'DEVICE_ONLINE',
     REFRESH_JOBS_LIST                : 'REFRESH_JOBS_LIST',
-    REFRESH_JOBS_LIST_FINISH         : 'REFRESH_JOBS_LIST_FINISH'
+    REFRESH_JOBS_LIST_FINISH         : 'REFRESH_JOBS_LIST_FINISH',
+    USER_AUTHORIZATION_UPDATE        : 'USER_AUTHORIZATION_UPDATE'
 };
 
 const MODAL = {
-    SHOW_FOOTNOTE : 'modal-show-footnote',
-    SHOW_HISTORY  : 'modal-show-history'
+    SHOW_FOOTNOTE         : 'modal-show-footnote',
+    PROVIDER_JOB_COMMENTS : 'modal-provider-job-comments',
+    SHOW_HISTORY          : 'modal-show-history'
 };
 
 const POPOVER = {
@@ -203,6 +206,7 @@ const SEARCH_PARAMS = {
     KEYWORDS                      : 'keywords',
     MUST_CORRECT                  : 'mustCorrect',
     PROGRESS_LEVEL                : 'progressLevel',
+    RATER                         : 'rater',
     RATING_TYPE                   : 'ratingType',
     RETURNED_FROM_INTERNAL_REVIEW : 'returnedFromInternalReview',
     RETURNED_FROM_PROVIDER_REVIEW : 'returnedFromProviderReview',

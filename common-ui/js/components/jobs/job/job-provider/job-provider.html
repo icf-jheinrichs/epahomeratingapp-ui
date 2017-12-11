@@ -1,7 +1,7 @@
 <div class="job-select flex-item-static flex-row flex-align-center">
     <label aria-labelledby="job-{{jobProviderCtrl.job._id}}">
         <span class="sr-only">Mark job for bulk operations.</span>
-        <input type="checkbox" ng-model="jobProviderCtrl.marked">
+        <input type="checkbox" ng-model="jobProviderCtrl.marked" ng-click="jobProviderCtrl.setBulkOperationStatus()" />
     </label>
 </div>
 
@@ -33,8 +33,10 @@
     </a>
 
     <div class="job-actions">
-        <button class="btn btn-sm" type="button">Download REM XML</button>
-        <button class="btn btn-sm" type="button">Mark As Registered</button>
+        <button class="btn btn-sm" data-ng-click="jobProviderCtrl.downloadXML(jobProviderCtrl.job._id)" type="button">Download REM XML</button>
+        <button class="btn btn-sm" data-ng-disabled="jobProviderCtrl.job.Status !== 'Submitted to Provider'" data-ng-click="jobProviderCtrl.markJobAsRegistered(jobProviderCtrl.job._id)" type="button">Mark As Registered</button>
+        <!--
         <button class="btn btn-sm pull-right" type="button">Archive</button>
+        -->
     </div>
 </div>

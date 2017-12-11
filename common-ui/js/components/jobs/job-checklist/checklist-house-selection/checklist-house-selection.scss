@@ -49,6 +49,25 @@
         font-weight: bold;
         margin: 0;
     }
+
+
+    .btn-job-comments {
+        position: absolute;
+        top: $padding-large;
+    }
+}
+
+.show-job-comments-button {
+    .house-selection-selected {
+        height: 150px;
+        padding-top: 50px;
+
+        &.collapse-height {
+            height: 0;
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+    }
 }
 
 .navbar-house-selection {
@@ -75,4 +94,8 @@
     overflow-y: hidden;
     position: relative;
     transition: height $transition-default, padding $transition-default;
+}
+
+.form-control.job-comments-textarea {
+    height: 400px;
 }

@@ -4,8 +4,11 @@ import './job-provider.scss';
 
 let jobProviderComponent = {
     bindings : {
-        job    : '<',
-        marked : '='
+        job                      : '<',
+        marked                   : '=',
+        onSetBulkOperationStatus : '&',
+        onMarkJobRegistered      : '&',
+        onDownloadXml            : '&'
     },
     template,
     controller,

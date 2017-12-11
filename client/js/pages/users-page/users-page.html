@@ -1,26 +1,72 @@
 <section class="page-container">
-    <header class="page-header item-list-header clearfix">
-        <h2 class="pull-left item-list-title">Users</h2>
-    </header>
-
     <div class="row">
-        <div class="col-xs-12 users">
-            <users users="usersPageCtrl.users" on-save-users="usersPageCtrl.saveUsers(users)"></users>
+        <div class="col-xs-2" data-ng-if="usersPageCtrl.organizationTypes.RaterOrg">
+            <nav class="nav nav-stacked nav-users-providers">
+                <button type="button" class="nav-item" data-ng-class="{'active' : usersPageCtrl.currentView==='users'}" data-ng-click="usersPageCtrl.setActiveView('users')">Users</button>
+                <button type="button" class="nav-item" data-ng-class="{'active' : usersPageCtrl.currentView==='providers'}" data-ng-click="usersPageCtrl.setActiveView('providers')">Providers</button>
+            </nav>
         </div>
+
+        <section data-ng-hide="usersPageCtrl.currentView!=='users'" data-ng-class="{'col-xs-10' : usersPageCtrl.organizationTypes.RaterOrg, 'col-xs-12' : !usersPageCtrl.organizationTypes.RaterOrg}">
+            <header class="page-header item-list-header clearfix">
+                <h2 class="pull-left item-list-title">Users</h2>
+            </header>
+
+            <div class="users">
+                <users users="usersPageCtrl.users" on-save-users="usersPageCtrl.saveUsers(users)"></users>
+            </div>
+        </section>
+
+        <section data-ng-hide="usersPageCtrl.currentView!=='providers'" data-ng-class="{'col-xs-10' : usersPageCtrl.organizationTypes.RaterOrg, 'col-xs-12' : !usersPageCtrl.organizationTypes.RaterOrg}">
+            <header class="page-header item-list-header clearfix">
+                <h2 class="pull-left item-list-title">Providers</h2>
+                <button type="button" class="btn pull-right" data-ng-click="usersPageCtrl.showAddProviderDialog()"><i class="fa fa-plus" aria-hidden="true"></i> Add Provider</button>
+            </header>
+
+            <div class="row">
+                <div class="col-xs-12 users">
+                    <table class="table-full-width">
+                        <thead>
+                            <tr>
+                                <th>RESNET Provider ID</th>
+                                <th>Company Name</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="provider in usersPageCtrl.company.RelatedProviderCompanys track by $index">
+                                <td>{{provider.ProviderRESNETId}}</td>
+                                <td>{{provider.Name}}</td>
+                                <td>{{provider.Status}}</td>
+                                <td><button type="button" class="btn btn-sm btn-link" data-ng-click="usersPageCtrl.removeProvider(provider.ProviderRESNETId)"> Remove</button></td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
     </div>
 </section>
 
-<div class="dialog hidden" dialog="dialog" id="dialog-save-user-companies-error">
+<div class="dialog hidden" dialog="dialog" id="dialog-add-provider-company">
     <div class="dialog-header">
-        <h3 class="dialog-title">Unable to Save</h3>
+        <h3 class="dialog-title">Add Provider Company</h3>
     </div>
     <div class="dialog-body">
-        <ul>
-            <li>There must be at least one active Admin.</li>
-            <li>For Provider Organizations, there must be at least one active Provider</li>
-        </ul>
+        <div class="form-group">
+            <label for="selectedProviderToAdd" class="control-label">Select a provider to add</label>
+            <select
+                class="form-control"
+                data-ng-model="usersPageCtrl.selectedProviderToAdd"
+                id="selectedProviderToAdd"
+                data-ng-options="provider.Name for provider in usersPageCtrl.providerCompanies track by provider.ProviderRESNETId">
+            </select>
+        </div>
+
+        <p>You will not be able to submit jobs until providers have approved your association.</p>
     </div>
     <div class="dialog-footer text-right">
-        <button class="btn" data-ng-click="dismiss(true)">Okay</button>
+        <button class="btn btn-link" type="button" data-ng-click="dismiss(false)">Cancel</button>
+        <button class="btn" data-ng-click="dismiss(true)">Add</button>
     </div>
 </div>

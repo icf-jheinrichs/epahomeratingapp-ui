@@ -1,3 +1,5 @@
+/* global File */
+
 const ERROR_SERVER = {
     type        : 'error',
     text        : 'There was an error processing your request. Please try again.',

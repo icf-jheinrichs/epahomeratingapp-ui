@@ -512,6 +512,15 @@ class JobChecklistState {
         this.putJobData();
     }
 
+    getProviderComment () {
+        return this.job.ProviderComment ? JSON.parse(this.job.ProviderComment) : '';
+    }
+
+    putProviderComment (providerComment) {
+        this.job.ProviderComment = providerComment;
+        this.putJobData();
+    }
+
     /**
      * Update job response state with checklist item comment, then call putJobData
      * @param  {object} photoData ID of house to update, URL of photo
@@ -527,10 +536,31 @@ class JobChecklistState {
     }
 
     /**
+     * Set status as submitted to provider and add ID of provider submitted to
+     * @return {[type]} [description]
+     */
+    submitJob (ProviderRESNETId) {
+        this.job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
+        this.job.InternalReview  = false;
+        this.job.ProviderCompany = ProviderRESNETId;
+
+        this.putJobData();
+    }
+
+    /**
      * Update job state as complete, then call putJobData
      */
     completeJob () {
         this.job.Status = this.JOB_STATUS.COMPLETED;
+
+        this.putJobData();
+    }
+
+    /**
+     * Flag job for review, then call putJobData
+     */
+    flagJobForReview () {
+        this.job.InternalReview = true;
 
         this.putJobData();
     }

@@ -66,6 +66,15 @@
         </div>
     </div>
 
+    <div>
+        <checklist-item-comments-review
+            data-ng-if="checklistItemCtrl.isReview"
+            comments="checklistItemCtrl.comments"
+            item-id="{{checklistItemCtrl.itemId}}"
+            on-comment="checklistItemCtrl.postComment(comment)">
+        </checklist-item-comments-review>
+    </div>
+
     <mrf-edit
         data-ng-repeat="row in checklistItemCtrl.editRow"
         on-save-mrf-row="checklistItemCtrl.onSaveMrfRow(mrfRowEditData)"

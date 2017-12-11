@@ -99,6 +99,7 @@
             <i class="fa fa-chevron-left fa-lg" aria-hidden="true"></i>
         </a>
 
+        <div>
         <div class="job-checklist-meta">
             <span class="label label-rating-type" data-ng-class="jobsChecklistPageCtrl.getRatingTypeClass()">
                 {{jobsChecklistPageCtrl.RatingTypeLabel}}
@@ -106,7 +107,7 @@
 
             <h2 class="job-checklist-title" data-ng-bind-html="jobsChecklistPageCtrl.JobTitle"></h2>
 
-            <button type="button" class="btn btn-link" data-ng-click="jobsChecklistPageCtrl.toggleDropDown()">
+            <button type="button" class="btn btn-job-dropdown-toggle" data-ng-click="jobsChecklistPageCtrl.toggleDropDown()">
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </button>
 
@@ -131,80 +132,69 @@
             </div>
         </div>
 
-
-        <div class="actions">
+        <div class="actions flex-row">
             <button
-                style="width: 125px; text-align: center; margin-right: 5px; float:right"
-                type="button"
-                data-ng-click="jobsChecklistPageCtrl.onDownloadRequest()"
-                class="drop-down-item">
-
-                Download Job
-            </button>
-
-            <button
-                style="width: 125px; text-align: center; margin-right: 5px; float:right"
-                disabled="disabled"
-                data-ng-if="jobsChecklistPageCtrl.role==='admin'"
-                class="drop-down-item"
-                type="button">
-
-                Flag for Review
-            </button>
-
-            <button
-                style="width: 125px; text-align: center; margin-right: 5px; float:right"
-                disabled="disabled"
-                class="drop-down-item"
-                data-ng-if="jobsChecklistPageCtrl.role==='admin'"
-                type="button">
-
-                Submit to Provider
-            </button>
-
-            <button
-                style="width: 125px; text-align: center; margin-right: 5px; float:right"
-                disabled="disabled"
-                class="drop-down-item"
-                data-ng-if="jobsChecklistPageCtrl.role!=='admin' && jobsChecklistPageCtrl.role!=='provider'"
-                type="button">
-
-                Notify Builder
-            </button>
-
-            <button
-                style="width: 125px; text-align: center; margin-right: 5px; float:right"
-                data-ng-click="jobsChecklistPageCtrl.hideDropDown(); jobsChecklistPageCtrl.completeJob()"
+                data-ng-click="jobsChecklistPageCtrl.completeJob()"
                 data-ng-disabled="!jobsChecklistPageCtrl.jobIsActive"
-                data-ng-class="{'drop-down-item-disabled' : !jobsChecklistPageCtrl.canCompleteJob()}"
-                data-ng-if="jobsChecklistPageCtrl.role!=='admin' && jobsChecklistPageCtrl.role!=='provider'"
-                class="drop-down-item"
+                data-ng-class="{'btn-disabled' : !jobsChecklistPageCtrl.canCompleteJob()}"
+                data-ng-if="jobsChecklistPageCtrl.role!=='provider' && jobsChecklistPageCtrl.userAuthorization.Admin"
+                class="btn btn-sm"
                 type="button">
 
                 Complete
             </button>
 
             <button
-                style="width: 125px; text-align: center; margin-right: 5px; float:right"
-                data-ng-click="jobsChecklistPageCtrl.hideDropDown(); jobsChecklistPageCtrl.completeJob()"
-                data-ng-disabled="!jobsChecklistPageCtrl.jobIsActive"
-                data-ng-class="{'drop-down-item-disabled' : !jobsChecklistPageCtrl.canCompleteJob()}"
-                class="drop-down-item"
+                data-ng-if="jobsChecklistPageCtrl.role==='admin'"
+                data-ng-click="jobsChecklistPageCtrl.flagJobForReview()"
+                data-ng-disabled="!jobsChecklistPageCtrl.canFlagForReview"
+                class="btn btn-sm"
+                type="button">
+
+                Flag for Review
+            </button>
+
+            <button
+                data-ng-disabled="!jobsChecklistPageCtrl.canSubmitJob()"
+                data-ng-class="{'btn-disabled' : !jobsChecklistPageCtrl.canSubmitJob()}"
+                class="btn btn-sm"
+                data-ng-click="jobsChecklistPageCtrl.submitToProvider()"
+                data-ng-if="jobsChecklistPageCtrl.role==='admin'"
+                type="button">
+
+                Submit to Provider
+            </button>
+
+            <!--
+            <button
+                data-ng-click="jobsChecklistPageCtrl.completeJob()"
+                data-ng-disabled="true"
+                class="btn btn-sm"
                 data-ng-if="jobsChecklistPageCtrl.role==='admin'"
                 type="button">
 
                 Delete Job
             </button>
+            -->
 
             <a
-                style="width: 125px; text-align: center; margin-right: 5px; float:right"
-                data-ng-if="false"
                 data-ui-sref="job-edit({id: jobsChecklistPageCtrl.job._id})"
-                class="drop-down-item">
+                data-ng-if="jobsChecklistPageCtrl.role==='admin'"
+                class="btn btn-sm">
 
                 Edit Job
             </a>
 
+            <button
+                type="button"
+                data-ng-if="jobsChecklistPageCtrl.role==='admin'"
+                data-ng-click="jobsChecklistPageCtrl.onDownloadRequest()"
+                class="btn btn-sm">
+
+                Download Job
+            </button>
+        </div>
+        </div>
     </header>
 </div>
 
@@ -216,4 +206,25 @@
     <checklist-filter></checklist-filter>
 
     <div ui-view></div>
+</div>
+
+<div class="dialog hidden" dialog="dialog" id="dialog-submit-to-provider">
+    <div class="dialog-header">
+        <h3 class="dialog-title">Submit {{jobsChecklistPageCtrl.marked}} Jobs</h3>
+    </div>
+    <div class="dialog-body">
+        <div class="form-group">
+            <label for="selectedProviderToAdd" class="control-label">Select Provider</label>
+            <select
+                class="form-control"
+                data-ng-model="jobsChecklistPageCtrl.selectedProviderToAdd"
+                id="selectedProviderToAdd"
+                data-ng-options="provider.Name for provider in jobsChecklistPageCtrl.company.RelatedProviderCompanys track by provider.ProviderRESNETId">
+            </select>
+        </div>
+    </div>
+    <div class="dialog-footer text-right">
+        <button class="btn btn-link" type="button" data-ng-click="dismiss(false)">Cancel</button>
+        <button class="btn" data-ng-click="dismiss(true)">Submit</button>
+    </div>
 </div>

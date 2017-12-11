@@ -31,8 +31,6 @@ class UserMenuController {
             .setCurrentOrganization(O_ID);
 
         this.currentOrganization = this.findOrganization(O_ID);
-
-        this.$state.transitionTo(this.$state.current, this.$stateParams, {reload : true, inherit : false, notify : true});
     }
 
     findOrganization (O_ID) {

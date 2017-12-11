@@ -1,26 +1,41 @@
 import _findIndex from 'lodash/findIndex';
 
 class JobsChecklistPageController {
-    constructor ($rootScope, $stateParams, AuthenticationService, JobChecklistStateService, JobsService, JobDataResponseService, UI_ENUMS, jobTitleFilter, ModalService) {
+    constructor (
+        $rootScope,
+        $stateParams,
+        AuthorizationService,
+        DialogService,
+        JobChecklistStateService,
+        JobsService,
+        JobDataResponseService,
+        ModalService,
+        UserCompanyService,
+        UI_ENUMS,
+        jobTitleFilter
+    ) {
         'ngInject';
 
         this.$rootScope               = $rootScope;
         this.$stateParams             = $stateParams;
 
+        this.AuthorizationService     = AuthorizationService;
+        this.DialogService            = DialogService;
         this.JobChecklistStateService = JobChecklistStateService;
         this.JobsService              = JobsService;
         this.JobDataResponseService   = JobDataResponseService;
         this.ModalService             = ModalService;
+        this.UserCompanyService       = UserCompanyService;
         this.MESSAGING                = UI_ENUMS.MESSAGING;
         this.JOB_STATUS               = UI_ENUMS.JOB_STATUS;
         this.CATEGORY_PROGRESS        = UI_ENUMS.CATEGORY_PROGRESS;
         this.RESPONSES                = UI_ENUMS.RESPONSES;
         this.USER_TYPE                = UI_ENUMS.USER_TYPE;
+        this.DIALOG                   = UI_ENUMS.DIALOG;
         this.MODAL                    = UI_ENUMS.MODAL;
 
         this.jobTitleFilter           = jobTitleFilter;
 
-        this.AuthenticationService    = AuthenticationService;
 
         this.responseListener = this.$rootScope.$on(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE, (event, response) => {
             this.updateChecklistResponse(response);
@@ -59,12 +74,6 @@ class JobsChecklistPageController {
         this.showCompleteModal         = false;
         this.showDownloadModal         = false;
         this.showHvacDesignReportModal = false;
-        this.user = this.AuthenticationService.getUser();
-        if (this.user.userType === this.USER_TYPE.ADMIN) {
-            this.showEditJobOption = true;
-        } else {
-            this.showEditJobOption = false;
-        }
 
         this.jobCompleteStatus = {
             MustCorrect     : 0,
@@ -72,13 +81,21 @@ class JobsChecklistPageController {
             Remaining       : 0
         };
 
-        this.role = this.$stateParams.role;
+        this.role              = this.$stateParams.role;
+        this.userAuthorization = this.AuthorizationService.getUserRole();
 
         this
             .JobChecklistStateService
             .setJobDisplayListState()
             .then(()=> {
                 this.jobCompleteStatus = this.JobChecklistStateService.getJobCompleteStatus();
+            });
+
+        this
+            .UserCompanyService
+            .getCompany(this.AuthorizationService.getCurrentOrganizationId())
+            .then((company) => {
+                this.company = company;
             });
     }
 
@@ -165,16 +182,45 @@ class JobsChecklistPageController {
         this.showHvacDesignReportModal = false;
     }
 
+    submitToProvider () {
+        if (this.canSubmitJob()) {
+            this
+                .DialogService
+                .openDialog(this.DIALOG.SUBMIT_TO_PROVIDER)
+                .then((confirmation) => {
+                    if (confirmation) {
+                        this.job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
+                        this.job.InternalReview  = false;
+                        this.job.ProviderCompany = this.selectedProviderToAdd.ProviderRESNETId;
+
+                        this
+                            .JobChecklistStateService
+                            .submitJob(this.selectedProviderToAdd.ProviderRESNETId);
+                    }
+                });
+        }
+    }
+
     completeJob () {
         if (this.canCompleteJob()) {
             this.jobIsActive = false;
-            this.job.Status = this.JOB_STATUS.INTERNAL_REVIEW;
+            this.job.Status = this.JOB_STATUS.COMPLETED;
 
             this
                 .JobChecklistStateService
                 .completeJob();
         } else {
             this.showCompleteModal = true;
+        }
+    }
+
+    flagJobForReview () {
+        if (this.canFlagForReview) {
+            this.job.InternalReview = true;
+
+            this
+                .JobChecklistStateService
+                .flagJobForReview();
         }
     }
 
@@ -219,8 +265,16 @@ class JobsChecklistPageController {
         return this.jobTitleFilter(this.job.Primary.AddressInformation);
     }
 
+    canSubmitJob () {
+        return this.job.Status === this.JOB_STATUS.COMPLETED;
+    }
+
     canCompleteJob () {
-        return this.jobCompleteStatus.Remaining === 0 && this.jobCompleteStatus.MustCorrect === 0 && this.jobCompleteStatus.BuilderVerified <= 8;
+        return this.job.Status === this.JOB_STATUS.ACTIVE && this.jobCompleteStatus.Remaining === 0 && this.jobCompleteStatus.MustCorrect === 0 && this.jobCompleteStatus.BuilderVerified <= 8;
+    }
+
+    get canFlagForReview () {
+        return this.userAuthorization.Admin && !this.job.InternalReview && this.job.Status === this.JOB_STATUS.COMPLETED;
     }
 }
 

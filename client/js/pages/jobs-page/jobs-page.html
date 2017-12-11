@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-xs-3">
             <nav class="nav nav-stacked ">
-                <a data-ui-sref="jobs-search({status : 'Active'})" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav active">Active</a>
+                <a data-ui-sref="jobs-search({status : 'Active'})" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav">Active</a>
                 <nav class="nav sub-nav">
                     <a data-ui-sref="jobs-search({status : 'Active', progressLevel : 'PreDrywall'})" ui-sref-opts="{inherit: false}" class="nav-item">Pre-drywall</a>
                     <a data-ui-sref="jobs-search({status : 'Active', progressLevel : 'Final'})" ui-sref-opts="{inherit: false}" class="nav-item">Final</a>
@@ -17,13 +17,15 @@
                     <a data-ui-sref="jobs-search({status : 'Completed', internalReview : 'true'})" ui-sref-opts="{inherit: false}" class="nav-item">Internal Review</a>
                 </nav>
                 <a data-ui-sref="jobs-search({status : 'Submitted to Provider'})" ui-sref-opts="{inherit: false}" class="nav-item">Submitted to Provider</a>
-                <a data-ui-sref="jobs-search({status : 'Submitted to Provider', registered : 'true'})" ui-sref-opts="{inherit: false}" class="nav-item">Registered</a>
+                <a data-ui-sref="jobs-search({status : 'Registered'})" ui-sref-opts="{inherit: false}" class="nav-item">Registered</a>
             </nav>
 
+            <!--
             <nav class="nav nav-stacked">
                 <a href="#" class="nav-item nav-item-link">Archived</a>
                 <a href="#" class="nav-item nav-item-link">Deleted</a>
             </nav>
+            -->
         </div>
 
         <div class="col-xs-9 jobs">
@@ -32,26 +34,56 @@
             </jobs-search>
 
             <div class="bulk-operation-bar">
-                <label><input type="checkbox" ng-model="jobsCtrl.checkAll" data-ng-change="jobsCtrl.selectAllJobs()"> Select All</label>
+                <label><input type="checkbox" ng-model="jobsPageCtrl.checkAll" data-ng-change="jobsPageCtrl.toggleAllJobs()"> Select All</label>
 
-                <button class="btn" type="button" data-ng-click="jobsCtrl.flagForReview()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">Flag for Review</button>
+                <button class="btn" type="button" data-ng-click="jobsPageCtrl.flagForReview()" data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">Flag for Review</button>
 
-                <button class="btn" type="button" data-ng-click="jobsCtrl.submitToProvider()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">Submit to Provider</button>
+                <button class="btn" type="button" data-ng-click="jobsPageCtrl.submitToProvider()" data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">Submit to Provider</button>
 
-                <button class="btn" type="button" data-ng-click="jobsCtrl.bulkDownload()" data-ng-disabled="!jobsCtrl.jobsAreSelected()">
-                    <i ng-show="jobsCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i>Download REM XML
+                <button class="btn" type="button" data-ng-click="jobsPageCtrl.bulkDownload()" data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
+                    <i ng-show="jobsPageCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i>Download REM XML
                 </button>
 
-                <button class="btn btn-warn" type="button" data-ng-click="jobsCtrl.bulkDownload()">
+                <!--
+                <button class="btn btn-warn" type="button" data-ng-click="jobsPageCtrl.bulkDownload()" disabled="disabled">
                     Archive
                 </button>
 
-                <button class="btn btn-error" type="button" data-ng-click="jobsCtrl.bulkDownload()">
+                <button class="btn btn-error" type="button" data-ng-click="jobsPageCtrl.bulkDownload()" disabled="disabled">
                     Delete
                 </button>
+                -->
             </div>
 
-            <jobs jobs="jobsPageCtrl.jobs"></jobs>
+            <jobs
+                jobs="jobsPageCtrl.jobs"
+                register-handlers="jobsPageCtrl.registerHandlers(toggleAllJobs, getSelectedJobs)"
+                on-download-xml="jobsPageCtrl.downloadXml(jobId)"
+                on-set-bulk-operation-jobId="jobsPageCtrl.setBulkOperationStatus(jobId)">
+            </jobs>
+
         </div>
     </div>
 </section>
+
+<div class="dialog hidden" dialog="dialog" id="dialog-submit-to-provider">
+    <div class="dialog-header">
+        <h3 class="dialog-title">Submit {{jobsPageCtrl.marked}} Jobs</h3>
+    </div>
+    <div class="dialog-body">
+        <div class="form-group">
+            <label for="selectedProviderToAdd" class="control-label">Select Provider</label>
+            <select
+                class="form-control"
+                data-ng-model="jobsPageCtrl.selectedProviderToAdd"
+                id="selectedProviderToAdd"
+                data-ng-options="provider.Name for provider in jobsPageCtrl.company.RelatedProviderCompanys track by provider.ProviderRESNETId">
+            </select>
+        </div>
+    </div>
+    <div class="dialog-footer text-right">
+        <button class="btn btn-link" type="button" data-ng-click="dismiss(false)">Cancel</button>
+        <button class="btn" data-ng-click="dismiss(true)">Submit</button>
+    </div>
+</div>
+

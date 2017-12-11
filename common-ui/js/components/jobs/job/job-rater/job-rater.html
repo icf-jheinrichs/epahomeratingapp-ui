@@ -8,11 +8,6 @@
             toggle-value="jobRaterCtrl.job.offlineAvailable">Make Job Available offline: <span data-ng-bind-html="jobRaterCtrl.JobTitle"></span></span>
         </toggle>
     </div>
-
-    <label data-ng-if="jobProviderCtrl.CONTEXT_IS_ADMIN" aria-labelledby="job-{{jobProviderCtrl.job._id}}">
-        <span class="sr-only">Mark job for bulk operations.</span>
-        <input type="checkbox" ng-model="jobProviderCtrl.marked">
-    </label>
 </div>
 
 <a aria-labelledby="job-{{jobRaterCtrl.job._id}}"

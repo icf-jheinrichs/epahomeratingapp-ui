@@ -1,10 +1,12 @@
 .nav-site-wrapper {
     background: linear-gradient(to bottom, darken($brand-auxillary, 10%) 0, $brand-auxillary 10px);
+    min-height: 65px;
 }
 
 .nav-item {
     cursor: pointer;
     outline: 0;
+    border-radius: 0;
     transition: box-shadow $transition-slow, background-color $transition-default, border $transition-default, color $transition-default;
 
     .badge {

@@ -5,7 +5,8 @@ import './jobs-provider-page.scss';
 
 let jobsProviderPageComponent = {
     bindings : {
-        jobs : '<'
+        jobs    : '<',
+        company : '<'
     },
     template,
     controller,

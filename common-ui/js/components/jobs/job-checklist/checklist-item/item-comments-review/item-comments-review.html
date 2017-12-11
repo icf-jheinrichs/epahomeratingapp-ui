@@ -1,0 +1,69 @@
+<div class="item-comments-review" id="{{::checklistItemCommentsReviewCtrl.id}}">
+    <header class="flex-row">
+        <h5 class="flex-item-grow item-comments-review-title">
+            <i class="fa fa-commenting-o fa-lg" aria-hidden="true"></i> Comments
+        </h5>
+
+        <button
+            class="btn btn-sm flex-item-static"
+            data-ng-click="checklistItemCommentsReviewCtrl.setState('post')"
+            data-ng-hide="checklistItemCommentsReviewCtrl.state === 'post'">
+
+            <i class="fa fa-plus" aria-hidden="true"></i> New
+        </button>
+    </header>
+
+    <section data-ng-class="{'hidden' : checklistItemCommentsReviewCtrl.state !== 'list'}">
+        <div class="item-list item-list-comments" data-ng-if="checklistItemCommentsReviewCtrl.comments.length > 0">
+            <div class="item-list-item item-comment" data-ng-repeat="comment in checklistItemCommentsReviewCtrl.comments track by $index">
+                <figure class="comment-image" data-ng-if="comment.PhotoUrl">
+                    <button
+                        aria-label="expand image"
+                        can-expand="true"
+                        class="btn btn-link btn-lightbox"
+                        lightbox="lightbox"
+                        type="button">
+
+                        <img data-ng-src="{{checklistItemCommentsReviewCtrl.BASE_IMAGE_URL + comment.PhotoUrl}}" alt="" />
+                    </button>
+                </figure>
+
+                <p class="comment-body">
+                    <span class="comment-user">{{comment.User.firstName}} {{comment.User.lastName}}</span> &bull; <span class="comment-timestamp">{{::checklistItemCommentsReviewCtrl.formatTimestamp(comment.Timestamp)}}</span><br />
+                    {{::comment.Comment}}
+                </p>
+
+
+            </div>
+        </div>
+    </section>
+
+    <form
+        name="checklistItemCommentsReviewCtrl.postCommentForm"
+        class="hidden clearfix"
+        data-ng-submit="checklistItemCommentsReviewCtrl.postComment()"
+        data-ng-class="{'hidden' : checklistItemCommentsReviewCtrl.state !== 'post', 'panel-no-photo-capture' : !checklistItemCommentsReviewCtrl.allowPhotoCapture}">
+
+        <div>
+            <div class="form-group">
+                <label for="commentText" class="sr-only">Enter Your Comment</label>
+
+                <textarea
+                    class="form-control comment-input"
+                    id="commentText"
+                    data-ng-model="checklistItemCommentsReviewCtrl.newCommentText">
+                </textarea>
+            </div>
+        </div>
+
+        <div>
+            <button type="submit" class="btn pull-right">
+                Done
+            </button>
+
+            <button type="button" class="btn btn-link pull-right" data-ng-click="checklistItemCommentsReviewCtrl.setState('list')">
+                Cancel
+            </button>
+        </div>
+    </form>
+</div>

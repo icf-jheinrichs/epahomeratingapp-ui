@@ -67,6 +67,13 @@ class JobsSearchBarController {
 
     search () {
         let searchParams = {};
+        let searchState;
+
+        if (this.$state.current.name === this.STATE_NAME.JOBS || this.$state.current.name === this.STATE_NAME.JOBS_SEARCH) {
+            searchState = this.STATE_NAME.JOBS_SEARCH;
+        } else if (this.$state.current.name === this.STATE_NAME.JOBS_PROVIDER || this.$state.current.name === this.STATE_NAME.JOBS_PROVIDER_SEARCH) {
+            searchState = this.STATE_NAME.JOBS_PROVIDER_SEARCH;
+        }
 
         this
             .filters
@@ -108,7 +115,7 @@ class JobsSearchBarController {
 
         this
             .$state
-            .go(this.STATE_NAME.JOBS_SEARCH, searchParams, {inherit : false});
+            .go(searchState, searchParams, {inherit : false});
     }
 
     showSubPanel (show) {

@@ -22,7 +22,8 @@
             data-ng-hide="loginCtrl.action !== 'authorization'"
             class="login-panel flip-back flip-panel">
 
-            <p>Logging in</p>
+            <p data-ng-if="!loginCtrl.notAuthorized">Logging in</p>
+            <p data-ng-if="loginCtrl.notAuthorized" class="status-message status-error">You are not authorized to use this system.</p>
         </div>
     </div>
 </div>

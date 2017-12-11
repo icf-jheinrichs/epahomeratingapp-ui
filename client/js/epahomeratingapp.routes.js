@@ -103,10 +103,21 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             url        : '/jobs/submitted',
             component  : 'jobsProviderPage',
             resolve    : {
-                jobs   : (JobsService) => {
+                company : (AuthorizationService, UserCompanyService) => {
+                    return UserCompanyService.getCompany(AuthorizationService.getCurrentOrganizationId());
+                },
+                jobs   : (company, JobsService, $stateParams) => {
+                    let raterId;
+
+                    if ($stateParams && $stateParams.rater) {
+                        raterId = $stateParams.rater;
+                    } else if (company.RelatedRaterCompanys.length) {
+                        raterId = company.RelatedRaterCompanys[0]._id;
+                    }
+
                     let jobPromise
                         = JobsService
-                            .get()
+                            .getProviderJobs(raterId)
                             .then(jobs => {
                                 return jobs;
                             });
@@ -120,10 +131,13 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             url        : `/jobs/submitted?${searchParams.join('&')}`,
             component  : 'jobsProviderPage',
             resolve    : {
+                company : (AuthorizationService, UserCompanyService) => {
+                    return UserCompanyService.getCompany(AuthorizationService.getCurrentOrganizationId());
+                },
                 jobs   : (JobsService, $stateParams) => {
                     let jobPromise
                         = JobsService
-                            .search($stateParams)
+                            .searchProviderJobs($stateParams)
                             .then(jobs => {
                                 return jobs;
                             });
@@ -138,6 +152,9 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             url        : '/jobs',
             component  : 'jobsPage',
             resolve    : {
+                company : (AuthorizationService, UserCompanyService) => {
+                    return UserCompanyService.getCompany(AuthorizationService.getCurrentOrganizationId());
+                },
                 jobs   : (JobsService) => {
                     let jobPromise
                         = JobsService
@@ -155,6 +172,9 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             url        : `/jobs?${searchParams.join('&')}`,
             component  : 'jobsPage',
             resolve    : {
+                company : (AuthorizationService, UserCompanyService) => {
+                    return UserCompanyService.getCompany(AuthorizationService.getCurrentOrganizationId());
+                },
                 jobs   : (JobsService, $stateParams) => {
                     let jobPromise
                         = JobsService

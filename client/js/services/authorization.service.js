@@ -7,11 +7,13 @@ import _find from 'lodash/find';
 const USER_SESSION_ITEM = 'userAuthentication';
 
 class AuthorizationService {
-    constructor ($q, UserCompanyService) {
+    constructor ($q, $rootScope, UserCompanyService, UI_ENUMS) {
         'ngInject';
 
         this.$q                 = $q;
+        this.$rootScope         = $rootScope;
         this.UserCompanyService = UserCompanyService;
+        this.MESSAGING          = UI_ENUMS.MESSAGING;
 
         this.authorizeLocalUser();
     }
@@ -20,10 +22,10 @@ class AuthorizationService {
         let sessionItem = window.sessionStorage.getItem(USER_SESSION_ITEM);
         let localUser;
 
-        if (sessionItem !== 'undefined') {
-            localUser = angular.fromJson(sessionItem);
-        } else {
+        if (sessionItem === 'undefined' || sessionItem === null) {
             localUser = undefined;
+        } else {
+            localUser = angular.fromJson(sessionItem);
         }
 
         if (localUser === undefined) {
@@ -90,7 +92,7 @@ class AuthorizationService {
     }
 
     getUserId () {
-        return this.user.CognitoId;
+        return this.user.user.CognitoId;
     }
 
     saveSessionStorage () {
@@ -114,6 +116,12 @@ class AuthorizationService {
                     this.saveSessionStorage();
 
                     resolve(this.user);
+                })
+                .catch(() => {
+                    this.clearState;
+                })
+                .finally(() => {
+                    this.$rootScope.$emit(this.MESSAGING.USER_AUTHORIZATION_UPDATE);
                 });
         });
     }
@@ -121,6 +129,7 @@ class AuthorizationService {
     setCurrentOrganization (O_ID) {
         this.currentOrganization = O_ID;
         this.saveSessionStorage();
+        this.$rootScope.$emit(this.MESSAGING.USER_AUTHORIZATION_UPDATE);
     }
 }
 

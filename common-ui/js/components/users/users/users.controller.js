@@ -1,3 +1,15 @@
+const SUCCESS = {
+    type        : 'success',
+    text        : 'User roles saved.',
+    dismissable : false
+};
+
+const ERROR = {
+    type        : 'error',
+    text        : 'Error saving user roles.',
+    dismissable : false
+};
+
 class UsersController {
     constructor (AuthorizationService) {
         'ngInject';
@@ -6,7 +18,17 @@ class UsersController {
     }
 
     $onInit () {
-        this.organizaitonTypes = this.AuthorizationService.getOrganizationTypes();
+        this.currentUserCognitoId
+            = this
+                .AuthorizationService
+                .getUserId();
+
+        this.organizaitonTypes
+            = this
+                .AuthorizationService
+                .getOrganizationTypes();
+
+        this.message = {};
     }
 
     formatName (user) {
@@ -14,9 +36,18 @@ class UsersController {
     }
 
     handleSaveUsers () {
-        this.onSaveUsers({
-            users : this.users
-        });
+        this.message = {};
+
+        this
+            .onSaveUsers({
+                users : this.users
+            })
+            .then(() => {
+                this.message = SUCCESS;
+            })
+            .catch(() => {
+                this.message = ERROR;
+            });
     }
 }
 
