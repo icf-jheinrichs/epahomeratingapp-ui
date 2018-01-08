@@ -9,7 +9,8 @@
     <a aria-labelledby="job-{{jobProviderCtrl.job._id}}"
        class="job job-provider flex-row flex-align-center"
        data-ng-class="{'job-returned': jobProviderCtrl.hasStatusLabel()}"
-       data-ui-sref="job-checklist-review.category({id: jobProviderCtrl.job._id, houseId: jobProviderCtrl.job.Primary.HouseId, categoryId: 'walls', role: 'provider'})">
+       data-ui-sref="job-checklist-review.category({id: jobProviderCtrl.job._id, houseId: jobProviderCtrl.job.Primary.HouseId, categoryId: 'walls', role: 'provider'})"
+       data-ng-disabled="!jobProviderCtrl.enabled">
 
         <div class="job-info">
             <div class="job-meta">
@@ -33,8 +34,8 @@
     </a>
 
     <div class="job-actions">
-        <button class="btn btn-sm" data-ng-click="jobProviderCtrl.downloadXML(jobProviderCtrl.job._id)" type="button">Download REM XML</button>
-        <button class="btn btn-sm" data-ng-disabled="jobProviderCtrl.job.Status !== 'Submitted to Provider'" data-ng-click="jobProviderCtrl.markJobAsRegistered(jobProviderCtrl.job._id)" type="button">Mark As Registered</button>
+        <button class="btn btn-sm" data-ng-click="jobProviderCtrl.downloadXML(jobProviderCtrl.job._id)" type="button" data-ng-disabled="!jobProviderCtrl.enabled">Download REM XML</button>
+        <button class="btn btn-sm" data-ng-disabled="jobProviderCtrl.job.Status !== 'Submitted to Provider'" data-ng-click="jobProviderCtrl.markJobAsRegistered(jobProviderCtrl.job._id)" type="button" data-ng-disabled="!jobProviderCtrl.enabled">Mark As Registered</button>
         <!--
         <button class="btn btn-sm pull-right" type="button">Archive</button>
         -->

@@ -5,11 +5,12 @@
     </label>
 </div>
 
-<div class="flex-item-grow">
+<div class="flex-item-grow" data-ng-disabled="true">
     <a aria-labelledby="job-{{jobAdminCtrl.job._id}}"
        class="job job-admin flex-row flex-align-center"
        data-ng-class="{'job-returned': jobAdminCtrl.hasStatusLabel()}"
-       data-ui-sref="job-checklist-review.category({id: jobAdminCtrl.job._id, houseId: jobAdminCtrl.job.Primary.HouseId, categoryId: 'walls', role: 'admin'})">
+       data-ui-sref="job-checklist-review.category({id: jobAdminCtrl.job._id, houseId: jobAdminCtrl.job.Primary.HouseId, categoryId: 'walls', role: 'admin'})"
+       data-ng-disabled="!jobAdminCtrl.enabled">
 
         <div class="job-info">
             <div class="job-meta">
@@ -33,8 +34,8 @@
     </a>
 
     <div class="job-actions">
-        <a data-ui-sref="job-edit({id : jobAdminCtrl.job._id})" class="btn btn-sm">Edit Profile</a>
-        <button data-ng-click="jobAdminCtrl.downloadXML(jobAdminCtrl.job._id)" class="btn btn-sm" type="button">Download XML</button>
+        <a data-ui-sref="job-edit({id : jobAdminCtrl.job._id})" class="btn btn-sm" data-ng-disabled="!jobAdminCtrl.enabled">Edit Profile</a>
+        <button data-ng-click="jobAdminCtrl.downloadXML(jobAdminCtrl.job._id)" class="btn btn-sm" type="button" data-ng-disabled="!jobAdminCtrl.enabled">Download XML</button>
         <!-- <button class="btn btn-sm pull-right" type="button">Delete</button> -->
     </div>
 </div>

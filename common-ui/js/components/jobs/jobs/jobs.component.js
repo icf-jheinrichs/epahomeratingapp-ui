@@ -4,6 +4,7 @@ import './jobs.scss';
 
 let jobsComponent = {
     bindings : {
+        enabled                  : '<',
         jobs                     : '<',
         registerHandlers         : '&',
         onSetBulkOperationStatus : '&',

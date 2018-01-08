@@ -13,7 +13,8 @@
 <a aria-labelledby="job-{{jobRaterCtrl.job._id}}"
    class="job job-rater flex-row flex-align-center flex-item-grow"
    data-ng-class="{'job-returned': jobRaterCtrl.hasStatusLabel()}"
-   data-ui-sref="job-checklist.category({id: jobRaterCtrl.job._id, houseId: jobRaterCtrl.job.Primary.HouseId, categoryId: 'walls'})">
+   data-ui-sref="job-checklist.category({id: jobRaterCtrl.job._id, houseId: jobRaterCtrl.job.Primary.HouseId, categoryId: 'walls'})"
+   data-ng-disabled="!jobRaterCtrl.enabled">
 
     <div class="job-info">
         <div class="job-meta">
