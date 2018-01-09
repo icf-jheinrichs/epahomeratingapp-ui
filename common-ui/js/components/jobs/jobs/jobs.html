@@ -1,5 +1,6 @@
 <div class="item-list">
     <job-admin
+        enabled="jobsCtrl.enabled"
         data-ng-if="jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS || jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS_SEARCH"
         class="item-list-item item-list-item-job flex-row"
         data-ng-repeat="job in jobsCtrl.jobs track by $index"
@@ -10,6 +11,7 @@
     </job-admin>
 
     <job-provider
+        enabled="jobsCtrl.enabled"
         data-ng-if="jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS_PROVIDER || jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS_PROVIDER_SEARCH"
         class="item-list-item item-list-item-job flex-row"
         data-ng-repeat="job in jobsCtrl.jobs track by $index"
@@ -21,6 +23,7 @@
     </job-provider>
 
     <job-rater
+        data-ng-disabled="jobsCtrl.enabled"
         data-ng-if="jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS && !jobsCtrl.CONTEXT_IS_ADMIN"
         class="item-list-item item-list-item-job flex-row"
         data-ng-repeat="job in jobsCtrl.jobs track by $index"

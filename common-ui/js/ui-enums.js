@@ -54,7 +54,9 @@ const DIALOG = {
     ADD_PROVIDER_COMPANY      : 'dialog-add-provider-company',
     MAKE_JOB_OFFLINE          : 'dialog-make-job-offline',
     LEAKAGE_TEST_EXEMPTION    : 'dialog-leakage-test-exemption',
-    SUBMIT_TO_PROVIDER        : 'dialog-submit-to-provider'
+    SUBMIT_TO_PROVIDER        : 'dialog-submit-to-provider',
+    DELETE_JOB                : 'dialog-delete-job',
+    ARCHIVE_JOB               : 'dialog-archive-job'
 };
 
 const DROPDOWN = {
@@ -81,7 +83,8 @@ const JOB_STATUS = {
     SUBMITTED_TO_PROVIDER : 'Submitted to Provider',
     APPROVED              : 'Approved',
     REGISTERED            : 'Registered',
-    DELETED               : 'Deleted'
+    DELETED               : 'Deleted',
+    ARCHIVED              : 'Archived'
 };
 
 const JOB_PROGRESS = {

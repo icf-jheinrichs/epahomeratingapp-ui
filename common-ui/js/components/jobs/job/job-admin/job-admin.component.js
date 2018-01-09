@@ -4,6 +4,7 @@ import './job-admin.scss';
 
 let jobAdminComponent = {
     bindings : {
+        enabled                  : '<',
         job                      : '<',
         marked                   : '=',
         onSetBulkOperationStatus : '&',

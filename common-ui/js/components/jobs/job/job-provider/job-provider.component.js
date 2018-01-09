@@ -4,6 +4,7 @@ import './job-provider.scss';
 
 let jobProviderComponent = {
     bindings : {
+        enabled                  : '<',
         job                      : '<',
         marked                   : '=',
         onSetBulkOperationStatus : '&',
