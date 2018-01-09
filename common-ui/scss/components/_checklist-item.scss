@@ -46,10 +46,16 @@
 }
 
 .checklist-item-review-response {
-    position: absolute;
-    right: $gutter-half;
-    top: 0;
-    width: auto;
+    .label-response {
+        position: absolute;
+        right: $gutter-half;
+        top: 0;
+        width: auto;
+    }
+
+    .house-title {
+        margin-bottom: $gutter-half;
+    }
 }
 
 .checklist-item-response-edit {

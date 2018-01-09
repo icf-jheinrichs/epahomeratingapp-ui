@@ -123,6 +123,10 @@ class ChecklistFilterController {
         }
     }
 
+    get isReview () {
+        return this.$state.current.name === this.STATE_NAME.JOB_CHECKLIST_REVIEW_CATEGORY;
+    }
+
     get checklistFilterCriteria () {
         let plural         = this.checklistItemsQuantity > 1 ? 's' : '';
         let inpectionStage = `${this.getCurrentInspectionStageFilterName()} Inspection Stage`;

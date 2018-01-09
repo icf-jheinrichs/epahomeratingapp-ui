@@ -96,6 +96,14 @@ class JobsChecklistPageController {
             .getCompany(this.AuthorizationService.getCurrentOrganizationId())
             .then((company) => {
                 this.company = company;
+                if (company.RelatedProviderCompanys.length > 0) {
+                    this
+                        .selectedProviderToAdd = this.company.RelatedProviderCompanys[0];
+
+                    this.hasRelatedProviderCompanies = true;
+                } else {
+                    this.hasRelatedProviderCompanies = false;
+                }
             });
     }
 

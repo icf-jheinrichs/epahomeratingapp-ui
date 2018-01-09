@@ -2,9 +2,9 @@ class DropdownService {
     constructor ($log, $q) {
         'ngInject';
 
-        this.$log           = $log;
-        this.$q             = $q;
-        this.dropdowns        = {};
+        this.$log      = $log;
+        this.$q        = $q;
+        this.dropdowns = {};
     }
 
     registerDropdown (dropdown) {

@@ -1,11 +1,12 @@
 class ChecklistItemResponseController {
-    constructor (JobChecklistStateService, UI_ENUMS) {
+    constructor ($stateParams, JobChecklistStateService, UI_ENUMS) {
         'ngInject';
 
         this.JobChecklistStateService = JobChecklistStateService;
         this.RESPONSES                = UI_ENUMS.RESPONSES;
 
         this.isReview                 = this.JobChecklistStateService.isReview;
+        this.stateHouseId             = parseInt($stateParams.houseId, 10);
     }
 
     $onChanges (changes) {
@@ -19,6 +20,10 @@ class ChecklistItemResponseController {
         if (changes.response && !changes.response.isFirstChange()) {
             this.response = changes.response.currentValue[0];
         }
+    }
+
+    get showHouseTitle () {
+        return (this.responseHouseId !== undefined) && (this.stateHouseId !== this.responseHouseId);
     }
 
     get responseName () {

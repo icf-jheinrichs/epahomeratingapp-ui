@@ -18,14 +18,14 @@ import {authenticationHook} from './services/authentication.hook';
 
 // Interceptor
 // @todo replace http-request service with this. import and use in module below appr.
-let interceptor = ($q) => {
+let interceptor = ($q, AuthenticationService) => {
     'ngInject';
 
     return {
         request  : (config) => {
             // @todo refactor
             if (angular.fromJson(window.sessionStorage.getItem('user')) !== null) {
-                let user = angular.fromJson(window.sessionStorage.getItem('user'));
+                let user            = angular.fromJson(window.sessionStorage.getItem('user'));
                 let ratingCompanyID = (window.sessionStorage.getItem('userAuthentication') === 'undefined' || window.sessionStorage.getItem('userAuthentication') === null) ? '' : angular.fromJson(window.sessionStorage.getItem('userAuthentication')).currentOrganization;
 
                 if (!config.headers.Authorization) {
@@ -40,6 +40,7 @@ let interceptor = ($q) => {
 
                 config.headers['RatingCompanyID'] = ratingCompanyID;
             }
+
             return config;
         },
 

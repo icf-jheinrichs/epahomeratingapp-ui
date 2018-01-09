@@ -10,13 +10,17 @@ class DropdownController {
         this.overlayElement = angular.element('<div class="overlay drop-down-overlay hidden"></div>');
         $element.append(this.overlayElement);
 
-        this.overlayElement.on('click', () => {
-            this.toggle();
-        });
+        this
+            .overlayElement
+            .on('click', () => {
+                this.toggle();
+            });
 
-        this.overlayElement.on('$destroy', () => {
-            this.overlayElement.off('click');
-        });
+        this
+            .overlayElement
+            .on('$destroy', () => {
+                this.overlayElement.off('click');
+            });
     }
 
     register (id) {
@@ -62,7 +66,9 @@ class DropdownController {
             .overlayElement
             .addClass(HIDDEN_CLASS);
 
-        this.toggleElement.attr('aria-expanded', this.isOpen);
+        this
+            .toggleElement
+            .attr('aria-expanded', this.isOpen);
     }
 
     toggle () {
