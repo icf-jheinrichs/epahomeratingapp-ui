@@ -336,7 +336,6 @@ class AuthenticationService {
     }
 
     userIDtoAWSCognitoCredentials (id_token) {
-        this.$log.log('userIDtoAWSCognitoCredentials');
         Config.credentials = new CognitoIdentityCredentials({
             IdentityPoolId : this.POOL_DATA.UserPoolId,
             Logins         : {
