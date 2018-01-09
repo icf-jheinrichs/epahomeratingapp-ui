@@ -91,6 +91,10 @@ class AuthorizationService {
         return this.currentOrganization;
     }
 
+    getUserMESAData () {
+        return this.user.user;
+    }
+
     getUserId () {
         return this.user.user.CognitoId;
     }

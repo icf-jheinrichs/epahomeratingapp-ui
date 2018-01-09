@@ -4,6 +4,10 @@ fieldset {
     border-bottom: $border-default;
     padding: $gutter-half;
     position: relative;
+
+    + fieldset {
+        margin-top: $gutter-half;
+    }
 }
 
 .form-actions {
@@ -83,6 +87,10 @@ fieldset {
 
 }
 
+.form-control-error {
+    display: none;
+}
+
 .has-error {
     .control-label {
         color: $status-error;
@@ -97,6 +105,7 @@ fieldset {
     }
 
     .form-control-error {
+        display: block;
         font-size: $font-size-small;
         margin: -$padding-small 0 0;
         padding-left: $padding-default;

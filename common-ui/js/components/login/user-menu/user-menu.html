@@ -13,6 +13,14 @@
         dropdown-menu="dropdown-menu"
         role="menu">
 
+        <a
+            data-ui-sref="user-settings"
+            class="drop-down-item dropdown-toggle"
+            role="menuitem">
+
+            Settings
+        </a>
+
         <button
             data-ng-click="userMenuCtrl.onLogout()"
             class="drop-down-item"
@@ -22,14 +30,13 @@
             Logout
         </button>
 
-        <button
+        <a
+            data-ui-sref="diagnostics"
             data-ng-if="userMenuCtrl.CONTEXT_IS_APP"
-            data-ng-click="userMenuCtrl.onDiagnostics()"
-            class="drop-down-item"
-            type="button"
+            class="drop-down-item dropdown-toggle"
             role="menuitem">
 
             Diagnostics &amp; Feedback
-        </button>
+        </a>
     </nav>
 </nav>

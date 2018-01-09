@@ -1,29 +1,31 @@
 import angular from 'angular';
 
 import {Config, CognitoIdentityCredentials} from 'aws-sdk';
-import {CognitoUserPool, CognitoUser, AuthenticationDetails} from 'amazon-cognito-identity-js';
+import {CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserAttribute} from 'amazon-cognito-identity-js';
 
 const DEFAULT_USER = Object.freeze({
-    'userId'       : '',
-    'password'     : '',
-    'firstName'    : '',
-    'lastName'     : '',
-    'userType'     : '',
-    'email'        : '',
-    'id_token'     : '',
-    'access_token' : '',
-    'status'       : 403
+    'userId'            : '',
+    'preferredUsername' : '',
+    'password'          : '',
+    'firstName'         : '',
+    'lastName'          : '',
+    'userType'          : '',
+    'email'             : '',
+    'id_token'          : '',
+    'access_token'      : '',
+    'refresh_token'     : '',
+    'status'            : 403
 });
 
 const USER_SESSION_ITEM = 'user';
 
 class AuthenticationService {
-    constructor ($q, AuthorizationService, COGNITO, UI_ENUMS) {
+    constructor ($log, $q, COGNITO, UI_ENUMS) {
         'ngInject';
 
+        this.$log                 = $log;
         this.$q                   = $q;
 
-        this.AuthorizationService = AuthorizationService;
         this.USER_TYPES           = UI_ENUMS.USER_TYPE;
 
         this.POOL_DATA = {
@@ -40,7 +42,8 @@ class AuthenticationService {
 
     getCognitoToken () {
         return this.$q((resolve, reject) => {
-            this.cognitoUser
+            this
+                .cognitoUser
                 .getSession((err, session) => {
                     if (!err) {
                         resolve(session.getIdToken().getJwtToken());
@@ -58,12 +61,15 @@ class AuthenticationService {
         if (localUser === null || this.cognitoUser === null) {
             this.setUser(DEFAULT_USER);
         } else {
-            this.getCognitoToken()
+            this
+                .getCognitoToken()
                 .then((token) => {
                     cognitoToken = token;
 
                     if (localUser.id_token === cognitoToken) {
                         localUser.status = 200;
+
+                        this.userIDtoAWSCognitoCredentials(localUser.id_token);
                     } else {
                         localUser.status = 403;
                     }
@@ -115,6 +121,7 @@ class AuthenticationService {
                     resolve({
                         id_token       : result.getIdToken().getJwtToken(),
                         access_token   : result.getAccessToken().getJwtToken(),
+                        refresh_token  : result.getRefreshToken().getToken(),
                         cognitoUser    : cognitoUser
                     });
                 },
@@ -179,7 +186,7 @@ class AuthenticationService {
 
                 this.userIDtoAWSCognitoCredentials(result.id_token);
 
-                return this.getAttributes(result.id_token, result.access_token);
+                return this.getAttributes(result.id_token, result.access_token, result.refresh_token);
             })
             .then(result => {
                 this.setUser(result);
@@ -218,38 +225,83 @@ class AuthenticationService {
         });
     }
 
-    getAttributes (id_token, access_token) {
+    getAttributes (id_token, access_token, refresh_token) {
         return this.$q((resolve, reject) => {
             this.cognitoUser
-                .getUserAttributes((err, result) => {
+                .getUserAttributes((error, result) => {
 
-                    if (!err) {
+                    if (!error) {
                         let attr = {};
                         result.map((obj) => {
                             attr[obj.Name] = obj.Value;
                         });
 
-                        let firstName       = attr.name.charAt(0).toUpperCase() + attr.name.slice(1);
-                        let lastName        = attr.family_name.charAt(0).toUpperCase() + attr.family_name.slice(1);
-                        let email           = attr.email;
-                        let userType        = attr['custom:userType'] || '';
-                        let ratingCompanyID = attr['custom:ratingCompanyID'] || '';
+                        let preferredUsername = attr.preferred_username || '';
+                        let firstName         = attr.name.charAt(0).toUpperCase() + attr.name.slice(1);
+                        let lastName          = attr.family_name.charAt(0).toUpperCase() + attr.family_name.slice(1);
+                        let email             = attr.email;
+                        let userType          = attr['custom:userType'] || '';
+                        let ratingCompanyID   = attr['custom:ratingCompanyID'] || '';
 
                         resolve({
                             status       : 200,
+                            preferredUsername,
                             firstName,
                             lastName,
                             email,
                             userType,
                             id_token,
                             access_token,
+                            refresh_token,
                             ratingCompanyID
                         });
                     } else {
                         reject({
                             status  : 403,
-                            message : err
+                            message : error
                         });
+                    }
+                });
+        });
+    }
+
+    setPreferredUsername (attributes) {
+        let attributeList = [];
+        attributes.forEach((attribute) => {
+            let cognitoUserAttribute = new CognitoUserAttribute(attribute);
+
+            attributeList.push(cognitoUserAttribute);
+        });
+
+        return this.$q((resolve, reject) => {
+            this
+                .cognitoUser
+                .updateAttributes(attributeList, (error, result) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        let user = Object.assign({}, this.user, {
+                            status            : 200,
+                            preferredUsername : attributeList[0].Value
+                        });
+
+                        this.setUser(user);
+
+                        resolve(result);
+                    }
+                });
+        });
+    }
+
+    setUserPassword (oldPassword, newPassword) {
+        return this.$q((resolve, reject) => {
+            this
+                .cognitoUser
+                .changePassword(oldPassword, newPassword, (error, result) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(result);
                     }
                 });
         });
@@ -284,6 +336,7 @@ class AuthenticationService {
     }
 
     userIDtoAWSCognitoCredentials (id_token) {
+        this.$log.log('userIDtoAWSCognitoCredentials');
         Config.credentials = new CognitoIdentityCredentials({
             IdentityPoolId : this.POOL_DATA.UserPoolId,
             Logins         : {

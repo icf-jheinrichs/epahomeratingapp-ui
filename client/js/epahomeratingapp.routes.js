@@ -16,6 +16,11 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         .otherwise(STATE_NAME.LOGIN);
 
     $stateProvider
+        .state(STATE_NAME.DIAGNOSTICS, {
+            url        : '/diagnostics',
+            component  : 'diagnosticsPage'
+        })
+
         .state(STATE_NAME.LOGIN, {
             url        : '/login',
             component  : 'loginPage',
@@ -305,14 +310,29 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
+        .state(STATE_NAME.PROVIDERS, {
+            url        : '/providers',
+            component  : 'providersPage'
+        })
+
         .state(STATE_NAME.USERS, {
             url        : '/users',
             component  : 'usersPage'
         })
 
-        .state(STATE_NAME.DIAGNOSTICS, {
-            url        : '/diagnostics',
-            component  : 'diagnosticsPage'
+        .state(STATE_NAME.USER_EDIT, {
+            url        : '/users/user/{C_ID}',
+            component  : 'userEditPage',
+            resolve    : {
+                user : (UserCompanyService, $stateParams) => {
+                    return UserCompanyService.getUser($stateParams.C_ID);
+                }
+            }
+        })
+
+        .state(STATE_NAME.USER_SETTINGS, {
+            url        : '/users/user/settings',
+            component  : 'userSettingsPage'
         });
 };
 

@@ -1,6 +1,6 @@
 <section class="page-container">
     <header class="page-header item-list-header clearfix">
-        <h2 class="pull-left item-list-title">Rater Jobs</h2>
+        <h2 class="pull-left">Rater Jobs</h2>
         <a data-ui-sref="job-new()" class="btn pull-right"><i class="fa fa-plus" aria-hidden="true"></i> Create a Job</a>
     </header>
 
@@ -59,7 +59,7 @@
                 jobs="jobsPageCtrl.jobs"
                 register-handlers="jobsPageCtrl.registerHandlers(toggleAllJobs, getSelectedJobs)"
                 on-download-xml="jobsPageCtrl.downloadXml(jobId)"
-                on-set-bulk-operation-jobId="jobsPageCtrl.setBulkOperationStatus(jobId)">
+                on-set-bulk-operation-status="jobsPageCtrl.setBulkOperationStatus(status)">
             </jobs>
 
         </div>
@@ -68,10 +68,10 @@
 
 <div class="dialog hidden" dialog="dialog" id="dialog-submit-to-provider">
     <div class="dialog-header">
-        <h3 class="dialog-title">Submit {{jobsPageCtrl.marked}} Jobs</h3>
+        <h3 class="dialog-title">Submit <ng-pluralize count="jobsPageCtrl.marked" when="{'one' : '{} Job', 'other' : '{} Jobs'}"></ng-pluralize></h3>
     </div>
     <div class="dialog-body">
-        <div class="form-group">
+        <div class="form-group" data-ng-if="jobsPageCtrl.company.RelatedProviderCompanys.length > 1">
             <label for="selectedProviderToAdd" class="control-label">Select Provider</label>
             <select
                 class="form-control"
@@ -80,10 +80,18 @@
                 data-ng-options="provider.Name for provider in jobsPageCtrl.company.RelatedProviderCompanys track by provider.ProviderRESNETId">
             </select>
         </div>
+
+        <div class="form-group" data-ng-if="jobsPageCtrl.company.RelatedProviderCompanys.length === 1">
+            <p for="selectedProviderToAdd" class="control-label">The selected <ng-pluralize count="jobsPageCtrl.marked" when="{'one' : 'job', 'other' : 'jobs'}"></ng-pluralize> will be submitted to: {{jobsPageCtrl.company.RelatedProviderCompanys[0].Name}}</p>
+        </div>
+
+        <div data-ng-if="!jobsPageCtrl.hasRelatedProviderCompanies">
+            <p>There are no provider companies associated with {{jobsPageCtrl.company.Name}}.</p>
+        </div>
     </div>
     <div class="dialog-footer text-right">
         <button class="btn btn-link" type="button" data-ng-click="dismiss(false)">Cancel</button>
-        <button class="btn" data-ng-click="dismiss(true)">Submit</button>
+        <button class="btn" data-ng-click="dismiss(true)" data-ng-disabled="!jobsPageCtrl.hasRelatedProviderCompanies">Submit</button>
     </div>
 </div>
 
