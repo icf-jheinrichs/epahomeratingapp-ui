@@ -245,7 +245,10 @@ class JobsChecklistPageController {
 
     showHistory () {
         this.hideDropDown();
-        this.ModalService.openModal(this.MODAL.SHOW_HISTORY);
+
+        this
+            .ModalService
+            .openModal(this.MODAL.SHOW_HISTORY);
     }
 
     viewHvacDesignReport () {

@@ -212,8 +212,6 @@ const SEARCH_PARAMS = {
     PROGRESS_LEVEL                : 'progressLevel',
     RATER                         : 'rater',
     RATING_TYPE                   : 'ratingType',
-    RETURNED_FROM_INTERNAL_REVIEW : 'returnedFromInternalReview',
-    RETURNED_FROM_PROVIDER_REVIEW : 'returnedFromProviderReview',
     STATUS                        : 'status'
 };
 

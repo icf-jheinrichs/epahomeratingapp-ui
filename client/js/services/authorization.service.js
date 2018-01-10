@@ -122,7 +122,7 @@ class AuthorizationService {
                     resolve(this.user);
                 })
                 .catch(() => {
-                    this.clearState;
+                    this.clearState();
                 })
                 .finally(() => {
                     this.$rootScope.$emit(this.MESSAGING.USER_AUTHORIZATION_UPDATE);

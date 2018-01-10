@@ -179,16 +179,6 @@ class JobsService {
                                         pick = false;
                                     }
                                     break;
-                                case this.SEARCH_PARAMS.RETURNED_FROM_INTERNAL_REVIEW :
-                                    if (!job.ReturnedFromInternal) {
-                                        pick = false;
-                                    }
-                                    break;
-                                case this.SEARCH_PARAMS.RETURNED_FROM_PROVIDER_REVIEW :
-                                    if (!job.ReturnedFromProvider) {
-                                        pick = false;
-                                    }
-                                    break;
                                 case this.SEARCH_PARAMS.STATUS :
                                     if (progressLevel !== undefined && progressLevel !== job.ProgressLevel) {
                                         pick = false;

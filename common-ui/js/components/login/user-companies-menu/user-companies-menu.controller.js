@@ -1,13 +1,12 @@
 import _findIndex from 'lodash/findIndex';
 
 class UserMenuController {
-    constructor ($state, $stateParams, $transitions, AuthenticationService, AuthorizationService, DropdownService, CONTEXT, UI_ENUMS) {
+    constructor ($state, $stateParams, $transitions, AuthorizationService, DropdownService, CONTEXT, UI_ENUMS) {
         'ngInject';
 
         this.$state                       = $state;
         this.$stateParams                 = $stateParams;
         this.$transitions                 = $transitions;
-        this.AuthenticationService        = AuthenticationService;
         this.AuthorizationService         = AuthorizationService;
         this.DropdownService              = DropdownService;
         this.DROPDOWN_USER_COMPANIES_MENU = UI_ENUMS.DROPDOWN.USER_COMPANIES_MENU;
