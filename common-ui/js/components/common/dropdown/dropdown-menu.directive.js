@@ -8,6 +8,14 @@ function dropdownMenu () {
             }
 
             dropdownCtrl.setMenuElement(element);
+
+            element
+                .find('a')
+                .on('click', (event) => {
+                    if (angular.element(event.target).hasClass('dropdown-toggle')) {
+                        dropdownCtrl.close();
+                    }
+                });
         }
     };
 }

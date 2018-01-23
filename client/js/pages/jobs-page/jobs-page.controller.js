@@ -1,6 +1,18 @@
 import JobsPage from './jobs-page.class.js';
 
 class JobsPageController extends JobsPage {
+    $onInit () {
+        super.$onInit();
+
+        if (this.company.RelatedProviderCompanys.length > 0) {
+            this.hasRelatedProviderCompanies = true;
+            this
+                .selectedProviderToAdd = this.company.RelatedProviderCompanys[0];
+        } else {
+            this.hasRelatedProviderCompanies = false;
+        }
+    }
+
     flagForReview () {
         const markedJobs = this.jobsHandlers.getSelectedJobs();
         let submitJobs   = [];

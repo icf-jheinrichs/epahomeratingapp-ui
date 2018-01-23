@@ -11,6 +11,10 @@ $status-message-border-size: 5px;
         padding-right: 30px;
     }
 
+    &.status-warning {
+        border-color: $status-warning;
+    }
+
     &.status-error {
         border-color: $status-error;
     }

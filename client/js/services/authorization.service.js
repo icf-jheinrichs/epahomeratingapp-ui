@@ -91,6 +91,10 @@ class AuthorizationService {
         return this.currentOrganization;
     }
 
+    getUserMESAData () {
+        return this.user.user;
+    }
+
     getUserId () {
         return this.user.user.CognitoId;
     }
@@ -118,7 +122,7 @@ class AuthorizationService {
                     resolve(this.user);
                 })
                 .catch(() => {
-                    this.clearState;
+                    this.clearState();
                 })
                 .finally(() => {
                     this.$rootScope.$emit(this.MESSAGING.USER_AUTHORIZATION_UPDATE);

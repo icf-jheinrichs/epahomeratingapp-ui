@@ -52,6 +52,7 @@ const USER_TYPE = {
 
 const DIALOG = {
     ADD_PROVIDER_COMPANY      : 'dialog-add-provider-company',
+    REMOVE_PROVIDER_COMPANY   : 'dialog-remove-provider-company',
     MAKE_JOB_OFFLINE          : 'dialog-make-job-offline',
     LEAKAGE_TEST_EXEMPTION    : 'dialog-leakage-test-exemption',
     SUBMIT_TO_PROVIDER        : 'dialog-submit-to-provider',
@@ -212,8 +213,6 @@ const SEARCH_PARAMS = {
     PROGRESS_LEVEL                : 'progressLevel',
     RATER                         : 'rater',
     RATING_TYPE                   : 'ratingType',
-    RETURNED_FROM_INTERNAL_REVIEW : 'returnedFromInternalReview',
-    RETURNED_FROM_PROVIDER_REVIEW : 'returnedFromProviderReview',
     STATUS                        : 'status'
 };
 
@@ -233,6 +232,7 @@ const STATUS_CLASSNAME = {
 };
 
 const STATE_NAME = {
+    DIAGNOSTICS                   : 'diagnostics',
     LOGIN                         : 'login',
     REGISTER                      : 'register',
     PROGRESS                      : 'progress',
@@ -251,8 +251,10 @@ const STATE_NAME = {
     JOB_CHECKLIST_STAGE           : 'job-checklist.stage',
     JOB_CHECKLIST_REVIEW          : 'job-checklist-review',
     JOB_CHECKLIST_REVIEW_CATEGORY : 'job-checklist-review.category',
+    PROVIDERS                     : 'providers',
     USERS                         : 'users',
-    DIAGNOSTICS                   : 'diagnostics'
+    USER_EDIT                     : 'user-edit',
+    USER_SETTINGS                 : 'user-settings'
 };
 
 const SYNC_STATUS = {
