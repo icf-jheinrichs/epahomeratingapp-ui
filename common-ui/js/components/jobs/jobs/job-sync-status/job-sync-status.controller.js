@@ -20,17 +20,25 @@ class JobSyncStatusController {
     $onInit () {
         let status = this.syncService.getOverallStatus();
 
-        this.syncStatus = status.syncStatus;
+        this.syncStatus      = status.syncStatus;
         this.syncStatusClass = status.syncStatusClass;
 
         this.dbRefreshed();
         if (this.syncStatus === this.STATUS.LAST_UPDATED) {
-            let now = moment(new Date()).format('MMM Do YYYY, h:mm:ss a');
+            let now         = moment(new Date()).format('MMM Do YYYY, h:mm:ss a');
             this.syncStatus = this.STATUS.LAST_UPDATED.replace(':now:', now);
         } else if (this.syncStatus === this.STATUS.SYNCING) {
             this.dbRefreshing();
         }
 
+        function applyChange () {
+            let self = this;
+            _defer(function afterDigest () {
+                self.$scope.$apply();
+            });
+        }
+
+        // TODO: May need to re-write the listeners...
         this.dbStartSyncListener = this.$rootScope.$on(this.MESSAGING.DB_START_SYNC, (event) => {
             this.$log.log('[job-sync-status.controller.js] dbStartSyncListener');
 
@@ -40,24 +48,21 @@ class JobSyncStatusController {
             // disable the refresh button
             this.dbRefreshing();
 
-            let self = this;
-            _defer(function afterDigest () {
-                self.$scope.$apply();
-            });
+            applyChange();
         });
 
         this.dbPauseSyncListener = this.$rootScope.$on(this.MESSAGING.DB_PAUSE_SYNC, (event) => {
             this.$log.log('[job-sync-status.controller.js] dbPauseSyncListener');
 
-            this.syncStatus      = this.STATUS.UP_TO_DATE;
-            this.syncStatusClass = this.STATUS_CLASSNAME.ONLINE_UP_TO_DATE;
+            // need to check image status
+            if (this.syncService.checkAllImageFinishedSyncing() === true) {
+                this.syncStatus      = this.STATUS.UP_TO_DATE;
+                this.syncStatusClass = this.STATUS_CLASSNAME.ONLINE_UP_TO_DATE;
 
-            this.dbRefreshed();
+                this.dbRefreshed();
+            }
 
-            let self = this;
-            _defer(function afterDigest () {
-                self.$scope.$apply();
-            });
+            applyChange();
         });
 
         this.dbErrorSyncListener = this.$rootScope.$on(this.MESSAGING.DB_ERROR_SYNC, (event) => {
@@ -71,10 +76,7 @@ class JobSyncStatusController {
             // enable the refresh button
             this.dbRefreshed();
 
-            let self = this;
-            _defer(function afterDigest () {
-                self.$scope.$apply();
-            });
+            applyChange();
         });
 
         this.deviceOfflineListener = this.$rootScope.$on(this.MESSAGING.DEVICE_OFFLINE, (event) => {
@@ -90,10 +92,7 @@ class JobSyncStatusController {
                 this.syncStatusClass = this.STATUS_CLASSNAME.SYNC_INCOMPLETE;
             }
 
-            let self = this;
-            _defer(function afterDigest () {
-                self.$scope.$apply();
-            });
+            applyChange();
         });
 
         this.deviceOnlineListener = this.$rootScope.$on(this.MESSAGING.DEVICE_ONLINE, (event, jobs) => {
@@ -112,10 +111,7 @@ class JobSyncStatusController {
                 this.syncStatusClass = this.STATUS_CLASSNAME.SYNCING;
             }
 
-            let self = this;
-            _defer(function afterDigest () {
-                self.$scope.$apply();
-            });
+            applyChange();
         });
 
         this.jobListFinishRefreshListener = this.$rootScope.$on(this.MESSAGING.REFRESH_JOBS_LIST_FINISH, (event) => {
@@ -124,11 +120,46 @@ class JobSyncStatusController {
                 this.listRefreshed();
             }
 
-            let self = this;
-            _defer(function afterDigest () {
-                self.$scope.$apply();
-            });
+            applyChange();
         });
+
+        // Individual sync status should affect the overall
+        this.assetBeingUploadedForJobListener = this.$rootScope.$on(this.MESSAGING.ASSET_BEING_UPLOADED_FOR_JOB, (event, status) => {
+            // job start upload
+            this.$log.log('[job-sync-status.controller.js] assetBeingUploadedForJobListener');
+
+            this.syncStatus      = this.STATUS.SYNCING;
+            this.syncStatusClass = this.STATUS_CLASSNAME.SYNCING;
+
+            applyChange();
+        });
+
+        this.assetBeingDownloadedForJobListener = this.$rootScope.$on(this.MESSAGING.JOB_AVAILABLE_OFFLINE, (event, offline) => {
+            // job start download
+            this.$log.log('[job-sync-status.controller.js] assetBeingDownloadedForJobListener');
+
+            this.syncStatus      = this.STATUS.SYNCING;
+            this.syncStatusClass = this.STATUS_CLASSNAME.SYNCING;
+
+            applyChange();
+        });
+
+        this.allAssetFinishedSyncingListener = this.$rootScope.$on(this.MESSAGING.ALL_JOB_ASSET_FINISHED_SYNCING, (event) => {
+            // all job finish sync, need to check db status not override
+            this.$log.log('[job-sync-status.controller.js] allAssetFinishedSyncingListener');
+
+            let dbStatus = this.syncService.getOverallStatus();
+
+            if (dbStatus.syncStatus === this.STATUS.UP_TO_DATE && this.STATUS_CLASSNAME.ONLINE_UP_TO_DATE) {
+                // only change when db sync is finished
+                this.syncStatus      = this.STATUS.UP_TO_DATE;
+                this.syncStatusClass = this.STATUS_CLASSNAME.ONLINE_UP_TO_DATE;
+            }
+
+            applyChange();
+        });
+
+
     }
 
     $onDestroy () {
