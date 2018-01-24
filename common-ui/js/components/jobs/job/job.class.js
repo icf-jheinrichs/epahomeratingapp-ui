@@ -51,7 +51,7 @@ class Job {
     }
 
     get lastUpdateTime () {
-        return moment(this.job.History[this.job.History.length - 1].DateTime).format('h:mm:ss a, MMM Do YYYY');
+        return moment(this.job.History[this.job.History.length - 1].DateTime).format('h:mm a, MMM Do YYYY');
     }
 
     get lastUpdateType () {

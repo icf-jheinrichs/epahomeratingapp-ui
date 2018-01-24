@@ -1,5 +1,5 @@
 <!-- edit house plan modal -->
-<form name="housePlanEdit" class="modal modal-large modal-scroll-body" data-ng-submit="housePlanEditBulkCtrl.acceptAll()">
+<form name="housePlanEditBulkCtrl.housePlanEditForm" class="modal modal-large modal-scroll-body" data-ng-submit="housePlanEditBulkCtrl.acceptAll()">
     <div class="modal-header flex-row">
         <span class="modal-title flex-item-grow">House Plan Information</span>
 
@@ -42,7 +42,7 @@
                 </div>
             </fieldset>
 
-            <!-- <fieldset class="row">
+            <fieldset class="row">
                 <legend class="fieldset-legend">HVAC Design Report</legend>
 
                 <file-manager
@@ -64,7 +64,7 @@
                     input-id="RaterDesignReviewChecklist"
                     files="housePlanEditBulkCtrl.housePlan.RaterDesignReviewChecklist">
                 </file-manager>
-            </fieldset> -->
+            </fieldset>
 
             <fieldset class="row">
                 <a ng-if="housePlanEditBulkCtrl.currentIndex!=0" class="btn btn-link pull-left" data-ng-disabled="housePlanEditBulkCtrl.isBusy" ng-click="housePlanEditBulkCtrl.previousHousePlan()">Previous</a>

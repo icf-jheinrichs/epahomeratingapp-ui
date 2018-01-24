@@ -44,14 +44,25 @@ class FileManagerController {
         }
     }
 
+    triggerInput (fileInput) {
+        document.getElementById(fileInput).click();
+    }
+
     addFile (file) {
         if (this.$scope.LocalFiles !== undefined && !_isEmpty(this.$scope.LocalFiles)) {
             return; // don't allow select local and library at the same time
         }
 
-        if (_findIndex(this.files, {_id : file._id}) < 0) {
+        if (this.showDetails === 'HousePlanLibrary' && _findIndex(this.files, {_id : file._id}) < 0) {
             this.files.push({
                 _id  : file._id,
+                Name : file.Name
+            });
+
+            this.librarySelectedCallback();
+        } else if (this.showDetails === 'File' && _findIndex(this.files, {Key : file.Key}) < 0) {
+            this.files.push({
+                Key  : file.Key,
                 Name : file.Name
             });
 

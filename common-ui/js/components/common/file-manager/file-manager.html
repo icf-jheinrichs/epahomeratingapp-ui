@@ -3,7 +3,14 @@
 
         <div data-ng-if="fileManagerCtrl.uploadOnly==='true'">
             <label class="btn nowrap" for="{{::fileManagerCtrl.inputId}}">Upload {{::fileManagerCtrl.label}}</label>
-            <input class="hidden" accept="{{::fileManagerCtrl.accept}}" type="file" name="{{::fileManagerCtrl.inputId}}" id="{{::fileManagerCtrl.inputId}}" />
+            <input
+                multiple="multiple"
+                select-local-file="LocalFiles"
+                class="hidden"
+                accept="{{::fileManagerCtrl.accept}}"
+                type="file"
+                name="{{::fileManagerCtrl.inputId}}"
+                id="{{::fileManagerCtrl.inputId}}" />
         </div>
 
         <div dropdown="dropdown" data-ng-if="fileManagerCtrl.uploadOnly==='false'">
@@ -22,8 +29,8 @@
                 popover="popover"
                 >
 
-                <input id="fileInput" type="file"
-                    accept="text/xml"
+                <input id="fileInput-{{::fileManagerCtrl.inputId}}" type="file"
+                    accept="{{::fileManagerCtrl.accept}}"
                     select-local-file="LocalFiles"
                     style="display:none;"
                     multiple />
@@ -33,8 +40,7 @@
                         class="drop-down-item"
                         type="button"
                         role="menuitem"
-                        accept="text/xml"
-                        onclick="document.getElementById('fileInput').click()">
+                        ng-click="fileManagerCtrl.triggerInput('fileInput-' + fileManagerCtrl.inputId)">
 
                         From Computer
                     </button>
@@ -46,7 +52,7 @@
                     role="menuitem"
                     popover-toggle="popover-toggle">
 
-                    From {{fileManagerCtrl.label}} Library
+                    From {{fileManagerCtrl.label}}
                 </button>
 
                 <div class="popover popover-has-search popover-medium hidden" popover-body="popover-body">
@@ -86,7 +92,7 @@
                                         data-ng-click="fileManagerCtrl.addFile(item)"
                                         data-ng-repeat="item in fileManagerCtrl.library | filter:fileManagerCtrl.search"
                                         class="drop-down-item popover-close item-list-item">
-                                        <div ng-if="fileManagerCtrl.showDetails === 'HousePlanLibrary'">
+                                        <div class="ellipsis" ng-if="fileManagerCtrl.showDetails === 'HousePlanLibrary'">
                                             <strong>{{item.Name}} - subplan {{item.SubplanName}}</strong>
                                             <div class="row">
                                                 <div class="col-xs-6">
@@ -96,6 +102,9 @@
                                                     <div class="ellipsis">Community: {{item.CommunityName}}</div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="ellipsis" ng-if="fileManagerCtrl.showDetails === 'File'">
+                                            {{item.Name}}
                                         </div>
                                     </button>
                                 </div>

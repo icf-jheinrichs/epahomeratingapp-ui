@@ -125,7 +125,8 @@ class HousePlanNewController {
             uploadPromises.push(uploadFile(files[fileIndex]));
         }
 
-        Promise.all(uploadPromises)
+        Promise
+            .all(uploadPromises)
             .then((response) => {
                 self.uploadStage = UPLOAD_STAGE.report;
 
@@ -138,7 +139,9 @@ class HousePlanNewController {
                     }
                 }
 
-                this.$rootScope.$emit(this.MESSAGING.HOUSE_PLAN_NEW_BULK, self.uploadedHousePlans);
+                this
+                    .$rootScope
+                    .$emit(this.MESSAGING.HOUSE_PLAN_NEW_BULK, self.uploadedHousePlans);
 
                 _defer(function afterDigest () {
                     self.$scope.$apply();

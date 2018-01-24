@@ -19,7 +19,7 @@ $switch-delta:  $toggle-size;
     height: $toggle-size;
     outline: 0;
     position: relative;
-    transition: box-shadow $transition-slow, background-color $transition-default, border-color $transition-default;
+    transition: box-shadow $transition-default, background-color $transition-fast, border-color $transition-fast;
     width: $toggle-size * 2;
 
     &:hover,
@@ -42,7 +42,7 @@ $switch-delta:  $toggle-size;
         left: $switch-offset;
         position: absolute;
         top: $switch-offset;
-        transition: transform $transition-default ease-out, border-color $transition-default;
+        transition: transform $transition-fast ease-out, border-color $transition-fast;
         width: $switch-size;
     }
 
@@ -77,7 +77,7 @@ $switch-delta:  $toggle-size;
 .status-syncing {
     margin: 5px 8px;
     opacity: 0;
-    transition: opacity $transition-default, color $transition-default;
+    transition: opacity $transition-fast, color $transition-fast;
 }
 
 .toggle-status,
@@ -87,7 +87,7 @@ $switch-delta:  $toggle-size;
     height: $toggle-size + 2;
     position: absolute;
     transform: scale(1);
-    transition: border-color $transition-default, transform $transition-default ease-out;
+    transition: border-color $transition-fast, transform $transition-fast ease-out;
 }
 
 .toggle-status-border {
@@ -220,7 +220,6 @@ $switch-delta:  $toggle-size;
     }
 }
 
-.sync-up,
 .sync-down {
     .status-syncing {
         opacity: 1;
