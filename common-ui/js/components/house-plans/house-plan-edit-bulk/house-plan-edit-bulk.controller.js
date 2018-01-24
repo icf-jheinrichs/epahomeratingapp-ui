@@ -8,7 +8,7 @@ const ERROR_SERVER = {
 };
 
 class HousePlanEditBulkController {
-    constructor ($q, $rootScope, $scope, $state, $stateParams, HousePlansService, S3Service, UI_ENUMS) {
+    constructor ($q, $rootScope, $scope, $state, $stateParams, HousePlansService, S3Service, S3_CONFIG, UI_ENUMS) {
         'ngInject';
 
         this.$q                = $q;
@@ -21,6 +21,7 @@ class HousePlanEditBulkController {
         this.S3Service         = S3Service;
         this.MESSAGING         = UI_ENUMS.MESSAGING;
         this.isBusy            = false;
+        this.PDF_FILE_PATH     = S3_CONFIG.PATH_PDF;
 
         this.housePlan         = {};
         this.currentIndex      = 0;
@@ -121,17 +122,13 @@ class HousePlanEditBulkController {
 
         this.housePlan.HvacDesignReport.forEach((hvacDesignReport) => {
             if (hvacDesignReport instanceof File && this.isValidFile(hvacDesignReport)) {
-                const path     = 'pdfs';
-
-                hvacDesignReportUploads.push(this.S3Service.upload(path, hvacDesignReport));
+                hvacDesignReportUploads.push(this.S3Service.upload(this.PDF_FILE_PATH, hvacDesignReport));
             }
         });
 
         this.housePlan.RaterDesignReviewChecklist.forEach((raterDesignReviewChecklist) => {
             if (raterDesignReviewChecklist instanceof File && this.isValidFile(raterDesignReviewChecklist)) {
-                const path     = 'pdfs';
-
-                raterDesignReviewChecklistUploads.push(this.S3Service.upload(path, raterDesignReviewChecklist));
+                raterDesignReviewChecklistUploads.push(this.S3Service.upload(this.PDF_FILE_PATH, raterDesignReviewChecklist));
             }
         });
 

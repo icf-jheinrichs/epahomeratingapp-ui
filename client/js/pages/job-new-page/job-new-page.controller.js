@@ -19,7 +19,7 @@ const HOUSE_PLAN_REQUIRED = {
 };
 
 class JobsNewPageController {
-    constructor ($q, $log, $state, JobsService, HousePlansService, S3Service) {
+    constructor ($q, $log, $state, JobsService, HousePlansService, S3Service, S3_CONFIG) {
         'ngInject';
 
         this.$q                = $q;
@@ -29,6 +29,7 @@ class JobsNewPageController {
         this.JobsService       = JobsService;
         this.HousePlansService = HousePlansService;
         this.S3Service         = S3Service;
+        this.PDF_FILE_PATH     = S3_CONFIG.PATH_PDF;
     }
 
     $onInit () {
@@ -191,7 +192,7 @@ class JobsNewPageController {
         let fileUploads = [];
 
         jobFiles.forEach((file) => {
-            fileUploads.push(this.S3Service.upload('pdf', file.file, file.token));
+            fileUploads.push(this.S3Service.upload(this.PDF_FILE_PATH, file.file, file.token));
         });
 
         this
@@ -221,7 +222,7 @@ class JobsNewPageController {
         let fileUploads = [];
 
         jobFiles.forEach((file) => {
-            fileUploads.push(this.S3Service.upload('pdf', file.file, file.token));
+            fileUploads.push(this.S3Service.upload(this.PDF_FILE_PATH, file.file, file.token));
         });
 
         this

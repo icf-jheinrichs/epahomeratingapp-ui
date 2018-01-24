@@ -21,6 +21,7 @@ export const COGNITO = {
 };
 
 export const S3_CONFIG = {
+    PATH_PDF              : 'pdfs',
     BUCKET_REGION         : DEFAULT_REGION,
     IDENTITY_POOL_ID      : process.env.IDENTITY_POOL_ID,
     S3_BUCKET_NAME_PREFIX : process.env.S3_BUCKET_NAME_PREFIX
