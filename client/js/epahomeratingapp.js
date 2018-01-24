@@ -9,12 +9,15 @@ import 'normalize.css';
 import 'font-awesome/css/font-awesome.css';
 
 // Constants
-import {API_URL, BASE_IMAGE_URL, COGNITO} from './epahomeratingapp.config';
+import {API_URL, BASE_IMAGE_URL, COGNITO, S3_CONFIG} from './epahomeratingapp.config';
 import {UI_ENUMS} from '../../epahomeratingappUI.js';
 
 // Services
 import ServicesModule from './services/services.module';
 import {authenticationHook} from './services/authentication.hook';
+
+// AWS SDK
+import * as AWS from 'aws-sdk/dist/aws-sdk.js'; // eslint-disable-line no-unused-vars
 
 // Interceptor
 // @todo replace http-request service with this. import and use in module below appr.
@@ -24,7 +27,9 @@ let interceptor = ($q, AuthenticationService) => {
     return {
         request  : (config) => {
             // @todo refactor
-            if (angular.fromJson(window.sessionStorage.getItem('user')) !== null) {
+            const authorize = (config.headers && config.headers.authorize !== false) || config.headers === undefined;
+
+            if (authorize && angular.fromJson(window.sessionStorage.getItem('user')) !== null) {
                 let user            = angular.fromJson(window.sessionStorage.getItem('user'));
                 let ratingCompanyID = (window.sessionStorage.getItem('userAuthentication') === 'undefined' || window.sessionStorage.getItem('userAuthentication') === null) ? '' : angular.fromJson(window.sessionStorage.getItem('userAuthentication')).currentOrganization;
 
@@ -92,6 +97,7 @@ angular
     .constant('API_URL', API_URL)
     .constant('BASE_IMAGE_URL', BASE_IMAGE_URL)
     .constant('COGNITO', COGNITO)
+    .constant('S3_CONFIG', S3_CONFIG)
     .constant('UI_ENUMS', UI_ENUMS)
     .constant('CONTEXT', UI_ENUMS.CONTEXT.ADMIN)
     .run(authenticationHook)

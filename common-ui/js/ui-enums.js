@@ -151,6 +151,8 @@ const MESSAGING = {
 };
 
 const MODAL = {
+    COMPLETE_JOB          : 'modal-complete-job',
+    DOWNLOAD_REM_XML      : 'modal-download-rem-xml',
     SHOW_FOOTNOTE         : 'modal-show-footnote',
     PROVIDER_JOB_COMMENTS : 'modal-provider-job-comments',
     SHOW_HISTORY          : 'modal-show-history'

@@ -46,7 +46,6 @@ class JobsController {
     }
 
     setBulkOperationStatus () {
-        console.log('jobs setBulkOperationStatus');
         this.onSetBulkOperationStatus({
             status : this.jobsAreSelected()
         });

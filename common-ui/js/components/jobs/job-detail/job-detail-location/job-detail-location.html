@@ -5,7 +5,9 @@
         <file-manager
             enabled="jobDetailLocationCtrl.selectHousePlanEnabled"
             upload-only="false"
-            label="House Plan"
+            label="House Plan Library"
+            accept="text/xml"
+            input-id="HousePlan-{{jobDetailLocationCtrl.location.HouseId}}"
             library="jobDetailLocationCtrl.housePlans.housePlan"
             files="jobDetailLocationCtrl.location.HousePlan"
             show-details="jobDetailLocationCtrl.showDetails"
@@ -86,28 +88,32 @@
     </div>
 </fieldset>
 
-<!-- <fieldset class="row">
+<fieldset class="row">
     <legend class="col-xs-3">HVAC Design Report</legend>
     <div class="offset-xs-3 col-xs-9">
         <file-manager
-            upload-only="true"
+            upload-only="false"
             accept="application/pdf"
-            label="HVAC Design Report"
-            input-id="HvacDesignReport"
+            label="House Plan"
+            show-details="jobDetailLocationCtrl.showFileDetails"
+            library="jobDetailLocationCtrl.housePlansHVACDesignReports"
+            input-id="HvacDesignReport-{{jobDetailLocationCtrl.location.HouseId}}"
             files="jobDetailLocationCtrl.location.HvacDesignReport">
         </file-manager>
     </div>
-</fieldset> -->
+</fieldset>
 
-<!-- <fieldset class="row">
+<fieldset class="row">
     <legend class="col-xs-3">Rater Design Review Checklist</legend>
     <div class="offset-xs-3 col-xs-9">
         <file-manager
-            upload-only="true"
+            upload-only="false"
             accept="application/pdf"
-            label="Rater Design Review Checklist"
-            input-id="RaterDesignReviewChecklist"
+            show-details="jobDetailLocationCtrl.showFileDetails"
+            label="House Plan"
+            library="jobDetailLocationCtrl.housePlansRaterDesignReviewChecklists"
+            input-id="RaterDesignReviewChecklist-{{jobDetailLocationCtrl.location.HouseId}}"
             files="jobDetailLocationCtrl.location.RaterDesignReviewChecklist">
         </file-manager>
     </div>
-</fieldset> -->
+</fieldset>

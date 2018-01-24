@@ -18,6 +18,10 @@ function fileManager () {
                     parentScope.fileManagerCtrl.localSelectedCallback();
                 });
             });
+
+            element.bind('click', function onClick (event) {
+                element[0].value = null;
+            });
         }
     };
 }
