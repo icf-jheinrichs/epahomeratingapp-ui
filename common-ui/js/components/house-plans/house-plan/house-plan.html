@@ -25,13 +25,13 @@
             <dl>
                 <dt>HVAC Design Report:</dt>
                     <dd data-ng-repeat="hvacDesignReport in housePlanCtrl.housePlan.HvacDesignReport">
-                        <a ng-href="https://s3.amazonaws.com/{{housePlanCtrl.s3Bucket}}/{{hvacDesignReport.Key}}" data-ng-click="housePlanCtrl.downloadFile($event, hvacDesignReport)">{{hvacDesignReport.Name}}</a>
+                        <a ng-href="https://s3.amazonaws.com/{{housePlanCtrl.s3Bucket}}/{{hvacDesignReport.Key}}" key="{{hvacDesignReport.Key}}" download="{{hvacDesignReport.Name}}" document-handler="document-handler">{{hvacDesignReport.Name}}</a>
                     </dd>
             </dl>
             <dl>
                 <dt>Rater Design Review Checklist:</dt>
                     <dd data-ng-repeat="reviewChecklist in housePlanCtrl.housePlan.RaterDesignReviewChecklist">
-                        <a ng-href="https://s3.amazonaws.com/{{housePlanCtrl.s3Bucket}}/{{reviewChecklist.Key}}" data-ng-click="housePlanCtrl.downloadFile($event, reviewChecklist)">{{reviewChecklist.Name}}</a>
+                        <a ng-href="https://s3.amazonaws.com/{{housePlanCtrl.s3Bucket}}/{{reviewChecklist.Key}}" key="{{reviewChecklist.Key}}" download="{{reviewChecklist.Name}}" document-handler="document-handler">{{reviewChecklist.Name}}</a>
                     </dd>
             </dl>
         </div>

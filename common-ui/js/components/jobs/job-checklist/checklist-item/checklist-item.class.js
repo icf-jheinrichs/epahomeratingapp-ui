@@ -7,7 +7,8 @@ class ChecklistItemClass {
         UI_ENUMS,
         DisplayLogicDigestService,
         JobChecklistStateService,
-        PopoverService) {
+        PopoverService,
+        S3_CONFIG) {
 
         'ngInject';
 
@@ -24,6 +25,7 @@ class ChecklistItemClass {
         this.PopoverService            = PopoverService;
 
         this.isReview                  = this.JobChecklistStateService.isReview;
+        this.s3Bucket                  = `${S3_CONFIG.S3_BUCKET_NAME_PREFIX}-rating-company`; //TODO DRY
     }
 
     $onInit () {

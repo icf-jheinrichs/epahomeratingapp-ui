@@ -212,6 +212,14 @@ class JobChecklistState {
     }
 
     /**
+     * Get current house data
+     * @return {object}         House data object
+     */
+    getCurrentHouse () {
+        return this.currentHouse;
+    }
+
+    /**
      * Create an easily queriable object of the houses in the job. Mitigates the Primay / Secondary props in the job data.
      * @return {object} key indexed object of the houses in the job
      */

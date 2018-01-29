@@ -1,10 +1,6 @@
-import FileSaver from 'file-saver';
-
 class HousePlanController {
-    constructor ($http, HousePlansService, S3_CONFIG) {
+    constructor (HousePlansService, S3_CONFIG) {
         'ngInject';
-
-        this.$http             = $http;
 
         this.HousePlansService = HousePlansService;
         this.s3Bucket          = `${S3_CONFIG.S3_BUCKET_NAME_PREFIX}-rating-company`;
@@ -27,23 +23,6 @@ class HousePlanController {
         }
 
         return title;
-    }
-
-    downloadFile ($event, hvacDesignReport) {
-        $event.preventDefault();
-
-        this
-            .$http({
-                method       : 'GET',
-                url          : `https://s3.amazonaws.com/${this.s3Bucket}/${hvacDesignReport.Key}`,
-                responseType : 'blob',
-                headers      : {
-                    authorize : false
-                }
-            })
-            .then((response) => {
-                FileSaver.saveAs(response.data, hvacDesignReport.Name);
-            });
     }
 
     onDownloadRequest () {

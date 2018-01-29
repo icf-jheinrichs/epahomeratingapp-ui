@@ -8,6 +8,8 @@ class ChecklistItemAirInletLocationsController extends ChecklistItemClass {
                 this.itemData       = this.itemData || {selectedOptionIndex : 0};
                 this.selectedOption = this.display.Options[this.itemData.selectedOptionIndex];
                 this.onSelectOption(false);
+
+                this.house = this.JobChecklistStateService.getCurrentHouse();
             });
     }
 
@@ -34,6 +36,12 @@ class ChecklistItemAirInletLocationsController extends ChecklistItemClass {
         if (setItemData) {
             this.setItemData(this.itemData);
         }
+    }
+
+    get hasHVACDesignReport () {
+        const hvacDesignReportLength = (this.house) ? this.house.HvacDesignReport.length : 0;
+
+        return hvacDesignReportLength > 0;
     }
 }
 

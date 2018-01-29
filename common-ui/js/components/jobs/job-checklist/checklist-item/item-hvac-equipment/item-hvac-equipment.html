@@ -48,7 +48,10 @@
     </div>
 
     <div>
-        <p><button class="btn" data-ng-click="checklistItemHVACEquipmentCtrl.onViewHvacDesignReport()" type="button">View HVAC Design Report</button></p>
+        <p>
+            <a class="btn" data-ng-if="checklistItemHVACEquipmentCtrl.hasHVACDesignReport" ng-href="https://s3.amazonaws.com/{{checklistItemHVACEquipmentCtrl.s3Bucket}}/{{checklistItemHVACEquipmentCtrl.house.HvacDesignReport[0].Key}}" key="{{checklistItemHVACEquipmentCtrl.house.HvacDesignReport[0].Key}}" download="{{checklistItemHVACEquipmentCtrl.house.HvacDesignReport[0].Name}}" document-handler="document-handler">View HVAC Design Report</a>
+            <span data-ng-if="!checklistItemHVACEquipmentCtrl.hasHVACDesignReport" class="status-message status-warning">No HVAC Design Report associated with this location</span>
+        </p>
 
         <div class="item-list item-list-equipment">
             <hvac-equipment

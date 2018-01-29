@@ -48,6 +48,8 @@ class ChecklistItemHVACCommissioningController extends ChecklistItemClass {
                 documentIndex = _findIndex(this.EQUIPMENT_MATCHES_DOCUMENT, {key : this.itemData.EquipmentMatches});
 
                 this.selectedEquipmentMatches = this.EQUIPMENT_MATCHES_DOCUMENT[documentIndex];
+
+                this.house = this.JobChecklistStateService.getCurrentHouse();
             });
     }
 
@@ -79,6 +81,12 @@ class ChecklistItemHVACCommissioningController extends ChecklistItemClass {
 
             resolve({success : true});
         });
+    }
+
+    get hasHVACDesignReport () {
+        const hvacDesignReportLength = (this.house) ? this.house.HvacDesignReport.length : 0;
+
+        return hvacDesignReportLength > 0;
     }
 }
 
