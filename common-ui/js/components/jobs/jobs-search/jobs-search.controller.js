@@ -53,16 +53,31 @@ class JobsSearchBarController {
         }
 
         this.subPanelActive = false;
+
+        this.hasFilters     = false;
     }
 
     get filterTextString () {
-        let filterTextString = [];
+        let filterTextString      = '';
+        let filterTextStringArray = [];
 
         _forOwn(this.filterText, (value) => {
-            filterTextString.push(value);
+            filterTextStringArray.push(value);
         });
 
-        return filterTextString.join(', ');
+        if (filterTextStringArray.length > 0) {
+            filterTextString = ` - Filtered By: ${filterTextStringArray.join(' | ')}`;
+        }
+
+        this.hasFilters = filterTextString.length > 0;
+
+        return filterTextString;
+    }
+
+    clear () {
+        this
+            .$state
+            .go(this.$state.current.name, {}, {inherit : false});
     }
 
     search () {

@@ -32,7 +32,7 @@ class SearchFilterBuilderController {
         if (this.keywords.length > 0) {
             filter = {
                 filterKey  : this.param,
-                filterName : ` Builder: "${this.keywords}"`,
+                filterName : this.keywords,
                 param      : {}
             };
 

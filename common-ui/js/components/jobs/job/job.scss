@@ -1,0 +1,161 @@
+@import '../../../../scss/variables';
+
+$job-photo-width:   115px;
+$job-photo-height:  115px;
+
+$job-photo-width-small:   85px;
+$job-photo-height-small:  85px;
+
+.job {
+    cursor: pointer;
+    display: block;
+    padding: $padding-large $gutter-half $padding-large $padding-large;
+    position: relative;
+    transition: background-color $transition-default ease-out;
+
+    .fa-chevron-right {
+        color: $link-color;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: lighten($brand-auxillary, 3%);
+
+        .list-item-activate {
+            transform: translateX($offset-default);
+        }
+    }
+}
+
+.job-meta {
+    .label-rating-type {
+        flex-grow: 0;
+        width: 125px;
+    }
+
+    .label-sample-set {
+        flex-grow: 0;
+    }
+
+    .last-update {
+        flex-grow: 1;
+        text-align: right;
+    }
+}
+
+.form-control-job-offline:checked + .job-offline-status .checked {
+    visibility: visible;
+}
+
+.job-toggle {
+    padding: 0 10px 0 20px;
+}
+
+.job-select {
+    $job-select-checkbox-size: 18px;
+    $job-select-checkbox-offset: ($job-select-checkbox-size / -2) - 1;
+
+    cursor: pointer;
+    position: relative;
+    transition: background-color $transition-default ease-out;
+    width: 40px;
+
+    .form-control-check,
+    .fa-check {
+        opacity: 0;
+        position: absolute;
+    }
+
+    .fa-check {
+        color: darken($status-correct, 20%);
+        left: 50%;
+        margin: (($font-size-base / -2) - 1) 0 0 (($font-size-base / -2) - 1);
+        top: 50%;
+        transition: opacity $transition-default ease-out;
+        z-index: 1;
+    }
+
+    &::after {
+        background-color: $body-bg;
+        border: 2px solid $border-color-dark;
+        content: '';
+        display: block;
+        height: $job-select-checkbox-size;
+        left: 50%;
+        margin: $job-select-checkbox-offset 0 0 $job-select-checkbox-offset;
+        position: absolute;
+        top: 50%;
+        transition: border-color $transition-default ease-out;
+        width: $job-select-checkbox-size;
+    }
+
+    &:hover,
+    &:focus {
+        &::after {
+            border-color: darken($border-color-dark, 10%);
+        }
+    }
+
+    &.job-select-marked {
+        background-color: $status-correct;
+
+        &::after {
+            border-color: darken($status-correct, 20%);
+        }
+
+        .fa-check {
+            opacity: 1;
+        }
+    }
+}
+
+.job-info {
+    align-self: flex-start;
+    max-width: 475px;
+}
+
+.job-provider {
+    .job-info {
+        max-width: 650px;
+    }
+
+    .label-rating-type {
+        width: 220px;
+    }
+}
+
+.job-title {
+    font-size: $font-size-h4;
+    margin: $offset-small 0;
+}
+
+.job-builder {
+    display: block;
+}
+
+.job-history,
+.job-builder {
+    color: $text-color-muted;
+    line-height: $line-height-small;
+}
+
+.data-sync-status {
+    font-weight: bold;
+}
+
+.job-progress {
+    flex-shrink: 0;
+    margin-left: auto;
+    width: 160px;
+
+    .radial-progress {
+        float: left;
+    }
+}
+
+@media only screen and (max-width: $screen-md-max) {
+    .job-info {
+        max-width: 300px;
+    }
+}
+

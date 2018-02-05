@@ -7,6 +7,7 @@
     <div class="row">
         <div class="col-xs-3">
             <nav class="nav nav-stacked ">
+                <a data-ui-sref="jobs()" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav">All</a>
                 <a data-ui-sref="jobs-search({status : 'Active'})" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav">Active</a>
                 <nav class="nav sub-nav">
                     <a data-ui-sref="jobs-search({status : 'Active', progressLevel : 'PreDrywall'})" ui-sref-opts="{inherit: false}" class="nav-item">Pre-drywall</a>
@@ -34,7 +35,7 @@
             </jobs-search>
 
             <div class="bulk-operation-bar">
-                <label><input type="checkbox" ng-model="jobsPageCtrl.checkAll" data-ng-change="jobsPageCtrl.toggleAllJobs()"> Select All</label>
+                <label class="bulk-toggle-all"><input class="bulk-toggle-all-control" type="checkbox" ng-model="jobsPageCtrl.checkAll" data-ng-change="jobsPageCtrl.toggleAllJobs()"> Select All</label>
 
                 <button class="btn" type="button" data-ng-click="jobsPageCtrl.flagForReview()" data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">Flag for Review</button>
 

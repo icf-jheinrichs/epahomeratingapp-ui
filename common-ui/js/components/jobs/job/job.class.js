@@ -32,18 +32,8 @@ class Job {
         this.isSample          = this.sampleQuantity > 1;
     }
 
-    hasStatusLabel () {
-        return (this.job.ReturnedFromInternal || this.job.ReturnedFromProvider);
-    }
-
     setBulkOperationStatus () {
         this.onSetBulkOperationStatus();
-    }
-
-    downloadXML (jobId) {
-        this.onDownloadXml({
-            jobId
-        });
     }
 
     get JobTitle () {

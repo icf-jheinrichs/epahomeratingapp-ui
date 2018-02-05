@@ -3,7 +3,8 @@ import controller from './search-filter-house-plan.controller';
 
 let searchFilterHousePlanComponent = {
     bindings : {
-        registerFilter : '&'
+        registerFilter : '&',
+        onShowSubPanel : '&'
     },
     template,
     controller,

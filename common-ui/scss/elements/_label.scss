@@ -13,16 +13,17 @@
 
 .label-sample-set {
     background-color: $label-sample-set;
+    border-radius: 10px;
+    line-height: $line-height-small;
 }
 
 .label-energy-star {
-    background-color: $label-energy-star;
-    color: $text-color-inverse;
+    color: $label-energy-star;
     text-transform: uppercase;
 }
 
 .label-hers-rating {
-    background-color: $label-hers;
+    color: $text-color-muted;
 }
 
 .label-primary {

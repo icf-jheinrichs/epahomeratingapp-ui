@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 
-const WIDTH         = 80;
-const THICKNESS     = 8;
+const WIDTH         = 60;
+const THICKNESS     = 7;
 const START_ANGLE   = 0;
 
 const CENTER        = WIDTH / 2;

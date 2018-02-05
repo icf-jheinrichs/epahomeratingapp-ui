@@ -45,7 +45,7 @@ class SearchFilterInspectionStageController {
 
             filter = {
                 filterKey  : this.param,
-                filterName : `Inspection Stage: ${stageObject.Name}`,
+                filterName : stageObject.Name,
                 param      : {}
             };
 

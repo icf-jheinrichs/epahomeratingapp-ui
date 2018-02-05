@@ -1,14 +1,8 @@
 @import '../../../../scss/variables';
 
-.search-meta {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
 .jobs-search {
     border-bottom: 3px solid $border-color-default;
-    padding: 10px 10px 0;
+    padding: 0 10px;
     position: relative;
 }
 

@@ -180,6 +180,17 @@ const RATING_TYPES = {
     }
 };
 
+const JOB_TYPES = {
+    'SampleSet' : {
+        Name : 'Sample Set',
+        Key  : 'sampleSet'
+    },
+    'IndividualHouse' : {
+        Name : 'Individual House',
+        Key  : 'individualHouse'
+    }
+};
+
 const RESPONSES = {
     NotApplicable : {
         Name  : 'N/A',
@@ -281,6 +292,7 @@ export default {
     MODAL,
     POPOVER,
     ANY,
+    JOB_TYPES,
     RATING_TYPES,
     RESPONSES,
     SEARCH_PARAMS,

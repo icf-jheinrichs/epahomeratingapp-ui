@@ -1,43 +1,27 @@
-<div class="job-select flex-item-static flex-row flex-align-center">
-    <label aria-labelledby="job-{{jobProviderCtrl.job._id}}">
-        <span class="sr-only">Mark job for bulk operations.</span>
-        <input type="checkbox" ng-model="jobProviderCtrl.marked" ng-click="jobProviderCtrl.setBulkOperationStatus()" />
-    </label>
-</div>
+<label data-ng-class="{'job-select-marked' : jobProviderCtrl.marked}" class="job-select flex-item-static flex-row flex-align-center" aria-labelledby="job-{{jobProviderCtrl.job._id}}">
+    <i class="fa fa-check" aria-hidden="true"></i>
+    <span class="sr-only">Mark job for bulk operations.</span>
+    <input class="form-control-check" type="checkbox" ng-model="jobProviderCtrl.marked" ng-click="jobProviderCtrl.setBulkOperationStatus()" />
+</label>
 
 <div class="flex-item-grow">
     <a aria-labelledby="job-{{jobProviderCtrl.job._id}}"
        class="job job-provider flex-row flex-align-center"
        data-ng-class="{'job-returned': jobProviderCtrl.hasStatusLabel()}"
-       data-ui-sref="job-checklist-review.category({id: jobProviderCtrl.job._id, houseId: jobProviderCtrl.job.Primary.HouseId, categoryId: 'walls', role: 'provider'})"
-       data-ng-disabled="!jobProviderCtrl.enabled">
+       data-ui-sref="job-checklist-review.category({id: jobProviderCtrl.job._id, houseId: jobProviderCtrl.job.Primary.HouseId, categoryId: 'walls', role: 'provider'})">
 
-        <div class="job-info">
-            <div class="job-meta">
-                <span class="label label-rating-type" data-ng-class="jobProviderCtrl.RatingTypeClass">{{::jobProviderCtrl.RatingType}}</span>
+        <div class="job-info flex-item-grow">
+            <div class="job-meta flex-row">
+                <span class="label-rating-type" data-ng-class="jobProviderCtrl.RatingTypeClass">{{::jobProviderCtrl.RatingType}}</span>
                 <span class="label label-sample-set" data-ng-if="jobProviderCtrl.isSample">Sample Set: {{::jobProviderCtrl.sampleQuantity}} <i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                <span class="last-update small"><strong>{{::jobProviderCtrl.lastUpdateType}}:</strong> {{::jobProviderCtrl.lastUpdateTime}}</span>
             </div>
 
             <h3 class="list-item-title job-title" id="job-{{jobProviderCtrl.job._id}}" data-ng-bind-html="jobProviderCtrl.JobTitle"></h3>
 
-            <div class="job-history">
-                <span class="last-update small"><strong>{{::jobProviderCtrl.lastUpdateType}}:</strong> {{::jobProviderCtrl.lastUpdateTime}}</span>
-            </div>
-        </div>
-
-        <div class="job-status">
-            <span class="label label-job-status label-status-returned" data-ng-if="jobProviderCtrl.job.ReturnedFromInternal">Returned from QA</span>
-            <span class="label label-job-status label-status-returned" data-ng-if="jobProviderCtrl.job.ReturnedFromProvider">Returned from Provider</span>
+            <span class="job-builder">{{::jobProviderCtrl.job.Primary.Builder}}</span>
         </div>
 
         <i class="list-item-activate fa fa-chevron-right fa-lg flex-item-pull-right" aria-hidden="true"></i>
     </a>
-
-    <div class="job-actions">
-        <button class="btn btn-sm" data-ng-click="jobProviderCtrl.downloadXML(jobProviderCtrl.job._id)" type="button" data-ng-disabled="!jobProviderCtrl.enabled">Download REM XML</button>
-        <button class="btn btn-sm" data-ng-disabled="jobProviderCtrl.job.Status !== 'Submitted to Provider'" data-ng-click="jobProviderCtrl.markJobAsRegistered(jobProviderCtrl.job._id)" type="button" data-ng-disabled="!jobProviderCtrl.enabled">Mark As Registered</button>
-        <!--
-        <button class="btn btn-sm pull-right" type="button">Archive</button>
-        -->
-    </div>
 </div>

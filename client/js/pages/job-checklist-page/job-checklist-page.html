@@ -62,7 +62,7 @@
 
     <div class="modal-body-wrapper">
         <div class="modal-body">
-            <p data-ng-repeat="history in jobsChecklistPageCtrl.job.History">{{history.Description}} by: {{history.User}} on {{history.DateTime | date:"MM/dd/yyyy"}}</p>
+            <p data-ng-repeat="history in jobsChecklistPageCtrl.job.History">{{::history.Description}} by: {{::history.User}} on {{history.DateTime | date:"MM/dd/yyyy"}}</p>
         </div>
     </div>
 </div>
@@ -102,7 +102,7 @@
         <div>
         <div class="job-checklist-meta">
             <span class="label label-rating-type" data-ng-class="jobsChecklistPageCtrl.getRatingTypeClass()">
-                {{jobsChecklistPageCtrl.RatingTypeLabel}}
+                {{::jobsChecklistPageCtrl.RatingTypeLabel}}
             </span><br />
 
             <h2 class="job-checklist-title" data-ng-bind-html="jobsChecklistPageCtrl.JobTitle"></h2>
@@ -122,7 +122,7 @@
                 <span
                     class="drop-down-item">
 
-                    ID: {{jobsChecklistPageCtrl.job._id}}
+                    ID: {{::jobsChecklistPageCtrl.job._id}}
                 </span>
             </nav>
             <div
@@ -133,11 +133,19 @@
         </div>
 
         <div class="actions flex-row">
+            <a
+                data-ui-sref="job-edit({id: jobsChecklistPageCtrl.job._id})"
+                data-ng-if="jobsChecklistPageCtrl.role==='admin'"
+                class="btn btn-sm">
+
+                Edit Profile
+            </a>
+
             <button
                 data-ng-click="jobsChecklistPageCtrl.completeJob()"
                 data-ng-disabled="!jobsChecklistPageCtrl.jobIsActive"
                 data-ng-class="{'btn-disabled' : !jobsChecklistPageCtrl.canCompleteJob()}"
-                data-ng-if="jobsChecklistPageCtrl.role!=='provider' && jobsChecklistPageCtrl.userAuthorization.Admin"
+                data-ng-if="jobsChecklistPageCtrl.role !== 'provider' && jobsChecklistPageCtrl.role !== 'admin'"
                 class="btn btn-sm"
                 type="button">
 
@@ -176,14 +184,6 @@
                 Delete Job
             </button>
             -->
-
-            <a
-                data-ui-sref="job-edit({id: jobsChecklistPageCtrl.job._id})"
-                data-ng-if="jobsChecklistPageCtrl.role==='admin'"
-                class="btn btn-sm">
-
-                Edit Job
-            </a>
 
             <button
                 type="button"

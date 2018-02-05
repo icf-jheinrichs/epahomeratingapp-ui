@@ -42,6 +42,18 @@
     }
 }
 
+.btn-link-inline {
+    border: 0;
+    color: $link-color;
+    display: inline;
+    padding: 0;
+
+    &:hover,
+    &:focus {
+        color: $link-color-hover;
+    }
+}
+
 .btn-link {
     background-color: transparent;
     border: 0;

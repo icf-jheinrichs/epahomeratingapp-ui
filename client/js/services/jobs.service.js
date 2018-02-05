@@ -5,7 +5,6 @@ import _omitBy from 'lodash/omitBy';
 import _pickBy from 'lodash/pickBy';
 import _map from 'lodash/map';
 import _forOwn from 'lodash/forOwn';
-import _intersection from 'lodash/intersection';
 
 /**
  * JobsService is the interface for all job data.
@@ -28,6 +27,7 @@ class JobsService {
         this.$stateParams         = $stateParams;
 
         this.SEARCH_PARAMS        = UI_ENUMS.SEARCH_PARAMS;
+        this.JOB_TYPES            = UI_ENUMS.JOB_TYPES;
 
         this.AuthorizationService = AuthorizationService;
 
@@ -112,12 +112,12 @@ class JobsService {
         let housePlans = [];
 
         samples.forEach((sample) => {
-            let sampleHousePlans = _map(sample.HousePlan, '_id');
+            let sampleHousePlans = _map(sample.HousePlan, 'Name');
 
             housePlans = housePlans.concat(housePlans, sampleHousePlans);
         });
 
-        return housePlans;
+        return housePlans.join(' ');
     }
 
     //TODO : move some of this server side
@@ -160,12 +160,19 @@ class JobsService {
                                     }
                                     break;
                                 case this.SEARCH_PARAMS.HOUSE_PLAN :
-                                    if (_intersection(jobHousePlans, value.split(',')).length === 0) {
+                                    if (jobHousePlans.toLowerCase().indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
                                         pick = false;
                                     }
                                     break;
                                 case this.SEARCH_PARAMS.KEYWORDS :
                                     if (jobTitle.indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
+                                        pick = false;
+                                    }
+                                    break;
+                                case this.SEARCH_PARAMS.JOB_TYPE :
+                                    if (value === this.JOB_TYPES.SampleSet.Key && job.Secondary.length === 0) {
+                                        pick = false;
+                                    } else if (value === this.JOB_TYPES.IndividualHouse.Key && job.Secondary.length > 0) {
                                         pick = false;
                                     }
                                     break;
@@ -257,12 +264,19 @@ class JobsService {
                                     }
                                     break;
                                 case this.SEARCH_PARAMS.HOUSE_PLAN :
-                                    if (_intersection(jobHousePlans, value.split(',')).length === 0) {
+                                    if (jobHousePlans.toLowerCase().indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
                                         pick = false;
                                     }
                                     break;
                                 case this.SEARCH_PARAMS.KEYWORDS :
                                     if (jobTitle.indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
+                                        pick = false;
+                                    }
+                                    break;
+                                case this.SEARCH_PARAMS.JOB_TYPE :
+                                    if (value === this.JOB_TYPES.SampleSet.Key && job.Secondary.length === 0) {
+                                        pick = false;
+                                    } else if (value === this.JOB_TYPES.IndividualHouse.Key && job.Secondary.length > 0) {
                                         pick = false;
                                     }
                                     break;

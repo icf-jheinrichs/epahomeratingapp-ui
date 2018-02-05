@@ -46,7 +46,8 @@
 }
 
 .checklist-item-review-response {
-    .label-response {
+    .label-response,
+    .label-error {
         position: absolute;
         right: $gutter-half;
         top: 0;

@@ -1,6 +1,7 @@
 <form class="jobs-search flex-row">
     <p class="search-meta">
-        <strong>{{jobsSearchCtrl.quantity}} Jobs</strong> {{jobsSearchCtrl.filterTextString}}
+        <strong>{{jobsSearchCtrl.quantity}} <ng-pluralize count="jobsSearchCtrl.quantity" when="{'one' : 'Job', 'other' : 'Jobs'}"></ng-pluralize></strong> {{jobsSearchCtrl.filterTextString}}
+        <button data-ng-if="jobsSearchCtrl.hasFilters" class="btn-link-inline" type="button" data-ng-click="jobsSearchCtrl.clear()"> Clear All Filters</button>
     </p>
 
     <div
@@ -13,7 +14,7 @@
             class="btn btn-link btn-search"
             type="button">
 
-            <i class="fa fa-search fa-lg" aria-hidden="true"></i> Search
+            <i class="fa fa-filter fa-lg" aria-hidden="true"></i> Filter
         </button>
 
         <div class="popover popover-small popover-jobs-search checklist-filter-popover hidden" popover-body="popover-body">
@@ -27,18 +28,23 @@
                             Clear
                         </button>
 
-                        <h5 class="popover-panel-title flex-item-grow">Search</h5>
+                        <h5 class="popover-panel-title flex-item-grow">Filter</h5>
 
                         <button
                             class="btn btn-link popover-close flex-item-static"
                             data-ng-click="jobsSearchCtrl.search()"
                             type="button">
 
-                            Search
+                            Filter
                         </button>
                     </header>
 
                     <div class="popover-panel-body item-list" data-ng-class="{'popover-subpanel-active' : jobsSearchCtrl.subPanelActive}">
+                        <search-filter-keywords
+                            class="item-list-item"
+                            register-filter="jobsSearchCtrl.registerFilter(filter)">
+                        </search-filter-keywords>
+
                         <search-filter-builder
                             class="item-list-item"
                             register-filter="jobsSearchCtrl.registerFilter(filter)">
@@ -50,15 +56,15 @@
                             on-show-sub-panel="jobsSearchCtrl.showSubPanel(show)">
                         </search-filter-house-plan>
 
-                        <search-filter-keywords
-                            class="item-list-item"
-                            register-filter="jobsSearchCtrl.registerFilter(filter)">
-                        </search-filter-keywords>
-
                         <search-filter-rating-type
                             class="item-list-item"
                             register-filter="jobsSearchCtrl.registerFilter(filter)">
                         </search-filter-rating-type>
+
+                        <search-filter-job-type
+                            class="item-list-item"
+                            register-filter="jobsSearchCtrl.registerFilter(filter)">
+                        </search-filter-job-type>
 
                         <search-filter-must-correct
                             class="item-list-item"

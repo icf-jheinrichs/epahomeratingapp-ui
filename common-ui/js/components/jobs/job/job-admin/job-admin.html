@@ -1,28 +1,25 @@
-<div class="job-select flex-item-static flex-row flex-align-center">
-    <label aria-labelledby="job-{{jobAdminCtrl.job._id}}">
-        <span class="sr-only">Mark job for bulk operations.</span>
-        <input type="checkbox" ng-model="jobAdminCtrl.marked" ng-click="jobAdminCtrl.setBulkOperationStatus()" />
-    </label>
-</div>
+<label data-ng-class="{'job-select-marked' : jobAdminCtrl.marked}" class="job-select flex-item-static flex-row flex-align-center" aria-labelledby="job-{{jobAdminCtrl.job._id}}">
+    <i class="fa fa-check" aria-hidden="true"></i>
+    <span class="sr-only">Mark job for bulk operations.</span>
+    <input class="form-control-check" type="checkbox" ng-model="jobAdminCtrl.marked" ng-click="jobAdminCtrl.setBulkOperationStatus()" />
+</label>
 
-<div class="flex-item-grow" data-ng-disabled="true">
+<div class="flex-item-grow">
     <a aria-labelledby="job-{{jobAdminCtrl.job._id}}"
        class="job job-admin flex-row flex-align-center"
        data-ng-class="{'job-returned': jobAdminCtrl.hasStatusLabel()}"
-       data-ui-sref="job-checklist-review.category({id: jobAdminCtrl.job._id, houseId: jobAdminCtrl.job.Primary.HouseId, categoryId: 'walls', role: 'admin'})"
-       data-ng-disabled="!jobAdminCtrl.enabled">
+       data-ui-sref="job-checklist-review.category({id: jobAdminCtrl.job._id, houseId: jobAdminCtrl.job.Primary.HouseId, categoryId: 'walls', role: 'admin'})">
 
-        <div class="job-info">
-            <div class="job-meta">
-                <span class="label label-rating-type" data-ng-class="jobAdminCtrl.RatingTypeClass">{{::jobAdminCtrl.RatingType}}</span>
+        <div class="job-info flex-item-grow">
+            <div class="job-meta flex-row">
+                <span class="label-rating-type" data-ng-class="jobAdminCtrl.RatingTypeClass">{{::jobAdminCtrl.RatingType}}</span>
                 <span class="label label-sample-set" data-ng-if="jobAdminCtrl.isSample">Sample Set: {{::jobAdminCtrl.sampleQuantity}} <i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                <span class="last-update small"><strong>{{::jobAdminCtrl.lastUpdateType}}:</strong> {{::jobAdminCtrl.lastUpdateTime}}</span>
             </div>
 
             <h3 class="list-item-title job-title" id="job-{{jobAdminCtrl.job._id}}" data-ng-bind-html="jobAdminCtrl.JobTitle"></h3>
 
-            <div class="job-history">
-                <span class="last-update small"><strong>{{::jobAdminCtrl.lastUpdateType}}:</strong> {{::jobAdminCtrl.lastUpdateTime}}</span>
-            </div>
+            <span class="job-builder">{{::jobAdminCtrl.job.Primary.Builder}}</span>
         </div>
 
         <div class="job-progress">
@@ -32,10 +29,4 @@
 
         <i class="list-item-activate fa fa-chevron-right fa-lg" aria-hidden="true"></i>
     </a>
-
-    <div class="job-actions">
-        <a data-ui-sref="job-edit({id : jobAdminCtrl.job._id})" class="btn btn-sm" data-ng-disabled="!jobAdminCtrl.enabled">Edit Profile</a>
-        <button data-ng-click="jobAdminCtrl.downloadXML(jobAdminCtrl.job._id)" class="btn btn-sm" type="button" data-ng-disabled="!jobAdminCtrl.enabled">Download XML</button>
-        <!-- <button class="btn btn-sm pull-right" type="button">Delete</button> -->
-    </div>
 </div>

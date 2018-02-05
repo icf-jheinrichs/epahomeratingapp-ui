@@ -1,18 +1,20 @@
 @import '../../../../scss/variables';
 
+$radial-progress-radius: 60px;
+
 .radial-progress {
     display: inline-block;
-    height: 90px;
+    height: $radial-progress-radius + 10px;
     margin-left: $offset-default;
     position: relative;
-    width: 80px;
+    width: $radial-progress-radius;
 
     .progress-total {
-        font-size: $font-size-h4;
+        font-size: $font-size-large;
         font-weight: bold;
-        height: $font-size-h4;
+        height: $font-size-large;
         line-height: $line-height-none;
-        margin-top: -($font-size-h4 / 2);
+        margin-top: -($font-size-large / 2);
         position: absolute;
         text-align: center;
         top: 50%;

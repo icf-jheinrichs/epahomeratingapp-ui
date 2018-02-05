@@ -6,8 +6,7 @@
         data-ng-repeat="job in jobsCtrl.jobs track by $index"
         job="job"
         marked="jobsCtrl.markedJobs[$index]"
-        on-set-bulk-operation-status="jobsCtrl.setBulkOperationStatus()"
-        on-download-xml="jobsCtrl.downloadXml(jobId)">
+        on-set-bulk-operation-status="jobsCtrl.setBulkOperationStatus()">
     </job-admin>
 
     <job-provider
@@ -17,9 +16,7 @@
         data-ng-repeat="job in jobsCtrl.jobs track by $index"
         job="job"
         marked="jobsCtrl.markedJobs[$index]"
-        on-mark-job-registered="jobsCtrl.markJobRegisterd(jobId)"
-        on-set-bulk-operation-status="jobsCtrl.setBulkOperationStatus()"
-        on-download-xml="jobsCtrl.downloadXml(jobId)">
+        on-set-bulk-operation-status="jobsCtrl.setBulkOperationStatus()">
     </job-provider>
 
     <job-rater

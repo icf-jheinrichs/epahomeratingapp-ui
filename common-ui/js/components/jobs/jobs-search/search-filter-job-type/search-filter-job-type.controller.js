@@ -1,18 +1,18 @@
 import _find from 'lodash/find';
 
-class SearchFilterRatingTypeController {
+class SearchFilterJobTypeController {
     constructor ($stateParams, UI_ENUMS) {
         'ngInject';
 
         this.$stateParams = $stateParams;
 
-        this.param   = UI_ENUMS.SEARCH_PARAMS.RATING_TYPE;
-        this.options = Object.assign({}, UI_ENUMS.ANY, UI_ENUMS.RATING_TYPES);
+        this.param   = UI_ENUMS.SEARCH_PARAMS.JOB_TYPE;
+        this.options = Object.assign({}, UI_ENUMS.ANY, UI_ENUMS.JOB_TYPES);
     }
 
     $onInit () {
         if (this.$stateParams[this.param]) {
-            this.ratingType = [this.$stateParams[this.param]];
+            this.jobType = [this.$stateParams[this.param]];
         } else {
             this.reset();
         }
@@ -26,21 +26,21 @@ class SearchFilterRatingTypeController {
     }
 
     reset () {
-        this.ratingType = [this.options.Any.Key];
+        this.jobType = [this.options.Any.Key];
     }
 
-    setRatingType (result) {
-        this.ratingType = result;
+    setJobType (result) {
+        this.jobType = result;
     }
 
     serialize () {
         let filter;
 
-        if (this.ratingType[0] !== this.options.Any.Key) {
+        if (this.jobType[0] !== this.options.Any.Key) {
             let typeObject;
 
             typeObject = _find(this.options, (type) => {
-                return type.Key === this.ratingType[0];
+                return type.Key === this.jobType[0];
             });
 
             filter = {
@@ -49,11 +49,11 @@ class SearchFilterRatingTypeController {
                 param      : {}
             };
 
-            filter.param[this.param] = this.ratingType[0];
+            filter.param[this.param] = this.jobType[0];
         }
 
         return filter;
     }
 }
 
-export default SearchFilterRatingTypeController;
+export default SearchFilterJobTypeController;

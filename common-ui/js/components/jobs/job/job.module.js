@@ -4,6 +4,8 @@ import jobAdminComponent from './job-admin/job-admin.component';
 import jobRaterComponent from './job-rater/job-rater.component';
 import jobProviderComponent from './job-provider/job-provider.component';
 
+import './job.scss';
+
 let jobModule
     = angular
         .module('epahomeratingapp.components.jobs.job', [
