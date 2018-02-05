@@ -52,6 +52,7 @@ const USER_TYPE = {
 
 const DIALOG = {
     ADD_PROVIDER_COMPANY      : 'dialog-add-provider-company',
+    CONFIRM_CHANGE_SAMPLE_SET : 'dialog-confirm-change-sample-set',
     REMOVE_PROVIDER_COMPANY   : 'dialog-remove-provider-company',
     MAKE_JOB_OFFLINE          : 'dialog-make-job-offline',
     LEAKAGE_TEST_EXEMPTION    : 'dialog-leakage-test-exemption',
