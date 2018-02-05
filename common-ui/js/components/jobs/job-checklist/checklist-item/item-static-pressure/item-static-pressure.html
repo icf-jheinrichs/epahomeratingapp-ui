@@ -1,17 +1,45 @@
 <div class="checklist-item">
-    <header class="checklist-item-header">
-        <button
-            aria-label="More Information"
-            class="checklist-item-info-toggle btn btn-link btn-no-label"
-            ng-class="{'has-footnote' : checklistItemCtrl.hasFootnote}"
-            ng-click="checklistItemCtrl.showFootnote()"
-            type="button">
+    <section class="flex-row flex-justify-between flex-align-center checklist-item-header-wrapper">
+        <header class="checklist-item-header">
+            <button
+                aria-label="More Information"
+                class="checklist-item-info-toggle btn btn-link btn-no-label"
+                ng-class="{'has-footnote' : checklistItemCtrl.hasFootnote}"
+                ng-click="checklistItemCtrl.showFootnote()"
+                type="button">
 
-            <i class="fa fa-info-circle" aria-hidden="true"></i>
-        </button>
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </button>
 
-        <h4 class="checklist-item-title">{{::checklistItemCtrl.display.Shorthand}}</h4>
-    </header>
+            <h4 class="checklist-item-title">{{::checklistItemCtrl.display.Shorthand}}</h4>
+        </header>
+
+        <div class="flex-row flex-align-center flex-justify-end flex-item-fixed-width">
+            <checklist-item-comments
+                data-ng-if="!checklistItemCtrl.isReview"
+                comments="checklistItemCtrl.comments"
+                item-id="{{checklistItemCtrl.itemId}}"
+                on-comment="checklistItemCtrl.postComment(comment)">
+            </checklist-item-comments>
+
+            <checklist-item-response
+                response="checklistItemCtrl.response"
+                response-house-id="checklistItemCtrl.responseHouseId"
+                data-ng-hide="checklistItemCtrl.showResponseButtons"
+                edit-response="checklistItemCtrl.onEditResponse()">
+            </checklist-item-response>
+
+            <div class="verification"
+                 data-ng-hide="!checklistItemCtrl.showResponseButtons">
+                <button-group
+                    class="button-group"
+                    buttons="checklistItemCtrl.responseButtons"
+                    initial-value="checklistItemCtrl.response"
+                    on-set-value="checklistItemCtrl.onSetResponse(response)">
+                </button-group>
+            </div>
+        </div>
+    </section>
 
     <section class="container">
         <div class="form-group form-group-horizontal"
@@ -33,32 +61,6 @@
         </div>
 
     </section>
-
-    <div class="flex-row flex-align-center flex-justify-end flex-item-fixed-width">
-        <checklist-item-comments
-            data-ng-if="!checklistItemCtrl.isReview"
-            comments="checklistItemCtrl.comments"
-            item-id="{{checklistItemCtrl.itemId}}"
-            on-comment="checklistItemCtrl.postComment(comment)">
-        </checklist-item-comments>
-
-        <checklist-item-response
-            response="checklistItemCtrl.response"
-            response-house-id="checklistItemCtrl.responseHouseId"
-            data-ng-hide="checklistItemCtrl.showResponseButtons"
-            edit-response="checklistItemCtrl.onEditResponse()">
-        </checklist-item-response>
-
-        <div class="verification"
-             data-ng-hide="!checklistItemCtrl.showResponseButtons">
-            <button-group
-                class="button-group"
-                buttons="checklistItemCtrl.responseButtons"
-                initial-value="checklistItemCtrl.response"
-                on-set-value="checklistItemCtrl.onSetResponse(response)">
-            </button-group>
-        </div>
-    </div>
 
     <mrf-edit
         data-ng-repeat="row in checklistItemCtrl.editRow"

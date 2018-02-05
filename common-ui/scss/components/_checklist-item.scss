@@ -1,12 +1,26 @@
+$checklist-item-padding: 25px;
+
 .checklist-item {
     border-top: $border-size-medium solid $border-color-default;
-    padding: $gutter-half $gutter-half $gutter-half $gutter-full;
+    padding: $checklist-item-padding $gutter-half $checklist-item-padding $gutter-full;
     position: relative;
+}
+
+.checklist-item-header-wrapper {
+    margin-bottom: $offset-large;
+}
+
+.checklist-item-title {
+    margin-bottom: 0;
 }
 
 .checklist-item-header {
     padding-right: $gutter-full;
     position: relative;
+
+    .form-control {
+        margin-left: $offset-large;
+    }
 }
 
 .checklist-item-info-toggle {

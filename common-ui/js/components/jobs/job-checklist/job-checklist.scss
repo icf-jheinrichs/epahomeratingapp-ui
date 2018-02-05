@@ -26,12 +26,13 @@
             flex: 1 1 0;
             margin-left: $offset-small;
             min-width: 125px;
+
+            &.disabled,
+            &[disabled='disabled'] {
+                color: $text-color-disabled;
+            }
         }
 
-        .btn.disabled,
-        .btn[disabled="disabled"] {
-            color: $text-color-disabled;
-        }
     }
 
     header {
@@ -66,7 +67,10 @@
 }
 
 .checklist-section-title {
-    margin: $gutter-full $gutter-half $offset-default;
+    background-color: $brand-alternate;
+    color: $body-bg;
+    margin: $gutter-full 0 0;
+    padding: $gutter-half $gutter-full;
 }
 
 .checklist-item .button-group .btn {
