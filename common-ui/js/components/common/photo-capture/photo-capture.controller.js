@@ -44,6 +44,10 @@ class PhotoCaptureController {
             this.photoUrl = this.defaultPhotoUrl;
         }
     }
+
+    get isCollapsed () {
+        return this.collapsed === 'true' && this.photoUrl === this.defaultPhotoUrl;
+    }
 }
 
 export default PhotoCaptureController;

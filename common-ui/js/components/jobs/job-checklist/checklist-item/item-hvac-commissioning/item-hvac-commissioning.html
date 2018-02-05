@@ -43,11 +43,22 @@
 
     <div class="flex-row">
         <photo-capture
+            data-ng-if="checklistItemHVACCommissioningCtrl.showPhotoCapture"
             class="flex-item-static"
             photo="checklistItemHVACCommissioningCtrl.itemData.Photo"
+            collapsed="true"
             on-photo-capture="checklistItemHVACCommissioningCtrl.handlePhotoCapture(photo)">
         </photo-capture>
 
         <p>Photograph HVAC Commissioning Checklist for records</p>
+    </div>
+
+    <div>
+        <checklist-item-comments-review
+            data-ng-if="checklistItemHVACCommissioningCtrl.isReview"
+            comments="checklistItemHVACCommissioningCtrl.comments"
+            item-id="{{checklistItemHVACCommissioningCtrl.itemId}}"
+            on-comment="checklistItemHVACCommissioningCtrl.postComment(comment)">
+        </checklist-item-comments-review>
     </div>
 </div>

@@ -22,6 +22,18 @@
             color: $text-color-inverse;
         }
     }
+
+    &.photo-capture-collapsed {
+        height: auto;
+
+        .btn-lightbox {
+            display: none;
+        }
+
+        .photo-capture-action {
+            position: static;
+        }
+    }
 }
 
 .btn-lightbox {

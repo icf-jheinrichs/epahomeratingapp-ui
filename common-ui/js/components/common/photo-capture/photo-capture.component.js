@@ -4,7 +4,8 @@ import controller from './photo-capture.controller';
 let photoCaptureComponent = {
     bindings : {
         'photo'          : '<',
-        'onPhotoCapture' : '&'
+        'onPhotoCapture' : '&',
+        'collapsed'      : '@'
     },
     template,
     controller,
