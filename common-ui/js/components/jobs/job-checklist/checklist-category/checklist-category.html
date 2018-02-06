@@ -2,7 +2,7 @@
     <h2 class="sr-only">{{jobChecklistCategoryCtrl.categoryName}}</h2>
 
     <section data-ng-if="jobChecklistCategoryCtrl.hasPredrywallItems" class="checklist-section">
-        <h3 class="checklist-section-title">{{jobChecklistCategoryCtrl.categoryName}} - Pre-Drywall</h3>
+        <h3 class="checklist-section-title">Pre-Drywall</h3>
 
         <checklist-item
             data-ng-repeat="checklistItem in jobChecklistCategoryCtrl.preDrywallChecklistItems track by $index"
@@ -14,7 +14,7 @@
     </section>
 
     <section data-ng-if="jobChecklistCategoryCtrl.hasFinalItems" class="checklist-section">
-        <h3 class="checklist-section-title">{{jobChecklistCategoryCtrl.categoryName}} - Final</h3>
+        <h3 class="checklist-section-title">Final</h3>
 
         <checklist-item
             data-ng-repeat="checklistItem in jobChecklistCategoryCtrl.finalChecklistItems track by $index"
