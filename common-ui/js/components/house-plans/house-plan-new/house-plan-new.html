@@ -44,7 +44,7 @@
                 </div>
 
                 <div ng-show="housePlanNewCtrl.uploadReport.length != 0">
-                    <legend class="fieldset-legend">{{housePlanNewCtrl.uploadReport.length}} files did not uploaded successfully.</legend>
+                    <legend class="fieldset-legend">{{housePlanNewCtrl.uploadReport.length}} <ng-pluralize count="housePlanNewCtrl.uploadReport.length" when="{'one' : 'file', 'other' : 'files'}"></ng-pluralize> did not upload successfully.</legend>
                     <br>
                     <div ng-repeat="failedHousePlan in housePlanNewCtrl.uploadReport track by $index">
                         <li>{{failedHousePlan.fileName}}. {{failedHousePlan.errorReason}}</li>
