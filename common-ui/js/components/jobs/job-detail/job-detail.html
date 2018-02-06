@@ -18,6 +18,7 @@
         <div class="offset-xs-3 col-xs-9">
             <toggle
                 toggle-value="jobDetailCtrl.isSampleSet"
+                toggle-confirmation-dialog="{{jobDetailCtrl.DIALOG}}"
                 toggle-id="sampleSet"
                 handle-change="jobDetailCtrl.handleSampleSetToggleChange(isOn)">Job is a Sample Set
             </toggle>
@@ -91,6 +92,21 @@
         <div class="offset-xs-3 col-xs-9">
             <button class="btn" type="submit">{{::jobDetailCtrl.submitLabel}}</button>
             <button class="btn btn-link" type="button" data-ng-click="jobDetailCtrl.onCancel()">Cancel</button>
+
+            <button class="btn btn-error pull-right" type="button" data-ng-click="jobDetailCtrl.deleteSample()" data-ng-hide="!jobDetailCtrl.canDeleteLocation">Remove From Sample Set</button>
         </div>
     </div>
 </form>
+
+<div class="dialog hidden" dialog="dialog" id="dialog-confirm-change-sample-set">
+    <div class="dialog-header">
+        <h3 class="dialog-title">Sample Set</h3>
+    </div>
+    <div class="dialog-body">
+        <p>Turning off sample set will delete all data from secondary locations.</p>
+    </div>
+    <div class="dialog-footer text-right">
+        <button class="btn btn-link" type="button" data-ng-click="dismiss(false)">Cancel</button>
+        <button class="btn" data-ng-click="dismiss(true)">Confirm</button>
+    </div>
+</div>
