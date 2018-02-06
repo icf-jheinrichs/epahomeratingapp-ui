@@ -1,5 +1,6 @@
 import homePageComponent from './home-page/home-page.component';
 import housePlansPageComponent from './house-plans-page/house-plans-page.component';
+import housePlansSearchPageComponent from './house-plans-search-page/house-plans-search-page.component';
 import jobsPageComponent from './jobs-page/jobs-page.component';
 import jobChecklistPageComponent from './job-checklist-page/job-checklist-page.component';
 import jobEditPageComponent from './job-edit-page/job-edit-page.component';
@@ -16,6 +17,7 @@ let servicesModule
         .module('epahomeratingapp.pages', [])
         .component('homePage', homePageComponent)
         .component('housePlansPage', housePlansPageComponent)
+        .component('housePlansSearchPage', housePlansSearchPageComponent)
         .component('jobsPage', jobsPageComponent)
         .component('jobChecklistPage', jobChecklistPageComponent)
         .component('jobEditPage', jobEditPageComponent)

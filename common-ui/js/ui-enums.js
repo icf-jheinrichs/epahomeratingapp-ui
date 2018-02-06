@@ -159,7 +159,8 @@ const MODAL = {
 };
 
 const POPOVER = {
-    JOB_SEARCH : 'job-search-popover'
+    JOB_SEARCH         : 'job-search-popover',
+    HOUSE_PLANS_SEARCH : 'house-plans-search-popover'
 };
 
 const ANY = {
@@ -218,6 +219,11 @@ const SEARCH_PARAMS = {
     STATUS                        : 'status'
 };
 
+const HOUSE_PLANS_SEARCH_PARAMS = {
+    BUILDER                       : 'builder',
+    KEYWORDS                      : 'keywords'
+};
+
 const STATUS = {
     LAST_UPDATED    : 'Last Updated :now:',
     UP_TO_DATE      : 'Up to Date',
@@ -234,29 +240,33 @@ const STATUS_CLASSNAME = {
 };
 
 const STATE_NAME = {
-    DIAGNOSTICS                   : 'diagnostics',
-    LOGIN                         : 'login',
-    REGISTER                      : 'register',
-    PROGRESS                      : 'progress',
-    HOUSE_LIBRARY                 : 'house-library',
-    HOUSE_LIBRARY_NEW             : 'house-library.new',
-    HOUSE_LIBRARY_EDIT            : 'house-library.edit',
-    HOUSE_LIBRARY_EDIT_BULK       : 'house-library.edit-bulk',
-    JOBS                          : 'jobs',
-    JOBS_SEARCH                   : 'jobs-search',
-    JOBS_PROVIDER                 : 'jobs-provider',
-    JOBS_PROVIDER_SEARCH          : 'jobs-provider-search',
-    JOB_NEW                       : 'job-new',
-    JOB_EDIT                      : 'job-edit',
-    JOB_CHECKLIST                 : 'job-checklist',
-    JOB_CHECKLIST_CATEGORY        : 'job-checklist.category',
-    JOB_CHECKLIST_STAGE           : 'job-checklist.stage',
-    JOB_CHECKLIST_REVIEW          : 'job-checklist-review',
-    JOB_CHECKLIST_REVIEW_CATEGORY : 'job-checklist-review.category',
-    PROVIDERS                     : 'providers',
-    USERS                         : 'users',
-    USER_EDIT                     : 'user-edit',
-    USER_SETTINGS                 : 'user-settings'
+    DIAGNOSTICS                    : 'diagnostics',
+    LOGIN                          : 'login',
+    REGISTER                       : 'register',
+    PROGRESS                       : 'progress',
+    HOUSE_LIBRARY                  : 'house-library',
+    HOUSE_LIBRARY_NEW              : 'house-library.new',
+    HOUSE_LIBRARY_EDIT             : 'house-library.edit',
+    HOUSE_LIBRARY_EDIT_BULK        : 'house-library.edit-bulk',
+    HOUSE_LIBRARY_SEARCH           : 'house-library-search',
+    HOUSE_LIBRARY_SEARCH_NEW       : 'house-library-search.new',
+    HOUSE_LIBRARY_SEARCH_EDIT      : 'house-library-search.edit',
+    HOUSE_LIBRARY_SEARCH_EDIT_BULK : 'house-library-search.edit-bulk',
+    JOBS                           : 'jobs',
+    JOBS_SEARCH                    : 'jobs-search',
+    JOBS_PROVIDER                  : 'jobs-provider',
+    JOBS_PROVIDER_SEARCH           : 'jobs-provider-search',
+    JOB_NEW                        : 'job-new',
+    JOB_EDIT                       : 'job-edit',
+    JOB_CHECKLIST                  : 'job-checklist',
+    JOB_CHECKLIST_CATEGORY         : 'job-checklist.category',
+    JOB_CHECKLIST_STAGE            : 'job-checklist.stage',
+    JOB_CHECKLIST_REVIEW           : 'job-checklist-review',
+    JOB_CHECKLIST_REVIEW_CATEGORY  : 'job-checklist-review.category',
+    PROVIDERS                      : 'providers',
+    USERS                          : 'users',
+    USER_EDIT                      : 'user-edit',
+    USER_SETTINGS                  : 'user-settings'
 };
 
 const SYNC_STATUS = {
@@ -284,6 +294,7 @@ export default {
     RATING_TYPES,
     RESPONSES,
     SEARCH_PARAMS,
+    HOUSE_PLANS_SEARCH_PARAMS,
     STATE_NAME,
     STATUS,
     STATUS_CLASSNAME,

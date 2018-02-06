@@ -7,6 +7,12 @@ _forOwn(UI_ENUMS.SEARCH_PARAMS, (value, key) => {
     searchParams.push(value);
 });
 
+let housePlansSearchParams = [];
+
+_forOwn(UI_ENUMS.HOUSE_PLANS_SEARCH_PARAMS, (value, key) => {
+    housePlansSearchParams.push(value);
+});
+
 const STATE_NAME = UI_ENUMS.STATE_NAME;
 
 let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $urlRouterProvider) {
@@ -103,6 +109,55 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
                 housePlanIDs : null
             }
         })
+
+        .state(STATE_NAME.HOUSE_LIBRARY_SEARCH, {
+            url        : `/house-library?${housePlansSearchParams.join('&')}`,
+            component  : 'housePlansSearchPage',
+            resolve    : {
+                housePlans : (HousePlansService, $stateParams) => {
+                    let housePlansPromise
+                        = HousePlansService
+                            .search($stateParams)
+                            .then(housePlans => {
+                                return housePlans;
+                            });
+
+                    return housePlansPromise;
+                }
+            }
+        })
+
+        //TODO Figure out how to get this in a single house plan view
+        .state(STATE_NAME.HOUSE_LIBRARY_SEARCH_NEW, {
+            url       : '/new',
+            component : 'housePlanNew'
+        })
+
+        .state(STATE_NAME.HOUSE_LIBRARY_SEARCH_EDIT, {
+            url       : '/{id}',
+            component : 'housePlanEdit',
+            resolve   : {
+                housePlan : (HousePlansService, $stateParams) => {
+                    let housePlanPromise
+                        = HousePlansService
+                            .getById($stateParams.id)
+                            .then(housePlan => {
+                                return housePlan;
+                            });
+
+                    return housePlanPromise;
+                }
+            }
+        })
+
+        .state(STATE_NAME.HOUSE_LIBRARY_SEARCH_EDIT_BULK, {
+            url       : '/edit-bulk',
+            component : 'housePlanEditBulk',
+            params    : {
+                housePlanIDs : null
+            }
+        })
+        //end house plan repeat
 
         .state(STATE_NAME.JOBS_PROVIDER, {
             url        : '/jobs/submitted',

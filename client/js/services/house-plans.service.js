@@ -1,3 +1,8 @@
+import _forOwn from 'lodash/forOwn';
+import _omitBy from 'lodash/omitBy';
+import _pickBy from 'lodash/pickBy';
+import _values from 'lodash/values';
+
 /**
  * HousePlansService is the interface for all job data.
  */
@@ -9,19 +14,22 @@ class HousePlansService {
      * @param  {function} $http     angular.$http ajax requests
      * @param  {object} DB          epahomeratingapp constants - contains paths to databases
      */
-    constructor ($q, $http, API_URL) {
+    constructor ($http, $stateParams, $q, API_URL, UI_ENUMS) {
         'ngInject';
 
-        this.$q      = $q;
-        this.$http   = $http;
+        this.$q           = $q;
+        this.$http        = $http;
+        this.$stateParams = $stateParams;
+
+        this.HOUSE_PLANS_SEARCH_PARAMS        = UI_ENUMS.HOUSE_PLANS_SEARCH_PARAMS;
 
         this.API_URL = API_URL;
     }
 
     /**
-     * Gets list of jobs.
+     * Gets list of house plans.
      *
-     * @return {promise}    resolves to array of jobs
+     * @return {promise}    resolves to array of house plans
      */
     get () {
         let promise = this.$q((resolve, reject) => {
@@ -33,6 +41,68 @@ class HousePlansService {
                 .then((response) => {
                     if (response.status === 200) {
                         resolve(response.data);
+                    } else {
+                        //TODO: make this less bad
+                        reject('somethings amiss');
+                    }
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+
+        return promise;
+    }
+
+    /**
+     * Gets list of house plans.
+     *
+     * @return {promise}    resolves to array of house plans
+     */
+    search (stateParams) {
+        let promise = this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'GET',
+                    url     : this.API_URL.HOUSE_PLAN
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        let allHousePlans      = response.data.housePlan;
+                        let filteredHousePlans = [];
+
+                        let searchParams = Object.assign({}, stateParams);
+
+                        searchParams = _omitBy(searchParams, (param) => {
+                            return param === undefined || param === null;
+                        });
+
+                        filteredHousePlans = _pickBy(allHousePlans, (housePlan) => {
+                            let pick          = true;
+                            let searchString  = `${housePlan.Name} ${housePlan.SubplanName} ${housePlan.CommunityName}`.toLowerCase();
+
+                            _forOwn(searchParams, (value, key) => {
+                                switch (key) {
+                                case this.HOUSE_PLANS_SEARCH_PARAMS.BUILDER :
+                                    if (housePlan.BuilderName.toLowerCase().indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
+                                        pick = false;
+                                    }
+                                    break;
+                                case this.HOUSE_PLANS_SEARCH_PARAMS.KEYWORDS :
+                                    if (searchString.indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
+                                        pick = false;
+                                    }
+                                    break;
+                                }
+                            });
+
+                            return pick;
+                        });
+
+                        resolve({
+                            housePlan : _values(filteredHousePlans),
+                            index     : response.data.index
+                        });
                     } else {
                         //TODO: make this less bad
                         reject('somethings amiss');
