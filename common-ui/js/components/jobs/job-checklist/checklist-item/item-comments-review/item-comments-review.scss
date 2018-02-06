@@ -3,6 +3,7 @@
 .item-comments-review {
     background-color: lighten($brand-auxillary, 5%);
     border-radius: $border-radius-large;
+    margin-top: $offset-default;
     padding: $padding-large;
 
     .item-list-comments {

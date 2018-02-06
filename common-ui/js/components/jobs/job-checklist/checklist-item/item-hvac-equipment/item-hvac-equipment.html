@@ -68,4 +68,13 @@
             <button class="btn pull-right" data-ng-click="checklistItemHVACEquipmentCtrl.addEquipment()" type="button"><i class="fa fa-plus" aria-hidden="true"></i> Add Equipment</button>
         </div>
     </div>
+
+    <div>
+        <checklist-item-comments-review
+            data-ng-if="checklistItemHVACEquipmentCtrl.isReview"
+            comments="checklistItemHVACEquipmentCtrl.comments"
+            item-id="{{checklistItemHVACEquipmentCtrl.itemId}}"
+            on-comment="checklistItemHVACEquipmentCtrl.postComment(comment)">
+        </checklist-item-comments-review>
+    </div>
 </div>
