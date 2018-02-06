@@ -1,0 +1,57 @@
+<form class="house-plans-search flex-row">
+    <p class="search-meta">
+        <strong>{{housePlansSearchCtrl.quantity}} House Plans</strong> {{housePlansSearchCtrl.filterTextString}}
+        <button data-ng-if="housePlansSearchCtrl.hasFilters" class="btn-link-inline" type="button" data-ng-click="housePlansSearchCtrl.clear()"> Clear All Filters</button>
+    </p>
+
+    <div
+        class="house-plans-search-popover-wrapper flex-item-pull-right flex-item-static  flex-item-fixed-width"
+        id="house-plans-search-popover"
+        popover="popover">
+
+        <button
+            popover-toggle="popover-toggle"
+            class="btn btn-link btn-search"
+            type="button">
+
+            <i class="fa fa fa-filter fa-lg" aria-hidden="true"></i> Filter
+        </button>
+
+        <div class="popover popover-small popover-house-plans-search checklist-filter-popover hidden" popover-body="popover-body">
+            <div class="popover-panel-wrapper">
+                <section class="popover-panel">
+                    <header class="popover-panel-header flex-row">
+                        <button
+                            class="btn btn-link flex-item-static"
+                            ng-click="housePlansSearchCtrl.reset()"
+                            type="button">
+                            Clear
+                        </button>
+
+                        <h5 class="popover-panel-title flex-item-grow">Filter</h5>
+
+                        <button
+                            class="btn btn-link popover-close flex-item-static"
+                            data-ng-click="housePlansSearchCtrl.search()"
+                            type="button">
+
+                            Filter
+                        </button>
+                    </header>
+
+                    <div class="popover-panel-body item-list" data-ng-class="{'popover-subpanel-active' : housePlansSearchCtrl.subPanelActive}">
+                        <house-plans-search-filter-house-plan
+                            class="item-list-item"
+                            register-filter="housePlansSearchCtrl.registerFilter(filter)">
+                        </house-plans-search-filter-house-plan>
+
+                        <house-plans-search-filter-builder
+                            class="item-list-item"
+                            register-filter="housePlansSearchCtrl.registerFilter(filter)">
+                        </house-plans-search-filter-builder>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</form>
