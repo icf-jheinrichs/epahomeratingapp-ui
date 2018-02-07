@@ -58,7 +58,8 @@ const DIALOG = {
     LEAKAGE_TEST_EXEMPTION    : 'dialog-leakage-test-exemption',
     SUBMIT_TO_PROVIDER        : 'dialog-submit-to-provider',
     DELETE_JOB                : 'dialog-delete-job',
-    ARCHIVE_JOB               : 'dialog-archive-job'
+    ARCHIVE_JOB               : 'dialog-archive-job',
+    DOCUMENT_VIEWER_ERROR     : 'dialog-document-viewer-error'
 };
 
 const DROPDOWN = {

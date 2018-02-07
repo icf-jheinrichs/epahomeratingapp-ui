@@ -27,6 +27,7 @@ class JobsService {
         this.$stateParams         = $stateParams;
 
         this.SEARCH_PARAMS        = UI_ENUMS.SEARCH_PARAMS;
+        this.JOB_STATUS           = UI_ENUMS.JOB_STATUS;
         this.JOB_TYPES            = UI_ENUMS.JOB_TYPES;
 
         this.AuthorizationService = AuthorizationService;
@@ -123,10 +124,18 @@ class JobsService {
     //TODO : move some of this server side
     search (stateParams) {
         let promise = this.$q((resolve, reject) => {
+            let url = this.API_URL.JOB;
+
+            if (stateParams.status === this.JOB_STATUS.ARCHIVED) {
+                url = `${url}?type=archive`;
+            } else if (stateParams.status === this.JOB_STATUS.DELETED) {
+                url = `${url}?type=delete`;
+            }
+
             this
                 .$http({
                     method  : 'GET',
-                    url     : this.API_URL.JOB
+                    url     : url
                 })
                 .then((response) => {
                     if (response.status === 200) {
@@ -139,10 +148,7 @@ class JobsService {
                             return param === undefined || param === null;
                         });
 
-                        // debugger;
-
                         filteredJobs = _pickBy(allJobs, (job) => {
-                            // debugger;
                             let pick          = true;
                             let jobTitle      = this.jobTitleFilter(job.Primary.AddressInformation).toLowerCase();
                             let samples       = job.Secondary.concat([job.Primary]);
@@ -187,7 +193,9 @@ class JobsService {
                                     }
                                     break;
                                 case this.SEARCH_PARAMS.STATUS :
-                                    if (progressLevel !== undefined && progressLevel !== job.ProgressLevel) {
+                                    if (stateParams.status === this.JOB_STATUS.ARCHIVED || stateParams.status === this.JOB_STATUS.DELETED) {
+                                        pick = true;
+                                    } else if (progressLevel !== undefined && progressLevel !== job.ProgressLevel) {
                                         pick = false;
                                     } else if (searchParams[this.SEARCH_PARAMS.STATUS] !== job.Status) {
                                         pick = false;
@@ -464,6 +472,60 @@ class JobsService {
                     method  : 'PUT',
                     url     : `${this.API_URL.JOB}/${job._id}`,
                     data    : job
+                })
+                .then((result) => {
+                    resolve(result);
+                })
+                .catch((err) => {
+                    reject(err);
+                });
+        });
+
+        return promise;
+    }
+
+    delete (job) {
+        let promise = this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'DELETE',
+                    url     : `${this.API_URL.JOB}/${job._id}?type=delete`,
+                })
+                .then((result) => {
+                    resolve(result);
+                })
+                .catch((err) => {
+                    reject(err);
+                });
+        });
+
+        return promise;
+    }
+
+    archive (job) {
+        let promise = this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'DELETE',
+                    url     : `${this.API_URL.JOB}/${job._id}?type=archive`,
+                })
+                .then((result) => {
+                    resolve(result);
+                })
+                .catch((err) => {
+                    reject(err);
+                });
+        });
+
+        return promise;
+    }
+
+    putback (job, type) {
+        let promise = this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'PUT',
+                    url     : `${this.API_URL.JOB}/${job._id}?type=${type}`,
                 })
                 .then((result) => {
                     resolve(result);
