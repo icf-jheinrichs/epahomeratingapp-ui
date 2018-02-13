@@ -1,6 +1,8 @@
+/* globals AWS */
+
 import angular from 'angular';
 
-import {Config, CognitoIdentityCredentials} from 'aws-sdk';
+import {CognitoIdentityCredentials} from 'aws-sdk';
 import {CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserAttribute} from 'amazon-cognito-identity-js';
 
 const DEFAULT_USER = Object.freeze({
@@ -20,12 +22,14 @@ const DEFAULT_USER = Object.freeze({
 const USER_SESSION_ITEM = 'user';
 
 class AuthenticationService {
-    constructor ($log, $q, COGNITO, UI_ENUMS) {
+    constructor ($log, $q, COGNITO, UI_ENUMS, S3_CONFIG) {
         'ngInject';
 
         this.$log                 = $log;
         this.$q                   = $q;
 
+        this.COGNITO              = COGNITO;
+        this.S3_CONFIG            = S3_CONFIG;
         this.USER_TYPES           = UI_ENUMS.USER_TYPE;
 
         this.POOL_DATA = {
@@ -335,13 +339,47 @@ class AuthenticationService {
         }
     }
 
-    userIDtoAWSCognitoCredentials (id_token) {
-        Config.credentials = new CognitoIdentityCredentials({
-            IdentityPoolId : this.POOL_DATA.UserPoolId,
-            Logins         : {
-                AWS_KEY : id_token
+    checkCognitoCredentials () {
+        return this.$q((resolve, reject) => {
+            if (AWS.config.credentials.needsRefresh()) {
+                AWS.config.credentials.clearCachedId();
+                AWS.config.credentials.get((err) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    resolve();
+                });
+            } else {
+                AWS.config.credentials.get((err) => {
+                    if (err) {
+                        reject(err);
+                        return;
+                    }
+                    resolve();
+                });
             }
         });
+    }
+
+    userIDtoAWSCognitoCredentials (id_token) {
+        let cognitoCredentials = new CognitoIdentityCredentials({
+            IdentityPoolId : this.S3_CONFIG.IDENTITY_POOL_ID,
+            Logins         : {[`cognito-idp.${this.COGNITO.REGION}.amazonaws.com/${this.COGNITO.POOL_ID}`] : id_token},
+            region         : this.S3_CONFIG.BUCKET_REGION
+        });
+
+        AWS.config.update({
+            region      : this.COGNITO.REGION,
+            credentials : cognitoCredentials
+        });
+
+        // Config.credentials = new CognitoIdentityCredentials({
+        //     IdentityPoolId : this.POOL_DATA.UserPoolId,
+        //     Logins         : {
+        //         AWS_KEY : id_token
+        //     }
+        // });
     }
 }
 

@@ -17,7 +17,7 @@ import ServicesModule from './services/services.module';
 import {authenticationHook} from './services/authentication.hook';
 
 // AWS SDK
-import * as AWS from 'aws-sdk/dist/aws-sdk.js'; // eslint-disable-line no-unused-vars
+import AWS from 'aws-sdk/global'; // eslint-disable-line no-unused-vars
 
 // Interceptor
 // @todo replace http-request service with this. import and use in module below appr.
@@ -28,6 +28,8 @@ let interceptor = ($q, AuthenticationService) => {
         request  : (config) => {
             // @todo refactor
             const authorize = (config.headers && config.headers.authorize !== false) || config.headers === undefined;
+
+            AuthenticationService.checkCognitoCredentials();
 
             if (authorize && angular.fromJson(window.sessionStorage.getItem('user')) !== null) {
                 let user            = angular.fromJson(window.sessionStorage.getItem('user'));
