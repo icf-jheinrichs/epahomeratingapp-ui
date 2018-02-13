@@ -28,6 +28,11 @@ class JobDetailLocationController {
         this.location.HousePlan.forEach((housePlan) => {
             let locationHousePlan = _find(this.housePlans.housePlan, {_id : housePlan._id});
 
+            //Skip house plans uploaded from computer
+            if (locationHousePlan === undefined) {
+                return;
+            }
+
             if (locationHousePlan.HvacDesignReport && locationHousePlan.HvacDesignReport.length > 0) {
                 hvacDesignReports.push(...locationHousePlan.HvacDesignReport);
             }
@@ -46,19 +51,22 @@ class JobDetailLocationController {
             return;
         }
 
+        //TODO Make this work with multiple houseplans - including if one is from computer
         let self = this;
         let selectedHousePlan = _find(this.housePlans.housePlan, function compare (o) {
             return o._id === self.location.HousePlan[0]._id;
         });
 
-        this.location.Builder                             = _isEmpty(selectedHousePlan.BuilderName) ? '' : selectedHousePlan.BuilderName;
-        this.location.AddressInformation.CommunityName    = _isEmpty(selectedHousePlan.CommunityName) ? '' : selectedHousePlan.CommunityName;
-        this.location.AddressInformation.Address1         = _isEmpty(selectedHousePlan.StreetAddress) ? '' : selectedHousePlan.StreetAddress;
-        this.location.AddressInformation.CityMunicipality = _isEmpty(selectedHousePlan.City) ? '' : selectedHousePlan.City;
-        this.location.AddressInformation.StateCode        = _isEmpty(selectedHousePlan.State) ? '' : selectedHousePlan.State;
-        this.location.AddressInformation.ZipCode          = _isEmpty(selectedHousePlan.ZipCode) ? '' : selectedHousePlan.ZipCode;
-        this.location.HvacDesignReport                    = _isEmpty(selectedHousePlan.HvacDesignReport) ? [] : selectedHousePlan.HvacDesignReport;
-        this.location.RaterDesignReviewChecklist          = _isEmpty(selectedHousePlan.RaterDesignReviewChecklist) ? [] : selectedHousePlan.RaterDesignReviewChecklist;
+        if (selectedHousePlan !== undefined) {
+            this.location.Builder                             = _isEmpty(selectedHousePlan.BuilderName) ? '' : selectedHousePlan.BuilderName;
+            this.location.AddressInformation.CommunityName    = _isEmpty(selectedHousePlan.CommunityName) ? '' : selectedHousePlan.CommunityName;
+            this.location.AddressInformation.Address1         = _isEmpty(selectedHousePlan.StreetAddress) ? '' : selectedHousePlan.StreetAddress;
+            this.location.AddressInformation.CityMunicipality = _isEmpty(selectedHousePlan.City) ? '' : selectedHousePlan.City;
+            this.location.AddressInformation.StateCode        = _isEmpty(selectedHousePlan.State) ? '' : selectedHousePlan.State;
+            this.location.AddressInformation.ZipCode          = _isEmpty(selectedHousePlan.ZipCode) ? '' : selectedHousePlan.ZipCode;
+            this.location.HvacDesignReport                    = _isEmpty(selectedHousePlan.HvacDesignReport) ? [] : selectedHousePlan.HvacDesignReport;
+            this.location.RaterDesignReviewChecklist          = _isEmpty(selectedHousePlan.RaterDesignReviewChecklist) ? [] : selectedHousePlan.RaterDesignReviewChecklist;
+        }
 
         this.gatherReports();
     }
@@ -85,8 +93,6 @@ class JobDetailLocationController {
                     self.location.RaterDesignReviewChecklist          = [];
 
                     self.$scope.$apply();
-
-                    this.gatherReports();
                 };
             }
         });
