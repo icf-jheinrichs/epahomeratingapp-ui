@@ -42,7 +42,7 @@
                 <button class="btn" type="button" data-ng-click="jobsPageCtrl.submitToProvider()" data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">Submit to Provider</button>
 
                 <button class="btn" type="button" data-ng-click="jobsPageCtrl.bulkDownload()" data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
-                    <i ng-show="jobsPageCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i>Download REM XML
+                    <i ng-show="jobsPageCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i>Download XML
                 </button>
 
                 <!--
@@ -72,7 +72,7 @@
         <h3 class="dialog-title">Submit <ng-pluralize count="jobsPageCtrl.marked" when="{'one' : '{} Job', 'other' : '{} Jobs'}"></ng-pluralize></h3>
     </div>
     <div class="dialog-body">
-        <div class="form-group" data-ng-if="jobsPageCtrl.company.RelatedProviderCompanys.length > 1">
+        <div class="form-group" data-ng-if="::jobsPageCtrl.company.RelatedProviderCompanys.length > 1">
             <label for="selectedProviderToAdd" class="control-label">Select Provider</label>
             <select
                 class="form-control"
@@ -82,11 +82,11 @@
             </select>
         </div>
 
-        <div class="form-group" data-ng-if="jobsPageCtrl.company.RelatedProviderCompanys.length === 1">
+        <div class="form-group" data-ng-if="::jobsPageCtrl.company.RelatedProviderCompanys.length === 1">
             <p for="selectedProviderToAdd" class="control-label">The selected <ng-pluralize count="jobsPageCtrl.marked" when="{'one' : 'job', 'other' : 'jobs'}"></ng-pluralize> will be submitted to: {{jobsPageCtrl.company.RelatedProviderCompanys[0].Name}}</p>
         </div>
 
-        <div data-ng-if="!jobsPageCtrl.hasRelatedProviderCompanies">
+        <div data-ng-if="::!jobsPageCtrl.hasRelatedProviderCompanies">
             <p>There are no provider companies associated with {{jobsPageCtrl.company.Name}}.</p>
         </div>
     </div>

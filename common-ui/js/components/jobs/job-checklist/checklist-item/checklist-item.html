@@ -1,6 +1,6 @@
 <div data-ng-class="{'hidden' : checklistItemStubCtrl.isFiltered || checklistItemStubCtrl.isOmitted}">
     <checklist-item-not-applicable
-        data-ng-if="!checklistItemStubCtrl.isApplicable"
+        data-ng-if="::!checklistItemStubCtrl.isApplicable"
         house-plan-ids="checklistItemStubCtrl.housePlanIds"
         item-id="{{::checklistItemStubCtrl.itemId}}"
         item-category="{{::checklistItemStubCtrl.itemCategory}}"
@@ -8,14 +8,14 @@
     </checklist-item-not-applicable>
 
     <checklist-item-default
-        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Default'"
+        data-ng-if="::checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Default'"
         item-id="{{::checklistItemStubCtrl.itemId}}"
         item-category="{{::checklistItemStubCtrl.itemCategory}}"
         item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
     </checklist-item-default>
 
     <checklist-item-mrf
-        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'MRF'"
+        data-ng-if="::checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'MRF'"
         item-id="{{::checklistItemStubCtrl.itemId}}"
         item-category="{{::checklistItemStubCtrl.itemCategory}}"
         item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
@@ -23,56 +23,56 @@
 
     <!-- checklist-item-static-pressure -->
     <checklist-item-static-pressure
-        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom3'"
+        data-ng-if="::checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom3'"
         item-id="{{::checklistItemStubCtrl.itemId}}"
         item-category="{{::checklistItemStubCtrl.itemCategory}}"
         item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
     </checklist-item-static-pressure>
 
     <checklist-item-select-thermal-strategy
-         data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom1'"
+         data-ng-if="::checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom1'"
          item-id="{{::checklistItemStubCtrl.itemId}}"
          item-category="{{::checklistItemStubCtrl.itemCategory}}"
          item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
      </checklist-item-select-thermal-strategy>
 
     <checklist-item-hvac-equipment
-        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom2'"
+        data-ng-if="::checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom2'"
         item-id="{{::checklistItemStubCtrl.itemId}}"
         item-category="{{::checklistItemStubCtrl.itemCategory}}"
         item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
     </checklist-item-hvac-equipment>
 
     <checklist-item-hvac-commissioning
-        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom4'"
+        data-ng-if="::checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom4'"
         item-id="{{::checklistItemStubCtrl.itemId}}"
         item-category="{{::checklistItemStubCtrl.itemCategory}}"
         item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
     </checklist-item-hvac-commissioning>
 
     <checklist-item-measured-ventilation
-        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom5'"
+        data-ng-if="::checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom5'"
         item-id="{{::checklistItemStubCtrl.itemId}}"
         item-category="{{::checklistItemStubCtrl.itemCategory}}"
         item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
     </checklist-item-measured-ventilation>
 
     <checklist-item-air-inlet-locations
-        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom6'"
+        data-ng-if="::checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom6'"
         item-id="{{::checklistItemStubCtrl.itemId}}"
         item-category="{{::checklistItemStubCtrl.itemCategory}}"
         item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
     </checklist-item-air-inlet-locations>
 
     <checklist-item-total-duct-leakage-test-strategy
-        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom7'"
+        data-ng-if="::checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom7'"
         item-id="{{::checklistItemStubCtrl.itemId}}"
         item-category="{{::checklistItemStubCtrl.itemCategory}}"
         item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
     </checklist-item-total-duct-leakage-test-strategy>
 
     <sub-item-default
-        data-ng-if="checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'SubItem-Default'"
+        data-ng-if="::checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'SubItem-Default'"
         item-id="{{::checklistItemStubCtrl.itemId}}"
         is-omitted="checklistItemStubCtrl.isOmitted"
         item-category="{{::checklistItemStubCtrl.itemCategory}}"

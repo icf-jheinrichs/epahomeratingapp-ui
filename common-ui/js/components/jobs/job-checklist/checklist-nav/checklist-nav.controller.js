@@ -40,7 +40,7 @@ class jobChecklistNavController {
     }
 
     setHidden () {
-        if (this.$state.current.name === this.STATE_NAME.JOB_CHECKLIST_STAGE) {
+        if (this.$state.current.name === this.STATE_NAME.JOB_CHECKLIST_STATUS) {
             this.hide = true;
         } else {
             this.hide = false;

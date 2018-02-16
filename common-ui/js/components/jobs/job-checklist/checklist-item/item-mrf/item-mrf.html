@@ -16,7 +16,7 @@
 
         <div class="flex-row flex-align-center flex-item-fixed-width">
             <checklist-item-comments
-                data-ng-if="!checklistItemCtrl.isReview"
+                data-ng-if="::!checklistItemCtrl.isReview"
                 comments="checklistItemCtrl.comments"
                 item-id="{{checklistItemCtrl.itemId}}"
                 on-comment="checklistItemCtrl.postComment(comment)">
@@ -42,8 +42,8 @@
     </section>
 
     <section data-ng-repeat="mrfTable in checklistItemCtrl.display.Sections track by $index">
-        <h5 class="table-caption">{{mrfTable.Name}}</h5>
-        <div class="table-responsive" data-ng-if="checklistItemCtrl.hasRows(checklistItemCtrl.homePerformance[mrfTable.Key])">
+        <h5 class="table-caption">{{::mrfTable.Name}}</h5>
+        <div class="table-responsive" data-ng-if="::checklistItemCtrl.hasRows(checklistItemCtrl.homePerformance[mrfTable.Key])">
             <table>
                 <thead>
                     <tr>
@@ -65,43 +65,43 @@
             </table>
 
         </div>
-        <p class="empty-table-text" data-ng-if="!checklistItemCtrl.hasRows(checklistItemCtrl.homePerformance[mrfTable.Key])">{{mrfTable.EmptyTableText}}</p>
+        <p class="empty-table-text" data-ng-if="::!checklistItemCtrl.hasRows(checklistItemCtrl.homePerformance[mrfTable.Key])">{{mrfTable.EmptyTableText}}</p>
     </section>
 
     <div>
         <checklist-item-comments-review
-            data-ng-if="checklistItemCtrl.isReview"
+            data-ng-if="::checklistItemCtrl.isReview"
             comments="checklistItemCtrl.comments"
-            item-id="{{checklistItemCtrl.itemId}}"
+            item-id="{{::checklistItemCtrl.itemId}}"
             on-comment="checklistItemCtrl.postComment(comment)">
         </checklist-item-comments-review>
     </div>
 
     <mrf-edit
-        data-ng-repeat="row in checklistItemCtrl.editRow"
+        data-ng-repeat="row in checklistItemCtrl.editRow track by $index"
         on-save-mrf-row="checklistItemCtrl.onSaveMrfRow(mrfRowEditData)"
         on-cancel-mrf-row="checklistItemCtrl.onCancelMrfRow()"
-        title="{{row.title}}"
+        title="{{::row.title}}"
         mrf-digest="row.mrfDigest"
         mrf-data="row.mrfData"
         library-type-name-key="{{row.LibraryTypeNameKey}}">
     </mrf-edit>
 
     <mrf-edit-duct-system
-        data-ng-repeat="row in checklistItemCtrl.editDuctSystemRow"
+        data-ng-repeat="row in checklistItemCtrl.editDuctSystemRow track by $index"
         on-save-mrf-row="checklistItemCtrl.onSaveDuctSystemMrfRow(mrfRowEditData)"
         on-cancel-mrf-row="checklistItemCtrl.onCancelDuctSystemMrfRow()"
-        title="{{row.title}}"
+        title="{{::row.title}}"
         mrf-digest="row.mrfDigest"
         mrf-data="row.mrfData"
         library-type-name-key="{{row.LibraryTypeNameKey}}">
     </mrf-edit-duct-system>
 
     <mrf-edit-infiltration
-        data-ng-repeat="row in checklistItemCtrl.editInfiltrationRow"
+        data-ng-repeat="row in checklistItemCtrl.editInfiltrationRow track by $index"
         on-save-mrf-row="checklistItemCtrl.onSaveInfiltrationMrfRow(mrfRowEditData)"
         on-cancel-mrf-row="checklistItemCtrl.onCancelInfiltrationMrfRow()"
-        title="{{row.title}}"
+        title="{{::row.title}}"
         mrf-digest="row.mrfDigest"
         mrf-data="row.mrfData"
         library-type-name-key="{{row.LibraryTypeNameKey}}">

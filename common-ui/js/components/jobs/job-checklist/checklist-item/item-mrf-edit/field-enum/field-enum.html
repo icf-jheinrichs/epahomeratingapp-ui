@@ -1,9 +1,9 @@
 <div class="form-group">
     <label for="{{::fieldEnumCtrl.field.Key}}" class="control-label" data-ng-class="{'status-error' : fieldEnumCtrl.enumNotFound}">
-        <i class="fa fa-list-alt" aria-hidden="true" data-ng-if="fieldEnumCtrl.field.IsLibraryAttribute"></i>
+        <i class="fa fa-list-alt" aria-hidden="true" data-ng-if="::fieldEnumCtrl.field.IsLibraryAttribute"></i>
         {{::fieldEnumCtrl.field.Name}}
     </label>
-    <p data-ng-if="fieldEnumCtrl.enumNotFound" class="form-control-static">{{::fieldEnumCtrl.value}}</p>
+    <p data-ng-if="::fieldEnumCtrl.enumNotFound" class="form-control-static">{{::fieldEnumCtrl.value}}</p>
 
     <select
         data-ng-if="!fieldEnumCtrl.enumNotFound && fieldEnumCtrl.displayType === 'select'"

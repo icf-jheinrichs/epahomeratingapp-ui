@@ -310,7 +310,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         })
 
         .state(STATE_NAME.JOB_CHECKLIST_CATEGORY, {
-            url        : '/{houseId}/{categoryId}?status',
+            url        : '/{houseId}/{categoryId}?stageId',
             component  : 'checklistCategory',
             resolve    : {
                 jobChecklistState : (JobChecklistStateService, $stateParams) => {
@@ -323,9 +323,9 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state(STATE_NAME.JOB_CHECKLIST_STAGE, {
-            url        : '/{houseId}/stage/{stageId}?status',
-            component  : 'checklistStage',
+        .state(STATE_NAME.JOB_CHECKLIST_STATUS, {
+            url        : '/{houseId}/status/{statusId}?stageId',
+            component  : 'checklistStatus',
             resolve    : {
                 jobChecklistState : (JobChecklistStateService, $stateParams) => {
                     let jobChecklistStatePromise
@@ -352,7 +352,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         })
 
         .state(STATE_NAME.JOB_CHECKLIST_REVIEW_CATEGORY, {
-            url        : '/{houseId}/{categoryId}?status',
+            url        : '/{houseId}/{categoryId}',
             component  : 'checklistCategory',
             resolve    : {
                 jobChecklistState : (JobChecklistStateService, $stateParams) => {

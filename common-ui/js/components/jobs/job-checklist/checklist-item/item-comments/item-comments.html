@@ -44,7 +44,7 @@
                         </figure>
 
                         <p class="comment-body">
-                            <span class="comment-user">{{comment.User.firstName}} {{comment.User.lastName}}</span> &bull; <span class="comment-timestamp">{{::checklistItemCommentsCtrl.formatTimestamp(comment.Timestamp)}}</span><br />
+                            <span class="comment-user">{{::comment.User.firstName}} {{::comment.User.lastName}}</span> &bull; <span class="comment-timestamp">{{::checklistItemCommentsCtrl.formatTimestamp(comment.Timestamp)}}</span><br />
                             {{::comment.Comment}}
                         </p>
 
@@ -83,7 +83,7 @@
                     class="flex-item-static"
                     photo="checklistItemCommentsCtrl.newCommentPhotoUrl"
                     on-photo-capture="checklistItemCommentsCtrl.handlePhotoCapture(photo)"
-                    data-ng-if="checklistItemCommentsCtrl.allowPhotoCapture">
+                    data-ng-if="::checklistItemCommentsCtrl.allowPhotoCapture">
                 </photo-capture>
 
                 <div class="form-group">

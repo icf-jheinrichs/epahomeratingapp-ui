@@ -1,6 +1,6 @@
 <div class="form-group" data-ng-class="{'has-error' : fieldStringCtrl.invalid}">
     <label for="{{::fieldStringCtrl.field.Key}}" class="control-label">
-        <i class="fa fa-list-alt" aria-hidden="true" data-ng-if="fieldStringCtrl.field.IsLibraryAttribute"></i>
+        <i class="fa fa-list-alt" aria-hidden="true" data-ng-if="::fieldStringCtrl.field.IsLibraryAttribute"></i>
         {{::fieldStringCtrl.field.Name}}
     </label>
 
@@ -10,7 +10,7 @@
         data-ng-change="fieldStringCtrl.onChange(fieldStringCtrl.value)"
         id="{{::fieldStringCtrl.field.Key}}"
         name="{{::fieldStringCtrl.field.Key}}"
-        maxlength="{{fieldStringCtrl.stringType.maxLength}}"
+        maxlength="{{::fieldStringCtrl.stringType.maxLength}}"
         type="text" />
 
 

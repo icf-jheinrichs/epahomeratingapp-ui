@@ -101,7 +101,7 @@ class JobChecklistProgressService {
      */
     calculateStageProgress (jobDataResponse, itemStatusQueries, stageId) {
         let jobProgress = _cloneDeep(jobDataResponse.Progress);
-        let STAGE    = this.CATEGORY_PROGRESS[stageId].Key;
+        let STAGE       = stageId;
 
         _forEach(jobProgress, (value, key) => {
             jobProgress[key][STAGE] = {

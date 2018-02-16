@@ -7,13 +7,12 @@
 <div class="flex-item-grow">
     <a aria-labelledby="job-{{jobAdminCtrl.job._id}}"
        class="job job-admin flex-row flex-align-center"
-       data-ng-class="{'job-returned': jobAdminCtrl.hasStatusLabel()}"
        data-ui-sref="job-checklist-review.category({id: jobAdminCtrl.job._id, houseId: jobAdminCtrl.job.Primary.HouseId, categoryId: 'walls', role: 'admin'})">
 
         <div class="job-info flex-item-grow">
             <div class="job-meta flex-row">
-                <span class="label-rating-type" data-ng-class="jobAdminCtrl.RatingTypeClass">{{::jobAdminCtrl.RatingType}}</span>
-                <span class="label label-sample-set" data-ng-if="jobAdminCtrl.isSample">Sample Set: {{::jobAdminCtrl.sampleQuantity}} <i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                <span class="label-rating-type" data-ng-class="::jobAdminCtrl.RatingTypeClass">{{::jobAdminCtrl.RatingType}}</span>
+                <span class="label label-sample-set" data-ng-if="::jobAdminCtrl.isSample">Sample Set: {{::jobAdminCtrl.sampleQuantity}} <i class="fa fa-map-marker" aria-hidden="true"></i></span>
                 <span class="last-update small"><strong>{{::jobAdminCtrl.lastUpdateType}}:</strong> {{::jobAdminCtrl.lastUpdateTime}}</span>
             </div>
 

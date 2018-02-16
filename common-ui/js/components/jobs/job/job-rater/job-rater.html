@@ -1,10 +1,10 @@
 <div class="job-toggle flex-item-static flex-row flex-align-center">
-    <div data-ng-if="jobRaterCtrl.CONTEXT_IS_APP">
+    <div data-ng-if="::jobRaterCtrl.CONTEXT_IS_APP">
         <toggle
             handle-change="jobRaterCtrl.handleAvailableOfflineChange(isOn)"
             toggle-class="jobRaterCtrl.toggleStatusClass"
-            toggle-confirmation-dialog="{{jobRaterCtrl.DIALOG}}"
-            toggle-id="{{jobRaterCtrl.job._id}}"
+            toggle-confirmation-dialog="{{::jobRaterCtrl.DIALOG}}"
+            toggle-id="{{::jobRaterCtrl.job._id}}"
             toggle-value="jobRaterCtrl.job.offlineAvailable">Make Job Available offline: <span data-ng-bind-html="jobRaterCtrl.JobTitle"></span></span>
         </toggle>
     </div>
@@ -18,7 +18,7 @@
     <div class="job-info flex-item-grow">
         <div class="job-meta flex-row">
             <span class="label-rating-type" data-ng-class="jobRaterCtrl.RatingTypeClass">{{::jobRaterCtrl.RatingType}}</span>
-            <span class="label label-sample-set" data-ng-if="jobRaterCtrl.isSample">Sample Set: {{::jobRaterCtrl.sampleQuantity}} <i class="fa fa-map-marker" aria-hidden="true"></i></span>
+            <span class="label label-sample-set" data-ng-if="::jobRaterCtrl.isSample">Sample Set: {{::jobRaterCtrl.sampleQuantity}} <i class="fa fa-map-marker" aria-hidden="true"></i></span>
             <span class="last-update small"><strong>{{::jobRaterCtrl.lastUpdateType}}:</strong> {{::jobRaterCtrl.lastUpdateTime}}</span>
         </div>
 
