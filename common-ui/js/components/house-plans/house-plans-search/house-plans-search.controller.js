@@ -49,7 +49,7 @@ class HousePlansSearchController {
 
         this
             .$state
-            .go(this.STATE_NAME.HOUSE_LIBRARY_SEARCH, searchParams, {inherit : false});
+            .go(this.STATE_NAME.TEMPLATE_LIBRARY_SEARCH, searchParams, {inherit : false});
     }
 
     reset () {

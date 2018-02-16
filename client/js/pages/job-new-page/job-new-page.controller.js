@@ -14,7 +14,7 @@ const SUCCESS = {
 
 const HOUSE_PLAN_REQUIRED = {
     type        : 'error',
-    text        : 'Please add a House Plan to all samples.',
+    text        : 'Please add a Rating File to all samples.',
     dismissable : false
 };
 
@@ -216,7 +216,7 @@ class JobsNewPageController {
     }
 
     sumbitJobWithLocalHousePlan (job) {
-        this.$log.log('Uploading House Plan');
+        this.$log.log('Uploading Rating File');
 
         let jobFiles    = this.gatherJobFiles(job);
         let fileUploads = [];

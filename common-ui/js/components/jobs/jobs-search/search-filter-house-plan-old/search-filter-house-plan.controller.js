@@ -68,7 +68,7 @@ class SearchFilterHousePlanController {
         if (this.selectedHousePlans.length) {
             filter = {
                 filterKey  : this.param,
-                filterName : `${this.selectedHousePlans.length} House Plan`,
+                filterName : `${this.selectedHousePlans.length} Rating File`,
                 param      : {}
             };
 

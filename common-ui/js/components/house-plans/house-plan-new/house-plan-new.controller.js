@@ -2,7 +2,7 @@
 
 const ERROR_INPUT = {
     type        : 'error',
-    text        : 'Please select valid house plan. File extension must be .xml and file should be no larger than 200kb.',
+    text        : 'Please select valid rating file. File extension must be .xml and file should be no larger than 200kb.',
     dismissable : false
 };
 
@@ -153,7 +153,7 @@ class HousePlanNewController {
         if (this.uploadedHousePlanIDs.length === 0) {
             this.$state.go('^');
         } else {
-            this.$state.go(this.STATE_NAME.HOUSE_LIBRARY_EDIT_BULK, {housePlanIDs : this.uploadedHousePlanIDs});
+            this.$state.go(this.STATE_NAME.TEMPLATE_LIBRARY_EDIT_BULK, {housePlanIDs : this.uploadedHousePlanIDs});
         }
     }
 }

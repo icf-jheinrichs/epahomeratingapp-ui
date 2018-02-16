@@ -63,8 +63,8 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state(STATE_NAME.HOUSE_LIBRARY, {
-            url        : '/house-library',
+        .state(STATE_NAME.TEMPLATE_LIBRARY, {
+            url        : '/template-library',
             component  : 'housePlansPage',
             resolve    : {
                 housePlans : (HousePlansService) => {
@@ -80,12 +80,12 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state(STATE_NAME.HOUSE_LIBRARY_NEW, {
+        .state(STATE_NAME.TEMPLATE_LIBRARY_NEW, {
             url       : '/new',
             component : 'housePlanNew'
         })
 
-        .state(STATE_NAME.HOUSE_LIBRARY_EDIT, {
+        .state(STATE_NAME.TEMPLATE_LIBRARY_EDIT, {
             url       : '/{id}',
             component : 'housePlanEdit',
             resolve   : {
@@ -102,7 +102,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state(STATE_NAME.HOUSE_LIBRARY_EDIT_BULK, {
+        .state(STATE_NAME.TEMPLATE_LIBRARY_EDIT_BULK, {
             url       : '/edit-bulk',
             component : 'housePlanEditBulk',
             params    : {
@@ -110,8 +110,8 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state(STATE_NAME.HOUSE_LIBRARY_SEARCH, {
-            url        : `/house-library?${housePlansSearchParams.join('&')}`,
+        .state(STATE_NAME.TEMPLATE_LIBRARY_SEARCH, {
+            url        : `/template-library?${housePlansSearchParams.join('&')}`,
             component  : 'housePlansSearchPage',
             resolve    : {
                 housePlans : (HousePlansService, $stateParams) => {
@@ -128,12 +128,12 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         })
 
         //TODO Figure out how to get this in a single house plan view
-        .state(STATE_NAME.HOUSE_LIBRARY_SEARCH_NEW, {
+        .state(STATE_NAME.TEMPLATE_LIBRARY_SEARCH_NEW, {
             url       : '/new',
             component : 'housePlanNew'
         })
 
-        .state(STATE_NAME.HOUSE_LIBRARY_SEARCH_EDIT, {
+        .state(STATE_NAME.TEMPLATE_LIBRARY_SEARCH_EDIT, {
             url       : '/{id}',
             component : 'housePlanEdit',
             resolve   : {
@@ -150,7 +150,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state(STATE_NAME.HOUSE_LIBRARY_SEARCH_EDIT_BULK, {
+        .state(STATE_NAME.TEMPLATE_LIBRARY_SEARCH_EDIT_BULK, {
             url       : '/edit-bulk',
             component : 'housePlanEditBulk',
             params    : {
