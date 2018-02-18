@@ -16,26 +16,3 @@
         </div>
     </div>
 </section>
-
-<div class="dialog hidden" dialog="dialog" id="dialog-add-provider-company">
-    <div class="dialog-header">
-        <h3 class="dialog-title">Add Provider Company</h3>
-    </div>
-    <div class="dialog-body">
-        <div class="form-group">
-            <label for="selectedProviderToAdd" class="control-label">Select a provider to add</label>
-            <select
-                class="form-control"
-                data-ng-model="usersPageCtrl.selectedProviderToAdd"
-                id="selectedProviderToAdd"
-                data-ng-options="provider.Name for provider in usersPageCtrl.providerCompanies track by provider.ProviderRESNETId">
-            </select>
-        </div>
-
-        <p>You will not be able to submit jobs until providers have approved your association.</p>
-    </div>
-    <div class="dialog-footer text-right">
-        <button class="btn btn-link" type="button" data-ng-click="dismiss(false)">Cancel</button>
-        <button class="btn" data-ng-click="dismiss(true)">Add</button>
-    </div>
-</div>

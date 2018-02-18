@@ -74,7 +74,7 @@ class NavbarAdminController {
             jobs            : this.organizationTypes.RaterOrg,
             templateLibrary : this.organizationTypes.RaterOrg,
             jobsProvider    : this.organizationTypes.ProviderOrg,
-            users           : this.userRole.Admin
+            users           : this.userRole.Admin || this.userRole.Provider
         };
     }
 
