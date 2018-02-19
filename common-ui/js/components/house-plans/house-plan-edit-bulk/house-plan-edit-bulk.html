@@ -1,7 +1,7 @@
 <!-- edit house plan modal -->
 <form name="housePlanEditBulkCtrl.housePlanEditForm" class="modal modal-large modal-scroll-body" data-ng-submit="housePlanEditBulkCtrl.acceptAll()">
     <div class="modal-header flex-row">
-        <span class="modal-title flex-item-grow">House Plan Information</span>
+        <span class="modal-title flex-item-grow">Template Information</span>
 
         <div class="modal-title pull-right">
             {{housePlanEditBulkCtrl.currentIndex + 1}}/{{housePlanEditBulkCtrl.$stateParams.housePlanIDs.length}}
@@ -15,11 +15,11 @@
             <h3>{{::housePlanEditBulkCtrl.housePlan.FileName}}</h3>
 
             <fieldset class="row">
-                <legend class="sr-only">Edit House Plan Details</legend>
+                <legend class="sr-only">Edit Template Details</legend>
 
                 <div class="row">
                     <div class="form-group col-xs-6">
-                        <label class="control-label" for="Name">House Plan Name</label>
+                        <label class="control-label" for="Name">Template Name</label>
                         <input class="form-control" type="text" name="Name" id="Name" data-ng-model="housePlanEditBulkCtrl.housePlan.Name" ng-required=true>
                     </div>
 
@@ -79,7 +79,7 @@
                         <button class="btn" type="submit" data-ng-disabled="housePlanEditBulkCtrl.isBusy"><i data-ng-class="{'hidden' : !housePlanEditBulkCtrl.isBusy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Finish</button>
                     </div>
 
-                    <a class="btn btn-link pull-right" ng-click="housePlanEditBulkCtrl.deleteHousePlan()" data-ng-disabled="housePlanEditBulkCtrl.isBusy">Delete this house plan</a>
+                    <a class="btn btn-link pull-right" ng-click="housePlanEditBulkCtrl.deleteHousePlan()" data-ng-disabled="housePlanEditBulkCtrl.isBusy">Delete This Template</a>
                 </div>
             </fieldset>
         </div>

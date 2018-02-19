@@ -1,11 +1,10 @@
-
 <fieldset class="row">
-    <legend class="col-xs-3">House Plan</legend>
+    <legend class="col-xs-3">Rating File</legend>
     <div class="offset-xs-3 col-xs-9">
         <file-manager
             enabled="jobDetailLocationCtrl.selectHousePlanEnabled"
             upload-only="false"
-            label="House Plan Library"
+            label="Template Library"
             accept="text/xml"
             input-id="HousePlan-{{jobDetailLocationCtrl.location.HouseId}}"
             library="jobDetailLocationCtrl.housePlans.housePlan"
@@ -94,7 +93,7 @@
         <file-manager
             upload-only="false"
             accept="application/pdf"
-            label="House Plan"
+            label="Rating File"
             show-details="jobDetailLocationCtrl.showFileDetails"
             library="jobDetailLocationCtrl.housePlansHVACDesignReports"
             input-id="HvacDesignReport-{{jobDetailLocationCtrl.location.HouseId}}"
@@ -110,7 +109,7 @@
             upload-only="false"
             accept="application/pdf"
             show-details="jobDetailLocationCtrl.showFileDetails"
-            label="House Plan"
+            label="Rating File"
             library="jobDetailLocationCtrl.housePlansRaterDesignReviewChecklists"
             input-id="RaterDesignReviewChecklist-{{jobDetailLocationCtrl.location.HouseId}}"
             files="jobDetailLocationCtrl.location.RaterDesignReviewChecklist">

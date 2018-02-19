@@ -5,7 +5,7 @@
             <a class="btn btn-link" data-ui-sref="^">Cancel</a>
         </div>
 
-        <span class="modal-title flex-item-grow">New House Plan</span>
+        <span class="modal-title flex-item-grow">New Template</span>
 
         <div class="flex-item-static">
             <button class="btn pull-right" type="submit" data-ng-disabled="housePlanNewCtrl.uploadStage != 'select'"><i data-ng-class="{'hidden' : housePlanNewCtrl.uploadStage != 'uploading'}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Upload</button>
@@ -17,9 +17,9 @@
             <status-message status="housePlanNewCtrl.message" id="house-plan-new-status-message"></status-message>
 
             <fieldset>
-                <legend class="fieldset-legend">Upload House Plan</legend>
+                <legend class="fieldset-legend">Upload Rating File</legend>
 
-                <label class="sr-only" for="housePlanFile">Choose a file to upload</label>
+                <label class="sr-only" for="housePlanFile">Choose a Rating File to upload</label>
                 <input
                     type="file"
                     accept="text/xml"
@@ -40,11 +40,11 @@
         <div class="modal-body" ng-show="housePlanNewCtrl.uploadStage == 'report'">
             <fieldset>
                 <div ng-show="housePlanNewCtrl.uploadReport.length == 0">
-                    <legend class="fieldset-legend">All files uploaded successfully</legend>
+                    <legend class="fieldset-legend">All Rating Files uploaded successfully</legend>
                 </div>
 
                 <div ng-show="housePlanNewCtrl.uploadReport.length != 0">
-                    <legend class="fieldset-legend">{{housePlanNewCtrl.uploadReport.length}} <ng-pluralize count="housePlanNewCtrl.uploadReport.length" when="{'one' : 'file', 'other' : 'files'}"></ng-pluralize> did not upload successfully.</legend>
+                    <legend class="fieldset-legend">{{housePlanNewCtrl.uploadReport.length}} Rating <ng-pluralize count="housePlanNewCtrl.uploadReport.length" when="{'one' : 'File', 'other' : 'Files'}"></ng-pluralize> did not upload successfully.</legend>
                     <br>
                     <div ng-repeat="failedHousePlan in housePlanNewCtrl.uploadReport track by $index">
                         <li>{{failedHousePlan.fileName}}. {{failedHousePlan.errorReason}}</li>

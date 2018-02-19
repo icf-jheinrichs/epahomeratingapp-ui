@@ -26,8 +26,8 @@ class NavbarAdminController {
         case this.STATE_NAME.JOBS :
             isAuthorized = this.organizationTypes.RaterOrg;
             break;
-        case this.STATE_NAME.HOUSE_LIBRARY :
-            isAuthorized = this.organizationTypes.RaterOrg;
+        case this.STATE_NAME.TEMPLATE_LIBRARY :
+            isAuthorized = this.userRole.Admin || this.userRole.Rater;
             break;
         case this.STATE_NAME.JOBS_PROVIDER :
             isAuthorized = this.organizationTypes.ProviderOrg;
@@ -45,8 +45,8 @@ class NavbarAdminController {
 
         if (this.stateIsAuthorized(this.STATE_NAME.JOBS)) {
             this.$state.go(this.STATE_NAME.JOBS);
-        } else if (this.stateIsAuthorized(this.STATE_NAME.HOUSE_LIBRARY)) {
-            this.$state.go(this.STATE_NAME.HOUSE_LIBRARY);
+        } else if (this.stateIsAuthorized(this.STATE_NAME.TEMPLATE_LIBRARY)) {
+            this.$state.go(this.STATE_NAME.TEMPLATE_LIBRARY);
         } else if (this.stateIsAuthorized(this.STATE_NAME.JOBS_PROVIDER)) {
             this.$state.go(this.STATE_NAME.JOBS_PROVIDER);
         } else if (this.stateIsAuthorized(this.STATE_NAME.USERS)) {

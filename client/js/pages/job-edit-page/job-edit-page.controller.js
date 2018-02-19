@@ -14,7 +14,7 @@ const SUCCESS = {
 
 const HOUSE_PLAN_REQUIRED = {
     type        : 'error',
-    text        : 'Please add a House Plan to all samples.',
+    text        : 'Please add a Rating File to all samples.',
     dismissable : false
 };
 
