@@ -11,8 +11,8 @@ let popoverModule
     = angular
         .module('epahomeratingapp.common.popover', [])
         .directive('popover', popoverDirective)
-        .directive('popoverToggle', popoverToggleDirective)
-        .directive('popoverBody', popoverBodyDirective)
+        .directive('popoverToggle', ['DOMUtilitiesService', popoverToggleDirective])
+        .directive('popoverBody', ['DOMUtilitiesService', popoverBodyDirective])
         .service('PopoverService', PopoverService);
 
 export default popoverModule;

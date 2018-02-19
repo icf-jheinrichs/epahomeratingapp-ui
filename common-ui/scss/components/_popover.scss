@@ -5,15 +5,15 @@
     box-shadow: $shadow-default;
     position: absolute;
     z-index: $zindex-popover;
+}
 
-    &::before {
-        @include arrow-up($arrow-large);
+.popover-arrow {
+    @include arrow-up($arrow-large);
 
-        bottom: 100%;
-        content: '';
-        left: 25px;
-        position: absolute;
-    }
+    bottom: 100%;
+    content: '';
+    left: 25px;
+    position: absolute;
 }
 
 .popover-small {

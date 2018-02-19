@@ -2,9 +2,9 @@ class PopoverService {
     constructor ($log, $q) {
         'ngInject';
 
-        this.$log           = $log;
-        this.$q             = $q;
-        this.popovers        = {};
+        this.$log     = $log;
+        this.$q       = $q;
+        this.popovers = {};
     }
 
     registerPopover (popover) {
