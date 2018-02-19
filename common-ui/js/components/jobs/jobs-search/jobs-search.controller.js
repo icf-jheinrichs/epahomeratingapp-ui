@@ -1,5 +1,4 @@
 import _forOwn from 'lodash/forOwn';
-import _find from 'lodash/find';
 
 class JobsSearchBarController {
     constructor ($state, $stateParams, CONTEXT, UI_ENUMS) {
@@ -19,39 +18,6 @@ class JobsSearchBarController {
     }
 
     $onInit () {
-        // Add status name to filter text (e.g. active, complete, submitted to provider)
-        if (this.$stateParams[this.SEARCH_PARAMS.STATUS]) {
-            let jobProgressObject;
-            let jobStatus = decodeURIComponent(this.$stateParams[this.SEARCH_PARAMS.STATUS]);
-
-            jobProgressObject = _find(this.JOB_PROGRESS, (progress) => {
-                return progress.Key === jobStatus;
-            });
-
-            this.filterText[jobStatus] = jobProgressObject.Name;
-        }
-
-        // Add progress level to filter text (pre-drywall or final)
-        if (this.$stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL]) {
-            let categoryProgressObject;
-
-            categoryProgressObject = _find(this.CATEGORY_PROGRESS, (progress) => {
-                return progress.Key === this.$stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL];
-            });
-
-            this.filterText[this.SEARCH_PARAMS.PROGRESS_LEVEL] = categoryProgressObject.Name;
-        }
-
-        // Add offline status to filter text (pre-drywall or final)
-        if (this.$stateParams[this.SEARCH_PARAMS.AVAILABLE_OFFLINE]) {
-            this.filterText[this.SEARCH_PARAMS.AVAILABLE_OFFLINE] = 'Available Offline';
-        }
-
-        // Add internal review to filter text (pre-drywall or final)
-        if (this.$stateParams[this.SEARCH_PARAMS.INTERNAL_REVIEW]) {
-            this.filterText[this.SEARCH_PARAMS.INTERNAL_REVIEW] = 'Internal Review';
-        }
-
         this.subPanelActive = false;
 
         this.hasFilters     = false;
