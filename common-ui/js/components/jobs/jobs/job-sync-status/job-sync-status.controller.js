@@ -19,6 +19,7 @@ class JobSyncStatusController {
 
     $onInit () {
         let status = this.syncService.getOverallStatus();
+        let self   = this;
 
         this.syncStatus      = status.syncStatus;
         this.syncStatusClass = status.syncStatusClass;
@@ -32,7 +33,6 @@ class JobSyncStatusController {
         }
 
         function applyChange () {
-            let self = this;
             _defer(function afterDigest () {
                 self.$scope.$apply();
             });
