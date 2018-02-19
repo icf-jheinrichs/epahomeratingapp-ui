@@ -9,6 +9,13 @@ class NavbarAdminController {
 
         this.MESSAGING             = UI_ENUMS.MESSAGING;
         this.STATE_NAME            = UI_ENUMS.STATE_NAME;
+
+        this.navVisibility = {
+            jobs            : false,
+            templateLibrary : false,
+            jobsProvider    : false,
+            users           : false
+        };
     }
 
     //TODO - move to authorization service
@@ -17,13 +24,13 @@ class NavbarAdminController {
 
         switch (stateName) {
         case this.STATE_NAME.JOBS :
-            isAuthorized = this.userRole.Admin || this.userRole.Rater;
+            isAuthorized = this.organizationTypes.RaterOrg;
             break;
         case this.STATE_NAME.HOUSE_LIBRARY :
-            isAuthorized = this.userRole.Admin || this.userRole.Rater;
+            isAuthorized = this.organizationTypes.RaterOrg;
             break;
         case this.STATE_NAME.JOBS_PROVIDER :
-            isAuthorized = this.userRole.Admin || this.userRole.Provider;
+            isAuthorized = this.organizationTypes.ProviderOrg;
             break;
         case this.STATE_NAME.USERS :
             isAuthorized = this.userRole.Admin || this.userRole.Provider;
@@ -62,23 +69,45 @@ class NavbarAdminController {
         return currentState;
     }
 
+    setNavVisibility () {
+        this.navVisibility = {
+            jobs            : this.organizationTypes.RaterOrg,
+            templateLibrary : this.organizationTypes.RaterOrg,
+            jobsProvider    : this.organizationTypes.ProviderOrg,
+            users           : this.userRole.Admin || this.userRole.Provider
+        };
+    }
+
     setUserRole () {
-        let currentState = this.$state.current.name;
-        this.userRole    = this.AuthorizationService.getUserRole();
+        const currentState     = this.$state.current.name;
+        this.userRole          = this.AuthorizationService.getUserRole();
+        this.organizationTypes = this.AuthorizationService.getOrganizationTypes();
+
+        this.setNavVisibility();
 
         if (!this.stateIsAuthorized(currentState)) {
-            this.$state.go(this.getAuthorizedRedirect());
+            this
+                .$state
+                .go(this.getAuthorizedRedirect());
         } else {
-            this.$state.transitionTo(this.$state.current, this.$stateParams, {reload : true, inherit : false, notify : true});
+            this
+                .$state
+                .transitionTo(
+                    this.$state.current,
+                    this.$stateParams,
+                    {reload : true, inherit : false, notify : true}
+                );
         }
     }
 
     $onInit () {
         this.setUserRole();
 
-        this.$rootScope.$on(this.MESSAGING.USER_AUTHORIZATION_UPDATE, () => {
-            this.setUserRole();
-        });
+        this
+            .$rootScope
+            .$on(this.MESSAGING.USER_AUTHORIZATION_UPDATE, () => {
+                this.setUserRole();
+            });
     }
 }
 

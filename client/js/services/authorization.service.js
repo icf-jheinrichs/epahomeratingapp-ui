@@ -19,7 +19,7 @@ class AuthorizationService {
     }
 
     authorizeLocalUser () {
-        let sessionItem = window.sessionStorage.getItem(USER_SESSION_ITEM);
+        const sessionItem = window.sessionStorage.getItem(USER_SESSION_ITEM);
         let localUser;
 
         if (sessionItem === 'undefined' || sessionItem === null) {
@@ -50,7 +50,7 @@ class AuthorizationService {
             Rater    : false,
             Provider : false
         };
-        let userCompanyIndex = _findIndex(this.user.userCompany, {O_ID : this.currentOrganization});
+        const userCompanyIndex = _findIndex(this.user.userCompany, {O_ID : this.currentOrganization});
         let userRoles = {};
 
         if (userCompanyIndex >= 0) {
@@ -65,7 +65,7 @@ class AuthorizationService {
     }
 
     getOrganizationTypes () {
-        let userCompany = _find(this.companies, {O_ID : this.currentOrganization});
+        const userCompany = _find(this.companies, {O_ID : this.currentOrganization});
         let orgTypes;
 
         if (userCompany) {
@@ -100,11 +100,16 @@ class AuthorizationService {
     }
 
     saveSessionStorage () {
-        window.sessionStorage.setItem(USER_SESSION_ITEM, angular.toJson({
-            user                : this.user,
-            companies           : this.companies,
-            currentOrganization : this.currentOrganization
-        }));
+        window
+            .sessionStorage
+            .setItem(
+                USER_SESSION_ITEM,
+                angular.toJson({
+                    user                : this.user,
+                    companies           : this.companies,
+                    currentOrganization : this.currentOrganization
+                })
+            );
     }
 
     setUserAuthorization (userId) {
@@ -125,7 +130,9 @@ class AuthorizationService {
                     this.clearState();
                 })
                 .finally(() => {
-                    this.$rootScope.$emit(this.MESSAGING.USER_AUTHORIZATION_UPDATE);
+                    this
+                        .$rootScope
+                        .$emit(this.MESSAGING.USER_AUTHORIZATION_UPDATE);
                 });
         });
     }
@@ -133,7 +140,10 @@ class AuthorizationService {
     setCurrentOrganization (O_ID) {
         this.currentOrganization = O_ID;
         this.saveSessionStorage();
-        this.$rootScope.$emit(this.MESSAGING.USER_AUTHORIZATION_UPDATE);
+
+        this
+            .$rootScope
+            .$emit(this.MESSAGING.USER_AUTHORIZATION_UPDATE);
     }
 }
 
