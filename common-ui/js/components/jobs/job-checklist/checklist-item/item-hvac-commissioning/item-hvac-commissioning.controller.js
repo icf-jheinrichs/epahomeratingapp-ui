@@ -16,7 +16,7 @@ class ChecklistItemHVACCommissioningController extends ChecklistItemClass {
     }
 
     get showPhotoCapture () {
-        return !this.isReview || this.itemData.Photo;
+        return !this.isReview || this.itemData;
     }
 }
 

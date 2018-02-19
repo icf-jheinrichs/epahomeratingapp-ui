@@ -93,116 +93,125 @@
     data-ng-click="jobsChecklistPageCtrl.hideModalHvacDesignReport()">
 </div>
 
-<div class="job-checklist-header">
-    <header class="page-container flex-row flex-align-center">
-        <a class="btn-back" data-ui-sref="jobs()" aria-label="Back to Jobs">
-            <i class="fa fa-chevron-left fa-lg" aria-hidden="true"></i>
-        </a>
+<div
+    id="job-checklist-header"
+    scroll-affix="scroll-affix"
+    affix-order="1"
+    affix-offset="-29">
 
-        <div>
-        <div class="job-checklist-meta">
-            <span class="label label-rating-type" data-ng-class="jobsChecklistPageCtrl.getRatingTypeClass()">
-                {{::jobsChecklistPageCtrl.RatingTypeLabel}}
-            </span><br />
-
-            <h2 class="job-checklist-title" data-ng-bind-html="jobsChecklistPageCtrl.JobTitle"></h2>
-
-            <button type="button" class="btn btn-job-dropdown-toggle" data-ng-click="jobsChecklistPageCtrl.toggleDropDown()">
-                <i class="fa fa-caret-down" aria-hidden="true"></i>
-            </button>
-
-            <nav class="drop-down" data-ng-class="{'hidden' : !jobsChecklistPageCtrl.showActionsDropDown}">
-                <button
-                    class="drop-down-item"
-                    type="button"
-                    data-ng-click="jobsChecklistPageCtrl.showHistory()">
-
-                    View Job History
-                </button>
-                <span
-                    class="drop-down-item">
-
-                    ID: {{::jobsChecklistPageCtrl.job._id}}
-                </span>
-            </nav>
-            <div
-                class="overlay drop-down-overlay"
-                data-ng-class="{'hidden' : !jobsChecklistPageCtrl.showActionsDropDown}"
-                data-ng-click="jobsChecklistPageCtrl.hideDropDown()">
-            </div>
-        </div>
-
-        <div class="actions flex-row">
-            <a
-                data-ui-sref="job-edit({id: jobsChecklistPageCtrl.job._id})"
-                data-ng-if="jobsChecklistPageCtrl.role==='admin'"
-                class="btn btn-sm">
-
-                Edit Profile
+    <div class="job-checklist-header">
+        <header class="page-container flex-row flex-align-center">
+            <a class="btn-back" data-ui-sref="jobs()" aria-label="Back to Jobs">
+                <i class="fa fa-chevron-left fa-lg" aria-hidden="true"></i>
             </a>
 
-            <button
-                data-ng-click="jobsChecklistPageCtrl.completeJob()"
-                data-ng-disabled="!jobsChecklistPageCtrl.jobIsActive"
-                data-ng-class="{'btn-disabled' : !jobsChecklistPageCtrl.canCompleteJob()}"
-                data-ng-if="jobsChecklistPageCtrl.role !== 'provider' && jobsChecklistPageCtrl.role !== 'admin'"
-                class="btn btn-sm"
-                type="button">
+            <div class="job-checklist-meta ellipsis">
+                <span class="label label-rating-type" data-ng-class="jobsChecklistPageCtrl.getRatingTypeClass()">
+                    {{::jobsChecklistPageCtrl.RatingTypeLabel}}
+                </span>
 
-                Complete
-            </button>
+                <h2 class="job-checklist-title" data-ng-bind-html="jobsChecklistPageCtrl.JobTitle"></h2>
+            </div>
 
-            <button
-                data-ng-if="jobsChecklistPageCtrl.role==='admin'"
-                data-ng-click="jobsChecklistPageCtrl.flagJobForReview()"
-                data-ng-disabled="!jobsChecklistPageCtrl.canFlagForReview"
-                class="btn btn-sm"
-                type="button">
+            <div class="actions flex-row flex-item-pull-right flex-align-center">
+                <button type="button" class="btn btn-job-dropdown-toggle" data-ng-click="jobsChecklistPageCtrl.toggleDropDown()">
+                    <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </button>
 
-                Flag for Review
-            </button>
+                <nav class="drop-down" data-ng-class="{'hidden' : !jobsChecklistPageCtrl.showActionsDropDown}">
+                    <button
+                        class="drop-down-item"
+                        type="button"
+                        data-ng-click="jobsChecklistPageCtrl.showHistory()">
 
-            <button
-                data-ng-disabled="!jobsChecklistPageCtrl.canSubmitJob()"
-                data-ng-class="{'btn-disabled' : !jobsChecklistPageCtrl.canSubmitJob()}"
-                class="btn btn-sm"
-                data-ng-click="jobsChecklistPageCtrl.submitToProvider()"
-                data-ng-if="jobsChecklistPageCtrl.role==='admin'"
-                type="button">
+                        View Job History
+                    </button>
+                    <span
+                        class="drop-down-item">
 
-                Submit to Provider
-            </button>
+                        ID: {{::jobsChecklistPageCtrl.job._id}}
+                    </span>
+                </nav>
+                <div
+                    class="overlay drop-down-overlay"
+                    data-ng-class="{'hidden' : !jobsChecklistPageCtrl.showActionsDropDown}"
+                    data-ng-click="jobsChecklistPageCtrl.hideDropDown()">
+                </div>
 
-            <!--
-            <button
-                data-ng-click="jobsChecklistPageCtrl.completeJob()"
-                data-ng-disabled="true"
-                class="btn btn-sm"
-                data-ng-if="jobsChecklistPageCtrl.role==='admin'"
-                type="button">
+                <a
+                    data-ui-sref="job-edit({id: jobsChecklistPageCtrl.job._id})"
+                    data-ng-if="jobsChecklistPageCtrl.role==='admin'"
+                    class="btn btn-sm">
 
-                Delete Job
-            </button>
-            -->
+                    Edit Profile
+                </a>
 
-            <button
-                type="button"
-                data-ng-if="jobsChecklistPageCtrl.role==='admin'"
-                data-ng-click="jobsChecklistPageCtrl.onDownloadRequest()"
-                class="btn btn-sm">
+                <button
+                    data-ng-click="jobsChecklistPageCtrl.completeJob()"
+                    data-ng-disabled="!jobsChecklistPageCtrl.jobIsActive"
+                    data-ng-class="{'btn-disabled' : !jobsChecklistPageCtrl.canCompleteJob()}"
+                    data-ng-if="jobsChecklistPageCtrl.role !== 'provider' && jobsChecklistPageCtrl.role !== 'admin'"
+                    class="btn btn-sm"
+                    type="button">
 
-                Download Job
-            </button>
+                    Complete
+                </button>
+
+                <button
+                    data-ng-if="jobsChecklistPageCtrl.role==='admin'"
+                    data-ng-click="jobsChecklistPageCtrl.flagJobForReview()"
+                    data-ng-disabled="!jobsChecklistPageCtrl.canFlagForReview"
+                    class="btn btn-sm"
+                    type="button">
+
+                    Flag for Review
+                </button>
+
+                <button
+                    data-ng-disabled="!jobsChecklistPageCtrl.canSubmitJob()"
+                    data-ng-class="{'btn-disabled' : !jobsChecklistPageCtrl.canSubmitJob()}"
+                    class="btn btn-sm"
+                    data-ng-click="jobsChecklistPageCtrl.submitToProvider()"
+                    data-ng-if="jobsChecklistPageCtrl.role==='admin'"
+                    type="button">
+
+                    Submit to Provider
+                </button>
+
+                <!--
+                <button
+                    data-ng-click="jobsChecklistPageCtrl.completeJob()"
+                    data-ng-disabled="true"
+                    class="btn btn-sm"
+                    data-ng-if="jobsChecklistPageCtrl.role==='admin'"
+                    type="button">
+
+                    Delete Job
+                </button>
+                -->
+
+                <button
+                    type="button"
+                    data-ng-if="jobsChecklistPageCtrl.role==='admin'"
+                    data-ng-click="jobsChecklistPageCtrl.onDownloadRequest()"
+                    class="btn btn-sm">
+
+                    Download Job
+                </button>
+            </div>
+        </header>
+    </div>
+
+    <div class="checklist-nav-wrapper">
+        <div class="page-container">
+            <checklist-nav></checklist-nav>
         </div>
-        </div>
-    </header>
+    </div>
 </div>
 
 <checklist-house-selection houses="jobsChecklistPageCtrl.houses"></checklist-house-selection>
 
 <div class="page-container">
-    <checklist-nav></checklist-nav>
-
     <checklist-filter></checklist-filter>
 
     <div ui-view></div>

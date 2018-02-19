@@ -1,5 +1,5 @@
 class NavbarAdminController {
-    constructor ($rootScope, $state, AuthenticationService, AuthorizationService, UI_ENUMS) {
+    constructor ($rootScope, $state, AuthenticationService, AuthorizationService, ScrollService, UI_ENUMS) {
         'ngInject';
 
         this.$rootScope            = $rootScope;

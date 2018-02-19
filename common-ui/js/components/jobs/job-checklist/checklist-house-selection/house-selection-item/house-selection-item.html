@@ -9,10 +9,13 @@
     </photo-capture>
 
     <div class="house-info">
-        <h4 class="house-title" data-ng-bind-html="houseSelectionItemCtrl.HouseTitle"></h4>
-        <span class="label label-primary" data-ng-if="houseSelectionItemCtrl.isPrimary=='true'"><i class="fa fa-star" aria-hidden="true"></i> Primary</span>
+        <h4 class="house-title" data-ng-bind-html="::houseSelectionItemCtrl.HouseTitle"></h4>
 
-        <p>Builder: {{::houseSelectionItemCtrl.house.BuilderId}}</p>
+        <span class="label label-primary" data-ng-if="houseSelectionItemCtrl.isPrimary=='true'">
+            <i class="fa fa-star" aria-hidden="true"></i> Primary
+        </span>
+
+        <p>Builder: {{::houseSelectionItemCtrl.house.Builder}}</p>
 
         <p>House Plan: {{::houseSelectionItemCtrl.house.HousePlan[0].Name}}</p>
     </div>

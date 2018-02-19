@@ -1,5 +1,32 @@
 @import '../../../../common-ui/scss/variables';
 
+
+$admin-head-shadow-color: rgba(0, 0, 0, .5);
+$admin-head-skip-link-background: rgba(255, 255, 255, 0.8);
+
 #admin-head {
     background: linear-gradient(to bottom, $brand-secondary 0, darken($brand-secondary, 5%) $border-radius-large, $body-bg $border-radius-large);
+    box-shadow: 0 0 10px $admin-head-shadow-color;
+    height: 75px;
+    top: 0;
+    z-index: $zindex-fixed-header;
+
+    .navbar {
+        padding: 15px 0 10px;
+    }
+
+    .site-skip-link:focus {
+        background-color: $admin-head-skip-link-background;
+        position: absolute;
+        width: 100%;
+    }
+}
+
+#admin-nav {
+    height: 45px;
+    position: fixed;
+    top: 75px;
+    transition: transform $transition-fast linear;
+    width: 100%;
+    z-index: $zindex-fixed-nav;
 }

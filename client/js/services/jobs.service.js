@@ -52,9 +52,13 @@ class JobsService {
                     if (response.status === 200) {
                         let jobs = response.data;
 
-                        jobs = _orderBy(jobs, [function sortByCreateDate (o) {
-                            return new Date(o.History[0].DateTime);
-                        }], ['desc']);
+                        jobs = _orderBy(
+                            jobs,
+                            [(job) => {
+                                return new Date(job.History[job.History.length - 1].DateTime);
+                            }],
+                            ['desc']
+                        );
 
                         resolve(jobs);
                     } else {
@@ -212,9 +216,13 @@ class JobsService {
                             return pick;
                         });
 
-                        filteredJobs = _orderBy(filteredJobs, [function sortByCreateDate (o) {
-                            return new Date(o.History[0].DateTime);
-                        }], ['desc']);
+                        filteredJobs = _orderBy(
+                            filteredJobs,
+                            [(job) => {
+                                return new Date(job.History[job.History.length - 1].DateTime);
+                            }],
+                            ['desc']
+                        );
 
                         resolve(filteredJobs);
                     } else {
@@ -331,9 +339,13 @@ class JobsService {
                             return pick;
                         });
 
-                        filteredJobs = _orderBy(filteredJobs, [function sortByCreateDate (o) {
-                            return new Date(o.History[0].DateTime);
-                        }], ['desc']);
+                        filteredJobs = _orderBy(
+                            filteredJobs,
+                            [(job) => {
+                                return new Date(job.History[job.History.length - 1].DateTime);
+                            }],
+                            ['desc']
+                        );
 
                         resolve(filteredJobs);
                     } else {

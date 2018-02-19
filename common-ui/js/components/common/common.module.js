@@ -12,11 +12,12 @@ import toggleComponent from './toggle/toggle.component';
 // common directives
 import DialogModule from './dialog/dialog.module';
 import DropdownModule from './dropdown/dropdown.module';
+import FileManagerModule from './file-manager/file-manager.module';
 import LightboxModule from './lightbox/lightbox.module';
 import ModalModule from './modal/modal.module';
 import PopoverModule from './popover/popover.module';
 import TypeAheadModule from './type-ahead/type-ahead.module';
-import FileManagerModule from './file-manager/file-manager.module';
+import ScrollModule from './scroll/scroll.module';
 import inputFocusDirective from './input-focus/input-focus.directive.js';
 
 let commonModule
@@ -28,6 +29,7 @@ let commonModule
             LightboxModule.name,
             ModalModule.name,
             PopoverModule.name,
+            ScrollModule.name,
             TypeAheadModule.name
         ])
         .component('buttonGroup', buttonGroupComponent)

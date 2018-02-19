@@ -127,6 +127,10 @@ $job-photo-height-small:  85px;
 .job-title {
     font-size: $font-size-h4;
     margin: $offset-small 0;
+
+    span {
+        display: block;
+    }
 }
 
 .job-builder {

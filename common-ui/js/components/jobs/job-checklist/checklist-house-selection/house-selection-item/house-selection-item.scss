@@ -83,6 +83,10 @@
         font-size: $font-size-h6;
         font-weight: bold;
         margin: 0 0 $offset-small;
+
+        span {
+            display: block;
+        }
     }
 
     p {
