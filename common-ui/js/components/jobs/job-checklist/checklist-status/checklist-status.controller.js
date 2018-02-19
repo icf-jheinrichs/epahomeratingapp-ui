@@ -35,8 +35,6 @@ class jobChecklistStatusController {
                     this.STAGES = this.CATEGORY_PROGRESS;
                 } else {
                     this.STAGES = _filter(this.CATEGORY_PROGRESS, {Key : this.$stateParams.stageId});
-
-                    console.dir(this.STAGES);
                 }
             });
     }

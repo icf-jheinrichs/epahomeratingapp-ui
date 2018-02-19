@@ -130,8 +130,6 @@ class JobChecklistProgressService {
 
         });
 
-        console.dir(progress);
-
         return progress;
     }
 

@@ -125,10 +125,10 @@ class ChecklistFilterController {
     }
 
     get checklistFilterCriteria () {
-        let plural         = this.checklistItemsQuantity > 1 ? 's' : '';
+        // let plural         = this.checklistItemsQuantity > 1 ? 's' : '';
         let inpectionStage = `${this.getCurrentInspectionStageFilterName()} Inspection Stage`;
 
-         //`checklist item${plural} for ${inpectionStage}, ${this.getCurrentStatusFilterName()}`;
+        //`checklist item${plural} for ${inpectionStage}, ${this.getCurrentStatusFilterName()}`;
         return `${inpectionStage}, ${this.getCurrentStatusFilterName()}`;
     }
 }
