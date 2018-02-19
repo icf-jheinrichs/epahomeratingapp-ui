@@ -1,0 +1,17 @@
+<section aria-labelledby="category-header-{{::key}}" data-ng-repeat="(key, value) in jobChecklistStatusCtrl.CATEGORIES">
+     <h2 aria-labelledby="category-header-{{::key}}" class="checklist-stage-title">
+        <img data-ng-src="img/icon-{{::key}}.svg" alt="" />
+        <span class="">{{::value.Name}}</span>
+    </h2>
+
+    <section data-ng-repeat="stage in jobChecklistStatusCtrl.STAGES">
+        <h3 class="checklist-section-title">{{::stage.Name}}</h3>
+
+        <checklist-item
+            data-ng-repeat="checklistItem in ::jobChecklistStatusCtrl.jobDisplayList[value.Key][stage.Key] track by $index"
+            item-id="{{::checklistItem.checklistItemRef}}"
+            item-category="{{::value.Key}}"
+            item-category-progress="{{::stage.Key}}">
+        </checklist-item>
+    </section>
+</section>

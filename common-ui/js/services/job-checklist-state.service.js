@@ -1,6 +1,7 @@
 import _findIndex from 'lodash/findIndex';
+// import _findKey from 'lodash/findKey';
 import _forOwn from 'lodash/forOwn';
-import _forEach from 'lodash/forEach';
+// import _forEach from 'lodash/forEach';
 import _cloneDeep from 'lodash/cloneDeep';
 
 class JobChecklistState {
@@ -36,6 +37,7 @@ class JobChecklistState {
 
         this.jobTitleFilter                = jobTitleFilter;
 
+        this.ANY                           = UI_ENUMS.ANY;
         this.JOB_STATUS                    = UI_ENUMS.JOB_STATUS;
         this.CATEGORY_PROGRESS             = UI_ENUMS.CATEGORY_PROGRESS;
         this.RATING_TYPES                  = UI_ENUMS.RATING_TYPES;
@@ -314,22 +316,25 @@ class JobChecklistState {
             this
                 .jobChecklistStatePromise
                 .then(() => {
-                    if (this.$stateParams.categoryId) {
-                        let currentCategory = this.CATEGORIES[this.$stateParams.categoryId].Key;
+                    resolve(0);
+                    // if (this.$stateParams.categoryId) {
+                    //     let currentCategory = this.CATEGORIES[this.$stateParams.categoryId].Key;
 
-                        resolve(this.jobDataResponse.Progress[currentCategory].PreDrywall.Total + this.jobDataResponse.Progress[currentCategory].Final.Total);
-                    } else if (this.$stateParams.stageId) {
-                        let currentStage = this.CATEGORY_PROGRESS[this.$stateParams.stageId].Key;
-                        let itemsQuantity = 0;
+                    //     resolve(this.jobDataResponse.Progress[currentCategory].PreDrywall.Total + this.jobDataResponse.Progress[currentCategory].Final.Total);
+                    // } else if (this.$stateParams.stageId) {
+                    //     const stageKey    = _findKey(this.CATEGORY_PROGRESS, {Key : this.$stateParams.stageId});
 
-                        _forEach(this.jobDataResponse.Progress, (category) => {
-                            itemsQuantity += category[currentStage].Total;
-                        });
+                    //     let currentStage  = this.CATEGORY_PROGRESS[stageKey].Key;
+                    //     let itemsQuantity = 0;
 
-                        resolve(itemsQuantity);
-                    } else {
-                        reject();
-                    }
+                    //     _forEach(this.jobDataResponse.Progress, (category) => {
+                    //         itemsQuantity += category[currentStage].Total;
+                    //     });
+
+                    //     resolve(itemsQuantity);
+                    // } else {
+                    //     reject();
+                    // }
                 });
         });
     }
@@ -461,17 +466,10 @@ class JobChecklistState {
             .ChecklistItems[response.Category][response.CategoryProgress][response.ItemId]
             .ResponseHouseId = this.currentHouse.HouseId;
 
-        if (this.$state.current.name === this.STATE_NAME.JOB_CHECKLIST_CATEGORY) {
-            this
-                .jobDataResponse
-                .Progress[response.Category]
-                = this.JobChecklistProgressService.calculateCategoryProgress(this.jobDataResponse, this.itemStatusQuery);
-        } else if (this.$state.current.name === this.STATE_NAME.JOB_CHECKLIST_STAGE) {
-            this
-                .jobDataResponse
-                .Progress
-                = this.JobChecklistProgressService.calculateStageProgress(this.jobDataResponse, this.itemStatusQuery, this.$stateParams.stageId);
-        }
+        this
+            .jobDataResponse
+            .Progress[response.Category][response.CategoryProgress]
+            = this.JobChecklistProgressService.calculateCategoryStageProgress(this.jobDataResponse, this.itemStatusQuery, response);
 
         this
             .job
@@ -507,8 +505,8 @@ class JobChecklistState {
 
         this
             .jobDataResponse
-            .Progress[update.Category]
-            = this.JobChecklistProgressService.calculateCategoryProgress(this.jobDataResponse, this.itemStatusQuery);
+            .Progress[update.Category][update.CategoryProgress]
+            = this.JobChecklistProgressService.calculateCategoryStageProgress(this.jobDataResponse, this.itemStatusQuery, update);
 
         this
             .job

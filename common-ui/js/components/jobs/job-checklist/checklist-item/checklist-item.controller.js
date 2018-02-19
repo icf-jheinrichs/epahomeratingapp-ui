@@ -7,14 +7,18 @@ class ChecklistItemController {
         this.DisplayLogicDigestService = DisplayLogicDigestService;
         this.JobChecklistStateService  = JobChecklistStateService;
 
-        this.jobRatingType = this.JobChecklistStateService.getJob().RatingType;
-        this.RATING_TYPES  = UI_ENUMS.RATING_TYPES;
-        this.isOmitted     = false;
+        this.ANY                   = UI_ENUMS.ANY;
+        this.CHECKLIST_ITEM_STATUS = UI_ENUMS.CHECKLIST_ITEM_STATUS;
+        this.RATING_TYPES          = UI_ENUMS.RATING_TYPES;
+        this.RESPONSES             = UI_ENUMS.RESPONSES;
+
+        this.jobRatingType     = this.JobChecklistStateService.getJob().RatingType;
+        this.isOmitted         = false;
     }
 
     $onInit () {
         let currentHousePlanId = this.JobChecklistStateService.currentHouse.HousePlan[0]._id;
-        let filterStatus       = this.$stateParams.status || '';
+        let filterStatus       = this.$stateParams.statusId || '';
 
         this
             .DisplayLogicDigestService
@@ -29,12 +33,12 @@ class ChecklistItemController {
 
                 this.response = response.Response;
 
-                if (filterStatus === 'Any') {
+                if (filterStatus === this.ANY.Any.Key) {
                     this.isFiltered = false;
-                } else if (filterStatus === 'to-do') {
+                } else if (filterStatus === this.CHECKLIST_ITEM_STATUS['to-do'].Key) {
                     this.isFiltered = this.response !== undefined;
-                } else if (filterStatus === 'must-correct') {
-                    this.isFiltered = this.response === undefined || this.response[0] !== 'MustCorrect';
+                } else if (filterStatus === this.CHECKLIST_ITEM_STATUS['must-correct'].Key) {
+                    this.isFiltered = this.response === undefined || this.response[0] !== this.RESPONSES.MustCorrect.Key;
                 } else {
                     this.isFiltered = false;
                 }

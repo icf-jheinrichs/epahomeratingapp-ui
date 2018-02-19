@@ -1,11 +1,11 @@
 <section>
     <h2 class="sr-only">{{jobChecklistCategoryCtrl.categoryName}}</h2>
 
-    <section data-ng-if="jobChecklistCategoryCtrl.hasPredrywallItems" class="checklist-section">
+    <section data-ng-if="::jobChecklistCategoryCtrl.showPredrywallItems" class="checklist-section">
         <h3 class="checklist-section-title">Pre-Drywall</h3>
 
         <checklist-item
-            data-ng-repeat="checklistItem in jobChecklistCategoryCtrl.preDrywallChecklistItems track by $index"
+            data-ng-repeat="checklistItem in ::jobChecklistCategoryCtrl.preDrywallChecklistItems track by $index"
             item-id="{{::checklistItem.checklistItemRef}}"
             item-category="{{::jobChecklistCategoryCtrl.categoryKey}}"
             item-category-progress="{{::jobChecklistCategoryCtrl.CATEGORY_PROGRESS['pre-drywall'].Key}}">
@@ -13,11 +13,11 @@
 
     </section>
 
-    <section data-ng-if="jobChecklistCategoryCtrl.hasFinalItems" class="checklist-section">
+    <section data-ng-if="::jobChecklistCategoryCtrl.showFinalItems" class="checklist-section">
         <h3 class="checklist-section-title">Final</h3>
 
         <checklist-item
-            data-ng-repeat="checklistItem in jobChecklistCategoryCtrl.finalChecklistItems track by $index"
+            data-ng-repeat="checklistItem in ::jobChecklistCategoryCtrl.finalChecklistItems track by $index"
             item-id="{{::checklistItem.checklistItemRef}}"
             item-category="{{::jobChecklistCategoryCtrl.categoryKey}}"
             item-category-progress="{{::jobChecklistCategoryCtrl.CATEGORY_PROGRESS['final'].Key}}">

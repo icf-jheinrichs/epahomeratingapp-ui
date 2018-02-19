@@ -43,6 +43,17 @@ const CONTEXT = {
     'ADMIN' : 'admin'
 };
 
+const CHECKLIST_ITEM_STATUS = {
+    'to-do' : {
+        Name : 'To-do',
+        Key  : 'ToDo'
+    },
+    'must-correct' : {
+        Name : 'Must Correct',
+        Key  : 'MustCorrect'
+    }
+};
+
 const USER_TYPE = {
     ADMIN       : 'ADMIN',
     RATER       : 'RATER',
@@ -168,7 +179,7 @@ const POPOVER = {
 const ANY = {
     'Any' : {
         Name : 'Any',
-        Key  : 'any'
+        Key  : 'Any'
     },
 };
 
@@ -273,7 +284,7 @@ const STATE_NAME = {
     JOB_EDIT                          : 'job-edit',
     JOB_CHECKLIST                     : 'job-checklist',
     JOB_CHECKLIST_CATEGORY            : 'job-checklist.category',
-    JOB_CHECKLIST_STAGE               : 'job-checklist.stage',
+    JOB_CHECKLIST_STATUS              : 'job-checklist.status',
     JOB_CHECKLIST_REVIEW              : 'job-checklist-review',
     JOB_CHECKLIST_REVIEW_CATEGORY     : 'job-checklist-review.category',
     PROVIDERS                         : 'providers',
@@ -292,6 +303,7 @@ const SYNC_STATUS = {
 export default {
     CATEGORIES,
     CATEGORY_PROGRESS,
+    CHECKLIST_ITEM_STATUS,
     CONTEXT,
     DIALOG,
     DROPDOWN,

@@ -4,7 +4,7 @@
             <button
                 aria-label="More Information"
                 class="checklist-item-info-toggle btn btn-link btn-no-label"
-                ng-class="{'has-footnote' : checklistItemCtrl.hasFootnote}"
+                ng-class="::{'has-footnote' : checklistItemCtrl.hasFootnote}"
                 ng-click="checklistItemCtrl.showFootnote()"
                 type="button">
 
@@ -16,7 +16,7 @@
 
         <div class="flex-row flex-align-center flex-justify-end flex-item-fixed-width">
             <checklist-item-comments
-                data-ng-if="!checklistItemCtrl.isReview"
+                data-ng-if="::!checklistItemCtrl.isReview"
                 comments="checklistItemCtrl.comments"
                 item-id="{{checklistItemCtrl.itemId}}"
                 on-comment="checklistItemCtrl.postComment(comment)">
@@ -59,15 +59,23 @@
                 {{::staticPressure.Unit.Abbr}}
             </abbr>
         </div>
-
     </section>
+
+    <div>
+        <checklist-item-comments-review
+            data-ng-if="::checklistItemCtrl.isReview"
+            comments="checklistItemCtrl.comments"
+            item-id="{{checklistItemCtrl.itemId}}"
+            on-comment="checklistItemCtrl.postComment(comment)">
+        </checklist-item-comments-review>
+    </div>
 
     <mrf-edit
         data-ng-repeat="row in checklistItemCtrl.editRow"
         on-save-mrf-row="checklistItemCtrl.onSaveMrfRow(mrfRowEditData)"
         on-cancel-mrf-row="checklistItemCtrl.onCancelMrfRow()"
         focus="{{row.focus}}"
-        title="{{row.title}}"
+        title="{{::row.title}}"
         mrf-digest="row.mrfDigest"
         mrf-data="row.mrfData">
     </mrf-edit>

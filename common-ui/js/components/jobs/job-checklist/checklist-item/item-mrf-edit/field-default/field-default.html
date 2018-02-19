@@ -1,12 +1,13 @@
 <div class="form-group">
     <label for="{{fieldCtrl.field.Key}}" class="control-label">
-        <i class="fa fa-list-alt" aria-hidden="true" data-ng-if="fieldCtrl.field.IsLibraryAttribute"></i>
-        {{fieldCtrl.field.Name}}
+        <i class="fa fa-list-alt" aria-hidden="true" data-ng-if="::fieldCtrl.field.IsLibraryAttribute"></i>
+        {{::fieldCtrl.field.Name}}
     </label>
 
     <input
         class="form-control"
-        id="{{fieldCtrl.field.Key}}"
+        id="{{::fieldCtrl.field.Key}}"
         data-ng-change="fieldCtrl.onChange(fieldCtrl.value)"
-        type="text" data-ng-model="fieldCtrl.value" />
+        type="text"
+        data-ng-model="fieldCtrl.value" />
 </div>

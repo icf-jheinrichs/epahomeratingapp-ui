@@ -4,7 +4,7 @@ import checklistNavComponent from './checklist-nav/checklist-nav.component';
 import checklistHouseSelectionComponent from './checklist-house-selection/checklist-house-selection.component';
 import houseSelectionItemComponent from './checklist-house-selection/house-selection-item/house-selection-item.component';
 import checklistCategoryComponent from './checklist-category/checklist-category.component';
-import checklistStageComponent from './checklist-stage/checklist-stage.component';
+import checklistStatusComponent from './checklist-status/checklist-status.component';
 import checklistFilterComponent from './checklist-filter/checklist-filter.component';
 import checklistItemComponent from './checklist-item/checklist-item.component';
 import checklistItemCommentsComponent from './checklist-item/item-comments/item-comments.component';
@@ -42,7 +42,7 @@ let jobsModule
         .component('checklistHouseSelection', checklistHouseSelectionComponent)
         .component('houseSelectionItem', houseSelectionItemComponent)
         .component('checklistCategory', checklistCategoryComponent)
-        .component('checklistStage', checklistStageComponent)
+        .component('checklistStatus', checklistStatusComponent)
         .component('checklistFilter', checklistFilterComponent)
         .component('checklistItem', checklistItemComponent)
         .component('checklistItemComments', checklistItemCommentsComponent)

@@ -14,82 +14,67 @@ class ChecklistFilterController {
         this.inspectionStageFilters
             = Object.assign(
                 {},
-                {
-                    'Any' : {
-                        Name : 'Any',
-                        Key  : 'Any'
-                    }
-                },
+                UI_ENUMS.ANY,
                 UI_ENUMS.CATEGORY_PROGRESS);
 
 
-        this.statusFilters = {
-            'Any' : {
-                Name : 'Any',
-                Key  : 'Any'
-            },
-            'to-do' : {
-                Name : 'To-do',
-                Key  : 'ToDo'
-            },
-            'must-correct' : {
-                Name : 'Must Correct',
-                Key  : 'MustCorrect'
-            }
-        };
+        this.statusFilters
+            = Object.assign(
+                {},
+                UI_ENUMS.ANY,
+                UI_ENUMS.CHECKLIST_ITEM_STATUS);
     }
 
     $onInit () {
         this.inspectionStageFilter  = this.getCurrentInspectionStageFilter();
         this.statusFilter           = this.getCurrentStatusFilter();
 
-        this
-            .JobChecklistStateService
-            .getChecklistItemsQuantity()
-            .then((checklistItemsQuantity) => {
-                this.checklistItemsQuantity = checklistItemsQuantity;
-            });
+        // this
+        //     .JobChecklistStateService
+        //     .getChecklistItemsQuantity()
+        //     .then((checklistItemsQuantity) => {
+        //         this.checklistItemsQuantity = checklistItemsQuantity;
+        //     });
     }
 
     getCurrentInspectionStageFilter () {
-        if (this.$state.current.name === this.STATE_NAME.JOB_CHECKLIST) {
-            return [this.inspectionStageFilters[this.$stateParams.stageId].Key];
+        if (this.$stateParams.stageId) {
+            return [this.$stateParams.stageId];
         } else {
-            return ['Any'];
+            return [this.inspectionStageFilters.Any.Key];
         }
     }
 
     getCurrentStatusFilter () {
-        let statusFilter;
-
-        if (this.$stateParams.status) {
-            statusFilter = this.statusFilters[this.$stateParams.status].Key;
+        if (this.$stateParams.statusId) {
+            return [this.$stateParams.statusId];
         } else {
-            statusFilter = 'Any';
+            return [this.statusFilters.Any.Key];
         }
-
-        return [statusFilter];
     }
 
     getCurrentInspectionStageFilterName () {
-        if (this.$state.current.name === this.STATE_NAME.JOB_CHECKLIST) {
-            return this.inspectionStageFilters[this.$stateParams.stageId].Name;
+        if (this.$stateParams.stageId) {
+            const stageKey = _findKey(this.inspectionStageFilters, {Key : this.$stateParams.stageId});
+
+            return this.inspectionStageFilters[stageKey].Name;
         } else {
-            return 'Any';
+            return this.inspectionStageFilters.Any.Name;
         }
     }
 
     getCurrentStatusFilterName () {
         let statusFilter;
 
-        if (this.$stateParams.status) {
-            statusFilter = this.statusFilters[this.$stateParams.status].Name;
+        if (this.$stateParams.statusId) {
+            const statusKey = _findKey(this.statusFilters, {Key : this.$stateParams.statusId});
+
+            statusFilter = this.statusFilters[statusKey].Name;
         } else {
             statusFilter = 'Any Status';
         }
 
-        //TODO: fix this
-        if (statusFilter === 'Any') {
+        if (statusFilter === this.statusFilters.Any.Name) {
             statusFilter = 'Any Status';
         }
 
@@ -105,21 +90,33 @@ class ChecklistFilterController {
     }
 
     onFilter () {
-        const stageId  = _findKey(this.inspectionStageFilters, {Key : this.inspectionStageFilter[0]});
-        const statusId = _findKey(this.statusFilters, {Key : this.statusFilter[0]});
+        const stageId  = this.inspectionStageFilter[0];
+        const statusId = this.statusFilter[0];
 
-        if (this.inspectionStageFilter[0] !== this.inspectionStageFilters['Any'].Key) {
-            this.$state.go('job-checklist.stage', {
-                houseId    : this.$stateParams.houseId,
-                stageId    : stageId,
-                status     : statusId
-            });
+        if (this.statusFilter[0] !== this.statusFilters.Any.Key) {
+            this
+                .$state
+                .go(
+                    this.STATE_NAME.JOB_CHECKLIST_STATUS,
+                    {
+                        houseId    : this.$stateParams.houseId,
+                        stageId    : stageId,
+                        statusId   : statusId
+                    },
+                    {reload : true}
+                );
         } else {
-            this.$state.go('job-checklist.category', {
-                houseId    : this.$stateParams.houseId,
-                categoryId : this.$stateParams.categoryId || 'walls',
-                status     : statusId
-            });
+            this
+                .$state
+                .go(
+                    this.STATE_NAME.JOB_CHECKLIST_CATEGORY,
+                    {
+                        houseId    : this.$stateParams.houseId,
+                        categoryId : this.$stateParams.categoryId || 'walls',
+                        stageId    : stageId
+                    },
+                    {reload : true}
+                );
         }
     }
 
@@ -131,7 +128,8 @@ class ChecklistFilterController {
         let plural         = this.checklistItemsQuantity > 1 ? 's' : '';
         let inpectionStage = `${this.getCurrentInspectionStageFilterName()} Inspection Stage`;
 
-        return `checklist item${plural} for ${inpectionStage}, ${this.getCurrentStatusFilterName()}`;
+         //`checklist item${plural} for ${inpectionStage}, ${this.getCurrentStatusFilterName()}`;
+        return `${inpectionStage}, ${this.getCurrentStatusFilterName()}`;
     }
 }
 

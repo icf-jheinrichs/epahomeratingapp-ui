@@ -16,7 +16,7 @@
 
         <div class="flex-row flex-align-center flex-item-fixed-width">
             <checklist-item-comments
-                data-ng-if="!checklistItemHVACCommissioningCtrl.isReview"
+                data-ng-if="::!checklistItemHVACCommissioningCtrl.isReview"
                 comments="checklistItemHVACCommissioningCtrl.comments"
                 item-id="{{checklistItemHVACCommissioningCtrl.itemId}}"
                 on-comment="checklistItemHVACCommissioningCtrl.postComment(comment)">
@@ -55,7 +55,7 @@
 
     <div>
         <checklist-item-comments-review
-            data-ng-if="checklistItemHVACCommissioningCtrl.isReview"
+            data-ng-if="::checklistItemHVACCommissioningCtrl.isReview"
             comments="checklistItemHVACCommissioningCtrl.comments"
             item-id="{{checklistItemHVACCommissioningCtrl.itemId}}"
             on-comment="checklistItemHVACCommissioningCtrl.postComment(comment)">

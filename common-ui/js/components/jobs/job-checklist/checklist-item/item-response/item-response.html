@@ -5,7 +5,7 @@
         <span class="ellipsis house-title" data-ng-bind-html="checklistItemResponseCtrl.house.title" data-ng-hide="!checklistItemResponseCtrl.showHouseTitle"></span>
     </div>
 
-    <div class="checklist-item-response-edit" data-ng-if="!checklistItemResponseCtrl.isReview">
+    <div class="checklist-item-response-edit" data-ng-if="::!checklistItemResponseCtrl.isReview">
         <button
             class="btn btn-default"
             data-ng-click="checklistItemResponseCtrl.editResponse()"

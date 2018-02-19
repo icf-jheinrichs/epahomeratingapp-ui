@@ -99,9 +99,51 @@ class JobChecklistProgressService {
      * @param  {object} itemStatusQueries    object containing function calls to query a checklist item to see if it's omitted from the job
      * @return {object}                      updated progress data object
      */
+    calculateCategoryStageProgress (jobDataResponse, itemStatusQueries, response) {
+        const category         = response.Category;
+        const categoryProgress = response.CategoryProgress;
+
+        let progress = {
+            'Total'       : 0,
+            'Verified'    : 0,
+            'MustCorrect' : 0
+        };
+
+        _forEach(itemStatusQueries, (query, key) => {
+            let [queryCategory, queryProgress, id] = key.split(':');
+
+            if (category === queryCategory && categoryProgress === queryProgress) {
+                let itemStatus = query();
+
+                if (!itemStatus.isOmitted) {
+                    progress.Total += 1;
+
+                    let response = jobDataResponse.ChecklistItems[queryCategory][queryProgress][id].Response;
+
+                    if (response !== undefined && response[0] === this.RESPONSES.MustCorrect.Key) {
+                        progress.MustCorrect += 1;
+                    } else if (response !== undefined) {
+                        progress.Verified += 1;
+                    }
+                }
+            }
+
+        });
+
+        console.dir(progress);
+
+        return progress;
+    }
+
+    /**
+     * Triggered after a checklist item is responded to, or if checklist item data is changed
+     * @param  {object} jobDataResponse      job response data
+     * @param  {object} itemStatusQueries    object containing function calls to query a checklist item to see if it's omitted from the job
+     * @return {object}                      updated progress data object
+     */
     calculateStageProgress (jobDataResponse, itemStatusQueries, stageId) {
         let jobProgress = _cloneDeep(jobDataResponse.Progress);
-        let STAGE    = this.CATEGORY_PROGRESS[stageId].Key;
+        let STAGE       = stageId;
 
         _forEach(jobProgress, (value, key) => {
             jobProgress[key][STAGE] = {
