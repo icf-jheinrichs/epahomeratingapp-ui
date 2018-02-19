@@ -74,6 +74,7 @@ const DIALOG = {
 };
 
 const DROPDOWN = {
+    JOB_INFO            : 'dropdown-job-info',
     USER_MENU           : 'user-menu',
     USER_COMPANIES_MENU : 'user-companies-menu'
 };

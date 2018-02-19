@@ -27,7 +27,7 @@ class NavbarAdminController {
             isAuthorized = this.organizationTypes.RaterOrg;
             break;
         case this.STATE_NAME.TEMPLATE_LIBRARY :
-            isAuthorized = this.userRole.Admin || this.userRole.Rater;
+            isAuthorized = this.organizationTypes.RaterOrg;
             break;
         case this.STATE_NAME.JOBS_PROVIDER :
             isAuthorized = this.organizationTypes.ProviderOrg;
