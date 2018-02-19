@@ -1,10 +1,16 @@
 @import '../../../../../scss/variables';
 
+.checklist-nav-wrapper {
+    background-color: $body-bg;
+    transition: box-shadow $transition-default ease-out;
+}
+
 .nav-checklist-sections {
-    margin: $gutter-half ($gutter-half / 2);
+    margin: ($gutter-half / 2);
 }
 
 .nav-checklist-item {
+    border-color: $body-bg;
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -14,7 +20,8 @@
 
     img {
         opacity: .5;
-        transition: opacity $transition-default;
+        transform-origin: top center;
+        transition: opacity $transition-default ease-out width $transition-default ease-out;
     }
 
     &:hover,
@@ -45,6 +52,12 @@
         position: absolute;
     }
 
+    .linear-progress,
+    .nav-checklist-item-description span {
+        transform-origin: top center;
+        transition: transform $transition-fast ease-out;
+    }
+
     .linear-progress-pre-drywall {
         top: 0;
     }
@@ -60,10 +73,52 @@
     margin: $offset-small 0;
     padding: $padding-default;
     text-align: center;
-    transition: background-color $transition-default;
+    transition: background-color $transition-default border-color $transition-default;
 
     span {
         display: block;
         line-height: $line-height-small;
+    }
+}
+
+$affixed-shadow-color: rgba(0, 0, 0, 0.5);
+
+.affix .checklist-nav-wrapper {
+    box-shadow: 0 0 10px $affixed-shadow-color;
+}
+
+.affix .nav-checklist-sections {
+    margin: 0 ($gutter-half / 2);
+}
+
+.affix .nav-checklist-item {
+    border-bottom: 5px solid $body-bg;
+    padding: 0;
+    transition: border-color $transition-default;
+
+    .linear-progress,
+    .nav-checklist-item-description span {
+        position: absolute;
+        transform: scaleY(0);
+    }
+
+    img {
+        opacity: 1;
+        width: 40px;
+    }
+
+    .nav-checklist-item-description {
+        background-color: $body-bg;
+        border-color: $body-bg;
+        padding-bottom: 0;
+    }
+
+    &:hover,
+    &:focus {
+        border-bottom-color: $border-color-default;
+    }
+
+    &.active {
+        border-bottom-color: $status-active;
     }
 }

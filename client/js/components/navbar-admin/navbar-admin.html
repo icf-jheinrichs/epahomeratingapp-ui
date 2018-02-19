@@ -1,5 +1,9 @@
-<div id="admin-head">
-    <button class="sr-only sr-only-focusable">Skip to Main Content</button>
+<div
+    id="admin-head"
+    scroll-affix="scroll-affix"
+    affix-order="0">
+
+    <button class="sr-only sr-only-focusable site-skip-link">Skip to Main Content</button>
 
     <header class="page-container navbar flex-row">
         <a class="flex-row" data-ui-sref="jobs()" class="site-home-link">
@@ -16,7 +20,7 @@
     </header>
 </div>
 
-<nav class="nav-site-wrapper">
+<nav class="nav-site-wrapper" id="admin-nav" scroll-up-reveal="scroll-up-reveal" scroll-id="admin-nav" threshold="75">
     <nav class="nav nav-site nav-flex flex-justify-end page-container">
         <a ui-sref="jobs" ui-sref-active="active" class="nav-item" data-ng-if="navbarAdminCtrl.userRole.Admin || navbarAdminCtrl.userRole.Rater">Rater Jobs</a>
         <!-- <a ui-sref="progress" ui-sref-active="active" class="nav-item">Progress</a> -->

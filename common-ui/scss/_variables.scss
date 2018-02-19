@@ -69,6 +69,7 @@ $status-offline:    #d3d3d3;
 
 $gutter-half:       20px;
 $gutter-full:       ($gutter-half * 2);
+$gutter-quarter:    ($gutter-half / 2);
 
 $offset-default:    10px;
 $offset-small:      5px;
@@ -150,6 +151,7 @@ $shadow-toggle-sync-error: 0 0 0 3px $body-bg, 0 0 4px 4px $shadow-color-error;
 $transition-default:    300ms;
 $transition-slow:       500ms;
 $transition-fast:       150ms;
+$transition-immediate:   50ms;
 
 //
 //## Tables
@@ -281,6 +283,8 @@ $zindex-dialog-overlay:   1105;
 $zindex-modal:            1100;
 $zindex-overlay:          1050;
 $zindex-fixed-header:     1000;
+$zindex-fixed-nav:         950;
+$zindex-affixed-default:   925;
 $zindex-fixed-footer:      900;
 $zindex-absolute:            5;
 

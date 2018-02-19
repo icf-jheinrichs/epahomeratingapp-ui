@@ -36,7 +36,7 @@ export default function jobTitleFilter () {
             addressString += ` ${AddressInformation.ZipCode}`;
         }
 
-        titleString = addressString;
+        titleString = `<span class="ellipsis">${addressString}</span>`;
 
         if (AddressInformation.CommunityName) {
             community.push(AddressInformation.CommunityName);
@@ -56,9 +56,9 @@ export default function jobTitleFilter () {
         }
 
         if (titleString.length > 0 && communityManualIdString) {
-            titleString += `<br />${communityManualIdString}`;
+            titleString += `<span class="ellipsis">${communityManualIdString}</span>`;
         } else if (communityManualIdString) {
-            titleString = communityManualIdString;
+            titleString = `<span class="ellipsis">${communityManualIdString}</span>`;
         }
 
         return titleString;

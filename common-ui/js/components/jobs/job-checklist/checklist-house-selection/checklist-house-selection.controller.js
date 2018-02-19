@@ -55,6 +55,7 @@ class checklistHouseSelectionController {
 
     $onDestroy () {
         this.deregisterOnFinish();
+        this.$rootScope.$emit(this.MESSAGING.SET_BOTTOM_PAD, 0);
     }
 
     //TODO: use constant for default photo
