@@ -466,17 +466,10 @@ class JobChecklistState {
             .ChecklistItems[response.Category][response.CategoryProgress][response.ItemId]
             .ResponseHouseId = this.currentHouse.HouseId;
 
-        if (this.$stateParams.stageId === undefined || this.$stateParams.stageId === this.ANY.Any.Key) {
-            this
-                .jobDataResponse
-                .Progress[response.Category]
-                = this.JobChecklistProgressService.calculateStageProgress(this.jobDataResponse, this.itemStatusQuery, this.$stateParams.stageId);
-        } else if (this.$stateParams.stageId && this.$stateParams.stageId !== this.ANY.Any.Key) {
-            this
-                .jobDataResponse
-                .Progress
-                = this.JobChecklistProgressService.calculateCategoryProgress(this.jobDataResponse, this.itemStatusQuery);
-        }
+        this
+            .jobDataResponse
+            .Progress[response.Category][response.CategoryProgress]
+            = this.JobChecklistProgressService.calculateCategoryStageProgress(this.jobDataResponse, this.itemStatusQuery, response);
 
         this
             .job
@@ -512,8 +505,8 @@ class JobChecklistState {
 
         this
             .jobDataResponse
-            .Progress[update.Category]
-            = this.JobChecklistProgressService.calculateCategoryProgress(this.jobDataResponse, this.itemStatusQuery);
+            .Progress[update.Category][update.CategoryProgress]
+            = this.JobChecklistProgressService.calculateCategoryStageProgress(this.jobDataResponse, this.itemStatusQuery, update);
 
         this
             .job
