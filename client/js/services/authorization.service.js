@@ -14,6 +14,7 @@ class AuthorizationService {
         this.$rootScope         = $rootScope;
         this.UserCompanyService = UserCompanyService;
         this.MESSAGING          = UI_ENUMS.MESSAGING;
+        this.STATE_NAME         = UI_ENUMS.STATE_NAME;
 
         this.authorizeLocalUser();
     }
@@ -144,6 +145,79 @@ class AuthorizationService {
         this
             .$rootScope
             .$emit(this.MESSAGING.USER_AUTHORIZATION_UPDATE);
+    }
+
+    userIsAuthorizedForRoute (route) {
+        const orgTypes = this.getOrganizationTypes();
+        const userRole = this.getUserRole();
+
+        let transitionTo = route;
+
+        if (typeof route === 'object' && route.name) {
+            transitionTo = route.name;
+        }
+
+        switch (transitionTo) {
+        case this.STATE_NAME.DIAGNOSTICS :
+            return true;
+        case this.STATE_NAME.LOGIN :
+            return true;
+        case this.STATE_NAME.NOT_AUTHORIZED :
+            return true;
+        case this.STATE_NAME.REGISTER :
+            return true;
+        case this.STATE_NAME.PROGRESS :
+            return false;
+        case this.STATE_NAME.TEMPLATE_LIBRARY :
+            return orgTypes.RaterOrg;
+        case this.STATE_NAME.TEMPLATE_LIBRARY_NEW :
+            return orgTypes.RaterOrg;
+        case this.STATE_NAME.TEMPLATE_LIBRARY_EDIT :
+            return orgTypes.RaterOrg;
+        case this.STATE_NAME.TEMPLATE_LIBRARY_EDIT_BULK :
+            return orgTypes.RaterOrg;
+        case this.STATE_NAME.TEMPLATE_LIBRARY_SEARCH :
+            return orgTypes.RaterOrg;
+        case this.STATE_NAME.TEMPLATE_LIBRARY_SEARCH_NEW :
+            return orgTypes.RaterOrg;
+        case this.STATE_NAME.TEMPLATE_LIBRARY_SEARCH_EDIT :
+            return orgTypes.RaterOrg;
+        case this.STATE_NAME.TEMPLATE_LIBRARY_SEARCH_EDIT_BULK :
+            return orgTypes.RaterOrg;
+        case this.STATE_NAME.JOBS :
+            return orgTypes.RaterOrg;
+        case this.STATE_NAME.JOBS_SEARCH :
+            return orgTypes.RaterOrg;
+        case this.STATE_NAME.JOBS_PROVIDER :
+            return orgTypes.ProviderOrg;
+        case this.STATE_NAME.JOBS_PROVIDER_SEARCH :
+            return orgTypes.ProviderOrg;
+        case this.STATE_NAME.JOB_NEW :
+            return orgTypes.RaterOrg;
+        case this.STATE_NAME.JOB_EDIT :
+            return orgTypes.RaterOrg;
+        case this.STATE_NAME.JOB_CHECKLIST :
+            return true;
+        case this.STATE_NAME.JOB_CHECKLIST_CATEGORY :
+            return true;
+        case this.STATE_NAME.JOB_CHECKLIST_STATUS :
+            return true;
+        case this.STATE_NAME.JOB_CHECKLIST_REVIEW :
+            return true;
+        case this.STATE_NAME.JOB_CHECKLIST_REVIEW_CATEGORY :
+            return true;
+        case this.STATE_NAME.PROVIDERS :
+            return userRole.Rater || userRole.Provider;
+        case this.STATE_NAME.USERS :
+            return userRole.Rater || userRole.Provider;
+        case this.STATE_NAME.USER_EDIT :
+            return userRole.Rater || userRole.Provider;
+        case this.STATE_NAME.USER_SETTINGS :
+            return userRole.Rater || userRole.Provider;
+        default :
+            //TODO get a little more confidence around this so I can default to false
+            return true;
+        }
     }
 }
 

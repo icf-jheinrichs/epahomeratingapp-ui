@@ -21,15 +21,13 @@ import AWS from 'aws-sdk/global'; // eslint-disable-line no-unused-vars
 
 // Interceptor
 // @todo replace http-request service with this. import and use in module below appr.
-let interceptor = ($q, AuthenticationService) => {
+let interceptor = ($log, $rootScope, $q) => {
     'ngInject';
 
     return {
         request  : (config) => {
             // @todo refactor
             const authorize = (config.headers && config.headers.authorize !== false) || config.headers === undefined;
-
-            AuthenticationService.checkCognitoCredentials();
 
             if (authorize && angular.fromJson(window.sessionStorage.getItem('user')) !== null) {
                 let user            = angular.fromJson(window.sessionStorage.getItem('user'));
@@ -47,7 +45,6 @@ let interceptor = ($q, AuthenticationService) => {
 
                 config.headers['RatingCompanyID'] = ratingCompanyID;
             }
-
             return config;
         },
 
@@ -56,8 +53,14 @@ let interceptor = ($q, AuthenticationService) => {
         },
 
         responseError : (rejection) => {
-            return $q.reject(rejection);
+            $log.log(rejection);
+            const jwtError = '"Unauthorized signature for this JWT Token"';
 
+            if (rejection && rejection.message && rejection.message.indexOf(jwtError)) {
+                $rootScope.$emit('invalidjwt');
+            }
+
+            return $q.reject(rejection);
         }
     };
 };

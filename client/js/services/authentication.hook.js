@@ -1,4 +1,4 @@
-export function authenticationHook ($transitions, AuthenticationService) {
+export function authenticationHook ($transitions, AuthenticationService, AuthorizationService) {
     'ngInject';
 
     // Matches if the destination state's data property has a truthy 'requiresAuth' property
@@ -16,6 +16,10 @@ export function authenticationHook ($transitions, AuthenticationService) {
 
         if (!AuthenticationService.userIsAuthenticated) {
             return $state.target('login', undefined, {location : false});
+        }
+
+        if (!AuthorizationService.userIsAuthorizedForRoute(transition._targetState._identifier)) {
+            return $state.target('not-authorized', undefined, {location : false});
         }
     };
 

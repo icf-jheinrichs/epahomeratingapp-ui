@@ -161,7 +161,8 @@ const MESSAGING = {
     DEVICE_ONLINE                    : 'DEVICE_ONLINE',
     REFRESH_JOBS_LIST                : 'REFRESH_JOBS_LIST',
     REFRESH_JOBS_LIST_FINISH         : 'REFRESH_JOBS_LIST_FINISH',
-    USER_AUTHORIZATION_UPDATE        : 'USER_AUTHORIZATION_UPDATE'
+    USER_AUTHORIZATION_UPDATE        : 'USER_AUTHORIZATION_UPDATE',
+    INVALID_JWT                      : 'INVALID_JWT'
 };
 
 const MODAL = {
@@ -267,6 +268,7 @@ const STATUS_CLASSNAME = {
 const STATE_NAME = {
     DIAGNOSTICS                       : 'diagnostics',
     LOGIN                             : 'login',
+    NOT_AUTHORIZED                    : 'not-authorized',
     REGISTER                          : 'register',
     PROGRESS                          : 'progress',
     TEMPLATE_LIBRARY                  : 'template-library',

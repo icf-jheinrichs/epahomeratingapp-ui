@@ -55,6 +55,14 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
+        .state(STATE_NAME.NOT_AUTHORIZED, {
+            url        : '/not-authorized',
+            component  : 'notAuthorizedPage',
+            data       : {
+                requiresAuth : false
+            }
+        })
+
         .state(STATE_NAME.REGISTER, {
             url        : '/register',
             component  : 'registerPage',

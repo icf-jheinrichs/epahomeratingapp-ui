@@ -88,7 +88,7 @@ class JobDetailLocationController {
                     self.location.AddressInformation.Address1         = _isEmpty(remJSON.buildingfile.building.projectinfo.propertyaddress._text) ? '' : remJSON.buildingfile.building.projectinfo.propertyaddress._text;
                     self.location.AddressInformation.CityMunicipality = _isEmpty(remJSON.buildingfile.building.projectinfo.propertycity._text) ? '' : remJSON.buildingfile.building.projectinfo.propertycity._text;
                     self.location.AddressInformation.StateCode        = _isEmpty(remJSON.buildingfile.building.projectinfo.propertystate._text) ? '' : remJSON.buildingfile.building.projectinfo.propertystate._text;
-                    self.location.AddressInformation.ZipCode          = _isEmpty(remJSON.buildingfile.building.projectinfo.propertyzip._text.toString()) ? '' : remJSON.buildingfile.building.projectinfo.propertyzip._text;
+                    self.location.AddressInformation.ZipCode          = remJSON.buildingfile.building.projectinfo.propertyzip._text === null ? '' : remJSON.buildingfile.building.projectinfo.propertyzip._text;
                     self.location.HvacDesignReport                    = [];
                     self.location.RaterDesignReviewChecklist          = [];
 

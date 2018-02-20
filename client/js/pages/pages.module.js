@@ -7,6 +7,7 @@ import jobEditPageComponent from './job-edit-page/job-edit-page.component';
 import jobNewPageComponent from './job-new-page/job-new-page.component';
 import jobsProviderPageComponent from './jobs-provider-page/jobs-provider-page.component';
 import loginPageComponent from './login-page/login-page.component';
+import notAuthorizedPageComponent from './not-authorized-page/not-authorized-page.component';
 import providersPageComponent from './providers-page/providers-page.component';
 import userSettingsPageComponent from './user-settings-page/user-settings-page.component';
 import usersPageComponent from './users-page/users-page.component';
@@ -24,6 +25,7 @@ let servicesModule
         .component('jobNewPage', jobNewPageComponent)
         .component('jobsProviderPage', jobsProviderPageComponent)
         .component('loginPage', loginPageComponent)
+        .component('notAuthorizedPage', notAuthorizedPageComponent)
         .component('providersPage', providersPageComponent)
         .component('userSettingsPage', userSettingsPageComponent)
         .component('usersPage', usersPageComponent)
