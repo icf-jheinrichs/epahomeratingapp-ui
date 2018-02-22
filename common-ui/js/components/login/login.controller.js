@@ -50,10 +50,11 @@ class LoginController {
 
     //TODO: get this to work again.
     returnToOriginalState () {
+        const authorizedRedirect = this.AuthorizationService.getAuthorizedRedirect();
         // let state   = this.returnTo.state();
         // let params  = this.returnTo.params();
         // let options = Object.assign({}, this.returnTo.options(), {reload : true});
-        this.$state.go(this.STATE_NAME.JOBS);
+        this.$state.go(authorizedRedirect);
     }
 
     userIsAuthorized (userCompanies) {

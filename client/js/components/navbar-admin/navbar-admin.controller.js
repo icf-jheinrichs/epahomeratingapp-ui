@@ -1,10 +1,9 @@
 class NavbarAdminController {
-    constructor ($rootScope, $state, AuthenticationService, AuthorizationService, ScrollService, UI_ENUMS) {
+    constructor ($rootScope, $state, AuthorizationService, ScrollService, UI_ENUMS) {
         'ngInject';
 
         this.$rootScope            = $rootScope;
         this.$state                = $state;
-        this.AuthenticationService = AuthenticationService;
         this.AuthorizationService  = AuthorizationService;
 
         this.MESSAGING             = UI_ENUMS.MESSAGING;
@@ -40,36 +39,10 @@ class NavbarAdminController {
         return isAuthorized;
     }
 
-    getAuthorizedRedirect () {
-        let currentState;
-
-        if (this.stateIsAuthorized(this.STATE_NAME.JOBS)) {
-            this.$state.go(this.STATE_NAME.JOBS);
-        } else if (this.stateIsAuthorized(this.STATE_NAME.TEMPLATE_LIBRARY)) {
-            this.$state.go(this.STATE_NAME.TEMPLATE_LIBRARY);
-        } else if (this.stateIsAuthorized(this.STATE_NAME.JOBS_PROVIDER)) {
-            this.$state.go(this.STATE_NAME.JOBS_PROVIDER);
-        } else if (this.stateIsAuthorized(this.STATE_NAME.USERS)) {
-            this.$state.go(this.STATE_NAME.USERS);
-        } else {
-            this
-                .AuthorizationService
-                .clearState();
-
-            this
-                .AuthenticationService
-                .logout()
-                .then(() => {
-                    this
-                        .$state
-                        .go(this.STATE_NAME.LOGIN);
-                });
-        }
-
-        return currentState;
-    }
-
     setNavVisibility () {
+        this.userRole          = this.AuthorizationService.getUserRole();
+        this.organizationTypes = this.AuthorizationService.getOrganizationTypes();
+
         this.navVisibility = {
             jobs            : this.organizationTypes.RaterOrg,
             templateLibrary : this.organizationTypes.RaterOrg,
@@ -78,36 +51,19 @@ class NavbarAdminController {
         };
     }
 
-    setUserRole () {
-        const currentState     = this.$state.current.name;
-        this.userRole          = this.AuthorizationService.getUserRole();
-        this.organizationTypes = this.AuthorizationService.getOrganizationTypes();
-
+    $onInit () {
         this.setNavVisibility();
 
-        if (!this.stateIsAuthorized(currentState)) {
-            this
-                .$state
-                .go(this.getAuthorizedRedirect());
-        } else {
-            this
-                .$state
-                .transitionTo(
-                    this.$state.current,
-                    this.$stateParams,
-                    {reload : true, inherit : false, notify : true}
-                );
-        }
+        this.userAuthorizationUpdateListener
+             = this
+                .$rootScope
+                .$on(this.MESSAGING.USER_AUTHORIZATION_UPDATE, () => {
+                    this.setNavVisibility();
+                });
     }
 
-    $onInit () {
-        this.setUserRole();
-
-        this
-            .$rootScope
-            .$on(this.MESSAGING.USER_AUTHORIZATION_UPDATE, () => {
-                this.setUserRole();
-            });
+    $onDestroy () {
+        this.userAuthorizationUpdateListener();
     }
 }
 

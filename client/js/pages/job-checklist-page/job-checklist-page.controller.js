@@ -86,7 +86,7 @@ class JobsChecklistPageController {
 
         this
             .JobChecklistStateService
-            .setJobDisplayListState()
+            .setJobDisplayListState(this.$stateParams.ratingCompanyID)
             .then(()=> {
                 this.jobCompleteStatus = this.JobChecklistStateService.getJobCompleteStatus();
             });
@@ -139,6 +139,7 @@ class JobsChecklistPageController {
                 this.job.Progress = progress;
             });
 
+        this.jobCompleteStatus = this.JobChecklistStateService.getJobCompleteStatus();
         this.$rootScope.$emit(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE_TOTALS);
     }
 
@@ -154,6 +155,7 @@ class JobsChecklistPageController {
                 this.job.Progress = progress;
             });
 
+        this.jobCompleteStatus = this.JobChecklistStateService.getJobCompleteStatus();
         this.$rootScope.$emit(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE_TOTALS);
     }
 
@@ -165,7 +167,6 @@ class JobsChecklistPageController {
 
     //TODO: all dropdown stuff belongs in a directive
     toggleDropDown () {
-        this.jobCompleteStatus = this.JobChecklistStateService.getJobCompleteStatus();
         this.showActionsDropDown = !this.showActionsDropDown;
     }
 

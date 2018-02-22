@@ -56,14 +56,14 @@ class JobChecklistState {
      *
      * @param {string} jobId ID of job to refresh checklist state with
      */
-    setJobState (jobId) {
+    setJobState (jobId, HouseId, ratingCompanyID) {
         this.clearState();
 
         this.jobStatePromise
             = this.$q((resolve, reject) => {
                 this
                     .JobsService
-                    .getById(jobId)
+                    .getById(jobId, ratingCompanyID)
                     .then((job) => {
                         this.$log.log('JobService Success');
 
@@ -87,7 +87,7 @@ class JobChecklistState {
      *
      * Sets a instance property, jobChecklistStatePromise, to a promise if state has resolved
      */
-    setJobDisplayListState () {
+    setJobDisplayListState (ratingCompanyID) {
         let job          = this.job;
         const jobId      = job._id;
         let housePlanIds = [job.Primary.HousePlan[0]._id];
@@ -101,14 +101,14 @@ class JobChecklistState {
         this.jobChecklistStatePromise
             = this
                 .JobDisplayListService
-                .getById(housePlanIds)
+                .getById(housePlanIds, ratingCompanyID)
                 .then((jobDisplayList) => {
                     this.jobDisplayList = jobDisplayList;
 
                     let JobDataResponsePromise
                         = this
                             .JobDataResponseService
-                            .getById(jobId);
+                            .getById(jobId, ratingCompanyID);
 
                     return JobDataResponsePromise;
                 })
@@ -139,7 +139,7 @@ class JobChecklistState {
      * @param {string} jobId   ID of current job
      * @param {string} HouseId ID of house to retrieve home performance (MRF) data for
      */
-    setJobHouseState (jobId, HouseId) {
+    setJobHouseState (jobId, HouseId, ratingCompanyID) {
         this.currentHouse    = this.getHouse(parseInt(HouseId, 10));
 
 
@@ -149,7 +149,7 @@ class JobChecklistState {
                 this.itemStatusQuery = {};
             } else {
                 this.JobDataHomePerformanceService
-                    .getById(jobId, HouseId)
+                    .getById(jobId, HouseId, ratingCompanyID)
                     .then((jobDataHomePerformance) => {
                         this.itemStatusQuery = {};
                         this.jobDataHomePerformance[HouseId] = jobDataHomePerformance;
@@ -395,7 +395,7 @@ class JobChecklistState {
     putJobData () {
         this
             .JobsService
-            .put(this.job);
+            .put(this.job, this.$stateParams.ratingCompanyID);
     }
 
     /**

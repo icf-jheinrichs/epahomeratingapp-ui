@@ -6,6 +6,7 @@ let jobProviderComponent = {
     bindings : {
         enabled                  : '<',
         job                      : '<',
+        ratingCompanyId          : '@',
         marked                   : '=',
         onSetBulkOperationStatus : '&',
         onMarkJobRegistered      : '&',

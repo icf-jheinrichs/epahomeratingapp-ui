@@ -79,15 +79,13 @@ class JobsService {
      *
      * @return {promise}    resolves to array of jobs
      */
-    getProviderJobs (companyId) {
+    getProviderJobs (ratingCompanyID) {
         let promise = this.$q((resolve, reject) => {
             this
                 .$http({
-                    method  : 'GET',
-                    url     : this.API_URL.JOB,
-                    data    : {
-                        'RatingCompanyID' : companyId
-                    }
+                    method          : 'GET',
+                    url             : this.API_URL.JOB,
+                    ratingCompanyID
                 })
                 .then((response) => {
                     if (response.status === 200) {
@@ -242,11 +240,9 @@ class JobsService {
         let promise = this.$q((resolve, reject) => {
             this
                 .$http({
-                    method  : 'GET',
-                    url     : this.API_URL.JOB,
-                    data    : {
-                        'RatingCompanyID' : stateParams.rater
-                    }
+                    method          : 'GET',
+                    url             : this.API_URL.JOB,
+                    ratingCompanyID : stateParams.rater
                 })
                 .then((response) => {
                     if (response.status === 200) {
@@ -367,12 +363,13 @@ class JobsService {
      * @param  {string} _id     UID of job
      * @return {promise}        resolves to
      */
-    getById (_id) {
+    getById (_id, ratingCompanyID) {
         let promise = this.$q((resolve, reject) => {
             this
                 .$http({
                     method  : 'GET',
-                    url     : `${this.API_URL.JOB}/${_id}`
+                    url     : `${this.API_URL.JOB}/${_id}`,
+                    ratingCompanyID
                 })
                 .then((response) => {
                     if (response.status === 200) {
@@ -477,13 +474,14 @@ class JobsService {
      * @param  {object} job job data
      * @return {promis}     resolves to successful save.
      */
-    put (job) {
+    put (job, ratingCompanyID) {
         let promise = this.$q((resolve, reject) => {
             this
                 .$http({
                     method  : 'PUT',
                     url     : `${this.API_URL.JOB}/${job._id}`,
-                    data    : job
+                    data    : job,
+                    ratingCompanyID
                 })
                 .then((result) => {
                     resolve(result);

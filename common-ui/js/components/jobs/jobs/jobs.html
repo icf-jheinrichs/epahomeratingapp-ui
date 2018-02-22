@@ -15,6 +15,7 @@
         class="item-list-item item-list-item-job flex-row"
         data-ng-repeat="job in jobsCtrl.jobs track by $index"
         job="job"
+        rating-company-id="{{::jobsCtrl.ratingCompanyId}}"
         marked="jobsCtrl.markedJobs[$index]"
         on-set-bulk-operation-status="jobsCtrl.setBulkOperationStatus()">
     </job-provider>

@@ -43,6 +43,10 @@ class AuthorizationService {
         this.companies           = [];
         this.currentOrganization = undefined;
         window.sessionStorage.setItem(USER_SESSION_ITEM, undefined);
+
+        this
+            .$rootScope
+            .$emit(this.MESSAGING.USER_AUTHORIZATION_UPDATE, false);
     }
 
     getUserRole () {
@@ -133,7 +137,7 @@ class AuthorizationService {
                 .finally(() => {
                     this
                         .$rootScope
-                        .$emit(this.MESSAGING.USER_AUTHORIZATION_UPDATE);
+                        .$emit(this.MESSAGING.USER_AUTHORIZATION_UPDATE, false);
                 });
         });
     }
@@ -144,7 +148,7 @@ class AuthorizationService {
 
         this
             .$rootScope
-            .$emit(this.MESSAGING.USER_AUTHORIZATION_UPDATE);
+            .$emit(this.MESSAGING.USER_AUTHORIZATION_UPDATE, true);
     }
 
     userIsAuthorizedForRoute (route) {
@@ -218,6 +222,22 @@ class AuthorizationService {
             //TODO get a little more confidence around this so I can default to false
             return true;
         }
+    }
+
+    getAuthorizedRedirect () {
+        let authorizedRedirect = this.STATE_NAME.LOGIN;
+
+        if (this.userIsAuthorizedForRoute(this.STATE_NAME.JOBS)) {
+            authorizedRedirect = this.STATE_NAME.JOBS;
+        } else if (this.userIsAuthorizedForRoute(this.STATE_NAME.TEMPLATE_LIBRARY)) {
+            authorizedRedirect = this.STATE_NAME.TEMPLATE_LIBRARY;
+        } else if (this.userIsAuthorizedForRoute(this.STATE_NAME.JOBS_PROVIDER)) {
+            authorizedRedirect = this.STATE_NAME.JOBS_PROVIDER;
+        } else if (this.userIsAuthorizedForRoute(this.STATE_NAME.USERS)) {
+            authorizedRedirect = this.STATE_NAME.USERS;
+        }
+
+        return authorizedRedirect;
     }
 }
 

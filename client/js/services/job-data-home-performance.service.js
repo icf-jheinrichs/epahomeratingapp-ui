@@ -8,12 +8,13 @@ class JobDataHomePerformanceService {
         this.API_URL   = API_URL;
     }
 
-    getById (jobId, houseId) {
+    getById (jobId, houseId, ratingCompanyID) {
         let promise = this.$q((resolve, reject) => {
             this
                 .$http({
                     method  : 'GET',
-                    url     : `${this.API_URL.JOB_DATA_HOME_PERFORMANCE}/${jobId}/${houseId}`
+                    url     : `${this.API_URL.JOB_DATA_HOME_PERFORMANCE}/${jobId}/${houseId}`,
+                    ratingCompanyID
                 })
                 .then((response) => {
                     if (response.status === 200) {

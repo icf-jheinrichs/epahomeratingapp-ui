@@ -6,6 +6,7 @@ let jobsComponent = {
     bindings : {
         enabled                  : '<',
         jobs                     : '<',
+        ratingCompanyId          : '@',
         registerHandlers         : '&',
         onSetBulkOperationStatus : '&',
         onDownloadXml            : '&',

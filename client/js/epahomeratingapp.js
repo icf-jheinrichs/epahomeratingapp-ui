@@ -39,8 +39,8 @@ let interceptor = ($log, $rootScope, $q) => {
                     config.headers.Authorization = undefined;
                 }
 
-                if (config.data && config.data.RatingCompanyID) {
-                    ratingCompanyID = config.data.RatingCompanyID;
+                if (config.ratingCompanyID) {
+                    ratingCompanyID = config.ratingCompanyID;
                 }
 
                 config.headers['RatingCompanyID'] = ratingCompanyID;
@@ -57,7 +57,7 @@ let interceptor = ($log, $rootScope, $q) => {
             const jwtError = '"Unauthorized signature for this JWT Token"';
 
             if (rejection && rejection.message && rejection.message.indexOf(jwtError)) {
-                $rootScope.$emit('invalidjwt');
+                $rootScope.$emit(UI_ENUMS.MESSAGING.INVALID_JWT);
             }
 
             return $q.reject(rejection);

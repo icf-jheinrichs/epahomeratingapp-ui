@@ -27,7 +27,7 @@ class JobsProviderPageController extends JobsPage {
 
         this
             .JobsService
-            .put(job);
+            .put(job, this.selectedRater.O_ID);
     }
 
     markAsRegistered () {
@@ -40,7 +40,7 @@ class JobsProviderPageController extends JobsPage {
                 // TODO - Pop error message to user
                 job.Status = this.JOB_STATUS.REGISTERED;
 
-                submitJobs.push(this.JobsService.put(job));
+                submitJobs.push(this.JobsService.put(job, this.selectedRater.O_ID));
             }
         });
 
@@ -53,7 +53,9 @@ class JobsProviderPageController extends JobsPage {
     }
 
     handleRatingCompanyChange () {
-        this.$state.go(this.STATE_NAME.JOBS_PROVIDER_SEARCH, {rater : this.selectedRater._id});
+        this
+            .$state
+            .go(this.STATE_NAME.JOBS_PROVIDER_SEARCH, {rater : this.selectedRater._id});
     }
 }
 
