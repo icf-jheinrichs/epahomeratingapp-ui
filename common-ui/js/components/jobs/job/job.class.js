@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 class Job {
-    constructor ($log, $rootScope, $scope, jobTitleFilter, CONTEXT, UI_ENUMS, BASE_IMAGE_URL) {
+    constructor ($log, $rootScope, $scope, jobTitleFilter, SyncService, CONTEXT, UI_ENUMS, BASE_IMAGE_URL) {
         'ngInject';
 
         this.$log              = $log;
@@ -9,6 +9,7 @@ class Job {
         this.$scope            = $scope;
 
         this.jobTitleFilter    = jobTitleFilter;
+        this.syncService       = SyncService;
         this.DEFAULT_PHOTO     = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
         this.BASE_IMAGE_URL    = BASE_IMAGE_URL;
 
