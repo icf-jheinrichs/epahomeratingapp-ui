@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-xs-3">
             <nav class="nav nav-stacked ">
-                <a data-ui-sref="jobs-provider()" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav">All</a>
+                <a data-ui-sref="jobs-provider()" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav" data-ng-class="{'active' : !jobsProviderPageCtrl.currentState}">All</a>
                 <a data-ui-sref="jobs-provider-search({status : 'Submitted to Provider', rater : jobsProviderPageCtrl.selectedRater.O_ID})" ui-sref-opts="{inherit: false}" class="nav-item">Submitted to Provider</a>
                 <a data-ui-sref="jobs-provider-search({status : 'Registered', rater : jobsProviderPageCtrl.selectedRater.O_ID})" ui-sref-opts="{inherit: false}" class="nav-item">Registered</a>
             </nav>
@@ -40,17 +40,24 @@
             <div class="bulk-operation-bar">
                 <label><input type="checkbox" ng-model="jobsProviderPageCtrl.checkAll" data-ng-change="jobsProviderPageCtrl.toggleAllJobs()"> Select All</label>
 
-                <button class="btn" type="button" data-ng-click="jobsProviderPageCtrl.markAsRegistered()" data-ng-disabled="!jobsProviderPageCtrl.bulkOperationsAreEnabled">Mark as Registered</button>
+                <button
+                    class="btn"
+                    type="button"
+                    data-ng-click="jobsProviderPageCtrl.markAsRegistered()"
+                    data-ng-if="::jobsProviderPageCtrl.showMarkAsRegistered()"
+                    data-ng-disabled="!jobsProviderPageCtrl.bulkOperationsAreEnabled">
 
-                <button class="btn" type="button" data-ng-click="jobsProviderPageCtrl.bulkDownload()" data-ng-disabled="!jobsProviderPageCtrl.bulkOperationsAreEnabled">
+                    Mark as Registered
+                </button>
+
+                <button
+                    class="btn"
+                    type="button"
+                    data-ng-click="jobsProviderPageCtrl.bulkDownload()"
+                    data-ng-disabled="!jobsProviderPageCtrl.bulkOperationsAreEnabled">
+
                     <i ng-show="jobsProviderPageCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i>Download XML
                 </button>
-
-                <!--
-                <button class="btn" type="button" data-ng-click="jobsProviderPageCtrl.flagForReview()" data-ng-disabled="!jobsProviderPageCtrl.bulkOperationsAreEnabled">
-                    Archive
-                </button>
-                -->
             </div>
 
             <jobs

@@ -17,28 +17,6 @@ class NavbarAdminController {
         };
     }
 
-    //TODO - move to authorization service
-    stateIsAuthorized (stateName) {
-        let isAuthorized = false;
-
-        switch (stateName) {
-        case this.STATE_NAME.JOBS :
-            isAuthorized = this.organizationTypes.RaterOrg;
-            break;
-        case this.STATE_NAME.TEMPLATE_LIBRARY :
-            isAuthorized = this.organizationTypes.RaterOrg;
-            break;
-        case this.STATE_NAME.JOBS_PROVIDER :
-            isAuthorized = this.organizationTypes.ProviderOrg;
-            break;
-        case this.STATE_NAME.USERS :
-            isAuthorized = this.userRole.Admin || this.userRole.Provider;
-            break;
-        }
-
-        return isAuthorized;
-    }
-
     setNavVisibility () {
         this.userRole          = this.AuthorizationService.getUserRole();
         this.organizationTypes = this.AuthorizationService.getOrganizationTypes();

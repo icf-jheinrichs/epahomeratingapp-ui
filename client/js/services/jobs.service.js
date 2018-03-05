@@ -93,9 +93,13 @@ class JobsService {
                             ProviderCompany : this.AuthorizationService.getCurrentOrganizationId()
                         });
 
-                        jobs = _orderBy(jobs, [function sortByCreateDate (o) {
-                            return new Date(o.History[0].DateTime);
-                        }], ['desc']);
+                        jobs = _orderBy(
+                            jobs,
+                            [(job) => {
+                                return new Date(job.History[job.History.length - 1].DateTime);
+                            }],
+                            ['desc']
+                        );
 
                         resolve(jobs);
                     } else {

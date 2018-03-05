@@ -30,6 +30,10 @@ class JobsProviderPageController extends JobsPage {
             .put(job, this.selectedRater.O_ID);
     }
 
+    showMarkAsRegistered () {
+        return (this.$stateParams.status !== 'Registered');
+    }
+
     markAsRegistered () {
         const markedJobs = this.jobsHandlers.getSelectedJobs();
         let submitJobs   = [];
@@ -48,7 +52,13 @@ class JobsProviderPageController extends JobsPage {
             .$q
             .all(submitJobs)
             .then(() => {
-                this.$state.transitionTo(this.$state.current, this.$stateParams, {reload : true, inherit : true, notify : true});
+                this
+                    .$state
+                    .transitionTo(
+                        this.$state.current,
+                        this.$stateParams,
+                        {reload : true, inherit : true, notify : true}
+                    );
             });
     }
 

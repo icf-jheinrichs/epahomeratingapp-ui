@@ -132,13 +132,6 @@ class JobsChecklistPageController {
             .JobChecklistStateService
             .updateChecklistResponse(response);
 
-        this
-            .JobChecklistStateService
-            .getJobProgress()
-            .then((progress) => {
-                this.job.Progress = progress;
-            });
-
         this.jobCompleteStatus = this.JobChecklistStateService.getJobCompleteStatus();
         this.$rootScope.$emit(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE_TOTALS);
     }
@@ -147,13 +140,6 @@ class JobsChecklistPageController {
         this
             .JobChecklistStateService
             .updateChecklistItemData(update);
-
-        this
-            .JobChecklistStateService
-            .getJobProgress()
-            .then((progress) => {
-                this.job.Progress = progress;
-            });
 
         this.jobCompleteStatus = this.JobChecklistStateService.getJobCompleteStatus();
         this.$rootScope.$emit(this.MESSAGING.UPDATE_CHECKLIST_RESPONSE_TOTALS);

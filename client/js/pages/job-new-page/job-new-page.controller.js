@@ -252,7 +252,7 @@ class JobsNewPageController {
                 this.$state.go('jobs');
             })
             .catch(error => {
-                this.$log.log('Create job with local house plan error');
+                this.$log.log('Create job with local rating file error');
                 this.$log.log(error);
                 this.message = Object.assign({}, ERROR_SERVER);
 
