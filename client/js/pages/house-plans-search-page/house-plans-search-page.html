@@ -1,0 +1,17 @@
+<section class="page-container">
+
+    <header class="page-header item-list-header clearfix">
+        <h2 class="pull-left">Template Library</h2>
+        <a data-ui-sref="template-library-search.new()" class="btn pull-right">
+            <i class="fa fa-plus" aria-hidden="true"></i> Add a Template
+        </a>
+    </header>
+
+    <house-plans-search
+        quantity="housePlansSearchPageCtrl.housePlans.housePlan.length">
+    </house-plans-search>
+
+    <div ui-view></div>
+
+    <house-plans house-plans="housePlansSearchPageCtrl.housePlans"></house-plans>
+</section>

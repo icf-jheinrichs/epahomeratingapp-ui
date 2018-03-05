@@ -28,7 +28,6 @@ Thumbs.db
 bower_components
 client/lib
 node_modules
-client/*
 client-*
 
 # Logs
