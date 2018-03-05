@@ -41,6 +41,11 @@ $job-photo-height-small:  85px;
         flex-grow: 1;
         text-align: right;
     }
+
+    .label-job-status {
+        flex-grow: 1;
+        text-align: right;
+    }
 }
 
 .form-control-job-offline:checked + .job-offline-status .checked {
@@ -156,4 +161,3 @@ $job-photo-height-small:  85px;
         float: left;
     }
 }
-
