@@ -57,7 +57,7 @@ class epahomeratingappController {
                 .then(() => {
                     this
                         .$state
-                        .go('login');
+                        .go(this.STATE_NAME.LOGIN);
                 });
         });
 

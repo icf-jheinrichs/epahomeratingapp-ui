@@ -211,13 +211,13 @@ class AuthorizationService {
         case this.STATE_NAME.JOB_CHECKLIST_REVIEW_CATEGORY :
             return true;
         case this.STATE_NAME.PROVIDERS :
-            return userRole.Rater || userRole.Provider;
+            return userRole.Admin || userRole.Provider;
         case this.STATE_NAME.USERS :
-            return userRole.Rater || userRole.Provider;
+            return userRole.Admin || userRole.Provider;
         case this.STATE_NAME.USER_EDIT :
-            return userRole.Rater || userRole.Provider;
+            return userRole.Admin || userRole.Provider;
         case this.STATE_NAME.USER_SETTINGS :
-            return userRole.Rater || userRole.Provider;
+            return userRole.Admin || userRole.Provider;
         default :
             //TODO get a little more confidence around this so I can default to false
             return true;

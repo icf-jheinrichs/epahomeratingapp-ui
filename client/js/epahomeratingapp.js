@@ -21,7 +21,7 @@ import AWS from 'aws-sdk/global'; // eslint-disable-line no-unused-vars
 
 // Interceptor
 // @todo replace http-request service with this. import and use in module below appr.
-let interceptor = ($log, $rootScope, $q) => {
+let interceptor = ($log, $rootScope, $q, UI_ENUMS) => {
     'ngInject';
 
     return {
@@ -110,7 +110,7 @@ angular
         'ngInject';
 
         $transitions.onSuccess(
-            {to : '*'}, () => {
+            {to : '**'}, () => {
                 document.body.scrollTop = document.documentElement.scrollTop = 0;
             }
         );

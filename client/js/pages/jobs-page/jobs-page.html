@@ -7,26 +7,24 @@
     <div class="row">
         <div class="col-xs-3">
             <nav class="nav nav-stacked ">
-                <a data-ui-sref="jobs()" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav">All</a>
-                <a data-ui-sref="jobs-search({status : 'Active'})" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav">Active</a>
+                <a data-ui-sref="jobs-search()" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav" data-ng-class="{'active' : !jobsPageCtrl.currentState}">All</a>
+                <a data-ui-sref="jobs-search({status : 'Active'})" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Active'}">Active</a>
                 <nav class="nav sub-nav">
-                    <a data-ui-sref="jobs-search({status : 'Active', progressLevel : 'PreDrywall'})" ui-sref-opts="{inherit: false}" class="nav-item">Pre-drywall</a>
-                    <a data-ui-sref="jobs-search({status : 'Active', progressLevel : 'Final'})" ui-sref-opts="{inherit: false}" class="nav-item">Final</a>
+                    <a data-ui-sref="jobs-search({status : 'Active', progressLevel : 'PreDrywall'})" ui-sref-opts="{inherit: false}" class="nav-item" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Active.PreDrywall'}">Pre-drywall</a>
+                    <a data-ui-sref="jobs-search({status : 'Active', progressLevel : 'Final'})" ui-sref-opts="{inherit: false}" class="nav-item" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Active.Final'}">Final</a>
                 </nav>
-                <a data-ui-sref="jobs-search({status : 'Completed'})" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav">Completed</a>
+                <a data-ui-sref="jobs-search({status : 'Completed'})" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Completed'}">Completed</a>
                 <nav class="nav sub-nav">
-                    <a data-ui-sref="jobs-search({status : 'Completed', internalReview : 'true'})" ui-sref-opts="{inherit: false}" class="nav-item">Internal Review</a>
+                    <a data-ui-sref="jobs-search({status : 'Completed', internalReview : 'true'})" ui-sref-opts="{inherit: false}" class="nav-item" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Completed.internalReview'}">Internal Review</a>
                 </nav>
-                <a data-ui-sref="jobs-search({status : 'Submitted to Provider'})" ui-sref-opts="{inherit: false}" class="nav-item">Submitted to Provider</a>
-                <a data-ui-sref="jobs-search({status : 'Registered'})" ui-sref-opts="{inherit: false}" class="nav-item">Registered</a>
+                <a data-ui-sref="jobs-search({status : 'Submitted to Provider'})" ui-sref-opts="{inherit: false}" class="nav-item" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Submitted to Provider'}">Submitted to Provider</a>
+                <a data-ui-sref="jobs-search({status : 'Registered'})" ui-sref-opts="{inherit: false}" class="nav-item" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Registered'}">Registered</a>
             </nav>
 
-            <!--
             <nav class="nav nav-stacked">
-                <a href="#" class="nav-item nav-item-link">Archived</a>
-                <a href="#" class="nav-item nav-item-link">Deleted</a>
+                <a data-ui-sref="jobs-search({status : 'Archived'})" ui-sref-opts="{inherit: false}" class="nav-item nav-item-link" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Archived'}">Archived</a>
+                <a data-ui-sref="jobs-search({status : 'Deleted'})" ui-sref-opts="{inherit: false}" class="nav-item nav-item-link" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Deleted'}">Recently Deleted</a>
             </nav>
-            -->
         </div>
 
         <div class="col-xs-9 jobs">
@@ -37,32 +35,74 @@
             <div class="bulk-operation-bar">
                 <label class="bulk-toggle-all"><input class="bulk-toggle-all-control" type="checkbox" ng-model="jobsPageCtrl.checkAll" data-ng-change="jobsPageCtrl.toggleAllJobs()"> Select All</label>
 
-                <button class="btn" type="button" data-ng-click="jobsPageCtrl.flagForReview()" data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">Flag for Review</button>
+                <span data-ng-if="::jobsPageCtrl.enableEdit() && jobsPageCtrl.enableWorkflow()">
+                    <button
+                        class="btn"
+                        type="button"
+                        data-ng-click="jobsPageCtrl.flagForReview()"
+                        data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
 
-                <button class="btn" type="button" data-ng-click="jobsPageCtrl.submitToProvider()" data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">Submit to Provider</button>
+                        Flag for Review
+                    </button>
 
-                <button class="btn" type="button" data-ng-click="jobsPageCtrl.bulkDownload()" data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
-                    <i ng-show="jobsPageCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i>Download XML
+                    <button
+                        class="btn"
+                        type="button"
+                        data-ng-click="jobsPageCtrl.submitToProvider()"
+                        data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
+
+                        Submit to Provider
+                    </button>
+                </span>
+
+                <button
+                    class="btn"
+                    type="button"
+                    data-ng-click="jobsPageCtrl.bulkDownload()"
+                    data-ng-if="::jobsPageCtrl.enableEdit()"
+                    data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
+
+                    <i data-ng-show="jobsPageCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Download XML
                 </button>
 
-                <!--
-                <button class="btn btn-warn" type="button" data-ng-click="jobsPageCtrl.bulkDownload()" disabled="disabled">
-                    Archive
+                <button
+                    class="btn"
+                    type="button"
+                    data-ng-click="jobsPageCtrl.archive()"
+                    data-ng-if="::jobsPageCtrl.showArchive()"
+                    data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
+
+                    Archive Job
                 </button>
 
-                <button class="btn btn-error" type="button" data-ng-click="jobsPageCtrl.bulkDownload()" disabled="disabled">
-                    Delete
+                <button
+                    class="btn"
+                    type="button"
+                    data-ng-click="jobsPageCtrl.delete()"
+                    data-ng-if="::jobsPageCtrl.showDelete()"
+                    data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
+
+                    Delete Job
                 </button>
-                -->
+
+                <button
+                    class="btn"
+                    type="button"
+                    data-ng-click="jobsPageCtrl.putback()"
+                    data-ng-if="::jobsPageCtrl.showPutBack()"
+                    data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
+
+                    Make Active
+                </button>
             </div>
 
             <jobs
+                enabled="jobsPageCtrl.enableEdit()"
                 jobs="jobsPageCtrl.jobs"
                 register-handlers="jobsPageCtrl.registerHandlers(toggleAllJobs, getSelectedJobs)"
                 on-download-xml="jobsPageCtrl.downloadXml(jobId)"
                 on-set-bulk-operation-status="jobsPageCtrl.setBulkOperationStatus(status)">
             </jobs>
-
         </div>
     </div>
 </section>
@@ -96,3 +136,28 @@
     </div>
 </div>
 
+<div class="dialog hidden" dialog="dialog" id="dialog-delete-job">
+    <div class="dialog-header">
+        <h3 class="dialog-title">Delete <ng-pluralize count="jobsPageCtrl.marked" when="{'one' : 'Job', 'other' : 'Jobs'}"></ng-pluralize>?</h3>
+    </div>
+    <div class="dialog-body">
+        <p>Are you sure you want to delete the selected <ng-pluralize count="jobsPageCtrl.marked" when="{'one' : 'job', 'other' : '{} jobs'}"></ng-pluralize>?</p>
+    </div>
+    <div class="dialog-footer text-right">
+        <button class="btn btn-link" type="button" data-ng-click="dismiss(false)">Cancel</button>
+        <button class="btn" data-ng-click="dismiss(true)">Delete</button>
+    </div>
+</div>
+
+<div class="dialog hidden" dialog="dialog" id="dialog-archive-job">
+    <div class="dialog-header">
+        <h3 class="dialog-title">Archive <ng-pluralize count="jobsPageCtrl.marked" when="{'one' : 'Job', 'other' : 'Jobs'}"></ng-pluralize>?</h3>
+    </div>
+    <div class="dialog-body">
+        <p>Are you sure you want to archive the selected <ng-pluralize count="jobsPageCtrl.marked" when="{'one' : 'job', 'other' : '{} jobs'}"></ng-pluralize>?</p>
+    </div>
+    <div class="dialog-footer text-right">
+        <button class="btn btn-link" type="button" data-ng-click="dismiss(false)">Cancel</button>
+        <button class="btn" data-ng-click="dismiss(true)">Archive</button>
+    </div>
+</div>
