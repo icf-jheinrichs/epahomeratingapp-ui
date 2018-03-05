@@ -30,7 +30,7 @@ class ChecklistItemStaticPressureController extends ChecklistItemClass {
                     'ConnectedAttribute' : false,
                     'DataType'           : {
                         'Type' : 'Decimal',
-                        'Name' : 'decimal_-1.0'
+                        'Name' : 'decimal_-1.00'
                     },
                     'Key'                : 'ReturnSideExternalStaticPressure',
                     'Locked'             : false,
@@ -42,7 +42,7 @@ class ChecklistItemStaticPressureController extends ChecklistItemClass {
                     'ConnectedAttribute' : false,
                     'DataType'           : {
                         'Type' : 'Decimal',
-                        'Name' : 'decimal_1.0'
+                        'Name' : 'decimal_1.00'
                     },
                     'Key'                : 'SupplySideExternalStaticPressure',
                     'Locked'             : false,
