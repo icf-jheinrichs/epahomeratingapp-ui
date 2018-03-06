@@ -53,6 +53,7 @@
                 name="{{::staticPressure.Key}}"
                 class="form-control"
                 value="{{checklistItemCtrl.itemData[staticPressure.Key]}}"
+                data-ng-disabled="::checklistItemCtrl.isReview"
                 data-ng-click="checklistItemCtrl.editMrfRow(staticPressure.Key)" />
 
             <abbr class="input-unit" title="{{::staticPressure.Unit.Title}}">

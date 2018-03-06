@@ -1,8 +1,10 @@
 import _assign from 'lodash/assign';
 
 class MrfEditController {
-    constructor () {
+    constructor (JobChecklistStateService) {
         'ngInject';
+
+        this.isReview = JobChecklistStateService.isReview;
     }
 
     $onInit () {

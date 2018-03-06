@@ -1,19 +1,34 @@
 <form class="modal modal-large modal-scroll-body" novalidate name="checklistItemMrfEditCtrl.mrfEditForm" data-ng-class="{'hidden' : !checklistItemMrfEditCtrl.showMrfEditModal}">
     <div class="modal-header flex-row">
         <div class="flex-item-static">
-            <button class="btn btn-link" type="button" data-ng-click="checklistItemMrfEditCtrl.cancel()">Cancel</button>
+            <button
+                class="btn btn-link"
+                type="button"
+                data-ng-if="::!checklistItemMrfEditCtrl.isReview"
+                data-ng-click="checklistItemMrfEditCtrl.cancel()">
+                    Cancel
+            </button>
         </div>
 
-        <span class="modal-title flex-item-grow">Edit {{::checklistItemMrfEditCtrl.title}}</span>
+        <span class="modal-title flex-item-grow"><span data-ng-if="::!checklistItemMrfEditCtrl.isReview">Edit</span> {{::checklistItemMrfEditCtrl.title}}</span>
 
         <div class="flex-item-static">
             <button
                 class="btn pull-right"
+                data-ng-if="::!checklistItemMrfEditCtrl.isReview"
                 data-ng-click="checklistItemMrfEditCtrl.save()"
                 data-ng-disabled="checklistItemMrfEditCtrl.mrfEditForm.$invalid"
                 type="submit">
 
                 Save
+            </button>
+            <button
+                class="btn pull-right"
+                data-ng-if="::checklistItemMrfEditCtrl.isReview"
+                data-ng-click="checklistItemMrfEditCtrl.cancel()"
+                type="button">
+
+                Close
             </button>
         </div>
     </div>
@@ -24,12 +39,12 @@
                  data-ng-repeat="field in ::checklistItemMrfEditCtrl.mrfDigest track by $index">
 
                 <mrf-edit-field-locked
-                    data-ng-if="::field.Locked"
+                    data-ng-if="::field.Locked || checklistItemMrfEditCtrl.isReview"
                     field="field"
                     value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
                 </mrf-edit-field-locked>
 
-                <div data-ng-if="::!field.Locked"
+                <div data-ng-if="::!field.Locked && !checklistItemMrfEditCtrl.isReview"
                      data-ng-switch on="field.DataType.Type">
 
                      <div ng-switch-when="Boolean">
