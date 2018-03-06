@@ -54,7 +54,13 @@ class LoginController {
         // let state   = this.returnTo.state();
         // let params  = this.returnTo.params();
         // let options = Object.assign({}, this.returnTo.options(), {reload : true});
-        this.$state.go(authorizedRedirect);
+
+        // default to active jobs
+        let searchParams = {
+            'status' : 'Active'
+        };
+
+        this.$state.go(authorizedRedirect, searchParams, {reload : true});
     }
 
     userIsAuthorized (userCompanies) {

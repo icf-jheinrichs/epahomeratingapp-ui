@@ -1,14 +1,17 @@
 import moment from 'moment';
+import _isEmpty from 'lodash/isEmpty';
 
 class Job {
-    constructor ($log, $rootScope, $scope, jobTitleFilter, CONTEXT, UI_ENUMS, BASE_IMAGE_URL) {
+    constructor ($log, $rootScope, $location, $scope, jobTitleFilter, SyncService, CONTEXT, UI_ENUMS, BASE_IMAGE_URL) {
         'ngInject';
 
         this.$log              = $log;
         this.$rootScope        = $rootScope;
         this.$scope            = $scope;
+        this.$location      = $location;
 
         this.jobTitleFilter    = jobTitleFilter;
+        this.syncService       = SyncService;
         this.DEFAULT_PHOTO     = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
         this.BASE_IMAGE_URL    = BASE_IMAGE_URL;
 
@@ -34,6 +37,10 @@ class Job {
 
     setBulkOperationStatus () {
         this.onSetBulkOperationStatus();
+    }
+
+    hideJobStatus () {
+        return _isEmpty(this.$location.$$search);
     }
 
     get JobTitle () {

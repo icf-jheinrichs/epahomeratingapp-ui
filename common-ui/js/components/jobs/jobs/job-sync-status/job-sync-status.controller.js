@@ -134,15 +134,26 @@ class JobSyncStatusController {
             applyChange();
         });
 
-        this.assetBeingDownloadedForJobListener = this.$rootScope.$on(this.MESSAGING.JOB_AVAILABLE_OFFLINE, (event, offline) => {
-            // job start download
-            this.$log.log('[job-sync-status.controller.js] assetBeingDownloadedForJobListener');
+        this.assetDownloadedListener = this.$rootScope.$on(this.MESSAGING.ASSET_DOWNLOADED, (event, status) => {
+            this.$log.log(`[job.controller.js] assetDownloadedListener ${status.jobID} ${status.assetStatus.total} ${status.assetStatus.missing}`);
 
-            this.syncStatus      = this.STATUS.SYNCING;
-            this.syncStatusClass = this.STATUS_CLASSNAME.SYNCING;
+            if (status.assetStatus.missing > 0) {
+                this.syncStatus      = this.STATUS.SYNCING;
+                this.syncStatusClass = this.STATUS_CLASSNAME.SYNCING;
+            }
 
             applyChange();
         });
+
+        // this.assetBeingDownloadedForJobListener = this.$rootScope.$on(this.MESSAGING.JOB_AVAILABLE_OFFLINE, (event, offline) => {
+        //     // job start download
+        //     this.$log.log('[job-sync-status.controller.js] assetBeingDownloadedForJobListener');
+        //
+        //     this.syncStatus      = this.STATUS.SYNCING;
+        //     this.syncStatusClass = this.STATUS_CLASSNAME.SYNCING;
+        //
+        //     applyChange();
+        // });
 
         this.allAssetFinishedSyncingListener = this.$rootScope.$on(this.MESSAGING.ALL_JOB_ASSET_FINISHED_SYNCING, (event) => {
             // all job finish sync, need to check db status not override

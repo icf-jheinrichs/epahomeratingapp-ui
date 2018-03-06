@@ -5,7 +5,18 @@ class JobRaterController extends Job {
     $onInit () {
         super.$onInit();
 
+        let self = this;
+
+        this.assetUpToDate = true;
+        this.docUpToDate   = true;
+
         this.toggleStatusClass = this.job.offlineAvailable ? this.syncService.getJobStatus(this.job._id) : '';
+
+        function selfApply () {
+            _defer(function afterDigest () {
+                self.$scope.$apply();
+            });
+        }
 
         this.assetDownloadedListener = this.$rootScope.$on(this.MESSAGING.ASSET_DOWNLOADED, (event, status) => {
             this.$log.log(`[job.controller.js] assetDownloadedListener ${status.jobID} ${status.assetStatus.total} ${status.assetStatus.missing}`);
@@ -15,10 +26,7 @@ class JobRaterController extends Job {
                 this.toggleStatusClass = '';
             }
 
-            let self = this;
-            _defer(function afterDigest () {
-                self.$scope.$apply();
-            });
+            selfApply();
         });
 
         this.assetBeingUploadedForJobListener = this.$rootScope.$on(this.MESSAGING.ASSET_BEING_UPLOADED_FOR_JOB, (event, status) => {
@@ -26,25 +34,22 @@ class JobRaterController extends Job {
 
             if (this.job.offlineAvailable && status.jobID === this.job._id) {
                 this.toggleStatusClass = this.SYNC_STATUS.UP;
+                this.assetUpToDate     = false;
             }
 
-            let self = this;
-            _defer(function afterDigest () {
-                self.$scope.$apply();
-            });
+            selfApply();
         });
 
         this.assetUploadedForJobListener = this.$rootScope.$on(this.MESSAGING.ASSET_UPLOADED_FOR_JOB, (event, status) => {
             this.$log.log(`[job.controller.js] assetUploadedForJobListener ${status.jobID}`);
 
-            if (this.job.offlineAvailable && status.jobID === this.job._id) {
+            this.assetUpToDate = true;
+
+            if (this.job.offlineAvailable && status.jobID === this.job._id && this.docUpToDate) {
                 this.toggleStatusClass = '';
             }
 
-            let self = this;
-            _defer(function afterDigest () {
-                self.$scope.$apply();
-            });
+            selfApply();
         });
 
         this.deviceOfflineListener = this.$rootScope.$on(this.MESSAGING.DEVICE_OFFLINE, (event) => {
@@ -56,10 +61,7 @@ class JobRaterController extends Job {
                 this.toggleStatusClass = this.SYNC_STATUS.OFFLINE;
             }
 
-            let self = this;
-            _defer(function afterDigest () {
-                self.$scope.$apply();
-            });
+            selfApply();
         });
 
         this.deviceOnlineListener = this.$rootScope.$on(this.MESSAGING.DEVICE_ONLINE, (event, jobs) => {
@@ -75,10 +77,25 @@ class JobRaterController extends Job {
                 this.toggleStatusClass = '';
             }
 
-            let self = this;
-            _defer(function afterDigest () {
-                self.$scope.$apply();
-            });
+            selfApply();
+        });
+
+        this.dbStartSyncListener = this.$rootScope.$on(this.MESSAGING.DB_START_SYNC, (event) => {
+            this.$log.log('[job.controller.js] dbStartSyncListener');
+
+            this.docUpToDate = false;
+        });
+
+        this.dbPauseSyncListener = this.$rootScope.$on(this.MESSAGING.DB_PAUSE_SYNC, (event) => {
+            this.$log.log('[job.controller.js] dbPauseSyncListener');
+
+            this.docUpToDate = true;
+
+            if (this.assetUpToDate) {
+                this.toggleStatusClass = '';
+            }
+
+            selfApply();
         });
     }
 
