@@ -270,19 +270,6 @@ class ChecklistItemMrfController extends ChecklistItemClass {
         let iterator                  = 0;
         let libraryTypeSuffix;
 
-        let libraryNameQuantity       = _reduce(sectionLibraryNames, (result, value, key) => {
-            if (value === libraryName) {
-                result += 1;
-            }
-            return result;
-        }, 0);
-
-        // if there's only one row - no need to change name
-        // if the only instance of that library type - no need to change name
-        if (sectionLibraryNames.length === 1 || libraryNameQuantity === 1) {
-            return libraryName;
-        }
-
         libraryName = libraryName.substring(0, PREFIXED_MAX_LENGTH);
 
         sectionLibraryNames.forEach((value) => {
