@@ -5,6 +5,7 @@ class MrfEditController {
         'ngInject';
 
         this.JobChecklistStateService = JobChecklistStateService;
+        this.isReview                 = JobChecklistStateService.isReview;
 
         this.infiltrationDisplayData = {
             'Name'               : 'Infiltration Value',

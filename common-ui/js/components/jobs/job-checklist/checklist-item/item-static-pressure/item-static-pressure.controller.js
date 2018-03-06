@@ -53,6 +53,10 @@ class ChecklistItemStaticPressureController extends ChecklistItemClass {
     }
 
     editMrfRow (focus) {
+        if (this.isReview) {
+            return;
+        }
+
         this
             .editRow
             .push({

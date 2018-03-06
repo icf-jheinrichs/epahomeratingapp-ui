@@ -1,11 +1,12 @@
 import _assign from 'lodash/assign';
 
 class MrfEditController {
-    constructor (DialogService, UI_ENUMS) {
+    constructor (DialogService, JobChecklistStateService, UI_ENUMS) {
         'ngInject';
 
         this.DialogService = DialogService;
         this.DIALOG        = UI_ENUMS.DIALOG.LEAKAGE_TEST_EXEMPTION;
+        this.isReview      = JobChecklistStateService.isReview;
 
         this.UNITS         = {
             CFM25 : {
