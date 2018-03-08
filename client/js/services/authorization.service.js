@@ -227,7 +227,9 @@ class AuthorizationService {
     getAuthorizedRedirect () {
         let authorizedRedirect = this.STATE_NAME.LOGIN;
 
-        if (this.userIsAuthorizedForRoute(this.STATE_NAME.JOBS)) {
+        if (this.userIsAuthorizedForRoute(this.STATE_NAME.JOBS_SEARCH)) {
+            authorizedRedirect = this.STATE_NAME.JOBS_SEARCH;
+        } else if (this.userIsAuthorizedForRoute(this.STATE_NAME.JOBS)) {
             authorizedRedirect = this.STATE_NAME.JOBS;
         } else if (this.userIsAuthorizedForRoute(this.STATE_NAME.TEMPLATE_LIBRARY)) {
             authorizedRedirect = this.STATE_NAME.TEMPLATE_LIBRARY;
