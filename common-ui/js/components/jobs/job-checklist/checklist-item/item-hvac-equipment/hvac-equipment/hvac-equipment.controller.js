@@ -1,7 +1,7 @@
 import _findIndex from 'lodash/findIndex';
 
 class HVACEquipmentController {
-    constructor (ManufacturersService, ScannerService) {
+    constructor (ManufacturersService, ScannerService, CONTEXT, UI_ENUMS) {
         'ngInject';
 
         this.EQUIPMENT_TYPE = [
@@ -21,6 +21,8 @@ class HVACEquipmentController {
 
         this.ManufacturersService = ManufacturersService;
         this.ScannerService       = ScannerService;
+
+        this.CONTEXT_IS_ADMIN = CONTEXT !== UI_ENUMS.CONTEXT.APP;
     }
 
     $onInit () {

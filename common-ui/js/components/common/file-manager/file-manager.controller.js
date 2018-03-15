@@ -8,7 +8,7 @@ class FileManagerController {
         this.$element  = $element;
         this.$scope    = $scope;
 
-        this.CONTEXT_IS_ADMIN = CONTEXT !== UI_ENUMS.CONTEXT.APP;
+        this.CONTEXT_IS_APP = CONTEXT === UI_ENUMS.CONTEXT.APP;
     }
 
     $onInit () {
