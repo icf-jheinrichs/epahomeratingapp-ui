@@ -162,7 +162,8 @@ const MESSAGING = {
     REFRESH_JOBS_LIST                : 'REFRESH_JOBS_LIST',
     REFRESH_JOBS_LIST_FINISH         : 'REFRESH_JOBS_LIST_FINISH',
     USER_AUTHORIZATION_UPDATE        : 'USER_AUTHORIZATION_UPDATE',
-    INVALID_JWT                      : 'INVALID_JWT'
+    INVALID_JWT                      : 'INVALID_JWT',
+    UPDATE_JOB_HISTORY               : 'UPDATE_JOB_HISTORY'
 };
 
 const MODAL = {
