@@ -10,6 +10,7 @@ import JobDataResponseService from './job-data-response.service';
 import JobDataHomePerformanceService from './job-data-home-performance.service';
 import ManufacturersService from './manufacturers.service';
 import ScannerService from './scanner.service';
+import SyncService from './sync.service';
 import UserCompanyService from './user-company.service';
 import AuthorizationService from './authorization.service';
 
@@ -26,6 +27,7 @@ let servicesModule
         .service('JobDataHomePerformanceService', JobDataHomePerformanceService)
         .service('ManufacturersService', ManufacturersService)
         .service('ScannerService', ScannerService)
+        .service('SyncService', SyncService)
         .service('UserCompanyService', UserCompanyService)
         .service('AuthorizationService', AuthorizationService);
 

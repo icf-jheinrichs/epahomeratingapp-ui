@@ -1,4 +1,7 @@
-<div class="form-group" data-ng-class="{'has-error' : fieldIntegerCtrl.invalid}">
+<div
+    class="form-group"
+    data-ng-class="{'has-error' : fieldIntegerCtrl.invalid, 'form-group-horizontal' : fieldIntegerCtrl.field.Unit}">
+
     <label for="{{::fieldIntegerCtrl.field.Key}}" class="control-label">
         <i class="fa fa-list-alt" aria-hidden="true" data-ng-if="::fieldIntegerCtrl.field.IsLibraryAttribute"></i>
         {{::fieldIntegerCtrl.field.Name}}
@@ -12,6 +15,13 @@
         data-ng-blur="fieldIntegerCtrl.validate()"
         data-ng-model="fieldIntegerCtrl.value" />
 
+    <abbr
+        class="input-unit"
+        data-ng-if="::fieldIntegerCtrl.field.Unit"
+        title="{{::fieldIntegerCtrl.field.Unit.Title}}">
+
+        {{::fieldIntegerCtrl.field.Unit.Abbr}}
+    </abbr>
 
     <p class="form-control-error" role="alert" data-ng-class="{'has-error' : fieldIntegerCtrl.invalid}">
         {{fieldIntegerCtrl.errorMessage}}
