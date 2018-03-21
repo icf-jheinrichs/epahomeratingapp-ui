@@ -10,7 +10,7 @@ class JobRaterController extends Job {
         this.assetUpToDate = true;
         this.docUpToDate   = true;
 
-        this.toggleStatusClass = this.job.offlineAvailable ? this.syncService.getJobStatus(this.job._id) : '';
+        this.toggleStatusClass = this.syncService.getJobStatus(this.job._id);
 
         function selfApply () {
             _defer(function afterDigest () {
