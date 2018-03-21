@@ -25,7 +25,11 @@
 
         <h3 class="list-item-title job-title" id="job-{{jobRaterCtrl.job._id}}" data-ng-bind-html="jobRaterCtrl.JobTitle"></h3>
 
-        <span class="job-builder">{{::jobRaterCtrl.job.Primary.Builder}}</span>
+        <div class="flex-row">
+            <span class="job-builder">{{::jobRaterCtrl.job.Primary.Builder}}</span>
+            <span class="job-status" data-ng-if="jobAdminCtrl.hideJobStatus()">{{::jobAdminCtrl.job.Status}}</span>
+        </div>
+
     </div>
 
     <div class="job-progress">
