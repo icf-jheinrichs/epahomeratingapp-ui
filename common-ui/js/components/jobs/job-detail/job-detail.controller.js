@@ -8,6 +8,7 @@ class JobDetailController {
         'ngInject';
 
         this.context           = $state.current.name === UI_ENUMS.STATE_NAME.JOB_NEW ? 'new' : 'edit';
+        this.JOB_STATUS        = UI_ENUMS.JOB_STATUS;
 
         this.ratingTypeOptions = UI_ENUMS.RATING_TYPES;
         this.DialogService     = DialogService;
@@ -20,6 +21,8 @@ class JobDetailController {
         this.isSampleSet = this.job.Secondary.length > 0;
 
         this.currentLocation = this.job.Primary.HouseId;
+
+        this.canEditSampleSet = (this.job.Status !== this.JOB_STATUS.SUBMITTED_TO_PROVIDER);
     }
 
     setTab (houseId) {
