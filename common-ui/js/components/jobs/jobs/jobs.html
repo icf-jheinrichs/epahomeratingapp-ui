@@ -1,3 +1,13 @@
+<div
+    class="item-list-head-jobs flex-align-end flex-row"
+    data-ng-class="{'item-list-head-jobs-admin' : jobsCtrl.CONTEXT_IS_ADMIN}"
+    data-ng-if="::jobsCtrl.currentStateName !== jobsCtrl.STATE_NAME.JOBS_PROVIDER && jobsCtrl.currentStateName !== jobsCtrl.STATE_NAME.JOBS_PROVIDER_SEARCH">
+
+    <span class="flex-item item-list-head-jobs-offline" data-ng-if="!jobsCtrl.CONTEXT_IS_ADMIN">Available Offline</span>
+    <span class="flex-item flex-item-pull-right">Pre-drywall</span>
+    <span class="flex-item">Final</span>
+</div>
+
 <div class="item-list">
     <job-admin
         enabled="jobsCtrl.enabled"
