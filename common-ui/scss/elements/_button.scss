@@ -93,6 +93,10 @@
     font-size: $font-size-small;
 }
 
+.btn-no-warp {
+    white-space: nowrap;
+}
+
 .btn-lg {
     border-radius: $border-radius-large;
 }

@@ -245,7 +245,7 @@
         </div>
     </div>
 
-    <div class="equipment-actions flex-col flex-item-static">
+    <div class="equipment-actions flex-col flex-item-static" ng-if="hvacEquipmentCtrl.CONTEXT_IS_APP">
         <div data-ng-class="{'hidden' : hvacEquipmentCtrl.isEditMode}">
             <button
                 aria-label="Edit"

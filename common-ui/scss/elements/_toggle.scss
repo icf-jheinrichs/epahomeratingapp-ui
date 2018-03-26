@@ -157,6 +157,8 @@ $switch-delta:  $toggle-size;
     }
 }
 
+.toggle-control + .toggle-label.sync-up .toggle-status { background-color: $status-warning }
+
 .toggle-control:checked + .toggle-label.sync-down {
     &:hover,
     &:focus {

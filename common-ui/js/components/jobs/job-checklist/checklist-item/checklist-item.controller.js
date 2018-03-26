@@ -1,5 +1,5 @@
 class ChecklistItemController {
-    constructor ($stateParams, DisplayLogicDigestService, JobChecklistStateService, UI_ENUMS) {
+    constructor ($stateParams, DisplayLogicDigestService, JobChecklistStateService, CONTEXT, UI_ENUMS) {
         'ngInject';
 
         this.$stateParams = $stateParams;
@@ -11,6 +11,7 @@ class ChecklistItemController {
         this.CHECKLIST_ITEM_STATUS = UI_ENUMS.CHECKLIST_ITEM_STATUS;
         this.RATING_TYPES          = UI_ENUMS.RATING_TYPES;
         this.RESPONSES             = UI_ENUMS.RESPONSES;
+        this.CONTEXT_IS_ADMIN      = CONTEXT !== UI_ENUMS.CONTEXT.APP;
 
         this.jobRatingType     = this.JobChecklistStateService.getJob().RatingType;
         this.isOmitted         = false;

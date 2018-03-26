@@ -13,7 +13,7 @@
         </div>
     </fieldset>
 
-    <fieldset class="row">
+    <fieldset class="row" data-ng-disabled="!jobDetailCtrl.canEditSampleSet">
         <legend class="col-xs-3">Sample Set</legend>
         <div class="offset-xs-3 col-xs-9">
             <toggle
@@ -54,7 +54,7 @@
         </button>
 
         <button
-            data-ng-disabled="!jobDetailCtrl.canAddSample"
+            data-ng-disabled="!jobDetailCtrl.canAddSample || !jobDetailCtrl.canEditSampleSet"
             data-ng-click="jobDetailCtrl.addSample()"
             type="button"
             class="btn btn-link">
