@@ -4,5 +4,15 @@
         {{::fieldCtrl.field.Name}}
     </span>
 
-    <p class="form-control-static">{{::fieldCtrl.value}}</p>
+    <p class="form-control-static">
+        {{::fieldCtrl.value}}
+
+        <abbr
+            class="input-unit"
+            data-ng-if="::fieldCtrl.field.Unit"
+            title="{{::fieldCtrl.field.Unit.Title}}">
+
+            {{::fieldCtrl.field.Unit.Abbr}}
+        </abbr>
+    </p>
 </div>

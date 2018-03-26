@@ -24,6 +24,10 @@ class ChecklistItemHVACCommissioningController extends ChecklistItemClass {
             .$onInit()
             .then(() => {
                 this.house = this.JobChecklistStateService.getCurrentHouse();
+
+                if (this.itemData === undefined) {
+                    this.itemData = {};
+                }
             });
 
         this
@@ -66,7 +70,9 @@ class ChecklistItemHVACCommissioningController extends ChecklistItemClass {
     }
 
     saveEquipment () {
-        this.itemData.Equipment.length = 0;
+        if (this.itemData.Equipment) {
+            this.itemData.Equipment.length = 0;
+        }
 
         this
             .$timeout(() => {
