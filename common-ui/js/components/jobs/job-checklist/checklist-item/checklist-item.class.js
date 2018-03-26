@@ -3,10 +3,12 @@ class ChecklistItemClass {
         $log,
         $q,
         $rootScope,
+        $timeout,
         $stateParams,
         UI_ENUMS,
         DisplayLogicDigestService,
         JobChecklistStateService,
+        ModalService,
         PopoverService,
         S3_CONFIG) {
 
@@ -15,13 +17,16 @@ class ChecklistItemClass {
         this.$log         = $log;
         this.$q           = $q;
         this.$rootScope   = $rootScope;
+        this.$timeout     = $timeout;
         this.$stateParams = $stateParams;
 
         this.RESPONSES    = UI_ENUMS.RESPONSES;
         this.MESSAGING    = UI_ENUMS.MESSAGING;
+        this.MODAL        = UI_ENUMS.MODAL;
 
         this.DisplayLogicDigestService = DisplayLogicDigestService;
         this.JobChecklistStateService  = JobChecklistStateService;
+        this.ModalService              = ModalService;
         this.PopoverService            = PopoverService;
 
         this.isReview                  = this.JobChecklistStateService.isReview;

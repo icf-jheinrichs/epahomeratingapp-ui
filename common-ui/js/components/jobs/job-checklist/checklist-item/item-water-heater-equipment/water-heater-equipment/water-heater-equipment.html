@@ -1,0 +1,76 @@
+<div class="flex-row">
+    <div class="equipment-details flex-col flex-item-grow">
+        <div class="row row-condensed">
+            <div class="form-group col-xs-4 water-heater-equipment-manufacturer">
+
+                <label for="water-heater-equipment-manufacturer-{{::waterHeaterEquipmentCtrl.index}}" class="sr-only">Equipment Manufacturer</label>
+
+                <div
+                    class="type-ahead"
+                    type-ahead="type-ahead"
+                    type-ahead-delay="125"
+                    type-ahead-min-input-lenght="0"
+                    type-ahead-max-results="5">
+
+                    <input
+                        class="form-control"
+                        data-ng-model="waterHeaterEquipmentCtrl.equipment.Manufacturer"
+                        data-ng-model-options="{debounce: 125}"
+                        data-ng-change="waterHeaterEquipmentCtrl.updatedFilteredEquipment('WATER_HEATER', waterHeaterEquipmentCtrl.equipment.Manufacturer)"
+                        id="water-heater-equipment-manufacturer-{{::waterHeaterEquipmentCtrl.index}}"
+                        name="Furnace"
+                        placeholder="Manufacturer"
+                        type="text"
+                        type-ahead-input="type-ahead-input" />
+
+                    <div
+                        class="type-ahead-results"
+                        type-ahead-result-data="waterHeaterEquipmentCtrl.filteredManufacturers.WATER_HEATER"
+                        type-ahead-results="type-ahead-results">
+                            <button
+                                class="btn btn-link btn-block type-ahead-result"
+                                data-ng-click="waterHeaterEquipmentCtrl.setEquipmentManfacturer('Furnace', manufacturer.name)"
+                                data-ng-repeat="manufacturer in waterHeaterEquipmentCtrl.filteredManufacturers.WATER_HEATER track by manufacturer.name"
+                                type="button">
+                                {{manufacturer.name}}
+                            </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-xs-4">
+                <label for="water-heater-equipment-model-{{::waterHeaterEquipmentCtrl.index}}" class="sr-only">Equipment Model</label>
+                <input
+                    class="form-control"
+                    data-ng-model="waterHeaterEquipmentCtrl.equipment.Model"
+                    id="water-heater-equipment-model-{{::waterHeaterEquipmentCtrl.index}}"
+                    placeholder="Equipment Model"
+                    type="text" />
+            </div>
+
+            <div class="form-group col-xs-4">
+                <label for="water-heater-equipment-serial-number-{{::waterHeaterEquipmentCtrl.index}}" class="sr-only">Serial Number</label>
+
+                <div class="input-group">
+                    <input
+                        class="form-control"
+                        data-ng-model="waterHeaterEquipmentCtrl.equipment.SerialNumber"
+                        id="water-heater-equipment-serial-number-{{::waterHeaterEquipmentCtrl.index}}"
+                        placeholder="Serial Number"
+                        type="text" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="equipment-actions flex-col flex-item-static">
+        <button
+            aria-label="Delete"
+            class="btn btn-link btn-no-label"
+            type="button"
+            data-ng-click="waterHeaterEquipmentCtrl.onDeleteEquipment()">
+
+            <i class="fa fa-remove" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>

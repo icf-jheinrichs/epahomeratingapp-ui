@@ -1,0 +1,160 @@
+<div class="checklist-item">
+    <div class="flex-row flex-justify-between flex-align-center checklist-item-header-wrapper">
+        <header class="checklist-item-header form-group-horizontal">
+            <button
+                aria-label="More Information"
+                class="checklist-item-info-toggle btn btn-link btn-no-label"
+                ng-class="{'has-footnote' : checklistItemWaterHeaterEquipmentCtrl.hasFootnote}"
+                ng-click="checklistItemWaterHeaterEquipmentCtrl.showFootnote()"
+                type="button">
+
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+            </button>
+
+            <h4 class="checklist-item-title pull-left">{{::checklistItemWaterHeaterEquipmentCtrl.display.Shorthand}}</h4>
+        </header>
+
+        <div class="flex-row flex-align-center flex-item-fixed-width">
+            <checklist-item-comments
+                data-ng-if="::!checklistItemWaterHeaterEquipmentCtrl.isReview"
+                comments="checklistItemWaterHeaterEquipmentCtrl.comments"
+                item-id="{{checklistItemWaterHeaterEquipmentCtrl.itemId}}"
+                on-comment="checklistItemWaterHeaterEquipmentCtrl.postComment(comment)">
+            </checklist-item-comments>
+
+            <checklist-item-response
+                response="checklistItemWaterHeaterEquipmentCtrl.response"
+                response-house-id="checklistItemWaterHeaterEquipmentCtrl.responseHouseId"
+                data-ng-hide="checklistItemWaterHeaterEquipmentCtrl.showResponseButtons"
+                edit-response="checklistItemWaterHeaterEquipmentCtrl.onEditResponse()">
+            </checklist-item-response>
+
+            <div class="verification"
+                 data-ng-hide="!checklistItemWaterHeaterEquipmentCtrl.showResponseButtons">
+                <button-group
+                    class="button-group"
+                    buttons="checklistItemWaterHeaterEquipmentCtrl.responseButtons"
+                    initial-value="checklistItemWaterHeaterEquipmentCtrl.response"
+                    on-set-value="checklistItemWaterHeaterEquipmentCtrl.onSetResponse(response)">
+                </button-group>
+            </div>
+        </div>
+    </div>
+
+    <section data-ng-repeat="mrfTable in checklistItemWaterHeaterEquipmentCtrl.display.Sections track by $index">
+        <h5 class="table-caption">{{::mrfTable.Name}}</h5>
+        <div class="table-responsive" data-ng-if="::checklistItemWaterHeaterEquipmentCtrl.hasRows(checklistItemWaterHeaterEquipmentCtrl.homePerformance[mrfTable.Key])">
+            <table>
+                <thead>
+                    <tr>
+                        <th data-ng-repeat="columnHeader in mrfTable.Columns track by $index">{{::columnHeader.Name}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        data-ng-repeat="dataRow in checklistItemWaterHeaterEquipmentCtrl.homePerformance[mrfTable.Key] track by $index"
+                        data-ng-click="checklistItemWaterHeaterEquipmentCtrl.editMrfRow($index, mrfTable.Key, mrfTable.Name, mrfTable.Columns, checklistItemWaterHeaterEquipmentCtrl.homePerformance[mrfTable.Key][$index])">
+
+                        <td data-ng-repeat="(key, value) in dataRow track by $index" ng-if="key !== 'Id'"
+                            data-ng-class="{'td-edited' : checklistItemWaterHeaterEquipmentCtrl.attributeIsEdited(mrfTable.Key, $parent.$parent.$index, key)}">
+
+                            {{value}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <p class="empty-table-text" data-ng-if="::!checklistItemWaterHeaterEquipmentCtrl.hasRows(checklistItemWaterHeaterEquipmentCtrl.homePerformance[mrfTable.Key])">{{mrfTable.EmptyTableText}}</p>
+    </section>
+
+    <div>
+        <div class="item-list item-list-equipment">
+            <div class="flex-row">
+                <div class="equipment-details flex-col flex-item-grow">
+                    <div
+                        class="row row-condensed item-list-item"
+                        data-ng-repeat="equipment in checklistItemWaterHeaterEquipmentCtrl.itemData.Equipment track by equipment.id">
+
+                        <div class="col-xs-4"><span class="control-label">Manufacturer</span><p class="form-control-static">{{::equipment.Manufacturer}}</p></div>
+                        <div class="col-xs-4"><span class="control-label">Model</span><p class="form-control-static">{{::equipment.Model}}</p></div>
+                        <div class="col-xs-4"><span class="control-label">Serial Number</span><p class="form-control-static">{{::equipment.SerialNumber}}</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="clearfix">
+            <button
+                class="btn pull-right"
+                data-ng-click="checklistItemWaterHeaterEquipmentCtrl.editEquipment()"
+                type="button"
+                ng-if="!checklistItemWaterHeaterEquipmentCtrl.isReview">
+
+                <i class="fa fa-pencil" aria-hidden="true"></i> Edit Equipment
+            </button>
+        </div>
+    </div>
+
+    <form class="modal modal-large modal-scroll-body hidden" modal="modal" id="modal-edit-water-heater-equipment">
+        <div class="modal-header flex-row">
+            <div class="flex-item-static">
+                <button class="btn btn-link btn-modal-close" type="button">Close</button>
+            </div>
+
+            <span class="modal-title flex-item-grow">Edit Hot Water Equipment</span>
+
+            <div class="flex-item-static">
+                <button
+                    class="btn pull-right"
+                    data-ng-click="checklistItemWaterHeaterEquipmentCtrl.saveEquipment()"
+                    type="submit">
+
+                    Save
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-body-wrapper">
+            <div class="modal-body">
+                <div class="item-list item-list-equipment">
+                    <water-heater-equipment
+                        class="item-list-item"
+                        data-ng-repeat="equipment in checklistItemWaterHeaterEquipmentCtrl.editEquipmentData track by equipment.id"
+                        delete-equipment="checklistItemWaterHeaterEquipmentCtrl.deleteEquipment(id)"
+                        equipment="equipment">
+                    </water-heater-equipment>
+                </div>
+
+                <div class="clearfix">
+                    <button
+                        class="btn pull-right"
+                        data-ng-click="checklistItemWaterHeaterEquipmentCtrl.addEquipment()"
+                        type="button">
+
+                        <i class="fa fa-plus" aria-hidden="true"></i> Add Equipment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <checklist-item-comments-review
+            data-ng-if="::checklistItemWaterHeaterEquipmentCtrl.isReview"
+            comments="checklistItemWaterHeaterEquipmentCtrl.comments"
+            item-id="{{checklistItemWaterHeaterEquipmentCtrl.itemId}}"
+            on-comment="checklistItemWaterHeaterEquipmentCtrl.postComment(comment)">
+        </checklist-item-comments-review>
+    </div>
+
+    <mrf-edit
+        data-ng-repeat="row in checklistItemWaterHeaterEquipmentCtrl.editRow track by $index"
+        on-save-mrf-row="checklistItemWaterHeaterEquipmentCtrl.onSaveMrfRow(mrfRowEditData)"
+        on-cancel-mrf-row="checklistItemWaterHeaterEquipmentCtrl.onCancelMrfRow()"
+        title="{{::row.title}}"
+        mrf-digest="row.mrfDigest"
+        mrf-data="row.mrfData"
+        library-type-name-key="{{row.LibraryTypeNameKey}}">
+    </mrf-edit>
+</div>
