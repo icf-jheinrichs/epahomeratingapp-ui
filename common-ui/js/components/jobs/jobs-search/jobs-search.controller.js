@@ -28,11 +28,11 @@ class JobsSearchBarController {
         let filterTextStringArray = [];
 
         _forOwn(this.filterText, (value) => {
-            filterTextStringArray.push(value);
+            filterTextStringArray.push(`<span class="label label-default">${value}</span>`);
         });
 
         if (filterTextStringArray.length > 0) {
-            filterTextString = ` - Filtered By: ${filterTextStringArray.join(' | ')}`;
+            filterTextString = ` - Filtered By: ${filterTextStringArray.join(' ')}`;
         }
 
         this.hasFilters = filterTextString.length > 0;

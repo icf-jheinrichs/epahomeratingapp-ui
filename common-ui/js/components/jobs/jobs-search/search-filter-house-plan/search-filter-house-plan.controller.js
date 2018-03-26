@@ -1,8 +1,9 @@
 class SearchFilterHousePlanController {
-    constructor ($stateParams, UI_ENUMS) {
+    constructor ($stateParams, $sanitize, UI_ENUMS) {
         'ngInject';
 
         this.$stateParams = $stateParams;
+        this.$sanitize    = $sanitize;
 
         this.param   = UI_ENUMS.SEARCH_PARAMS.HOUSE_PLAN;
     }
@@ -36,7 +37,7 @@ class SearchFilterHousePlanController {
                 param      : {}
             };
 
-            filter.param[this.param] = encodeURIComponent(this.keywords);
+            filter.param[this.param] = encodeURIComponent(this.$sanitize(this.keywords));
         }
 
         return filter;

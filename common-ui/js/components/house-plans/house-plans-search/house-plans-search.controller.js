@@ -1,5 +1,4 @@
 import _forOwn from 'lodash/forOwn';
-// import _find from 'lodash/find';
 
 class HousePlansSearchController {
     constructor ($state, $stateParams, CONTEXT, UI_ENUMS) {
@@ -22,11 +21,11 @@ class HousePlansSearchController {
         let filterTextStringArray = [];
 
         _forOwn(this.filterText, (value) => {
-            filterTextStringArray.push(value);
+            filterTextStringArray.push(`<span class="label label-default">${value}</span>`);
         });
 
         if (filterTextStringArray.length > 0) {
-            filterTextString = ` - Filtered By: ${filterTextStringArray.join(' | ')}`;
+            filterTextString = ` - Filtered By: ${filterTextStringArray.join(' ')}`;
         }
 
         this.hasFilters = filterTextString.length > 0;

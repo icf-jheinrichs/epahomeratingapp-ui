@@ -6,6 +6,19 @@
     position: relative;
 }
 
+.search-meta {
+    margin-bottom: 0;
+
+    .label {
+        display: inline-block;
+        margin: 0 $offset-small $offset-small 0;
+    }
+}
+
+.search-terms {
+    min-width: 0;
+}
+
 .popover-jobs-search {
     .popover-panel-body {
         padding: 0;

@@ -4,6 +4,11 @@
     padding: $padding-small $padding-large;
 }
 
+.label-default {
+    background-color: lighten($brand-auxillary, 3%);
+    border-radius: $label-border-radius;
+}
+
 .label-rating-type,
 .label-sample-set {
     display: inline-block;
@@ -13,7 +18,7 @@
 
 .label-sample-set {
     background-color: $label-sample-set;
-    border-radius: 10px;
+    border-radius: $label-border-radius;
     line-height: $line-height-small;
 }
 
