@@ -1,13 +1,25 @@
 @import '../../../../scss/variables';
 
 .item-list-head-jobs {
+    font-size: $font-size-small;
     font-weight: bold;
-    margin: $gutter-half 0 $offset-default;
-    padding-right: 55px;
+    line-height: 1em;
+    margin: $offset-default 0;
+    padding-right: 30px;
+
+    &.item-list-head-jobs-admin {
+        padding-right: 40px;
+    }
 
     span {
+        margin-right: 10px;
         text-align: center;
-        width: 80px;
+        width: 60px;
+    }
+
+    .item-list-head-jobs-offline {
+        padding: 0 10px 0 20px;
+        width: 90px;
     }
 }
 
