@@ -1,8 +1,11 @@
 <form class="jobs-search flex-row">
     <p class="search-meta">
-        <strong>{{jobsSearchCtrl.quantity}} <ng-pluralize count="jobsSearchCtrl.quantity" when="{'one' : 'Job', 'other' : 'Jobs'}"></ng-pluralize></strong> {{jobsSearchCtrl.filterTextString}}
-        <button data-ng-if="jobsSearchCtrl.hasFilters" class="btn-link-inline" type="button" data-ng-click="jobsSearchCtrl.clear()"> Clear All Filters</button>
+        <strong>{{::jobsSearchCtrl.quantity}} <ng-pluralize count="jobsSearchCtrl.quantity" when="{'one' : 'Job', 'other' : 'Jobs'}"></ng-pluralize></strong> <span data-ng-bind-html="::jobsSearchCtrl.filterTextString"></span>
     </p>
+
+    <div class="flex-item-static">
+        <button data-ng-if="jobsSearchCtrl.hasFilters" class="btn-link-inline nowrap" type="button" data-ng-click="jobsSearchCtrl.clear()"> Clear All Filters</button>
+    </div>
 
     <div
         class="job-search-popover-wrapper popover-wrapper flex-item-pull-right flex-item-static flex-item-fixed-width"
