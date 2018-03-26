@@ -29,6 +29,12 @@ class ModalService {
             }
         });
     }
+
+    closeModal (modalId) {
+        if (this.modals[modalId]) {
+            this.modals[modalId].close();
+        }
+    }
 }
 
 export default ModalService;

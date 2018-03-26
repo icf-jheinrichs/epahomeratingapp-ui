@@ -29,6 +29,8 @@ import checklistItemStaticPressureComponent from './checklist-item/item-static-p
 import checklistItemHvacCommissioningComponent from './checklist-item/item-hvac-commissioning/item-hvac-commissioning.component';
 import checklistItemHvacEquipmentComponent from './checklist-item/item-hvac-equipment/item-hvac-equipment.component';
 import hvacEquipmentComponent from './checklist-item/item-hvac-equipment/hvac-equipment/hvac-equipment.component';
+import checklistItemWaterHeaterEquipmentComponent from './checklist-item/item-water-heater-equipment/item-water-heater-equipment.component';
+import waterHeaterEquipmentComponent from './checklist-item/item-water-heater-equipment/water-heater-equipment/water-heater-equipment.component';
 import checklistItemMeasuredVentilationComponent from './checklist-item/item-measured-ventilation/item-measured-ventilation.component';
 import checklistItemAirInletLocationsComponent from './checklist-item/item-air-inlet-locations/item-air-inlet-locations.component';
 import checklistItemSelectThermalStrategyComponent from './checklist-item/item-select-thermal-strategy/item-select-thermal-strategy.component';
@@ -65,6 +67,8 @@ let jobsModule
         .component('checklistItemHvacCommissioning', checklistItemHvacCommissioningComponent)
         .component('checklistItemHvacEquipment', checklistItemHvacEquipmentComponent)
         .component('hvacEquipment', hvacEquipmentComponent)
+        .component('checklistItemWaterHeaterEquipment', checklistItemWaterHeaterEquipmentComponent)
+        .component('waterHeaterEquipment', waterHeaterEquipmentComponent)
         .component('checklistItemMeasuredVentilation', checklistItemMeasuredVentilationComponent)
         .component('checklistItemAirInletLocations', checklistItemAirInletLocationsComponent)
         .component('checklistItemSelectThermalStrategy', checklistItemSelectThermalStrategyComponent)

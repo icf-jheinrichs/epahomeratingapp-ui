@@ -50,6 +50,13 @@
         item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
     </checklist-item-hvac-commissioning>
 
+    <checklist-item-water-heater-equipment
+        data-ng-if="::checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom8'"
+        item-id="{{::checklistItemStubCtrl.itemId}}"
+        item-category="{{::checklistItemStubCtrl.itemCategory}}"
+        item-category-progress="{{::checklistItemStubCtrl.itemCategoryProgress}}">
+    </checklist-item-water-heater-equipment>
+
     <checklist-item-measured-ventilation
         data-ng-if="::checklistItemStubCtrl.isApplicable && checklistItemStubCtrl.checklistItem.Type === 'Custom5'"
         item-id="{{::checklistItemStubCtrl.itemId}}"
