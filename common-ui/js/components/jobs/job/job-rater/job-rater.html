@@ -20,14 +20,13 @@
             <span class="label-rating-type" data-ng-class="jobRaterCtrl.RatingTypeClass">{{::jobRaterCtrl.RatingType}}</span>
             <span class="label label-sample-set" data-ng-if="::jobRaterCtrl.isSample">Sample Set: {{::jobRaterCtrl.sampleQuantity}} <i class="fa fa-map-marker" aria-hidden="true"></i></span>
             <span class="last-update small"><strong>{{::jobRaterCtrl.lastUpdateType}}:</strong> {{::jobRaterCtrl.lastUpdateTime}}</span>
-            <span class="label-job-status" data-ng-if="jobRaterCtrl.hideJobStatus()">{{::jobRaterCtrl.job.Status}}</span>
         </div>
 
         <h3 class="list-item-title job-title" id="job-{{jobRaterCtrl.job._id}}" data-ng-bind-html="jobRaterCtrl.JobTitle"></h3>
 
         <div class="flex-row">
             <span class="job-builder">{{::jobRaterCtrl.job.Primary.Builder}}</span>
-            <span class="job-status" data-ng-if="jobAdminCtrl.hideJobStatus()">{{::jobAdminCtrl.job.Status}}</span>
+            <span class="job-status" data-ng-if="jobRaterCtrl.hideJobStatus()">{{::jobRaterCtrl.job.Status}}</span>
         </div>
 
     </div>
