@@ -3,7 +3,8 @@
         <toggle
             handle-change="jobRaterCtrl.handleAvailableOfflineChange(isOn)"
             toggle-class="jobRaterCtrl.toggleStatusClass"
-            toggle-confirmation-dialog="{{::jobRaterCtrl.DIALOG}}"
+            toggle-confirmation-dialog="{{::jobRaterCtrl.OFFLINE_CONFIRMATION_DIALOG}}"
+            toggle-disabled-dialog="{{::jobRaterCtrl.OFFLINE_DISABLED_DIALOG}}"
             toggle-id="{{::jobRaterCtrl.job._id}}"
             toggle-value="jobRaterCtrl.job.offlineAvailable">Make Job Available offline: <span data-ng-bind-html="jobRaterCtrl.JobTitle"></span></span>
         </toggle>

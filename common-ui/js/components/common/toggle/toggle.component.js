@@ -6,6 +6,7 @@ let toggleComponent = {
         handleChange             : '&',
         toggleClass              : '<',
         toggleConfirmationDialog : '@',
+        toggleDisabledDialog     : '@',
         toggleId                 : '@',
         toggleValue              : '<'
     },
