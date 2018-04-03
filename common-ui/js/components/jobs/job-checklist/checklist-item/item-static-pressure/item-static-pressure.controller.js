@@ -34,7 +34,12 @@ class ChecklistItemStaticPressureController extends ChecklistItemClass {
                     },
                     'Key'                : 'ReturnSideExternalStaticPressure',
                     'Locked'             : false,
-                    'IsLibraryAttribute' : false
+                    'IsLibraryAttribute' : false,
+                    'ErrorMessage'       : {
+                        'overMax'  : 'Please enter value between -1.0 and 0',
+                        'underMin' : 'Please enter value between -1.0 and 0',
+                        'notValid' : 'Please enter value between -1.0 and 0'
+                    }
                 },
                 {
                     'Name'               : 'Supply Side External Static Pressure',
@@ -46,7 +51,12 @@ class ChecklistItemStaticPressureController extends ChecklistItemClass {
                     },
                     'Key'                : 'SupplySideExternalStaticPressure',
                     'Locked'             : false,
-                    'IsLibraryAttribute' : false
+                    'IsLibraryAttribute' : false,
+                    'ErrorMessage'       : {
+                        'overMax'  : 'Please enter value between 0 and 1.0',
+                        'underMin' : 'Please enter value between 0 and 1.0',
+                        'notValid' : 'Please enter value between 0 and 1.0'
+                    }
                 }
             ]
         };

@@ -66,7 +66,8 @@
                             field="field"
                             focus="{{checklistItemMrfEditCtrl.focus === field.Key}}"
                             ng-model="checklistItemMrfEditCtrl.mrfEditForm[field.Key]"
-                            value="checklistItemMrfEditCtrl.editMrfData[field.Key]">
+                            value="checklistItemMrfEditCtrl.editMrfData[field.Key]"
+                            custom-error-message="field.ErrorMessage">
                         </mrf-edit-field-decimal>
                     </div>
 
