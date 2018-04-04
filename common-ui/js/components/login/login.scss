@@ -9,9 +9,14 @@ $login-background:  $body-bg;
     width: $login-width;
 
     .flipper,
-    .login-panel {
+    .login-panel,
+    .reset-password-panel {
         height: $login-height;
         width: $login-width;
+    }
+
+    .reset-password-panel {
+        height: auto;
     }
 
     .form-actions {
@@ -20,12 +25,14 @@ $login-background:  $body-bg;
 }
 
 .flipper,
-.register-panel {
+.register-panel,
+.reset-password-panel {
     box-shadow: $shadow-default;
 }
 
 .login-panel,
-.register-panel {
+.register-panel,
+.reset-password-panel {
     padding: $gutter-half $padding-large $padding-large;
 }
 

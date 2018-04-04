@@ -294,6 +294,7 @@ const STATE_NAME = {
     PROVIDERS                         : 'providers',
     USERS                             : 'users',
     USER_EDIT                         : 'user-edit',
+    USER_RESET_PASSWORD               : 'user-reset-password',
     USER_REGISTER                     : 'user-register',
     USER_SETTINGS                     : 'user-settings'
 };

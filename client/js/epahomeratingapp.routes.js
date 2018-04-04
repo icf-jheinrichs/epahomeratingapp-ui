@@ -385,6 +385,19 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
+        .state(STATE_NAME.USER_RESET_PASSWORD, {
+            url        : '/users/reset-password/{C_ID}',
+            component  : 'userResetPasswordPage',
+            data       : {
+                requiresAuth : false
+            },
+            resolve    : {
+                user : (AuthenticationService, $stateParams) => {
+                    return AuthenticationService.getUserResetPassword($stateParams.C_ID);
+                }
+            }
+        })
+
         .state(STATE_NAME.USER_REGISTER, {
             url        : '/users/register/{C_ID}',
             component  : 'userRegisterPage',
