@@ -1,0 +1,71 @@
+<section class="page-container">
+    <header class="page-header">
+        <h2>Welcome to ENERGY STAR RaterPRO</h2>
+    </header>
+
+    <form class="row" name="loginForm" data-ng-submit="userRegisterPageCtrl.onSubmit()" novalidate>
+        <status-message status="userRegisterPageCtrl.message"></status-message>
+
+        <div class="register-panel col-xs-6 offset-xs-3">
+            <h3>Please create a password for your account</h3>
+
+            <div class="form-group">
+                <span class="control-label">Login</span>
+                <p class="form-control-static">{{::userRegisterPageCtrl.user.userName}}</p>
+            </div>
+
+            <div class="form-group" data-ng-class="{'has-error' : userRegisterPageCtrl.userSettings.newPassword.$invalid && userRegisterPageCtrl.userSettings.newPassword.$dirty}">
+                <label for="loginFormPassword" class="control-label">Password</label>
+                <input
+                    name="password"
+                    data-ng-model="userRegisterPageCtrl.password"
+                    required="required"
+                    type="password"
+                    data-ng-minlength="8"
+                    class="form-control"
+                    data-ng-pattern="userRegisterPageCtrl.passwordPattern"
+                    id="loginFormPassword" />
+
+                <p class="note">Password must be at least 8 characters long, contain an upper and lower case letter, one digit and one special character (@$!%*#?&amp;)</p>
+            </div>
+
+            <div class="form-group" data-ng-class="{'has-error' : userRegisterPageCtrl.userSettings.confirmPassword.$invalid && userRegisterPageCtrl.userSettings.confirmPassword.$dirty}">
+                <label for="confirmPassword" class="control-label">Confirm Password</label>
+                <input
+                    name="password"
+                    data-ng-model="userRegisterPageCtrl.confirmPassword"
+                    required="required"
+                    type="password"
+                    data-ng-minlength="8"
+                    class="form-control"
+                    data-ng-pattern="userRegisterPageCtrl.passwordPattern"
+                    id="confirmPassword" />
+
+                    <p class="form-control-error" role="alert">
+                        Passwords must be valid and match.
+                    </p>
+            </div>
+        </div>
+
+        <div class="col-xs-12">
+            <h3>Read and accept the terms of use</h3>
+
+            <div class="scrollable scrollable-large">
+                <div class="scrollable-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </div>
+
+            <div class="form-actions text-right">
+                <label class="offset-right"><input type="checkbox" data-ng-model="userRegisterPageCtrl.acceptTerms" /> Accept Terms</label>
+                <button type="submit" class="btn" data-ng-disabled="!userRegisterPageCtrl.acceptTerms"><i data-ng-class="{'hidden' : !userRegisterPageCtrl.isBusy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Create Account</button>
+            </div>
+        </div>
+    </form>
+</section>

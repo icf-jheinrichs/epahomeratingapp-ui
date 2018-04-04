@@ -1,0 +1,10 @@
+.scrollable {
+    border: $border-default;
+    border-radius: $border-radius-large;
+    height: $scrollable-height-default;
+    overflow: scroll;
+
+    .scrollable-body {
+        padding: $padding-large;
+    }
+}

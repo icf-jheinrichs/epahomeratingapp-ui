@@ -17,14 +17,22 @@ $login-background:  $body-bg;
     .form-actions {
         padding: $offset-default 0 0;
     }
+}
 
-    .flipper,
-    .register-panel {
-        box-shadow: $shadow-default;
-    }
+.flipper,
+.register-panel {
+    box-shadow: $shadow-default;
 }
 
 .login-panel,
 .register-panel {
     padding: $gutter-half $padding-large $padding-large;
+}
+
+.register-panel {
+    margin: $offset-large 0;
+}
+
+.offset-right {
+    margin-right: $offset-default;
 }
