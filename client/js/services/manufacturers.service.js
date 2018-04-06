@@ -5,14 +5,8 @@ class ManufacturersService {
         'ngInject';
 
         this.FILTERED_MANUFACTURERS = {
-            EVAPORATOR   : _filter(UI_ENUMS.MANUFACTURERS, (manufacturer) => {
-                return manufacturer.type.evaporator;
-            }),
-            CONDENSER    : _filter(UI_ENUMS.MANUFACTURERS, (manufacturer) => {
-                return manufacturer.type.condenser;
-            }),
-            FURNACE      : _filter(UI_ENUMS.MANUFACTURERS, (manufacturer) => {
-                return manufacturer.type.furnace;
+            HVAC         : _filter(UI_ENUMS.MANUFACTURERS, (manufacturer) => {
+                return manufacturer.type.hvac;
             }),
             WATER_HEATER : _filter(UI_ENUMS.MANUFACTURERS, (manufacturer) => {
                 return manufacturer.type.waterHeater;

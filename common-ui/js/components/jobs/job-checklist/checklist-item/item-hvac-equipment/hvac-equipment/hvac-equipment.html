@@ -31,7 +31,7 @@
                         data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                         data-ng-model="hvacEquipmentCtrl.equipment.Furnace.Manufacturer"
                         data-ng-model-options="{debounce: 125}"
-                        data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('FURNACE', hvacEquipmentCtrl.equipment.Furnace.Manufacturer)"
+                        data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('HVAC', hvacEquipmentCtrl.equipment.Furnace.Manufacturer)"
                         id="furnace-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}"
                         name="Furnace"
                         placeholder="Manufacturer"
@@ -40,12 +40,12 @@
 
                     <div
                         class="type-ahead-results"
-                        type-ahead-result-data="hvacEquipmentCtrl.filteredManufacturers.FURNACE"
+                        type-ahead-result-data="hvacEquipmentCtrl.filteredManufacturers.HVAC"
                         type-ahead-results="type-ahead-results">
                             <button
                                 class="btn btn-link btn-block type-ahead-result"
                                 data-ng-click="hvacEquipmentCtrl.setEquipmentManfacturer('Furnace', manufacturer.name)"
-                                data-ng-repeat="manufacturer in hvacEquipmentCtrl.filteredManufacturers.FURNACE track by manufacturer.name"
+                                data-ng-repeat="manufacturer in hvacEquipmentCtrl.filteredManufacturers.HVAC track by manufacturer.name"
                                 type="button">
                                 {{manufacturer.name}}
                             </button>
@@ -107,7 +107,7 @@
                         data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                         data-ng-model="hvacEquipmentCtrl.equipment.Condenser.Manufacturer"
                         data-ng-model-options="{debounce: 125}"
-                        data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('CONDENSER', hvacEquipmentCtrl.equipment.Condenser.Manufacturer)"
+                        data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('HVAC', hvacEquipmentCtrl.equipment.Condenser.Manufacturer)"
                         id="condenser-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}"
                         name="Condenser"
                         placeholder="Manufacturer"
@@ -116,12 +116,12 @@
 
                     <div
                         class="type-ahead-results"
-                        type-ahead-result-data="hvacEquipmentCtrl.filteredManufacturers.CONDENSER"
+                        type-ahead-result-data="hvacEquipmentCtrl.filteredManufacturers.HVAC"
                         type-ahead-results="type-ahead-results">
                             <button
                                 class="btn btn-link btn-block type-ahead-result"
                                 data-ng-click="hvacEquipmentCtrl.setEquipmentManfacturer('Condenser', manufacturer.name)"
-                                data-ng-repeat="manufacturer in hvacEquipmentCtrl.filteredManufacturers.CONDENSER track by manufacturer.name"
+                                data-ng-repeat="manufacturer in hvacEquipmentCtrl.filteredManufacturers.HVAC track by manufacturer.name"
                                 type="button">
                                 {{manufacturer.name}}
                             </button>
@@ -183,7 +183,7 @@
                         data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                         data-ng-model="hvacEquipmentCtrl.equipment.Evaporator.Manufacturer"
                         data-ng-model-options="{debounce: 125}"
-                        data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('EVAPORATOR', hvacEquipmentCtrl.equipment.Evaporator.Manufacturer)"
+                        data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('HVAC', hvacEquipmentCtrl.equipment.Evaporator.Manufacturer)"
                         id="evaporator-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}"
                         name="Evaporator"
                         placeholder="Manufacturer"
@@ -192,12 +192,12 @@
 
                     <div
                         class="type-ahead-results"
-                        type-ahead-result-data="hvacEquipmentCtrl.filteredManufacturers.EVAPORATOR"
+                        type-ahead-result-data="hvacEquipmentCtrl.filteredManufacturers.HVAC"
                         type-ahead-results="type-ahead-results">
                             <button
                                 class="btn btn-link btn-block type-ahead-result"
                                 data-ng-click="hvacEquipmentCtrl.setEquipmentManfacturer('Evaporator', manufacturer.name)"
-                                data-ng-repeat="manufacturer in hvacEquipmentCtrl.filteredManufacturers.EVAPORATOR track by manufacturer.name"
+                                data-ng-repeat="manufacturer in hvacEquipmentCtrl.filteredManufacturers.HVAC track by manufacturer.name"
                                 type="button">
                                 {{manufacturer.name}}
                             </button>

@@ -32,9 +32,7 @@ class HVACEquipmentController {
         // let evaporatorManufacturerIndex;
 
         this.filteredManufacturers  = {
-            EVAPORATOR   : this.getFilteredManufacturers('EVAPORATOR'),
-            CONDENSER    : this.getFilteredManufacturers('CONDENSER'),
-            FURNACE      : this.getFilteredManufacturers('FURNACE')
+            HVAC : this.getFilteredManufacturers('HVAC')
         };
 
         this.index = parseInt(this.index, 10);
