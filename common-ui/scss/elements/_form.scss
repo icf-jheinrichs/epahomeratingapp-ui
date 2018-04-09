@@ -123,6 +123,10 @@ fieldset {
     padding: $padding-default;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    .input-unit {
+        font-size: $font-size-base;
+    }
 }
 
 .has-feedback .form-control {
