@@ -9,22 +9,37 @@ $login-background:  $body-bg;
     width: $login-width;
 
     .flipper,
-    .login-panel {
+    .login-panel,
+    .reset-password-panel {
         height: $login-height;
         width: $login-width;
+    }
+
+    .reset-password-panel {
+        height: auto;
     }
 
     .form-actions {
         padding: $offset-default 0 0;
     }
+}
 
-    .flipper,
-    .register-panel {
-        box-shadow: $shadow-default;
-    }
+.flipper,
+.register-panel,
+.reset-password-panel {
+    box-shadow: $shadow-default;
 }
 
 .login-panel,
-.register-panel {
+.register-panel,
+.reset-password-panel {
     padding: $gutter-half $padding-large $padding-large;
+}
+
+.register-panel {
+    margin: $offset-large 0;
+}
+
+.offset-right {
+    margin-right: $offset-default;
 }

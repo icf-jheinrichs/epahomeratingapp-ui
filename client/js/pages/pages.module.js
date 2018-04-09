@@ -12,6 +12,8 @@ import providersPageComponent from './providers-page/providers-page.component';
 import userSettingsPageComponent from './user-settings-page/user-settings-page.component';
 import usersPageComponent from './users-page/users-page.component';
 import userEditPageComponent from './user-edit-page/user-edit-page.component';
+import userRegisterPageComponent from './user-register-page/user-register-page.component';
+import userResetPasswordPageComponent from './user-reset-password-page/user-reset-password-page.component';
 
 let servicesModule
     = angular
@@ -29,6 +31,8 @@ let servicesModule
         .component('providersPage', providersPageComponent)
         .component('userSettingsPage', userSettingsPageComponent)
         .component('usersPage', usersPageComponent)
-        .component('userEditPage', userEditPageComponent);
+        .component('userEditPage', userEditPageComponent)
+        .component('userRegisterPage', userRegisterPageComponent)
+        .component('userResetPasswordPage', userResetPasswordPageComponent);
 
 export default servicesModule;

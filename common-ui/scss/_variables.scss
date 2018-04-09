@@ -119,7 +119,7 @@ $arrow-large:           15px;
 //## Shadows
 //
 
-$shadow-color-default:  rgba(0, 0, 0, .25);
+$shadow-color-default:  rgba(0, 0, 0, .20);
 $shadow-color-light:    rgba(0, 0, 0, .1);
 $shadow-color-dark:     rgba(0, 0, 0, .5);
 $shadow-color-inset:    rgba(0, 0, 0, .05);
@@ -270,6 +270,10 @@ $toggle-size-small: 20px;
 // Tooltip
 
 $tooltip-width-default: 200px;
+
+// Scrollable
+$scrollable-height-default: 200px;
+$scrollable-height-large: 400px;
 
 //
 //## Z indexes

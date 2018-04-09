@@ -1,3 +1,5 @@
+import {PATTERN} from '../../epahomeratingapp.config.js';
+
 const USER_SETTINGS_ERROR = {
     type        : 'error',
     text        : 'An error occurred while trying to update your settings.',
@@ -25,8 +27,8 @@ class UserPageController {
         this.AuthenticationService = AuthenticationService;
         this.AuthorizationService  = AuthorizationService;
 
-        this.userNamePattern       = /^[A-Za-z\d@._-]{7,}$/;
-        this.passwordPattern       = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        this.userNamePattern       = PATTERN.USER_NAME;
+        this.passwordPattern       = PATTERN.PASSWORD;
     }
 
     $onInit () {

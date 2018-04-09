@@ -90,6 +90,14 @@ class AuthenticationService {
         return this.user;
     }
 
+    getUserResetPassword (C_ID) {
+        return this.$q((resolve, reject) => {
+            resolve({
+                userName : 'Hi'
+            });
+        });
+    }
+
     getUserInfo () {
         return {
             userId    : this.user.userId,

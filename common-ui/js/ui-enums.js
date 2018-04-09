@@ -272,7 +272,6 @@ const STATE_NAME = {
     DIAGNOSTICS                       : 'diagnostics',
     LOGIN                             : 'login',
     NOT_AUTHORIZED                    : 'not-authorized',
-    REGISTER                          : 'register',
     PROGRESS                          : 'progress',
     TEMPLATE_LIBRARY                  : 'template-library',
     TEMPLATE_LIBRARY_NEW              : 'template-library.new',
@@ -296,6 +295,8 @@ const STATE_NAME = {
     PROVIDERS                         : 'providers',
     USERS                             : 'users',
     USER_EDIT                         : 'user-edit',
+    USER_RESET_PASSWORD               : 'user-reset-password',
+    USER_REGISTER                     : 'user-register',
     USER_SETTINGS                     : 'user-settings'
 };
 

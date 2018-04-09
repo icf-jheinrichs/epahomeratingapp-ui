@@ -63,14 +63,6 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-        .state(STATE_NAME.REGISTER, {
-            url        : '/register',
-            component  : 'registerPage',
-            data       : {
-                requiresAuth : false
-            }
-        })
-
         .state(STATE_NAME.TEMPLATE_LIBRARY, {
             url        : '/template-library',
             component  : 'housePlansPage',
@@ -389,6 +381,32 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             resolve    : {
                 user : (UserCompanyService, $stateParams) => {
                     return UserCompanyService.getUser($stateParams.C_ID);
+                }
+            }
+        })
+
+        .state(STATE_NAME.USER_RESET_PASSWORD, {
+            url        : '/users/reset-password/{C_ID}',
+            component  : 'userResetPasswordPage',
+            data       : {
+                requiresAuth : false
+            },
+            resolve    : {
+                user : (AuthenticationService, $stateParams) => {
+                    return AuthenticationService.getUserResetPassword($stateParams.C_ID);
+                }
+            }
+        })
+
+        .state(STATE_NAME.USER_REGISTER, {
+            url        : '/users/register/{C_ID}',
+            component  : 'userRegisterPage',
+            data       : {
+                requiresAuth : false
+            },
+            resolve    : {
+                user : (UserCompanyService, $stateParams) => {
+                    return UserCompanyService.getNewUser($stateParams.C_ID);
                 }
             }
         })
