@@ -546,13 +546,6 @@ const MANUFACTURERS = [
         }
     },
     {
-        name : 'Ducane',
-        type : {
-            hvac        : true,
-            waterHeater : false
-        }
-    },
-    {
         name : 'Dunkirk Radiator',
         type : {
             hvac        : true,
@@ -1604,13 +1597,6 @@ const MANUFACTURERS = [
     },
     {
         name : 'Thermo-Dynamics Boiler Co.',
-        type : {
-            hvac        : true,
-            waterHeater : false
-        }
-    },
-    {
-        name : 'Trane',
         type : {
             hvac        : true,
             waterHeater : false

@@ -1,6 +1,8 @@
 import ChecklistItemClass from '../checklist-item.class';
+import _filter from 'lodash/filter';
 import _findIndex from 'lodash/findIndex';
 import _cloneDeep from 'lodash/cloneDeep';
+import uuidv4 from 'uuid/v4';
 
 const NEW_EQUIPMENT = {
     Type         : '',
@@ -23,6 +25,23 @@ const NEW_EQUIPMENT = {
 
 class ChecklistItemHVACCommissioningController extends ChecklistItemClass {
     $onInit () {
+
+        this.EQUIPMENT_TYPE = [
+            {
+                key  : 'furnace',
+                name : 'Furnace'
+            },
+            {
+                key  : 'ac',
+                name : 'Air Conditioner'
+            },
+            {
+                key  : 'hp',
+                name : 'Heat Pump'
+            }
+        ];
+
+        this.MODAL_EDIT_HVAC_EQUIPMENT = this.MODAL.EDIT_HVAC_EQUIPMENT;
 
         this.EQUIPMENT_MATCHES_DOCUMENT = [
             {
@@ -63,24 +82,62 @@ class ChecklistItemHVACCommissioningController extends ChecklistItemClass {
         this.setItemData(this.itemData);
     }
 
+    //TODO: DRY make an equipment or similar component/ directive
+    editEquipment () {
+        if (!this.isReview) {
+            this
+                .editEquipmentData = _cloneDeep(this.itemData.Equipment || []);
+
+            this
+                .ModalService
+                .openModal(this.MODAL_EDIT_HVAC_EQUIPMENT);
+        }
+    }
+
     addEquipment () {
-        this.itemData.Equipment.push(_cloneDeep(NEW_EQUIPMENT));
+        const newEquipment = _cloneDeep(NEW_EQUIPMENT);
+        newEquipment.id = uuidv4();
+
+        this
+            .editEquipmentData
+            .push(newEquipment);
     }
 
-    deleteEquipment (index) {
-        this.itemData.Equipment.splice(index, 1);
+    deleteEquipment (id) {
+        const index = _findIndex(this.editEquipmentData, {id : id});
 
-        this.setItemData(this.itemData);
+        this
+            .editEquipmentData
+            .splice(index, 1);
     }
 
-    saveEquipment (index, equipment) {
-        return this.$q((resolve, reject) => {
-            this.itemData.Equipment[index] = equipment;
+    saveEquipment () {
+        if (this.itemData.Equipment) {
+            this.itemData.Equipment.length = 0;
+        }
 
-            this.setItemData(this.itemData);
+        this
+            .$timeout(() => {
+                this
+                    .itemData
+                    .Equipment
+                    = _filter(this.editEquipmentData, equipment => {
+                            return (equipment.Manufacturer !== '') || (equipment.Model !== '') || (equipment.SerialNumber !== '');
+                        });
 
-            resolve({success : true});
-        });
+                this.setItemData(this.itemData);
+
+                this
+                    .ModalService
+                    .closeModal(this.MODAL_EDIT_HVAC_EQUIPMENT);
+            }, 25);
+    }
+    // end equipment DRY
+
+    getEquipmentTypeName (key) {
+        const index = _findIndex(this.EQUIPMENT_TYPE, {key : key});
+
+        return this.EQUIPMENT_TYPE[index].name;
     }
 
     get hasHVACDesignReport () {

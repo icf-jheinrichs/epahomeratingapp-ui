@@ -1,23 +1,35 @@
 <div class="flex-row">
-    <div class="equipment-type form-group flex-col flex-item-static">
-        <label for="equipment-type-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Type</label>
-        <select
-            class="form-control"
-            data-ng-options="type.name for type in hvacEquipmentCtrl.EQUIPMENT_TYPE track by type.key"
-            data-ng-model="hvacEquipmentCtrl.selectedEquipmentType"
-            data-ng-change="hvacEquipmentCtrl.onEquipmentTypeChange()"
-            data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
-            id="equipment-type-{{::hvacEquipmentCtrl.index}}">
-        </select>
+    <div class="equipment-type flex-col flex-item-grow">
+        <div class="form-group">
+            <label for="equipment-type-{{::hvacEquipmentCtrl.equipment.id}}" class="sr-only">Equipment Type</label>
+            <select
+                class="form-control"
+                data-ng-options="type.name for type in hvacEquipmentCtrl.EQUIPMENT_TYPE track by type.key"
+                data-ng-model="hvacEquipmentCtrl.selectedEquipmentType"
+                data-ng-change="hvacEquipmentCtrl.onEquipmentTypeChange()"
+                id="equipment-type-{{::hvacEquipmentCtrl.equipment.id}}">
+            </select>
+        </div>
     </div>
 
+    <div class="equipment-actions flex-col flex-item-static flex-item-pull-right">
+        <button
+            aria-label="Delete"
+            class="btn btn-link btn-no-label"
+            type="button"
+            data-ng-click="hvacEquipmentCtrl.onDeleteEquipment()">
+
+            <i class="fa fa-remove" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+
+<div class="flex-row">
     <div class="equipment-details flex-col flex-item-grow">
         <div class="row row-condensed" data-ng-class="{'hidden' : hvacEquipmentCtrl.equipment.Type !== hvacEquipmentCtrl.EQUIPMENT_TYPE[0].key}">
-            <h5 class="col-xs-2 title-furnace"><span class="sr-only">Furnace</span></h5>
-
             <div class="form-group col-xs-4 furnace-equipment-manufacturer">
 
-                <label for="furnace-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Manufacturer</label>
+                <label for="furnace-equipment-manufacturer-{{::hvacEquipmentCtrl.equipment.id}}" class="sr-only">Equipment Manufacturer</label>
 
                 <div
                     class="type-ahead"
@@ -28,11 +40,10 @@
 
                     <input
                         class="form-control"
-                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                         data-ng-model="hvacEquipmentCtrl.equipment.Furnace.Manufacturer"
                         data-ng-model-options="{debounce: 125}"
                         data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('HVAC', hvacEquipmentCtrl.equipment.Furnace.Manufacturer)"
-                        id="furnace-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}"
+                        id="furnace-equipment-manufacturer-{{::hvacEquipmentCtrl.equipment.id}}"
                         name="Furnace"
                         placeholder="Manufacturer"
                         type="text"
@@ -53,33 +64,30 @@
                 </div>
             </div>
 
-            <div class="form-group col-xs-3">
-                <label for="furnace-equipment-model-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Model</label>
+            <div class="form-group col-xs-4">
+                <label for="furnace-equipment-model-{{::hvacEquipmentCtrl.equipment.id}}" class="sr-only">Equipment Model</label>
                 <input
                     class="form-control"
-                    data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                     data-ng-model="hvacEquipmentCtrl.equipment.Furnace.Model"
-                    id="furnace-equipment-model-{{::hvacEquipmentCtrl.index}}"
+                    id="furnace-equipment-model-{{::hvacEquipmentCtrl.equipment.id}}"
                     placeholder="Equipment Model"
                     type="text" />
             </div>
 
-            <div class="form-group col-xs-3">
-                <label for="furnace-equipment-serial-number-{{::hvacEquipmentCtrl.index}}" class="sr-only">Serial Number</label>
+            <div class="form-group col-xs-4">
+                <label for="furnace-equipment-serial-number-{{::hvacEquipmentCtrl.equipment.id}}" class="sr-only">Serial Number</label>
 
                 <div class="input-group">
                     <input
                         class="form-control"
-                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                         data-ng-model="hvacEquipmentCtrl.equipment.Furnace.SerialNumber"
-                        id="furnace-equipment-serial-number-{{::hvacEquipmentCtrl.index}}"
+                        id="furnace-equipment-serial-number-{{::hvacEquipmentCtrl.equipment.id}}"
                         placeholder="Serial Number"
                         type="text" />
 
                     <!-- <button
                         aria-label="Scan Barcode"
                         class="btn input-add-on"
-                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                         data-ng-click="hvacEquipmentCtrl.onScanBarcode('Furnace')"
                         type="button">
 
@@ -93,7 +101,7 @@
             <h5 class="col-xs-2">Condenser</h5>
 
             <div class="form-group col-xs-4">
-                <label for="condenser-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Manufacturer</label>
+                <label for="condenser-equipment-manufacturer-{{::hvacEquipmentCtrl.equipment.id}}" class="sr-only">Equipment Manufacturer</label>
 
                 <div
                     class="type-ahead"
@@ -104,11 +112,10 @@
 
                     <input
                         class="form-control"
-                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                         data-ng-model="hvacEquipmentCtrl.equipment.Condenser.Manufacturer"
                         data-ng-model-options="{debounce: 125}"
                         data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('HVAC', hvacEquipmentCtrl.equipment.Condenser.Manufacturer)"
-                        id="condenser-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}"
+                        id="condenser-equipment-manufacturer-{{::hvacEquipmentCtrl.equipment.id}}"
                         name="Condenser"
                         placeholder="Manufacturer"
                         type="text"
@@ -130,32 +137,29 @@
             </div>
 
             <div class="form-group col-xs-3">
-                <label for="condenser-equipment-model-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Model</label>
+                <label for="condenser-equipment-model-{{::hvacEquipmentCtrl.equipment.id}}" class="sr-only">Equipment Model</label>
                 <input
                     class="form-control"
-                    data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                     data-ng-model="hvacEquipmentCtrl.equipment.Condenser.Model"
-                    id="condenser-equipment-model-{{::hvacEquipmentCtrl.index}}"
+                    id="condenser-equipment-model-{{::hvacEquipmentCtrl.equipment.id}}"
                     placeholder="Equipment Model"
                     type="text" />
             </div>
 
             <div class="form-group col-xs-3">
-                <label for="condenser-equipment-serial-number-{{::hvacEquipmentCtrl.index}}" class="sr-only">Serial Number</label>
+                <label for="condenser-equipment-serial-number-{{::hvacEquipmentCtrl.equipment.id}}" class="sr-only">Serial Number</label>
 
                 <div class="input-group">
                     <input
                         type="text"
                         class="form-control"
-                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                         data-ng-model="hvacEquipmentCtrl.equipment.Condenser.SerialNumber"
-                        id="condenser-equipment-serial-number-{{::hvacEquipmentCtrl.index}}"
+                        id="condenser-equipment-serial-number-{{::hvacEquipmentCtrl.equipment.id}}"
                         placeholder="Serial Number" />
 
                     <!-- <button
                         aria-label="Scan Barcode"
                         class="btn input-add-on"
-                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                         data-ng-click="hvacEquipmentCtrl.onScanBarcode('Condenser')"
                         type="button">
 
@@ -169,7 +173,7 @@
             <h5 class="col-xs-2">Evaporator</h5>
 
             <div class="form-group col-xs-4">
-                <label for="evaporator-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Manufacturer</label>
+                <label for="evaporator-equipment-manufacturer-{{::hvacEquipmentCtrl.equipment.id}}" class="sr-only">Equipment Manufacturer</label>
 
                 <div
                     class="type-ahead"
@@ -180,11 +184,10 @@
 
                     <input
                         class="form-control"
-                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                         data-ng-model="hvacEquipmentCtrl.equipment.Evaporator.Manufacturer"
                         data-ng-model-options="{debounce: 125}"
                         data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('HVAC', hvacEquipmentCtrl.equipment.Evaporator.Manufacturer)"
-                        id="evaporator-equipment-manufacturer-{{::hvacEquipmentCtrl.index}}"
+                        id="evaporator-equipment-manufacturer-{{::hvacEquipmentCtrl.equipment.id}}"
                         name="Evaporator"
                         placeholder="Manufacturer"
                         type="text"
@@ -208,33 +211,30 @@
             </div>
 
             <div class="form-group col-xs-3">
-                <label for="evaporator-equipment-model-{{::hvacEquipmentCtrl.index}}" class="sr-only">Equipment Model</label>
+                <label for="evaporator-equipment-model-{{::hvacEquipmentCtrl.equipment.id}}" class="sr-only">Equipment Model</label>
 
                 <input
                     class="form-control"
-                    data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                     data-ng-model="hvacEquipmentCtrl.equipment.Evaporator.Model"
-                    id="evaporator-equipment-model-{{::hvacEquipmentCtrl.index}}"
+                    id="evaporator-equipment-model-{{::hvacEquipmentCtrl.equipment.id}}"
                     placeholder="Equipment Model"
                     type="text" />
             </div>
 
             <div class="form-group col-xs-3">
-                <label for="evaporator-equipment-serial-number-{{::hvacEquipmentCtrl.index}}" class="sr-only">Serial Number</label>
+                <label for="evaporator-equipment-serial-number-{{::hvacEquipmentCtrl.equipment.id}}" class="sr-only">Serial Number</label>
 
                 <div class="input-group">
                     <input
                         class="form-control"
-                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                         data-ng-model="hvacEquipmentCtrl.equipment.Evaporator.SerialNumber"
-                        id="evaporator-equipment-serial-number-{{::hvacEquipmentCtrl.index}}"
+                        id="evaporator-equipment-serial-number-{{::hvacEquipmentCtrl.equipment.id}}"
                         placeholder="Serial Number"
                         type="text" />
 
                     <!-- <button
                         aria-label="Scan Barcode"
                         class="btn input-add-on"
-                        data-ng-disabled="!hvacEquipmentCtrl.isEditMode"
                         data-ng-click="hvacEquipmentCtrl.onScanBarcode('Evaporator')"
                         type="button">
 
@@ -242,48 +242,6 @@
                     </button> -->
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="equipment-actions flex-col flex-item-static" ng-if="hvacEquipmentCtrl.CONTEXT_IS_APP">
-        <div data-ng-class="{'hidden' : hvacEquipmentCtrl.isEditMode}">
-            <button
-                aria-label="Edit"
-                class="btn btn-link btn-no-label"
-                data-ng-click="hvacEquipmentCtrl.toggleEditMode()"
-                type="button">
-
-                <i class="fa fa-pencil" aria-hidden="true"></i>
-            </button>
-
-            <button
-                aria-label="Delete"
-                class="btn btn-link btn-no-label"
-                type="button"
-                data-ng-click="hvacEquipmentCtrl.onDeleteEquipment()">
-
-                <i class="fa fa-remove" aria-hidden="true"></i>
-            </button>
-        </div>
-
-        <div data-ng-class="{'hidden' : !hvacEquipmentCtrl.isEditMode}">
-            <button
-                aria-label="Save"
-                class="btn btn-link btn-no-label"
-                data-ng-click="hvacEquipmentCtrl.onSaveEquipment()"
-                type="button">
-
-                <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-            </button>
-
-            <button
-                aria-label="Cancel"
-                class="btn btn-link btn-no-label"
-                data-ng-click="hvacEquipmentCtrl.toggleEditMode()"
-                type="button">
-
-                <i class="fa fa-ban" aria-hidden="true"></i>
-            </button>
         </div>
     </div>
 </div>

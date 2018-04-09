@@ -169,6 +169,7 @@ const MESSAGING = {
 const MODAL = {
     COMPLETE_JOB                : 'modal-complete-job',
     DOWNLOAD_REM_XML            : 'modal-download-rem-xml',
+    EDIT_HVAC_EQUIPMENT         : 'modal-edit-hvac-equipment',
     EDIT_WATER_HEATER_EQUIPMENT : 'modal-edit-water-heater-equipment',
     SHOW_FOOTNOTE               : 'modal-show-footnote',
     PROVIDER_JOB_COMMENTS       : 'modal-provider-job-comments',
