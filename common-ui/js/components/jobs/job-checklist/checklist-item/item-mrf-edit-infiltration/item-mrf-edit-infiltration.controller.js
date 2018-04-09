@@ -43,7 +43,7 @@ class MrfEditController {
 
                 this.unitsAreCfm       = this.editMrfData.Units === 'CFM @ 50 Pascals';
 
-                let heatingSeasonValue = parseFloat(this.editMrfData.HeatingSeasonValue);
+                let heatingSeasonValue = this.editMrfData.AnnualValue ? parseFloat(this.editMrfData.AnnualValue) : parseFloat(this.editMrfData.HeatingSeasonValue);
 
                 this.infiltrationValue = (this.unitsAreCfm) ? heatingSeasonValue : this.calculateInitialInfiltrationValue();
                 this.ACH50             = (!this.unitsAreCfm) ? heatingSeasonValue : this.calculateAch50();
@@ -78,9 +78,11 @@ class MrfEditController {
         if (this.unitsAreCfm) {
             this.editMrfData.HeatingSeasonValue = this.infiltrationValue;
             this.editMrfData.CoolingSeasonValue = this.infiltrationValue;
+            this.editMrfData.AnnualValue        = this.infiltrationValue;
         } else if (!this.unitsAreCfm) {
             this.editMrfData.HeatingSeasonValue = this.ACH50;
             this.editMrfData.CoolingSeasonValue = this.ACH50;
+            this.editMrfData.AnnualValue        = this.ACH50;
         }
     }
 

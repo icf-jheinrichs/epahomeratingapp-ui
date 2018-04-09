@@ -17,9 +17,9 @@ class Job {
 
         this.CONTEXT_IS_APP    = CONTEXT === UI_ENUMS.CONTEXT.APP;
         this.CONTEXT_IS_ADMIN  = CONTEXT === UI_ENUMS.CONTEXT.ADMIN;
-        this.DIALOG            = UI_ENUMS.DIALOG.MAKE_JOB_OFFLINE;
         this.MESSAGING         = UI_ENUMS.MESSAGING;
         this.SYNC_STATUS       = UI_ENUMS.SYNC_STATUS;
+        this.UI_ENUMS          = UI_ENUMS;
     }
 
     $onInit () {

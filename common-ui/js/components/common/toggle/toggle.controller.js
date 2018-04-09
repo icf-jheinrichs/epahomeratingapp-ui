@@ -11,6 +11,7 @@ class ToggleController {
         this.toggleId = this.toggleId || 'toggle';
 
         this.confirmToggleOff = this.toggleConfirmationDialog && this.toggleConfirmationDialog.length > 0;
+        this.confirmDisabled  = this.toggleDisabledDialog && this.toggleDisabledDialog.length > 0;
     }
 
     $onChanges (changes) {
@@ -20,7 +21,19 @@ class ToggleController {
     }
 
     onChange () {
-        if (this.toggleValue === false && this.confirmToggleOff) {
+        // dialog disabled has a higher priority than the confirm toggle off
+        if (this.confirmDisabled) {
+            this.DialogService
+                .openDialog(this.toggleDisabledDialog)
+                .then((confirmed) => {
+                    if (confirmed) {
+                        this.toggleValue = !this.toggleValue;
+                    }
+                })
+                .catch((message) => {
+                    this.$log.log(message);
+                });
+        } else if (this.toggleValue === false && this.confirmToggleOff) {
             this.DialogService
                 .openDialog(this.toggleConfirmationDialog)
                 .then((confirmed) => {

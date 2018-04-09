@@ -334,6 +334,14 @@ class ChecklistItemMrfController extends ChecklistItemClass {
 
         return editIndex >= 0;
     }
+
+    showColumn (index, mrfTable) {
+        // hide columns that are empty
+        let row   = this.homePerformance[mrfTable.Key][0];
+        let key   = Object.keys(row)[index];
+        let value = row[key];
+        return (value !== undefined && value !== '');
+    }
 }
 
 export default ChecklistItemMrfController;
