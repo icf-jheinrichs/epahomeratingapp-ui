@@ -210,6 +210,10 @@ class JobChecklistProgressService {
         return progressLevel;
     }
 
+    builderMustCorrect (jobProgress) {
+        return (jobProgress.Final.MustCorrect + jobProgress.PreDrywall.MustCorrect) > 0;
+    }
+
     jobCompleteStatus (jobDataResponse) {
         let status = {
             MustCorrect     : 0,

@@ -481,6 +481,11 @@ class JobChecklistState {
             .ProgressLevel
             = this.JobChecklistProgressService.jobProgressLevel(this.job.Progress);
 
+        this
+            .job
+            .BuilderMustCorrect
+            = this.JobChecklistProgressService.builderMustCorrect(this.job.Progress);
+
         this.putJobDataResponse();
 
         this.putJobData();
