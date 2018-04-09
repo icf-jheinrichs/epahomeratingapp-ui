@@ -117,17 +117,43 @@
 
                 <div class="clearfix">
                     <div class="form-group col-xs-6">
+                        <!-- ductLeakTestExemption -->
+                        <mrf-edit-field-boolean
+                            data-ng-if="::!checklistItemMrfEditCtrl.isReview && checklistItemMrfEditCtrl.editMrfData['DuctLeakTestExemption']"
+                            field="checklistItemMrfEditCtrl.mrfDigest[12]"
+                            value="checklistItemMrfEditCtrl.editMrfData['DuctLeakTestExemption']">
+                        </mrf-edit-field-boolean>
+
+                        <mrf-edit-field-locked
+                            data-ng-if="::checklistItemMrfEditCtrl.isReview && checklistItemMrfEditCtrl.editMrfData['DuctLeakTestExemption']"
+                            field="checklistItemMrfEditCtrl.mrfDigest[12]"
+                            value="checklistItemMrfEditCtrl.editMrfData['DuctLeakTestExemption']">
+                        </mrf-edit-field-locked>
+
+                        <!-- resnetLtOTestExemption -->
+                        <mrf-edit-field-boolean
+                            data-ng-if="::!checklistItemMrfEditCtrl.isReview"
+                            field="checklistItemMrfEditCtrl.mrfDigest[11]"
+                            value="checklistItemMrfEditCtrl.editMrfData['ResnetLtoTestExemption']">
+                        </mrf-edit-field-boolean>
+
+                        <mrf-edit-field-locked
+                            data-ng-if="::checklistItemMrfEditCtrl.isReview"
+                            field="checklistItemMrfEditCtrl.mrfDigest[11]"
+                            value="checklistItemMrfEditCtrl.editMrfData['ResnetLtoTestExemption']">
+                        </mrf-edit-field-locked>
+
+                        <!-- eStarTestExemption -->
                         <mrf-edit-field-boolean
                             data-ng-if="::!checklistItemMrfEditCtrl.isReview"
                             field="checklistItemMrfEditCtrl.mrfDigest[10]"
-                            value="checklistItemMrfEditCtrl.editMrfData['DuctLeakTestExemption']"
-                            handle-change="checklistItemMrfEditCtrl.setExemption(value)">
+                            value="checklistItemMrfEditCtrl.editMrfData['EStarTestExemption']">
                         </mrf-edit-field-boolean>
 
                         <mrf-edit-field-locked
                             data-ng-if="::checklistItemMrfEditCtrl.isReview"
                             field="checklistItemMrfEditCtrl.mrfDigest[10]"
-                            value="checklistItemMrfEditCtrl.editMrfData['DuctLeakTestExemption']">
+                            value="checklistItemMrfEditCtrl.editMrfData['EStarTestExemption']">
                         </mrf-edit-field-locked>
                     </div>
                 </div>

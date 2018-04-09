@@ -47,7 +47,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th data-ng-repeat="columnHeader in mrfTable.Columns track by $index">{{::columnHeader.Name}}</th>
+                        <th data-ng-repeat="columnHeader in mrfTable.Columns track by $index"
+                            ng-if="checklistItemCtrl.showColumn($index, mrfTable)">
+                            {{::columnHeader.Name}}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,9 +58,8 @@
                         data-ng-repeat="dataRow in checklistItemCtrl.homePerformance[mrfTable.Key] track by $index"
                         data-ng-click="checklistItemCtrl.editMrfRow($index, mrfTable.Key, mrfTable.Name, mrfTable.Columns, checklistItemCtrl.homePerformance[mrfTable.Key][$index])">
 
-                        <td data-ng-repeat="(key, value) in dataRow track by $index" ng-if="key !== 'Id'"
+                        <td data-ng-repeat="(key, value) in dataRow track by $index" ng-if="key !== 'Id' && value"
                             data-ng-class="{'td-edited' : checklistItemCtrl.attributeIsEdited(mrfTable.Key, $parent.$parent.$index, key)}">
-
                             {{value}}
                         </td>
                     </tr>
