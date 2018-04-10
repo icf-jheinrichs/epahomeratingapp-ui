@@ -6,13 +6,14 @@ let JSZip      = require('jszip');
 let FileSaver  = require('file-saver');
 
 class JobsPage {
-    constructor ($http, $q, $state, $stateParams, AuthorizationService, DialogService, JobsService, UserCompanyService, UI_ENUMS) {
+    constructor ($http, $q, $state, $stateParams, $transitions, AuthorizationService, DialogService, JobsService, UserCompanyService, UI_ENUMS) {
         'ngInject';
 
         this.$http                = $http;
         this.$q                   = $q;
         this.$state               = $state;
         this.$stateParams         = $stateParams;
+        this.$transitions         = $transitions;
         this.AuthorizationService = AuthorizationService;
         this.DialogService        = DialogService;
         this.JobsService          = JobsService;

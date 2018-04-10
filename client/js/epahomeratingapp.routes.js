@@ -162,6 +162,11 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         .state(STATE_NAME.JOBS_PROVIDER, {
             url        : '/jobs/submitted',
             component  : 'jobsProviderPage',
+            params     : {
+                page   : {
+                    dynamic : true
+                }
+            },
             resolve    : {
                 company : (AuthorizationService, UserCompanyService) => {
                     return UserCompanyService.getCompany(AuthorizationService.getCurrentOrganizationId());
@@ -190,6 +195,11 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         .state(STATE_NAME.JOBS_PROVIDER_SEARCH, {
             url        : `/jobs/submitted?${searchParams.join('&')}`,
             component  : 'jobsProviderPage',
+            params     : {
+                page   : {
+                    dynamic : true
+                }
+            },
             resolve    : {
                 company : (AuthorizationService, UserCompanyService) => {
                     return UserCompanyService.getCompany(AuthorizationService.getCurrentOrganizationId());
@@ -211,6 +221,11 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         .state(STATE_NAME.JOBS, {
             url        : '/jobs',
             component  : 'jobsPage',
+            params     : {
+                page   : {
+                    dynamic : true
+                }
+            },
             resolve    : {
                 company : (AuthorizationService, UserCompanyService) => {
                     return UserCompanyService.getCompany(AuthorizationService.getCurrentOrganizationId());
@@ -231,6 +246,11 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         .state(STATE_NAME.JOBS_SEARCH, {
             url        : `/jobs?${searchParams.join('&')}`,
             component  : 'jobsPage',
+            params     : {
+                page   : {
+                    dynamic : true
+                }
+            },
             resolve    : {
                 company : (AuthorizationService, UserCompanyService) => {
                     return UserCompanyService.getCompany(AuthorizationService.getCurrentOrganizationId());
