@@ -12,8 +12,10 @@
             </button>
 
             <h4 class="checklist-item-title pull-left">Mfr. &amp; model of HVAC equipment matches</h4>
+
             <select
                 class="form-control hvac-equipment-matches"
+                ng-disabled="::checklistItemHVACEquipmentCtrl.isReview"
                 data-ng-options="document.name for document in checklistItemHVACEquipmentCtrl.EQUIPMENT_MATCHES_DOCUMENT track by document.key"
                 data-ng-model="checklistItemHVACEquipmentCtrl.selectedEquipmentMatches"
                 data-ng-change="checklistItemHVACEquipmentCtrl.onEquipmentMatchesChange()">
