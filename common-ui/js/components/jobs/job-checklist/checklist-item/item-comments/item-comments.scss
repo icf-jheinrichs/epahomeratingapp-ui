@@ -45,6 +45,14 @@
         }
     }
 
+    .comment-image-app {
+        margin: 0 0 $offset-default;
+
+        img {
+            width:200px;
+        }
+    }
+
     .comment-timestamp {
         color: $text-color-muted;
         font-size: $font-size-small;
