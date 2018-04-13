@@ -1,5 +1,5 @@
 <form class="inline-legend" data-ng-submit="jobDetailCtrl.onSubmit()" name="jobForm">
-    <fieldset class="row">
+    <fieldset class="row" data-ng-disabled="!jobDetailCtrl.canEditRatingType">
         <legend class="col-xs-3">Rating Type</legend>
         <div class="offset-xs-3 col-xs-9">
             <button-group
@@ -54,7 +54,7 @@
         </button>
 
         <button
-            data-ng-disabled="!jobDetailCtrl.canAddSample || !jobDetailCtrl.canEditSampleSet"
+            data-ng-disabled="!jobDetailCtrl.canEditSampleSet"
             data-ng-click="jobDetailCtrl.addSample()"
             type="button"
             class="btn btn-link">
@@ -93,7 +93,12 @@
             <button class="btn" type="submit">{{::jobDetailCtrl.submitLabel}}</button>
             <button class="btn btn-link" type="button" data-ng-click="jobDetailCtrl.onCancel()">Cancel</button>
 
-            <button class="btn btn-error pull-right" type="button" data-ng-click="jobDetailCtrl.deleteSample()" data-ng-hide="!jobDetailCtrl.canDeleteLocation">Remove From Sample Set</button>
+            <button class="btn btn-error pull-right" type="button"
+                data-ng-click="jobDetailCtrl.deleteSample()"
+                data-ng-disabled="!jobDetailCtrl.canEditSampleSet"
+                data-ng-hide="!jobDetailCtrl.canDeleteLocation">
+                Remove From Sample Set
+            </button>
         </div>
     </div>
 </form>

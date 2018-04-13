@@ -18,11 +18,26 @@ class JobDetailController {
     }
 
     $onInit () {
-        this.isSampleSet = this.job.Secondary.length > 0;
+        this.isSampleSet       = this.job.Secondary.length > 0;
+        this.currentLocation   = this.job.Primary.HouseId;
 
-        this.currentLocation = this.job.Primary.HouseId;
+        let ratingStarted      = this.ratingStarted(this.job);
+        this.canEditSampleSet  = !ratingStarted;
+        this.canEditRatingType = !ratingStarted;
+    }
 
-        this.canEditSampleSet = (this.job.Status !== this.JOB_STATUS.SUBMITTED_TO_PROVIDER);
+    ratingStarted (job) {
+        let progress = job.Progress;
+
+        if (progress.PreDrywall.MustCorrect !== 0 || progress.PreDrywall.Verified !== 0) {
+            return true;
+        }
+
+        if (progress.Final.MustCorrect !== 0 || progress.Final.Verified !== 0) {
+            return true;
+        }
+
+        return false;
     }
 
     setTab (houseId) {
@@ -83,11 +98,7 @@ class JobDetailController {
     }
 
     get canDeleteLocation () {
-        if (this.context !== 'new' || this.currentLocation === this.job.Primary.HouseId) {
-            return false;
-        }
-
-        return true;
+        return this.currentLocation !== this.job.Primary.HouseId;
     }
 }
 
