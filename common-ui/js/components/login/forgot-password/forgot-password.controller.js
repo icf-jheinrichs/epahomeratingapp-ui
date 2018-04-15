@@ -23,16 +23,23 @@ const SUCCESS = {
 };
 
 class ForgotPasswordController {
-    constructor ($scope) {
+    constructor ($scope, $state, UI_ENUMS) {
         'ngInject';
 
-        this.$scope = $scope;
+        this.$scope             = $scope;
+        this.$state             = $state;
+        this.STATE_NAME         = UI_ENUMS.STATE_NAME;
+        this.userNamePattern    = /^[A-Za-z\d@._-]{7,}$/;
     }
 
     handleError (err) {
         switch (err.status) {
         case 404:
             this.message = Object.assign({}, ERROR_NOT_FOUND);
+            break;
+        case 403:
+            this.message = Object.assign({}, ERROR_NOT_FOUND);
+            this.message.text = err.message;
             break;
         default:
             this.message = Object.assign({}, ERROR_SERVER);
@@ -56,6 +63,9 @@ class ForgotPasswordController {
                 .resetPassword({user : this.user})
                 .then((data) => {
                     this.message = Object.assign({}, SUCCESS);
+                    return this
+                            .$state
+                            .go(this.STATE_NAME.USER_RESET_PASSWORD);
                 })
                 .catch((err) => {
                     this.handleError(err);
