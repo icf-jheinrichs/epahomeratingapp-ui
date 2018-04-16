@@ -38,6 +38,8 @@ class JobsPageController extends JobsPage {
         this.toggleAllJobs();
 
         this.viewJobs = this.jobs.slice(this.pageStart, this.pageEnd);
+
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
     }
 
     flagForReview () {

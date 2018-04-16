@@ -1,6 +1,6 @@
 {
   "name": "epahomeratingapp-ui",
-  "version": "0.9.05",
+  "version": "0.9.06",
   "sasslintConfig": ".scss-lint.yml",
   "description": "Package of all common ui (angular components and associated styles)",
   "main": "epahomeratingappUI.js",
@@ -40,7 +40,7 @@
     "angular-mocks": "^1.6.9",
     "angular-sanitize": "^1.6.9",
     "angular-touch": "^1.6.9",
-    "autoprefixer": "^8.2.0",
+    "autoprefixer": "^8.3.0",
     "aws-sdk": "^2.221.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
