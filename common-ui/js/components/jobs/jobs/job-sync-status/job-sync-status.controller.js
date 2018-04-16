@@ -140,6 +140,10 @@ class JobSyncStatusController {
             if (status.assetStatus.missing > 0) {
                 this.syncStatus      = this.STATUS.SYNCING;
                 this.syncStatusClass = this.STATUS_CLASSNAME.SYNCING;
+            } else if (status.assetStatus.missing === 0) {
+                let status = this.syncService.getOverallStatus();
+                this.syncStatus      = status.syncStatus;
+                this.syncStatusClass = status.syncStatusClass;
             }
 
             applyChange();
