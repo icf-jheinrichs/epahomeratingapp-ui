@@ -12,8 +12,10 @@
             </button>
 
             <h4 class="checklist-item-title pull-left">Mfr. &amp; model of HVAC equipment matches</h4>
+
             <select
                 class="form-control hvac-equipment-matches"
+                ng-disabled="::checklistItemHVACEquipmentCtrl.isReview"
                 data-ng-options="document.name for document in checklistItemHVACEquipmentCtrl.EQUIPMENT_MATCHES_DOCUMENT track by document.key"
                 data-ng-model="checklistItemHVACEquipmentCtrl.selectedEquipmentMatches"
                 data-ng-change="checklistItemHVACEquipmentCtrl.onEquipmentMatchesChange()">
@@ -54,20 +56,107 @@
         </p>
 
         <div class="item-list item-list-equipment">
-            <hvac-equipment
-                class="item-list-item"
-                data-ng-repeat="equipment in checklistItemHVACEquipmentCtrl.itemData.Equipment track by $index"
-                delete-equipment="checklistItemHVACEquipmentCtrl.deleteEquipment(index)"
-                equipment="equipment"
-                index="{{$index}}"
-                save-equipment="checklistItemHVACEquipmentCtrl.saveEquipment(index, equipment)">
-            </hvac-equipment>
+            <div class="flex-row">
+                <div class="equipment-details flex-col flex-item-grow">
+                    <div
+                        class="row row-condensed item-list-item"
+                        data-ng-repeat="equipment in checklistItemHVACEquipmentCtrl.itemData.Equipment track by equipment.id">
+
+                        <div data-ng-if="equipment.Type === checklistItemHVACEquipmentCtrl.EQUIPMENT_TYPE[0].key">
+                            <p class="col-xs-12"><strong>Furnace</strong></p>
+
+                            <div class="col-xs-4">
+                                <span class="control-label">Manufacturer</span><p class="form-control-static">{{::equipment.Furnace.Manufacturer}}</p>
+                            </div>
+                            <div class="col-xs-4">
+                                <span class="control-label">Model</span><p class="form-control-static">{{::equipment.Furnace.Model}}</p>
+                            </div>
+                            <div class="col-xs-4">
+                                <span class="control-label">Serial Number</span><p class="form-control-static">{{::equipment.Furnace.SerialNumber}}</p>
+                            </div>
+                        </div>
+
+                        <div data-ng-if="equipment.Type !== checklistItemHVACEquipmentCtrl.EQUIPMENT_TYPE[0].key">
+                            <p class="col-xs-12"><strong>{{checklistItemHVACEquipmentCtrl.getEquipmentTypeName(equipment.Type)}}</strong> Condensor</p>
+                            <div class="col-xs-4">
+                                <span class="control-label">Manufacturer</span><p class="form-control-static">{{::equipment.Condenser.Manufacturer}}</p>
+                            </div>
+                            <div class="col-xs-4">
+                                <span class="control-label">Model</span><p class="form-control-static">{{::equipment.Condenser.Model}}</p>
+                            </div>
+                            <div class="col-xs-4">
+                                <span class="control-label">Serial Number</span><p class="form-control-static">{{::equipment.Condenser.SerialNumber}}</p>
+                            </div>
+
+                            <p class="col-xs-12 offset-top"><strong>{{checklistItemHVACEquipmentCtrl.getEquipmentTypeName(equipment.Type)}}</strong> Evaporator</p>
+                            <div class="col-xs-4">
+                                <span class="control-label">Manufacturer</span><p class="form-control-static">{{::equipment.Evaporator.Manufacturer}}</p>
+                            </div>
+                            <div class="col-xs-4">
+                                <span class="control-label">Model</span><p class="form-control-static">{{::equipment.Evaporator.Model}}</p>
+                            </div>
+                            <div class="col-xs-4">
+                                <span class="control-label">Serial Number</span><p class="form-control-static">{{::equipment.Evaporator.SerialNumber}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="clearfix" ng-if="checklistItemHVACEquipmentCtrl.CONTEXT_IS_APP">
-            <button class="btn pull-right" data-ng-click="checklistItemHVACEquipmentCtrl.addEquipment()" type="button"><i class="fa fa-plus" aria-hidden="true"></i> Add Equipment</button>
+        <div class="clearfix" ng-if="!checklistItemHVACEquipmentCtrl.isReview">
+            <button
+                class="btn pull-right"
+                data-ng-click="checklistItemHVACEquipmentCtrl.editEquipment()"
+                type="button">
+
+                <i class="fa fa-pencil" aria-hidden="true"></i> Edit Equipment
+            </button>
         </div>
     </div>
+
+    <form class="modal modal-large modal-scroll-body hidden" modal="modal" id="modal-edit-hvac-equipment">
+        <div class="modal-header flex-row">
+            <div class="flex-item-static">
+                <button class="btn btn-link btn-modal-close" type="button">Close</button>
+            </div>
+
+            <span class="modal-title flex-item-grow">Edit HVAC Equipment</span>
+
+            <div class="flex-item-static">
+                <button
+                    class="btn pull-right"
+                    data-ng-click="checklistItemHVACEquipmentCtrl.saveEquipment()"
+                    type="submit">
+
+                    Save
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-body-wrapper">
+            <div class="modal-body">
+                <div class="item-list item-list-equipment">
+                    <hvac-equipment
+                        class="item-list-item"
+                        data-ng-repeat="equipment in checklistItemHVACEquipmentCtrl.editEquipmentData track by equipment.id"
+                        delete-equipment="checklistItemHVACEquipmentCtrl.deleteEquipment(id)"
+                        equipment="equipment">
+                    </hvac-equipment>
+                </div>
+
+                <div class="clearfix">
+                    <button
+                        class="btn pull-right"
+                        data-ng-click="checklistItemHVACEquipmentCtrl.addEquipment()"
+                        type="button">
+
+                        <i class="fa fa-plus" aria-hidden="true"></i> Add Equipment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
 
     <div>
         <checklist-item-comments-review

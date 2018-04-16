@@ -1,1315 +1,1814 @@
 const MANUFACTURERS = [
     {
-        name : 'A.O. Smith Corporation',
+        name : 'A.O. Smith',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : false,
             waterHeater : true
         }
     },
     {
-        name : 'A.O. Smith Water Products Co.',
+        name : 'AAON',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
-            waterHeater : true
-        }
-    },
-    {
-        name : 'Aaon, Inc.',
-        type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'AC Pro',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Adams Manufacturing Company',
+        name : 'Adams',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : true,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Addison Products',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Advanced Distributor Products',
         type : {
-            evaporator  : true,
-            condenser   : false,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Aerosys, Inc.',
+        name : 'Aerosys',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Air-Con International, Inc.',
+        name : 'Air Comfort',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Aire-Flow',
+        name : 'Air Star',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Air-Con International',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Aire-Flo',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Airease',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Airedale North America',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Airmax',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'AirPro Air Conditioning',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Airquest',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Airtemp',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Allied Air Enterprises, LLC',
+        name : 'All Seasons',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Allstyle Coil Co., Inc.',
+        name : 'Allied Air Enterprises',
         type : {
-            evaporator  : true,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Amana Heating And Air Conditioning',
+        name : 'Allstyle Coil',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Amana',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'American Best',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'American Standard',
         type : {
-            evaporator  : true,
-            condenser   : true,
-            furnace     : true,
-            waterHeater : false
-        }
-    },
-    {
-        name : 'American Standard Heating & Air Conditioning',
-        type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'American Water Heater Company',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : false,
             waterHeater : true
         }
     },
     {
-        name : 'American Water Heaters',
+        name : 'Apex Coil',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
-            waterHeater : true
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'AquaCal',
+        type : {
+            hvac        : true,
+            waterHeater : false
         }
     },
     {
         name : 'Arcoaire',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Armstrong Air Conditioning, Inc.',
+        name : 'Armstrong Air Conditioning',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Aspen Manufacturing',
         type : {
-            evaporator  : true,
-            condenser   : false,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Axeman-Anderson',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'B Heat',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Bard Manufacturing Company',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Bock Water Heaters, Inc.',
+        name : 'Basis By Luxaire',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
-            waterHeater : true
-        }
-    },
-    {
-        name : 'Bosch Thermotechnology Corp.',
-        type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
-            waterHeater : true
-        }
-    },
-    {
-        name : 'Boyertown Furnance Co.',
-        type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Bradford White Corp.',
+        name : 'BDP Company',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Benchmark Mfg.',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Bock Water Heaters',
+        type : {
+            hvac        : false,
+            waterHeater : true
+        }
+    },
+    {
+        name : 'Bosch',
+        type : {
+            hvac        : false,
+            waterHeater : true
+        }
+    },
+    {
+        name : 'Boyertown Furnace',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Bradford White',
+        type : {
+            hvac        : false,
             waterHeater : true
         }
     },
     {
         name : 'Broan',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Bryant Heating & Cooling Systems',
+        name : 'Bryant',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Bryant Heating And Cooling Systems',
+        name : 'Bryant (Commercial)',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Buderus',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Burnham',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Buy Max',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Calentadores De America Sa De Cv',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : false,
             waterHeater : true
         }
     },
     {
-        name : 'Carrier Air Conditioning',
+        name : 'Carrier',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Carrier Corporation',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Champion By Johnson Controls',
+        name : 'Century',
         type : {
-            evaporator  : true,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Chapmion, Unitary Products Group - Commercial',
+        name : 'Champion',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Choice By York',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Clare Bros.',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Climate Master',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Cold Flow Air Conditioning',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Cold Point',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Cole-Evcon',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Coleman By Johnson Controls',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Coleman, Unitarty Products Group - Commercial',
+        name : 'Coleman Evcon',
         type : {
-            evaporator  : true,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Colex International, S.A.',
+        name : 'Colex International',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Columbia Boiler Company Of Pottstown',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Comfortmaker',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Command-Aire',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Concord',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Consolidated Industries',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Consolidated Technology',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Coolwave',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Crispaire',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Crown Boiler Co.',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Daikin Applied Americas, Inc.',
+        name : 'Custom By Coleman Evcon',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Daikin Manufacturing Company, LP',
+        name : 'Daikin',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Daikin-Modine',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Day & Night',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Dayton Electric Manufacturing Company',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'DeMarco Energy Systems',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Dettson Industries, Inc.',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Diamondair, Inc.',
+        name : 'Diamondair',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Direct Air',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Ducane',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Dunkirk Radiator',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Eair LLC',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Ecosmart Us, LLC',
+        name : 'ECONAR',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Ecosmart US',
+        type : {
+            hvac        : false,
             waterHeater : true
         }
     },
     {
         name : 'Ecotemp',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Ecr International',
+        name : 'ECR International',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Eemax, Inc.',
+        name : 'Eemax',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : false,
             waterHeater : true
         }
     },
     {
         name : 'Efm',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : true,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Elect-Aire',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Enviromaster International',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Eubank Mfg.',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Evcon By Johnson Controls',
         type : {
-            evaporator  : true,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Evcon, Unitary Products Group - Commercial',
+        name : 'Eventemp',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Fraser - Johnston, Unitary Products Group - Commercial',
+        name : 'Everest',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Fraser - Johnston By Johnson Controls',
+        name : 'Evolution',
         type : {
-            evaporator  : true,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Fedders Products',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Fhp Manufacturing Company',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Firm Group Co.',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Fraser - Johnston',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Freedom Air',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Freus',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Friedrich',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Frigidaire',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Fujitsu',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Galpa Export Corp',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Gamatec International, Inc.',
+        name : 'Gamatec International',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Gd Midea Air-Conditioning Equipment Co., Ltd.',
+        name : 'GE Appliances',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
-            waterHeater : false
-        }
-    },
-    {
-        name : 'Gd Miea Heating & Ventlating Equipment Co., Ltd.',
-        type : {
-            evaporator  : true,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : true
         }
     },
     {
-        name : 'Ge Appliances, A Haier Company',
+        name : 'General Electric Company',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
-            waterHeater : true
+            hvac        : true,
+            waterHeater : false
         }
     },
     {
-        name : 'Giant Factories, Inc.',
+        name : 'Genesis Boiler Company',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Genex A/C',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Geo Thermal Plus',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Giant Factories',
+        type : {
+            hvac        : false,
             waterHeater : true
         }
     },
     {
         name : 'Gibson',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Goodman Manufacturing Co., LP',
+        name : 'Glowcore A.C.',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Granby Furnaces, Inc.',
+        name : 'Goettl Air Conditioning',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : true,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Goodman',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Granby Furnaces',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Grandaire',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Gsw Water Heaters',
+        name : 'GSW Water Heaters',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : false,
             waterHeater : true
         }
     },
     {
-        name : 'Gsw Water Heating Company',
+        name : 'Guardian',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
-            waterHeater : true
-        }
-    },
-    {
-        name : 'Guardian By Johnson Controls',
-        type : {
-            evaporator  : true,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Guardian, Unitary Products Group - Commercial',
+        name : 'H.E.P. Materials Corp.',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Haier America',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Hamilton Home Products',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Heat Controller, Inc.',
         type : {
-            evaporator  : true,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Heat Pipe Technology',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Heil',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Htp, Inc.',
+        name : 'HHP',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : false,
             waterHeater : true
         }
     },
     {
-        name : 'Icp Commercial',
+        name : 'HTP',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : true
+        }
+    },
+    {
+        name : 'Hydron Module',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Hydrotherm',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Hyundai Canada',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'ICP Commercial',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Ingersoll Rand',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : true,
-            waterHeater : false
-        }
-    },
-    {
-        name : 'Ingersoll Rand Company',
-        type : {
-            evaporator  : true,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Innovair Corporation',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'International Comfort Products',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Intertherm',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'John Wood',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : false,
             waterHeater : true
         }
     },
     {
-        name : 'Johnson Controls, Unitary Products - Commercial',
+        name : 'Johnson Controls',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Keeprite',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Kelvinator',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Kenmore',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Klimaire Products, Inc.',
+        name : 'Kerr Heating Products',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Lennox Industries, Inc.',
+        name : 'Klimaire Products',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Lochinvar, LLC',
+        name : 'Koldwave',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Lennox Industries',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'LG Electronics',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Lincoln',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Lincoln Barriere',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Lochinvar',
+        type : {
+            hvac        : true,
             waterHeater : true
         }
     },
     {
-        name : 'Luxaire By Johnson Controls',
+        name : 'Loop Group',
         type : {
-            evaporator  : true,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Luxaire, Unitary Products Group - Commercial',
+        name : 'Luxaire',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Mammoth, Inc.',
+        name : 'Mammoth',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Maratherm',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Marvair',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Maytag',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'McQuay International',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Medallion',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Melvin Manufacturing Co.',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Metzger Machine Corporation',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Midea',
+        type : {
+            hvac        : true,
+            waterHeater : true
+        }
+    },
+    {
+        name : 'Millbrook',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Miller',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'MrCool, LLC',
+        name : 'Mitsubishi Electric',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Mobitemp',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Modine Manufacturing Company',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Monaco',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Moncrief',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Mortex Products',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'MrCool',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'MSH Legacy',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Multiaqua',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'National Comfort Products',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Navien, Inc.',
+        name : 'Navien',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : false,
             waterHeater : true
+        }
+    },
+    {
+        name : 'New Yorker Boiler Co',
+        type : {
+            hvac        : true,
+            waterHeater : false
         }
     },
     {
         name : 'Newmac Manufacturing',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Nordyne',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Noritz America Corporation',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : true,
-            waterHeater : false
+            hvac        : false,
+            waterHeater : true
         }
     },
     {
-        name : 'Nortek Global Hvac, LLC',
+        name : 'Nortek Global HVAC',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Nutone',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Parker David Hvac International, Inc.',
+        name : 'Olsen Manufacturing Company',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Oneida Royal',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Onyx',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Pameco',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Parker David HVAC International',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Payne Heating & Cooling',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Payne Heating And Cooling',
+        name : 'Peerless Heater',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Pennco',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Peregrine Industries',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Philco',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Refricenter Of Miami, Inc.',
+        name : 'Phoenix Manufacturing',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Reliance Water Heater',
+        name : 'Powermiser',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
-            waterHeater : true
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Proflo Aire',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Proseries',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Raypak',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'RBI Water Heaters',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Refricenter Of Miami',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Refrigeration Industries Company',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Refrigeration Technology',
+        type : {
+            hvac        : true,
+            waterHeater : false
         }
     },
     {
         name : 'Reliance Water Heater Company',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : false,
             waterHeater : true
         }
     },
     {
         name : 'Reznor',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
+        }
+    },
+    {
+        name : 'Rheem',
+        type : {
+            hvac        : false,
+            waterHeater : true
         }
     },
     {
         name : 'Rheem Manufacturing Company',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Rheem Sales Company, Inc.',
+        name : 'Rinnai Corporation',
         type : {
-            evaporator  : true,
-            condenser   : true,
-            furnace     : true,
+            hvac        : false,
             waterHeater : true
         }
     },
     {
-        name : 'Rinnali Corporation',
+        name : 'Ruud Air Conditioning',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Samsung',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Sanyo Fisher',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Sears',
+        type : {
+            hvac        : true,
             waterHeater : true
         }
     },
     {
-        name : 'Sears Brands Management Corporation',
+        name : 'Service Experts',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
-            waterHeater : true
+            hvac        : true,
+            waterHeater : false
         }
     },
     {
-        name : 'Sears, Roebuck & Company',
+        name : 'Shenxhen Moretrade',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
-            waterHeater : true
+            hvac        : true,
+            waterHeater : false
         }
     },
     {
-        name : 'Shenxhen Moretrade Network Technology Co., Ltd.',
+        name : 'Skymark',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Slant/Fin',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Smart Comfort',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Smith Cast Iron Boilers',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Solitare',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Space Pak',
         type : {
-            evaporator  : true,
-            condenser   : false,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'State Water Heaters',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : false,
             waterHeater : true
         }
     },
     {
-        name : 'Style Crest, Inc.',
+        name : 'Style Crest',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Summit Manufacturing, Inc.',
+        name : 'Summit Manufacturing',
         type : {
-            evaporator  : true,
-            condenser   : false,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Sun Mfg.',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Superior Coils',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Syle Crest Products',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Tadiran',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Tappan',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Teledyne Laars',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Tempmaster',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Tempstar',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Thermo Products, Inc.',
+        name : 'Texas Furnace',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'The Williamson Co.',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Thermal Zone',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Thermo Products',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Thermo-Dynamics Boiler Co.',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Trane',
         type : {
-            evaporator  : true,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Trane U.S., Inc.',
+        name : 'Trianco-Heatmaker',
         type : {
-            evaporator  : true,
-            condenser   : false,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Triangle Tube PhaseIII, Inc.',
+        name : 'Triangle Tube PhaseIII',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : false,
             waterHeater : true
         }
     },
     {
         name : 'U.S. A/C Products',
         type : {
-            evaporator  : true,
-            condenser   : false,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'U.S. Craftmaster Water Heaters',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : false,
             waterHeater : true
         }
     },
     {
-        name : 'U.S. Craftmaster',
+        name : 'Ultimate Engineering',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Unico, Inc.',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'United Refrigeration, Inc.',
+        name : 'Unitary Products Group',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'United Refrigeration',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Unus Air Corps',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'UPG',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Utica Boilers Inc',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'V-Aire',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Vaughn Thermal Corp.',
         type : {
-            evaporator  : false,
-            condenser   : false,
-            furnace     : false,
+            hvac        : false,
             waterHeater : true
+        }
+    },
+    {
+        name : 'Victa Hytemp Industries',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Viessmann Manufacturing Company',
+        type : {
+            hvac        : true,
+            waterHeater : false
         }
     },
     {
         name : 'Villara Corporation',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Waterfurnace International',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Weatherking',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Weil-Mclain',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Westinghouse',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'WFI Industries',
+        type : {
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Whirlpool',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Williamson - Thermoflo',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Wolf Steel, Ltd.',
+        name : 'Winchester',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
+            waterHeater : false
+        }
+    },
+    {
+        name : 'Wolf Steel',
+        type : {
+            hvac        : true,
             waterHeater : false
         }
     },
     {
         name : 'Xenon',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'York By Johnson Controls',
+        name : 'York',
         type : {
-            evaporator  : true,
-            condenser   : true,
-            furnace     : true,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'York, Unitary Products Group - Commercial',
+        name : 'Your Source Products',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     },
     {
-        name : 'Your Source Products, Inc.',
+        name : 'Zamil',
         type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
-            waterHeater : false
-        }
-    },
-    {
-        name : 'Zamil Air Conditioners & Home Appliances Co., LLC',
-        type : {
-            evaporator  : false,
-            condenser   : true,
-            furnace     : false,
+            hvac        : true,
             waterHeater : false
         }
     }

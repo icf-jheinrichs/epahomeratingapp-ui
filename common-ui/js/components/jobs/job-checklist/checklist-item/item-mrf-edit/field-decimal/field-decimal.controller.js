@@ -25,9 +25,9 @@ class MrfEditFieldDecimalController extends MrfEditField {
         this.decimalType.roundMultiplier = this.setRoundMultiplier();
 
         this.errorMessages = {
-            overMax  : `Please enter a value no larger than ${decimal.maxInclusive}.`,
-            underMin : `Please enter a value that's at least ${decimal.minInclusive}.`,
-            notValid : 'Please enter a valid number.'
+            overMax  : this.customErrorMessage ? this.customErrorMessage.overMax : `Please enter a value no larger than ${decimal.maxInclusive}.`,
+            underMin : this.customErrorMessage ? this.customErrorMessage.underMin : `Please enter a value that's at least ${decimal.minInclusive}.`,
+            notValid : this.customErrorMessage ? this.customErrorMessage.notValid : 'Please enter a valid number.'
         };
     }
 

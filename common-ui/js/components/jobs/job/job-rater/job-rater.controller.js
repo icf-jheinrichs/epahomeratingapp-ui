@@ -5,6 +5,11 @@ class JobRaterController extends Job {
     $onInit () {
         super.$onInit();
 
+        this.OFFLINE_CONFIRMATION_DIALOG = this.UI_ENUMS.DIALOG.MAKE_JOB_OFFLINE;
+        if (!this.syncService.online) {
+            this.OFFLINE_DISABLED_DIALOG = this.UI_ENUMS.DIALOG.UNDO_JOB_OFFLINE;
+        }
+
         let self = this;
 
         this.assetUpToDate = true;
@@ -55,6 +60,8 @@ class JobRaterController extends Job {
         this.deviceOfflineListener = this.$rootScope.$on(this.MESSAGING.DEVICE_OFFLINE, (event) => {
             this.$log.log(`[job.controller.js] deviceOfflineListener ${this.toggleStatusClass}`);
 
+            this.OFFLINE_DISABLED_DIALOG = this.UI_ENUMS.DIALOG.UNDO_JOB_OFFLINE;
+
             if (this.job.offlineAvailable && this.toggleStatusClass !== '') {
                 this.toggleStatusClass = this.SYNC_STATUS.ERROR;
             } else if (this.job.offlineAvailable && this.toggleStatusClass === '') {
@@ -66,6 +73,8 @@ class JobRaterController extends Job {
 
         this.deviceOnlineListener = this.$rootScope.$on(this.MESSAGING.DEVICE_ONLINE, (event, jobs) => {
             this.$log.log(`[job.controller.js] deviceOnlineListener ${jobs.uploadingJobs}`);
+
+            this.OFFLINE_DISABLED_DIALOG = undefined;
 
             if (this.job.offlineAvailable && this.toggleStatusClass === this.SYNC_STATUS.ERROR) {
                 if (jobs.uploadingJobs.indexOf(this.job._id) >= 0) {

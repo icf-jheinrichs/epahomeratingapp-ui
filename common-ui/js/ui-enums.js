@@ -66,6 +66,7 @@ const DIALOG = {
     CONFIRM_CHANGE_SAMPLE_SET : 'dialog-confirm-change-sample-set',
     REMOVE_PROVIDER_COMPANY   : 'dialog-remove-provider-company',
     MAKE_JOB_OFFLINE          : 'dialog-make-job-offline',
+    UNDO_JOB_OFFLINE          : 'dialog-undo-job-offline',
     LEAKAGE_TEST_EXEMPTION    : 'dialog-leakage-test-exemption',
     SUBMIT_TO_PROVIDER        : 'dialog-submit-to-provider',
     DELETE_JOB                : 'dialog-delete-job',
@@ -169,6 +170,7 @@ const MESSAGING = {
 const MODAL = {
     COMPLETE_JOB                : 'modal-complete-job',
     DOWNLOAD_REM_XML            : 'modal-download-rem-xml',
+    EDIT_HVAC_EQUIPMENT         : 'modal-edit-hvac-equipment',
     EDIT_WATER_HEATER_EQUIPMENT : 'modal-edit-water-heater-equipment',
     SHOW_FOOTNOTE               : 'modal-show-footnote',
     PROVIDER_JOB_COMMENTS       : 'modal-provider-job-comments',

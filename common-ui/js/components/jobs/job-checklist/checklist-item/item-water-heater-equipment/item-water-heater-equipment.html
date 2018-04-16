@@ -84,12 +84,11 @@
             </div>
         </div>
 
-        <div class="clearfix">
+        <div class="clearfix" ng-if="!checklistItemWaterHeaterEquipmentCtrl.isReview">
             <button
                 class="btn pull-right"
                 data-ng-click="checklistItemWaterHeaterEquipmentCtrl.editEquipment()"
-                type="button"
-                ng-if="!checklistItemWaterHeaterEquipmentCtrl.isReview">
+                type="button">
 
                 <i class="fa fa-pencil" aria-hidden="true"></i> Edit Equipment
             </button>

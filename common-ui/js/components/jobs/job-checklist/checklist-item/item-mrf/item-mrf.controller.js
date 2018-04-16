@@ -334,6 +334,23 @@ class ChecklistItemMrfController extends ChecklistItemClass {
 
         return editIndex >= 0;
     }
+
+    showColumn (index, mrfTable) {
+        // hide columns that are empty
+        const row   = this.homePerformance[mrfTable.Key][0];
+        const key   = Object.keys(row)[index];
+        const value = row[key];
+        const order = mrfTable.Columns[index].Order;
+
+        return (value !== undefined && value !== '' && order !== '0');
+    }
+
+    showCell (key, mrfTableColumns) {
+        // hide columns that are empty
+        const columnIndex = _findIndex(mrfTableColumns, {Key : key});
+
+        return mrfTableColumns[columnIndex].Order !== '0';
+    }
 }
 
 export default ChecklistItemMrfController;

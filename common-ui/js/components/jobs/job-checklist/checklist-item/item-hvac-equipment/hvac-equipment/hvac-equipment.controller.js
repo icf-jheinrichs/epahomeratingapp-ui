@@ -27,14 +27,9 @@ class HVACEquipmentController {
 
     $onInit () {
         let equipmentIndex;
-        // let furnaceManufacturerIndex;
-        // let condenserManufacturerIndex;
-        // let evaporatorManufacturerIndex;
 
         this.filteredManufacturers  = {
-            EVAPORATOR   : this.getFilteredManufacturers('EVAPORATOR'),
-            CONDENSER    : this.getFilteredManufacturers('CONDENSER'),
-            FURNACE      : this.getFilteredManufacturers('FURNACE')
+            HVAC : this.getFilteredManufacturers('HVAC')
         };
 
         this.index = parseInt(this.index, 10);
@@ -44,14 +39,10 @@ class HVACEquipmentController {
             this.equipment.Type = this.EQUIPMENT_TYPE[0].key;
 
             this.selectedEquipmentType = this.EQUIPMENT_TYPE[0];
-
-            this.isEditMode = true;
         } else {
             equipmentIndex = _findIndex(this.EQUIPMENT_TYPE, {key : this.equipment.Type});
 
             this.selectedEquipmentType = this.EQUIPMENT_TYPE[equipmentIndex];
-
-            this.isEditMode = false;
         }
 
     }
@@ -69,14 +60,12 @@ class HVACEquipmentController {
     }
 
     onScanBarcode (equipmentType) {
-        if (this.isEditMode) {
-            this
-                .ScannerService
-                .scanBarCode()
-                .then((barCode) => {
-                    this.equipment[equipmentType].SerialNumber = barCode;
-                });
-        }
+        this
+            .ScannerService
+            .scanBarCode()
+            .then((barCode) => {
+                this.equipment[equipmentType].SerialNumber = barCode;
+            });
     }
 
     onEquipmentTypeChange () {
@@ -89,22 +78,8 @@ class HVACEquipmentController {
 
     onDeleteEquipment () {
         this.deleteEquipment({
-            index : this.index
+            id : this.equipment.id
         });
-    }
-
-    onSaveEquipment () {
-        this.saveEquipment({
-            index     : this.index,
-            equipment : this.equipment
-        })
-            .then(() => {
-                this.toggleEditMode();
-            });
-    }
-
-    toggleEditMode () {
-        this.isEditMode = !this.isEditMode;
     }
 }
 

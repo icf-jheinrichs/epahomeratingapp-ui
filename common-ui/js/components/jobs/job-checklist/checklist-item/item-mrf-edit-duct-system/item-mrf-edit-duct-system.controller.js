@@ -108,20 +108,7 @@ class MrfEditController {
     }
 
     setExemption (value) {
-        if (value === 'true' && this.editMrfData.DuctLeakTotal !== 0 && this.editMrfData.DuctLeakTotal !== undefined && this.editMrfData.DuctLeakTotal !== null) {
-            this
-                .DialogService
-                .openDialog(this.DIALOG)
-                .then((confirmed) => {
-                    if (confirmed) {
-                        this.leakageTestIsExempt       = true;
-                        this.editMrfData.DuctLeakTotal = this.leakageToOutside.total = 0;
-                        this.calculateLeakageOutside();
-                    } else {
-                        this.editMrfData.DuctLeakTestExemption = 'false';
-                    }
-                });
-        } else if (value === 'true') {
+        if (value === 'true') {
             this.leakageTestIsExempt = true;
         } else {
             this.leakageTestIsExempt = false;
