@@ -104,7 +104,9 @@
                 on-set-bulk-operation-status="jobsPageCtrl.setBulkOperationStatus(status)">
             </jobs>
 
-            <pagination quantity="jobsPageCtrl.jobs.length"></pagination>
+            <pagination
+                quantity="jobsPageCtrl.jobs.length"
+                on-set-page="jobsPageCtrl.setPage(page)"></pagination>
         </div>
     </div>
 </section>

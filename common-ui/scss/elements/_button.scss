@@ -138,3 +138,16 @@ $btn-no-label-size: $icon-font-size + ($padding-default * 2);
 .btn-error.active {
     background-color: $status-error;
 }
+
+.btn-pagination {
+    background-color: lighten($brand-auxillary, 5%);
+    border: 0;
+
+    &.active {
+        background-color: $button-background-color-active;
+    }
+
+    &[disabled] {
+        color: $text-color-muted;
+    }
+}

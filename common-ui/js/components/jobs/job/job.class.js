@@ -31,8 +31,7 @@ class Job {
             this.RatingTypeClass = 'label-hers-rating';
         }
 
-        this.sampleQuantity    = this.job.Secondary.length + 1;
-        this.isSample          = this.sampleQuantity > 1;
+        this.isSample            = this.job.SampleSize > 1;
     }
 
     setBulkOperationStatus () {

@@ -3,7 +3,8 @@ import controller from './pagination.controller';
 
 let paginationComponent = {
     bindings : {
-        'quantity' : '<'
+        'quantity'  : '<',
+        'onSetPage' : '&'
     },
     template,
     controller,

@@ -417,6 +417,7 @@ class JobsService {
         // @todo consider applying logic for req. fields (if this group is partly filled - return rejection, etc)
         let jobToPost = this.sanitize(job);
         jobToPost.searchMeta = this.createSearchMeta(jobToPost);
+        jobToPost.SampleSize = job.Secondary.length + 1;
 
         let promise = this.$q((resolve, reject) => {
             this
@@ -473,6 +474,7 @@ class JobsService {
     put (job, ratingCompanyID) {
         let jobToPost = this.sanitize(job);
         jobToPost.searchMeta = this.createSearchMeta(jobToPost);
+        jobToPost.SampleSize = job.Secondary.length + 1;
 
         let promise = this.$q((resolve, reject) => {
             this

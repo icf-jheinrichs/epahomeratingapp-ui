@@ -6,7 +6,19 @@ let JSZip      = require('jszip');
 let FileSaver  = require('file-saver');
 
 class JobsPage {
-    constructor ($http, $q, $state, $stateParams, $transitions, AuthorizationService, DialogService, JobsService, UserCompanyService, UI_ENUMS) {
+    constructor (
+        $http,
+        $q,
+        $state,
+        $stateParams,
+        $transitions,
+        AuthorizationService,
+        DialogService,
+        JobsService,
+        UserCompanyService,
+        UI_ENUMS,
+        PAGINATION
+    ) {
         'ngInject';
 
         this.$http                = $http;
@@ -22,6 +34,7 @@ class JobsPage {
         this.DIALOG               = UI_ENUMS.DIALOG;
         this.JOB_STATUS           = UI_ENUMS.JOB_STATUS;
         this.STATE_NAME           = UI_ENUMS.STATE_NAME;
+        this.PAGE_SIZE            = PAGINATION.PAGE_SIZE;
     }
 
     $onInit () {
@@ -116,12 +129,12 @@ class JobsPage {
         }
 
         markedJobs.forEach((index) => {
-            let exportFileName = this.jobs[index].Primary.ExportFilename;
+            let exportFileName = this.viewJobs[index].Primary.ExportFilename;
             if (exportFileName === '' || exportFileName === undefined) {
-                exportFileName = this.generateFileName(this.jobs[index]);
+                exportFileName = this.generateFileName(this.viewJobs[index]);
             }
             downloadJobs.push({
-                id          : this.jobs[index]._id,
+                id          : this.viewJobs[index]._id,
                 fileName    : exportFileName,
                 fileNameDup : getNumOfDupFiles(exportFileName)
             });

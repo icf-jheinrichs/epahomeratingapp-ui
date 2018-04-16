@@ -24,19 +24,20 @@ class JobsPageController extends JobsPage {
             this.currentState = `${this.$stateParams.status}.internalReview`;
         }
 
-        this.transitionListener = this.$transitions.onSuccess({}, (transition) => {
-            console.log(transition.from());
-            console.log(transition.to());
-        });
-
         this.pageStart = 0,
-        this.pageEnd   = 5;
+        this.pageEnd   = this.PAGE_SIZE;
 
         this.viewJobs = this.jobs.slice(this.pageStart, this.pageEnd);
     }
 
-    $onDestroy () {
-        this.transitionListener();
+    setPage (page) {
+        this.pageStart = this.PAGE_SIZE * (page - 1);
+        this.pageEnd   = this.pageStart + this.PAGE_SIZE;
+
+        this.checkAll = false;
+        this.toggleAllJobs();
+
+        this.viewJobs = this.jobs.slice(this.pageStart, this.pageEnd);
     }
 
     flagForReview () {

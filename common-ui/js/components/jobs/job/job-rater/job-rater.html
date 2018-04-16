@@ -19,7 +19,7 @@
     <div class="job-info flex-item-grow">
         <div class="job-meta flex-row">
             <span class="label-rating-type" data-ng-class="jobRaterCtrl.RatingTypeClass">{{::jobRaterCtrl.RatingType}}</span>
-            <span class="label label-sample-set" data-ng-if="::jobRaterCtrl.isSample">Sample Set: {{::jobRaterCtrl.sampleQuantity}} <i class="fa fa-map-marker" aria-hidden="true"></i></span>
+            <span class="label label-sample-set" data-ng-if="::jobRaterCtrl.isSample">Sample Set: {{::jobRaterCtrl.job.SampleSize}} <i class="fa fa-map-marker" aria-hidden="true"></i></span>
             <span class="last-update small"><strong>{{::jobRaterCtrl.lastUpdateType}}:</strong> {{::jobRaterCtrl.lastUpdateTime}}</span>
         </div>
 

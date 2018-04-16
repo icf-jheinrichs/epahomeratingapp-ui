@@ -243,7 +243,6 @@ const SEARCH_PARAMS = {
     JOB_TYPE                      : 'jobType',
     KEYWORDS                      : 'keywords',
     MUST_CORRECT                  : 'mustCorrect',
-    PAGE                          : 'page',
     PROGRESS_LEVEL                : 'progressLevel',
     RATER                         : 'rater',
     RATING_TYPE                   : 'ratingType',

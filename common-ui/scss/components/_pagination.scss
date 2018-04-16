@@ -1,0 +1,22 @@
+.pagination {
+    font-size: $font-size-large;
+    justify-content: flex-end;
+    margin-top: $offset-default;
+
+    .btn-pagination {
+        border-radius: 0;
+        padding: 10px 15px;
+
+        &:first-of-type {
+            border-radius: $border-radius-default 0 0 $border-radius-default;
+        }
+
+        &:last-of-type {
+            border-radius: 0 $border-radius-default $border-radius-default 0;
+        }
+
+        &:only-of-type {
+            border-radius: $border-radius-default;
+        }
+    }
+}
