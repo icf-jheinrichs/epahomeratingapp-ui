@@ -33,6 +33,10 @@ class JobsController {
         });
     }
 
+    $onChanges (changes) {
+        this.jobs = changes.jobs.currentValue;
+    }
+
     downloadXml (jobId) {
         this.onDownloadXml({
             jobId

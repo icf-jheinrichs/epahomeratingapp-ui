@@ -127,6 +127,12 @@ class JobsService {
         return housePlans.join(' ');
     }
 
+    reduceBuilders (samples) {
+        return samples.reduce((jobBuilderList, sample) => {
+            return jobBuilderList + ` ${sample.Builder}`;
+        }, '');
+    }
+
     //TODO : move some of this server side
     search (stateParams) {
         let promise = this.$q((resolve, reject) => {
@@ -156,28 +162,22 @@ class JobsService {
 
                         filteredJobs = _pickBy(allJobs, (job) => {
                             let pick          = true;
-                            let jobTitle      = this.jobTitleFilter(job.Primary.AddressInformation).toLowerCase();
-                            let samples       = job.Secondary.concat([job.Primary]);
-                            let jobBuilders   = samples.reduce((jobBuilderList, sample) => {
-                                return jobBuilderList + ` ${sample.Builder}`;
-                            }, '');
                             let progressLevel = stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL];
-                            let jobHousePlans = this.reduceHousePlans(samples);
 
                             _forOwn(searchParams, (value, key) => {
                                 switch (key) {
                                 case this.SEARCH_PARAMS.BUILDER :
-                                    if (jobBuilders.toLowerCase().indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
+                                    if (job.searchMeta.builders.indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
                                         pick = false;
                                     }
                                     break;
                                 case this.SEARCH_PARAMS.HOUSE_PLAN :
-                                    if (jobHousePlans.toLowerCase().indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
+                                    if (job.searchMeta.ratingFiles.indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
                                         pick = false;
                                     }
                                     break;
                                 case this.SEARCH_PARAMS.KEYWORDS :
-                                    if (jobTitle.indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
+                                    if (job.searchMeta.addressInformation.indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
                                         pick = false;
                                     }
                                     break;
@@ -194,9 +194,7 @@ class JobsService {
                                     }
                                     break;
                                 case this.SEARCH_PARAMS.MUST_CORRECT :
-                                    if ((job.Progress.Final.MustCorrect + job.Progress.PreDrywall.MustCorrect) === 0) {
-                                        pick = false;
-                                    }
+                                    pick = job.BuilderMustCorrect;
                                     break;
                                 case this.SEARCH_PARAMS.STATUS :
                                     if (stateParams.status === this.JOB_STATUS.ARCHIVED || stateParams.status === this.JOB_STATUS.DELETED) {
@@ -264,28 +262,22 @@ class JobsService {
                         filteredJobs = _pickBy(allJobs, (job) => {
                             // debugger;
                             let pick          = true;
-                            let jobTitle      = this.jobTitleFilter(job.Primary.AddressInformation).toLowerCase();
-                            let samples       = job.Secondary.concat([job.Primary]);
-                            let jobBuilders   = samples.reduce((jobBuilderList, sample) => {
-                                return jobBuilderList + ` ${sample.Builder}`;
-                            }, '');
                             let progressLevel = stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL];
-                            let jobHousePlans = this.reduceHousePlans(samples);
 
                             _forOwn(searchParams, (value, key) => {
                                 switch (key) {
                                 case this.SEARCH_PARAMS.BUILDER :
-                                    if (jobBuilders.toLowerCase().indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
+                                    if (job.searchMeta.builders.indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
                                         pick = false;
                                     }
                                     break;
                                 case this.SEARCH_PARAMS.HOUSE_PLAN :
-                                    if (jobHousePlans.toLowerCase().indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
+                                    if (job.searchMeta.ratingFiles.indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
                                         pick = false;
                                     }
                                     break;
                                 case this.SEARCH_PARAMS.KEYWORDS :
-                                    if (jobTitle.indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
+                                    if (job.searchMeta.addressInformation.indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
                                         pick = false;
                                     }
                                     break;
@@ -302,9 +294,7 @@ class JobsService {
                                     }
                                     break;
                                 case this.SEARCH_PARAMS.MUST_CORRECT :
-                                    if ((job.Progress.Final.MustCorrect + job.Progress.PreDrywall.MustCorrect) === 0) {
-                                        pick = false;
-                                    }
+                                    pick = job.BuilderMustCorrect;
                                     break;
                                 case this.SEARCH_PARAMS.RETURNED_FROM_INTERNAL_REVIEW :
                                     if (!job.ReturnedFromInternal) {
@@ -425,13 +415,16 @@ class JobsService {
 
     post (job) {
         // @todo consider applying logic for req. fields (if this group is partly filled - return rejection, etc)
-        this.job = this.sanitize(job);
+        let jobToPost = this.sanitize(job);
+        jobToPost.searchMeta = this.createSearchMeta(jobToPost);
+        jobToPost.SampleSize = job.Secondary.length + 1;
+
         let promise = this.$q((resolve, reject) => {
             this
                 .$http({
                     method  : 'POST',
                     url     : this.API_URL.JOB,
-                    data    : job
+                    data    : jobToPost
                 })
                 .then((response) => {
                     if (response.status === 200) {
@@ -479,12 +472,16 @@ class JobsService {
      * @return {promis}     resolves to successful save.
      */
     put (job, ratingCompanyID) {
+        let jobToPost = this.sanitize(job);
+        jobToPost.searchMeta = this.createSearchMeta(jobToPost);
+        jobToPost.SampleSize = job.Secondary.length + 1;
+
         let promise = this.$q((resolve, reject) => {
             this
                 .$http({
                     method  : 'PUT',
                     url     : `${this.API_URL.JOB}/${job._id}`,
-                    data    : job,
+                    data    : jobToPost,
                     ratingCompanyID
                 })
                 .then((result) => {
@@ -552,15 +549,40 @@ class JobsService {
         return promise;
     }
 
+    createSearchMeta (job) {
+        const samples = job.Secondary.concat([job.Primary]);
+
+        return {
+            addressInformation : this.jobTitleFilter(job.Primary.AddressInformation, true).toLowerCase(),
+            ratingFiles        : this.reduceHousePlans(samples).toLowerCase(),
+            builders           : this.reduceBuilders(samples).toLowerCase()
+        };
+    }
+
     sanitize (job) {
-        job.Primary.BuilderId                           = this.$sanitize(job.Primary.BuilderId);
+        job.Primary.Builder                             = this.$sanitize(job.Primary.Builder);
         job.Primary.AddressInformation.Address1         = this.$sanitize(job.Primary.AddressInformation.Address1);
         job.Primary.AddressInformation.CityMunicipality = this.$sanitize(job.Primary.AddressInformation.CityMunicipality);
         job.Primary.AddressInformation.CommunityName    = this.$sanitize(job.Primary.AddressInformation.CommunityName);
         job.Primary.AddressInformation.LotNo            = this.$sanitize(job.Primary.AddressInformation.LotNo);
-        job.Primary.AddressInformation.ManualIdentifier = this.$sanitize(job.Primary.AddressInformation.ManualIdentifier);
+        job.Primary.AddressInformation.ManualId         = this.$sanitize(job.Primary.AddressInformation.ManualId);
         job.Primary.AddressInformation.StateCode        = this.$sanitize(job.Primary.AddressInformation.StateCode);
         job.Primary.AddressInformation.ZipCode          = this.$sanitize(job.Primary.AddressInformation.ZipCode);
+        job.Primary.ExportFilename                      = this.$sanitize(job.Primary.ExportFilename);
+
+        job.Secondary.forEach((secondary, index) => {
+            job.Secondary[index].Builder                             = this.$sanitize(job.Secondary[index].Builder);
+            job.Secondary[index].AddressInformation.Address1         = this.$sanitize(job.Secondary[index].AddressInformation.Address1);
+            job.Secondary[index].AddressInformation.CityMunicipality = this.$sanitize(job.Secondary[index].AddressInformation.CityMunicipality);
+            job.Secondary[index].AddressInformation.CommunityName    = this.$sanitize(job.Secondary[index].AddressInformation.CommunityName);
+            job.Secondary[index].AddressInformation.LotNo            = this.$sanitize(job.Secondary[index].AddressInformation.LotNo);
+            job.Secondary[index].AddressInformation.ManualId         = this.$sanitize(job.Secondary[index].AddressInformation.ManualId);
+            job.Secondary[index].AddressInformation.StateCode        = this.$sanitize(job.Secondary[index].AddressInformation.StateCode);
+            job.Secondary[index].AddressInformation.ZipCode          = this.$sanitize(job.Secondary[index].AddressInformation.ZipCode);
+            job.Secondary[index].ExportFilename                      = this.$sanitize(job.Secondary[index].ExportFilename);
+        });
+
+        return job;
     }
 }
 

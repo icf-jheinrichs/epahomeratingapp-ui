@@ -1,5 +1,5 @@
 export default function jobTitleFilter () {
-    return function jobTitle (AddressInformation) {
+    return function jobTitle (AddressInformation, omitHtml = false) {
         // let title = AddressInformation.Address1 || '';
         // let manualIdSeparator = (AddressInformation.CommunityName) ? '|' : '';
 
@@ -17,6 +17,9 @@ export default function jobTitleFilter () {
         let communityString         = '';
         let communityManualIdString = '';
         let titleString             = '';
+
+        let spanOpen                = omitHtml ? ' ' : '<span class="ellipsis">';
+        let spanClose               = omitHtml ? ' ' : '</span>';
 
         if (AddressInformation.Address1) {
             address.push(AddressInformation.Address1);
@@ -36,7 +39,7 @@ export default function jobTitleFilter () {
             addressString += ` ${AddressInformation.ZipCode}`;
         }
 
-        titleString = `<span class="ellipsis">${addressString}</span>`;
+        titleString = `${spanOpen}${addressString}${spanClose}`;
 
         if (AddressInformation.CommunityName) {
             community.push(AddressInformation.CommunityName);
@@ -56,9 +59,9 @@ export default function jobTitleFilter () {
         }
 
         if (titleString.length > 0 && communityManualIdString) {
-            titleString += `<span class="ellipsis">${communityManualIdString}</span>`;
+            titleString += `${spanOpen}${communityManualIdString}${spanClose}`;
         } else if (communityManualIdString) {
-            titleString = `<span class="ellipsis">${communityManualIdString}</span>`;
+            titleString = `${spanOpen}${communityManualIdString}${spanClose}`;
         }
 
         return titleString;

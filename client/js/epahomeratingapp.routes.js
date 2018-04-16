@@ -207,7 +207,6 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
-
         .state(STATE_NAME.JOBS, {
             url        : '/jobs',
             component  : 'jobsPage',

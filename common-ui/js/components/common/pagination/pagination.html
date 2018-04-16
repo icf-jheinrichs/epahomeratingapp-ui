@@ -1,0 +1,28 @@
+<nav class="pagination flex-row">
+    <a
+        data-ng-click="paginationCtrl.setPage(paginationCtrl.previousPage)"
+        ng-if="paginationCtrl.currentPage !== 1"
+        class="btn btn-pagination">
+
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        <span class="sr-only">Previous</span>
+    </a>
+
+    <a
+        data-ng-click="paginationCtrl.setPage(page)"
+        class="btn btn-pagination"
+        data-ng-repeat="page in paginationCtrl.pages track by page"
+        data-ng-class="{'active' : paginationCtrl.currentPage === page}">
+
+        {{page}}
+    </a>
+
+    <a
+        data-ng-click="paginationCtrl.setPage(paginationCtrl.nextPage)"
+        ng-if="paginationCtrl.currentPage < paginationCtrl.numberOfPages"
+        class="btn btn-pagination">
+
+        <span class="sr-only">Next</span>
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+    </a>
+</nav>

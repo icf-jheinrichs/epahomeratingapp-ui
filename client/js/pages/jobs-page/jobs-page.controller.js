@@ -23,6 +23,21 @@ class JobsPageController extends JobsPage {
         if (this.$stateParams.internalReview === 'true') {
             this.currentState = `${this.$stateParams.status}.internalReview`;
         }
+
+        this.pageStart = 0,
+        this.pageEnd   = this.PAGE_SIZE;
+
+        this.viewJobs = this.jobs.slice(this.pageStart, this.pageEnd);
+    }
+
+    setPage (page) {
+        this.pageStart = this.PAGE_SIZE * (page - 1);
+        this.pageEnd   = this.pageStart + this.PAGE_SIZE;
+
+        this.checkAll = false;
+        this.toggleAllJobs();
+
+        this.viewJobs = this.jobs.slice(this.pageStart, this.pageEnd);
     }
 
     flagForReview () {

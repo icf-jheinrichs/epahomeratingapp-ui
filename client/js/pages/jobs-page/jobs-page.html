@@ -98,11 +98,15 @@
 
             <jobs
                 enabled="jobsPageCtrl.enableEdit()"
-                jobs="jobsPageCtrl.jobs"
+                jobs="jobsPageCtrl.viewJobs"
                 register-handlers="jobsPageCtrl.registerHandlers(toggleAllJobs, getSelectedJobs)"
                 on-download-xml="jobsPageCtrl.downloadXml(jobId)"
                 on-set-bulk-operation-status="jobsPageCtrl.setBulkOperationStatus(status)">
             </jobs>
+
+            <pagination
+                quantity="jobsPageCtrl.jobs.length"
+                on-set-page="jobsPageCtrl.setPage(page)"></pagination>
         </div>
     </div>
 </section>
