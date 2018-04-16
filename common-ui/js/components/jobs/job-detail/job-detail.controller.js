@@ -29,6 +29,10 @@ class JobDetailController {
     ratingStarted (job) {
         let progress = job.Progress;
 
+        if (!progress) {
+            return false;
+        }
+
         if (progress.PreDrywall.MustCorrect !== 0 || progress.PreDrywall.Verified !== 0) {
             return true;
         }
