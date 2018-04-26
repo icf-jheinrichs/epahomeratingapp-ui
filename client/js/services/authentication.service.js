@@ -116,7 +116,7 @@ class AuthenticationService {
 
     login (user) {
         let authenticationData = {
-            'Username' : user.userId,
+            'Username' : user.userId.toLowerCase(),
             'Password' : user.password
         };
         let authenticationDetails = new AuthenticationDetails(authenticationData);
