@@ -122,7 +122,7 @@ class AuthenticationService {
         let authenticationDetails = new AuthenticationDetails(authenticationData);
 
         let userData = {
-            'Username' : user.userId,
+            'Username' : user.userId.toLowerCase(),
             'Pool'     : this.userPool
         };
         let cognitoUser = new CognitoUser(userData);
