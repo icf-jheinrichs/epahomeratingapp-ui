@@ -116,13 +116,13 @@ class AuthenticationService {
 
     login (user) {
         let authenticationData = {
-            'Username' : user.userId,
+            'Username' : user.userId.toLowerCase(),
             'Password' : user.password
         };
         let authenticationDetails = new AuthenticationDetails(authenticationData);
 
         let userData = {
-            'Username' : user.userId,
+            'Username' : user.userId.toLowerCase(),
             'Pool'     : this.userPool
         };
         let cognitoUser = new CognitoUser(userData);
