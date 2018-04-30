@@ -257,10 +257,7 @@ class JobsService {
                             return param === undefined || param === null;
                         });
 
-                        // debugger;
-
                         filteredJobs = _pickBy(allJobs, (job) => {
-                            // debugger;
                             let pick          = true;
                             let progressLevel = stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL];
 
@@ -415,7 +412,7 @@ class JobsService {
 
     post (job) {
         // @todo consider applying logic for req. fields (if this group is partly filled - return rejection, etc)
-        let jobToPost = this.sanitize(job);
+        let jobToPost        = this.sanitize(job);
         jobToPost.searchMeta = this.createSearchMeta(jobToPost);
         jobToPost.SampleSize = job.Secondary.length + 1;
 
