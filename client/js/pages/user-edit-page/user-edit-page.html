@@ -36,7 +36,7 @@
             </div>
 
             <fieldset>
-                <legend class="fieldset-legend">User Name</legend>
+                <legend class="fieldset-legend">Username</legend>
 
                 <div class="form-group" data-ng-class="{'has-error' : userSettingsPageCtrl.userSettings.userName.$invalid && userSettingsPageCtrl.userSettings.userName.$dirty}">
                     <label for="userName"></label>
@@ -46,11 +46,11 @@
                         name="userName"
                         type="text"
                         data-ng-pattern="userSettingsPageCtrl.userNamePattern"
-                        placeholder="User Name"
+                        placeholder="Username"
                         data-ng-model="userSettingsPageCtrl.userName" />
 
                     <p class="form-control-error" role="alert">
-                        Please enter a valid user name. Username cannot be blank, and can only contain letters, numbers, or the characters "@ _ - ."
+                        Please enter a valid username. Username cannot be blank, and can only contain letters, numbers, or the characters "@ _ - ."
                     </p>
                 </div>
             </fieldset>

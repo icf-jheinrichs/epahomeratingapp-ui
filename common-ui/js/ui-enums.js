@@ -309,7 +309,7 @@ const SYNC_STATUS = {
 };
 
 const VALIDATION_MESSAGE = {
-    USER_NAME        : 'Please enter a valid user name. Username must be at least 7 characters and can only contain letters, numbers, or the characters "@ _ - ."',
+    USER_NAME        : 'Please enter a valid username. Username must be at least 7 characters and can only contain letters, numbers, or the characters "@ _ - ."',
     PASSWORD         : 'Please enter a valid password. Password must be at least 8 characters, contain one uppercase letter, one number, and one special character (@$!%*#?&).',
     CONFIRM_PASSWORD : 'Passwords must be valid and match.'
 };
