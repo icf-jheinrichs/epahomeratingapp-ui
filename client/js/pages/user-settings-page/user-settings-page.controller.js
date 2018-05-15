@@ -18,15 +18,15 @@ const USER_SETTINGS_NO_CHANGES = {
 
 class UserPageController {
     constructor (
-            $log,
-            $q,
-            AuthenticationService,
-            AuthorizationService,
-            DialogService,
-            UserCompanyService,
-            UI_ENUMS,
-            VALIDATION_PATTERN
-        ) {
+        $log,
+        $q,
+        AuthenticationService,
+        AuthorizationService,
+        DialogService,
+        UserCompanyService,
+        UI_ENUMS,
+        VALIDATION_PATTERN
+    ) {
         'ngInject';
 
         this.$log                  = $log;

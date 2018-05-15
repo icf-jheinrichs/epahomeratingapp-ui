@@ -64,8 +64,8 @@ class ForgotPasswordController {
                 .then((data) => {
                     this.message = Object.assign({}, SUCCESS);
                     return this
-                            .$state
-                            .go(this.STATE_NAME.USER_RESET_PASSWORD);
+                        .$state
+                        .go(this.STATE_NAME.USER_RESET_PASSWORD);
                 })
                 .catch((err) => {
                     this.handleError(err);
