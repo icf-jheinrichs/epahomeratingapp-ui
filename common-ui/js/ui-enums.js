@@ -309,8 +309,8 @@ const SYNC_STATUS = {
 };
 
 const VALIDATION_MESSAGE = {
-    USER_NAME        : 'Please enter a valid user name. Username cannot be blank, and can only contain letters, numbers, or the characters "@ _ - ."',
-    PASSWORD         : 'Please enter a valid password. Password cannot be blank, must be at least 8 characters, and contain one uppercase letter, one number and one special character.',
+    USER_NAME        : 'Please enter a valid user name. Username must be at least 7 characters and can only contain letters, numbers, or the characters "@ _ - ."',
+    PASSWORD         : 'Please enter a valid password. Password must be at least 8 characters, contain one uppercase letter, one number, and one special character (@$!%*#?&).',
     CONFIRM_PASSWORD : 'Passwords must be valid and match.'
 };
 
