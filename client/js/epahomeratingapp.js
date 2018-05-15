@@ -10,7 +10,7 @@ import 'font-awesome/css/font-awesome.css';
 
 // Constants
 import {API_URL, BASE_IMAGE_URL, COGNITO, S3_CONFIG, PAGINATION} from './epahomeratingapp.config';
-import {UI_ENUMS} from '../../epahomeratingappUI.js';
+import {UI_ENUMS, CONFIG} from '../../epahomeratingappUI.js';
 
 // Services
 import ServicesModule from './services/services.module';
@@ -104,6 +104,7 @@ angular
     .constant('COGNITO', COGNITO)
     .constant('S3_CONFIG', S3_CONFIG)
     .constant('UI_ENUMS', UI_ENUMS)
+    .constant('VALIDATION_PATTERN', CONFIG.VALIDATION_PATTERN)
     .constant('CONTEXT', UI_ENUMS.CONTEXT.ADMIN)
     .constant('PAGINATION', PAGINATION)
     .run(authenticationHook)

@@ -50,7 +50,7 @@
                         data-ng-model="userSettingsPageCtrl.userName" />
 
                     <p class="form-control-error" role="alert">
-                        Please enter a valid user name. Username cannot be blank, and can only contain letters, numbers, or the characters "@ _ - ."
+                        {{::userSettingsPageCtrl.VALIDATION_MESSAGE.USER_NAME}}
                     </p>
                 </div>
             </fieldset>
@@ -61,6 +61,7 @@
                 <div class="form-group" data-ng-class="{'has-error' : userSettingsPageCtrl.userSettings.currentPassword.$invalid && userSettingsPageCtrl.userSettings.currentPassword.$dirty}">
                     <label for="currentPassword"></label>
                     <input
+                        autocomplete="current-password"
                         class="form-control"
                         type="password"
                         id="currentPassword"
@@ -70,13 +71,14 @@
                         data-ng-model="userSettingsPageCtrl.currentPassword" />
 
                     <p class="form-control-error" role="alert">
-                        Please enter a valid password. Password cannot be blank, must be at least 8 characters, and contain one uppercase letter, one number and one special character.
+                        {{::userSettingsPageCtrl.VALIDATION_MESSAGE.PASSWORD}}
                     </p>
                 </div>
 
                 <div class="form-group" data-ng-class="{'has-error' : userSettingsPageCtrl.userSettings.newPassword.$invalid && userSettingsPageCtrl.userSettings.newPassword.$dirty}">
                     <label for="newPassword"></label>
                     <input
+                        autocomplete="new-password"
                         class="form-control"
                         type="password"
                         id="newPassword"
@@ -86,13 +88,14 @@
                         data-ng-model="userSettingsPageCtrl.newPassword" />
 
                     <p class="form-control-error" role="alert">
-                        Please enter a valid password. Password cannot be blank, must be at least 8 characters, and contain one uppercase letter, one number and one special character.
+                        {{::userSettingsPageCtrl.VALIDATION_MESSAGE.PASSWORD}}
                     </p>
                 </div>
 
                 <div class="form-group" data-ng-class="{'has-error' : userSettingsPageCtrl.userSettings.confirmPassword.$invalid && userSettingsPageCtrl.userSettings.confirmPassword.$dirty}">
                     <label for="confirmPassword"></label>
                     <input
+                        autocomplete="new-password"
                         class="form-control"
                         type="password"
                         id="confirmPassword"
@@ -102,7 +105,7 @@
                         data-ng-model="userSettingsPageCtrl.confirmPassword" />
 
                     <p class="form-control-error" role="alert">
-                        Passwords must be valid and match.
+                        {{::userSettingsPageCtrl.VALIDATION_MESSAGE.CONFIRM_PASSWORD}}
                     </p>
                 </div>
             </fieldset>

@@ -17,7 +17,16 @@ const USER_SETTINGS_NO_CHANGES = {
 };
 
 class UserPageController {
-    constructor ($log, $q, AuthenticationService, AuthorizationService, DialogService, UserCompanyService, UI_ENUMS) {
+    constructor (
+            $log,
+            $q,
+            AuthenticationService,
+            AuthorizationService,
+            DialogService,
+            UserCompanyService,
+            UI_ENUMS,
+            VALIDATION_PATTERN
+        ) {
         'ngInject';
 
         this.$log                  = $log;
@@ -25,8 +34,10 @@ class UserPageController {
         this.AuthenticationService = AuthenticationService;
         this.AuthorizationService  = AuthorizationService;
 
-        this.userNamePattern       = /^[A-Za-z\d@._-]{7,}$/;
-        this.passwordPattern       = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+        this.VALIDATION_MESSAGE    = UI_ENUMS.VALIDATION_MESSAGE;
+
+        this.userNamePattern       = VALIDATION_PATTERN.USER_NAME;
+        this.passwordPattern       = VALIDATION_PATTERN.PASSWORD;
     }
 
     $onInit () {
