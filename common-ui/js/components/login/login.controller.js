@@ -1,8 +1,8 @@
 class LoginController {
-    constructor ($state, $q, $log, AuthenticationService, AuthorizationService, UI_ENUMS) {
+    constructor ($state, $q, $log, AuthenticationService, AuthorizationService, UI_ENUMS, VALIDATION_PATTERN) {
         'ngInject';
 
-        this.userIdPattern = /^[A-Za-z\d@._-]{7,}$/;
+        this.userIdPattern = VALIDATION_PATTERN.USER_NAME;
         this.$log          = $log;
         this.$state        = $state;
         this.$q            = $q;
