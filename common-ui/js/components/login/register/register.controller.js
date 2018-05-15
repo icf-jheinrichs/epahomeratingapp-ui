@@ -1,24 +1,6 @@
-// const ERROR_INPUT = {
-//     type        : 'error',
-//     text        : 'Please enter a valid User ID and Password.',
-//     dismissable : false
-// };
-
-// const ERROR_INPUT_ID = {
-//     type        : 'error',
-//     text        : 'Please enter a valid User ID.',
-//     dismissable : false
-// };
-
-// const ERROR_INPUT_PASSWORD = {
-//     type        : 'error',
-//     text        : 'Please enter a valid Password (minimum 8 characters).',
-//     dismissable : false
-// };
-
 const ERROR_NOT_FOUND = {
     type        : 'error',
-    text        : 'User with provided ID and Password not found.',
+    text        : 'User with provided Username and Password not found.',
     dismissable : false
 };
 

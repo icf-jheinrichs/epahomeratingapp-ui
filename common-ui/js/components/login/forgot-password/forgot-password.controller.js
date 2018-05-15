@@ -1,12 +1,12 @@
 const ERROR_INPUT = {
     type        : 'error',
-    text        : 'Please enter a valid User ID',
+    text        : 'Please enter a valid Username',
     dismissable : false
 };
 
 const ERROR_NOT_FOUND = {
     type        : 'error',
-    text        : 'User ID not found.',
+    text        : 'Username not found.',
     dismissable : false
 };
 
@@ -18,7 +18,7 @@ const ERROR_SERVER = {
 
 const SUCCESS = {
     type        : 'success',
-    text        : 'An email was sent to the address associated with the provided User ID.',
+    text        : 'An email was sent to the address associated with the provided Username.',
     dismissable : false
 };
 

@@ -1,12 +1,12 @@
 const ERROR_INPUT = {
     type        : 'error',
-    text        : 'Please enter a valid User ID and Password.',
+    text        : 'Please enter a valid Username and Password.',
     dismissable : false
 };
 
 const ERROR_INPUT_ID = {
     type        : 'error',
-    text        : 'Please enter a valid User ID.',
+    text        : 'Please enter a valid Username.',
     dismissable : false
 };
 
