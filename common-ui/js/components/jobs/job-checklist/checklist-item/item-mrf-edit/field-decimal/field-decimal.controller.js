@@ -16,6 +16,10 @@ class MrfEditFieldDecimalController extends MrfEditField {
             });
 
         this.disabled = this.disabled || false;
+
+        if (this.unit) {
+            this.field.Unit = this.unit;
+        }
     }
 
     configureValidation (decimal) {

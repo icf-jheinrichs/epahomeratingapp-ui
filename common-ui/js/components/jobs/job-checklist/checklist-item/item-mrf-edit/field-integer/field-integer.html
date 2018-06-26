@@ -13,6 +13,7 @@
         class="form-control"
         type="number"
         data-ng-blur="fieldIntegerCtrl.validate()"
+        data-ng-keypress="fieldIntegerCtrl.handleKeypress($event)"
         data-ng-model="fieldIntegerCtrl.value" />
 
     <abbr

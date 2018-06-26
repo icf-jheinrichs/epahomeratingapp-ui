@@ -11,7 +11,11 @@ class ChecklistItemMrfController extends ChecklistItemClass {
         super
             .$onInit()
             .then(() => {
-                // console.dir(this.itemData);
+                this.columnKeyOrder = this.display.Sections.map((section) => {
+                    return section.Columns.map((column) => {
+                        return column.Key;
+                    });
+                });
             });
 
         this
@@ -24,6 +28,7 @@ class ChecklistItemMrfController extends ChecklistItemClass {
         this.editRow = [];
         this.editDuctSystemRow = [];
         this.editInfiltrationRow = [];
+
     }
 
     editMrfRow (index, key, title, digest, data) {
@@ -336,18 +341,16 @@ class ChecklistItemMrfController extends ChecklistItemClass {
     }
 
     showColumn (index, mrfTable) {
-        // hide columns that are empty
-        const row   = this.homePerformance[mrfTable.Key][0];
-        const key   = Object.keys(row)[index];
-        const value = row[key];
-        const order = mrfTable.Columns[index].Order;
-
-        return (value !== undefined && value !== '' && order !== '0');
+        return (mrfTable.Columns[index].Order !== '0');
     }
 
     showCell (key, mrfTableColumns) {
         // hide columns that are empty
         const columnIndex = _findIndex(mrfTableColumns, {Key : key});
+
+        if (columnIndex < 0 || mrfTableColumns[columnIndex].Order === undefined) {
+            return true;
+        }
 
         return mrfTableColumns[columnIndex].Order !== '0';
     }

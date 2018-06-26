@@ -14,6 +14,7 @@
         input-focus
         focus-on-init="{{fieldDecimalCtrl.focus}}"
         type="number"
+        data-ng-keypress="fieldDecimalCtrl.handleKeypress($event)"
         data-ng-blur="fieldDecimalCtrl.validate()"
         data-ng-disabled="fieldDecimalCtrl.disabled"
         data-ng-model="fieldDecimalCtrl.value" />
