@@ -31,7 +31,7 @@
             <div class="popover-panel-body">
                 <div class="item-list item-list-comments" data-ng-if="checklistItemCommentsCtrl.comments.length > 0">
                     <div class="item-list-item item-comment" data-ng-repeat="comment in checklistItemCommentsCtrl.comments track by $index">
-                        <figure data-ng-if="!checklistItemCommentsCtrl.CONTEXT_IS_APP" class="comment-image" data-ng-if="comment.PhotoUrl">
+                        <figure data-ng-if="!checklistItemCommentsCtrl.CONTEXT_IS_APP && comment.PhotoUrl" class="comment-image">
                             <button
                                 aria-label="expand image"
                                 can-expand="true"
@@ -44,7 +44,7 @@
                         </figure>
 
 
-                        <figure data-ng-if="checklistItemCommentsCtrl.CONTEXT_IS_APP" class="comment-image-app" data-ng-if="comment.PhotoUrl">
+                        <figure data-ng-if="checklistItemCommentsCtrl.CONTEXT_IS_APP && comment.PhotoUrl" class="comment-image-app">
                             <button
                                 aria-label="expand image"
                                 can-expand="true"
