@@ -41,9 +41,39 @@ class JobsSearchBarController {
     }
 
     clear () {
+        let searchParams = {};
+
+        if (this.$stateParams[this.SEARCH_PARAMS.INTERNAL_REVIEW]) {
+            let internalReview = {};
+            internalReview[this.SEARCH_PARAMS.INTERNAL_REVIEW] = this.$stateParams[this.SEARCH_PARAMS.INTERNAL_REVIEW];
+
+            Object.assign(searchParams, internalReview);
+        }
+
+        if (this.$stateParams[this.SEARCH_PARAMS.STATUS]) {
+            let status = {};
+            status[this.SEARCH_PARAMS.STATUS] = this.$stateParams[this.SEARCH_PARAMS.STATUS];
+
+            Object.assign(searchParams, status);
+        }
+
+        if (this.$stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL]) {
+            let progressLevel = {};
+            progressLevel[this.SEARCH_PARAMS.PROGRESS_LEVEL] = this.$stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL];
+
+            Object.assign(searchParams, progressLevel);
+        }
+
+        if (this.$stateParams[this.SEARCH_PARAMS.RATER]) {
+            let rater = {};
+            rater[this.SEARCH_PARAMS.RATER] = this.$stateParams[this.SEARCH_PARAMS.RATER];
+
+            Object.assign(searchParams, rater);
+        }
+
         this
             .$state
-            .go(this.$state.current.name, {}, {inherit : false});
+            .go(this.$state.current.name, searchParams, {inherit : false});
     }
 
     search () {
@@ -67,28 +97,42 @@ class JobsSearchBarController {
             });
 
         if (this.$stateParams[this.SEARCH_PARAMS.STATUS]) {
-            let status                        = {};
+            let status = {};
             status[this.SEARCH_PARAMS.STATUS] = this.$stateParams[this.SEARCH_PARAMS.STATUS];
 
             Object.assign(searchParams, status);
         }
 
         if (this.$stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL]) {
-            let progressLevel                                = {};
+            let progressLevel = {};
             progressLevel[this.SEARCH_PARAMS.PROGRESS_LEVEL] = this.$stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL];
 
             Object.assign(searchParams, progressLevel);
         }
 
         if (this.$stateParams[this.SEARCH_PARAMS.AVAILABLE_OFFLINE]) {
-            let availableOffline                                   = {};
+            let availableOffline = {};
             availableOffline[this.SEARCH_PARAMS.AVAILABLE_OFFLINE] = this.$stateParams[this.SEARCH_PARAMS.AVAILABLE_OFFLINE];
 
             Object.assign(searchParams, availableOffline);
         }
 
         if (this.$stateParams[this.SEARCH_PARAMS.INTERNAL_REVIEW]) {
-            let internalReview                                 = {};
+            let internalReview = {};
+            internalReview[this.SEARCH_PARAMS.INTERNAL_REVIEW] = this.$stateParams[this.SEARCH_PARAMS.INTERNAL_REVIEW];
+
+            Object.assign(searchParams, internalReview);
+        }
+
+        if (this.$stateParams[this.SEARCH_PARAMS.RATER]) {
+            let rater = {};
+            rater[this.SEARCH_PARAMS.RATER] = this.$stateParams[this.SEARCH_PARAMS.RATER];
+
+            Object.assign(searchParams, rater);
+        }
+
+        if (this.$stateParams[this.SEARCH_PARAMS.INTERNAL_REVIEW]) {
+            let internalReview = {};
             internalReview[this.SEARCH_PARAMS.INTERNAL_REVIEW] = this.$stateParams[this.SEARCH_PARAMS.INTERNAL_REVIEW];
 
             Object.assign(searchParams, internalReview);
