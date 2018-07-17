@@ -81,10 +81,10 @@ class HousePlansService {
                             let pick          = true;
                             let searchString  = `${housePlan.Name} ${housePlan.SubplanName} ${housePlan.CommunityName}`.toLowerCase();
 
-                            _forOwn(searchParams, (value, key) => {
+                            _forOwn(searchParams, (value, key, object) => {
                                 switch (key) {
                                 case this.HOUSE_PLANS_SEARCH_PARAMS.BUILDER :
-                                    if (housePlan.BuilderName.toLowerCase().indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
+                                    if (housePlan.BuilderName === undefined || housePlan.BuilderName.toLowerCase().indexOf(decodeURIComponent(value).toLowerCase()) < 0) {
                                         pick = false;
                                     }
                                     break;
