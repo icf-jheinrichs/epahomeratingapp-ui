@@ -4,6 +4,7 @@ class ChecklistItemClass {
         $q,
         $rootScope,
         $timeout,
+        $sanitize,
         $stateParams,
         UI_ENUMS,
         DisplayLogicDigestService,
@@ -18,6 +19,7 @@ class ChecklistItemClass {
         this.$q           = $q;
         this.$rootScope   = $rootScope;
         this.$timeout     = $timeout;
+        this.$sanitize    = $sanitize;
         this.$stateParams = $stateParams;
 
         this.RESPONSES    = UI_ENUMS.RESPONSES;

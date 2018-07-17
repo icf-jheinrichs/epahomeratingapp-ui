@@ -8,12 +8,13 @@ const ERROR_SERVER = {
 };
 
 class HousePlanController {
-    constructor ($log, $q, $rootScope, $state, HousePlansService, S3Service, S3_CONFIG, UI_ENUMS) {
+    constructor ($log, $q, $rootScope, $sanitize, $state, HousePlansService, S3Service, S3_CONFIG, UI_ENUMS) {
         'ngInject';
 
         this.$log                 = $log;
         this.$q                   = $q;
         this.$rootScope           = $rootScope;
+        this.$sanitize            = $sanitize;
         this.$state               = $state;
 
         this.HousePlansService    = HousePlansService;
@@ -72,6 +73,11 @@ class HousePlanController {
 
         let hvacDesignReportUploads            = [];
         let raterDesignReviewChecklistUploads  = [];
+
+        this.housePlan.Name          = this.$sanitize(this.housePlan.Name);
+        this.housePlan.SubplanName   = this.$sanitize(this.housePlan.SubplanName);
+        this.housePlan.BuilderName   = this.$sanitize(this.housePlan.BuilderName);
+        this.housePlan.CommunityName = this.$sanitize(this.housePlan.CommunityName);
 
         this.housePlan.HvacDesignReport.forEach((hvacDesignReport) => {
             if (hvacDesignReport instanceof File && this.isValidFile(hvacDesignReport)) {
