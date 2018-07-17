@@ -118,11 +118,55 @@ class ChecklistItemHVACCommissioningController extends ChecklistItemClass {
 
         this
             .$timeout(() => {
+                this.editEquipmentData
+                    = this
+                        .editEquipmentData
+                        .map((equipment) => {
+                            return Object.assign(
+                                {},
+                                equipment,
+                                {
+                                    Furnace : {
+                                        Manufacturer : this.$sanitize(equipment.Furnace.Manufacturer),
+                                        Model        : this.$sanitize(equipment.Furnace.Model),
+                                        SerialNumber : this.$sanitize(equipment.Furnace.SerialNumber)
+                                    },
+                                    Condenser    : {
+                                        Manufacturer : this.$sanitize(equipment.Condenser.Manufacturer),
+                                        Model        : this.$sanitize(equipment.Condenser.Model),
+                                        SerialNumber : this.$sanitize(equipment.Condenser.SerialNumber)
+                                    },
+                                    Evaporator   : {
+                                        Manufacturer : this.$sanitize(equipment.Evaporator.Manufacturer),
+                                        Model        : this.$sanitize(equipment.Evaporator.Model),
+                                        SerialNumber : this.$sanitize(equipment.Evaporator.SerialNumber)
+                                    }
+                                }
+                            );
+                        });
+
                 this
                     .itemData
                     .Equipment
                     = _filter(this.editEquipmentData, equipment => {
-                            return (equipment.Manufacturer !== '') || (equipment.Model !== '') || (equipment.SerialNumber !== '');
+                            let filterEquipment = false;
+
+                            if (equipment.Type === this.EQUIPMENT_TYPE[0].key) {
+                                filterEquipment
+                                 = equipment.Furnace.Manufacturer !== ''
+                                || equipment.Furnace.Model !== ''
+                                || equipment.Furnace.SerialNumber !== '';
+                            } else {
+                                filterEquipment
+                                 = equipment.Condenser.Manufacturer !== ''
+                                || equipment.Condenser.Model !== ''
+                                || equipment.Condenser.SeerialNumber !== ''
+                                || equipment.Evaporator.Manufacturer !== ''
+                                || equipment.Evaporator.Model !== ''
+                                || equipment.Evaporator.SerialNumber !== '';
+                            }
+
+                            return filterEquipment;
                         });
 
                 this.setItemData(this.itemData);

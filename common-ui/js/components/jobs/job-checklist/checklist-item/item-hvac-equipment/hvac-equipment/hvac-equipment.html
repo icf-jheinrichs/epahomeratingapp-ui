@@ -46,6 +46,7 @@
                         id="furnace-equipment-manufacturer-{{::hvacEquipmentCtrl.equipment.id}}"
                         name="Furnace"
                         placeholder="Manufacturer"
+                        maxlength="64"
                         type="text"
                         type-ahead-input="type-ahead-input" />
 
@@ -70,6 +71,7 @@
                     class="form-control"
                     data-ng-model="hvacEquipmentCtrl.equipment.Furnace.Model"
                     id="furnace-equipment-model-{{::hvacEquipmentCtrl.equipment.id}}"
+                    maxlength="64"
                     placeholder="Equipment Model"
                     type="text" />
             </div>
@@ -82,6 +84,7 @@
                         class="form-control"
                         data-ng-model="hvacEquipmentCtrl.equipment.Furnace.SerialNumber"
                         id="furnace-equipment-serial-number-{{::hvacEquipmentCtrl.equipment.id}}"
+                        maxlength="64"
                         placeholder="Serial Number"
                         type="text" />
 
@@ -117,6 +120,7 @@
                         data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('HVAC', hvacEquipmentCtrl.equipment.Condenser.Manufacturer)"
                         id="condenser-equipment-manufacturer-{{::hvacEquipmentCtrl.equipment.id}}"
                         name="Condenser"
+                        maxlength="64"
                         placeholder="Manufacturer"
                         type="text"
                         type-ahead-input="type-ahead-input" />
@@ -142,6 +146,7 @@
                     class="form-control"
                     data-ng-model="hvacEquipmentCtrl.equipment.Condenser.Model"
                     id="condenser-equipment-model-{{::hvacEquipmentCtrl.equipment.id}}"
+                    maxlength="64"
                     placeholder="Equipment Model"
                     type="text" />
             </div>
@@ -155,6 +160,7 @@
                         class="form-control"
                         data-ng-model="hvacEquipmentCtrl.equipment.Condenser.SerialNumber"
                         id="condenser-equipment-serial-number-{{::hvacEquipmentCtrl.equipment.id}}"
+                        maxlength="64"
                         placeholder="Serial Number" />
 
                     <!-- <button
@@ -188,6 +194,7 @@
                         data-ng-model-options="{debounce: 125}"
                         data-ng-change="hvacEquipmentCtrl.updatedFilteredEquipment('HVAC', hvacEquipmentCtrl.equipment.Evaporator.Manufacturer)"
                         id="evaporator-equipment-manufacturer-{{::hvacEquipmentCtrl.equipment.id}}"
+                        maxlength="64"
                         name="Evaporator"
                         placeholder="Manufacturer"
                         type="text"
@@ -217,6 +224,7 @@
                     class="form-control"
                     data-ng-model="hvacEquipmentCtrl.equipment.Evaporator.Model"
                     id="evaporator-equipment-model-{{::hvacEquipmentCtrl.equipment.id}}"
+                    maxlength="64"
                     placeholder="Equipment Model"
                     type="text" />
             </div>
@@ -229,6 +237,7 @@
                         class="form-control"
                         data-ng-model="hvacEquipmentCtrl.equipment.Evaporator.SerialNumber"
                         id="evaporator-equipment-serial-number-{{::hvacEquipmentCtrl.equipment.id}}"
+                        maxlength="64"
                         placeholder="Serial Number"
                         type="text" />
 

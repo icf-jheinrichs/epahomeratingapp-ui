@@ -1,6 +1,10 @@
 import MrfEditField from '../field.class.js';
 
 class MrfEditFieldStringController extends MrfEditField {
+    sanitize () {
+        this.value = this.$sanitize(this.value);
+    }
+
     $onInit () {
         this.DisplayLogicDigestService
             .getString(this.stringName)

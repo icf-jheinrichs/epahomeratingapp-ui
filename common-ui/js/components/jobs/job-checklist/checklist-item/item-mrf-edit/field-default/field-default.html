@@ -8,6 +8,7 @@
         class="form-control"
         id="{{::fieldCtrl.field.Key}}"
         data-ng-change="fieldCtrl.onChange(fieldCtrl.value)"
+        data-ng-blur="fieldCtrl.sanitize()"
         type="text"
         data-ng-model="fieldCtrl.value" />
 </div>

@@ -1,7 +1,8 @@
 class MrfEditField {
-    constructor (DisplayLogicDigestService) {
+    constructor ($sanitize, DisplayLogicDigestService) {
         'ngInject';
 
+        this.$sanitize                 = $sanitize;
         this.DisplayLogicDigestService = DisplayLogicDigestService;
     }
 
