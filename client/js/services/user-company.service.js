@@ -46,20 +46,27 @@ class UserCompanyService {
             this
                 .requestUser(C_ID)
                 .then((userResponse) => {
-                    let userCompanies = [];
-                    user = userResponse;
+                    if (userResponse !== undefined) {
+                        let userCompanies = [];
+                        user = userResponse;
 
-                    user.userCompany.forEach((company) => {
-                        userCompanies.push(company.O_ID);
-                    });
+                        user.userCompany.forEach((company) => {
+                            userCompanies.push(company.O_ID);
+                        });
 
-                    return this.getUserCompanies(userCompanies);
+                        return this.getUserCompanies(userCompanies);
+                    } else {
+                        reject({message : 'There was an error logging in.'});
+                    }
                 })
                 .then((companies) => {
                     resolve({
                         user,
                         companies
                     });
+                })
+                .catch((error) => {
+                    reject(error);
                 });
         });
     }

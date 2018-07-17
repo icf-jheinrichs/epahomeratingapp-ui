@@ -23,7 +23,10 @@
             class="login-panel flip-back flip-panel">
 
             <p data-ng-if="!loginCtrl.notAuthorized">Logging in</p>
-            <p data-ng-if="loginCtrl.notAuthorized" class="status-message status-error">You are not authorized to use this system.</p>
+            <div data-ng-if="loginCtrl.notAuthorized">
+                <p class="status-message status-error">You are not authorized to use this system.</p>
+                <button type="button" class="btn btn-link" data-ng-click="loginCtrl.reset()"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</button>
+            </div>
         </div>
     </div>
 </div>

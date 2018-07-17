@@ -131,8 +131,9 @@ class AuthorizationService {
 
                     resolve(this.user);
                 })
-                .catch(() => {
+                .catch((error) => {
                     this.clearState();
+                    reject(error);
                 })
                 .finally(() => {
                     this

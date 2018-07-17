@@ -1,27 +1,29 @@
 class LoginController {
-    constructor ($state, $q, $log, AuthenticationService, AuthorizationService, UI_ENUMS, VALIDATION_PATTERN) {
+    constructor ($log, $rootScope, $state, $transitions, $q, AuthenticationService, AuthorizationService, UI_ENUMS, VALIDATION_PATTERN) {
         'ngInject';
 
-        this.userIdPattern = VALIDATION_PATTERN.USER_NAME;
-        this.$log          = $log;
-        this.$state        = $state;
-        this.$q            = $q;
+        this.$log         = $log;
+        this.$rootScope   = $rootScope;
+        this.$state       = $state;
+        this.$transitions = $transitions;
+        this.$q           = $q;
 
         this.AuthenticationService = AuthenticationService;
         this.AuthorizationService  = AuthorizationService;
 
-        this.STATE_NAME            = UI_ENUMS.STATE_NAME;
-
-        this.notAuthorized         = false;
+        this.userIdPattern = VALIDATION_PATTERN.USER_NAME;
+        this.STATE_NAME    = UI_ENUMS.STATE_NAME;
     }
 
     $onInit () {
-        this.action = 'login';
         this.user   = {
             'userId'   : '',
             'password' : ''
         };
-        this.isBusy = false;
+
+        this
+            .reset();
+
         this
             .AuthenticationService
             .checkLogin()
@@ -42,6 +44,17 @@ class LoginController {
                 this.isBusy = false;
                 return;
             });
+
+        this.rootscopeSubscription = this.$transitions.onError({from : 'login'}, (transition) => {
+            this.isBusy        = false;
+            this.notAuthorized = true;
+            this.AuthorizationService.clearState();
+            this.AuthenticationService.logout();
+        });
+    }
+
+    $onDestroy () {
+        this.rootscopeSubscription();
     }
 
     setAction (action) {
@@ -60,6 +73,7 @@ class LoginController {
             'status' : 'Active'
         };
 
+        this.isBusy = false;
         this.$state.go(authorizedRedirect, searchParams, {reload : true});
     }
 
@@ -98,9 +112,17 @@ class LoginController {
                     }
                 })
                 .catch((err) => {
+                    this.notAuthorized = true;
+                    this.AuthenticationService.logout();
                     reject(err);
                 });
         });
+    }
+
+    reset () {
+        this.notAuthorized = false;
+        this.action = 'login';
+        this.isBusy = false;
     }
 
     resetPassword (user) {

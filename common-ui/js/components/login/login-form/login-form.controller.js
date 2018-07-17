@@ -64,7 +64,7 @@ class LoginFormController {
     }
 
     onSubmit () {
-        this.message = {};
+
         this.isBusy = true;
 
         if (this.$scope.loginForm.userId.$invalid && this.$scope.loginForm.password.$invalid) {
@@ -86,9 +86,11 @@ class LoginFormController {
     }
 
     $onChanges (changes) {
+        this.message = {};
+
         if (changes.isBusy) {
-            this.isBusy = angular.copy(this.isBusy);
-            this.isBusy = angular.copy(changes.isBusy.currentValue);
+            this.isBusy  = angular.copy(this.isBusy);
+            this.isBusy  = angular.copy(changes.isBusy.currentValue);
         }
     }
 
