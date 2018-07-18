@@ -100,6 +100,7 @@ class LoginController {
                 .AuthenticationService
                 .login(user)
                 .then((user) => {
+                    this.notAuthorized = false;
                     this.setAction('authorization');
                     return this.AuthorizationService.setUserAuthorization(user.userId);
                 })
@@ -111,10 +112,10 @@ class LoginController {
                         reject({status : 'not authorized'});
                     }
                 })
-                .catch((err) => {
+                .catch((error) => {
                     this.notAuthorized = true;
                     this.AuthenticationService.logout();
-                    reject(err);
+                    reject(error);
                 });
         });
     }
