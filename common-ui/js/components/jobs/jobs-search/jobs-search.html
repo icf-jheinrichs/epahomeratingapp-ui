@@ -1,6 +1,6 @@
 <form class="jobs-search flex-row">
     <p class="search-meta">
-        <strong>{{::jobsSearchCtrl.quantity}} <ng-pluralize count="jobsSearchCtrl.quantity" when="{'one' : 'Job', 'other' : 'Jobs'}"></ng-pluralize></strong> <span data-ng-bind-html="::jobsSearchCtrl.filterTextString"></span>
+        <strong>{{jobsSearchCtrl.quantity}} <ng-pluralize count="jobsSearchCtrl.quantity" when="{'one' : 'Job', 'other' : 'Jobs'}"></ng-pluralize></strong> <span data-ng-bind-html="::jobsSearchCtrl.filterTextString"></span>
     </p>
 
     <div class="flex-item-static">
