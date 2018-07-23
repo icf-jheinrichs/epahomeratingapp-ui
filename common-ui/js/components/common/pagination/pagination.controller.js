@@ -25,14 +25,15 @@ class paginationController {
             return;
         }
 
-        this.currentPage   = page;
+        // page is set to 0 on quantity change, check for this and set to 1 if so.
+        this.currentPage   = (page === 0) ? 1 : page;
         this.previousPage  = Math.max(1, this.currentPage - 1);
         this.nextPage      = Math.min(this.numberOfPages, this.currentPage + 1);
 
         this.pages         = this.getPageArray();
 
         this.onSetPage({
-            page
+            page : this.currentPage
         });
     }
 
@@ -71,6 +72,14 @@ class paginationController {
         }
 
         return pageStart;
+    }
+
+    $onChanges (changes) {
+        if (!changes.quantity.isFirstChange() && changes.quantity) {
+            this.quantity      = changes.quantity.currentValue;
+            this.numberOfPages = Math.ceil(this.quantity / this.PAGE_SIZE);
+            this.setPage(0);
+        }
     }
 }
 
