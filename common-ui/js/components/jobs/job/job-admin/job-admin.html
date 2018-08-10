@@ -1,7 +1,7 @@
 <label data-ng-class="{'job-select-marked' : jobAdminCtrl.marked}" class="job-select flex-item-static flex-row flex-align-center" aria-labelledby="job-{{jobAdminCtrl.job._id}}">
     <i class="fa fa-check" aria-hidden="true"></i>
     <span class="sr-only">Mark job for bulk operations.</span>
-    <input class="form-control-check" type="checkbox" ng-model="jobAdminCtrl.marked" ng-click="jobAdminCtrl.setBulkOperationStatus()" />
+    <input class="form-control-check" type="checkbox" ng-model="jobAdminCtrl.marked" ng-change="jobAdminCtrl.setBulkOperationStatus()" />
 </label>
 
 <div class="flex-item-grow">
