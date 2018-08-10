@@ -173,6 +173,10 @@ fieldset {
     }
 }
 
+.form-group-horizontal.form-group-mrf-field .control-label {
+    display: block;
+}
+
 .form-control-feedback {
     bottom: 1px;
     color: $text-color-muted;
