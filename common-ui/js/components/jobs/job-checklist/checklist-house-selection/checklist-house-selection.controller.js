@@ -40,7 +40,10 @@ class checklistHouseSelectionController {
         this.setAppBottomPad();
         // watch for state change, set current house and hide houseSelection
         this.deregisterOnFinish = this.$transitions.onSuccess(
-            {to : 'job-checklist.*'}, () => {
+            {to : (state) => {
+                return state.name.indexOf('job-checklist') === 0;
+            }},
+            () => {
                 let houseId = parseInt(this.$stateParams.houseId, 10);
 
                 this.setSelectedHouse(houseId);
@@ -113,7 +116,9 @@ class checklistHouseSelectionController {
     }
 
     saveProviderComment () {
-        this.JobChecklistStateService.putProviderComment(JSON.stringify(this.$sanitize(this.providerComment)));
+        this
+            .JobChecklistStateService
+            .putProviderComment(JSON.stringify(this.$sanitize(this.providerComment)));
     }
 
     get selectedHouseTitle () {
