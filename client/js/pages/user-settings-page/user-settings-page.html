@@ -36,7 +36,7 @@
             </div>
 
             <fieldset>
-                <legend class="fieldset-legend">Username</legend>
+                <legend class="fieldset-legend">User Name</legend>
 
                 <div class="form-group" data-ng-class="{'has-error' : userSettingsPageCtrl.userSettings.userName.$invalid && userSettingsPageCtrl.userSettings.userName.$dirty}">
                     <label for="userName"></label>
@@ -46,7 +46,8 @@
                         name="userName"
                         type="text"
                         data-ng-pattern="userSettingsPageCtrl.userNamePattern"
-                        placeholder="Username"
+                        data-ng-minlength="7"
+                        placeholder="User Name"
                         data-ng-model="userSettingsPageCtrl.userName" />
 
                     <p class="form-control-error" role="alert">
@@ -61,7 +62,6 @@
                 <div class="form-group" data-ng-class="{'has-error' : userSettingsPageCtrl.userSettings.currentPassword.$invalid && userSettingsPageCtrl.userSettings.currentPassword.$dirty}">
                     <label for="currentPassword"></label>
                     <input
-                        autocomplete="current-password"
                         class="form-control"
                         type="password"
                         id="currentPassword"
@@ -78,7 +78,6 @@
                 <div class="form-group" data-ng-class="{'has-error' : userSettingsPageCtrl.userSettings.newPassword.$invalid && userSettingsPageCtrl.userSettings.newPassword.$dirty}">
                     <label for="newPassword"></label>
                     <input
-                        autocomplete="new-password"
                         class="form-control"
                         type="password"
                         id="newPassword"
@@ -95,7 +94,6 @@
                 <div class="form-group" data-ng-class="{'has-error' : userSettingsPageCtrl.userSettings.confirmPassword.$invalid && userSettingsPageCtrl.userSettings.confirmPassword.$dirty}">
                     <label for="confirmPassword"></label>
                     <input
-                        autocomplete="new-password"
                         class="form-control"
                         type="password"
                         id="confirmPassword"

@@ -114,7 +114,7 @@ class AuthenticationService {
         });
     }
 
-    login (user) {
+    login (user, newPassword, newAttributesData) {
         let authenticationData = {
             'Username' : user.userId.toLowerCase(),
             'Password' : user.password
@@ -156,7 +156,7 @@ class AuthenticationService {
                         break;
                     default :
                         errorMessage = {
-                            status  : err.statusCode,
+                            status  : 403,
                             message : err.message
                         };
                         break;
@@ -166,30 +166,44 @@ class AuthenticationService {
                 },
 
                 newPasswordRequired : (userAttributes, requiredAttributes) => {
-                    // // User was signed up by an admin and must provide new
-                    // // password and required attributes, if any, to complete
-                    // // authentication.
 
-                    // // TODO: need to come up with a screen for making new password after temp password.
+                    cognitoUser.completeNewPasswordChallenge(newPassword, newAttributesData, {
+                        onSuccess : (result) => {
+                            resolve({
+                                id_token       : result.getIdToken().getJwtToken(),
+                                access_token   : result.getAccessToken().getJwtToken(),
+                                cognitoUser    : cognitoUser
+                            });
+                        },
 
-                    // const newPassword = 'TempPass2@';
+                        onFailure : (err) => {
+                            let errorMessage;
 
-                    // // creates user name or other attributes
-                    // const data = Object.freeze({
-                    //     name                     : 'Jeff',
-                    //     family_name              : 'Heinrichs',
-                    //     email                    : 'jeff.heinrichs@icf.com',
-                    //     'custom:ratingCompanyID' : '000',
-                    //     'custom:ratingUserID'    : '1224444'
-                    // });
+                            switch (err.code) {
+                            case 'NotAuthorizedException' :
+                                errorMessage = {
+                                    status  : 400,
+                                    message : err.message
+                                };
+                                break;
+                            case 'PasswordResetRequiredException' :
+                                errorMessage = {
+                                    status  : 401,
+                                    message : err.message
+                                };
+                                break;
+                            default :
+                                errorMessage = {
+                                    status  : 403,
+                                    message : err.message
+                                };
+                                break;
+                            }
 
-                    // cognitoUser.completeNewPasswordChallenge(newPassword, data, this);
+                            reject(errorMessage);
 
-                    // resolve({
-                    //     id_token       : result.getIdToken().getJwtToken(),
-                    //     access_token   : result.getAccessToken().getJwtToken(),
-                    //     cognitoUser    : cognitoUser
-                    // });
+                        }
+                    });
                 }
             });
         })
@@ -209,24 +223,80 @@ class AuthenticationService {
 
     resetPassword (user) {
         return this.$q((resolve, reject) => {
-            resolve({
-                message : 'success',
-                status  : 200
-            });
 
-            /* Example error cases */
+            let userData = {
+                'Username' : user.userId.toLowerCase(),
+                'Pool'     : this.userPool
+            };
 
-            // User/ Pass don't match
-            // reject({
-            //     message : 'not found',
-            //     status  : 404
-            // });
+            this.cognitoUser = new CognitoUser(userData);
+            this
+                .cognitoUser
+                .forgotPassword({
+                    onSuccess : (result) => {
+                        resolve({
+                            status       : 200
+                        });
+                    },
+                    onFailure : (err) => {
+                        reject({
+                            status  : 403,
+                            message : err.message
+                        });
+                    },
+                    inputVerificationCode () {
+                        resolve({
+                            status       : 200
+                        });
+                    }
+                });
+        });
+    }
 
-            // Server error
-            // reject({
-            //     message : 'server error',
-            //     status  : 500
-            // });
+    confirmPasswordReset (user, verificationCode, newPassword) {
+        return this.$q((resolve, reject) => {
+
+            let userData = {
+                'Username' : user.toLowerCase(),
+                'Pool'     : this.userPool
+            };
+
+            this.cognitoUser = new CognitoUser(userData);
+            this
+                .cognitoUser
+                .confirmPassword(verificationCode, newPassword, {
+                    onSuccess : (result) => {
+                        resolve({
+                            status       : 200
+                        });
+                    },
+                    onFailure : (err) => {
+                        let errorMessage;
+
+                        switch (err.code) {
+                        case 'NotAuthorizedException' :
+                            errorMessage = {
+                                status  : 400,
+                                message : err.message
+                            };
+                            break;
+                        case 'UserNotConfirmedException' :
+                            errorMessage = {
+                                status  : 401,
+                                message : err.message
+                            };
+                            break;
+                        default :
+                            errorMessage = {
+                                status  : 403,
+                                message : err.message
+                            };
+                            break;
+                        }
+
+                        reject(errorMessage);
+                    }
+                });
         });
     }
 
@@ -306,6 +376,27 @@ class AuthenticationService {
     }
 
     setUserPassword (oldPassword, newPassword) {
+        return this.$q((resolve, reject) => {
+            this
+                .cognitoUser
+                .changePassword(oldPassword, newPassword, (error, result) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(result);
+                    }
+                });
+        });
+    }
+
+    completeUserPasswordSetup (preferredUsernameAttribute, newPassword) {
+
+        let attributeList = [];
+        attributes.forEach((preferredUsernameAttribute) => {
+            let cognitoUserAttribute = new CognitoUserAttribute(preferredUsernameAttribute);
+
+            attributeList.push(cognitoUserAttribute);
+        });
         return this.$q((resolve, reject) => {
             this
                 .cognitoUser

@@ -22,11 +22,6 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         .otherwise(STATE_NAME.LOGIN);
 
     $stateProvider
-        .state(STATE_NAME.DIAGNOSTICS, {
-            url        : '/diagnostics',
-            component  : 'diagnosticsPage'
-        })
-
         .state(STATE_NAME.LOGIN, {
             url        : '/login',
             component  : 'loginPage',
@@ -207,6 +202,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
+
         .state(STATE_NAME.JOBS, {
             url        : '/jobs',
             component  : 'jobsPage',
@@ -385,15 +381,10 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         })
 
         .state(STATE_NAME.USER_RESET_PASSWORD, {
-            url        : '/users/reset-password/{C_ID}',
+            url        : '/users/reset-password',
             component  : 'userResetPasswordPage',
             data       : {
                 requiresAuth : false
-            },
-            resolve    : {
-                user : (AuthenticationService, $stateParams) => {
-                    return AuthenticationService.getUserResetPassword($stateParams.C_ID);
-                }
             }
         })
 
@@ -402,11 +393,6 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             component  : 'userRegisterPage',
             data       : {
                 requiresAuth : false
-            },
-            resolve    : {
-                user : (UserCompanyService, $stateParams) => {
-                    return UserCompanyService.getNewUser($stateParams.C_ID);
-                }
             }
         })
 

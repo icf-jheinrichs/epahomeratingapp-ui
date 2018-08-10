@@ -1,11 +1,13 @@
 class JobDataResponseService {
-    constructor ($q, $http, API_URL) {
+    constructor ($q, $rootScope, $http, API_URL, UI_ENUMS) {
         'ngInject';
 
-        this.$q        = $q;
-        this.$http     = $http;
+        this.$q         = $q;
+        this.$http      = $http;
+        this.$rootScope = $rootScope;
 
-        this.API_URL   = API_URL;
+        this.API_URL    = API_URL;
+        this.MESSAGING  = UI_ENUMS.MESSAGING;
     }
 
     getById (_id, ratingCompanyID) {
@@ -41,6 +43,11 @@ class JobDataResponseService {
                     data    : jobDataResponse
                 })
                 .then((result) => {
+                    this.$rootScope.$broadcast(this.MESSAGING.UPDATE_JOB_HISTORY, {
+                        jobID       : jobDataResponse._id,
+                        description : 'Updated response',
+                    });
+
                     resolve(result);
                 })
                 .catch((err) => {

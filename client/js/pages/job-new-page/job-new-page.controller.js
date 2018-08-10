@@ -19,13 +19,14 @@ const HOUSE_PLAN_REQUIRED = {
 };
 
 class JobsNewPageController {
-    constructor ($q, $log, $state, JobsService, HousePlansService, S3Service, S3_CONFIG) {
+    constructor ($q, $log, $state, AnalyticsService, JobsService, HousePlansService, S3Service, S3_CONFIG) {
         'ngInject';
 
         this.$q                = $q;
         this.$log              = $log;
         this.$state            = $state;
 
+        this.AnalyticsService  = AnalyticsService;
         this.JobsService       = JobsService;
         this.HousePlansService = HousePlansService;
         this.S3Service         = S3Service;
@@ -68,6 +69,15 @@ class JobsNewPageController {
             } else {
                 this.submitJobWithLibrarayHousePlan(job);
             }
+
+            this
+                .AnalyticsService
+                .trackEvent({
+                    Category : 'job',
+                    Action   : 'new',
+                    Label    : '',
+                    Value    : ''
+                });
         } else {
             this.message = Object.assign({}, HOUSE_PLAN_REQUIRED);
         }

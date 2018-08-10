@@ -55,7 +55,7 @@ class UserPageController {
 
         let userSettingsPromises = [];
 
-        if (this.userSettings.userName.$valid && this.user.preferredUsername !== this.userName) {
+        if (this.userSettings.userName.$valid && this.user.preferredUsername !== this.userName.toLowerCase()) {
             let attribute = [{
                 Name  : 'preferred_username',
                 Value : this.userName.toLowerCase()

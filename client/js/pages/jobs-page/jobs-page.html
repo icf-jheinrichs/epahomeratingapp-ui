@@ -7,23 +7,83 @@
     <div class="row">
         <div class="col-xs-3">
             <nav class="nav nav-stacked ">
-                <a data-ui-sref="jobs-search()" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav" data-ng-class="{'active' : !jobsPageCtrl.currentState}">All</a>
-                <a data-ui-sref="jobs-search({status : 'Active'})" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Active'}">Active</a>
+                <a
+                    data-ui-sref="jobs-search(jobsPageCtrl.appendFilterParams())"
+                    ui-sref-opts="{inherit: false}"
+                    class="nav-item nav-item-has-sub-nav"
+                    data-ng-class="{'active' : !jobsPageCtrl.currentState}">
+                    All
+                </a>
+                <a
+                    data-ui-sref="jobs-search(jobsPageCtrl.appendFilterParams({status : 'Active'}))"
+                    ui-sref-opts="{inherit: false}"
+                    class="nav-item nav-item-has-sub-nav"
+                    data-ng-class="{'active' : jobsPageCtrl.currentState === 'Active'}">
+                    Active
+                </a>
                 <nav class="nav sub-nav">
-                    <a data-ui-sref="jobs-search({status : 'Active', progressLevel : 'PreDrywall'})" ui-sref-opts="{inherit: false}" class="nav-item" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Active.PreDrywall'}">Pre-drywall</a>
-                    <a data-ui-sref="jobs-search({status : 'Active', progressLevel : 'Final'})" ui-sref-opts="{inherit: false}" class="nav-item" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Active.Final'}">Final</a>
+                    <a
+                        data-ui-sref="jobs-search(jobsPageCtrl.appendFilterParams({status : 'Active', progressLevel : 'PreDrywall'}))"
+                        ui-sref-opts="{inherit: false}"
+                        class="nav-item"
+                        data-ng-class="{'active' : jobsPageCtrl.currentState === 'Active.PreDrywall'}">
+                        Pre-drywall
+                    </a>
+                    <a
+                        data-ui-sref="jobs-search(jobsPageCtrl.appendFilterParams({status : 'Active', progressLevel : 'Final'}))"
+                        ui-sref-opts="{inherit: false}"
+                        class="nav-item"
+                        data-ng-class="{'active' : jobsPageCtrl.currentState === 'Active.Final'}">
+                        Final
+                    </a>
                 </nav>
-                <a data-ui-sref="jobs-search({status : 'Completed'})" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Completed'}">Completed</a>
+                <a
+                    data-ui-sref="jobs-search(jobsPageCtrl.appendFilterParams({status : 'Completed'}))"
+                    ui-sref-opts="{inherit: false}"
+                    class="nav-item nav-item-has-sub-nav"
+                    data-ng-class="{'active' : jobsPageCtrl.currentState === 'Completed'}">
+                    Completed
+                </a>
                 <nav class="nav sub-nav">
-                    <a data-ui-sref="jobs-search({status : 'Completed', internalReview : 'true'})" ui-sref-opts="{inherit: false}" class="nav-item" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Completed.internalReview'}">Internal Review</a>
+                    <a
+                        data-ui-sref="jobs-search(jobsPageCtrl.appendFilterParams({status : 'Completed', internalReview : 'true'}))"
+                        ui-sref-opts="{inherit: false}"
+                        class="nav-item"
+                        data-ng-class="{'active' : jobsPageCtrl.currentState === 'Completed.internalReview'}">
+                        Internal Review
+                    </a>
                 </nav>
-                <a data-ui-sref="jobs-search({status : 'Submitted to Provider'})" ui-sref-opts="{inherit: false}" class="nav-item" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Submitted to Provider'}">Submitted to Provider</a>
-                <a data-ui-sref="jobs-search({status : 'Registered'})" ui-sref-opts="{inherit: false}" class="nav-item" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Registered'}">Registered</a>
+                <a
+                    data-ui-sref="jobs-search(jobsPageCtrl.appendFilterParams({status : 'Submitted to Provider'}))"
+                    ui-sref-opts="{inherit: false}"
+                    class="nav-item"
+                    data-ng-class="{'active' : jobsPageCtrl.currentState === 'Submitted to Provider'}">
+                    Submitted to Provider
+                </a>
+                <a
+                    data-ui-sref="jobs-search(jobsPageCtrl.appendFilterParams({status : 'Registered'}))"
+                    ui-sref-opts="{inherit: false}"
+                    class="nav-item"
+                    data-ng-class="{'active' : jobsPageCtrl.currentState === 'Registered'}">
+                    Registered
+                </a>
             </nav>
 
             <nav class="nav nav-stacked">
-                <a data-ui-sref="jobs-search({status : 'Archived'})" ui-sref-opts="{inherit: false}" class="nav-item nav-item-link" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Archived'}">Archived</a>
-                <a data-ui-sref="jobs-search({status : 'Deleted'})" ui-sref-opts="{inherit: false}" class="nav-item nav-item-link" data-ng-class="{'active' : jobsPageCtrl.currentState === 'Deleted'}">Recently Deleted</a>
+                <a
+                    data-ui-sref="jobs-search(jobsPageCtrl.appendFilterParams({status : 'Archived'}))"
+                    ui-sref-opts="{inherit: false}"
+                    class="nav-item nav-item-link"
+                    data-ng-class="{'active' : jobsPageCtrl.currentState === 'Archived'}">
+                    Archived
+                </a>
+                <a
+                    data-ui-sref="jobs-search(jobsPageCtrl.appendFilterParams({status : 'Deleted'}))"
+                    ui-sref-opts="{inherit: false}"
+                    class="nav-item nav-item-link"
+                    data-ng-class="{'active' : jobsPageCtrl.currentState === 'Deleted'}">
+                    Recently Deleted
+                </a>
             </nav>
         </div>
 
@@ -40,7 +100,7 @@
                         class="btn"
                         type="button"
                         data-ng-click="jobsPageCtrl.flagForReview()"
-                        data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
+                        data-ng-disabled="!jobsPageCtrl.bulkOperationsEnabled">
 
                         Flag for Review
                     </button>
@@ -49,7 +109,10 @@
                         class="btn"
                         type="button"
                         data-ng-click="jobsPageCtrl.submitToProvider()"
-                        data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
+                        data-ng-disabled="
+                            !jobsPageCtrl.bulkOperationsEnabled ||
+                            !jobsPageCtrl.submitToProvierEnabled()
+                        ">
 
                         Submit to Provider
                     </button>
@@ -60,9 +123,10 @@
                     type="button"
                     data-ng-click="jobsPageCtrl.bulkDownload()"
                     data-ng-if="::jobsPageCtrl.enableEdit()"
-                    data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
+                    data-ng-disabled="!jobsPageCtrl.bulkOperationsEnabled || jobsPageCtrl.downloadingRem">
 
-                    <i data-ng-show="jobsPageCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Download XML
+                    <i data-ng-show="jobsPageCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+                    {{jobsPageCtrl.xmlDownloadButtonMessage}}
                 </button>
 
                 <button
@@ -70,7 +134,10 @@
                     type="button"
                     data-ng-click="jobsPageCtrl.archive()"
                     data-ng-if="::jobsPageCtrl.showArchive()"
-                    data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
+                    data-ng-disabled="
+                        !jobsPageCtrl.bulkOperationsEnabled ||
+                        !jobsPageCtrl.archiveDeleteEnabled()"
+                    >
 
                     Archive Job
                 </button>
@@ -80,7 +147,10 @@
                     type="button"
                     data-ng-click="jobsPageCtrl.delete()"
                     data-ng-if="::jobsPageCtrl.showDelete()"
-                    data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
+                    data-ng-disabled="
+                        !jobsPageCtrl.bulkOperationsEnabled ||
+                        !jobsPageCtrl.archiveDeleteEnabled()"
+                    >
 
                     Delete Job
                 </button>
@@ -90,7 +160,7 @@
                     type="button"
                     data-ng-click="jobsPageCtrl.putback()"
                     data-ng-if="::jobsPageCtrl.showPutBack()"
-                    data-ng-disabled="!jobsPageCtrl.bulkOperationsAreEnabled">
+                    data-ng-disabled="!jobsPageCtrl.bulkOperationsEnabled">
 
                     Make Active
                 </button>
@@ -100,7 +170,6 @@
                 enabled="jobsPageCtrl.enableEdit()"
                 jobs="jobsPageCtrl.viewJobs"
                 register-handlers="jobsPageCtrl.registerHandlers(toggleAllJobs, getSelectedJobs)"
-                on-download-xml="jobsPageCtrl.downloadXml(jobId)"
                 on-set-bulk-operation-status="jobsPageCtrl.setBulkOperationStatus(status)">
             </jobs>
 

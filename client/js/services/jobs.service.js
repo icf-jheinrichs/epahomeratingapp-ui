@@ -18,22 +18,29 @@ class JobsService {
      * @param  {function} $sanitize angular.$sanitize html injection
      * @param  {object}   API_URL   epahomeratingapp constants - contains paths to API
      */
-    constructor ($q, $http, $stateParams, $sanitize, UI_ENUMS, API_URL, AuthorizationService, jobTitleFilter) {
+    constructor ($q, $http, $rootScope, $stateParams, $sanitize, UI_ENUMS, API_URL, AuthorizationService, AuthenticationService, jobTitleFilter) {
         'ngInject';
 
-        this.$q                   = $q;
-        this.$http                = $http;
-        this.$sanitize            = $sanitize;
-        this.$stateParams         = $stateParams;
+        this.$q                    = $q;
+        this.$http                 = $http;
+        this.$sanitize             = $sanitize;
+        this.$stateParams          = $stateParams;
+        this.$rootScope            = $rootScope;
 
-        this.SEARCH_PARAMS        = UI_ENUMS.SEARCH_PARAMS;
-        this.JOB_STATUS           = UI_ENUMS.JOB_STATUS;
-        this.JOB_TYPES            = UI_ENUMS.JOB_TYPES;
+        this.SEARCH_PARAMS         = UI_ENUMS.SEARCH_PARAMS;
+        this.JOB_STATUS            = UI_ENUMS.JOB_STATUS;
+        this.JOB_TYPES             = UI_ENUMS.JOB_TYPES;
+        this.MESSAGING             = UI_ENUMS.MESSAGING;
 
-        this.AuthorizationService = AuthorizationService;
+        this.AuthorizationService  = AuthorizationService;
+        this.AuthenticationService = AuthenticationService;
 
-        this.API_URL              = API_URL;
-        this.jobTitleFilter       = jobTitleFilter;
+        this.API_URL               = API_URL;
+        this.jobTitleFilter        = jobTitleFilter;
+
+        this.updateJobHistoryListener = this.$rootScope.$on(this.MESSAGING.UPDATE_JOB_HISTORY, (event, data) => {
+            this.updateJobHistory(data.jobID, data.description, data.ratingCompanyID);
+        });
     }
 
     /**
@@ -439,16 +446,28 @@ class JobsService {
         return promise;
     }
 
-    getExportSignedUrl (_id) {
+    getExportSignedUrl (downloadTask) {
         let promise = this.$q((resolve, reject) => {
+
+            let options = {
+                method  : 'GET',
+                url     : `${this.API_URL.JOB}/rem_xml/${downloadTask.jobID}`
+            };
+
+            // provider job download from original company
+            if (downloadTask.ratingCompanyID) {
+                options.ratingCompanyID = downloadTask.ratingCompanyID;
+            }
+
             this
-                .$http({
-                    method  : 'GET',
-                    url     : `${this.API_URL.JOB}/rem_xml/${_id}`
-                })
+                .$http(options)
                 .then((response) => {
                     if (response.status === 200) {
-                        resolve(response.data.data.url);
+                        if (response.data.data) {
+                            resolve(response.data.data.url);
+                        } else {
+                            reject();
+                        }
                     } else {
                         //TODO: make this less bad
                         reject('somethings amiss');
@@ -544,6 +563,41 @@ class JobsService {
         });
 
         return promise;
+    }
+
+    updateJobHistory (jobID, description, ratingCompanyID) {
+        this
+            .$http({
+                method  : 'GET',
+                url     : `${this.API_URL.JOB}/${jobID}`,
+                ratingCompanyID
+            })
+            .then((response) => {
+                if (response.status !== 200) {
+                    return;
+                }
+
+                let job = response.data;
+
+                if (!job.History) {
+                    job.History = {};
+                }
+
+                let user = this.AuthenticationService.getUserInfo();
+
+                job.History.push({
+                    Description : description ? description : 'Updated',
+                    DateTime    : new Date(),
+                    User        : user.firstName + ' ' + user.lastName
+                });
+
+                return this.$http({
+                    method  : 'PUT',
+                    url     : `${this.API_URL.JOB}/${job._id}`,
+                    data    : job,
+                    ratingCompanyID
+                });
+            });
     }
 
     createSearchMeta (job) {

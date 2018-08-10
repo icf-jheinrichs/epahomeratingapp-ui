@@ -15,6 +15,27 @@ class JobsProviderPageController extends JobsPage {
         }
 
         this.selectedRater = this.company.RelatedRaterCompanys[raterCompanyIndex];
+
+        if (this.$stateParams.status) {
+            this.currentState = this.$stateParams.status;
+        }
+
+        this.pageStart = 0,
+        this.pageEnd   = this.PAGE_SIZE;
+
+        this.viewJobs = this.jobs.slice(this.pageStart, this.pageEnd);
+    }
+
+    setPage (page) {
+        this.pageStart = this.PAGE_SIZE * (page - 1);
+        this.pageEnd   = this.pageStart + this.PAGE_SIZE;
+
+        this.checkAll = false;
+        this.toggleAllJobs();
+
+        this.viewJobs = this.jobs.slice(this.pageStart, this.pageEnd);
+
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
     }
 
     markJobRegistered (jobId) {
@@ -39,7 +60,7 @@ class JobsProviderPageController extends JobsPage {
         let submitJobs   = [];
 
         markedJobs.forEach((index) => {
-            let job = this.jobs[index];
+            let job = this.viewJobs[index];
             if (job.Status === this.JOB_STATUS.SUBMITTED_TO_PROVIDER) {
                 // TODO - Pop error message to user
                 job.Status = this.JOB_STATUS.REGISTERED;

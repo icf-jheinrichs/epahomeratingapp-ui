@@ -6,17 +6,28 @@
     <div class="row">
         <div class="col-xs-3">
             <nav class="nav nav-stacked ">
-                <a data-ui-sref="jobs-provider()" ui-sref-opts="{inherit: false}" class="nav-item nav-item-has-sub-nav" data-ng-class="{'active' : !jobsProviderPageCtrl.currentState}">All</a>
-                <a data-ui-sref="jobs-provider-search({status : 'Submitted to Provider', rater : jobsProviderPageCtrl.selectedRater.O_ID})" ui-sref-opts="{inherit: false}" class="nav-item">Submitted to Provider</a>
-                <a data-ui-sref="jobs-provider-search({status : 'Registered', rater : jobsProviderPageCtrl.selectedRater.O_ID})" ui-sref-opts="{inherit: false}" class="nav-item">Registered</a>
+                <a
+                    data-ui-sref="jobs-provider-search(jobsProviderPageCtrl.appendFilterParams({}))"
+                    ui-sref-opts="{inherit: false}"
+                    class="nav-item nav-item-has-sub-nav"
+                    data-ng-class="{'active' : !jobsProviderPageCtrl.currentState}">
+                    All
+                </a>
+                <a
+                    data-ui-sref="jobs-provider-search(jobsProviderPageCtrl.appendFilterParams({status : 'Submitted to Provider', rater : jobsProviderPageCtrl.selectedRater.O_ID}))"
+                    ui-sref-opts="{inherit: false}"
+                    class="nav-item"
+                    data-ng-class="{'active' : jobsProviderPageCtrl.currentState === 'Submitted to Provider'}">
+                    Submitted to Provider
+                </a>
+                <a
+                    data-ui-sref="jobs-provider-search(jobsProviderPageCtrl.appendFilterParams({status : 'Registered', rater : jobsProviderPageCtrl.selectedRater.O_ID}))"
+                    ui-sref-opts="{inherit: false}"
+                    class="nav-item"
+                    data-ng-class="{'active' : jobsProviderPageCtrl.currentState === 'Registered'}">
+                    Registered
+                </a>
             </nav>
-
-            <!--
-            <nav class="nav nav-stacked">
-                <a href="#" class="nav-item nav-item-link">Archived</a>
-                <a href="#" class="nav-item nav-item-link">Deleted</a>
-            </nav>
-            -->
         </div>
 
         <div class="col-xs-9 jobs">
@@ -45,7 +56,7 @@
                     type="button"
                     data-ng-click="jobsProviderPageCtrl.markAsRegistered()"
                     data-ng-if="::jobsProviderPageCtrl.showMarkAsRegistered()"
-                    data-ng-disabled="!jobsProviderPageCtrl.bulkOperationsAreEnabled">
+                    data-ng-disabled="!jobsProviderPageCtrl.bulkOperationsEnabled">
 
                     Mark as Registered
                 </button>
@@ -54,20 +65,24 @@
                     class="btn"
                     type="button"
                     data-ng-click="jobsProviderPageCtrl.bulkDownload()"
-                    data-ng-disabled="!jobsProviderPageCtrl.bulkOperationsAreEnabled">
+                    data-ng-disabled="!jobsProviderPageCtrl.bulkOperationsEnabled || jobsProviderPageCtrl.downloadingRem">
 
-                    <i ng-show="jobsProviderPageCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i>Download XML
+                    <i ng-show="jobsProviderPageCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+                    {{jobsProviderPageCtrl.xmlDownloadButtonMessage}}
                 </button>
             </div>
 
             <jobs
-                jobs="jobsProviderPageCtrl.jobs"
-                register-handlers="jobsProviderPageCtrl.registerHandlers(toggleAllJobs, getSelectedJobs)"
+                jobs="jobsProviderPageCtrl.viewJobs"
                 rating-company-id="{{::jobsProviderPageCtrl.selectedRater.O_ID}}"
+                register-handlers="jobsProviderPageCtrl.registerHandlers(toggleAllJobs, getSelectedJobs)"
                 on-mark-job-as-registered="jobsProviderPageCtrl.markJobRegistered(jobId)"
-                on-download-xml="jobsProviderPageCtrl.downloadXml(jobId)"
                 on-set-bulk-operation-status="jobsProviderPageCtrl.setBulkOperationStatus(status)">
             </jobs>
+
+            <pagination
+                quantity="jobsProviderPageCtrl.jobs.length"
+                on-set-page="jobsProviderPageCtrl.setPage(page)"></pagination>
         </div>
     </div>
 </section>

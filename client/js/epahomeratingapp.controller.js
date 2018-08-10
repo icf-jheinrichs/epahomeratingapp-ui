@@ -1,17 +1,20 @@
 class epahomeratingappController {
-    constructor ($timeout, $rootScope, $state, $stateParams, AuthenticationService, AuthorizationService, DisplayLogicDigestService, UI_ENUMS) {
+    constructor ($rootScope, $state, $stateParams, $timeout, $transitions, AnalyticsService, AuthenticationService, AuthorizationService, DisplayLogicDigestService, UI_ENUMS) {
         'ngInject';
 
-        this.$timeout     = $timeout;
         this.$rootScope   = $rootScope;
         this.$state       = $state;
         this.$stateParams = $stateParams;
+        this.$timeout     = $timeout;
+        this.$transitions = $transitions;
 
+        this.AnalyticsService          = AnalyticsService;
         this.AuthenticationService     = AuthenticationService;
         this.AuthorizationService      = AuthorizationService;
         this.DisplayLogicDigestService = DisplayLogicDigestService;
         this.MESSAGING                 = UI_ENUMS.MESSAGING;
         this.STATE_NAME                = UI_ENUMS.STATE_NAME;
+        this.JOB_STATUS                = UI_ENUMS.JOB_STATUS;
 
         this.paddingTop    = `${45}px`;
         this.paddingBottom = '0px';
@@ -30,6 +33,15 @@ class epahomeratingappController {
     }
 
     $onInit () {
+        this.transistionSuccessListener
+            = this
+                .$transitions
+                .onSuccess({}, (transition) => {
+                    this
+                        .AnalyticsService
+                        .trackPageView(transition.router.urlRouter.location);
+                });
+
         this.topPadListener = this.$rootScope.$on(this.MESSAGING.SET_TOP_PAD, (event, topPad) => {
             this.$timeout(() => {
                 this.paddingTop = `${topPad}px`;
@@ -75,9 +87,19 @@ class epahomeratingappController {
                         const authorizedRedirect = this.AuthorizationService.getAuthorizedRedirect();
 
                         if (authorizedRedirect !== this.STATE_NAME.LOGIN) {
-                            this
-                                .$state
-                                .go(authorizedRedirect);
+                            if (authorizedRedirect === this.STATE_NAME.JOBS_SEARCH) {
+                                this
+                                    .$state
+                                    .go(authorizedRedirect, {'status' : 'Active'});
+                            } else if (authorizedRedirect === this.STATE_NAME.JOBS_PROVIDER_SEARCH) {
+                                this
+                                    .$state
+                                    .go(authorizedRedirect, {'status' : 'Submitted to Provider'});
+                            } else {
+                                this
+                                    .$state
+                                    .go(authorizedRedirect);
+                            }
                         } else {
                             this
                                 .AuthorizationService

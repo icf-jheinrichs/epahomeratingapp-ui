@@ -47,7 +47,7 @@ class JobsPageController extends JobsPage {
         let submitJobs   = [];
 
         markedJobs.forEach((index) => {
-            let job = this.jobs[index];
+            let job = this.viewJobs[index];
             if (job.Status === this.JOB_STATUS.COMPLETED && job.InternalReview === false) {
                 // TODO - Pop error message to user
                 job.InternalReview = true;
@@ -64,6 +64,30 @@ class JobsPageController extends JobsPage {
             });
     }
 
+    archiveDeleteEnabled () {
+        const markedJobs = this.jobsHandlers.getSelectedJobs();
+
+        for (let index in markedJobs) {
+            if (this.viewJobs[markedJobs[index]].Status === this.JOB_STATUS.SUBMITTED_TO_PROVIDER) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    submitToProvierEnabled () {
+        const markedJobs = this.jobsHandlers.getSelectedJobs();
+
+        for (let index in markedJobs) {
+            if (this.viewJobs[markedJobs[index]].Status !== this.JOB_STATUS.COMPLETED) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     submitToProvider () {
         const markedJobs = this.jobsHandlers.getSelectedJobs();
         this.marked      = markedJobs.length;
@@ -75,7 +99,7 @@ class JobsPageController extends JobsPage {
                 let submitJobs = [];
                 if (confirmation) {
                     markedJobs.forEach((index) => {
-                        let job = this.jobs[index];
+                        let job = this.viewJobs[index];
                         if (job.Status === this.JOB_STATUS.COMPLETED) {
                             // TODO - Pop error message to user
                             job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
@@ -114,7 +138,7 @@ class JobsPageController extends JobsPage {
                     let deleteJobs   = [];
 
                     markedJobs.forEach((index) => {
-                        let job = this.jobs[index];
+                        let job = this.viewJobs[index];
 
                         if (canDeleteJob(job)) {
                             // TODO - Pop error message to user
@@ -160,7 +184,7 @@ class JobsPageController extends JobsPage {
                     let archiveJobs   = [];
 
                     markedJobs.forEach((index) => {
-                        let job = this.jobs[index];
+                        let job = this.viewJobs[index];
 
                         if (canArchiveJob(job)) {
                             // TODO - Pop error message to user
@@ -192,7 +216,7 @@ class JobsPageController extends JobsPage {
         let putbackJobs   = [];
 
         markedJobs.forEach((index) => {
-            let job = this.jobs[index];
+            let job = this.viewJobs[index];
 
             if (canPutbackJob(job)) {
                 // TODO - Pop error message to user

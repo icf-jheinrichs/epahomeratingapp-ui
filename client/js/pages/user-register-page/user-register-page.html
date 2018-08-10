@@ -3,36 +3,59 @@
         <h2>Welcome to ENERGY STAR RaterPRO</h2>
     </header>
 
-    <form class="row" name="loginForm" data-ng-submit="userRegisterPageCtrl.onSubmit()" novalidate>
-        <status-message status="userRegisterPageCtrl.message"></status-message>
+    <form class="row register-user-panel"
+        name="userRegisterPageCtrl.userSettings"
+        data-ng-submit="userRegisterPageCtrl.onSubmit()"
+        novalidate>
 
         <div class="register-panel col-xs-6 offset-xs-3">
-            <h3>Please create a password for your account</h3>
+            <h3>Please create a Username and Password for your account</h3>
+
+            <status-message status="userRegisterPageCtrl.message"></status-message>
 
             <div class="form-group">
-                <span class="control-label">Login</span>
-                <p class="form-control-static">{{::userRegisterPageCtrl.user.userName}}</p>
+                <label for="userId" class="control-label">Create Your Username</label>
+                <input
+                    name="userId"
+                    data-ng-model="userRegisterPageCtrl.userId"
+                    type="text"
+                    data-ng-pattern="userRegisterPageCtrl.userNamePattern"
+                    data-ng-minlength="7"
+                    class="form-control"
+                    id="userId" />
+                <p class="note">{{::userRegisterPageCtrl.VALIDATION_MESSAGE.USER_NAME}}</p>
+            </div>
+
+            <div class="form-group">
+                <label for="temporaryPassword" class="control-label">Temporary Password</label>
+                <input
+                    name="temporaryPassword"
+                    data-ng-model="userRegisterPageCtrl.temporaryPassword"
+                    required="required"
+                    type="password"
+                    class="form-control"
+                    id="temporaryPassword" />
+                <p class="note">You should have recieved a temporary password via Email.</p>
             </div>
 
             <div class="form-group" data-ng-class="{'has-error' : userRegisterPageCtrl.userSettings.newPassword.$invalid && userRegisterPageCtrl.userSettings.newPassword.$dirty}">
-                <label for="loginFormPassword" class="control-label">Password</label>
+                <label for="newPassword" class="control-label">New Password</label>
                 <input
-                    name="password"
-                    data-ng-model="userRegisterPageCtrl.password"
+                    name="newPassword"
+                    data-ng-model="userRegisterPageCtrl.newPassword"
                     required="required"
                     type="password"
                     data-ng-minlength="8"
                     class="form-control"
                     data-ng-pattern="userRegisterPageCtrl.passwordPattern"
-                    id="loginFormPassword" />
-
-                <p class="note">Password must be at least 8 characters long, contain an upper and lower case letter, one digit and one special character (@$!%*#?&amp;)</p>
+                    id="newPassword" />
+                <p class="note">{{::userRegisterPageCtrl.VALIDATION_MESSAGE.PASSWORD}} Your new password must be different from the temporary password.</p>
             </div>
 
             <div class="form-group" data-ng-class="{'has-error' : userRegisterPageCtrl.userSettings.confirmPassword.$invalid && userRegisterPageCtrl.userSettings.confirmPassword.$dirty}">
                 <label for="confirmPassword" class="control-label">Confirm Password</label>
                 <input
-                    name="password"
+                    name="confirmPassword"
                     data-ng-model="userRegisterPageCtrl.confirmPassword"
                     required="required"
                     type="password"
@@ -42,23 +65,75 @@
                     id="confirmPassword" />
 
                     <p class="form-control-error" role="alert">
-                        Passwords must be valid and match.
+                        {{::userRegisterPageCtrl.VALIDATION_MESSAGE.CONFIRM_PASSWORD}}
                     </p>
             </div>
         </div>
 
-        <div class="col-xs-12">
+        <div class="col-xs-12 offset-top">
             <h3>Read and accept the terms of use</h3>
 
             <div class="scrollable scrollable-large">
                 <div class="scrollable-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <h4>Privacy Notice</h4>
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <p>This privacy notice discloses the privacy practices for ENERGY STAR™ RaterPRO and applies to information collected on the RaterPRO website (<a href="https://www.raterpro.net"  class="nav-item nav-item-link">www.raterpro.net</a>) and mobile app. It will notify you of the following:</p>
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <ol>
+                        <li>What personally identifiable information is collected from you through the website and app and how it is used.</li>
+                        <li>What choices are available to you regarding the use and sharing of your data.</li>
+                        <li>The security procedures in place to protect the misuse of your information.</li>
+                    </ol>
 
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar sic tempor. Sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus pronin sapien nunc accuan eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <h4>Information Collection and Use</h4>
+
+                    <p>Use of RaterPRO, and use of any specific features within RaterPRO, is completely optional. The information collected in RaterPRO is based on the 'minimum rated features' defined by ANSI/RESNET-301 and the ENERGY STAR Certified Homes program requirements. You are not required to use RaterPRO to participate in the ENERGY STAR Certified Homes program. If you do use RaterPRO, you have the choice whether to collect:</p>
+
+                    <ul>
+                        <li><strong>A home's address.</strong> You may use an arbitrary manual identifier instead.</li>
+                        <li><strong>Comments about a home.</strong> You may elect not to add comments.</li>
+                        <li><strong>Photos to accompany comments.</strong> RaterPRO requires only one photo for each job: the front elevation of the home. All other photos are optional.</li>
+                    </ul>
+
+                    <p>You are the owner of the information you collect within RaterPRO. EPA will not share the information with anyone, including RESNET. EPA or its technical support contractor may access information solely for the following purposes:</p>
+
+                    <ul style="list-style-type:none">
+                        <li><p><strong>Technical Support Request</strong> – With your express written or verbal permission, EPA’s technical support subcontractor may access collected information solely for diagnostic purposes in order to resolve your support request.</p></li>
+                        <li>
+                            <p><strong>Ongoing Technical Development</strong> – EPA’s technical support contractor may temporally access stored information during the normal course of development and upkeep to ensure data integrity.</p>
+                        </li>
+                        <li><p><strong>Anonymized Usage Statistics</strong> - EPA may generate anonymized usage statistics for the betterment of the website and app as a whole. These statistics will never include identifiable information about an organization, user or home.</p></li>
+                    </ul>
+
+                    <h4>Information Control and Sharing</h4>
+
+                    <p>You and all users in your organization have the ability to view, edit and delete information that you collect within RaterPRO. You may delete a job's entire record unless that job has been shared with a provider. After 30 days, a deleted job's information is permanently erased and is not retrievable.</p>
+
+                    <p>RaterPRO offers two ways to share information. Use of both features is completely optional.</p>
+
+                    <ul style="list-style-type:none">
+                        <li><p><strong>Sharing Information with Providers</strong> - You may choose to share job information with a provider organization using the 'Submit to Provider' feature. Provider users will have access to all information associated with a shared job, including job profile (location, builder and plan name), job history (dates of edits and identity of editor), status of 'minimum rated features,' status of ENERGY STAR checklist requirements, comments and photos. Once you share a job with a provider, you will not be able to unshare that job.</p></li>
+                        <li><p><strong>Sharing Information via Reports</strong> - You may choose to share job information with third parties using one of RaterPRO's reports, such as the Builder Corrections report. In this case, RaterPRO will generate a PDF report which can then be sent to a third party via e-mail, text message, or other communication system. </p></li>
+                    </ul>
+
+                    <h4>Security</h4>
+
+                    <p>The security of your information is very important to the EPA. We have designed RaterPRO with the following security features:</p>
+
+                    <ul style="list-style-type:none">
+                        <li><p><strong>Secure, Password Protected Access </strong>Upon registration, you establish your own password. You may change your username at any point in the Settings screen. No information within your registered account will be examined without your expressed written or verbal permission.</p></li>
+                        <li><p><strong>Secure Communications</strong> - All data communicated over the web are secured by Secure Socket Layer (SSL) encryption to protect data transmissions. No information is transferred openly over the web.</p></li>
+                        <li><p><strong>Secure Servers</strong> - All information collected within ENERGY STAR RaterPRO is stored and maintained on commercial servers that use industry-standard security protocols. No information collected within ENERGY STAR RaterPRO is stored on EPA equipment.</p></li>
+                    </ul>
+
+                    <p>While EPA has taken steps to ensure the security and stability of RaterPRO, there is a possibility of data loss and/or system downtime. EPA shall not be liable for any loss of data, loss of profits, loss of business, loss of use or any other economic loss.</p>
+
+                    <h4>Changes to This Privacy Policy</h4>
+
+                    <p>EPA reserves the right to change our policies regarding the privacy of your information in the future. If that happens, we will endeavor to promptly update this Privacy Policy and provide a message to RaterPRO users.</p>
+
+                    <p><strong>If you have any questions or comments about the information presented here, please send us your comments at<a href="mailto:energystarhomes@energystar.gov" class="btn btn-link">energystarhomes@energystar.gov.</a></strong></p>
+
                 </div>
             </div>
 

@@ -71,19 +71,6 @@ class UserCompanyService {
         });
     }
 
-    /**
-     * Get user data
-     * @param  {string} C_ID contact id (from iStar)
-     * @return {promise}     promise that resolves with user data
-     */
-    getNewUser (C_ID) {
-        return this.$q((resolve, reject) => {
-            resolve({
-                userName : 'joe@username.com'
-            });
-        });
-    }
-
     putUser (user) {
         return this.$q((resolve, reject) => {
             this

@@ -3,9 +3,14 @@ import _findIndex from 'lodash/findIndex';
 class JobsChecklistPageController {
     constructor (
         $rootScope,
+        $scope,
         $stateParams,
+        $log,
+        $window,
+        AnalyticsService,
         AuthorizationService,
         DialogService,
+        DropdownService,
         JobChecklistStateService,
         JobsService,
         JobDataResponseService,
@@ -17,10 +22,15 @@ class JobsChecklistPageController {
         'ngInject';
 
         this.$rootScope               = $rootScope;
+        this.$scope                   = $scope;
         this.$stateParams             = $stateParams;
+        this.$window                  = $window;
+        this.$log                     = $log;
 
+        this.AnalyticsService         = AnalyticsService;
         this.AuthorizationService     = AuthorizationService;
         this.DialogService            = DialogService;
+        this.DropdownService          = DropdownService;
         this.JobChecklistStateService = JobChecklistStateService;
         this.JobsService              = JobsService;
         this.JobDataResponseService   = JobDataResponseService;
@@ -72,7 +82,6 @@ class JobsChecklistPageController {
         //TODO: this belongs in a directive
         this.showActionsDropDown       = false;
         this.showCompleteModal         = false;
-        this.showDownloadModal         = false;
         this.showHvacDesignReportModal = false;
 
         this.jobCompleteStatus = {
@@ -114,6 +123,11 @@ class JobsChecklistPageController {
         this.postCommentListener();
         this.housePhotoListener();
         this.viewHvacDesignReportListener();
+    }
+
+    appendFilterParams () {
+        let sessionStoredParams = this.$window.sessionStorage.getItem('filter.param');
+        return sessionStoredParams === undefined ? {} : JSON.parse(sessionStoredParams);
     }
 
     getRatingTypeClass () {
@@ -172,16 +186,6 @@ class JobsChecklistPageController {
     }
 
     //TODO: all modal stuff belongs in a directive
-    toggleModalDownload () {
-        this.showDownloadModal = !this.showDownloadModal;
-    }
-
-    //TODO: all modal stuff belongs in a directive
-    hideModalDownload () {
-        this.showDownloadModal = false;
-    }
-
-    //TODO: all modal stuff belongs in a directive
     toggleModalHvacDesignReport () {
         this.showHvacDesignReportModal = !this.showHvacDesignReportModal;
     }
@@ -218,8 +222,17 @@ class JobsChecklistPageController {
             this
                 .JobChecklistStateService
                 .completeJob();
+
+            this
+                .AnalyticsService
+                .trackEvent({
+                    Category : 'job',
+                    Action   : 'complete',
+                    Label    : '',
+                    Value    : ''
+                });
         } else {
-            this.showCompleteModal = true;
+            this.ModalService.openModal(this.MODAL.COMPLETE_JOB);
         }
     }
 
@@ -234,18 +247,23 @@ class JobsChecklistPageController {
     }
 
     onDownloadRequest () {
-        this.hideDropDown();
+        let downloadTask = {
+            jobID           : this.job._id,
+            ratingCompanyID : this.$stateParams.ratingCompanyID
+        };
 
         this.JobsService
-            .getExportSignedUrl(this.job._id)
+            .getExportSignedUrl(downloadTask)
             .then((response) => {
                 this.downloadUrl = response;
-                this.toggleModalDownload();
+                this.ModalService.openModal(this.MODAL.DOWNLOAD_REM_XML);
             });
     }
 
     showHistory () {
-        this.hideDropDown();
+        this
+            .DropdownService
+            .closeDropdown('dropdown-job-info');
 
         this
             .ModalService
@@ -266,6 +284,15 @@ class JobsChecklistPageController {
         }
 
         this.showHvacDesignReportModal = true;
+    }
+
+    markAsRegistered () {
+        this.job.Status = this.JOB_STATUS.REGISTERED;
+        this.JobsService.put(this.job, this.$stateParams.ratingCompanyID);
+    }
+
+    canMarkAsRegistered () {
+        return this.job.Status === this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
     }
 
     //TODO: determine if we need user friendly ID in addition to DB id.

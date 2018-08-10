@@ -1,9 +1,13 @@
 import _defer from 'lodash/defer';
 
 let _forEach   = require('lodash/forEach');
-let _findIndex = require('lodash/findIndex');
 let JSZip      = require('jszip');
 let FileSaver  = require('file-saver');
+
+let xmlDownloadMessage = {
+    notDownloading : 'Download XML',
+    downloading    : 'Generating XML'
+};
 
 class JobsPage {
     constructor (
@@ -11,7 +15,8 @@ class JobsPage {
         $q,
         $state,
         $stateParams,
-        $transitions,
+        $scope,
+        $window,
         AuthorizationService,
         DialogService,
         JobsService,
@@ -25,7 +30,8 @@ class JobsPage {
         this.$q                   = $q;
         this.$state               = $state;
         this.$stateParams         = $stateParams;
-        this.$transitions         = $transitions;
+        this.$scope               = $scope;
+        this.$window              = $window;
         this.AuthorizationService = AuthorizationService;
         this.DialogService        = DialogService;
         this.JobsService          = JobsService;
@@ -35,13 +41,33 @@ class JobsPage {
         this.JOB_STATUS           = UI_ENUMS.JOB_STATUS;
         this.STATE_NAME           = UI_ENUMS.STATE_NAME;
         this.PAGE_SIZE            = PAGINATION.PAGE_SIZE;
+
+        this.xmlDownloadButtonMessage = xmlDownloadMessage.notDownloading;
     }
 
     $onInit () {
-        this.checkAll                 = false;
-        this.bulkOperationsAreEnabled = false;
+        this.checkAll              = false;
+        this.bulkOperationsEnabled = false;
 
-        this.userRole                 = this.AuthorizationService.getUserRole();
+        this.userRole              = this.AuthorizationService.getUserRole();
+
+        this.$window.sessionStorage.setItem('filter.param', JSON.stringify(this.$stateParams));
+    }
+
+    appendFilterParams (jobSearchParams) {
+        if (!jobSearchParams) {
+            jobSearchParams = {};
+        }
+
+        // persist filter across job tabs
+        jobSearchParams.builder     = this.$stateParams.builder;
+        jobSearchParams.housePlan   = this.$stateParams.housePlan;
+        jobSearchParams.jobType     = this.$stateParams.jobType;
+        jobSearchParams.keywords    = this.$stateParams.keywords;
+        jobSearchParams.mustCorrect = this.$stateParams.mustCorrect;
+        jobSearchParams.ratingType  = this.$stateParams.ratingType;
+
+        return jobSearchParams;
     }
 
     generateFileName (job) {
@@ -55,57 +81,32 @@ class JobsPage {
         return `${housePlanName}${address}`;
     }
 
-    downloadXml (jobId) {
-        const jobIndex = _findIndex(this.jobs, {_id : jobId});
-        let self       = this;
-        let zip             = new JSZip();
-        let zipFilename     = 'ExportedXML.zip';
+    getExportFileName (index) {
+        let exportFileName = this.viewJobs[index].Primary.ExportFilename;
+        if (exportFileName === '' || exportFileName === undefined) {
+            exportFileName = this.generateFileName(this.viewJobs[index]);
+        }
+        return exportFileName;
+    }
 
-        let downloadJobs    = [{
-            id          : jobId,
-            fileName    : this.jobs[jobIndex].Primary.ExportFilename || this.generateFileName(this.jobs[jobIndex]),
-            fileNameDup : 0
-        }];
+    downloadSingleXML (markedJobIndex) {
+        let downloadJob = this.viewJobs[markedJobIndex];
 
-        // download the files async to get rid of the same export-file-name issue
-        // rem-xml-outbound service save the exported name to S3, same file name will overwrite
-        // TODO - This might need server change?
-        let sequence = Promise.resolve();
+        let downloadTask = {
+            jobID           : downloadJob._id,
+            ratingCompanyID : this.selectedRater ? this.selectedRater.O_ID : undefined
+        };
 
-        downloadJobs.forEach(function downloadJob (downloadJob) {
-            sequence = sequence
-                .then(() => {
-                    return self.JobsService.getExportSignedUrl(downloadJob.id);
-                })
-                .then((url) => {
-                    let config = {
-                        method  : 'GET',
-                        url     : url,
-                        headers : {
-                            Authorization : 'Remove in Interceptor'
-                        }
-                    };
-                    return self.$http(config);
-                })
-                .then((response) => {
-                    if (downloadJob.fileNameDup !== 0) {
-                        downloadJob.fileName = `${downloadJob.fileName} (${downloadJob.fileNameDup})`;
-                    }
+        this.JobsService
+            .getExportSignedUrl(downloadTask)
+            .then((downloadUrl) => {
+                let link = document.createElement('a');
+                link.href = downloadUrl;
+                link.download = this.getExportFileName(markedJobIndex);
+                link.click();
 
-                    zip.file(downloadJob.fileName + '.xml', response.data, {binary : false});
-                });
-        });
-
-        sequence
-            .then(() => {
-                self.downloadingRem = false;
-                _defer(function afterDigest () {
-                    self.$scope.$apply();
-                });
-                return zip.generateAsync({type : 'Blob'});
-            })
-            .then((base64) => {
-                FileSaver.saveAs(base64, zipFilename);
+                this.downloadingRem = false;
+                this.xmlDownloadButtonMessage = xmlDownloadMessage.notDownloading;
             });
     }
 
@@ -117,7 +118,17 @@ class JobsPage {
         let zipFilename     = 'ExportedXML.zip';
 
         this.downloadingRem = true;
+        this.downloadProgress = 0;
+        this.downloadTotal = markedJobs.length;
+        this.xmlDownloadButtonMessage = `${xmlDownloadMessage.downloading} ${this.downloadProgress}/${this.downloadTotal}`;
 
+        // if only one selected
+        if (markedJobs.length === 1) {
+            this.downloadSingleXML(markedJobs[0]);
+            return;
+        }
+
+        // if multiple selected
         function getNumOfDupFiles (exportFileName) {
             let numOfDup = 0;
             _forEach(downloadJobs, (job) => {
@@ -129,10 +140,7 @@ class JobsPage {
         }
 
         markedJobs.forEach((index) => {
-            let exportFileName = this.viewJobs[index].Primary.ExportFilename;
-            if (exportFileName === '' || exportFileName === undefined) {
-                exportFileName = this.generateFileName(this.viewJobs[index]);
-            }
+            let exportFileName = this.getExportFileName(index);
             downloadJobs.push({
                 id          : this.viewJobs[index]._id,
                 fileName    : exportFileName,
@@ -148,9 +156,18 @@ class JobsPage {
         downloadJobs.forEach(function downloadJob (downloadJob) {
             sequence = sequence
                 .then(() => {
-                    return self.JobsService.getExportSignedUrl(downloadJob.id);
+                    let downloadTask = {
+                        jobID           : downloadJob.id,
+                        ratingCompanyID : self.selectedRater ? self.selectedRater.O_ID : undefined
+                    };
+
+                    return self.JobsService.getExportSignedUrl(downloadTask);
                 })
                 .then((url) => {
+                    if (!url) {
+                        return;
+                    }
+
                     let config = {
                         method  : 'GET',
                         url     : url,
@@ -158,6 +175,7 @@ class JobsPage {
                             Authorization : 'Remove in Interceptor'
                         }
                     };
+
                     return self.$http(config);
                 })
                 .then((response) => {
@@ -166,15 +184,21 @@ class JobsPage {
                     }
 
                     zip.file(downloadJob.fileName + '.xml', response.data, {binary : false});
+
+                    self.downloadProgress++;
+                    self.xmlDownloadButtonMessage = `${xmlDownloadMessage.downloading} ${self.downloadProgress}/${self.downloadTotal}`;
                 });
         });
 
         sequence
             .then(() => {
                 self.downloadingRem = false;
+                self.xmlDownloadButtonMessage = xmlDownloadMessage.notDownloading;
+
                 _defer(function afterDigest () {
                     self.$scope.$apply();
                 });
+
                 return zip.generateAsync({type : 'Blob'});
             })
             .then((base64) => {
@@ -183,9 +207,9 @@ class JobsPage {
     }
 
     setBulkOperationStatus (status) {
-        this.bulkOperationsAreEnabled = status;
+        this.bulkOperationsEnabled = status;
 
-        if (this.checkAll && !this.bulkOperationsAreEnabled) {
+        if (this.checkAll && !this.bulkOperationsEnabled) {
             this.checkAll = false;
         }
     }

@@ -218,7 +218,7 @@ class AuthorizationService {
         case this.STATE_NAME.USER_EDIT :
             return userRole.Admin || userRole.Provider;
         case this.STATE_NAME.USER_SETTINGS :
-            return userRole.Admin || userRole.Provider;
+            return true;
         default :
             //TODO get a little more confidence around this so I can default to false
             return true;
@@ -232,6 +232,8 @@ class AuthorizationService {
             authorizedRedirect = this.STATE_NAME.JOBS_SEARCH;
         } else if (this.userIsAuthorizedForRoute(this.STATE_NAME.JOBS)) {
             authorizedRedirect = this.STATE_NAME.JOBS;
+        } else if (this.userIsAuthorizedForRoute(this.STATE_NAME.JOBS_PROVIDER_SEARCH)) {
+            authorizedRedirect = this.STATE_NAME.JOBS_PROVIDER_SEARCH;
         } else if (this.userIsAuthorizedForRoute(this.STATE_NAME.TEMPLATE_LIBRARY)) {
             authorizedRedirect = this.STATE_NAME.TEMPLATE_LIBRARY;
         } else if (this.userIsAuthorizedForRoute(this.STATE_NAME.JOBS_PROVIDER)) {

@@ -27,6 +27,11 @@ export const S3_CONFIG = {
     S3_BUCKET_NAME_PREFIX : process.env.S3_BUCKET_NAME_PREFIX
 };
 
+export const PATTERN = {
+    USER_NAME : /^[A-Za-z\d@._-]{7,}$/,
+    PASSWORD  : /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+};
+
 export const PAGINATION = {
     PAGE_SIZE : 20
 };

@@ -14,7 +14,14 @@
         <section class="col-xs-10">
             <header class="page-header item-list-header clearfix">
                 <h2 class="pull-left item-list-title">Providers</h2>
-                <button type="button" class="btn pull-right" data-ng-click="providersPageCtrl.showAddProviderDialog()"><i class="fa fa-plus" aria-hidden="true"></i> Add Provider</button>
+                <button
+                    type="button"
+                    class="btn pull-right"
+                    data-ng-click="providersPageCtrl.showAddProviderDialog()"
+                    data-ng-if="false">
+
+                    <i class="fa fa-plus" aria-hidden="true"></i> Add Provider
+                </button>
             </header>
 
             <div class="row">
@@ -64,6 +71,7 @@
         <button class="btn" data-ng-click="dismiss(true)">Add</button>
     </div>
 </div>
+
 
 <div class="dialog hidden" dialog="dialog" id="dialog-remove-provider-company">
     <div class="dialog-header">
