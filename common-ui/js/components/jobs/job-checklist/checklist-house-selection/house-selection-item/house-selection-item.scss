@@ -12,10 +12,27 @@
         margin-right: $gutter-half;
     }
 
+    .house-info {
+        background-color: $brand-auxillary;
+        border-left: 1px solid $body-bg;
+        padding-top: ($padding-large + $offset-default);
+    }
+
+    .photo-capture {
+        position: relative;
+        z-index: 2;
+    }
+}
+
+.house-selection-list-item-link {
+    align-items: stretch;
+    display: flex;
+
     &::before {
         background-color: $status-active;
         bottom: 0;
         content: '';
+        left: 0;
         position: absolute;
         top: 0;
         transition: transform $transition-default;
@@ -24,12 +41,6 @@
 
     &.active::before {
         transform: scale(1.04, 1.08);
-    }
-
-    .house-info {
-        background-color: $brand-auxillary;
-        border-left: 1px solid $body-bg;
-        padding-top: ($padding-large + $offset-default);
     }
 }
 

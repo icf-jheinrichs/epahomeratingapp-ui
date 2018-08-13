@@ -1,8 +1,15 @@
 class houseSelectionItemController {
-    constructor (jobTitleFilter) {
+    constructor (jobTitleFilter, UI_ENUMS, BASE_IMAGE_URL) {
         'ngInject';
 
-        this.jobTitleFilter = jobTitleFilter;
+        this.jobTitleFilter  = jobTitleFilter;
+
+        this.defaultPhotoUrl = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
+        this.BASE_IMAGE_URL  = BASE_IMAGE_URL;
+    }
+
+    $onInit () {
+        this.photoUrl = (this.house.Photo[0]) ? `${this.BASE_IMAGE_URL}${this.house.Photo[0]}` : this.defaultPhotoUrl;
     }
 
     handlePhotoCapture (photo) {
