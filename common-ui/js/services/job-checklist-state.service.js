@@ -142,11 +142,10 @@ class JobChecklistState {
     setJobHouseState (jobId, HouseId, ratingCompanyID) {
         this.currentHouse    = this.getHouse(parseInt(HouseId, 10));
 
-
         let setJobHouseStatePromise = this.$q((resolve, reject) => {
             if (this.jobDataHomePerformance[HouseId] !== undefined) {
-                resolve(this.jobDataHomePerformance[HouseId]);
                 this.itemStatusQuery = {};
+                resolve(this.jobDataHomePerformance[HouseId]);
             } else {
                 this.JobDataHomePerformanceService
                     .getById(jobId, HouseId, ratingCompanyID)
