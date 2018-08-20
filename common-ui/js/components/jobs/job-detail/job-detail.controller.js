@@ -67,6 +67,10 @@ class JobDetailController {
     }
 
     addSample () {
+        if (!this.canAddSample) {
+            return;
+        }
+
         this.job.Secondary.push(this.JobsService.getNewSample());
 
         this.setTab(this.job.Secondary[this.job.Secondary.length - 1].HouseId);

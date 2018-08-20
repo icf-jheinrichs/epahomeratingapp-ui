@@ -54,7 +54,7 @@
         </button>
 
         <button
-            data-ng-disabled="!jobDetailCtrl.canEditSampleSet"
+            data-ng-disabled="!jobDetailCtrl.canEditSampleSet || !jobDetailCtrl.canAddSample"
             data-ng-click="jobDetailCtrl.addSample()"
             type="button"
             class="btn btn-link">
