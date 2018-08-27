@@ -14,6 +14,7 @@
             <button
                 class="btn btn-block btn-photo-capture btn-link"
                 popover-toggle="popover-toggle"
+                ng-click="houseSelectionItemCtrl.showElevationPhotos()"
                 type="button">
 
                 <i class="fa fa-camera" aria-hidden="true"></i> View All
@@ -38,4 +39,12 @@
             <p class="ellipsis">Rating File: {{::houseSelectionItemCtrl.house.HousePlan[0].Name}}</p>
         </div>
     </a>
+
 </div>
+
+<house-elevation-photos
+    elevation-photos-visible="houseSelectionItemCtrl.elevationPhotosVisible"
+    on-update-house-photo="houseSelectionItemCtrl.onUpdateHousePhoto(HouseId, photo, key)"
+    photos="houseSelectionItemCtrl.house.Photo">
+
+</house-elevation-photos>

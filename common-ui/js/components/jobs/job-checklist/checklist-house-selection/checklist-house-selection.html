@@ -37,14 +37,14 @@
             <house-selection-item
                 house="checklistHouseSelectionCtrl.houses.Primary"
                 is-primary="true"
-                on-update-house-photo="checklistHouseSelectionCtrl.onUpdateHousePhoto(HouseId, photo)">
+                on-update-house-photo="checklistHouseSelectionCtrl.onUpdateHousePhoto(HouseId, photo, key)">
             </house-selection-item>
 
             <house-selection-item
                 data-ng-repeat="house in checklistHouseSelectionCtrl.houses.Secondary"
                 house="house"
                 is-primary="false"
-                on-update-house-photo="checklistHouseSelectionCtrl.onUpdateHousePhoto(HouseId, photo)">
+                on-update-house-photo="checklistHouseSelectionCtrl.onUpdateHousePhoto(HouseId, photo, key)">
             </house-selection-item>
         </div>
     </nav>

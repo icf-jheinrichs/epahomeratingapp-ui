@@ -415,11 +415,11 @@ class JobChecklistState {
         let secondaryIndex;
 
         if (this.job.Primary.HouseId === photoData.HouseId) {
-            this.job.Primary.Photo = [photoData.photo];
+            this.job.Primary.Photo[photoData.key] = photoData.photo;
         } else {
             secondaryIndex = _findIndex(this.job.Secondary, {HouseId : photoData.HouseId});
 
-            this.job.Secondary[secondaryIndex].Photo = [photoData.photo];
+            this.job.Secondary[secondaryIndex].Photo[photoData.key] = photoData.photo;
         }
 
         this.putJobData();

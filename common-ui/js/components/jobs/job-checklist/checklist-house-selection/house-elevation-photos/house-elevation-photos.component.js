@@ -5,9 +5,9 @@ import './house-elevation-photos.scss';
 
 let houseElevationPhotosComponent = {
     bindings : {
-        house              : '=',
-        isPrimary          : '@',
-        onUpdateHousePhoto : '&'
+        elevationPhotosVisible : '=',
+        photos                 : '<',
+        onUpdateHousePhoto     : '&'
     },
     template,
     controller,

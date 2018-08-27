@@ -73,28 +73,28 @@ const DROPDOWN = {
     USER_COMPANIES_MENU : 'user-companies-menu'
 };
 
-const ELEVATION_PHOTOS = [
-    {
-        index : 0,
-        name  : 'Front (main)'
-    },
-    {
-        index : 1,
-        name  : 'Front (main)'
-    },
-    {
-        index : 2,
-        name  : 'Front (main)'
-    },
-    {
-        index : 3,
-        name  : 'Front (main)'
-    }
-];
-
 const IMAGES = {
     DEFAULT_PHOTO : 'img/job-photo-default.svg'
 };
+
+const ELEVATION_PHOTOS = [
+    {
+        Key  : 0,
+        Name : 'Front (main)'
+    },
+    {
+        Key  : 1,
+        Name : 'Back'
+    },
+    {
+        Key  : 2,
+        Name : 'Left'
+    },
+    {
+        Key  : 3,
+        Name : 'Right'
+    }
+];
 
 const JOB_PAGE_TAB = {
     ACTIVE                : 'Active',

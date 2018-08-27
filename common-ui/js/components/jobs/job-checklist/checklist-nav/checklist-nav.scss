@@ -21,7 +21,8 @@
     img {
         opacity: .5;
         transform-origin: top center;
-        transition: opacity $transition-default ease-out width $transition-default ease-out;
+        transition: opacity $transition-default ease-out, width $transition-fast ease-out;
+        width: 60px;
     }
 
     &:hover,

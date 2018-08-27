@@ -1,37 +1,19 @@
-<div class="house-elevation-photos">
-    <section>
-        Front (main)
-        <photo-capture
-            class="flex-item-static"
-            photo="houseSelectionItemCtrl.house.Photo[0]"
-            on-photo-capture="houseSelectionItemCtrl.handlePhotoCapture(photo)">
-        </photo-capture>
-    </section>
+<div class="house-elevation-photos" ng-class="{'active' : houseElevationPhotosCtrl.elevationPhotosVisible}">
+    <button
+        class="btn btn-link btn-close-house-elevation-photos"
+        ng-click="houseElevationPhotosCtrl.hideElevationPhotos()">
 
-    <section>
-        Back
-        <photo-capture
-            class="flex-item-static"
-            photo="houseSelectionItemCtrl.house.Photo[1]"
-            on-photo-capture="houseSelectionItemCtrl.handlePhotoCapture(photo)">
-        </photo-capture>
-    </section>
+        <i class="fa fa-close" aria-hidden="true"></i> Close
+    </button>
 
-    <section>
-        Left
-        <photo-capture
-            class="flex-item-static"
-            photo="houseSelectionItemCtrl.house.Photo[2]"
-            on-photo-capture="houseSelectionItemCtrl.handlePhotoCapture(photo)">
-        </photo-capture>
-    </section>
-
-    <section>
-        Right
-        <photo-capture
-            class="flex-item-static"
-            photo="houseSelectionItemCtrl.house.Photo[3]"
-            on-photo-capture="houseSelectionItemCtrl.handlePhotoCapture(photo)">
-        </photo-capture>
-    </section>
+    <div class="flex-row">
+        <section ng-repeat="elevationPhoto in houseElevationPhotosCtrl.ELEVATION_PHOTOS track by $index">
+            {{::elevationPhoto.Name}}
+            <photo-capture
+                class="flex-item-static"
+                photo="houseElevationPhotosCtrl.photos[elevationPhoto.Key]"
+                on-photo-capture="elevationPhoto.Callback(photo)">
+            </photo-capture>
+        </section>
+    </div>
 </div>
