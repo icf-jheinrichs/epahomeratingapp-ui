@@ -23,6 +23,19 @@ class MrfEditController {
             .addClass('overlay-open');
     }
 
+    showField (field, value) {
+        let displayLogic = true;
+
+        if (field.DisplayLogic !== undefined
+            && field.DisplayLogic === 'DisplayIfExists'
+            && value === '') {
+
+            displayLogic = false;
+        }
+
+        return displayLogic;
+    }
+
     cancel () {
         this.showMrfEditModal = false;
         this.onCancelMrfRow();

@@ -37,7 +37,7 @@
         <div class="modal-body">
             <div class="form-group col-xs-6"
                  data-ng-repeat="field in ::checklistItemMrfEditCtrl.mrfDigest track by $index"
-                 data-ng-if="::field.Order !== '0'">
+                 data-ng-if="::field.Order !== '0' && checklistItemMrfEditCtrl.showField(field, checklistItemMrfEditCtrl.editMrfData[field.Key])">
 
                 <mrf-edit-field-locked
                     data-ng-if="::field.Locked || checklistItemMrfEditCtrl.isReview"
