@@ -1,7 +1,18 @@
 import _find from 'lodash/find';
 
 class checklistHouseSelectionController {
-    constructor ($rootScope, $stateParams, $sanitize, $transitions, JobChecklistStateService, ModalService, BASE_IMAGE_URL, UI_ENUMS, jobTitleFilter) {
+    constructor (
+        $rootScope,
+        $stateParams,
+        $sanitize,
+        $transitions,
+        AuthorizationService,
+        JobChecklistStateService,
+        ModalService,
+        BASE_IMAGE_URL,
+        UI_ENUMS,
+        jobTitleFilter
+    ) {
         'ngInject';
 
         // capture DI
@@ -13,6 +24,7 @@ class checklistHouseSelectionController {
         this.DEFAULT_PHOTO               = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
         this.BASE_IMAGE_URL              = BASE_IMAGE_URL;
         this.MESSAGING                   = UI_ENUMS.MESSAGING;
+        this.AuthorizationService        = AuthorizationService;
         this.JobChecklistStateService    = JobChecklistStateService;
         this.ModalService                = ModalService;
         this.jobTitleFilter              = jobTitleFilter;
@@ -28,6 +40,8 @@ class checklistHouseSelectionController {
     $onInit () {
         // init view variables
         this.showNavbar         = false;
+
+        this.userAuthorization  = this.AuthorizationService.getUserRole();
 
         this.sampleSize         = this.houses.Secondary.length + 1;
 
@@ -116,9 +130,11 @@ class checklistHouseSelectionController {
     }
 
     saveProviderComment () {
-        this
-            .JobChecklistStateService
-            .putProviderComment(JSON.stringify(this.$sanitize(this.providerComment)));
+        if (this.userAuthorization.Provider === 'provider') {
+            this
+                .JobChecklistStateService
+                .putProviderComment(JSON.stringify(this.$sanitize(this.providerComment)));
+        }
     }
 
     get selectedHouseTitle () {
@@ -126,7 +142,7 @@ class checklistHouseSelectionController {
     }
 
     get isProviderRole () {
-        return this.$stateParams.role === 'provider';
+        return this.userAuthorization.Provider === 'provider' && this.$stateParams.role === 'provider';
     }
 }
 
