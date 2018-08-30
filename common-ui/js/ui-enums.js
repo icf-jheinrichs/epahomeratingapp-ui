@@ -54,13 +54,6 @@ const CHECKLIST_ITEM_STATUS = {
     }
 };
 
-const USER_TYPE = {
-    ADMIN       : 'ADMIN',
-    RATER       : 'RATER',
-    PROVIDER    : 'PROVIDER',
-    QA          : 'QA'
-};
-
 const DIALOG = {
     ADD_PROVIDER_COMPANY      : 'dialog-add-provider-company',
     CONFIRM_CHANGE_SAMPLE_SET : 'dialog-confirm-change-sample-set',
@@ -83,6 +76,25 @@ const DROPDOWN = {
 const IMAGES = {
     DEFAULT_PHOTO : 'img/job-photo-default.svg'
 };
+
+const ELEVATION_PHOTOS = [
+    {
+        Key  : 0,
+        Name : 'Front (main)'
+    },
+    {
+        Key  : 1,
+        Name : 'Back'
+    },
+    {
+        Key  : 2,
+        Name : 'Left'
+    },
+    {
+        Key  : 3,
+        Name : 'Right'
+    }
+];
 
 const JOB_PAGE_TAB = {
     ACTIVE                : 'Active',
@@ -308,6 +320,13 @@ const SYNC_STATUS = {
     OFFLINE : 'sync-offline'
 };
 
+const USER_TYPE = {
+    ADMIN       : 'ADMIN',
+    RATER       : 'RATER',
+    PROVIDER    : 'PROVIDER',
+    QA          : 'QA'
+};
+
 const VALIDATION_MESSAGE = {
     USER_NAME        : 'Please enter a valid username. Username must be at least 7 characters and can only contain letters, numbers, or the characters "@ _ - ."',
     PASSWORD         : 'Please enter a valid password. Password must be at least 8 characters, contain one uppercase letter, one number, and one special character (@$!%*#?&).',
@@ -321,6 +340,7 @@ export default {
     CONTEXT,
     DIALOG,
     DROPDOWN,
+    ELEVATION_PHOTOS,
     IMAGES,
     JOB_PAGE_TAB,
     JOB_STATUS,

@@ -1,0 +1,33 @@
+@import '../../../../../../scss/variables';
+
+.house-elevation-photos {
+    background-color: $body-bg;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateY(100%);
+    transition: transform $transition-fast ease-in-out;
+    z-index: 5;
+
+    &.active {
+        transform: translateY(0%);
+    }
+
+    .btn-close-house-elevation-photos {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .flex-row {
+        justify-content: space-between;
+        padding: $gutter-half $gutter-half 0;
+    }
+
+    .photo-capture {
+        height: $photo-capture-small;
+        width: $photo-capture-small;
+    }
+}

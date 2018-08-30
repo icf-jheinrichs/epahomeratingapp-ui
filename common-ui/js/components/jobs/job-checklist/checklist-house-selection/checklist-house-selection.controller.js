@@ -122,11 +122,14 @@ class checklistHouseSelectionController {
         this.$rootScope.$emit(this.MESSAGING.SET_BOTTOM_PAD, bottomPad);
     }
 
-    onUpdateHousePhoto (HouseId, photo) {
-        this.$rootScope.$emit(this.MESSAGING.UPDATE_HOUSE_PHOTO, {
-            HouseId,
-            photo
-        });
+    onUpdateHousePhoto (HouseId, photo, key) {
+        this
+            .$rootScope
+            .$emit(this.MESSAGING.UPDATE_HOUSE_PHOTO, {
+                HouseId,
+                photo,
+                key
+            });
     }
 
     saveProviderComment () {

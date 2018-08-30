@@ -83,6 +83,7 @@
     background-color: $body-bg;
     overflow-y: scroll;
     padding: $gutter-half;
+    position: relative;
 
     .photo-capture {
         margin-right: 0;
@@ -91,6 +92,7 @@
 
 .house-selection-selected,
 .navbar-house-selection {
+    overflow-x: scroll;
     overflow-y: hidden;
     position: relative;
     transition: height $transition-default, padding $transition-default;
