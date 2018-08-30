@@ -1,11 +1,33 @@
-function scrollUpReveal (ScrollService) {
+function scrollUpReveal (ScrollService, $rootScope) {
     return {
         restrict : 'A',
         link     : (scope, element, attrs) => {
-            let threshold = parseInt(attrs.threshold, 10);
-            let currentY  = ScrollService.getScroll().scrollY;
-            const height  = element[0].offsetHeight;
-            const id      = attrs.id;
+            const context   = attrs.revealContext || 'DEFAULT';
+            const height    = element[0].offsetHeight;
+            const id        = attrs.id;
+            const index     = parseInt(attrs.revealOrder, 10);
+            const threshold = parseInt(attrs.threshold, 10);
+            let currentY    = ScrollService.getScroll().scrollY;
+
+            function affix () {
+                element.addClass('affix');
+            }
+
+            function unaffix () {
+                element.css('transform', 'translateY(0px)');
+                element.removeClass('affix');
+            }
+
+            let overrideDefaultListener
+                = $rootScope
+                    .$on('SET_SCROLL_CONTEXT', (event, scrollContext) => {
+                        if (scrollContext !== context) {
+                            unaffix();
+                        } else {
+                            affix();
+                            setTop(ScrollService.getScroll());
+                        }
+                    });
 
             function setTop (scroll) {
                 let top;
@@ -27,15 +49,19 @@ function scrollUpReveal (ScrollService) {
                 element.css('transform', `translateY(${top}px)`);
             }
 
+            affix();
             setTop(ScrollService.getScroll());
 
             ScrollService.registerListener({
                 id,
-                scrollHandler : setTop
+                index,
+                scrollHandler : setTop,
+                context
             });
 
             scope.$on('$destroy', () => {
                 ScrollService.deregisterListener(id);
+                overrideDefaultListener();
             });
         }
     };

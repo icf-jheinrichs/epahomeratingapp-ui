@@ -9,6 +9,7 @@ class ScrollService {
         this.$window         = $window;
         this.listeners       = {};
         this.affixedElements = [];
+        this.scrollContext   = 'DEFAULT';
 
         this.MESSAGING_SET_TOP_PAD = UI_ENUMS.MESSAGING.SET_TOP_PAD;
 
@@ -25,21 +26,33 @@ class ScrollService {
         };
     }
 
+    setScrollContext (context) {
+        this.scrollContext = context;
+
+        console.log(`setScrollContext('${context}')`);
+        this
+            .$rootScope
+            .$broadcast('SET_SCROLL_CONTEXT', context);
+    }
+
     handleScroll () {
         const scroll = this.getScroll();
 
-        _forEach(this.listeners, (listener) => {
+        _forEach(this.listeners[this.scrollContext], (listener) => {
             listener.scrollHandler(scroll);
         });
     }
 
     registerListener (listener) {
-        this.listeners[listener.id] = listener;
+        if (this.listeners[listener.context] === undefined) {
+            this.listeners[listener.context] = {};
+        }
+        this.listeners[listener.context][listener.id] = listener;
     }
 
-    deregisterListener (listenerId) {
-        if (this.listeners[listenerId]) {
-            delete this.listeners[listenerId];
+    deregisterListener (listener) {
+        if (this.listeners[listener.context][listener.id]) {
+            delete this.listeners[listener.context][listener.id];
         }
     }
 
@@ -51,7 +64,9 @@ class ScrollService {
         while (index < elementIndex && index < length) {
             const element = this.affixedElements[index];
 
-            threshold += element.height;
+            if (element) {
+                threshold += element.height;
+            }
             index     += 1;
         }
 
@@ -66,7 +81,9 @@ class ScrollService {
         while (index < elementIndex && index < length) {
             const element = this.affixedElements[index];
 
-            top   += (element.isAffixed) ? element.height : 0;
+            if (element) {
+                top   += (element.isAffixed) ? element.height : 0;
+            }
             index += 1;
         }
 
