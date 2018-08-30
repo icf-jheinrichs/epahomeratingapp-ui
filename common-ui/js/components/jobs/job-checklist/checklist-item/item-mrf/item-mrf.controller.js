@@ -341,18 +341,35 @@ class ChecklistItemMrfController extends ChecklistItemClass {
     }
 
     showColumn (index, mrfTable) {
-        return (mrfTable.Columns[index].Order !== '0');
+        let displayLogic = true;
+
+        if (mrfTable.Columns[index].DisplayLogic !== undefined
+            && mrfTable.Columns[index].DisplayLogic === 'DisplayIfExists'
+            && this.homePerformance[mrfTable.Key][0] === '') {
+
+            displayLogic = false;
+        }
+
+        return (mrfTable.Columns[index].Order !== '0' && displayLogic);
     }
 
-    showCell (key, mrfTableColumns) {
-        // hide columns that are empty
+    showCell (key, mrfTableColumns, value) {
+        // Hide columns with Order===0. If Order is undefined, assume it should be shown.
         const columnIndex = _findIndex(mrfTableColumns, {Key : key});
+        let displayLogic  = true;
+
+        if (mrfTableColumns[columnIndex].DisplayLogic !== undefined
+            && mrfTableColumns[columnIndex].DisplayLogic === 'DisplayIfExists'
+            && value === '') {
+
+            displayLogic = false;
+        }
 
         if (columnIndex < 0 || mrfTableColumns[columnIndex].Order === undefined) {
             return true;
         }
 
-        return mrfTableColumns[columnIndex].Order !== '0';
+        return mrfTableColumns[columnIndex].Order !== '0' && displayLogic;
     }
 }
 
