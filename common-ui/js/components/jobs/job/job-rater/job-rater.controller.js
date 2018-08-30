@@ -108,6 +108,10 @@ class JobRaterController extends Job {
         });
     }
 
+    openJob () {
+        this.onOpenJob();
+    }
+
     /**
      * deregester all $rootScope listeners
      */

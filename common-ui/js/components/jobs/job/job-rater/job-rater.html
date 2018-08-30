@@ -1,20 +1,21 @@
 <div class="job-toggle flex-item-static flex-row flex-align-center">
-    <div data-ng-if="::jobRaterCtrl.CONTEXT_IS_APP">
-        <toggle
-            handle-change="jobRaterCtrl.handleAvailableOfflineChange(isOn)"
-            toggle-class="jobRaterCtrl.toggleStatusClass"
-            toggle-confirmation-dialog="{{::jobRaterCtrl.OFFLINE_CONFIRMATION_DIALOG}}"
-            toggle-disabled-dialog="{{::jobRaterCtrl.OFFLINE_DISABLED_DIALOG}}"
-            toggle-id="{{::jobRaterCtrl.job._id}}"
-            toggle-value="jobRaterCtrl.job.offlineAvailable">Make Job Available offline: <span data-ng-bind-html="jobRaterCtrl.JobTitle"></span></span>
-        </toggle>
-    </div>
+    <toggle
+        handle-change="jobRaterCtrl.handleAvailableOfflineChange(isOn)"
+        toggle-class="jobRaterCtrl.toggleStatusClass"
+        toggle-confirmation-dialog="{{::jobRaterCtrl.OFFLINE_CONFIRMATION_DIALOG}}"
+        toggle-disabled-dialog="{{::jobRaterCtrl.OFFLINE_DISABLED_DIALOG}}"
+        toggle-id="{{::jobRaterCtrl.job._id}}"
+        toggle-value="jobRaterCtrl.job.offlineAvailable">Make Job Available offline: <span data-ng-bind-html="jobRaterCtrl.JobTitle"></span></span>
+    </toggle>
 </div>
 
-<a aria-labelledby="job-{{jobRaterCtrl.job._id}}"
-   class="job job-rater flex-row flex-align-center flex-item-grow"
-   data-ng-class="{'job-returned': jobRaterCtrl.hasStatusLabel()}"
-   data-ui-sref="job-checklist.category({id: jobRaterCtrl.job._id, houseId: jobRaterCtrl.job.Primary.HouseId, categoryId: 'walls'})">
+<!-- data-ui-sref="job-checklist.category({id: jobRaterCtrl.job._id, houseId: jobRaterCtrl.job.Primary.HouseId, categoryId: 'walls'})" -->
+
+<button aria-labelledby="job-{{jobRaterCtrl.job._id}}"
+    type="button"
+    class="job job-rater flex-row flex-align-center flex-item-grow"
+    data-ng-class="{'job-returned': jobRaterCtrl.hasStatusLabel()}"
+    ng-click="jobRaterCtrl.openJob()">
 
     <div class="job-info flex-item-grow">
         <div class="job-meta flex-row">
@@ -38,4 +39,4 @@
     </div>
 
     <i class="list-item-activate fa fa-chevron-right fa-lg" aria-hidden="true"></i>
-</a>
+</button>
