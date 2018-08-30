@@ -1,7 +1,8 @@
 <div
     id="admin-head"
     scroll-affix="scroll-affix"
-    affix-order="0">
+    affix-order="0"
+    affix-context="DEFAULT">
 
     <button class="sr-only sr-only-focusable site-skip-link">Skip to Main Content</button>
 
@@ -20,7 +21,13 @@
     </header>
 </div>
 
-<nav class="nav-site-wrapper" id="admin-nav" scroll-up-reveal="scroll-up-reveal" scroll-id="admin-nav" threshold="75">
+<nav
+    class="nav-site-wrapper"
+    id="admin-nav"
+    reveal-context="DEFAULT"
+    scroll-up-reveal="scroll-up-reveal"
+    threshold="75">
+
     <nav class="nav nav-site nav-flex flex-justify-end page-container">
         <a ui-sref="jobs-search({status : 'Active'})" ui-sref-active="active" class="nav-item" data-ng-if="navbarAdminCtrl.navVisibility.jobs">Rater Jobs</a>
         <a ui-sref="template-library" ui-sref-active="active" class="nav-item" data-ng-if="navbarAdminCtrl.navVisibility.templateLibrary">Template Library</a>

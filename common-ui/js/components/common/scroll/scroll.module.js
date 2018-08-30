@@ -4,7 +4,7 @@ import scrollUpRevealDirective from './scroll-up-reveal.directive';
 let ScrollModule
     = angular
         .module('epahomeratingapp.common.scroll', [])
-        .directive('scrollAffix', ['ScrollService', scrollAffixDirective])
-        .directive('scrollUpReveal', ['ScrollService', scrollUpRevealDirective]);
+        .directive('scrollAffix', ['ScrollService', '$rootScope', scrollAffixDirective])
+        .directive('scrollUpReveal', ['ScrollService', '$rootScope', scrollUpRevealDirective]);
 
 export default ScrollModule;
