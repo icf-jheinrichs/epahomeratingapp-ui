@@ -31,7 +31,6 @@ class houseElevationPhotosController {
     }
 
     $onChanges (changes) {
-        // debugger;
         if (changes.photos && !changes.photos.isFirstChange()) {
             this.photos = changes.photos.currentValue;
         }

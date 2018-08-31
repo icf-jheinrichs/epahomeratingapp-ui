@@ -34,6 +34,13 @@ class houseSelectionItemController {
     get HouseTitle () {
         return this.jobTitleFilter(this.house.AddressInformation);
     }
+
+    $onChanges (changes) {
+        if (changes.house && !changes.house.isFirstChange()) {
+            this.house    = changes.house.currentValue;
+            this.photoUrl = this.getPhotoUrl();
+        }
+    }
 }
 
 export default houseSelectionItemController;
