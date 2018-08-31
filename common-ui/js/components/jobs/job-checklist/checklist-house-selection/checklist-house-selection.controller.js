@@ -1,4 +1,5 @@
 import _find from 'lodash/find';
+import _findIndex from 'lodash/findIndex';
 
 class checklistHouseSelectionController {
     constructor (
@@ -139,9 +140,11 @@ class checklistHouseSelectionController {
     handlePhotoCapture (photo, key) {
         if (this.currentElevationPhotos === this.houses.Primary.HouseId) {
             this.houses.Primary.Photo[key] = photo;
+            this.houses.Primary = angular.copy(this.houses.Primary);
         } else {
-            const selectedHouse = _find(this.houses.Secondary, {HouseId : this.currentElevationPhotos});
-            selectedHouse.Photo[key] = photo;
+            const houseIndex = _findIndex(this.houses.Secondary, {HouseId : this.currentElevationPhotos});
+            this.houses.Secondary[houseIndex].Photo[key] = photo;
+            this.houses.Secondary[houseIndex] = angular.copy(this.houses.Secondary[houseIndex]);
         }
 
         this

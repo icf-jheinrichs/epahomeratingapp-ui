@@ -42,10 +42,12 @@ class PhotoCaptureController {
     $onChanges (changes) {
         if (changes.photo && !changes.photo.isFirstChange()) {
             if (!changes.photo.currentValue) {
-                this.photoUrl = this.defaultPhotoUrl;
+                this.photoUrl         = this.defaultPhotoUrl;
+                this.photoActionLabel = this.photoActionLabelEnum.ADD;
             } else {
-                this.photo    = changes.photo.currentValue;
-                this.photoUrl = `${this.BASE_IMAGE_URL}${this.photo}`;
+                this.photo            = changes.photo.currentValue;
+                this.photoUrl         = `${this.BASE_IMAGE_URL}${this.photo}`;
+                this.photoActionLabel = this.photoActionLabelEnum.CHANGE;
             }
         }
     }
