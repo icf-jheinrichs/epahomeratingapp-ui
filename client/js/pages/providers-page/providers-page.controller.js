@@ -1,3 +1,4 @@
+import _find from 'lodash/find';
 import _findIndex from 'lodash/findIndex';
 import _reject from 'lodash/reject';
 
@@ -28,14 +29,18 @@ class ProvidersPageController {
             .then((company) => {
                 // debugger;
                 this.company = company;
-            });
 
-        this
-            .UserCompanyService
-            .getProviderCompanies()
+                return this
+                    .UserCompanyService
+                    .getProviderCompanies();
+            })
             .then((providerCompanies) => {
                 this.providerCompanies     = providerCompanies;
                 this.selectedProviderToAdd = providerCompanies[0];
+
+                this.relatedProviderCompanys = this.company.RelatedProviderCompanys.map((O_ID) => {
+                    return _find(this.providerCompanies, {O_ID});
+                });
             });
     }
 
@@ -82,17 +87,17 @@ class ProvidersPageController {
         }
     }
 
-    removeProvider (ProviderRESNETId) {
+    removeProvider (O_ID) {
         this
             .company
             .RelatedProviderCompanys
-            = _reject(this.company.RelatedProviderCompanys, {ProviderRESNETId : ProviderRESNETId});
+            = _reject(this.company.RelatedProviderCompanys, {O_ID : O_ID});
 
         this
             .UserCompanyService
             .putCompany(this.company)
             .then(() => {
-                return this.UserCompanyService.getCompany(ProviderRESNETId);
+                return this.UserCompanyService.getCompany(O_ID);
             })
             .then((providerCompany) => {
                 providerCompany
