@@ -137,6 +137,13 @@ class checklistHouseSelectionController {
     }
 
     handlePhotoCapture (photo, key) {
+        if (this.currentElevationPhotos === this.houses.Primary.HouseId) {
+            this.houses.Primary.Photo[key] = photo;
+        } else {
+            const selectedHouse = _find(this.houses.Secondary, {HouseId : this.currentElevationPhotos});
+            selectedHouse.Photo[key] = photo;
+        }
+
         this
             .$rootScope
             .$emit(this.MESSAGING.UPDATE_HOUSE_PHOTO, {
