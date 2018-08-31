@@ -3,10 +3,11 @@
 .house-elevation-photos {
     background-color: $body-bg;
     bottom: 0;
-    left: 0;
+    box-shadow: $shadow-default;
+    left: $gutter-quarter;
     position: absolute;
-    right: 0;
-    top: 0;
+    right: $gutter-quarter;
+    top: $gutter-half;
     transform: translateY(100%);
     transition: transform $transition-fast ease-in-out;
     z-index: 5;
@@ -27,7 +28,7 @@
     }
 
     .photo-capture {
-        height: $photo-capture-small;
-        width: $photo-capture-small;
+        height: $photo-capture-large;
+        width: $photo-capture-large;
     }
 }

@@ -29,7 +29,6 @@ class ScrollService {
     setScrollContext (context) {
         this.scrollContext = context;
 
-        console.log(`setScrollContext('${context}')`);
         this
             .$rootScope
             .$broadcast('SET_SCROLL_CONTEXT', context);
