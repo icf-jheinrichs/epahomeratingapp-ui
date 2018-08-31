@@ -30,10 +30,14 @@ class houseSelectionItemController {
         this.elevationPhotosVisible = true;
     }
 
-    handlePhotoCapture (photo) {
+    handlePhotoCapture (photo, key) {
+        this.house.Photo[key] = photo;
+        this.photoUrl         = this.getPhotoUrl();
+
         this.onUpdateHousePhoto({
             HouseId : this.house.HouseId,
-            photo
+            photo   : photo.photo,
+            key     : photo.elevationPhotoKey
         });
     }
 

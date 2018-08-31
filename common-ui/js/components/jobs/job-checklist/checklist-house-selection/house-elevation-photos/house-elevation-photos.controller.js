@@ -17,7 +17,6 @@ class houseElevationPhotosController {
 
     handlePhotoCapture (photo, elevationPhotoKey) {
         this.onUpdateHousePhoto({
-            HouseId : this.house.HouseId,
             photo,
             key     : elevationPhotoKey
         });
