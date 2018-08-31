@@ -46,7 +46,13 @@
                 on-update-house-photo="checklistHouseSelectionCtrl.onUpdateHousePhoto(HouseId, photo, key)">
             </house-selection-item>
         </div>
-    </nav>
+
+        <house-elevation-photos
+            elevation-photos-visible="checklistHouseSelectionCtrl.elevationPhotosVisible"
+            on-update-house-photo="checklistHouseSelectionCtrl.handlePhotoCapture(photo, key)"
+            photos="checklistHouseSelectionCtrl.elevationPhotos">
+        </house-elevation-photos>
+</nav>
 </div>
 
 <!-- modal: provider job comments -->

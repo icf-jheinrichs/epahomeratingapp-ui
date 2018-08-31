@@ -29,6 +29,13 @@ class houseElevationPhotosController {
     get HouseTitle () {
         return this.jobTitleFilter(this.house.AddressInformation);
     }
+
+    $onChanges (changes) {
+        // debugger;
+        if (changes.photos && !changes.photos.isFirstChange()) {
+            this.photos = changes.photos.currentValue;
+        }
+    }
 }
 
 export default houseElevationPhotosController;

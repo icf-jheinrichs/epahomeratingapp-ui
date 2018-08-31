@@ -40,8 +40,13 @@ class PhotoCaptureController {
     }
 
     $onChanges (changes) {
-        if (!changes.photo.isFirstChange() && changes.photo.currentValue === '') {
-            this.photoUrl = this.defaultPhotoUrl;
+        if (changes.photo && !changes.photo.isFirstChange()) {
+            if (!changes.photo.currentValue) {
+                this.photoUrl = this.defaultPhotoUrl;
+            } else {
+                this.photo    = changes.photo.currentValue;
+                this.photoUrl = `${this.BASE_IMAGE_URL}${this.photo}`;
+            }
         }
     }
 

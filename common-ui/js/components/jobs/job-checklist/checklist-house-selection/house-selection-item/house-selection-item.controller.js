@@ -9,8 +9,7 @@ class houseSelectionItemController {
     }
 
     $onInit () {
-        this.elevationPhotosVisible = false;
-        this.photoUrl               = this.getPhotoUrl();
+        this.photoUrl = this.getPhotoUrl();
     }
 
     getPhotoUrl () {
@@ -27,17 +26,8 @@ class houseSelectionItemController {
     }
 
     showElevationPhotos () {
-        this.elevationPhotosVisible = true;
-    }
-
-    handlePhotoCapture (photo, key) {
-        this.house.Photo[key] = photo;
-        this.photoUrl         = this.getPhotoUrl();
-
         this.onUpdateHousePhoto({
-            HouseId : this.house.HouseId,
-            photo   : photo,
-            key     : key
+            HouseId : this.house.HouseId
         });
     }
 

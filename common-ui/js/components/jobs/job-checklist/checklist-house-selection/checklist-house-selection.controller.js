@@ -49,6 +49,8 @@ class checklistHouseSelectionController {
         this.selectedHousePhoto = (this.houses.Primary.Photo.length === 0) ? this.DEFAULT_PHOTO : this.houses.Primary.Photo[0];
 
         this.toggleText         = this.toggleTextEnum.more;
+        this.elevationPhotos    = [];
+        this.elevationPhotosVisible = false;
 
         // set app bottom pad to accomodate house selector
         this.setAppBottomPad();
@@ -122,11 +124,23 @@ class checklistHouseSelectionController {
         this.$rootScope.$emit(this.MESSAGING.SET_BOTTOM_PAD, bottomPad);
     }
 
-    onUpdateHousePhoto (HouseId, photo, key) {
+    onUpdateHousePhoto (HouseId) {
+        if (HouseId === this.houses.Primary.HouseId) {
+            this.elevationPhotos = this.houses.Primary.Photo;
+        } else {
+            const selectedHouse = _find(this.houses.Secondary, {HouseId : HouseId});
+            this.elevationPhotos = selectedHouse.Photo;
+        }
+
+        this.currentElevationPhotos = HouseId;
+        this.elevationPhotosVisible = true;
+    }
+
+    handlePhotoCapture (photo, key) {
         this
             .$rootScope
             .$emit(this.MESSAGING.UPDATE_HOUSE_PHOTO, {
-                HouseId,
+                HouseId : this.currentElevationPhotos,
                 photo,
                 key
             });
