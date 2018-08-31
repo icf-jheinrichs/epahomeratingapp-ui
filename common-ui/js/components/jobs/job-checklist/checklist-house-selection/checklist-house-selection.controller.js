@@ -157,10 +157,12 @@ class checklistHouseSelectionController {
     }
 
     saveProviderComment () {
-        if (this.userAuthorization.Provider === 'provider') {
+        if (this.userAuthorization.Provider) {
             this
                 .JobChecklistStateService
                 .putProviderComment(JSON.stringify(this.$sanitize(this.providerComment)));
+
+            this.ModalService.closeModal(this.MODAL_PROVIDER_JOB_COMMENTS);
         }
     }
 
@@ -169,7 +171,7 @@ class checklistHouseSelectionController {
     }
 
     get isProviderRole () {
-        return this.userAuthorization.Provider === 'provider' && this.$stateParams.role === 'provider';
+        return this.userAuthorization.Provider && this.$stateParams.role === 'provider';
     }
 }
 
