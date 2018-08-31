@@ -36,8 +36,8 @@ class houseSelectionItemController {
 
         this.onUpdateHousePhoto({
             HouseId : this.house.HouseId,
-            photo   : photo.photo,
-            key     : photo.elevationPhotoKey
+            photo   : photo,
+            key     : key
         });
     }
 
