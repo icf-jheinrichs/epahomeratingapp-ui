@@ -23,7 +23,7 @@ class houseSelectionItemController {
             index += 1;
         }
 
-        return photoUrl || this.defaultPhotoUrl;
+        return this.BASE_IMAGE_URL + photoUrl || this.defaultPhotoUrl;
     }
 
     showElevationPhotos () {
