@@ -1,0 +1,19 @@
+EPA ENERGY STAR® RaterPRO
+Version 1.0. 2018
+Copyright © 2017 – 2018 ICF Incorporated, L.L.C.
+Prepared By ICF Under BPA No. EP-BPA-15-H-0004, Order Numbera EP-B16H-00175, EP-B17H-00149, and 68HE0H18F0107 for the Environmental Protection Agency
+
+Use of this App in binary forms solely is permitted and provided that the following conditions are met:
+• Retention of the copyright notices, restrictions and conditions, and disclaimers within this Cover tab.
+• Any distributions must also include acknowledgments as follows:
+	"This product includes code developed by ICF Incorporated, L.L.C under BPA No. EP-BPA-15-H-0004, Order Numbers EP-B16H-00175, EP-B17H-00149, and 68HE0H18F0107 for the
+ Environmental Protection Agency"
+• Use Limitation. The Work and any derivative works thereof only may be used or intended for use with the web services, computing platforms or applications provided by Amazon.com, Inc. or its affiliates, including Amazon Web Services, Inc.
+• Patent Claims. If you bring or threaten to bring a patent claim against any Licensor (including any claim, cross-claim or counterclaim in a lawsuit) to enforce any patents that you allege are infringed by any Work, then your rights under this License from such Licensor (including the grants in Sections 2.1 and 2.2) will terminate immediately.
+• Trademarks. This License does not grant any rights to use any Licensor’s or its affiliates’ names, logos, or trademarks, except as necessary to reproduce the notices described in this License.
+• Termination. If you violate any term of this License, then your rights under this License will terminate immediately.
+
+WARRANTY DISCLAIMER. THE APP BY ICF, IS SUPPLIED "AS IS" WITHOUT WARRANTY OF ANY KIND. ICF: (1) DISCLAIMS ANY WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE OR NON-INFRINGEMENT, (2) DO NOT ASSUME ANY LEGAL LIABILITY OR RESPONSIBILITY FOR THE ACCURACY, COMPLETENESS, OR USEFULNESS OF THE SOFTWARE, (3) DO NOT REPRESENT THAT USE OF THE SOFTWARE WOULD NOT INFRINGE PRIVATELY OWNED RIGHTS, (4) DO NOT WARRANT THAT THE SOFTWARE WILL FUNCTION UNINTERRUPTED, THAT IT IS ERROR-FREE OR THAT ANY ERRORS WILL BE CORRECTED.
+LIMITATION OF LIABILITY. IN NO EVENT WILL ICF BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, EXEMPLARY, CONSEQUENTIAL, SPECIAL OR PUNITIVE DAMAGES OF ANY KIND OR NATURE, INCLUDING BUT NOT LIMITED TO LOSS OF USE, PROFITS, DATA OR BUSINESS INTERRUPTION, FOR ANY REASON WHATSOEVER, WHETHER SUCH LIABILITY IS ASSERTED ON THE BASIS OF CONTRACT, TORT (INCLUDING NEGLIGENCE OR STRICT LIABILITY), OR OTHERWISE ARISING IN ANY WAY OUT OF THE USE OF THE MODEL, EVEN IF ANY OF SAID PARTIES HAS BEEN WARNED OF THE POSSIBILITY OF SUCH LOSS OR DAMAGES.
+
+This App is a derivative work of a combination of various individual open source software packages and is changed from the original files. In accordance with those respective license terms, a copy of each complete license is included in licenses.csv along with any copyright, patent, trademark, or attribution notices that are present in the aforementoned open source software packages. A listing of the various individual open source software packages and derivative works used in this App can be found here:  package.json

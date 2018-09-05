@@ -1,0 +1,816 @@
+Type,License,link,Permissions,Limitations ,Requirement Conditions,License Information,Additional Information
+pako@1.0.6,(MIT AND Zlib),https://github.com/nodeca/pako,"Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Warranty",License and copyright notice,,
+font-awesome@4.7.0,(OFL-1.1 AND MIT),https://github.com/FortAwesome/Font-Awesome,Further review required of various licenses,Further review required of various licenses,Further review required of various licenses,,
+elementtree@0.1.6,Apache,https://github.com/racker/node-elementtree,"Commercial use
+ Modification
+ Distribution
+ Patent use
+ Private use","Trademark use
+ Liability
+ Warranty","License and copyright notice
+ State changes",,
+jmespath@0.15.0,Apache 2.0,"https://github.com/jmespath/jmespath.js
+http://www.apache.org/licenses/LICENSE-2.0",Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+qrcode-terminal@0.8.0,Apache 2.0,https://github.com/gtanner/qrcode-terminal,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+qrcode-terminal@0.9.4,Apache 2.0,https://github.com/gtanner/qrcode-terminal,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+rx-lite-aggregates@4.0.8,"Apache License, Version 2.0",https://github.com/Reactive-Extensions/RxJS,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+rx-lite@3.1.2,"Apache License, Version 2.0",https://github.com/Reactive-Extensions/RxJS,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+rx-lite@4.0.8,"Apache License, Version 2.0",https://github.com/Reactive-Extensions/RxJS,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+acorn-node@1.3.0,Apache-2.0,https://github.com/browserify/acorn-node,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+ansi-html@0.0.7,Apache-2.0,https://github.com/Tjatse/ansi-html,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+aws-sdk@2.177.0,Apache-2.0,https://github.com/aws/aws-sdk-js,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+aws-sdk@2.229.1,Apache-2.0,https://github.com/aws/aws-sdk-js,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+aws-sign2@0.6.0,Apache-2.0,https://github.com/mikeal/aws-sign,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+aws-sign2@0.7.0,Apache-2.0,https://github.com/mikeal/aws-sign,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+caseless@0.11.0,Apache-2.0,https://github.com/mikeal/caseless,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+caseless@0.12.0,Apache-2.0,https://github.com/mikeal/caseless,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+connect-phonegap@0.24.9,Apache-2.0,https://github.com/phonegap/connect-phonegap,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-app-hello-world@3.12.0,Apache-2.0,https://git-wip-us.apache.org/repos/asf/cordova-app-hello-world,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-common@2.1.0,Apache-2.0,https://github.com/apache/cordova-lib,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-common@2.2.1,Apache-2.0,https://github.com/apache/cordova-lib,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-create@1.1.2,Apache-2.0,https://github.com/apache/cordova-create,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-fetch@1.3.0,Apache-2.0,https://github.com/apache/cordova-lib,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-ios@4.5.4,Apache-2.0,https://github.com/apache/cordova-ios,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-js@4.2.2,Apache-2.0,https://github.com/apache/cordova-js,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-lib@8.0.0,Apache-2.0,https://github.com/apache/cordova-lib,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-battery-status@2.0.2,Apache-2.0,https://github.com/apache/cordova-plugin-battery-status,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-camera@4.0.3,Apache-2.0,https://github.com/apache/cordova-plugin-camera,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-compat@1.2.0,Apache-2.0,https://github.com/apache/cordova-plugin-compat,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-console@1.1.0,Apache-2.0,https://github.com/apache/cordova-plugin-console,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-contacts@3.0.1,Apache-2.0,https://github.com/apache/cordova-plugin-contacts,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-device-motion@2.0.1,Apache-2.0,https://github.com/apache/cordova-plugin-device-motion,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-device-orientation@2.0.1,Apache-2.0,https://github.com/apache/cordova-plugin-device-orientation,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-device@2.0.2,Apache-2.0,https://github.com/apache/cordova-plugin-device,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-dialogs@2.0.1,Apache-2.0,https://github.com/apache/cordova-plugin-dialogs,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-file-transfer@1.6.3,Apache-2.0,https://github.com/apache/cordova-plugin-file-transfer,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-file@4.3.3,Apache-2.0,https://github.com/apache/cordova-plugin-file,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-geolocation@4.0.1,Apache-2.0,https://github.com/apache/cordova-plugin-geolocation,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-globalization@1.11.0,Apache-2.0,https://github.com/apache/cordova-plugin-globalization,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-inappbrowser@2.0.2,Apache-2.0,https://github.com/apache/cordova-plugin-inappbrowser,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-media-capture@1.4.3,Apache-2.0,https://github.com/apache/cordova-plugin-media-capture,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-media@3.0.1,Apache-2.0,https://github.com/apache/cordova-plugin-media,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-network-information@2.0.1,Apache-2.0,https://github.com/apache/cordova-plugin-network-information,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-splashscreen@5.0.2,Apache-2.0,https://github.com/apache/cordova-plugin-splashscreen,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-statusbar@2.4.2,Apache-2.0,https://github.com/apache/cordova-plugin-statusbar,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-vibration@3.1.0,Apache-2.0,https://github.com/apache/cordova-plugin-vibration,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-whitelist@1.3.3,Apache-2.0,https://github.com/apache/cordova-plugin-whitelist,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-wkwebview-engine@1.1.4-dev,Apache-2.0,https://github.com/ionic-team/cordova-plugin-wkwebview-engine,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-serve@2.0.0,Apache-2.0,https://github.com/apache/cordova-lib,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova@8.0.0,Apache-2.0,https://github.com/apache/cordova-cli,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+detect-libc@1.0.3,Apache-2.0,https://github.com/lovell/detect-libc,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+doctrine@2.1.0,Apache-2.0,https://github.com/eslint/doctrine,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+eslint-visitor-keys@1.0.0,Apache-2.0,https://github.com/eslint/eslint-visitor-keys,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+forever-agent@0.6.1,Apache-2.0,https://github.com/mikeal/forever-agent,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+jstransform@3.0.0,Apache-2.0,https://github.com/facebook/jstransform,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+kew@0.7.0,Apache-2.0,https://github.com/Medium/kew,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+log4js@2.6.1,Apache-2.0,https://github.com/log4js-node/log4js-node,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+oauth-sign@0.8.2,Apache-2.0,https://github.com/mikeal/oauth-sign,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+phantomjs-prebuilt@2.1.16,Apache-2.0,https://github.com/Medium/phantomjs,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+phantomjs@2.1.7,Apache-2.0,https://github.com/Medium/phantomjs,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+phonegap@8.0.0,Apache-2.0,https://github.com/phonegap/phonegap-cli,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-abstract-mapreduce@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-adapter-cordova-sqlite@2.0.3,Apache-2.0,https://github.com/nolanlawson/pouchdb-adapter-cordova-sqlite,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-adapter-utils@6.2.0,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-adapter-utils@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-adapter-websql-core@6.2.0,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-adapter-websql-core@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-all-dbs@1.0.2,Apache-2.0,https://github.com/nolanlawson/pouchdb-all-dbs,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-binary-utils@6.2.0,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-binary-utils@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-collate@6.4.3,Apache-2.0,,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-collections@6.2.0,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-collections@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-errors@6.2.0,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-errors@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-find@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-json@6.2.0,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-json@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-mapreduce-utils@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-md5@6.2.0,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-md5@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-merge@6.2.0,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-merge@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-promise@5.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-promise@6.2.0,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-promise@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-selector-core@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-utils@6.2.0,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb-utils@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb@6.2.0,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+pouchdb@6.4.3,Apache-2.0,https://github.com/pouchdb/pouchdb,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+request@2.65.0,Apache-2.0,https://github.com/request/request,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+request@2.67.0,Apache-2.0,https://github.com/request/request,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+request@2.75.0,Apache-2.0,https://github.com/request/request,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+request@2.76.0,Apache-2.0,https://github.com/request/request,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+request@2.79.0,Apache-2.0,https://github.com/request/request,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+request@2.80.0,Apache-2.0,https://github.com/request/request,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+request@2.81.0,Apache-2.0,https://github.com/request/request,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+request@2.83.0,Apache-2.0,https://github.com/request/request,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+spdx-correct@3.0.0,Apache-2.0,https://github.com/jslicense/spdx-correct.js,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+tunnel-agent@0.4.3,Apache-2.0,https://github.com/mikeal/tunnel-agent,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+tunnel-agent@0.6.0,Apache-2.0,https://github.com/mikeal/tunnel-agent,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+validate-npm-package-license@3.0.3,Apache-2.0,https://github.com/kemitchell/validate-npm-package-license.js,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+vuvuzela@1.0.3,Apache-2.0,https://github.com/nolanlawson/vuvuzela,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+xcode@0.9.3,Apache-2.0,https://github.com/alunny/node-xcode,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+xcode@1.0.0,Apache-2.0,https://github.com/apache/cordova-node-xcode,Commercial use silent but may be implied,"Trademark use
+ Liability
+ Warranty","License copy to recipients required
+Notice ",,
+cordova-plugin-email-composer@0.8.15,Apache*,https://github.com/katzer/cordova-plugin-email-composer,"Commercial use
+Modification
+Distribution
+Patent use
+Private use","Trademark use
+ Liability
+ Warranty","License and copyright notice
+State changes",,
+dependency-ls@1.1.1,Apache*,https://github.com/stevengill/dependency-ls ,"Commercial use
+Modification
+Distribution
+Patent use
+Private use","Trademark use
+ Liability
+ Warranty","License and copyright notice
+State changes",,
+phonegap-build-api@0.4.0,Apache*,https://github.com/phonegap/node-phonegap-build-api,"Commercial use
+Modification
+Distribution
+Patent use
+Private use","Trademark use
+ Liability
+ Warranty","License and copyright notice
+State changes",,
+phonegap-build@0.10.0,Apache*,https://github.com/phonegap/node-phonegap-build,"Commercial use
+Modification
+Distribution
+Patent use
+Private use","Trademark use
+ Liability
+ Warranty","License and copyright notice
+State changes",,
+request@2.11.4,Apache*,https://github.com/mikeal/request,"Commercial use
+Modification
+Distribution
+Patent use
+Private use","Trademark use
+ Liability
+ Warranty","License and copyright notice
+State changes",,
+request@2.9.203,Apache*,https://github.com/mikeal/request,"Commercial use
+Modification
+Distribution
+Patent use
+Private use","Trademark use
+ Liability
+ Warranty","License and copyright notice
+State changes",,
+revalidator@0.1.8,Apache*,https://github.com/flatiron/revalidator,"Commercial use
+Modification
+Distribution
+Patent use
+Private use","Trademark use
+ Liability
+ Warranty","License and copyright notice
+State changes",,
+tiny-queue@0.2.1,Apache*,https://github.com/nolanlawson/tiny-queue,"Commercial use
+Modification
+Distribution
+Patent use
+Private use","Trademark use
+ Liability
+ Warranty","License and copyright notice
+State changes",,
+true-case-path@1.0.2,Apache*,https://github.com/barsh/true-case-path,"Commercial use
+Modification
+Distribution
+Patent use
+Private use","Trademark use
+ Liability
+ Warranty","License and copyright notice
+State changes",,
+valid-identifier@0.0.1,Apache*,https://github.com/purplecabbage/valid-identifier,"Commercial use
+Modification
+Distribution
+Patent use
+Private use","Trademark use
+ Liability
+ Warranty","License and copyright notice
+State changes",,
+spdx-exceptions@2.1.0,CC-BY-3.0,https://github.com/kemitchell/spdx-exceptions.json,"Commercial use
+Modification
+Distribution
+Patent use
+Private use"," Liability
+ Warranty","License and copyright notice
+State changes",,
+caniuse-db@1.0.30000841,CC-BY-4.0,https://github.com/Fyrd/caniuse,"Commercial use
+Modification
+Distribution
+Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty","License and copyright notice
+State changes",,
+caniuse-lite@1.0.30000841,CC-BY-4.0,https://github.com/ben-eb/caniuse-lite,"Commercial use
+Modification
+Distribution
+Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty","License and copyright notice
+State changes",,
+@csstools/convert-colors@1.4.0,CC0-1.0,https://github.com/jonathantneal/convert-colors," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+@csstools/sass-import-resolve@1.0.0,CC0-1.0,https://github.com/jonathantneal/sass-import-resolve," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+cssdb@1.6.0,CC0-1.0,https://github.com/jonathantneal/css-db," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+postcss-advanced-variables@2.3.3,CC0-1.0,https://github.com/jonathantneal/postcss-advanced-variables," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+postcss-color-mod-function@2.4.2,CC0-1.0,https://github.com/jonathantneal/postcss-color-mod-function," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+postcss-dir-pseudo-class@3.0.0,CC0-1.0,https://github.com/jonathantneal/postcss-dir-pseudo-class," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+postcss-extend-rule@1.1.0,CC0-1.0,https://github.com/jonathantneal/postcss-extend-rule," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+postcss-focus-visible@2.0.0,CC0-1.0,https://github.com/jonathantneal/postcss-focus-visible," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+postcss-font-family-system-ui@3.0.0,CC0-1.0,https://github.com/JLHwung/postcss-font-family-system-ui," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+postcss-logical@1.1.1,CC0-1.0,https://github.com/jonathantneal/postcss-logical," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+postcss-nesting@4.2.1,CC0-1.0,https://github.com/jonathantneal/postcss-nesting," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+postcss-preset-env@3.5.0,CC0-1.0,https://github.com/jonathantneal/postcss-preset-env," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+postcss-pseudo-class-any-link@4.0.0,CC0-1.0,https://github.com/jonathantneal/postcss-pseudo-class-any-link," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+precss@3.1.2,CC0-1.0,https://github.com/jonathantneal/precss," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+spdx-license-ids@3.0.0,CC0-1.0,https://github.com/shinnn/spdx-license-ids," Commercial use
+ Modification
+ Distribution
+ Private use"," Liability
+ Trademark use
+ Patent use
+ Warranty",,,
+form-data@0.0.3,Custom: http://dev.w3.org/2006/webapi/XMLHttpRequest-2/Overview.html,https://github.com/felixge/node-form-data,"Commercial use
+Modification
+Distribution
+Private use","Liability
+Warranty",License and copyright notice,,
+colors@0.6.0-1,Custom: http://i.imgur.com/goJdO.png,https://github.com/Marak/colors.js,"Commercial use
+Modification
+Distribution
+Private use","Liability
+Warranty",License and copyright notice,"Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ""Software""), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: 
+ 
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. 
+
+THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+",
+colors@0.6.2,Custom: http://i.imgur.com/goJdO.png,https://github.com/Marak/colors.js,"Commercial use
+Modification
+Distribution
+Private use","Liability
+Warranty",License and copyright notice,"Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ""Software""), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: 
+ 
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. 
+
+THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+",
+pkginfo@0.2.3,Custom: http://npmjs.org/install.sh,https://github.com/indexzero/node-pkginfo,"Commercial use
+Modification
+Distribution
+Private use","Liability
+Warranty",License and copyright notice,,
+amazon-cognito-identity-js@1.31.0,Custom: https://github.com/aws/amazon-cognito-identity-js/issues/646,https://github.com/aws/amazon-cognito-identity-js,"Copyright Grant
+Patent Grant","Redistribution
+Derivative Works
+Use Limitation
+Patent Claims
+Trademarks
+Termination 
+Limitation of Liability",License and copyright notice,"The Work and any derivative works thereof only may be used or intended for use with the web services, computing platforms or applications provided by Amazon.com, Inc. or its affiliates, including Amazon Web Services, Inc.",
+map-stream@0.1.0,Custom: https://github.com/dominictarr/event-stream,https://github.com/dominictarr/map-stream,"Commercial use
+Modification
+Distribution
+Private use","Liability
+Warranty",License and copyright notice,,
+cycle@1.0.3,Custom: https://github.com/douglascrockford/JSON-js,https://github.com/dscape/cycle,,,,No License information found,
+pouchdb-binary-util@1.0.1,Custom: https://github.com/pouchdb/pouchdb/pull/3730,https://github.com/pouchdb/binary-util,,,,No License information found,
+event-stream@3.1.7,Custom: https://secure.travis-ci.org/dominictarr/event-stream.png,https://github.com/dominictarr/event-stream,"Commercial use
+Modification
+Distribution
+Private use","Liability
+Warranty",License and copyright notice,,
+bitsyntax@0.0.4,Custom: https://travis-ci.org/squaremo/bitsyntax-js.png,https://github.com/squaremo/bitsyntax-js,"Commercial use
+Modification
+Distribution
+Private use","Liability
+Warranty",License and copyright notice,"""Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the """"Software""""), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: 
+ 
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. 
+
+THE SOFTWARE IS PROVIDED """"AS IS"""", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+""
+",
+cordova-registry-mapper@1.1.15,Custom: https://travis-ci.org/stevengill/cordova-registry-mapper.svg,https://github.com/stevengill/cordova-registry-mapper,,,,No License information found,
+xmldom@0.1.27,LGPL,https://github.com/jindw/xmldom,"Commercial use
+Modification
+Distribution
+Private use","Liability
+Warranty",License and copyright notice,"GNU LESSER GENERAL PUBLIC LICENSE
+The MIT License:
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ""Software""), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+",
+module name,license,repository,Permissions,Restrictions,,,
+node-ninja@1.0.2,MPL-2.0,https://github.com/codejockey/node-ninja,"Commercial use
+Modification
+Distribution
+Patent use
+Private use","Trademark use
+Liability
+Warranty","Disclosure source
+License and copyright notice
+Same license (file)",,
+jsonify@0.0.0,Public Domain,https://github.com/substack/jsonify,,,,No License information found,
+base64id@0.1.0,UNKNOWN,https://github.com/faeldt/base64id,"Commercial use
+Modification
+Distribution
+Private use","Liability
+Warranty",License and copyright notice,,
+png-js@0.1.1,UNKNOWN,https://github.com/devongovett/png.js,"Commercial use
+Modification
+Distribution
+Private use","Liability
+Warranty",License and copyright notice,,
+big-integer@1.6.25,Unlicense,https://github.com/peterolson/BigInteger.js,"Private use
+Commercial use
+Modification
+Distribution  ","Liability
+Warranty",,,
+big-integer@1.6.28,Unlicense,https://github.com/peterolson/BigInteger.js,"Private use
+Commercial use
+Modification
+Distribution  ","Liability
+Warranty",,,
+cordova-sqlite-storage-dependencies@1.2.0,Unlicense,https://github.com/litehelpers/Cordova-sqlite-storage-dependencies,"Private use
+Commercial use
+Modification
+Distribution  ","Liability
+Warranty",,"The Unlicense:
+
+This is free and unencumbered software released into the public domain.
+
+Anyone is free to copy, modify, publish, use, compile, sell, or
+distribute this software, either in source code form or as a compiled
+binary, for any purpose, commercial or non-commercial, and by any
+means.
+
+In jurisdictions that recognize copyright laws, the author or authors
+of this software dedicate any and all copyright interest in the
+software to the public domain. We make this dedication for the benefit
+of the public at large and to the detriment of our heirs and
+successors. We intend this dedication to be an overt act of
+relinquishment in perpetuity of all present and future rights to this
+software under copyright law.
+
+THE SOFTWARE IS PROVIDED ""AS IS"", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.",LICENSE: Unlicense (unlicense.org) (public domain)
+postcss-apply@0.9.0,Unlicense,https://github.com/pascalduez/postcss-apply,"Private use
+Commercial use
+Modification
+Distribution  ","Liability
+Warranty",,,
+stream-buffers@2.2.0,Unlicense,https://github.com/samcday/node-stream-buffer,"Private use
+Commercial use
+Modification
+Distribution  ","Liability
+Warranty",,,
+tweetnacl@0.14.5,Unlicense,https://github.com/dchest/tweetnacl-js,"Private use
+Commercial use
+Modification
+Distribution  ","Liability
+Warranty",,,
+epahomeratingapp-app@0.9.13,UNLICENSED,https://git-codecommit.us-east-1.amazonaws.com/v1/repos/phonegap-app-framework,,,,Do not have access to the webpage,
+argsarray@0.0.1,WTFPL,https://github.com/calvinmetcalf/argsarray,"Private use
+Commercial use
+Modification
+Distribution  ",,,"""Do What É You Want To Public License""  ",
+expand-template@1.1.1,WTFPL & MIT,https://github.com/ralphtheninja/expand-template,"Commercial use
+Modification
+Distribution
+Private use","Liability
+Warranty",License and copyright notice,"License:  All code, unless stated otherwise, is dual-licensed under WTFPL and MIT.",
+opener@1.4.1,WTFPL & MIT,https://github.com/domenic/opener,"Commercial use
+Modification
+Distribution
+Private use","Liability
+Warranty",License and copyright notice,Dual-licensed under WTFPL and MIT.,
+spark-md5@3.0.0,WTFPL,https://github.com/satazor/js-spark-md5,"Commercial use
+Modification
+Distribution
+Private use",,,"""Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the """"Software""""), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: 
+ 
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. 
+
+THE SOFTWARE IS PROVIDED """"AS IS"""", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+""
+",
+uws@9.14.0,Zlib,https://github.com/uWebSockets/uWebSockets,"Commercial use
+Modification
+Distribution
+Private use"," Liability
+ Warranty","License and copyright notice
+State changes",,
