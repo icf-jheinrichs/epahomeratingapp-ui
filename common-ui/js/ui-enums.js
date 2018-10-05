@@ -305,6 +305,7 @@ const STATE_NAME = {
     JOB_CHECKLIST_STATUS              : 'job-checklist.status',
     JOB_CHECKLIST_REVIEW              : 'job-checklist-review',
     JOB_CHECKLIST_REVIEW_CATEGORY     : 'job-checklist-review.category',
+    PRIVACY_POLICY                    : 'privacy-policy',
     PROVIDERS                         : 'providers',
     USERS                             : 'users',
     USER_EDIT                         : 'user-edit',

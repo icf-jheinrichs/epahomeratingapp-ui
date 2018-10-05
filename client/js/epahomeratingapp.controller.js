@@ -17,7 +17,7 @@ class epahomeratingappController {
         this.JOB_STATUS                = UI_ENUMS.JOB_STATUS;
 
         this.paddingTop    = `${45}px`;
-        this.paddingBottom = '0px';
+        this.paddingBottom = '45px';
     }
 
     stateIsJobChecklist (route) {
@@ -52,7 +52,7 @@ class epahomeratingappController {
 
         this.bottomPadListener = this.$rootScope.$on(this.MESSAGING.SET_BOTTOM_PAD, (event, bottomPad) => {
             this.$timeout(() => {
-                this.paddingBottom = `${bottomPad}px`;
+                this.paddingBottom = `${bottomPad + 45}px`;
             });
 
             return bottomPad;

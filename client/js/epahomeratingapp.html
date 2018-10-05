@@ -1,7 +1,14 @@
 <navbar-admin></navbar-admin>
 
-<div ui-view
-    id="view-epahomeratingapp"
-    class="view-epahomeratingapp"
-    data-ng-style="{'padding-top' : epahomeratingappCtrl.paddingTop, 'padding-bottom' : epahomeratingappCtrl.paddingBottom}">
+<div class="view-wrapper">
+    <div ui-view
+        id="view-epahomeratingapp"
+        class="view-epahomeratingapp"
+        data-ng-style="{'padding-top' : epahomeratingappCtrl.paddingTop, 'padding-bottom' : epahomeratingappCtrl.paddingBottom}">
+    </div>
 </div>
+<footer id="site-footer">
+    <nav class="page-container">
+        <a ui-sref="privacy-policy">Privacy Policy</a>
+    </nav>
+</footer>
