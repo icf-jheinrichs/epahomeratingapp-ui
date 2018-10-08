@@ -5,7 +5,7 @@ import './house-selection-item.scss';
 
 let houseSelectionItemComponent = {
     bindings : {
-        house              : '=',
+        house              : '<',
         isPrimary          : '@',
         onUpdateHousePhoto : '&'
     },

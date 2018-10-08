@@ -24,9 +24,12 @@ $admin-head-skip-link-background: rgba(255, 255, 255, 0.8);
 
 #admin-nav {
     height: 45px;
-    position: fixed;
-    top: 75px;
     transition: transform $transition-fast linear;
     width: 100%;
-    z-index: $zindex-fixed-nav;
+
+    &.affixed {
+        position: fixed;
+        top: 75px;
+        z-index: $zindex-fixed-nav;
+    }
 }

@@ -1,16 +1,36 @@
+import _find from 'lodash/find';
+
 import JobsPage from './jobs-page.class.js';
 
 class JobsPageController extends JobsPage {
     $onInit () {
         super.$onInit();
 
-        if (this.company.RelatedProviderCompanys.length > 0) {
-            this.hasRelatedProviderCompanies = true;
-            this
-                .selectedProviderToAdd = this.company.RelatedProviderCompanys[0];
-        } else {
-            this.hasRelatedProviderCompanies = false;
-        }
+        this
+            .UserCompanyService
+            .getCompany(this.AuthorizationService.getCurrentOrganizationId())
+            .then((company) => {
+                // debugger;
+                this.company = company;
+
+                return this
+                    .UserCompanyService
+                    .getProviderCompanies();
+            })
+            .then((providerCompanies) => {
+                this.relatedProviderCompanys = this.company.RelatedProviderCompanys.map((O_ID) => {
+                    return _find(providerCompanies, {O_ID});
+                });
+
+                if (this.company.RelatedProviderCompanys.length > 0) {
+                    this.hasRelatedProviderCompanies = true;
+                    this
+                        .selectedProviderToAdd = this.relatedProviderCompanys[0];
+                } else {
+                    this.hasRelatedProviderCompanies = false;
+                }
+            });
+
 
         if (this.$stateParams.status) {
             this.currentState = this.$stateParams.status;
@@ -104,7 +124,7 @@ class JobsPageController extends JobsPage {
                             // TODO - Pop error message to user
                             job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
                             job.InternalReview  = false;
-                            job.ProviderCompany = this.selectedProviderToAdd.ProviderRESNETId;
+                            job.ProviderCompany = this.selectedProviderToAdd.O_ID;
 
                             submitJobs.push(this.JobsService.put(job));
                         }

@@ -36,11 +36,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-ng-repeat="provider in providersPageCtrl.company.RelatedProviderCompanys track by $index">
+                            <tr data-ng-repeat="provider in providersPageCtrl.relatedProviderCompanys track by $index">
                                 <td>{{provider.ProviderRESNETId}}</td>
                                 <td>{{provider.Name}}</td>
                                 <td>{{provider.Status}}</td>
-                                <td><button type="button" class="btn btn-sm btn-link" data-ng-click="providersPageCtrl.showRemoveProviderDiaglog(provider.ProviderRESNETId)">Remove</button></td>
+                                <td><button type="button" class="btn btn-sm btn-link" data-ng-if="provider.O_ID !== providersPageCtrl.company.O_ID" data-ng-click="providersPageCtrl.showRemoveProviderDiaglog(provider.O_ID)">Remove</button></td>
                             </tr>
                     </table>
                 </div>

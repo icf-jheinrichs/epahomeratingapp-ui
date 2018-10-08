@@ -1,22 +1,42 @@
-<a class="house-selection-list-item flex-row"
-   ui-sref="{houseId: houseSelectionItemCtrl.house.HouseId}"
-   ui-sref-active="active">
+<div class="house-selection-list-item flex-row">
+    <figure class="photo-capture clearfix">
+        <button
+            aria-label="expand image"
+            can-expand="true"
+            class="btn btn-link btn-lightbox"
+            lightbox="lightbox"
+            type="button">
 
-    <photo-capture
-        class="flex-item-static"
-        photo="houseSelectionItemCtrl.house.Photo[0]"
-        on-photo-capture="houseSelectionItemCtrl.handlePhotoCapture(photo)">
-    </photo-capture>
+            <img class="pull-left" data-ng-src="{{houseSelectionItemCtrl.photoUrl}}" alt="" />
+        </button>
 
-    <div class="house-info">
-        <h4 class="house-title" data-ng-bind-html="::houseSelectionItemCtrl.HouseTitle"></h4>
+        <figcaption class="photo-capture-action">
+            <button
+                class="btn btn-block btn-photo-capture btn-link"
+                popover-toggle="popover-toggle"
+                ng-click="houseSelectionItemCtrl.showElevationPhotos()"
+                type="button">
 
-        <span class="label label-primary" data-ng-if="houseSelectionItemCtrl.isPrimary=='true'">
-            <i class="fa fa-star" aria-hidden="true"></i> Primary
-        </span>
+                <i class="fa fa-camera" aria-hidden="true"></i> View All
+            </button>
+        </figcaption>
+    </figure>
 
-        <p class="ellipsis">Builder: {{::houseSelectionItemCtrl.house.Builder}}</p>
+    <a
+        class="house-selection-list-item-link"
+        ui-sref="{houseId: houseSelectionItemCtrl.house.HouseId}"
+        ui-sref-active="active">
 
-        <p class="ellipsis">Rating File: {{::houseSelectionItemCtrl.house.HousePlan[0].Name}}</p>
-    </div>
-</a>
+        <div class="house-info">
+            <h4 class="house-title" data-ng-bind-html="::houseSelectionItemCtrl.HouseTitle"></h4>
+
+            <span class="label label-primary" data-ng-if="houseSelectionItemCtrl.isPrimary=='true'">
+                <i class="fa fa-star" aria-hidden="true"></i> Primary
+            </span>
+
+            <p class="ellipsis">Builder: {{::houseSelectionItemCtrl.house.Builder}}</p>
+
+            <p class="ellipsis">Rating File: {{::houseSelectionItemCtrl.house.HousePlan[0].Name}}</p>
+        </div>
+    </a>
+</div>

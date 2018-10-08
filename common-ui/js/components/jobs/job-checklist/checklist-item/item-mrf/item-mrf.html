@@ -60,7 +60,7 @@
 
                         <td
                             data-ng-repeat="key in checklistItemCtrl.columnKeyOrder[$parent.$index] track by $index"
-                            data-ng-if="checklistItemCtrl.showCell(key, mrfTable.Columns)"
+                            data-ng-if="checklistItemCtrl.showCell(key, mrfTable.Columns, dataRow[key])"
                             data-ng-class="{'td-edited' : checklistItemCtrl.attributeIsEdited(mrfTable.Key, $parent.$parent.$index, key)}">
                             {{dataRow[key]}}
                         </td>

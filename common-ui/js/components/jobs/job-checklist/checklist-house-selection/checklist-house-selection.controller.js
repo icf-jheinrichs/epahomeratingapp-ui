@@ -1,7 +1,19 @@
 import _find from 'lodash/find';
+import _findIndex from 'lodash/findIndex';
 
 class checklistHouseSelectionController {
-    constructor ($rootScope, $stateParams, $sanitize, $transitions, JobChecklistStateService, ModalService, BASE_IMAGE_URL, UI_ENUMS, jobTitleFilter) {
+    constructor (
+        $rootScope,
+        $stateParams,
+        $sanitize,
+        $transitions,
+        AuthorizationService,
+        JobChecklistStateService,
+        ModalService,
+        BASE_IMAGE_URL,
+        UI_ENUMS,
+        jobTitleFilter
+    ) {
         'ngInject';
 
         // capture DI
@@ -13,6 +25,7 @@ class checklistHouseSelectionController {
         this.DEFAULT_PHOTO               = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
         this.BASE_IMAGE_URL              = BASE_IMAGE_URL;
         this.MESSAGING                   = UI_ENUMS.MESSAGING;
+        this.AuthorizationService        = AuthorizationService;
         this.JobChecklistStateService    = JobChecklistStateService;
         this.ModalService                = ModalService;
         this.jobTitleFilter              = jobTitleFilter;
@@ -29,12 +42,16 @@ class checklistHouseSelectionController {
         // init view variables
         this.showNavbar         = false;
 
+        this.userAuthorization  = this.AuthorizationService.getUserRole();
+
         this.sampleSize         = this.houses.Secondary.length + 1;
 
         this.selectedHouse      = this.houses.Primary;
         this.selectedHousePhoto = (this.houses.Primary.Photo.length === 0) ? this.DEFAULT_PHOTO : this.houses.Primary.Photo[0];
 
         this.toggleText         = this.toggleTextEnum.more;
+        this.elevationPhotos    = [];
+        this.elevationPhotosVisible = false;
 
         // set app bottom pad to accomodate house selector
         this.setAppBottomPad();
@@ -108,17 +125,45 @@ class checklistHouseSelectionController {
         this.$rootScope.$emit(this.MESSAGING.SET_BOTTOM_PAD, bottomPad);
     }
 
-    onUpdateHousePhoto (HouseId, photo) {
-        this.$rootScope.$emit(this.MESSAGING.UPDATE_HOUSE_PHOTO, {
-            HouseId,
-            photo
-        });
+    onUpdateHousePhoto (HouseId) {
+        if (HouseId === this.houses.Primary.HouseId) {
+            this.elevationPhotos = this.houses.Primary.Photo;
+        } else {
+            const selectedHouse = _find(this.houses.Secondary, {HouseId : HouseId});
+            this.elevationPhotos = selectedHouse.Photo;
+        }
+
+        this.currentElevationPhotos = HouseId;
+        this.elevationPhotosVisible = true;
+    }
+
+    handlePhotoCapture (photo, key) {
+        if (this.currentElevationPhotos === this.houses.Primary.HouseId) {
+            this.houses.Primary.Photo[key] = photo;
+            this.houses.Primary = angular.copy(this.houses.Primary);
+        } else {
+            const houseIndex = _findIndex(this.houses.Secondary, {HouseId : this.currentElevationPhotos});
+            this.houses.Secondary[houseIndex].Photo[key] = photo;
+            this.houses.Secondary[houseIndex] = angular.copy(this.houses.Secondary[houseIndex]);
+        }
+
+        this
+            .$rootScope
+            .$emit(this.MESSAGING.UPDATE_HOUSE_PHOTO, {
+                HouseId : this.currentElevationPhotos,
+                photo,
+                key
+            });
     }
 
     saveProviderComment () {
-        this
-            .JobChecklistStateService
-            .putProviderComment(JSON.stringify(this.$sanitize(this.providerComment)));
+        if (this.userAuthorization.Provider) {
+            this
+                .JobChecklistStateService
+                .putProviderComment(JSON.stringify(this.$sanitize(this.providerComment)));
+
+            this.ModalService.closeModal(this.MODAL_PROVIDER_JOB_COMMENTS);
+        }
     }
 
     get selectedHouseTitle () {
@@ -126,7 +171,7 @@ class checklistHouseSelectionController {
     }
 
     get isProviderRole () {
-        return this.$stateParams.role === 'provider';
+        return this.userAuthorization.Provider && this.$stateParams.role === 'provider';
     }
 }
 

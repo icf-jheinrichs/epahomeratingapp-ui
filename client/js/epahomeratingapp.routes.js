@@ -167,7 +167,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
                     if ($stateParams && $stateParams.rater) {
                         raterId = $stateParams.rater;
                     } else if (company.RelatedRaterCompanys.length) {
-                        raterId = company.RelatedRaterCompanys[0]._id;
+                        raterId = company.RelatedRaterCompanys[0];
                     }
 
                     let jobPromise

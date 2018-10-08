@@ -1,4 +1,4 @@
-<div class="house-selection" data-ng-class="{'show-job-comments-button' : checklistHouseSelectionCtrl.isProviderRole}">
+<div class="house-selection show-job-comments-button">
     <div class="page-container house-selection-toggle">
         <button
             type="button"
@@ -11,7 +11,6 @@
     <section class="page-container flex-row flex-align-center house-selection-selected" data-ng-class="{'collapse-height' : checklistHouseSelectionCtrl.showNavbar}">
         <button
             class="btn btn-job-comments"
-            data-ng-if="checklistHouseSelectionCtrl.isProviderRole"
             data-ng-click="checklistHouseSelectionCtrl.showComments()">
 
             Job Comments
@@ -37,22 +36,32 @@
             <house-selection-item
                 house="checklistHouseSelectionCtrl.houses.Primary"
                 is-primary="true"
-                on-update-house-photo="checklistHouseSelectionCtrl.onUpdateHousePhoto(HouseId, photo)">
+                on-update-house-photo="checklistHouseSelectionCtrl.onUpdateHousePhoto(HouseId, photo, key)">
             </house-selection-item>
 
             <house-selection-item
                 data-ng-repeat="house in checklistHouseSelectionCtrl.houses.Secondary"
                 house="house"
                 is-primary="false"
-                on-update-house-photo="checklistHouseSelectionCtrl.onUpdateHousePhoto(HouseId, photo)">
+                on-update-house-photo="checklistHouseSelectionCtrl.onUpdateHousePhoto(HouseId, photo, key)">
             </house-selection-item>
         </div>
-    </nav>
+
+        <house-elevation-photos
+            elevation-photos-visible="checklistHouseSelectionCtrl.elevationPhotosVisible"
+            on-update-house-photo="checklistHouseSelectionCtrl.handlePhotoCapture(photo, key)"
+            photos="checklistHouseSelectionCtrl.elevationPhotos">
+        </house-elevation-photos>
+</nav>
 </div>
 
-<!-- modal: history -->
+<!-- modal: provider job comments -->
 
-<form class="modal modal-large modal-scroll-body hidden" modal="modal" id="modal-provider-job-comments" data-ng-submit="checklistHouseSelectionCtrl.saveProviderComment()">
+<form
+    class="modal modal-large modal-scroll-body hidden"
+    modal="modal" id="modal-provider-job-comments"
+    data-ng-submit="checklistHouseSelectionCtrl.saveProviderComment()">
+
     <div class="modal-header flex-row">
         <div class="flex-item-static">
             <button class="btn btn-link btn-modal-close" type="button">Close</button>
@@ -60,7 +69,7 @@
 
         <span class="modal-title flex-item-grow">Comments</span>
 
-        <div class="flex-item-static">
+        <div class="flex-item-static" data-ng-if="checklistHouseSelectionCtrl.isProviderRole">
             <button class="btn btn-link btn-modal btn-modal-close" type="submit">Save</button>
         </div>
     </div>
@@ -70,6 +79,7 @@
             <div class="form-group">
                 <label for="providerComment" class="sr-only">Job Comments</label>
                 <textarea
+                    ng-disabled="!checklistHouseSelectionCtrl.isProviderRole"
                     data-ng-model="checklistHouseSelectionCtrl.providerComment"
                     id="providerComment"
                     class="form-control job-comments-textarea">

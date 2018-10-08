@@ -3,6 +3,7 @@ import angular from 'angular';
 import checklistNavComponent from './checklist-nav/checklist-nav.component';
 import checklistHouseSelectionComponent from './checklist-house-selection/checklist-house-selection.component';
 import houseSelectionItemComponent from './checklist-house-selection/house-selection-item/house-selection-item.component';
+import houseElevationPhotosComponent from './checklist-house-selection/house-elevation-photos/house-elevation-photos.component';
 import checklistCategoryComponent from './checklist-category/checklist-category.component';
 import checklistStatusComponent from './checklist-status/checklist-status.component';
 import checklistFilterComponent from './checklist-filter/checklist-filter.component';
@@ -43,6 +44,7 @@ let jobsModule
         .component('checklistNav', checklistNavComponent)
         .component('checklistHouseSelection', checklistHouseSelectionComponent)
         .component('houseSelectionItem', houseSelectionItemComponent)
+        .component('houseElevationPhotos', houseElevationPhotosComponent)
         .component('checklistCategory', checklistCategoryComponent)
         .component('checklistStatus', checklistStatusComponent)
         .component('checklistFilter', checklistFilterComponent)

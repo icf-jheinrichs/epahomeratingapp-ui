@@ -51,7 +51,9 @@ class JobsController {
     }
 
     $onChanges (changes) {
-        this.jobs = changes.jobs.currentValue;
+        if (changes.jobs) {
+            this.jobs = changes.jobs.currentValue;
+        }
     }
 
     downloadXml (jobId) {

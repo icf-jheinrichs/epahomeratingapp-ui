@@ -77,11 +77,16 @@
     .house-selection-title {
         margin-bottom: $offset-default;
     }
+
+    .btn-lightbox {
+        width: 100%;
+    }
 }
 
 .house-selection-list {
     background-color: $body-bg;
-    overflow-y: scroll;
+    overflow-x: scroll;
+    overflow-y: hidden;
     padding: $gutter-half;
 
     .photo-capture {
@@ -91,9 +96,12 @@
 
 .house-selection-selected,
 .navbar-house-selection {
+    overflow-x: scroll;
     overflow-y: hidden;
-    position: relative;
     transition: height $transition-default, padding $transition-default;
+}
+.navbar-house-selection {
+    position: relative;
 }
 
 .form-control.job-comments-textarea {

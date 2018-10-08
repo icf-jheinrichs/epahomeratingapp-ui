@@ -1,3 +1,4 @@
+import _find from 'lodash/find';
 import _findIndex from 'lodash/findIndex';
 
 import JobsPage from '../jobs-page/jobs-page.class.js';
@@ -8,13 +9,33 @@ class JobsProviderPageController extends JobsPage {
 
         let raterCompanyIndex = 0;
 
-        if (this.$stateParams.rater) {
-            raterCompanyIndex = _findIndex(this.company.RelatedRaterCompanys, {
-                _id : this.$stateParams.rater
-            });
-        }
+        this
+            .UserCompanyService
+            .getCompany(this.AuthorizationService.getCurrentOrganizationId())
+            .then((company) => {
+                // debugger;
+                this.company = company;
 
-        this.selectedRater = this.company.RelatedRaterCompanys[raterCompanyIndex];
+                return this
+                    .UserCompanyService
+                    .getProviderCompanies();
+            })
+            .then((providerCompanies) => {
+                this.providerCompanies     = providerCompanies;
+                this.selectedProviderToAdd = providerCompanies[0];
+
+                this.relatedRaterCompanys = this.company.RelatedRaterCompanys.map((O_ID) => {
+                    return _find(this.providerCompanies, {O_ID});
+                });
+
+                if (this.$stateParams.rater) {
+                    raterCompanyIndex = _findIndex(this.relatedRaterCompanys, {
+                        O_ID : this.$stateParams.rater
+                    });
+                }
+
+                this.selectedRater = this.relatedRaterCompanys[raterCompanyIndex];
+            });
 
         if (this.$stateParams.status) {
             this.currentState = this.$stateParams.status;

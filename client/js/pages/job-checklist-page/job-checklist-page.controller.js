@@ -16,6 +16,7 @@ class JobsChecklistPageController {
         JobDataResponseService,
         ModalService,
         UserCompanyService,
+        ScrollService,
         UI_ENUMS,
         jobTitleFilter
     ) {
@@ -35,6 +36,7 @@ class JobsChecklistPageController {
         this.JobsService              = JobsService;
         this.JobDataResponseService   = JobDataResponseService;
         this.ModalService             = ModalService;
+        this.ScrollService            = ScrollService;
         this.UserCompanyService       = UserCompanyService;
         this.MESSAGING                = UI_ENUMS.MESSAGING;
         this.JOB_STATUS               = UI_ENUMS.JOB_STATUS;
@@ -114,6 +116,14 @@ class JobsChecklistPageController {
                     this.hasRelatedProviderCompanies = false;
                 }
             });
+
+        this
+            .ScrollService
+            .setScrollContext('JOB_CHECKLIST');
+
+        this
+            .$rootScope
+            .$broadcast(this.MESSAGING.SET_TOP_PAD, 0);
     }
 
     $onDestroy () {
@@ -123,6 +133,14 @@ class JobsChecklistPageController {
         this.postCommentListener();
         this.housePhotoListener();
         this.viewHvacDesignReportListener();
+
+        this
+            .ScrollService
+            .setScrollContext('DEFAULT');
+
+        this
+            .$rootScope
+            .$broadcast(this.MESSAGING.SET_TOP_PAD, 45);
     }
 
     appendFilterParams () {
