@@ -1,6 +1,6 @@
 {
   "name": "epahomeratingapp-ui",
-  "version": "0.9.35",
+  "version": "0.9.40",
   "sasslintConfig": ".scss-lint.yml",
   "description": "Package of all common ui (angular components and associated styles)",
   "main": "epahomeratingappUI.js",
