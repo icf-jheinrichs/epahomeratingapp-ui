@@ -72,7 +72,8 @@
             data-ng-class="{'active' : (jobDetailCtrl.job.Primary.HouseId === jobDetailCtrl.currentLocation)}"
             id="tabpanel-location-{{jobDetailCtrl.job.Primary.HouseId}}"
             house-plans="jobDetailCtrl.housePlans"
-            location="jobDetailCtrl.job.Primary">
+            location="jobDetailCtrl.job.Primary"
+            select-house-plan-enabled="jobDetailCtrl.canEditHouesPlans">
         </job-detail-location>
 
         <job-detail-location
@@ -84,7 +85,8 @@
             data-ng-class="{'active' : (secondary.HouseId === jobDetailCtrl.currentLocation)}"
             id="tabpanel-location-{{secondary.HouseId}}"
             house-plans="jobDetailCtrl.housePlans"
-            location="secondary">
+            location="secondary"
+            select-house-plan-enabled="jobDetailCtrl.canEditHouesPlans">
         </job-detail-location>
     </div>
 

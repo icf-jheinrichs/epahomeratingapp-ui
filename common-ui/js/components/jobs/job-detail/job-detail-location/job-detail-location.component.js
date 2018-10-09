@@ -3,8 +3,9 @@ import controller from './job-detail-location.controller';
 
 let jobDetailLocationComponent = {
     bindings : {
-        location   : '<',
-        housePlans : '<'
+        location               : '<',
+        housePlans             : '<',
+        selectHousePlanEnabled : '<'
     },
     template,
     controller,

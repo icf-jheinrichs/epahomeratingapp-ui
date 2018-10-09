@@ -21,27 +21,31 @@ class JobDetailController {
         this.isSampleSet       = this.job.Secondary.length > 0;
         this.currentLocation   = this.job.Primary.HouseId;
 
-        let ratingStarted      = this.ratingStarted(this.job);
+        const ratingStarted    = this.ratingStarted(this.job);
         this.canEditSampleSet  = !ratingStarted;
         this.canEditRatingType = !ratingStarted;
+        this.canEditHouesPlans = !ratingStarted;
     }
 
     ratingStarted (job) {
-        let progress = job.Progress;
+        const progress = job.Progress;
+        let total      = 0;
+
+        if (job.JobInitiated) {
+            return true;
+        }
 
         if (!progress) {
             return false;
         }
 
-        if (progress.PreDrywall.MustCorrect !== 0 || progress.PreDrywall.Verified !== 0) {
-            return true;
-        }
+        total += progress.PreDrywall.MustCorrect;
+        total += progress.PreDrywall.Verified;
 
-        if (progress.Final.MustCorrect !== 0 || progress.Final.Verified !== 0) {
-            return true;
-        }
+        total += progress.Final.MustCorrect;
+        total += progress.Final.Verified;
 
-        return false;
+        return total > 0;
     }
 
     setTab (houseId) {

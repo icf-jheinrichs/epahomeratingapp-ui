@@ -9,7 +9,6 @@ class JobDetailLocationController {
         'ngInject';
 
         this.ratingTypeOptions      = UI_ENUMS.RATING_TYPES;
-        this.selectHousePlanEnabled = true;
         this.showDetails            = 'HousePlanLibrary';
         this.showFileDetails        = 'File';
 

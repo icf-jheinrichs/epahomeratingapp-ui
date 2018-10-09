@@ -1,5 +1,5 @@
 <div class="file-manager flex-row">
-    <div class="file-manager-actions flex-item-static">
+    <div class="file-manager-actions flex-item-static" data-ng-if="fileManagerCtrl.enabled !== false">
 
         <div data-ng-if="fileManagerCtrl.uploadOnly==='true'">
             <label class="btn nowrap" for="{{::fileManagerCtrl.inputId}}">Upload {{::fileManagerCtrl.label}}</label>
@@ -126,7 +126,8 @@
                     class="btn btn-no-label btn-link btn-remove pull-right"
                     type="button"
                     aria-label="Remove {{::file.Name}}"
-                    data-ng-click="fileManagerCtrl.removeFile(file._id)">
+                    data-ng-click="fileManagerCtrl.removeFile(file._id)"
+                    data-ng-if="fileManagerCtrl.enabled !== false">
 
                     <i class="fa fa-remove" aria-hidden="true"></i>
                 </button>
