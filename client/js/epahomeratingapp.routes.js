@@ -399,6 +399,14 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         .state(STATE_NAME.USER_SETTINGS, {
             url        : '/users/user/settings',
             component  : 'userSettingsPage'
+        })
+
+        .state(STATE_NAME.PRIVACY_POLICY, {
+            url        : '/privacy-policy',
+            component  : 'privacyPolicyPage',
+            data       : {
+                requiresAuth : false
+            }
         });
 };
 

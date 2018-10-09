@@ -21,6 +21,10 @@ body {
     }
 }
 
+.view-wrapper {
+    min-height: calc(100% - 95px);
+}
+
 .view-epahomeratingapp {
     margin-bottom: $gutter-half;
 }
@@ -28,4 +32,6 @@ body {
 html,
 body {
     -webkit-overflow-scrolling: touch; // sass-lint:disable-line no-vendor-prefixes, no-misspelled-properties
+    height: 100%;
+    margin: 0;
 }
