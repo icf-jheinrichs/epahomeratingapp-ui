@@ -392,6 +392,8 @@ class JobChecklistState {
      * Save job data to DB (typically for progress  or status updates)
      */
     putJobData () {
+        this.job.JobInitiated = true;
+
         this
             .JobsService
             .put(this.job, this.$stateParams.ratingCompanyID);
@@ -486,7 +488,6 @@ class JobChecklistState {
             = this.JobChecklistProgressService.builderMustCorrect(this.job.Progress);
 
         this.putJobDataResponse();
-
         this.putJobData();
     }
 
@@ -518,7 +519,6 @@ class JobChecklistState {
             = this.JobChecklistProgressService.calculateJobProgress(this.jobDataResponse.Progress);
 
         this.putJobDataResponse();
-
         this.putJobData();
     }
 
@@ -542,6 +542,7 @@ class JobChecklistState {
             .Comments
             .push(comment.Comment);
 
+        this.putJobData(); // update the job data object so that job set to JobInitiated = true
         this.putJobDataResponse();
     }
 

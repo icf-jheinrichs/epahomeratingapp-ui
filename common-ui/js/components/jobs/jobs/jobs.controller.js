@@ -7,7 +7,6 @@ class JobsController {
         $rootScope,
         JobsService,
         jobTitleFilter,
-        ModalService,
         CONTEXT,
         UI_ENUMS
     ) {
@@ -22,19 +21,15 @@ class JobsController {
 
         this.jobTitleFilter   = jobTitleFilter;
         this.JobsService      = JobsService;
-        this.ModalService     = ModalService;
 
         this.JOB_STATUS       = UI_ENUMS.JOB_STATUS;
         this.MESSAGING        = UI_ENUMS.MESSAGING;
-        this.MODAL_OPEN_JOB   = UI_ENUMS.MODAL.OPEN_JOB;
 
         this.markedJobs       = [];
         this.downloadingRem   = false;
 
         this.STATE_NAME       = UI_ENUMS.STATE_NAME;
         this.currentStateName = this.$state.current.name;
-
-        this.jobToOpen        = {};
     }
 
     $onInit () {
@@ -112,29 +107,10 @@ class JobsController {
         return this.jobTitleFilter(sampleAddressInformation);
     }
 
-    openJob (job) {
-        this.jobToOpen = job;
-
-        this.jobToOpenSamples = [this.jobToOpen.Primary].concat(this.jobToOpen.Secondary);
-        this.jobIndex = 1;
-
-        this
-            .ModalService
-            .openModal(this.MODAL_OPEN_JOB);
-    }
-
-    modalOpenJobPrevious () {
-        this.jobIndex = Math.max(this.jobIndex - 1, 1);
-    }
-
-    modalOpenJobNext () {
-        this.jobIndex = Math.min(this.jobIndex + 1, this.jobToOpenSamples.length);
-    }
-
-    modalOpenJobFinish () {
-        this
-            .ModalService
-            .closeModal(this.MODAL_OPEN_JOB);
+    openJob (jobId) {
+        this.onOpenJob({
+            jobId
+        });
     }
 }
 

@@ -10,7 +10,8 @@ let jobsComponent = {
         registerHandlers         : '&',
         onSetBulkOperationStatus : '&',
         onDownloadXml            : '&',
-        onMarkJobAsRegistered    : '&'
+        onMarkJobAsRegistered    : '&',
+        onOpenJob                : '&'
     },
     template,
     controller,

@@ -27,7 +27,7 @@ class RadialProgressController {
      * Bind progressTotal to controller for the view.
      */
     get progressTotal () {
-        return Math.ceil(((this.progress.Verified + this.progress.MustCorrect) / this.progress.Total) * 100);
+        return this.progress.Total === 0 ? 0 : Math.ceil(((this.progress.Verified + this.progress.MustCorrect) / this.progress.Total) * 100);
     }
 
     /**

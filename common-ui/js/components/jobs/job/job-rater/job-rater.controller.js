@@ -109,7 +109,8 @@ class JobRaterController extends Job {
     }
 
     openJob () {
-        this.onOpenJob();
+        this
+            .onOpenJob({jobId : this.job._id});
     }
 
     /**

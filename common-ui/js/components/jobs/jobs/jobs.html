@@ -11,7 +11,7 @@
 <div class="item-list">
     <job-admin
         enabled="jobsCtrl.enabled"
-        data-ng-if="false"
+        data-ng-if="::jobsCtrl.CONTEXT_IS_ADMIN && (jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS || jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS_SEARCH)"
         class="item-list-item item-list-item-job flex-row"
         data-ng-repeat="job in jobsCtrl.jobs track by job._id"
         job="job"
@@ -32,46 +32,11 @@
 
     <job-rater
         data-ng-disabled="jobsCtrl.enabled"
-        data-ng-if="true"
+        data-ng-if="::!jobsCtrl.CONTEXT_IS_ADMIN && (jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS || jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS_SEARCH)"
         class="item-list-item item-list-item-job flex-row"
         data-ng-repeat="job in jobsCtrl.jobs track by job._id"
         job="job"
         marked="jobsCtrl.markedJobs[$index]"
-        on-open-job="jobsCtrl.openJob(job)">
+        on-open-job="jobsCtrl.openJob(jobId)">
     </job-rater>
-</div>
-
-<!-- modal: history -->
-
-<div class="modal modal-large hidden" modal="modal" id="modal-open-job">
-    <div class="modal-header flex-row">
-        <span class="modal-title flex-item-grow">Select House Plan</span>
-    </div>
-
-    <div class="modal-body-wrapper">
-        <div class="modal-body">
-            <p>This job was created with multiple house plans. Please select the most relevant house plan to continue. Once selected, you cannot change the House Plan for this job.</p>
-
-            <section
-                ng-repeat="sample in jobsCtrl.jobToOpenSamples track by $index"
-                ng-hide="$index + 1 !== jobsCtrl.jobIndex">
-
-                <p>
-                    <strong ng-if="jobsCtrl.jobToOpenSamples.length > 1">House {{jobsCtrl.jobIndex}} of {{jobsCtrl.jobToOpenSamples.length}} - </strong>
-                    <strong ng-bind-html="jobsCtrl.sampleTitle(sample.AddressInformation)"></strong>
-                </p>
-
-                <div class="form-group" ng-repeat="houseplan in sample.HousePlan track by $index">
-                    <label><input type="radio" /> {{houseplan.Name}}</label>
-                </div>
-            </section>
-        </div>
-    </div>
-
-    <div class="modal-footer clearfix">
-        <button class="btn btn-link btn-modal btn-modal-close" type="button">Cancel</button>
-        <button class="btn btn-default pull-right" type="button" ng-hide="jobsCtrl.jobIndex !== jobsCtrl.jobToOpenSamples.length" ng-click="jobsCtrl.modalOpenJobFinish()">Finish Selection</button>
-        <button class="btn btn-default pull-right" type="button" ng-hide="jobsCtrl.jobToOpenSamples.length === 1" ng-click="jobsCtrl.modalOpenJobNext()" data-ng-disabled="jobsCtrl.jobIndex === jobsCtrl.jobToOpenSamples.length">Next Sample &gt;</button>
-        <button class="btn btn-default pull-right" type="button" ng-hide="jobsCtrl.jobToOpenSamples.length === 1" ng-click="jobsCtrl.modalOpenJobPrevious()" data-ng-disabled="jobsCtrl.jobIndex === 1">&lt; Previous Sample</button>
-    </div>
 </div>

@@ -2,7 +2,18 @@ import moment from 'moment';
 import _isEmpty from 'lodash/isEmpty';
 
 class Job {
-    constructor ($location, $log, $rootScope, $scope, $timeout, jobTitleFilter, SyncService, CONTEXT, UI_ENUMS, BASE_IMAGE_URL) {
+    constructor (
+        $location,
+        $log,
+        $rootScope,
+        $scope,
+        $timeout,
+        jobTitleFilter,
+        SyncService,
+        CONTEXT,
+        UI_ENUMS,
+        BASE_IMAGE_URL
+    ) {
         'ngInject';
 
         this.$location        = $location;

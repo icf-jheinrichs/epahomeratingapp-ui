@@ -1,10 +1,13 @@
 import _find from 'lodash/find';
+import _cloneDeep from 'lodash/cloneDeep';
 
 import JobsPage from './jobs-page.class.js';
 
 class JobsPageController extends JobsPage {
     $onInit () {
         super.$onInit();
+
+        this.MODAL_OPEN_JOB = this.MODAL.OPEN_JOB;
 
         this
             .UserCompanyService
@@ -47,7 +50,10 @@ class JobsPageController extends JobsPage {
         this.pageStart = 0,
         this.pageEnd   = this.PAGE_SIZE;
 
-        this.viewJobs = this.jobs.slice(this.pageStart, this.pageEnd);
+        this.viewJobs  = this.jobs.slice(this.pageStart, this.pageEnd);
+        this.jobToOpen = {};
+
+        this.updateHouseplanFormBusy = false;
     }
 
     setPage (page) {
@@ -300,6 +306,139 @@ class JobsPageController extends JobsPage {
 
     enableWorkflow () {
         return (this.$stateParams.status !== this.JOB_STATUS.SUBMITTED_TO_PROVIDER && this.$stateParams.status !== this.JOB_STATUS.REGISTERED);
+    }
+
+    testJobInitiated () {
+        let totalProgress = 0;
+
+        if (this.jobToOpen.Progress === undefined) {
+            return false;
+        }
+
+        totalProgress += this.jobToOpen.Progress.PreDrywall.MustCorrect;
+        totalProgress += this.jobToOpen.Progress.PreDrywall.Verified;
+
+        totalProgress += this.jobToOpen.Progress.Final.MustCorrect;
+        totalProgress += this.jobToOpen.Progress.Final.Verified;
+
+        return totalProgress > 0;
+    }
+
+    routeToJob () {
+        this
+            .$state
+            .go(
+                this.STATE_NAME.JOB_CHECKLIST_CATEGORY,
+                {
+                    id         : this.jobToOpen._id,
+                    houseId    : this.jobToOpen.Primary.HouseId,
+                    categoryId : 'walls'
+                }
+            );
+    }
+
+    sampleTitle (sampleAddressInformation) {
+        return this.jobTitleFilter(sampleAddressInformation);
+    }
+
+    showHousePlanModal () {
+        this.updateHouseplanFormBusy = false;
+        this.housePlanSelectValid    = false;
+        this.housePlanSelectMessage  = '';
+        this.jobIndex                = 1;
+
+        this
+            .housePlanSelect
+            .$setPristine();
+
+        this
+            .ModalService
+            .openModal(this.MODAL_OPEN_JOB);
+    }
+
+    openJob (jobId) {
+        this.jobToOpen        = _find(this.jobs, {_id : jobId});
+        this.jobToOpenSamples = [this.jobToOpen.Primary].concat(this.jobToOpen.Secondary);
+        this.housePlansModel  = this.jobToOpenSamples.map((sample) => {
+            return {
+                houseplan : (sample.HousePlan.length === 1) ? sample.HousePlan[0]._id : ''
+            };
+        });
+
+        const housePlanCount  = this.jobToOpenSamples.reduce((count, sample) => {
+            return count + sample.HousePlan.length;
+        }, 0);
+
+        if (this.jobToOpen.JobInitiated) {
+            this.routeToJob();
+        } else if (this.jobToOpen.JobInitiated === false && housePlanCount === this.jobToOpenSamples.length) {
+            this.routeToJob();
+        } else if (this.jobToOpen.JobInitiated === undefined && housePlanCount === this.jobToOpenSamples.length) {
+            this.routeToJob();
+        } else if (this.jobToOpen.JobInitiated === false) {
+            this.showHousePlanModal();
+        } else if (this.jobToOpen.JobInitiated === undefined) {
+            if (this.testJobInitiated()) {
+                this.routeToJob();
+            } else {
+                this.showHousePlanModal();
+            }
+        }
+    }
+
+    modalOpenJobPrevious () {
+        this.jobIndex = Math.max(this.jobIndex - 1, 1);
+    }
+
+    modalOpenJobNext () {
+        this.jobIndex = Math.min(this.jobIndex + 1, this.jobToOpenSamples.length);
+    }
+
+    modalOpenJobSubmit () {
+        this.updateHouseplanFormBusy = true;
+
+        this.housePlanSelectValid = this.housePlansModel.reduce((isValid, housePlanModel) => {
+            return isValid && (housePlanModel.houseplan !== '');
+        }, true);
+
+        if (this.housePlanSelectValid) {
+            this
+                .JobsService
+                .getById(this.jobToOpen._id)
+                .then((job) => {
+                    const updatedJob = _cloneDeep(job);
+
+                    updatedJob.JobInitiated = true;
+
+                    updatedJob.Primary.HousePlan = updatedJob.Primary.HousePlan.filter((housePlan) => {
+                        return housePlan._id === this.housePlansModel[0].houseplan;
+                    });
+
+                    updatedJob
+                        .Secondary
+                        .forEach((secondary, index) => {
+                            secondary.HousePlan = secondary.HousePlan.filter((housePlan) => {
+                                return housePlan._id === this.housePlansModel[index + 1].houseplan;
+                            });
+                        });
+
+                    return this.JobsService.put(updatedJob, this.company.O_ID);
+                })
+                .then((result) => {
+                    this
+                        .ModalService
+                        .closeModal(this.MODAL_OPEN_JOB);
+                })
+                .catch((error) => {
+                    this.housePlanSelectMessage = error;
+                })
+                .finally(() => {
+                    this.updateHouseplanFormBusy = false;
+                });
+        } else {
+            this.updateHouseplanFormBusy = false;
+            this.housePlanSelectMessage  = 'Please select a house plan for each sample.';
+        }
     }
 }
 

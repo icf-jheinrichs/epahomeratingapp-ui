@@ -170,7 +170,8 @@
                 enabled="jobsPageCtrl.enableEdit()"
                 jobs="jobsPageCtrl.viewJobs"
                 register-handlers="jobsPageCtrl.registerHandlers(toggleAllJobs, getSelectedJobs)"
-                on-set-bulk-operation-status="jobsPageCtrl.setBulkOperationStatus(status)">
+                on-set-bulk-operation-status="jobsPageCtrl.setBulkOperationStatus(status)"
+                on-open-job="jobsPageCtrl.openJob(jobId)">
             </jobs>
 
             <pagination
@@ -234,3 +235,90 @@
         <button class="btn" data-ng-click="dismiss(true)">Archive</button>
     </div>
 </div>
+
+<!-- modal: open job -->
+
+<form
+    class="modal modal-large hidden"
+    modal="modal"
+    id="modal-open-job"
+    name="jobsPageCtrl.housePlanSelect"
+    ng-submit="jobsPageCtrl.modalOpenJobSubmit()">
+
+    <div class="modal-header flex-row">
+        <span class="modal-title flex-item-grow">Select House Plan</span>
+    </div>
+
+    <div class="modal-body-wrapper">
+        <div class="modal-body">
+            <p>This job was created with multiple house plans. Please select the most relevant house plan to continue. Once selected, you cannot change the House Plan for this job.</p>
+
+            <div class="status-message status-error" ng-hide="!jobsPageCtrl.housePlanSelect.$submitted && !jobsPageCtrl.housePlanSelectValid">
+                <p class="status-text">{{jobsPageCtrl.housePlanSelectMessage}}</p>
+            </div>
+
+            <fieldset
+                ng-repeat="housePlan in jobsPageCtrl.housePlansModel track by $index"
+                ng-hide="$index + 1 !== jobsPageCtrl.jobIndex">
+
+                <legend>
+                    <strong ng-if="jobsPageCtrl.jobToOpenSamples.length > 1">Sample {{jobsPageCtrl.jobIndex}} of {{jobsPageCtrl.jobToOpenSamples.length}} - </strong>
+                    <strong ng-bind-html="jobsPageCtrl.sampleTitle(jobsPageCtrl.jobToOpenSamples[$index].AddressInformation)"></strong>
+                </legend>
+
+                <ng-form name="houseplanForm">
+                    <div class="form-group" ng-repeat="sampleHouseplan in jobsPageCtrl.jobToOpenSamples[$index].HousePlan">
+                        <label>
+                            <input
+                                type="radio"
+                                name="sampleHouseplans-{{jobsPageCtrl.jobToOpenSamples[$parent.$index].HouseId}}"
+                                ng-value="sampleHouseplan._id"
+                                ng-model="housePlan.houseplan" />
+
+                            {{sampleHouseplan.Name}}
+                        </label>
+                    </div>
+                </ng-form>
+            </fieldset>
+        </div>
+    </div>
+
+    <div class="modal-footer clearfix">
+        <button
+            class="btn btn-link btn-modal btn-modal-close"
+            type="button"
+            ng-disabled="jobsPageCtrl.updateHouseplanFormBusy">
+
+            Cancel
+        </button>
+
+        <button
+            class="btn btn-default pull-right"
+            type="submit"
+            ng-disabled="jobsPageCtrl.updateHouseplanFormBusy">
+
+            <i data-ng-show="jobsPageCtrl.updateHouseplanFormBusy" class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+            Finish Selection
+        </button>
+
+        <button
+            class="btn btn-default pull-right"
+            type="button"
+            ng-hide="jobsPageCtrl.jobToOpenSamples.length === 1"
+            ng-click="jobsPageCtrl.modalOpenJobNext()"
+            ng-disabled="jobsPageCtrl.updateHouseplanFormBusy || jobsPageCtrl.jobIndex === jobsPageCtrl.jobToOpenSamples.length">
+
+            Next Sample &gt;
+        </button>
+
+        <button
+            class="btn btn-default pull-right"
+            type="button"
+            ng-hide="jobsPageCtrl.jobToOpenSamples.length === 1"
+            ng-click="jobsPageCtrl.modalOpenJobPrevious()"
+            ng-disabled="jobsPageCtrl.updateHouseplanFormBusy || jobsPageCtrl.jobIndex === 1">
+
+            &lt; Previous Sample
+        </button>
+    </div>
+</form>
