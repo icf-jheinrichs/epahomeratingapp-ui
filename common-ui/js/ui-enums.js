@@ -56,8 +56,10 @@ const CHECKLIST_ITEM_STATUS = {
 
 const DIALOG = {
     ADD_PROVIDER_COMPANY      : 'dialog-add-provider-company',
+    ADD_RATING_COMPANY        : 'dialog-add-rating-company',
     CONFIRM_CHANGE_SAMPLE_SET : 'dialog-confirm-change-sample-set',
     REMOVE_PROVIDER_COMPANY   : 'dialog-remove-provider-company',
+    REMOVE_RATING_COMPANY     : 'dialog-remove-rating-company',
     MAKE_JOB_OFFLINE          : 'dialog-make-job-offline',
     UNDO_JOB_OFFLINE          : 'dialog-undo-job-offline',
     LEAKAGE_TEST_EXEMPTION    : 'dialog-leakage-test-exemption',
