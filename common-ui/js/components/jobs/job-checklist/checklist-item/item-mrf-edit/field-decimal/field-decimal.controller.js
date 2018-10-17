@@ -52,7 +52,7 @@ class MrfEditFieldDecimalController extends MrfEditField {
         } else if (this.value < this.decimalType.minInclusive) {
             this.errorMessage = this.errorMessages.underMin;
             this.invalid      = true;
-        } else if (this.value === undefined) {
+        } else if (this.value === undefined || this.value === '' || this.value === null) {
             this.errorMessage = this.errorMessages.notValid;
             this.invalid      = true;
         } else {

@@ -342,10 +342,11 @@ class ChecklistItemMrfController extends ChecklistItemClass {
 
     showColumn (index, mrfTable) {
         let displayLogic = true;
+        const value      = this.homePerformance[mrfTable.Key][0][mrfTable.Columns[index].Key];
 
         if (mrfTable.Columns[index].DisplayLogic !== undefined
             && mrfTable.Columns[index].DisplayLogic === 'DisplayIfExists'
-            && this.homePerformance[mrfTable.Key][0][mrfTable.Columns[index].Key] === undefined) {
+            && (value === undefined || value === '')) {
 
             displayLogic = false;
         }
@@ -360,7 +361,7 @@ class ChecklistItemMrfController extends ChecklistItemClass {
 
         if (mrfTableColumns[columnIndex].DisplayLogic !== undefined
             && mrfTableColumns[columnIndex].DisplayLogic === 'DisplayIfExists'
-            && value === undefined) {
+            && (value === undefined || value === '')) {
 
             displayLogic = false;
         }

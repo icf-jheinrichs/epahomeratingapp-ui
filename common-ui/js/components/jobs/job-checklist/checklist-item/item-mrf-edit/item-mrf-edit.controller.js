@@ -28,7 +28,7 @@ class MrfEditController {
 
         if (field.DisplayLogic !== undefined
             && field.DisplayLogic === 'DisplayIfExists'
-            && value === undefined) {
+            && (value === undefined || value === '')) {
 
             displayLogic = false;
         }
