@@ -1,5 +1,11 @@
 @import '../../../epahomeratingapp-ui/common-ui/scss/variables';
 
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
 .page-container {
     width: $screen-lg;
 }
@@ -7,4 +13,23 @@
 .site-title .logo {
     height: 48px;
     width: 188px;
+}
+
+.pending-companies {
+    border-top: 1px $border-color-default solid;
+    margin: $offset-default 0;
+    padding-top: $gutter-half;
+}
+
+.pending-company {
+    border: 1px $border-color-default solid;
+    padding: 5px $gutter-half;
+
+    + .pending-company {
+        border-top: 0;
+    }
+}
+
+.view-wrapper {
+    min-height: calc(100% - 95px);
 }

@@ -11,11 +11,11 @@
 
 <!-- data-ui-sref="job-checklist.category({id: jobRaterCtrl.job._id, houseId: jobRaterCtrl.job.Primary.HouseId, categoryId: 'walls'})" -->
 
-<button aria-labelledby="job-{{jobRaterCtrl.job._id}}"
-    type="button"
+<div aria-labelledby="job-{{jobRaterCtrl.job._id}}"
     class="job job-rater flex-row flex-align-center flex-item-grow"
     data-ng-class="{'job-returned': jobRaterCtrl.hasStatusLabel()}"
-    ng-click="jobRaterCtrl.openJob()">
+    ng-click="jobRaterCtrl.openJob()"
+    tabindex="0">
 
     <div class="job-info flex-item-grow">
         <div class="job-meta flex-row">
@@ -39,4 +39,4 @@
     </div>
 
     <i class="list-item-activate fa fa-chevron-right fa-lg" aria-hidden="true"></i>
-</button>
+</div>

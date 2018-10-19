@@ -346,7 +346,7 @@ class ChecklistItemMrfController extends ChecklistItemClass {
 
         if (mrfTable.Columns[index].DisplayLogic !== undefined
             && mrfTable.Columns[index].DisplayLogic === 'DisplayIfExists'
-            && (value === undefined || value === '')) {
+            && (value === undefined || value === '' || value === null)) {
 
             displayLogic = false;
         }
