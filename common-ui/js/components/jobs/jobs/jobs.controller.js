@@ -1,9 +1,10 @@
 class JobsController {
     constructor (
         $window,
+        $http,
         $scope,
         $state,
-        $http,
+        $stateParams,
         $rootScope,
         JobsService,
         jobTitleFilter,
@@ -16,6 +17,7 @@ class JobsController {
 
         this.$http            = $http;
         this.$state           = $state;
+        this.$stateParams     = $stateParams;
         this.$scope           = $scope;
         this.$rootScope       = $rootScope;
 
@@ -43,6 +45,8 @@ class JobsController {
             toggleAllJobs   : this.toggleAllJobs.bind(this),
             getSelectedJobs : this.getSelectedJobs.bind(this)
         });
+
+        this.ratingCompanyId = this.$stateParams.rater;
     }
 
     $onChanges (changes) {
