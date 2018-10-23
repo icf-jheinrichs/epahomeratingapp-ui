@@ -18,15 +18,20 @@ class JobsProviderPageController extends JobsPage {
 
                 return this
                     .UserCompanyService
-                    .getProviderCompanies();
+                    .getRatingCompanies();
             })
-            .then((providerCompanies) => {
-                this.providerCompanies     = providerCompanies;
-                this.selectedProviderToAdd = providerCompanies[0];
+            .then((raterCompanies) => {
+                this.raterCompanies = raterCompanies;
 
-                this.relatedRaterCompanys = this.company.RelatedRaterCompanys.map((O_ID) => {
-                    return _find(this.providerCompanies, {O_ID});
+                const relatedRaters = this.company.RelatedRaterCompanys.map((O_ID) => {
+                    return _find(this.raterCompanies, {O_ID});
                 });
+
+                const previouslyRelatedRaters = this.company.PastRaterCompanies.map((O_ID) => {
+                    return _find(this.raterCompanies, {O_ID});
+                });
+
+                this.relatedRaterCompanys = relatedRaters.concat(previouslyRelatedRaters);
 
                 if (this.$stateParams.rater) {
                     raterCompanyIndex = _findIndex(this.relatedRaterCompanys, {
@@ -76,6 +81,37 @@ class JobsProviderPageController extends JobsPage {
         return (this.$stateParams.status !== 'Registered');
     }
 
+    declineJob () {
+        const markedJobs = this.jobsHandlers.getSelectedJobs();
+        this.marked      = markedJobs.length;
+
+        this
+            .DialogService
+            .openDialog('dialog-decline-jobs') //TODO: make this a constant in UI-ENUMS - this.DIALOG.DECLINE_JOBS
+            .then((confirmation) => {
+                let submitJobs = [];
+                if (confirmation) {
+                    markedJobs.forEach((index) => {
+                        let job = this.viewJobs[index];
+                        if (job.Status === this.JOB_STATUS.SUBMITTED_TO_PROVIDER) {
+                            // TODO - Pop error message to user
+                            job.Status          = this.JOB_STATUS.COMPLETED;
+                            job.ProviderCompany = undefined;
+
+                            submitJobs.push(this.JobsService.put(job));
+                        }
+                    });
+
+                    this
+                        .$q
+                        .all(submitJobs)
+                        .then(() => {
+                            this.$state.transitionTo(this.$state.current, this.$stateParams, {reload : true, inherit : true, notify : true});
+                        });
+                }
+            });
+    }
+
     markAsRegistered () {
         const markedJobs = this.jobsHandlers.getSelectedJobs();
         let submitJobs   = [];
@@ -105,9 +141,11 @@ class JobsProviderPageController extends JobsPage {
     }
 
     handleRatingCompanyChange () {
-        this
-            .$state
-            .go(this.STATE_NAME.JOBS_PROVIDER_SEARCH, {rater : this.selectedRater._id});
+        this.$timeout(() => {
+            this
+                .$state
+                .go(this.STATE_NAME.JOBS_PROVIDER_SEARCH, {rater : this.selectedRater.O_ID});
+        }, 0);
     }
 }
 

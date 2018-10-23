@@ -125,6 +125,69 @@ class UserCompanyService {
         });
     }
 
+    createPendingProviderRaterAssociation (providerCompanyId, raterCompanyId) {
+        return this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'POST',
+                    url     : `${this.API_URL.COMPANY}/associate/${providerCompanyId}?raterId=${raterCompanyId}`
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        resolve('success');
+                    } else {
+                        //TODO: make this less bad
+                        reject('somethings amiss');
+                    }
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
+
+    updatePendingProviderRaterAssociation (providerCompanyId, raterCompanyId, approve) {
+        return this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'PUT',
+                    url     : `${this.API_URL.COMPANY}/associate/${providerCompanyId}?raterId=${raterCompanyId}&approve=${approve}`
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        resolve('success');
+                    } else {
+                        //TODO: make this less bad
+                        reject('somethings amiss');
+                    }
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
+
+    removeProviderRaterAssociation (providerCompanyId, raterCompanyId) {
+        return this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'DELETE',
+                    url     : `${this.API_URL.COMPANY}/associate/${providerCompanyId}?raterId=${raterCompanyId}`
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        resolve('success');
+                    } else {
+                        //TODO: make this less bad
+                        reject('somethings amiss');
+                    }
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
+
     /**
      * get company data
      * @param  {string} O_ID organization ID (from iStar)
@@ -163,6 +226,29 @@ class UserCompanyService {
                         let providers = response.data.data;
 
                         resolve(_filter(providers, {ProviderOrg : true}));
+                    } else {
+                        //TODO: make this less bad
+                        reject('somethings amiss');
+                    }
+                })
+                .catch((error) => {
+                    reject(error);
+                });
+        });
+    }
+
+    getRatingCompanies () {
+        return this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'GET',
+                    url     : `${this.API_URL.COMPANY}`
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        const ratingCompanies = response.data.data;
+
+                        resolve(_filter(ratingCompanies, {RaterOrg : true}));
                     } else {
                         //TODO: make this less bad
                         reject('somethings amiss');

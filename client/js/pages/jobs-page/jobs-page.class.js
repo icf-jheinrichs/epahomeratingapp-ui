@@ -16,13 +16,12 @@ class JobsPage {
         $state,
         $stateParams,
         $scope,
+        $timeout,
         $window,
         AuthorizationService,
         DialogService,
         JobsService,
-        ModalService,
         UserCompanyService,
-        jobTitleFilter,
         UI_ENUMS,
         PAGINATION
     ) {
@@ -33,16 +32,14 @@ class JobsPage {
         this.$state               = $state;
         this.$stateParams         = $stateParams;
         this.$scope               = $scope;
+        this.$timeout             = $timeout;
         this.$window              = $window;
         this.AuthorizationService = AuthorizationService;
         this.DialogService        = DialogService;
         this.JobsService          = JobsService;
-        this.ModalService         = ModalService;
         this.UserCompanyService   = UserCompanyService;
-        this.jobTitleFilter       = jobTitleFilter;
 
         this.DIALOG               = UI_ENUMS.DIALOG;
-        this.MODAL                = UI_ENUMS.MODAL;
         this.JOB_STATUS           = UI_ENUMS.JOB_STATUS;
         this.STATE_NAME           = UI_ENUMS.STATE_NAME;
         this.PAGE_SIZE            = PAGINATION.PAGE_SIZE;

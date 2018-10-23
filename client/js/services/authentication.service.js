@@ -32,6 +32,8 @@ class AuthenticationService {
         this.S3_CONFIG            = S3_CONFIG;
         this.USER_TYPES           = UI_ENUMS.USER_TYPE;
 
+        this.clearReturnState();
+
         this.POOL_DATA = {
             'UserPoolId' : COGNITO.POOL_ID,
             'ClientId'   : COGNITO.CLIENT_ID
@@ -458,6 +460,18 @@ class AuthenticationService {
                 });
             }
         });
+    }
+
+    setReturnstate (state) {
+        this.returnState = state;
+    }
+
+    getReturnState () {
+        return this.returnState;
+    }
+
+    clearReturnState () {
+        this.returnState = {};
     }
 
     userIDtoAWSCognitoCredentials (id_token) {

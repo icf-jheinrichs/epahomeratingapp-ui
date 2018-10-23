@@ -15,6 +15,11 @@ export function authenticationHook ($transitions, AuthenticationService, Authori
         let $state = transition.router.stateService;
 
         if (!AuthenticationService.userIsAuthenticated) {
+            AuthenticationService.setReturnstate({
+                name   : transition.to().name,
+                params : transition.params()
+            });
+
             return $state.target('login', undefined, {location : false});
         }
 

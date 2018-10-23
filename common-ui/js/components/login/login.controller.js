@@ -61,20 +61,23 @@ class LoginController {
         this.action = action;
     }
 
-    //TODO: get this to work again.
     returnToOriginalState () {
-        const authorizedRedirect = this.AuthorizationService.getAuthorizedRedirect();
-        // let state   = this.returnTo.state();
-        // let params  = this.returnTo.params();
-        // let options = Object.assign({}, this.returnTo.options(), {reload : true});
-
-        // default to active jobs
-        let searchParams = {
-            'status' : 'Active'
+        const returnState      = this.AuthenticationService.getReturnState();
+        let authorizedRedirect = {
+            name   : this.AuthorizationService.getAuthorizedRedirect(),
+            params : {
+                'status' : 'Active'
+            }
         };
 
+        if (Object.keys(returnState).length > 0 && this.AuthorizationService.userIsAuthorizedForRoute(returnState)) {
+            authorizedRedirect = returnState;
+        }
+
+        this.AuthenticationService.clearReturnState();
+
         this.isBusy = false;
-        this.$state.go(authorizedRedirect, searchParams, {reload : true});
+        this.$state.go(authorizedRedirect.name, authorizedRedirect.params, {reload : true});
     }
 
     userIsAuthorized (userCompanies) {

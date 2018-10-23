@@ -70,11 +70,19 @@
                     <i ng-show="jobsProviderPageCtrl.downloadingRem" class="fa fa-circle-o-notch fa-spin fa-fw"></i>
                     {{jobsProviderPageCtrl.xmlDownloadButtonMessage}}
                 </button>
+
+                <button
+                    class="btn"
+                    type="button"
+                    data-ng-click="jobsProviderPageCtrl.declineJob()"
+                    data-ng-disabled="!jobsProviderPageCtrl.bulkOperationsEnabled">
+
+                    Decline Job
+                </button>
             </div>
 
             <jobs
                 jobs="jobsProviderPageCtrl.viewJobs"
-                rating-company-id="{{::jobsProviderPageCtrl.selectedRater.O_ID}}"
                 register-handlers="jobsProviderPageCtrl.registerHandlers(toggleAllJobs, getSelectedJobs)"
                 on-mark-job-as-registered="jobsProviderPageCtrl.markJobRegistered(jobId)"
                 on-set-bulk-operation-status="jobsProviderPageCtrl.setBulkOperationStatus(status)">
@@ -86,3 +94,16 @@
         </div>
     </div>
 </section>
+
+<div class="dialog hidden" dialog="dialog" id="dialog-decline-jobs">
+    <div class="dialog-header">
+        <h3 class="dialog-title">Decline <ng-pluralize count="jobsProviderPageCtrl.marked" when="{'one' : 'Job', 'other' : 'Jobs'}"></ng-pluralize>?</h3>
+    </div>
+    <div class="dialog-body">
+        <p>Are you sure you want to decline registering <ng-pluralize count="jobsProviderPageCtrl.marked" when="{'one' : 'job', 'other' : '{} jobs'}"></ng-pluralize>?</p>
+    </div>
+    <div class="dialog-footer text-right">
+        <button class="btn btn-link" type="button" data-ng-click="dismiss(false)">Cancel</button>
+        <button class="btn" data-ng-click="dismiss(true)">Decline</button>
+    </div>
+</div>
