@@ -46,6 +46,12 @@ class LoginController {
             });
 
         this.rootscopeSubscription = this.$transitions.onError({from : 'login'}, (transition) => {
+            try {
+                this.statusMessage = transition._error.detail.message || 'There was a system error. Please contact RaterPRO support.';
+            } catch (error) {
+                this.statusMessage = 'There was a system error. Please contact RaterPRO support.';
+            }
+
             this.isBusy        = false;
             this.notAuthorized = true;
             this.AuthorizationService.clearState();
@@ -112,6 +118,8 @@ class LoginController {
                         this.returnToOriginalState();
                     } else {
                         this.notAuthorized = true;
+                        this.statusMessage = 'You are not authorized to use this system.';
+                        this.AuthenticationService.logout();
                         reject({status : 'not authorized'});
                     }
                 })
@@ -125,8 +133,9 @@ class LoginController {
 
     reset () {
         this.notAuthorized = false;
-        this.action = 'login';
-        this.isBusy = false;
+        this.action        = 'login';
+        this.isBusy        = false;
+        this.statusMessage = '';
     }
 
     resetPassword (user) {

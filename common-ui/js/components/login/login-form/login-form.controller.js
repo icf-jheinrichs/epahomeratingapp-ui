@@ -30,7 +30,7 @@ const ERROR_NOT_FOUND = {
 
 const ERROR_SERVER = {
     type        : 'error',
-    text        : 'There was an error processing your request. Please try again.',
+    text        : 'There was an error. Please try again.',
     dismissable : false
 };
 
@@ -46,13 +46,13 @@ class LoginFormController {
     handleError (err) {
         switch (err.status) {
         case 400:
-            this.message = Object.assign({}, ERROR_NOT_FOUND, {text : err.message});
+            this.message = Object.assign({}, ERROR_NOT_FOUND, {text : err.message || ERROR_NOT_FOUND.text});
             break;
         case 401:
             this.message = Object.assign({}, ERROR_RESET);
             break;
         default:
-            this.message = Object.assign({}, ERROR_SERVER, {text : err.message});
+            this.message = Object.assign({}, ERROR_SERVER, {text : err.message || ERROR_SERVER.text});
             break;
         }
     }
