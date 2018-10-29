@@ -114,6 +114,26 @@ class HousePlanEditBulkController {
         });
     }
 
+    filterInvalidFiles () {
+        this
+            .housePlan
+            .HvacDesignReport
+            = this.housePlan
+                    .HvacDesignReport
+                    .filter((hvacDesignReport) => {
+                        return hvacDesignReport instanceof File && this.isValidFile(hvacDesignReport);
+                    });
+
+        this
+            .housePlan
+            .RaterDesignReviewChecklist
+            = this.housePlan
+                    .RaterDesignReviewChecklist
+                    .filter((raterDesignReviewChecklist) => {
+                        return raterDesignReviewChecklist instanceof File && this.isValidFile(raterDesignReviewChecklist);
+                    });
+    }
+
     saveCurrentHousePlan () {
         this.message = {};
         this.isBusy  = true;
@@ -125,6 +145,8 @@ class HousePlanEditBulkController {
         this.housePlan.SubplanName   = this.$sanitize(this.housePlan.SubplanName);
         this.housePlan.BuilderName   = this.$sanitize(this.housePlan.BuilderName);
         this.housePlan.CommunityName = this.$sanitize(this.housePlan.CommunityName);
+
+        this.filterInvalidFiles();
 
         this.housePlan.HvacDesignReport.forEach((hvacDesignReport) => {
             if (hvacDesignReport instanceof File && this.isValidFile(hvacDesignReport)) {
