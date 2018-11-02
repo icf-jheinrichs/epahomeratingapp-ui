@@ -1,6 +1,6 @@
 import _values from 'lodash/values';
 
-function fileManager () {
+function fileManager ($timeout) {
     return {
         scope    : {
             LocalFiles : '='
@@ -13,10 +13,11 @@ function fileManager () {
             // may need to make this better...
             element.bind('change', function onChange (event) {
                 let parentScope = scope.$parent.$parent;
-                parentScope.$apply(function updateLocalfiles () {
+
+                $timeout(()=>{
                     parentScope.fileManagerCtrl.files = _values(event.target.files);
                     parentScope.fileManagerCtrl.localSelectedCallback();
-                });
+                }, 0);
             });
 
             element.bind('click', function onClick (event) {

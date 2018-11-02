@@ -7,6 +7,6 @@ import fileManagerDirective from './file-manager.directive';
 let fileManagerModule
     = angular
         .module('epahomeratingapp.common.file-manger', [])
-        .directive('selectLocalFile', fileManagerDirective);
+        .directive('selectLocalFile', ['$timeout', fileManagerDirective]);
 
 export default fileManagerModule;
