@@ -28,31 +28,30 @@ class LoginController {
             .AuthenticationService
             .checkLogin()
             .then((userData) => {
-                // no resolve needed. handle success here.
-                // resolve(data);
                 let userInfo       = angular.fromJson(userData);
 
                 this.user.userId   = userInfo.userId;
                 this.user.password = userInfo.password;
-                this.isBusy        = true;
+
+                this.isBusy = {busy : true};
                 return (this.login(this.user));
             })
-            .then((data) => {
-                return;
-            })
             .catch((error) => {
-                this.isBusy = false;
+                this.$log.error(`[login.controller.js $onInit login] ${JSON.stringify(error)}`);
+                this.isBusy = {busy : false};
                 return;
             });
 
         this.rootscopeSubscription = this.$transitions.onError({from : 'login'}, (transition) => {
             try {
+                this.$log.error(`[login.controller.js $onInit $transition onError try] ${JSON.stringify(transition._error.detail)}`);
                 this.statusMessage = transition._error.detail.message || 'There was a system error. Please contact RaterPRO support.';
             } catch (error) {
+                this.$log.error(`[login.controller.js $onInit $transition onError catch] ${JSON.stringify(error)}`);
                 this.statusMessage = 'There was a system error. Please contact RaterPRO support.';
             }
 
-            this.isBusy        = false;
+            this.isBusy = {busy : false};
             this.notAuthorized = true;
             this.AuthorizationService.clearState();
             this.AuthenticationService.logout();
@@ -82,7 +81,7 @@ class LoginController {
 
         this.AuthenticationService.clearReturnState();
 
-        this.isBusy = false;
+        this.isBusy = {busy : false};
         this.$state.go(authorizedRedirect.name, authorizedRedirect.params, {reload : true});
     }
 
@@ -124,6 +123,7 @@ class LoginController {
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[login.controller.js login] ${JSON.stringify(error)}`);
                     this.notAuthorized = true;
                     this.AuthenticationService.logout();
                     reject(error);
@@ -134,7 +134,8 @@ class LoginController {
     reset () {
         this.notAuthorized = false;
         this.action        = 'login';
-        this.isBusy        = false;
+
+        this.isBusy = {busy : false};
         this.statusMessage = '';
     }
 
@@ -146,8 +147,9 @@ class LoginController {
                 .then((data) => {
                     resolve('yes');
                 })
-                .catch((err) => {
-                    reject(err);
+                .catch((error) => {
+                    this.$log.error(`[login.controller.js resetPassword] ${JSON.stringify(error)}`);
+                    reject(error);
                 });
         });
     }

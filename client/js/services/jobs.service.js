@@ -18,11 +18,23 @@ class JobsService {
      * @param  {function} $sanitize angular.$sanitize html injection
      * @param  {object}   API_URL   epahomeratingapp constants - contains paths to API
      */
-    constructor ($q, $http, $rootScope, $stateParams, $sanitize, UI_ENUMS, API_URL, AuthorizationService, AuthenticationService, jobTitleFilter) {
+    constructor ($q,
+        $http,
+        $log,
+        $rootScope,
+        $stateParams,
+        $sanitize,
+        UI_ENUMS,
+        API_URL,
+        AuthorizationService,
+        AuthenticationService,
+        jobTitleFilter
+    ) {
         'ngInject';
 
-        this.$q                    = $q;
         this.$http                 = $http;
+        this.$log                  = $log;
+        this.$q                    = $q;
         this.$sanitize             = $sanitize;
         this.$stateParams          = $stateParams;
         this.$rootScope            = $rootScope;
@@ -74,6 +86,7 @@ class JobsService {
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[jobs.service.js get] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -115,6 +128,7 @@ class JobsService {
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[jobs.service.js getProviderJobs] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -238,7 +252,11 @@ class JobsService {
                     }
                 })
                 .catch((error) => {
-                    reject(error);
+                    this.$log.error(`[jobs.service.js search] ${JSON.stringify(error)}`);
+                    reject({
+                        message : 'There was an error retrieving jobs. Please contact the RaterPRO support team.',
+                        data    : error
+                    });
                 });
         });
 
@@ -348,6 +366,7 @@ class JobsService {
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[jobs.service.js searchProviderJobs] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -379,6 +398,7 @@ class JobsService {
 
                 })
                 .catch((error) => {
+                    this.$log.error(`[jobs.service.js getById] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -439,6 +459,7 @@ class JobsService {
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[jobs.service.js post] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -474,6 +495,7 @@ class JobsService {
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[jobs.service.js getExportSignedUrl] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -503,8 +525,9 @@ class JobsService {
                 .then((result) => {
                     resolve(result);
                 })
-                .catch((err) => {
-                    reject(err);
+                .catch((error) => {
+                    this.$log.error(`[jobs.service.js put] ${JSON.stringify(error)}`);
+                    reject(error);
                 });
         });
 
@@ -521,8 +544,9 @@ class JobsService {
                 .then((result) => {
                     resolve(result);
                 })
-                .catch((err) => {
-                    reject(err);
+                .catch((error) => {
+                    this.$log.error(`[jobs.service.js delete] ${JSON.stringify(error)}`);
+                    reject(error);
                 });
         });
 
@@ -539,8 +563,9 @@ class JobsService {
                 .then((result) => {
                     resolve(result);
                 })
-                .catch((err) => {
-                    reject(err);
+                .catch((error) => {
+                    this.$log.error(`[jobs.service.js delete] ${JSON.stringify(error)}`);
+                    reject(error);
                 });
         });
 
@@ -557,8 +582,9 @@ class JobsService {
                 .then((result) => {
                     resolve(result);
                 })
-                .catch((err) => {
-                    reject(err);
+                .catch((error) => {
+                    this.$log.error(`[jobs.service.js putback] ${JSON.stringify(error)}`);
+                    reject(error);
                 });
         });
 
