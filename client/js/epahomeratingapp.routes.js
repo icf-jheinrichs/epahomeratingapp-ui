@@ -346,6 +346,20 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             }
         })
 
+        .state(STATE_NAME.JOB_CHECKLIST_REVIEW_HISTORY, {
+            url        : '/{houseId}/history',
+            component  : 'jobHistory',
+            resolve    : {
+                jobChecklistState : (JobChecklistStateService, $stateParams) => {
+                    let jobChecklistStatePromise
+                        = JobChecklistStateService
+                            .getJobHistory($stateParams.id);
+
+                    return jobChecklistStatePromise;
+                }
+            }
+        })
+
         .state(STATE_NAME.JOB_CHECKLIST_REVIEW_CATEGORY, {
             url        : '/{houseId}/{categoryId}',
             component  : 'checklistCategory',

@@ -1,13 +1,14 @@
 class jobChecklistNavController {
-    constructor ($rootScope, $state, $transitions, JobChecklistStateService, UI_ENUMS) {
+    constructor ($rootScope, $state, $stateParams, $transitions, JobChecklistStateService, UI_ENUMS) {
         'ngInject';
 
         this.$state       = $state;
+        this.$stateParams = $stateParams;
         this.$transitions = $transitions;
         this.STATE_NAME   = UI_ENUMS.STATE_NAME;
 
-        this.CATEGORIES   = UI_ENUMS.CATEGORIES;
-        this.MESSAGING    = UI_ENUMS.MESSAGING;
+        this.CATEGORIES = UI_ENUMS.CATEGORIES;
+        this.MESSAGING  = UI_ENUMS.MESSAGING;
 
         this.JobChecklistStateService = JobChecklistStateService;
 
@@ -23,6 +24,8 @@ class jobChecklistNavController {
 
     $onInit () {
         this.setHidden();
+
+        this.houseId = this.$stateParams.houseId;
 
         this
             .JobChecklistStateService
