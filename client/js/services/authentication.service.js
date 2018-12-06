@@ -110,7 +110,7 @@ class AuthenticationService {
 
     checkLogin () {
         return this.$q((resolve, reject) => {
-            reject('not supported');
+            reject('cached login not supported on website');
         });
     }
 

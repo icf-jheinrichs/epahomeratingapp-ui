@@ -39,8 +39,6 @@ class LoginFormController {
         'ngInject';
 
         this.$scope = $scope;
-
-        this.isBusy = false;
     }
 
     handleError (err) {
@@ -64,15 +62,17 @@ class LoginFormController {
     }
 
     onSubmit () {
-
-        this.isBusy = true;
+        this.isBusy.busy = true;
 
         if (this.$scope.loginForm.userId.$invalid && this.$scope.loginForm.password.$invalid) {
             this.message = Object.assign({}, ERROR_INPUT);
+            this.isBusy.busy = false;
         } else if (this.$scope.loginForm.userId.$invalid) {
             this.message = Object.assign({}, ERROR_INPUT_ID);
+            this.isBusy.busy = false;
         } else if (this.$scope.loginForm.password.$invalid) {
             this.message = Object.assign({}, ERROR_INPUT_PASSWORD);
+            this.isBusy.busy = false;
         } else {
             this
                 .login({user : this.user})
@@ -80,7 +80,7 @@ class LoginFormController {
                     this.handleError(err);
                 })
                 .finally(() => {
-                    this.isBusy = false;
+                    this.isBusy.busy = false;
                 });
         }
     }
@@ -90,10 +90,8 @@ class LoginFormController {
 
         if (changes.isBusy) {
             this.isBusy  = angular.copy(this.isBusy);
-            this.isBusy  = angular.copy(changes.isBusy.currentValue);
         }
     }
-
 }
 
 export default LoginFormController;

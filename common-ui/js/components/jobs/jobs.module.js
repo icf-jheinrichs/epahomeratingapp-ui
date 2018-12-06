@@ -6,6 +6,7 @@ import jobDetailComponent from './job-detail/job-detail.component';
 import jobDetailLocationComponent from './job-detail/job-detail-location/job-detail-location.component';
 import jobChecklistComponent from './job-checklist/job-checklist.component';
 import JobChecklistModule from './job-checklist/job-checklist.module';
+import jobHistoryComponent from './job-history/job-history.component';
 import jobsSearchModule from './jobs-search/jobs-search.module';
 import jobSyncStatusComponent from './jobs/job-sync-status/job-sync-status.component';
 
@@ -21,6 +22,7 @@ let jobsModule
         .component('jobDetailLocation', jobDetailLocationComponent)
         .component('jobChecklist', jobChecklistComponent)
         .component('jobChecklist', jobChecklistComponent)
+        .component('jobHistory', jobHistoryComponent)
         .component('jobSyncStatus', jobSyncStatusComponent);
 
 export default jobsModule;

@@ -78,6 +78,7 @@ class JobsChecklistPageController {
             Primary   : this.job.Primary,
             Secondary : this.job.Secondary
         };
+        this.houseId = this.$stateParams.houseId;
 
         this.jobIsActive = (this.job.Status === this.JOB_STATUS.ACTIVE);
 
@@ -300,7 +301,7 @@ class JobsChecklistPageController {
 
     viewHvacDesignReport () {
         let secondaryIndex;
-        let houseId           = parseInt(this.$stateParams.houseId, 10);
+        let houseId           = parseInt(this.houseId, 10);
         this.hvacDesignReport = '';
 
         if (this.job.Primary.HouseId === houseId) {

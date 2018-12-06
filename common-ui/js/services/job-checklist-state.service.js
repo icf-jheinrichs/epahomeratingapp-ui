@@ -716,6 +716,10 @@ class JobChecklistState {
         return elements;
     }
 
+    getJobHistory () {
+        return this.job.History;
+    }
+
     get isReview () {
         const currentState = this.$state.current.name;
         return currentState === this.STATE_NAME.JOB_CHECKLIST_REVIEW || currentState === this.STATE_NAME.JOB_CHECKLIST_REVIEW_CATEGORY;

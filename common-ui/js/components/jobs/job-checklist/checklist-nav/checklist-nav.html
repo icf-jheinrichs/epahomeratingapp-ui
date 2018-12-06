@@ -1,6 +1,6 @@
 <nav class="nav nav-checklist-sections flex-row" data-ng-class="::{'hidden' : jobChecklistNavCtrl.hide}">
     <a data-ng-repeat="(key, value) in ::jobChecklistNavCtrl.categories track by $index"
-       ui-sref=".category({categoryId: key})"
+       ui-sref=".category({categoryId: key, houseId: jobChecklistNavCtrl.houseId})"
        ui-sref-active="active"
        class="nav-checklist-item">
         <linear-progress

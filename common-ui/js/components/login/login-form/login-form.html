@@ -24,7 +24,7 @@
             id="loginFormPassword" />
     </div>
     <div class="form-actions">
-        <button type="submit" class="btn" data-ng-disabled="loginFormCtrl.isBusy"><i data-ng-class="{'hidden' : !loginFormCtrl.isBusy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Log In</button>
+        <button type="submit" class="btn" data-ng-disabled="loginFormCtrl.isBusy.busy"><i data-ng-class="{'hidden' : !loginFormCtrl.isBusy.busy}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Log In</button>
         <button class="btn btn-link pull-right" type="button" data-ng-click="loginFormCtrl.onForgotPassword()">Forgot Password?</button>
     </div>
 </form>

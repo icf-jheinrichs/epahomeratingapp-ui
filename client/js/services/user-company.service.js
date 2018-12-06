@@ -25,10 +25,12 @@ class UserCompanyService {
                         resolve(response.data.data);
                     } else {
                         //TODO: make this less bad
-                        reject('somethings amiss');
+                        this.$log.error(`[user-company.service.js requestUser] ${JSON.stringify(response)}`);
+                        reject('something is amiss');
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[user-company.service.js requestUser] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -66,6 +68,7 @@ class UserCompanyService {
                     });
                 })
                 .catch((error) => {
+                    this.$log.error(`[user-company.service.js getUser] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -88,6 +91,7 @@ class UserCompanyService {
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[user-company.service.js putUser] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -120,6 +124,7 @@ class UserCompanyService {
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[user-company.service.js putCompany] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -141,6 +146,7 @@ class UserCompanyService {
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[user-company.service.js createPendingProviderRaterAssociation] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -158,10 +164,12 @@ class UserCompanyService {
                         resolve('success');
                     } else {
                         //TODO: make this less bad
+                        this.$log.error(`[user-company.service.js updatePendingProviderRaterAssociation] ${JSON.stringify(response)}`);
                         reject('somethings amiss');
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[user-company.service.js updatePendingProviderRaterAssociation] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -179,10 +187,12 @@ class UserCompanyService {
                         resolve('success');
                     } else {
                         //TODO: make this less bad
+                        this.$log.error(`[user-company.service.js removeProviderRaterAssociation] ${JSON.stringify(response)}`);
                         reject('somethings amiss');
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[user-company.service.js removeProviderRaterAssociation] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -205,10 +215,12 @@ class UserCompanyService {
                         resolve(response.data.data);
                     } else {
                         //TODO: make this less bad
+                        this.$log.error(`[user-company.service.js getCompany] ${JSON.stringify(response)}`);
                         reject('somethings amiss');
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[user-company.service.js getCompany] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -228,10 +240,12 @@ class UserCompanyService {
                         resolve(_filter(providers, {ProviderOrg : true}));
                     } else {
                         //TODO: make this less bad
+                        this.$log.error(`[user-company.service.js getProviderCompanies] ${JSON.stringify(response)}`);
                         reject('somethings amiss');
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[user-company.service.js getProviderCompanies] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -251,10 +265,12 @@ class UserCompanyService {
                         resolve(_filter(ratingCompanies, {RaterOrg : true}));
                     } else {
                         //TODO: make this less bad
+                        this.$log.error(`[user-company.service.js getRatingCompanies] ${JSON.stringify(response)}`);
                         reject('somethings amiss');
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[user-company.service.js getRatingCompanies] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -287,6 +303,7 @@ class UserCompanyService {
                     }
                 })
                 .catch((error) => {
+                    this.$log.error(`[user-company.service.js requestCompanyUsers] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -306,6 +323,7 @@ class UserCompanyService {
                         return this.requestCompanyUserAuthorizations(userCognitoIds);
                     } else {
                         //TODO: make this less bad
+                        this.$log.error(`[user-company.service.js getCompanyUsers] ${JSON.stringify(response)}`);
                         reject('somethings amiss');
                     }
                 })
@@ -313,6 +331,7 @@ class UserCompanyService {
                     resolve(companyUserAuthorizations);
                 })
                 .catch((error) => {
+                    this.$log.error(`[user-company.service.js getCompanyUsers] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });

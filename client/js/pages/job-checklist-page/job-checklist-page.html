@@ -100,14 +100,13 @@
                         role="menu"
                         popover="popover">
 
-                        <button
+                        <a
                             class="drop-down-item"
-                            type="button"
                             role="menuitem"
-                            data-ng-click="jobsChecklistPageCtrl.showHistory()">
+                            data-ui-sref=".history({houseId: jobsChecklistPageCtrl.houseId})">
 
                             View Job History
-                        </button>
+                        </a>
                         <span
                             class="drop-down-item">
 
