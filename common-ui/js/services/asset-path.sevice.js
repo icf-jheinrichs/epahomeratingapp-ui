@@ -12,6 +12,7 @@ class AssetPathService {
         if (this.CONTEXT_IS_ADMIN) {
             // assume online and keep the same functionality
             return this.$q((resolve, reject) => {
+                this.$log.warn('GETTING BASEURL, CONTEXT_IS_ADMIN');
                 resolve({
                     url    : this.BASE_IMAGE_URL,
                     type   : assetType,
@@ -23,21 +24,22 @@ class AssetPathService {
             // CONTEXT_IS_APP: check and handle logic
             // Image: return remoteURL if online, otherwise localURL
             // PDF: download to the app's local cache
+            this.$log.warn('GETTING BASEURL, CONTEXT_IS_APP');
             switch (assetType) {
             case 'IMAGE':
                 // handle photo logic
                 this.$log.log('[AssetPathService] case Photo');
                 if (online) {
                     resolve({
-                        url    : remoteURL,
+                        url    : this.BASE_IMAGE_URL,
                         type   : assetType,
                         status : 200
                     });
                 } else {
                     resolve({
-                        url    : localURL,
+                        url    : '',
                         type   : assetType,
-                        status : 200
+                        status : 404
                     });
                 }
                 break;
@@ -45,7 +47,11 @@ class AssetPathService {
                 // handle pdf download to local cache
                 this.$log.log('[AssetPathService] case PDF');
                 // TODO: download PDF to local cache
-                resolve({url : localURL, type : assetType, status : 200});
+                resolve({
+                    url    : this.BASE_IMAGE_URL + '/pdfs',
+                    type   : assetType,
+                    status : 200
+                });
                 break;
             default:
                 reject({

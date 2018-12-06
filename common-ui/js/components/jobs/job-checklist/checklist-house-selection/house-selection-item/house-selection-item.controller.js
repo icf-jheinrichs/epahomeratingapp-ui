@@ -1,14 +1,18 @@
 class houseSelectionItemController {
-    constructor (jobTitleFilter, UI_ENUMS, BASE_IMAGE_URL) {
+    constructor (jobTitleFilter, AssetPathService, UI_ENUMS) {
         'ngInject';
 
-        this.jobTitleFilter  = jobTitleFilter;
+        this.jobTitleFilter = jobTitleFilter;
 
         this.defaultPhotoUrl = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
-        this.BASE_IMAGE_URL  = BASE_IMAGE_URL;
+        this.AssetPathService = AssetPathService;
+        this.BASE_IMAGE_URL = '';
     }
 
     $onInit () {
+        this.AssetPathService.getBaseURL('IMAGE', true).then(res => {
+            this.BASE_IMAGE_URL = res.url;
+        });
         this.photoUrl = this.getPhotoUrl();
     }
 
@@ -37,7 +41,7 @@ class houseSelectionItemController {
 
     $onChanges (changes) {
         if (changes.house && !changes.house.isFirstChange()) {
-            this.house    = changes.house.currentValue;
+            this.house = changes.house.currentValue;
             this.photoUrl = this.getPhotoUrl();
         }
     }

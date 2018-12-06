@@ -9,57 +9,66 @@ class checklistHouseSelectionController {
         $transitions,
         AuthorizationService,
         JobChecklistStateService,
+        AssetPathService,
         ModalService,
-        BASE_IMAGE_URL,
         UI_ENUMS,
         jobTitleFilter
     ) {
         'ngInject';
 
         // capture DI
-        this.$rootScope   = $rootScope;
+        this.$rootScope = $rootScope;
         this.$stateParams = $stateParams;
-        this.$sanitize    = $sanitize;
+        this.$sanitize = $sanitize;
         this.$transitions = $transitions;
 
-        this.DEFAULT_PHOTO               = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
-        this.BASE_IMAGE_URL              = BASE_IMAGE_URL;
-        this.MESSAGING                   = UI_ENUMS.MESSAGING;
-        this.AuthorizationService        = AuthorizationService;
-        this.JobChecklistStateService    = JobChecklistStateService;
-        this.ModalService                = ModalService;
-        this.jobTitleFilter              = jobTitleFilter;
+        this.DEFAULT_PHOTO = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
+        this.BASE_IMAGE_URL = '';
+        this.MESSAGING = UI_ENUMS.MESSAGING;
+        this.AuthorizationService = AuthorizationService;
+        this.AssetPathService = AssetPathService;
+        this.JobChecklistStateService = JobChecklistStateService;
+        this.ModalService = ModalService;
+        this.jobTitleFilter = jobTitleFilter;
         this.MODAL_PROVIDER_JOB_COMMENTS = UI_ENUMS.MODAL.PROVIDER_JOB_COMMENTS;
 
         // init View Labels
         this.toggleTextEnum = {
-            'more' : 'More',
-            'less' : 'Less'
+            more : 'More',
+            less : 'Less'
         };
     }
 
     $onInit () {
         // init view variables
-        this.showNavbar         = false;
+        this.AssetPathService.getBaseURL('IMAGE', true).then(res => {
+            this.BASE_IMAGE_URL = res.url;
+        });
+        this.showNavbar = false;
 
-        this.userAuthorization  = this.AuthorizationService.getUserRole();
+        this.userAuthorization = this.AuthorizationService.getUserRole();
 
-        this.sampleSize         = this.houses.Secondary.length + 1;
+        this.sampleSize = this.houses.Secondary.length + 1;
 
-        this.selectedHouse      = this.houses.Primary;
-        this.selectedHousePhoto = (this.houses.Primary.Photo.length === 0) ? this.DEFAULT_PHOTO : this.houses.Primary.Photo[0];
+        this.selectedHouse = this.houses.Primary;
+        this.selectedHousePhoto
+            = this.houses.Primary.Photo.length === 0
+                ? this.DEFAULT_PHOTO
+                : this.houses.Primary.Photo[0];
 
-        this.toggleText         = this.toggleTextEnum.more;
-        this.elevationPhotos    = [];
+        this.toggleText = this.toggleTextEnum.more;
+        this.elevationPhotos = [];
         this.elevationPhotosVisible = false;
 
         // set app bottom pad to accomodate house selector
         this.setAppBottomPad();
         // watch for state change, set current house and hide houseSelection
         this.deregisterOnFinish = this.$transitions.onSuccess(
-            {to : (state) => {
-                return state.name.indexOf('job-checklist') === 0;
-            }},
+            {
+                to : state => {
+                    return state.name.indexOf('job-checklist') === 0;
+                }
+            },
             () => {
                 let houseId = parseInt(this.$stateParams.houseId, 10);
 
@@ -83,7 +92,9 @@ class checklistHouseSelectionController {
         if (houseId === this.houses.Primary.HouseId) {
             this.selectedHouse = this.houses.Primary;
         } else {
-            this.selectedHouse = _find(this.houses.Secondary, {HouseId : houseId});
+            this.selectedHouse = _find(this.houses.Secondary, {
+                HouseId : houseId
+            });
         }
     }
 
@@ -110,17 +121,21 @@ class checklistHouseSelectionController {
     }
 
     getSelectedHousePhoto () {
-        return (this.selectedHouse.Photo.length === 0) ? this.DEFAULT_PHOTO : this.BASE_IMAGE_URL + this.selectedHouse.Photo[0];
+        return this.selectedHouse.Photo.length === 0
+            ? this.DEFAULT_PHOTO
+            : this.BASE_IMAGE_URL + this.selectedHouse.Photo[0];
     }
 
     setHouseSelectionState () {
-        this.toggleText = (this.showNavbar) ? this.toggleTextEnum.less : this.toggleTextEnum.more;
+        this.toggleText = this.showNavbar
+            ? this.toggleTextEnum.less
+            : this.toggleTextEnum.more;
 
         this.setAppBottomPad();
     }
 
     setAppBottomPad () {
-        let bottomPad = (this.showNavbar) ? 250 : 100;
+        let bottomPad = this.showNavbar ? 250 : 100;
 
         this.$rootScope.$emit(this.MESSAGING.SET_BOTTOM_PAD, bottomPad);
     }
@@ -129,7 +144,9 @@ class checklistHouseSelectionController {
         if (HouseId === this.houses.Primary.HouseId) {
             this.elevationPhotos = this.houses.Primary.Photo;
         } else {
-            const selectedHouse = _find(this.houses.Secondary, {HouseId : HouseId});
+            const selectedHouse = _find(this.houses.Secondary, {
+                HouseId : HouseId
+            });
             this.elevationPhotos = selectedHouse.Photo;
         }
 
@@ -142,25 +159,27 @@ class checklistHouseSelectionController {
             this.houses.Primary.Photo[key] = photo;
             this.houses.Primary = angular.copy(this.houses.Primary);
         } else {
-            const houseIndex = _findIndex(this.houses.Secondary, {HouseId : this.currentElevationPhotos});
+            const houseIndex = _findIndex(this.houses.Secondary, {
+                HouseId : this.currentElevationPhotos
+            });
             this.houses.Secondary[houseIndex].Photo[key] = photo;
-            this.houses.Secondary[houseIndex] = angular.copy(this.houses.Secondary[houseIndex]);
+            this.houses.Secondary[houseIndex] = angular.copy(
+                this.houses.Secondary[houseIndex]
+            );
         }
 
-        this
-            .$rootScope
-            .$emit(this.MESSAGING.UPDATE_HOUSE_PHOTO, {
-                HouseId : this.currentElevationPhotos,
-                photo,
-                key
-            });
+        this.$rootScope.$emit(this.MESSAGING.UPDATE_HOUSE_PHOTO, {
+            HouseId : this.currentElevationPhotos,
+            photo,
+            key
+        });
     }
 
     saveProviderComment () {
         if (this.userAuthorization.Provider) {
-            this
-                .JobChecklistStateService
-                .putProviderComment(JSON.stringify(this.$sanitize(this.providerComment)));
+            this.JobChecklistStateService.putProviderComment(
+                JSON.stringify(this.$sanitize(this.providerComment))
+            );
 
             this.ModalService.closeModal(this.MODAL_PROVIDER_JOB_COMMENTS);
         }
@@ -171,7 +190,10 @@ class checklistHouseSelectionController {
     }
 
     get isProviderRole () {
-        return this.userAuthorization.Provider && this.$stateParams.role === 'provider';
+        return (
+            this.userAuthorization.Provider
+            && this.$stateParams.role === 'provider'
+        );
     }
 }
 

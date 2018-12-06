@@ -19,7 +19,9 @@ class PhotoCaptureController {
     // Call assetpath service to get baseURL
 
     $onInit () {
-        this.BASE_IMAGE_URL = this.AssetPathService.getBaseURL('IMAGE', true);
+        this.AssetPathService.getBaseURL('IMAGE', true).then(res => {
+            this.BASE_IMAGE_URL = res.url;
+        });
         this.allowAddPhoto = this.CONTEXT_IS_APP;
         this.photoUrl = this.photo
             ? `${this.BASE_IMAGE_URL}${this.photo}`
