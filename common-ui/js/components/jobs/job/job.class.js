@@ -8,6 +8,7 @@ class Job {
         $rootScope,
         $scope,
         $timeout,
+        JobHistoryService,
         jobTitleFilter,
         SyncService,
         CONTEXT,
@@ -22,8 +23,9 @@ class Job {
         this.$scope           = $scope;
         this.$timeout         = $timeout;
 
-        this.jobTitleFilter   = jobTitleFilter;
-        this.syncService      = SyncService;
+        this.JobHistoryService = JobHistoryService;
+        this.jobTitleFilter    = jobTitleFilter;
+        this.syncService       = SyncService;
 
         this.DEFAULT_PHOTO    = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
         this.BASE_IMAGE_URL   = BASE_IMAGE_URL;
@@ -43,7 +45,8 @@ class Job {
             this.RatingTypeClass = 'label-hers-rating';
         }
 
-        this.isSample            = this.job.SampleSize > 1;
+        this.isSample = this.job.SampleSize > 1;
+        this.setLastUpdate();
     }
 
     setBulkOperationStatus () {
@@ -57,16 +60,34 @@ class Job {
         return _isEmpty(this.$location.$$search);
     }
 
+    setLastUpdate () {
+        let lastUpdateRecord = this.job.History[this.job.History.length - 1];
+
+        if (Array.isArray(lastUpdateRecord)) {
+            lastUpdateRecord = this.JobHistoryService.deserializeHistoryRecord(lastUpdateRecord);
+
+            this.lastUpdate = {
+                DateTime    : lastUpdateRecord.DateTime,
+                Description : this.JobHistoryService.getShortDescription(lastUpdateRecord)
+            };
+        } else {
+            this.lastUpdate = {
+                DateTime    : lastUpdateRecord.DateTime,
+                Description : lastUpdateRecord.Description
+            };
+        }
+    }
+
     get JobTitle () {
         return this.jobTitleFilter(this.job.Primary.AddressInformation);
     }
 
     get lastUpdateTime () {
-        return moment(this.job.History[this.job.History.length - 1].DateTime).format('h:mm a, MMM Do YYYY');
+        return moment(this.lastUpdate.DateTime).format('h:mm a, MMM Do YYYY');
     }
 
     get lastUpdateType () {
-        return this.job.History[this.job.History.length - 1].Description;
+        return this.lastUpdate.Description;
     }
 }
 

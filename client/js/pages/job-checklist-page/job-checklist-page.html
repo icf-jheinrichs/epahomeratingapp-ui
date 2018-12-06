@@ -40,25 +40,6 @@
     </div>
 </div>
 
-<!-- modal: history -->
-
-<div class="modal modal-large modal-scroll-body hidden" modal="modal" id="modal-show-history">
-    <div class="modal-header flex-row">
-        <div class="flex-item-static">
-            <button class="btn btn-link btn-modal-close" type="button">Close</button>
-        </div>
-
-        <span class="modal-title flex-item-grow">History</span>
-    </div>
-
-    <div class="modal-body-wrapper">
-        <div class="modal-body">
-            <p data-ng-repeat="history in jobsChecklistPageCtrl.job.History">{{::history.Description}} by: {{::history.User}} on {{::history.DateTime | date:"MM/dd/yyyy"}}</p>
-        </div>
-    </div>
-</div>
-
-
 <!-- modal: Download HVAC Design Report -->
 
 <div class="modal modal-dialog" data-ng-class="{'hidden' : !jobsChecklistPageCtrl.showHvacDesignReportModal}">

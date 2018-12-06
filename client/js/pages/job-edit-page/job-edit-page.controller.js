@@ -19,16 +19,32 @@ const HOUSE_PLAN_REQUIRED = {
 };
 
 class JobsEditPageController {
-    constructor ($q, $state, JobsService, S3Service, S3_CONFIG) {
+    constructor ($q,
+        $state,
+        AuthenticationService,
+        GeolocationService,
+        JobHistoryService,
+        JobsService,
+        S3Service,
+        S3_CONFIG,
+        UI_ENUMS
+    ) {
         'ngInject';
 
         this.$q          = $q;
         this.$state      = $state;
 
-        this.JobsService = JobsService;
-        this.S3Service   = S3Service;
+        this.AuthenticationService = AuthenticationService;
+        this.GeolocationService    = GeolocationService;
+        this.JobHistoryService     = JobHistoryService;
+        this.JobsService           = JobsService;
+        this.S3Service             = S3Service;
 
         this.PDF_FILE_PATH = S3_CONFIG.PATH_PDF;
+        this.HISTORY = {
+            CATEGORIES    : UI_ENUMS.HISTORY_CATEGORIES,
+            SUBCATEGORIES : UI_ENUMS.HISTORY_SUBCATEGORIES
+        };
     }
 
     $onInit () {
@@ -186,7 +202,19 @@ class JobsEditPageController {
                 .$q
                 .all(fileUploads)
                 .then((results) => {
+                    const now  = new Date();
+                    const user = this.AuthenticationService.getUserInfo();
+
                     this.updateJobFileData(results, job);
+
+                    job.History.push(this.JobHistoryService.serializeHistoryRecord({
+                        DateTime        : now.toUTCString(),
+                        Category        : this.HISTORY.CATEGORIES.MANAGE,
+                        Subcategory     : this.HISTORY.SUBCATEGORIES.MANAGE.UPDATED,
+                        UserId          : user.userId,
+                        UserName        : `${user.firstName} ${user.lastName}`,
+                        LatLongAccuracy : this.GeolocationService.getLocation()
+                    }));
 
                     return this.JobsService.put(job);
                 })

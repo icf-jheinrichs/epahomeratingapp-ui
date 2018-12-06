@@ -18,8 +18,10 @@ class JobsPage {
         $scope,
         $timeout,
         $window,
+        AuthenticationService,
         AuthorizationService,
         DialogService,
+        GeolocationService,
         JobsService,
         UserCompanyService,
         UI_ENUMS,
@@ -27,22 +29,28 @@ class JobsPage {
     ) {
         'ngInject';
 
-        this.$http                = $http;
-        this.$q                   = $q;
-        this.$state               = $state;
-        this.$stateParams         = $stateParams;
-        this.$scope               = $scope;
-        this.$timeout             = $timeout;
-        this.$window              = $window;
-        this.AuthorizationService = AuthorizationService;
-        this.DialogService        = DialogService;
-        this.JobsService          = JobsService;
-        this.UserCompanyService   = UserCompanyService;
+        this.$http                 = $http;
+        this.$q                    = $q;
+        this.$state                = $state;
+        this.$stateParams          = $stateParams;
+        this.$scope                = $scope;
+        this.$timeout              = $timeout;
+        this.$window               = $window;
+        this.AuthenticationService = AuthenticationService;
+        this.AuthorizationService  = AuthorizationService;
+        this.DialogService         = DialogService;
+        this.GeolocationService    = GeolocationService;
+        this.JobsService           = JobsService;
+        this.UserCompanyService    = UserCompanyService;
 
         this.DIALOG               = UI_ENUMS.DIALOG;
         this.JOB_STATUS           = UI_ENUMS.JOB_STATUS;
         this.STATE_NAME           = UI_ENUMS.STATE_NAME;
         this.PAGE_SIZE            = PAGINATION.PAGE_SIZE;
+        this.HISTORY              = {
+            CATEGORIES    : UI_ENUMS.HISTORY_CATEGORIES,
+            SUBCATEGORIES : UI_ENUMS.HISTORY_SUBCATEGORIES
+        };
 
         this.xmlDownloadButtonMessage = xmlDownloadMessage.notDownloading;
     }
@@ -227,6 +235,23 @@ class JobsPage {
             toggleAllJobs,
             getSelectedJobs
         };
+    }
+
+    formatHistoryRecord (data) {
+        const now  = new Date();
+        const user = this.AuthenticationService.getUserInfo();
+
+        const historyRecord = Object.assign(
+            {
+                DateTime        : now.toUTCString(),
+                UserId          : user.userId,
+                UserName        : `${user.firstName} ${user.lastName}`,
+                LatLongAccuracy : this.GeolocationService.getLocation()
+            },
+            data
+        );
+
+        return this.JobHistoryService.serializeHistoryRecord(historyRecord);
     }
 }
 

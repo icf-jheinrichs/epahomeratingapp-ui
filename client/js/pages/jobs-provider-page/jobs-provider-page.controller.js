@@ -87,7 +87,7 @@ class JobsProviderPageController extends JobsPage {
 
         this
             .DialogService
-            .openDialog('dialog-decline-jobs') //TODO: make this a constant in UI-ENUMS - this.DIALOG.DECLINE_JOBS
+            .openDialog(this.DIALOG.DECLINE_JOBS)
             .then((confirmation) => {
                 let submitJobs = [];
                 if (confirmation) {
@@ -97,6 +97,13 @@ class JobsProviderPageController extends JobsPage {
                             // TODO - Pop error message to user
                             job.Status          = this.JOB_STATUS.COMPLETED;
                             job.ProviderCompany = undefined;
+
+                            job
+                                .History
+                                .push(this.formatHistoryRecord({
+                                    Category    : this.HISTORY.CATEGORIES.STATUS,
+                                    Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.DECLINED_BY_PROVIDER
+                                }));
 
                             submitJobs.push(this.JobsService.put(job));
                         }
@@ -121,6 +128,13 @@ class JobsProviderPageController extends JobsPage {
             if (job.Status === this.JOB_STATUS.SUBMITTED_TO_PROVIDER) {
                 // TODO - Pop error message to user
                 job.Status = this.JOB_STATUS.REGISTERED;
+
+                job
+                    .History
+                    .push(this.formatHistoryRecord({
+                        Category    : this.HISTORY.CATEGORIES.STATUS,
+                        Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.REGISTERED
+                    }));
 
                 submitJobs.push(this.JobsService.put(job, this.selectedRater.O_ID));
             }
