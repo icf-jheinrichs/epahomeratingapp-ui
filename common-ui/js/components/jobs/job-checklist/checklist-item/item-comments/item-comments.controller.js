@@ -1,29 +1,22 @@
 import moment from 'moment';
 
 class ChecklistCommentsController {
-    constructor (
-        $sanitize,
-        UI_ENUMS,
-        CONTEXT,
-        AuthenticationService,
-        AssetPathService
-    ) {
+    constructor ($sanitize, AssetPathService, UI_ENUMS, CONTEXT, AuthenticationService) {
         'ngInject';
 
-        this.$sanitize = $sanitize;
-
-        this.BASE_IMAGE_URL = '';
+        this.$sanitize        = $sanitize;
         this.AssetPathService = AssetPathService;
-        this.user = AuthenticationService.getUserInfo();
-        this.CONTEXT_IS_APP = CONTEXT === UI_ENUMS.CONTEXT.APP;
+        this.BASE_IMAGE_URL   = '';
+        this.user             = AuthenticationService.getUserInfo();
+        this.CONTEXT_IS_APP   = CONTEXT === UI_ENUMS.CONTEXT.APP;
     }
 
     $onInit () {
         this.AssetPathService.getBaseURL('IMAGE', true).then(res => {
             this.BASE_IMAGE_URL = res.url;
         });
-        this.state = 'list';
-        this.id = this.itemId.replace(/\s/g, '_');
+        this.state             = 'list';
+        this.id                = this.itemId.replace(/\s/g, '_');
         this.allowPhotoCapture = this.CONTEXT_IS_APP;
     }
 
@@ -34,7 +27,7 @@ class ChecklistCommentsController {
     setState (state) {
         this.state = state;
 
-        this.newCommentText = '';
+        this.newCommentText     = '';
         this.newCommentPhotoUrl = '';
     }
 
@@ -46,10 +39,10 @@ class ChecklistCommentsController {
         if (this.newCommentText || this.newCommentPhotoUrl !== '') {
             //TODO: make a stub user service that provides user id.
             const comment = {
-                PhotoUrl  : this.newCommentPhotoUrl,
-                Comment   : this.$sanitize(this.newCommentText),
-                User      : this.user,
-                Timestamp : moment().format()
+                'PhotoUrl'  : this.newCommentPhotoUrl,
+                'Comment'   : this.$sanitize(this.newCommentText),
+                'User'      : this.user,
+                'Timestamp' : moment().format()
             };
 
             this.onComment({
