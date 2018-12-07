@@ -1,17 +1,14 @@
 class jobHistoryController {
-    constructor ($rootScope, $stateParams, JobChecklistStateService, JobDataHomePerformanceService, ModalService, UI_ENUMS) {
+    constructor (
+        JobHistoryService
+    ) {
         'ngInject';
 
-        this.$rootScope                    = $rootScope;
-        this.$stateParams                  = $stateParams;
-        this.JobChecklistStateService      = JobChecklistStateService;
-        this.JobDataHomePerformanceService = JobDataHomePerformanceService;
-        this.JobChecklistStateService      = JobChecklistStateService;
-        this.ModalService                  = ModalService;
+        this.JobHistoryService = JobHistoryService;
     }
 
     $onInit () {
-
+        this.history = this.JobHistoryService.parseHistory(this.jobHistory);
     }
 }
 

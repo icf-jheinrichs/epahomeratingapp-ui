@@ -80,7 +80,7 @@ const HISTORY_TITLES = {
         'DELETED'    : 'Deleted',
         'UNDELETED'  : 'Restored',
         'ARCHIVED'   : 'Archived',
-        'UNARCHIVED' : 'Restored',
+        'UNARCHIVED' : 'Restored from Archive',
         'UPDATED'    : 'Updated'
     }
 };
@@ -383,6 +383,7 @@ const STATE_NAME = {
     JOB_EDIT                          : 'job-edit',
     JOB_CHECKLIST                     : 'job-checklist',
     JOB_CHECKLIST_CATEGORY            : 'job-checklist.category',
+    JOB_CHECKLIST_HISTORY             : 'job-checklist.history',
     JOB_CHECKLIST_STATUS              : 'job-checklist.status',
     JOB_CHECKLIST_REVIEW              : 'job-checklist-review',
     JOB_CHECKLIST_REVIEW_CATEGORY     : 'job-checklist-review.category',

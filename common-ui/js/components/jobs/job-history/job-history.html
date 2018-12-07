@@ -1,1 +1,14 @@
-<h2>Job History</h2>
+<section style="padding: 30px 15px;">
+    <h2>Job History</h2>
+
+    <div
+        class="history-group"
+        data-ng-repeat="historyGroup in ::jobHistoryCtrl.history track by $index">
+
+        <p><stong>{{historyGroup.title}}:</stong> {{historyGroup.date | date:'medium' }} by {{historyGroup.user}}</p>
+
+        <ul ng-if="historyGroup.details">
+            <li ng-repeat="detail in historyGroup.details track by $index">{{::detail}}</li>
+        </ul>
+    </div>
+</section>
