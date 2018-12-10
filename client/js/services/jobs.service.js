@@ -28,6 +28,8 @@ class JobsService {
         API_URL,
         AuthorizationService,
         AuthenticationService,
+        GeolocationService,
+        JobHistoryService,
         jobTitleFilter
     ) {
         'ngInject';
@@ -43,16 +45,18 @@ class JobsService {
         this.JOB_STATUS            = UI_ENUMS.JOB_STATUS;
         this.JOB_TYPES             = UI_ENUMS.JOB_TYPES;
         this.MESSAGING             = UI_ENUMS.MESSAGING;
+        this.HISTORY                       = {
+            CATEGORIES    : UI_ENUMS.HISTORY_CATEGORIES,
+            SUBCATEGORIES : UI_ENUMS.HISTORY_SUBCATEGORIES
+        };
 
         this.AuthorizationService  = AuthorizationService;
         this.AuthenticationService = AuthenticationService;
+        this.GeolocationService    = GeolocationService;
+        this.JobHistoryService     = JobHistoryService;
 
         this.API_URL               = API_URL;
         this.jobTitleFilter        = jobTitleFilter;
-
-        this.updateJobHistoryListener = this.$rootScope.$on(this.MESSAGING.UPDATE_JOB_HISTORY, (event, data) => {
-            this.updateJobHistory(data.jobID, data.description, data.ratingCompanyID);
-        });
     }
 
     /**
@@ -74,7 +78,9 @@ class JobsService {
                         jobs = _orderBy(
                             jobs,
                             [(job) => {
-                                return new Date(job.History[job.History.length - 1].DateTime);
+                                const historyRecord = job.History[job.History.length - 1];
+                                const dateTime = Array.isArray(historyRecord) ? historyRecord[0] : historyRecord.DateTime;
+                                return new Date(dateTime);
                             }],
                             ['desc']
                         );
@@ -116,7 +122,9 @@ class JobsService {
                         jobs = _orderBy(
                             jobs,
                             [(job) => {
-                                return new Date(job.History[job.History.length - 1].DateTime);
+                                const historyRecord = job.History[job.History.length - 1];
+                                const dateTime = Array.isArray(historyRecord) ? historyRecord[0] : historyRecord.DateTime;
+                                return new Date(dateTime);
                             }],
                             ['desc']
                         );
@@ -240,7 +248,9 @@ class JobsService {
                         filteredJobs = _orderBy(
                             filteredJobs,
                             [(job) => {
-                                return new Date(job.History[job.History.length - 1].DateTime);
+                                const historyRecord = job.History[job.History.length - 1];
+                                const dateTime = Array.isArray(historyRecord) ? historyRecord[0] : historyRecord.DateTime;
+                                return new Date(dateTime);
                             }],
                             ['desc']
                         );
@@ -354,7 +364,9 @@ class JobsService {
                         filteredJobs = _orderBy(
                             filteredJobs,
                             [(job) => {
-                                return new Date(job.History[job.History.length - 1].DateTime);
+                                const historyRecord = job.History[job.History.length - 1];
+                                const dateTime = Array.isArray(historyRecord) ? historyRecord[0] : historyRecord.DateTime;
+                                return new Date(dateTime);
                             }],
                             ['desc']
                         );
@@ -440,8 +452,14 @@ class JobsService {
     post (job) {
         // @todo consider applying logic for req. fields (if this group is partly filled - return rejection, etc)
         let jobToPost        = this.sanitize(job);
+        let historyRecord    = this.formatHistoryRecord({
+            Category    : this.HISTORY.CATEGORIES.MANAGE,
+            Subcategory : this.HISTORY.SUBCATEGORIES.MANAGE.CREATED
+        });
+
         jobToPost.searchMeta = this.createSearchMeta(jobToPost);
         jobToPost.SampleSize = job.Secondary.length + 1;
+        jobToPost.History    = [historyRecord];
 
         let promise = this.$q((resolve, reject) => {
             this
@@ -591,39 +609,21 @@ class JobsService {
         return promise;
     }
 
-    updateJobHistory (jobID, description, ratingCompanyID) {
-        this
-            .$http({
-                method  : 'GET',
-                url     : `${this.API_URL.JOB}/${jobID}`,
-                ratingCompanyID
-            })
-            .then((response) => {
-                if (response.status !== 200) {
-                    return;
-                }
+    formatHistoryRecord (data) {
+        const now  = new Date();
+        const user = this.AuthenticationService.getUserInfo();
 
-                let job = response.data;
+        const historyRecord = Object.assign(
+            {
+                DateTime        : now.toUTCString(),
+                UserId          : user.userId,
+                UserName        : `${user.firstName} ${user.lastName}`,
+                LatLongAccuracy : this.GeolocationService.getLocation()
+            },
+            data
+        );
 
-                if (!job.History) {
-                    job.History = {};
-                }
-
-                let user = this.AuthenticationService.getUserInfo();
-
-                job.History.push({
-                    Description : description ? description : 'Updated',
-                    DateTime    : new Date(),
-                    User        : user.firstName + ' ' + user.lastName
-                });
-
-                return this.$http({
-                    method  : 'PUT',
-                    url     : `${this.API_URL.JOB}/${job._id}`,
-                    data    : job,
-                    ratingCompanyID
-                });
-            });
+        return this.JobHistoryService.serializeHistoryRecord(historyRecord);
     }
 
     createSearchMeta (job) {

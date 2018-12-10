@@ -1,0 +1,13 @@
+@import '../../../../scss/variables';
+
+.history-wrapper {
+    padding: $gutter-full $gutter-half;
+}
+
+.history-group {
+    margin-bottom: $gutter-full;
+}
+
+.history-group-title {
+    margin-bottom: 0;
+}

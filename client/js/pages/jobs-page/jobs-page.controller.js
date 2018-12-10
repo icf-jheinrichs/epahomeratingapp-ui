@@ -1,6 +1,4 @@
 import _find from 'lodash/find';
-import _cloneDeep from 'lodash/cloneDeep';
-
 import JobsPage from './jobs-page.class.js';
 
 class JobsPageController extends JobsPage {
@@ -76,6 +74,13 @@ class JobsPageController extends JobsPage {
                 // TODO - Pop error message to user
                 job.InternalReview = true;
 
+                job
+                    .History
+                    .push(this.formatHistoryRecord({
+                        Category    : this.HISTORY.CATEGORIES.STATUS,
+                        Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.INTERNAL_REVIEW
+                    }));
+
                 submitJobs.push(this.JobsService.put(job));
             }
         });
@@ -129,6 +134,14 @@ class JobsPageController extends JobsPage {
                             job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
                             job.InternalReview  = false;
                             job.ProviderCompany = this.selectedProviderToAdd.O_ID;
+
+                            job
+                                .History
+                                .push(this.formatHistoryRecord({
+                                    Category    : this.HISTORY.CATEGORIES.STATUS,
+                                    Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.SUBMITTED_TO_PROVIDER,
+                                    Data        : this.selectedProviderToAdd.O_ID
+                                }));
 
                             submitJobs.push(this.JobsService.put(job));
                         }

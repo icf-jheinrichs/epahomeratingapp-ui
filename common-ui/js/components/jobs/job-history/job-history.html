@@ -1,1 +1,39 @@
-<h2>Job History</h2>
+<section class="history-wrapper">
+    <h2>Job History</h2>
+
+    <div
+        class="history-group"
+        ng-if="jobHistoryCtrl.historyType === undefined">
+
+        <p>Parsing history. Please wait.</p>
+    </div>
+
+    <div ng-if="jobHistoryCtrl.historyType === jobHistoryCtrl.HISTORY_TYPES.NEW">
+        <div
+            class="history-group"
+            data-ng-repeat="historyGroup in ::jobHistoryCtrl.history track by $index">
+
+            <p class="history-group-title"><stong>{{historyGroup.title}}:</stong> {{historyGroup.date | date:'medium' }} by {{historyGroup.user}}</p>
+
+            <ul ng-if="historyGroup.details">
+                <li ng-repeat="detail in historyGroup.details track by $index">{{::detail}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <div
+        class="history-group"
+        ng-if="jobHistoryCtrl.historyType === jobHistoryCtrl.HISTORY_TYPES.OLD">
+
+        <p>The history data for this job is in an old format and cannot be displayed until updated to a new format. Please note that updating will not provide a complete history as previous job activity did not capture as much history data.</p>
+
+        <button
+            type="button"
+            class="btn btn-default"
+            ng-disabled="jobHistoryCtrl.isHistoryUpdateProcessing"
+            ng-click="jobHistoryCtrl.updateHistoryFormat()">
+
+            <i data-ng-class="{'hidden' : !jobHistoryCtrl.isHistoryUpdateProcessing}" class="fa fa-circle-o-notch fa-spin fa-fw"></i> Update History Data Format
+        </button>
+    </div>
+</section>

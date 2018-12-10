@@ -11,7 +11,6 @@ const DEFAULT_USER = Object.freeze({
     'password'          : '',
     'firstName'         : '',
     'lastName'          : '',
-    'userType'          : '',
     'email'             : '',
     'id_token'          : '',
     'access_token'      : '',
@@ -105,7 +104,6 @@ class AuthenticationService {
             userId    : this.user.userId,
             firstName : this.user.firstName,
             lastName  : this.user.lastName,
-            userType  : this.user.userType,
             email     : this.user.email
         };
     }
@@ -324,7 +322,6 @@ class AuthenticationService {
                         let firstName         = attr.name.charAt(0).toUpperCase() + attr.name.slice(1);
                         let lastName          = attr.family_name.charAt(0).toUpperCase() + attr.family_name.slice(1);
                         let email             = attr.email;
-                        let userType          = attr['custom:userType'] || '';
                         let ratingCompanyID   = attr['custom:ratingCompanyID'] || '';
 
                         resolve({
@@ -333,7 +330,6 @@ class AuthenticationService {
                             firstName,
                             lastName,
                             email,
-                            userType,
                             id_token,
                             access_token,
                             refresh_token,
@@ -420,7 +416,6 @@ class AuthenticationService {
 
             this.userIsAuthenticated = true;
 
-            attr.userType = this.USER_TYPES.PROVIDER;
             this.user = Object.assign({}, attr);
 
             // TODO: Is there a more secure way to store persistant login?

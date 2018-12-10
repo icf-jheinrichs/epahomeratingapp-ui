@@ -27,6 +27,87 @@ const CATEGORIES = {
     }
 };
 
+const HISTORY_CATEGORIES = {
+    'EDITED'  : 'EDITED',
+    'MANAGE'  : 'MANAGE',
+    'STATUS'  : 'STATUS',
+    'UNKNOWN' : 'UNKNOWN'
+};
+
+const HISTORY_SUBCATEGORIES = {
+    'EDITED' : {
+        'COMMENT'           : 'COMMENT',
+        'PROVIDER_COMMENT'  : 'PROVIDER_COMMENT',
+        'EDIT_MRF'          : 'EDIT_MRF',
+        'PHOTO'             : 'PHOTO',
+        'UPDATE_PREDRYWALL' : 'UPDATE_PREDRYWALL',
+        'UPDATE_FINAL'      : 'UPDATE_FINAL'
+    },
+    'STATUS' : {
+        'COMPLETED'             : 'COMPLETED',
+        'INTERNAL_REVIEW'       : 'INTERNAL_REVIEW',
+        'SUBMITTED_TO_PROVIDER' : 'SUBMITTED_TO_PROVIDER',
+        'DECLINED_BY_PROVIDER'  : 'DECLINED_BY_PROVIDER',
+        'REGISTERED'            : 'REGISTERED'
+    },
+    'MANAGE' : {
+        'CREATED'    : 'CREATED',
+        'DELETED'    : 'DELETED',
+        'UNDELETED'  : 'UNDELETED',
+        'ARCHIVED'   : 'ARCHIVED',
+        'UNARCHIVED' : 'UNARCHIVED',
+        'UPDATED'    : 'UPDATED'
+    }
+};
+
+const HISTORY_TITLES = {
+    'EDITED' : {
+        'COMMENT'           : 'comment(s)',
+        'PROVIDER_COMMENT'  : 'provider comment updated',
+        'EDIT_MRF'          : 'minimum rated featue(s) edited',
+        'PHOTO'             : 'photo(s)',
+        'UPDATE_PREDRYWALL' : 'pre-drywall status update(s)',
+        'UPDATE_FINAL'      : 'final status update(s)'
+    },
+    'STATUS' : {
+        'COMPLETED'             : 'Completed',
+        'INTERNAL_REVIEW'       : 'Flagged for Internal Review',
+        'SUBMITTED_TO_PROVIDER' : 'Submitted to Provider',
+        'DECLINED_BY_PROVIDER'  : 'Declined by Provider',
+        'REGISTERED'            : 'Registered'
+    },
+    'MANAGE' : {
+        'CREATED'    : 'Created',
+        'DELETED'    : 'Deleted',
+        'UNDELETED'  : 'Restored',
+        'ARCHIVED'   : 'Archived',
+        'UNARCHIVED' : 'Restored from Archive',
+        'UPDATED'    : 'Updated'
+    },
+    'UNKNOWN' : {
+        'UNKNOWN'    : 'Unknown'
+    }
+};
+
+const HISTORY_SHORT_DESCRIPTION = {
+    'EDITED' : 'Edited',
+    'STATUS' : {
+        'COMPLETED'             : 'Completed',
+        'INTERNAL_REVIEW'       : 'Flagged',
+        'SUBMITTED_TO_PROVIDER' : 'Submitted',
+        'DECLINED_BY_PROVIDER'  : 'Declined',
+        'REGISTERED'            : 'Registered'
+    },
+    'MANAGE' : {
+        'CREATED'    : 'Created',
+        'DELETED'    : 'Deleted',
+        'UNDELETED'  : 'Restored',
+        'ARCHIVED'   : 'Archived',
+        'UNARCHIVED' : 'Restored',
+        'UPDATED'    : 'Updated'
+    }
+};
+
 const CATEGORY_PROGRESS = {
     'pre-drywall' : {
         Name : 'Pre-Drywall',
@@ -64,6 +145,7 @@ const DIALOG = {
     UNDO_JOB_OFFLINE          : 'dialog-undo-job-offline',
     LEAKAGE_TEST_EXEMPTION    : 'dialog-leakage-test-exemption',
     SUBMIT_TO_PROVIDER        : 'dialog-submit-to-provider',
+    DECLINE_JOB               : 'dialog-decline-jobs',
     DELETE_JOB                : 'dialog-delete-job',
     ARCHIVE_JOB               : 'dialog-archive-job',
     DOCUMENT_VIEWER_ERROR     : 'dialog-document-viewer-error'
@@ -305,6 +387,7 @@ const STATE_NAME = {
     JOB_EDIT                          : 'job-edit',
     JOB_CHECKLIST                     : 'job-checklist',
     JOB_CHECKLIST_CATEGORY            : 'job-checklist.category',
+    JOB_CHECKLIST_HISTORY             : 'job-checklist.history',
     JOB_CHECKLIST_STATUS              : 'job-checklist.status',
     JOB_CHECKLIST_REVIEW              : 'job-checklist-review',
     JOB_CHECKLIST_REVIEW_CATEGORY     : 'job-checklist-review.category',
@@ -347,6 +430,10 @@ export default {
     DIALOG,
     DROPDOWN,
     ELEVATION_PHOTOS,
+    HISTORY_CATEGORIES,
+    HISTORY_SUBCATEGORIES,
+    HISTORY_TITLES,
+    HISTORY_SHORT_DESCRIPTION,
     IMAGES,
     JOB_PAGE_TAB,
     JOB_STATUS,

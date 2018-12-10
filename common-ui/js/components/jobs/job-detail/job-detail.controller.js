@@ -105,6 +105,7 @@ class JobDetailController {
                     .Secondary[locationIndex]
                     .RaterDesignReviewChecklist
                     = location
+                            .RaterDesignReviewChecklist
                             .filter((raterDesignReviewChecklist) => {
                                 return raterDesignReviewChecklist instanceof File && this.isValidFile(raterDesignReviewChecklist);
                             });

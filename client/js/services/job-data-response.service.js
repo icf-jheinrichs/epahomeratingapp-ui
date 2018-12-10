@@ -42,14 +42,6 @@ class JobDataResponseService {
                     url     : `${this.API_URL.JOB_DATA_RESPONSE}/${jobDataResponse._id}`,
                     data    : jobDataResponse
                 })
-                .then((result) => {
-                    this.$rootScope.$broadcast(this.MESSAGING.UPDATE_JOB_HISTORY, {
-                        jobID       : jobDataResponse._id,
-                        description : 'Updated response',
-                    });
-
-                    resolve(result);
-                })
                 .catch((err) => {
                     reject(err);
                 });
