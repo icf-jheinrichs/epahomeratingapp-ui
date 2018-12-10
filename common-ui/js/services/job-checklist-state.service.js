@@ -472,7 +472,7 @@ class JobChecklistState {
             .push(this.formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.EDITED,
                 Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.EDIT_MRF,
-                Data        : `${mrfEditData.ItemId}: ${mrfEditData.title} - ${mrfEditData.key}`
+                Data        : `[${mrfEditData.ItemId}: ${mrfEditData.title}] ${mrfEditData.key}`
             }));
 
         this
@@ -507,7 +507,7 @@ class JobChecklistState {
             .push(this.formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.EDITED,
                 Subcategory : response.CategoryProgress === this.CATEGORY_PROGRESS['pre-drywall'].Key ? this.HISTORY.SUBCATEGORIES.EDITED.UPDATE_PREDRYWALL : this.HISTORY.SUBCATEGORIES.EDITED.UPDATE_FINAL,
-                Data        : `${response.Category} ${response.CategoryProgress}: ${response.ItemId} - ${response.Response[0]}`
+                Data        : `[${response.Category} ${response.CategoryProgress}: ${response.ItemId}] ${response.Response[0]}`
             }));
 
         this
@@ -718,6 +718,12 @@ class JobChecklistState {
 
     getJobHistory () {
         return this.job.History;
+    }
+
+    updateJobHistory (updatedHistory) {
+        this.job.History = JSON.parse(JSON.stringify(updatedHistory));
+
+        return this.JobsService.put(this.job, this.$stateParams.ratingCompanyID);
     }
 
     get isReview () {
