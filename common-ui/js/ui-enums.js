@@ -28,9 +28,10 @@ const CATEGORIES = {
 };
 
 const HISTORY_CATEGORIES = {
-    'EDITED' : 'EDITED',
-    'MANAGE' : 'MANAGE',
-    'STATUS' : 'STATUS'
+    'EDITED'  : 'EDITED',
+    'MANAGE'  : 'MANAGE',
+    'STATUS'  : 'STATUS',
+    'UNKNOWN' : 'UNKNOWN'
 };
 
 const HISTORY_SUBCATEGORIES = {
@@ -82,6 +83,9 @@ const HISTORY_TITLES = {
         'ARCHIVED'   : 'Archived',
         'UNARCHIVED' : 'Restored from Archive',
         'UPDATED'    : 'Updated'
+    },
+    'UNKNOWN' : {
+        'UNKNOWN'    : 'Unknown'
     }
 };
 
