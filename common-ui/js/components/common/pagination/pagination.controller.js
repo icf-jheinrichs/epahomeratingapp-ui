@@ -16,7 +16,6 @@ class paginationController {
     $onInit () {
         const page = parseInt(this.$stateParams[this.PAGE_PARAM], 10);
         this.numberOfPages = Math.ceil(this.quantity / this.PAGE_SIZE);
-        // this.currentPage   = 1;
         this.currentPage   = page === 0 || page === '' || page === undefined ? 1 : page;
         if (this.currentPage !== 1) {
             this.setPage(this.currentPage);
