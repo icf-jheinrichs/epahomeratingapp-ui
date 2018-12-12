@@ -339,7 +339,8 @@ const SEARCH_PARAMS = {
     PROGRESS_LEVEL                : 'progressLevel',
     RATER                         : 'rater',
     RATING_TYPE                   : 'ratingType',
-    STATUS                        : 'status'
+    STATUS                        : 'status',
+    PAGE                          : 'page'
 };
 
 const HOUSE_PLANS_SEARCH_PARAMS = {
