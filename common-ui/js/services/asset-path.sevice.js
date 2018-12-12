@@ -1,5 +1,7 @@
 class AssetPathService {
     constructor ($q, CONTEXT, UI_ENUMS, BASE_IMAGE_URL, BASE_S3_URL, SyncService) {
+        'ngInject';
+
         this.$q = $q;
         this.syncService = SyncService;
         this.BASE_S3_URL = BASE_S3_URL;
