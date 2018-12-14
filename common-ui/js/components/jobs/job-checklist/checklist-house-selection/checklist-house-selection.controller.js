@@ -3,27 +3,31 @@ import _findIndex from 'lodash/findIndex';
 
 class checklistHouseSelectionController {
     constructor (
+        $log,
         $rootScope,
         $stateParams,
         $sanitize,
         $transitions,
+        $timeout,
         AuthorizationService,
         AssetPathService,
         JobChecklistStateService,
         ModalService,
         UI_ENUMS,
-        jobTitleFilter
+        jobTitleFilter,
+        BASE_IMAGE_URL
     ) {
         'ngInject';
 
         // capture DI
+        this.$log         = $log;
         this.$rootScope   = $rootScope;
         this.$stateParams = $stateParams;
         this.$sanitize    = $sanitize;
         this.$transitions = $transitions;
+        this.$timeout     = $timeout;
 
         this.DEFAULT_PHOTO               = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
-        this.BASE_IMAGE_URL              = '';
         this.MESSAGING                   = UI_ENUMS.MESSAGING;
         this.AssetPathService            = AssetPathService;
         this.AuthorizationService        = AuthorizationService;
@@ -31,7 +35,7 @@ class checklistHouseSelectionController {
         this.ModalService                = ModalService;
         this.jobTitleFilter              = jobTitleFilter;
         this.MODAL_PROVIDER_JOB_COMMENTS = UI_ENUMS.MODAL.PROVIDER_JOB_COMMENTS;
-        this.imageBaseUrl = '';
+        this.BASE_IMAGE_URL              = BASE_IMAGE_URL;
         // init View Labels
         this.toggleTextEnum = {
             'more' : 'More',
@@ -41,8 +45,9 @@ class checklistHouseSelectionController {
 
     $onInit () {
         // init view variables
-        this.AssetPathService.getBaseURL('IMAGE', true).then(res => {
-            this.imageBaseUrl = res.url;
+        this.$log.log('[ChecklistHouseSelectionController] initialized');
+        this.AssetPathService.getBaseURL('IMAGE').then(res => {
+            this.imageUrl = res.url;
         });
         this.showNavbar         = false;
 
@@ -113,8 +118,7 @@ class checklistHouseSelectionController {
     }
 
     getSelectedHousePhoto () {
-        return (this.selectedHouse.Photo.length === 0) ? this.DEFAULT_PHOTO : this.imageBaseUrl + this.selectedHouse.Photo[0];
-
+        return (this.selectedHouse.Photo.length === 0) ? this.DEFAULT_PHOTO : this.imageUrl + this.selectedHouse.Photo[0];
     }
 
     setHouseSelectionState () {

@@ -1,12 +1,13 @@
 class PhotoCaptureController {
-    constructor (CameraService, UI_ENUMS, CONTEXT, AssetPathService) {
+    constructor ($log, CameraService, UI_ENUMS, CONTEXT, AssetPathService, AssetLocalService, SyncService, BASE_IMAGE_URL) {
         'ngInject';
-
+        this.$log = $log;
         this.CameraService = CameraService;
+        this.SyncService = SyncService;
         this.AssetPathService = AssetPathService;
-
+        this.AssetLocalService = AssetLocalService;
+        this.localBaseUrl = BASE_IMAGE_URL;
         this.defaultPhotoUrl = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
-        this.BASE_IMAGE_URL = '';
 
         this.photoActionLabelEnum = {
             ADD    : 'Add Photo',
@@ -19,13 +20,21 @@ class PhotoCaptureController {
     // Call assetpath service to get baseURL
 
     $onInit () {
-        this.AssetPathService.getBaseURL('IMAGE', true).then(res => {
-            this.BASE_IMAGE_URL = res.url;
+        this.$log.log('[PhotoCaptureController] initialized');
+        this.AssetPathService.getBaseURL('IMAGE').then(res => {
+            this.s3BaseUrl = res.url;
         });
         this.allowAddPhoto = this.CONTEXT_IS_APP;
-        this.photoUrl = this.photo
-            ? `${this.BASE_IMAGE_URL}${this.photo}`
-            : this.defaultPhotoUrl;
+        if (this.newPhoto) {
+            this.photoUrl = this.photo
+                ? `${this.localBaseUrl}${this.photo}`
+                : this.defaultPhotoUrl;
+        } else {
+            this.photoUrl = this.photo
+                ? `${this.s3BaseUrl}${this.photo}`
+                : this.defaultPhotoUrl;
+        }
+
         this.photoActionLabel
             = this.photoUrl === this.defaultPhotoUrl
                 ? this.photoActionLabelEnum.ADD
@@ -37,7 +46,8 @@ class PhotoCaptureController {
         $event.stopPropagation();
 
         this.CameraService.getPhoto().then(photo => {
-            this.photoUrl = `${this.BASE_IMAGE_URL}${photo}`;
+            this.photoUrl = `${this.localBaseUrl}${photo}`;
+            this.newPhoto = true;
             this.photoActionLabel = this.photoActionLabelEnum.CHANGE;
 
             this.onPhotoCapture({
@@ -55,7 +65,19 @@ class PhotoCaptureController {
                 this.photoActionLabel = this.photoActionLabelEnum.ADD;
             } else {
                 this.photo = changes.photo.currentValue;
-                this.photoUrl = `${this.BASE_IMAGE_URL}${this.photo}`;
+                let assetAvailable = this.AssetLocalService.checkIfAssetAvailable(this.photo);
+                // if (this.SyncService.online) {
+                if (assetAvailable === true) {
+                    this.photoUrl = `${this.localBaseUrl}${this.photo}`;
+                } else {
+                    this.photoUrl = `${this.s3BaseUrl}${this.photo}`;
+                }
+                this.newPhoto = false;
+                // } else {
+                //     this.photoUrl = `${this.localBaseUrl}${this.photo}`;
+
+                // }
+                this.$log.log(`[PhotoCaptureController] onChange photoUrl: ${this.photoUrl}`);
                 this.photoActionLabel = this.photoActionLabelEnum.CHANGE;
             }
         }
