@@ -1,5 +1,4 @@
 import _find from 'lodash/find';
-import _cloneDeep from 'lodash/cloneDeep';
 
 import JobsPage from './jobs-page.class.js';
 
