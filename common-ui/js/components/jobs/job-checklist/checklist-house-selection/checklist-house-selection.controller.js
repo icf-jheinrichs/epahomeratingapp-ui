@@ -8,9 +8,9 @@ class checklistHouseSelectionController {
         $sanitize,
         $transitions,
         AuthorizationService,
+        AssetPathService,
         JobChecklistStateService,
         ModalService,
-        BASE_IMAGE_URL,
         UI_ENUMS,
         jobTitleFilter
     ) {
@@ -23,14 +23,15 @@ class checklistHouseSelectionController {
         this.$transitions = $transitions;
 
         this.DEFAULT_PHOTO               = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
-        this.BASE_IMAGE_URL              = BASE_IMAGE_URL;
+        this.BASE_IMAGE_URL              = '';
         this.MESSAGING                   = UI_ENUMS.MESSAGING;
+        this.AssetPathService            = AssetPathService;
         this.AuthorizationService        = AuthorizationService;
         this.JobChecklistStateService    = JobChecklistStateService;
         this.ModalService                = ModalService;
         this.jobTitleFilter              = jobTitleFilter;
         this.MODAL_PROVIDER_JOB_COMMENTS = UI_ENUMS.MODAL.PROVIDER_JOB_COMMENTS;
-
+        this.imageBaseUrl = '';
         // init View Labels
         this.toggleTextEnum = {
             'more' : 'More',
@@ -40,6 +41,9 @@ class checklistHouseSelectionController {
 
     $onInit () {
         // init view variables
+        this.AssetPathService.getBaseURL('IMAGE', true).then(res => {
+            this.imageBaseUrl = res.url;
+        });
         this.showNavbar         = false;
 
         this.userAuthorization  = this.AuthorizationService.getUserRole();
@@ -48,7 +52,6 @@ class checklistHouseSelectionController {
 
         this.selectedHouse      = this.houses.Primary;
         this.selectedHousePhoto = (this.houses.Primary.Photo.length === 0) ? this.DEFAULT_PHOTO : this.houses.Primary.Photo[0];
-
         this.toggleText         = this.toggleTextEnum.more;
         this.elevationPhotos    = [];
         this.elevationPhotosVisible = false;
@@ -110,7 +113,8 @@ class checklistHouseSelectionController {
     }
 
     getSelectedHousePhoto () {
-        return (this.selectedHouse.Photo.length === 0) ? this.DEFAULT_PHOTO : this.BASE_IMAGE_URL + this.selectedHouse.Photo[0];
+        return (this.selectedHouse.Photo.length === 0) ? this.DEFAULT_PHOTO : this.imageBaseUrl + this.selectedHouse.Photo[0];
+
     }
 
     setHouseSelectionState () {

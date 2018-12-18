@@ -9,7 +9,7 @@ import 'normalize.css';
 import 'font-awesome/css/font-awesome.css';
 
 // Constants
-import {API_URL, BASE_IMAGE_URL, COGNITO, S3_CONFIG, PAGINATION} from './epahomeratingapp.config';
+import {API_URL, BASE_IMAGE_URL, BASE_S3_URL, COGNITO, S3_CONFIG, PAGINATION} from './epahomeratingapp.config';
 import {UI_ENUMS, CONFIG} from '../../epahomeratingappUI.js';
 
 // Services
@@ -101,6 +101,7 @@ angular
     })
     .constant('API_URL', API_URL)
     .constant('BASE_IMAGE_URL', BASE_IMAGE_URL)
+    .constant('BASE_S3_URL', BASE_S3_URL)
     .constant('COGNITO', COGNITO)
     .constant('S3_CONFIG', S3_CONFIG)
     .constant('UI_ENUMS', UI_ENUMS)

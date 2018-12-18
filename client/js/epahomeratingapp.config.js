@@ -13,6 +13,7 @@ export const API_URL = {
 };
 
 export const BASE_IMAGE_URL = process.env.S3_PREFIX;
+export const BASE_S3_URL = `https://s3.amazonaws.com/${process.env.S3_BUCKET_NAME_PREFIX}-rating-company/`;
 
 export const COGNITO = {
     REGION    : DEFAULT_REGION,

@@ -1,17 +1,20 @@
 import moment from 'moment';
 
 class ChecklistCommentsController {
-    constructor ($sanitize, UI_ENUMS, BASE_IMAGE_URL, CONTEXT, AuthenticationService) {
+    constructor ($sanitize, AssetPathService, UI_ENUMS, CONTEXT, AuthenticationService) {
         'ngInject';
 
-        this.$sanitize       = $sanitize;
-
-        this.BASE_IMAGE_URL  = BASE_IMAGE_URL;
-        this.user            = AuthenticationService.getUserInfo();
-        this.CONTEXT_IS_APP  = CONTEXT === UI_ENUMS.CONTEXT.APP;
+        this.$sanitize        = $sanitize;
+        this.AssetPathService = AssetPathService;
+        this.BASE_IMAGE_URL   = '';
+        this.user             = AuthenticationService.getUserInfo();
+        this.CONTEXT_IS_APP   = CONTEXT === UI_ENUMS.CONTEXT.APP;
     }
 
     $onInit () {
+        this.AssetPathService.getBaseURL('IMAGE', true).then(res => {
+            this.BASE_IMAGE_URL = res.url;
+        });
         this.state             = 'list';
         this.id                = this.itemId.replace(/\s/g, '_');
         this.allowPhotoCapture = this.CONTEXT_IS_APP;

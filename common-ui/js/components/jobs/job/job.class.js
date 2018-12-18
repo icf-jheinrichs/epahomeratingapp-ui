@@ -13,35 +13,38 @@ class Job {
         SyncService,
         CONTEXT,
         UI_ENUMS,
-        BASE_IMAGE_URL
+        AssetPathService
     ) {
         'ngInject';
 
-        this.$location        = $location;
-        this.$log             = $log;
-        this.$rootScope       = $rootScope;
-        this.$scope           = $scope;
-        this.$timeout         = $timeout;
+        this.$location = $location;
+        this.$log = $log;
+        this.$rootScope = $rootScope;
+        this.$scope = $scope;
+        this.$timeout = $timeout;
 
         this.JobHistoryService = JobHistoryService;
         this.jobTitleFilter    = jobTitleFilter;
         this.syncService       = SyncService;
 
-        this.DEFAULT_PHOTO    = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
-        this.BASE_IMAGE_URL   = BASE_IMAGE_URL;
-        this.CONTEXT_IS_APP   = CONTEXT === UI_ENUMS.CONTEXT.APP;
+        this.DEFAULT_PHOTO = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
+        this.AssetPathService = AssetPathService;
+        this.CONTEXT_IS_APP = CONTEXT === UI_ENUMS.CONTEXT.APP;
         this.CONTEXT_IS_ADMIN = CONTEXT === UI_ENUMS.CONTEXT.ADMIN;
-        this.MESSAGING        = UI_ENUMS.MESSAGING;
-        this.SYNC_STATUS      = UI_ENUMS.SYNC_STATUS;
-        this.UI_ENUMS         = UI_ENUMS;
+        this.MESSAGING = UI_ENUMS.MESSAGING;
+        this.SYNC_STATUS = UI_ENUMS.SYNC_STATUS;
+        this.UI_ENUMS = UI_ENUMS;
     }
 
     $onInit () {
+        this.AssetPathService.getBaseURL('IMAGE', true).then(res => {
+            this.BASE_IMAGE_URL = res.url;
+        });
         if (this.job.RatingType === 'energy-star') {
-            this.RatingType      = 'ENERGY STAR';
+            this.RatingType = 'ENERGY STAR';
             this.RatingTypeClass = 'label-energy-star';
         } else {
-            this.RatingType      = 'HERS Rating';
+            this.RatingType = 'HERS Rating';
             this.RatingTypeClass = 'label-hers-rating';
         }
 

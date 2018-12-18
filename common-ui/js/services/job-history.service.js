@@ -41,6 +41,18 @@ class JobHistory {
     }
 
     deserializeHistoryRecord (historyData) {
+        if (historyData.Description !== undefined) {
+            return {
+                DateTime        : new Date(historyData.DateTime),
+                Category        : this.HISTORY.CATEGORIES.UNKNOWN,
+                Subcategory     : this.HISTORY.CATEGORIES.UNKNOWN,
+                UserId          : undefined,
+                UserName        : historyData.User,
+                Data            : undefined,
+                LatLongAccuracy : undefined
+            };
+        }
+
         const [
             DateTime,
             Category,
@@ -98,6 +110,55 @@ class JobHistory {
         });
     }
 
+    updateHistory (history) {
+        return history.map((historyRecord) => {
+            if (Array.isArray(historyRecord)) {
+                return historyRecord;
+            }
+
+            let category    = this.HISTORY.CATEGORIES.MANAGE;
+            let subcategory = this.HISTORY.SUBCATEGORIES.MANAGE.UPDATED;
+            const date      = new Date(historyRecord.DateTime);
+
+            switch (historyRecord.Description) {
+            case 'Created' :
+                category    = this.HISTORY.CATEGORIES.MANAGE;
+                subcategory = this.HISTORY.SUBCATEGORIES.MANAGE.CREATED;
+                break;
+            case 'Updated response' :
+                category    = this.HISTORY.CATEGORIES.EDITED;
+                subcategory = this.HISTORY.SUBCATEGORIES.EDITED.UPDATE_FINAL;
+                break;
+            case 'Updated mrf data' :
+                category    = this.HISTORY.CATEGORIES.EDITED;
+                subcategory = this.HISTORY.SUBCATEGORIES.EDITED.EDIT_MRF;
+                break;
+            case 'Deleted' :
+                category    = this.HISTORY.CATEGORIES.MANAGE;
+                subcategory = this.HISTORY.SUBCATEGORIES.MANAGE.DELETED;
+                break;
+            case 'Archived' :
+                category    = this.HISTORY.CATEGORIES.MANAGE;
+                subcategory = this.HISTORY.SUBCATEGORIES.MANAGE.ARCHIVED;
+                break;
+            case 'Restored' :
+                category    = this.HISTORY.CATEGORIES.MANAGE;
+                subcategory = this.HISTORY.SUBCATEGORIES.MANAGE.UNDELETED;
+                break;
+            }
+
+            return this.serializeHistoryRecord({
+                DateTime        : date.toUTCString(),
+                Category        : category,
+                Subcategory     : subcategory,
+                UserId          : undefined,
+                UserName        : historyRecord.User,
+                Data            : undefined,
+                LatLongAccuracy : undefined
+            });
+        });
+    }
+
     mapReduceHistory (history) {
         return history.map((historyGroup) => {
             const isEditedCategory = historyGroup[0].Category === this.HISTORY.CATEGORIES.EDITED;
@@ -105,8 +166,34 @@ class JobHistory {
 
             if (isEditedCategory) {
                 const durationInMs  = historyGroup[historyGroup.length - 1].DateTime - historyGroup[0].DateTime;
+                const duplicates    = {
+                    UPDATE_PREDRYWALL : [],
+                    UPDATE_FINAL      : []
+                };
+
                 const subQuantities = historyGroup.reduce((quantities, historyRecord) => {
-                    quantities[historyRecord.Subcategory] += 1;
+                    const subcategory = historyRecord.Subcategory;
+
+                    if (subcategory === this.HISTORY.SUBCATEGORIES.EDITED.UPDATE_PREDRYWALL
+                        || subcategory === this.HISTORY.SUBCATEGORIES.EDITED.UPDATE_FINAL) {
+                        let itemId;
+
+                        try {
+                            itemId = historyRecord.Data.match(/\[(.*?)\]/)[1];
+                        } catch (error) {
+                            itemId = historyRecord.Data;
+                        }
+
+                        if (historyRecord.Data && !duplicates[subcategory].includes(itemId)) {
+                            duplicates[subcategory].push(itemId);
+                            quantities[subcategory] += 1;
+                        } else if (historyRecord.Data === undefined || historyRecord.Data === null) {
+                            quantities[subcategory] += 1;
+                        }
+                    } else {
+                        quantities[subcategory] += 1;
+                    }
+
 
                     return quantities;
                 }, {
@@ -130,7 +217,7 @@ class JobHistory {
             }
 
             return {
-                title   : isEditedCategory ? 'Edited' : this.HISTORY.TITLES[historyGroup[0].Category][historyGroup[0].Subcategory],
+                title   : isEditedCategory ? this.HISTORY.SHORT_DESCRIPTION.EDITED : this.HISTORY.TITLES[historyGroup[0].Category][historyGroup[0].Subcategory],
                 date    : historyGroup[0].DateTime,
                 user    : historyGroup[0].UserName,
                 details : details
