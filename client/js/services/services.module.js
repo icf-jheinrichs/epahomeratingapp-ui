@@ -3,6 +3,7 @@ import angular from 'angular';
 import AnalyticsService from './analytics.service';
 import AuthenticationService from './authentication.service';
 import AuthorizationService from './authorization.service';
+import AssetPathService from './asset-path.service';
 import CameraService from './camera.service';
 import DisplayLogicDigestService from './display-logic-digest.service';
 import HousePlansService from './house-plans.service';
@@ -22,6 +23,7 @@ let servicesModule
         .service('AnalyticsService', AnalyticsService)
         .service('AuthenticationService', AuthenticationService)
         .service('AuthorizationService', AuthorizationService)
+        .service('AssetPathService', AssetPathService)
         .service('CameraService', CameraService)
         .service('DisplayLogicDigestService', DisplayLogicDigestService)
         .service('HousePlansService', HousePlansService)

@@ -265,16 +265,6 @@ class JobsChecklistPageController {
         }
     }
 
-    markAsRegistered () {
-        if (this.userAuthorization.Provider) {
-            this.job.Status = this.JOB_STATUS.REGISTERED;
-
-            this
-                .JobChecklistStateService
-                .markAsRegistered();
-        }
-    }
-
     onDownloadRequest () {
         let downloadTask = {
             jobID           : this.job._id,
@@ -301,7 +291,7 @@ class JobsChecklistPageController {
 
     viewHvacDesignReport () {
         let secondaryIndex;
-        let houseId           = parseInt(this.houseId, 10);
+        let houseId           = parseInt(this.$stateParams.houseId, 10);
         this.hvacDesignReport = '';
 
         if (this.job.Primary.HouseId === houseId) {
@@ -313,6 +303,16 @@ class JobsChecklistPageController {
         }
 
         this.showHvacDesignReportModal = true;
+    }
+
+    markAsRegistered () {
+        if (this.userAuthorization.Provider) {
+            this.job.Status = this.JOB_STATUS.REGISTERED;
+
+            this
+                .JobChecklistStateService
+                .markAsRegistered();
+        }
     }
 
     canMarkAsRegistered () {

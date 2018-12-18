@@ -263,10 +263,7 @@ class JobsService {
                 })
                 .catch((error) => {
                     this.$log.error(`[jobs.service.js search] ${JSON.stringify(error)}`);
-                    reject({
-                        message : 'There was an error retrieving jobs. Please contact the RaterPRO support team.',
-                        data    : error
-                    });
+                    reject(error);
                 });
         });
 

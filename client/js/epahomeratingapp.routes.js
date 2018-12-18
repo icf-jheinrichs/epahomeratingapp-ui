@@ -393,6 +393,11 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             component  : 'providersPage'
         })
 
+        .state(STATE_NAME.RATING_COMPANIES, {
+            url        : '/rating-compaines',
+            component  : 'ratingCompaniesPage'
+        })
+
         .state(STATE_NAME.USERS, {
             url        : '/users',
             component  : 'usersPage'

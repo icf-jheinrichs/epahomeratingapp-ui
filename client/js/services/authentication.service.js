@@ -388,6 +388,7 @@ class AuthenticationService {
     }
 
     completeUserPasswordSetup (preferredUsernameAttribute, newPassword) {
+
         let attributeList = [];
         attributes.forEach((preferredUsernameAttribute) => {
             let cognitoUserAttribute = new CognitoUserAttribute(preferredUsernameAttribute);

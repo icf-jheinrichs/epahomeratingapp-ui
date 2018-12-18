@@ -13,7 +13,6 @@ class ProvidersPageController {
         this.DialogService        = DialogService;
         this.UserCompanyService   = UserCompanyService;
 
-        this.DIALOG_ADD_PROVIDER_COMPANY    = UI_ENUMS.DIALOG.ADD_PROVIDER_COMPANY;
         this.DIALOG_REMOVE_PROVIDER_COMPANY = UI_ENUMS.DIALOG.REMOVE_PROVIDER_COMPANY;
     }
 
@@ -41,93 +40,66 @@ class ProvidersPageController {
                 this.relatedProviderCompanys = this.company.RelatedProviderCompanys.map((O_ID) => {
                     return _find(this.providerCompanies, {O_ID});
                 });
+
+                this.pendingCompanies = this.company.PendingProviderCompanies.map((O_ID) => {
+                    return _find(this.providerCompanies, {O_ID});
+                });
             });
     }
 
-    addProvider (selectedProviderToAdd) {
-        const companyIndex = _findIndex(this.company.RelatedProviderCompanys, {ProviderRESNETId : selectedProviderToAdd.ProviderRESNETId});
-
-        if (companyIndex < 0) {
-            this
-                .company
-                .RelatedProviderCompanys
-                .push({
-                    _id              : selectedProviderToAdd._id,
-                    O_ID             : selectedProviderToAdd.O_ID,
-                    ProviderRESNETId : selectedProviderToAdd.ProviderRESNETId || selectedProviderToAdd._id,
-                    Name             : selectedProviderToAdd.Name,
-                    Status           : selectedProviderToAdd.Status
+    respondToProviderRequest (providerCompanyId, accept) {
+        this
+            .UserCompanyService
+            .updatePendingProviderRaterAssociation(providerCompanyId, this.company.O_ID, accept)
+            .then((response) => {
+                this.company.PendingProviderCompanies = this.company.PendingProviderCompanies.filter((companyId) => {
+                    return companyId !== providerCompanyId;
+                });
+                this.pendingCompanies = this.pendingCompanies.filter((company) => {
+                    return company.O_ID !== providerCompanyId;
                 });
 
-            this
-                .UserCompanyService
-                .putCompany(this.company)
-                .then(() => {
-                    return this.UserCompanyService.getCompany(selectedProviderToAdd._id);
-                })
-                .then((providerCompany) => {
-                    if (providerCompany.ProviderRESNETId === '') {
-                        providerCompany.ProviderRESNETId = providerCompany._id;
-                    }
+                if (accept) {
+                    this.company.RelatedProviderCompanys.push(providerCompanyId);
 
-                    providerCompany
-                        .RelatedRaterCompanys
-                        .push({
-                            _id              : this.company._id,
-                            O_ID             : this.company.O_ID,
-                            ProviderRESNETId : this.company.ProviderRESNETId || this.company._id,
-                            Name             : this.company.Name,
-                            Status           : this.company.Status
-                        });
-
-                    this
-                        .UserCompanyService
-                        .putCompany(providerCompany);
-                });
-        }
+                    this.relatedProviderCompanys.push(_find(this.providerCompanies, {O_ID : providerCompanyId}));
+                }
+            })
+            .catch((error) => {
+                //TODO: handle error
+                this.$log.log(error);
+            });
     }
 
-    removeProvider (O_ID) {
-        this
-            .company
-            .RelatedProviderCompanys
-            = _reject(this.company.RelatedProviderCompanys, {O_ID : O_ID});
+    removeProvider (providerCompanyId) {
+        if (this.company.O_ID === providerCompanyId) {
+            return;
+        }
 
         this
             .UserCompanyService
-            .putCompany(this.company)
-            .then(() => {
-                return this.UserCompanyService.getCompany(O_ID);
+            .removeProviderRaterAssociation(providerCompanyId, this.company.O_ID)
+            .then((response) => {
+                this.company.RelatedProviderCompanys = this.company.RelatedProviderCompanys.filter((companyId) => {
+                    return companyId !== providerCompanyId;
+                });
+                this.relatedProviderCompanys = this.relatedProviderCompanys.filter((company) => {
+                    return company.O_ID !== providerCompanyId;
+                });
             })
-            .then((providerCompany) => {
-                providerCompany
-                    .RelatedRaterCompanys
-                    = _reject(providerCompany.RelatedRaterCompanys, {_id : this.company._id.toString()});
-
-                this
-                    .UserCompanyService
-                    .putCompany(providerCompany);
+            .catch((error) => {
+                //TODO: handle error
+                this.$log.log(error);
             });
     }
 
-    showRemoveProviderDiaglog (ProviderRESNETId) {
+    showRemoveProviderDialog (O_ID) {
         this
             .DialogService
             .openDialog(this.DIALOG_REMOVE_PROVIDER_COMPANY)
             .then((confirmation) => {
                 if (confirmation) {
-                    this.removeProvider(ProviderRESNETId);
-                }
-            });
-    }
-
-    showAddProviderDialog () {
-        this
-            .DialogService
-            .openDialog(this.DIALOG_ADD_PROVIDER_COMPANY)
-            .then((confirmation) => {
-                if (confirmation) {
-                    this.addProvider(this.selectedProviderToAdd);
+                    this.removeProvider(O_ID);
                 }
             });
     }

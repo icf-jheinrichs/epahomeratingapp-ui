@@ -160,7 +160,7 @@
                     data-ng-class="{'btn-disabled' : !jobsChecklistPageCtrl.canMarkAsRegistered()}"
                     class="btn btn-sm btn-no-warp"
                     type="button"
-                    data-ng-if="jobsChecklistPageCtrl.role === 'provider' || jobsChecklistPageCtrl.role === 'admin'"
+                    data-ng-if="jobsChecklistPageCtrl.role === 'provider' && jobsChecklistPageCtrl.userAuthorization.Provider"
                     data-ng-click="jobsChecklistPageCtrl.markAsRegistered()">
 
                     Mark as Registered

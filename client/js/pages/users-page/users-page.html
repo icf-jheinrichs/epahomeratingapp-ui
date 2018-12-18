@@ -4,14 +4,16 @@
     </header>
 
     <div class="row">
-        <div class="col-xs-2" data-ng-if="usersPageCtrl.organizationTypes.RaterOrg">
+        <div class="col-xs-2">
             <nav class="nav nav-stacked">
                 <a data-ui-sref="users" ui-sref-active="active" class="nav-item">Users</a>
-                <a data-ui-sref="providers" ui-sref-active="active" class="nav-item">Providers</a>
+                <a data-ui-sref="rating-companies" ui-sref-active="active" class="nav-item" data-ng-if="usersPageCtrl.organizationTypes.ProviderOrg">Rating Companies</a>
+                <a data-ui-sref="providers" ui-sref-active="active" class="nav-item" data-ng-if="usersPageCtrl.organizationTypes.RaterOrg">Providers</a>
             </nav>
         </div>
 
-        <div class="users" data-ng-class="{'col-xs-10' : usersPageCtrl.organizationTypes.RaterOrg, 'col-xs-12' : !usersPageCtrl.organizationTypes.RaterOrg}">
+        <div class="users col-xs-10">
+            <p>To update contact information, please make changes in <a href="https://www.energystar.gov/index.cfm?fuseaction=mesa.showlogin">My Energy Star Account</a>.</p>
             <users users="usersPageCtrl.users" on-save-users="usersPageCtrl.saveUsers(users)"></users>
         </div>
     </div>

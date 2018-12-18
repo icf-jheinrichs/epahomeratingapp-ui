@@ -46,10 +46,7 @@ class JobsPageController extends JobsPage {
         this.pageStart = 0,
         this.pageEnd   = this.PAGE_SIZE;
 
-        this.viewJobs  = this.jobs.slice(this.pageStart, this.pageEnd);
-        this.jobToOpen = {};
-
-        this.updateHouseplanFormBusy = false;
+        this.viewJobs = this.jobs.slice(this.pageStart, this.pageEnd);
     }
 
     flagForReview () {
