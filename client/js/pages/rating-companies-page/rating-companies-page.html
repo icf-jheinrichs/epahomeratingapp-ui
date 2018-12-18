@@ -1,0 +1,97 @@
+<section class="page-container">
+    <header class="page-header">
+        <h2>Users</h2>
+    </header>
+
+    <div class="row">
+        <div class="col-xs-2">
+            <nav class="nav nav-stacked">
+                <a data-ui-sref="users" ui-sref-active="active" class="nav-item">Users</a>
+                <a data-ui-sref="rating-companies" ui-sref-active="active" class="nav-item" data-ng-if="ratingCompaniesPageCtrl.organizationTypes.ProviderOrg">Rating Companies</a>
+                <a data-ui-sref="providers" ui-sref-active="active" class="nav-item" data-ng-if="ratingCompaniesPageCtrl.organizationTypes.RaterOrg">Providers</a>
+            </nav>
+        </div>
+
+        <section class="col-xs-10">
+            <header class="page-header item-list-header clearfix">
+                <h2 class="pull-left item-list-title">Rating Companies</h2>
+                <button
+                    type="button"
+                    class="btn pull-right"
+                    data-ng-click="ratingCompaniesPageCtrl.showAddRatingCompanyDialog()">
+
+                    <i class="fa fa-plus" aria-hidden="true"></i> Add Rating Company
+                </button>
+            </header>
+
+            <div class="row">
+                <div class="col-xs-12 users">
+                    <div ng-if="ratingCompaniesPageCtrl.company.PendingRaterCompanies.length" class="col-xs-12 pending-companies">
+                        <h4>Pending Rating Companies</h4>
+                        <div class="pending-company clearfix" ng-repeat="ratingCompany in ratingCompaniesPageCtrl.pendingCompanies track by ratingCompany.O_ID">
+                            {{ratingCompany.Name}}
+                            <button
+                                class="btn btn-default btn-sm pull-right"
+                                ng-click="ratingCompaniesPageCtrl.cancelRatingCompany(ratingCompany.O_ID)">
+
+                                <i class="fa fa-ban" aria-hidden="true"></i> Cancel
+                            </button>
+                        </div>
+                    </div>
+                    <table class="table-full-width">
+                        <thead>
+                            <tr>
+                                <th>Company Name</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="ratingCompany in ratingCompaniesPageCtrl.relatedRatingCompanys track by ratingCompany.O_ID">
+                                <td>{{ratingCompany.Name}}</td>
+                                <td>{{ratingCompany.Status}}</td>
+                                <td><button type="button" class="btn btn-sm btn-link" data-ng-if="ratingCompany.O_ID !== ratingCompaniesPageCtrl.company.O_ID" data-ng-click="ratingCompaniesPageCtrl.showRemoveRatingCompanyDialog(ratingCompany.O_ID)">Remove</button></td>
+                            </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+<div class="dialog hidden" dialog="dialog" id="dialog-add-rating-company">
+    <div class="dialog-header">
+        <h3 class="dialog-title">Add Rating Company</h3>
+    </div>
+    <div class="dialog-body">
+        <div class="form-group">
+            <label for="selectedRatingCompanyToAdd" class="control-label">Select a rating compnay to add</label>
+            <select
+                class="form-control"
+                data-ng-model="ratingCompaniesPageCtrl.selectedRatingCompanyToAdd"
+                id="selectedRatingCompanyToAdd"
+                data-ng-options="ratingCompany.Name for ratingCompany in ratingCompaniesPageCtrl.ratingCompanies track by ratingCompany._id">
+            </select>
+        </div>
+
+        <p>You will not be able to review jobs until the selected rating company has approved your association and submitted jobs.</p>
+    </div>
+    <div class="dialog-footer text-right">
+        <button class="btn btn-link" type="button" data-ng-click="dismiss(false)">Cancel</button>
+        <button class="btn" data-ng-click="dismiss(true)">Add</button>
+    </div>
+</div>
+
+
+<div class="dialog hidden" dialog="dialog" id="dialog-remove-rating-company">
+    <div class="dialog-header">
+        <h3 class="dialog-title">Remove Rating Company</h3>
+    </div>
+    <div class="dialog-body">
+        <p>Any jobs submitted by this rating company will still be available to view.</p>
+    </div>
+    <div class="dialog-footer text-right">
+        <button class="btn btn-link" type="button" data-ng-click="dismiss(false)">Cancel</button>
+        <button class="btn" data-ng-click="dismiss(true)">Remove</button>
+    </div>
+</div>
