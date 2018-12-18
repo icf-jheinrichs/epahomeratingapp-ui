@@ -1,19 +1,22 @@
 class houseSelectionItemController {
-    constructor (jobTitleFilter, $q, AssetPathService, UI_ENUMS) {
+    constructor (jobTitleFilter, $q, $log, AssetPathService, UI_ENUMS, BASE_IMAGE_URL) {
         'ngInject';
-
-        this.jobTitleFilter = jobTitleFilter;
-        this.$q = $q;
-        this.defaultPhotoUrl = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
+        this.BASE_IMAGE_URL   = BASE_IMAGE_URL;
+        this.jobTitleFilter   = jobTitleFilter;
+        this.$q               = $q;
+        this.$log             = $log;
+        this.defaultPhotoUrl  = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
         this.AssetPathService = AssetPathService;
-        this.imageBaseUrl = '';
-        this.photoUrl = '';
     }
 
     $onInit () {
-        this.AssetPathService.getBaseURL('IMAGE', true).then(res => {
-            this.imageBaseUrl = res.url;
+        this.$log.log('[HouseSelectionItemController] initialized');
+        this.AssetPathService.getBaseURL('IMAGE').then(res => {
+            this.imageUrl = res.url;
+
+            this.$log.log(`BaseURL: ${this.imageUrl}`);
             this.photoUrl = this.getPhotoUrl();
+            this.$log.log(`PhotoURL: ${this.photoUrl}`);
         });
     }
 
@@ -26,7 +29,7 @@ class houseSelectionItemController {
 
             index += 1;
         }
-        return photoUrl ? this.imageBaseUrl + photoUrl : this.defaultPhotoUrl;
+        return photoUrl ? this.imageUrl + photoUrl : this.defaultPhotoUrl;
     }
 
     showElevationPhotos () {

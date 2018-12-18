@@ -1,4 +1,8 @@
 import _find from 'lodash/find';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 78d913fadb5aebe4d74d7389a3bc7d0bfb6eb772
 import JobsPage from './jobs-page.class.js';
 
 class JobsPageController extends JobsPage {
