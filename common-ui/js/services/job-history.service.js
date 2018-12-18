@@ -86,7 +86,8 @@ class JobHistory {
 
             if (previousRecord.UserId !== historyRecord.UserId
                 || dateTimeDelta > MAX_DATE_DELTA
-                || previousRecord.Category !== historyRecord.Category) {
+                || previousRecord.Category !== historyRecord.Category
+                || (previousRecord.Category !== this.HISTORY.CATEGORIES.EDITED && previousRecord.Subcategory !== historyRecord.Subcategory)) {
 
                 groupedHistory.push(historyGroup);
                 historyGroup = [historyRecord];
