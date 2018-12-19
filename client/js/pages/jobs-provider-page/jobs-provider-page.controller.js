@@ -52,18 +52,6 @@ class JobsProviderPageController extends JobsPage {
         this.viewJobs = this.jobs.slice(this.pageStart, this.pageEnd);
     }
 
-    setPage (page) {
-        this.pageStart = this.PAGE_SIZE * (page - 1);
-        this.pageEnd   = this.pageStart + this.PAGE_SIZE;
-
-        this.checkAll = false;
-        this.toggleAllJobs();
-
-        this.viewJobs = this.jobs.slice(this.pageStart, this.pageEnd);
-
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
-    }
-
     markJobRegistered (jobId) {
         let markedJobIndex = _findIndex(this.jobs, {
             _id : jobId
