@@ -46,9 +46,7 @@ class checklistHouseSelectionController {
     $onInit () {
         // init view variables
         this.$log.log('[ChecklistHouseSelectionController] initialized');
-        this.AssetPathService.getBaseURL('IMAGE').then(res => {
-            this.imageUrl = res.url;
-        });
+        this.imageUrl = this.AssetPathService.getBaseURL('IMAGE');
         this.showNavbar         = false;
 
         this.userAuthorization  = this.AuthorizationService.getUserRole();
@@ -118,7 +116,12 @@ class checklistHouseSelectionController {
     }
 
     getSelectedHousePhoto () {
-        return (this.selectedHouse.Photo.length === 0) ? this.DEFAULT_PHOTO : this.imageUrl + this.selectedHouse.Photo[0];
+        if (this.selectedHouse.Photo.length === 0) {
+            return this.DEFAULT_PHOTO;
+        } else {
+            this.imageUrl = this.AssetPathService.getBaseURL('IMAGE', this.selectedHouse.Photo[0]);
+            return this.imageUrl + this.selectedHouse.Photo[0];
+        }
     }
 
     setHouseSelectionState () {
