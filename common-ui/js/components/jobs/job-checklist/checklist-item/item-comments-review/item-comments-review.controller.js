@@ -12,9 +12,7 @@ class ChecklistCommentsReviewController {
 
     $onInit () {
         this.$log.log('[ChecklistCommentsReviewController] initialized');
-        this.AssetPathService.getBaseURL('IMAGE').then(res => {
-            this.imageUrl = res.url;
-        });
+        this.imageUrl = this.AssetPathService.getBaseURL('IMAGE');
         this.state = 'list';
         this.id = this.itemId.replace(/\s/g, '_');
         this.allowPhotoCapture = this.CONTEXT_IS_APP;
@@ -37,6 +35,7 @@ class ChecklistCommentsReviewController {
 
     postComment () {
         if (this.newCommentText || this.newCommentPhotoUrl !== '') {
+            this.newCommentPhotoUrl ? this.imageUrl = this.AssetPathService.getBaseURL('IMAGE', this.newCommentPhotoUrl) : null;
             //TODO: make a stub user service that provides user id.
             const comment = {
                 PhotoUrl  : this.newCommentPhotoUrl,

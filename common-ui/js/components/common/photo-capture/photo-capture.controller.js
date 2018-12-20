@@ -21,9 +21,7 @@ class PhotoCaptureController {
 
     $onInit () {
         this.$log.log('[PhotoCaptureController] initialized');
-        this.AssetPathService.getBaseURL('IMAGE').then(res => {
-            this.s3BaseUrl = res.url;
-        });
+        this.s3BaseUrl = this.AssetPathService.getBaseURL('IMAGE');
         this.allowAddPhoto = this.CONTEXT_IS_APP;
         if (this.newPhoto) {
             this.photoUrl = this.photo
@@ -66,17 +64,12 @@ class PhotoCaptureController {
             } else {
                 this.photo = changes.photo.currentValue;
                 let assetAvailable = this.AssetLocalService.checkIfAssetAvailable(this.photo);
-                // if (this.SyncService.online) {
                 if (assetAvailable === true) {
                     this.photoUrl = `${this.localBaseUrl}${this.photo}`;
                 } else {
                     this.photoUrl = `${this.s3BaseUrl}${this.photo}`;
                 }
                 this.newPhoto = false;
-                // } else {
-                //     this.photoUrl = `${this.localBaseUrl}${this.photo}`;
-
-                // }
                 this.$log.log(`[PhotoCaptureController] onChange photoUrl: ${this.photoUrl}`);
                 this.photoActionLabel = this.photoActionLabelEnum.CHANGE;
             }

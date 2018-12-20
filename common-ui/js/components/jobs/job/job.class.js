@@ -38,9 +38,7 @@ class Job {
 
     $onInit () {
         this.$log.log('[JobClass] initialized');
-        this.AssetPathService.getBaseURL('IMAGE').then(res => {
-            this.imageUrl = res.url;
-        });
+        this.imageUrl = this.AssetPathService.getBaseURL('IMAGE');
         if (this.job.RatingType === 'energy-star') {
             this.RatingType = 'ENERGY STAR';
             this.RatingTypeClass = 'label-energy-star';
