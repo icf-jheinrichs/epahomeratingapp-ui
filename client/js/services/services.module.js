@@ -15,7 +15,6 @@ import JobDataHomePerformanceService from './job-data-home-performance.service';
 import ManufacturersService from './manufacturers.service';
 import ScannerService from './scanner.service';
 import SyncService from './sync.service';
-import AssetPathService from './asset-path.sevice';
 import AssetLocalService from './asset-local.service';
 import UserCompanyService from './user-company.service';
 
@@ -27,7 +26,6 @@ let servicesModule
         .service('AssetLocalService', AssetLocalService)
         .service('AuthenticationService', AuthenticationService)
         .service('AuthorizationService', AuthorizationService)
-        .service('AssetPathService', AssetPathService)
         .service('CameraService', CameraService)
         .service('DisplayLogicDigestService', DisplayLogicDigestService)
         .service('HousePlansService', HousePlansService)
