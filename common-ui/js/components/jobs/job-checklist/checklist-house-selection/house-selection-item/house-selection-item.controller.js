@@ -11,13 +11,7 @@ class houseSelectionItemController {
 
     $onInit () {
         this.$log.log('[HouseSelectionItemController] initialized');
-        this.AssetPathService.getBaseURL('IMAGE').then(res => {
-            this.imageUrl = res.url;
-
-            this.$log.log(`BaseURL: ${this.imageUrl}`);
-            this.photoUrl = this.getPhotoUrl();
-            this.$log.log(`PhotoURL: ${this.photoUrl}`);
-        });
+        this.photoUrl = this.getPhotoUrl();
     }
 
     getPhotoUrl () {
@@ -26,10 +20,14 @@ class houseSelectionItemController {
 
         while (!photoUrl && index < this.house.Photo.length) {
             photoUrl = this.house.Photo[index];
-
             index += 1;
         }
-        return photoUrl ? this.imageUrl + photoUrl : this.defaultPhotoUrl;
+        if (photoUrl) {
+            this.imageUrl = this.AssetPathService.getBaseURL('IMAGE', photoUrl);
+            return this.imageUrl + photoUrl;
+        } else {
+            return this.defaultPhotoUrl;
+        }
     }
 
     showElevationPhotos () {
