@@ -15,11 +15,11 @@ function fileManager ($timeout) {
                 let parentScope = scope.$parent.$parent;
 
                 $timeout(()=>{
-                    console.log(parentScope.fileManagerCtrl.files);
                     console.log(_values(event.target.files));
                     //parentScope.fileManagerCtrl.files = _values(event.target.files);
-                    parentScope.fileManagerCtrl.files.push(_values(event.target.files));
+                    parentScope.fileManagerCtrl.files.push.apply(parentScope.fileManagerCtrl.files, _values(event.target.files));
                     parentScope.fileManagerCtrl.localSelectedCallback();
+                    console.log(parentScope.fileManagerCtrl.files);
                 }, 0);
             });
 
