@@ -25,7 +25,7 @@
             novalidate
             class="col-xs-12"
             name="userSettingsPageCtrl.userSettings"
-            data-ng-submit="userSettingsPageCtrl.onSubmit()">
+            data-ng-submit="userSettingsPageCtrl.userSettings.$valid && userSettingsPageCtrl.onSubmit()">
 
             <h3>User Settings</h3>
 
@@ -55,6 +55,7 @@
                     </p>
                 </div>
             </fieldset>
+
 
             <fieldset>
                 <legend class="fieldset-legend">Password</legend>
@@ -109,10 +110,7 @@
             </fieldset>
 
             <div class="form-actions">
-                <button
-                    type="submit"
-                    class="btn">
-
+                <button type="submit" ng-disabled="userName.$invalid" class="btn">
                     Save
                 </button>
             </button>
