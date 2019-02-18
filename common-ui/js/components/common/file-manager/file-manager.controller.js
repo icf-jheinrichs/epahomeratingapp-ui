@@ -14,6 +14,8 @@ class FileManagerController {
         this.$element = $element;
         this.$scope = $scope;
 
+        this.VALIDATION_MESSAGE    = UI_ENUMS.VALIDATION_MESSAGE;
+
         this.CONTEXT_IS_APP = CONTEXT === UI_ENUMS.CONTEXT.APP;
         this.CONTEXT_IS_ADMIN = CONTEXT === UI_ENUMS.CONTEXT.ADMIN;
     }
@@ -69,8 +71,7 @@ class FileManagerController {
                 break;
             default:
                 this.message = Object.assign({}, FILE_TYPE_ERROR);
-
-                console.log(this.message);
+                alert('File type error.');
                 this.value = '';
             }
         };
