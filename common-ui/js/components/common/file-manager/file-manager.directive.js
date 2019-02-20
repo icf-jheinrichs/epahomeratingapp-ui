@@ -15,6 +15,16 @@ function fileManager ($timeout) {
                 let parentScope = scope.$parent.$parent;
                 $timeout(()=>{
                     //parentScope.fileManagerCtrl.files = _values(event.target.files);
+                    if (this.accept === 'application/pdf') {
+                        var ext = this.value.match(/\.(.+)$/)[1];
+                        switch (ext) {
+                        case 'pdf':
+                            break;
+                        default:
+                            alert('File type error.');
+                            this.value = '';
+                        }
+                    }
                     parentScope.fileManagerCtrl.files.push.apply(parentScope.fileManagerCtrl.files, _values(event.target.files));
                     parentScope.fileManagerCtrl.localSelectedCallback();
                 }, 0);

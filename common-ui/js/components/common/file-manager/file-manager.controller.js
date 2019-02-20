@@ -63,18 +63,6 @@ class FileManagerController {
     triggerInput (fileInput) {
         var file = document.getElementById(fileInput);
         document.getElementById(fileInput).click();
-        //Alert if file type is not pdf
-        file.onchange = function pdfCheck (e) {
-            var ext = this.value.match(/\.(.+)$/)[1];
-            switch (ext) {
-            case 'pdf':
-                break;
-            default:
-                this.message = Object.assign({}, FILE_TYPE_ERROR);
-                alert('File type error.');
-                this.value = '';
-            }
-        };
     }
 
     addFile (file) {
