@@ -1,4 +1,5 @@
 import _findIndex from 'lodash/findIndex';
+import _find from 'lodash/find';
 
 class JobsChecklistPageController {
     constructor (
@@ -108,11 +109,20 @@ class JobsChecklistPageController {
             .getCompany(this.AuthorizationService.getCurrentOrganizationId())
             .then((company) => {
                 this.company = company;
-                if (company.RelatedProviderCompanys.length > 0) {
-                    this
-                        .selectedProviderToAdd = this.company.RelatedProviderCompanys[0];
 
+                return this
+                    .UserCompanyService
+                    .getProviderCompanies();
+            })
+            .then((providerCompanies) => {
+                this.relatedProviderCompanys = this.company.RelatedProviderCompanys.map((O_ID) => {
+                    return _find(providerCompanies, {O_ID});
+                });
+
+                if (this.company.RelatedProviderCompanys.length > 0) {
                     this.hasRelatedProviderCompanies = true;
+                    this
+                        .selectedProviderToAdd = this.relatedProviderCompanys[0];
                 } else {
                     this.hasRelatedProviderCompanies = false;
                 }
@@ -223,11 +233,11 @@ class JobsChecklistPageController {
                     if (confirmation) {
                         this.job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
                         this.job.InternalReview  = false;
-                        this.job.ProviderCompany = this.selectedProviderToAdd.ProviderRESNETId;
+                        this.job.ProviderCompany = this.selectedProviderToAdd.O_ID;
 
                         this
                             .JobChecklistStateService
-                            .submitJob(this.selectedProviderToAdd.ProviderRESNETId);
+                            .submitJob(this.selectedProviderToAdd.O_ID);
                     }
                 });
         }

@@ -25,7 +25,6 @@ class RatingCompanyPageController {
             .UserCompanyService
             .getCompany(this.AuthorizationService.getCurrentOrganizationId())
             .then((company) => {
-                // debugger;
                 this.company = company;
 
                 return this
