@@ -52,7 +52,8 @@
                     accept=".pdf, application/pdf"
                     label="HVAC Design Report"
                     input-id="HvacDesignReport"
-                    files="housePlanEditCtrl.housePlan.HvacDesignReport">
+                    files="housePlanEditCtrl.housePlan.HvacDesignReport"
+                    handle-error="housePlanEditCtrl.onError(error)">
                 </file-manager>
             </fieldset>
 
@@ -64,7 +65,8 @@
                     accept=".pdf, application/pdf"
                     label="Rater Design Review Checklist"
                     input-id="RaterDesignReviewChecklist"
-                    files="housePlanEditCtrl.housePlan.RaterDesignReviewChecklist">
+                    files="housePlanEditCtrl.housePlan.RaterDesignReviewChecklist"
+                    handle-error="housePlanEditCtrl.onError(error)">
                 </file-manager>
             </fieldset>
 

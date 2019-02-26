@@ -1,5 +1,11 @@
 import _values from 'lodash/values';
 
+const FILE_TYPE_ERROR = {
+    type        : 'error',
+    text        : 'File type not allowed.',
+    dismissable : false
+};
+
 function fileManager ($timeout) {
     return {
         scope    : {
@@ -23,6 +29,7 @@ function fileManager ($timeout) {
                         default:
                             alert('File type error.');
                             this.value = '';
+                            parentScope.fileManagerCtrl.handleError({error : {'errorType' : 'errorType', 'errorMessage' : 'errorMessage'}});
                         }
                     }
                     parentScope.fileManagerCtrl.files.push.apply(parentScope.fileManagerCtrl.files, _values(event.target.files));

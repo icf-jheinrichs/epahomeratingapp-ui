@@ -8,11 +8,12 @@ const FILE_TYPE_ERROR = {
 };
 
 class FileManagerController {
-    constructor ($element, $scope, CONTEXT, UI_ENUMS) {
+    constructor ($element, $scope, $rootScope, CONTEXT, UI_ENUMS) {
         'ngInject';
 
         this.$element = $element;
         this.$scope = $scope;
+        this.$rootScope = $rootScope;
 
         this.VALIDATION_MESSAGE    = UI_ENUMS.VALIDATION_MESSAGE;
 

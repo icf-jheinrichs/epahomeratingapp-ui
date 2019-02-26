@@ -8,7 +8,7 @@ const ERROR_SERVER = {
 };
 
 class HousePlanController {
-    constructor ($log, $q, $rootScope, $sanitize, $state, HousePlansService, S3Service, S3_CONFIG, UI_ENUMS) {
+    constructor ($log, $q, $scope, $rootScope, $sanitize, $state, HousePlansService, S3Service, S3_CONFIG, UI_ENUMS) {
         'ngInject';
 
         this.$log                 = $log;
@@ -24,6 +24,10 @@ class HousePlanController {
         this.PDF_FILE_PATH        = S3_CONFIG.PATH_PDF;
     }
 
+    onError (error) {
+        console.dir(error);
+    }
+
     /**
      * Check if file is PDF and less than 2 MB
      * @param  {File}      file file to validify
@@ -32,6 +36,8 @@ class HousePlanController {
     isValidFile (file) {
         return file.type === 'application/pdf' && ((file.size / 1048576) < 2);
     }
+
+
 
     //TODO: Either move this to a house-plan-edit class or into the filemanager
     updateHvacDesignReports (files) {
