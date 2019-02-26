@@ -7,6 +7,12 @@ const ERROR_SERVER = {
     dismissable : false
 };
 
+const FILE_TYPE_ERROR = {
+    type        : 'error',
+    text        : 'The wrong type file was uploaded.',
+    dismissable : false
+};
+
 class HousePlanController {
     constructor ($log, $q, $scope, $rootScope, $sanitize, $state, HousePlansService, S3Service, S3_CONFIG, UI_ENUMS) {
         'ngInject';
@@ -16,6 +22,7 @@ class HousePlanController {
         this.$rootScope           = $rootScope;
         this.$sanitize            = $sanitize;
         this.$state               = $state;
+        this.message              = {};
 
         this.HousePlansService    = HousePlansService;
         this.S3Service            = S3Service;
@@ -25,7 +32,8 @@ class HousePlanController {
     }
 
     onError (error) {
-        console.dir(error);
+        console.log(error);
+        this.message = Object.assign({}, FILE_TYPE_ERROR);
     }
 
     /**

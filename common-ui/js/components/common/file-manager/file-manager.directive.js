@@ -9,7 +9,7 @@ const FILE_TYPE_ERROR = {
 function fileManager ($timeout) {
     return {
         scope    : {
-            LocalFiles : '='
+            LocalFiles  : '=',
         },
         restrict : 'A',
         link     : (scope, element, attrs, fileManagerCtrl) => {
@@ -27,9 +27,8 @@ function fileManager ($timeout) {
                         case 'pdf':
                             break;
                         default:
-                            alert('File type error.');
+                            parentScope.fileManagerCtrl.handleError({error : 'fileError'});
                             this.value = '';
-                            parentScope.fileManagerCtrl.handleError({error : {'errorType' : 'errorType', 'errorMessage' : 'errorMessage'}});
                         }
                     }
                     parentScope.fileManagerCtrl.files.push.apply(parentScope.fileManagerCtrl.files, _values(event.target.files));
