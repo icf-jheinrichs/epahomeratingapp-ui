@@ -43,11 +43,13 @@
             </fieldset>
 
             <fieldset class="row">
+                
+                <status-message status="userSettingsPageCtrl.message"></status-message>
                 <legend class="fieldset-legend">HVAC Design Report</legend>
 
                 <file-manager
                     upload-only="true"
-                    accept="application/pdf"
+                    accept=".pdf, application/pdf"
                     label="HVAC Design Report"
                     input-id="HvacDesignReport"
                     files="housePlanEditCtrl.housePlan.HvacDesignReport">
@@ -59,7 +61,7 @@
 
                 <file-manager
                     upload-only="true"
-                    accept="application/pdf"
+                    accept=".pdf, application/pdf"
                     label="Rater Design Review Checklist"
                     input-id="RaterDesignReviewChecklist"
                     files="housePlanEditCtrl.housePlan.RaterDesignReviewChecklist">

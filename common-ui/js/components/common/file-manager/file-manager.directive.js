@@ -15,14 +15,17 @@ function fileManager ($timeout) {
                 let parentScope = scope.$parent.$parent;
 
                 $timeout(()=>{
-                    parentScope.fileManagerCtrl.files = _values(event.target.files);
+                    console.log(parentScope.fileManagerCtrl.files);
+                    console.log(_values(event.target.files));
+                    //parentScope.fileManagerCtrl.files = _values(event.target.files);
+                    parentScope.fileManagerCtrl.files.push(_values(event.target.files));
                     parentScope.fileManagerCtrl.localSelectedCallback();
                 }, 0);
             });
 
-            element.bind('click', function onClick (event) {
-                element[0].value = null;
-            });
+            //element.bind('click', function onClick (event) {
+            //    element[0].value = null;
+            //});
         }
     };
 }
