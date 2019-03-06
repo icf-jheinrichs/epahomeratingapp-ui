@@ -9,7 +9,8 @@ export const API_URL = {
     JOB_DATA_HOME_PERFORMANCE : `${APIGATEWAY_URI}/job/home_performance_data`,
     HOUSE_PLAN                : `${APIGATEWAY_URI}/house_plan`,
     COMPANY                   : `${APIGATEWAY_URI}/company`,
-    USER                      : `${APIGATEWAY_URI}/user`
+    USER                      : `${APIGATEWAY_URI}/user`,
+    LOGIN                     : `${APIGATEWAY_URI}/login`
 };
 
 export const BASE_IMAGE_URL = process.env.S3_PREFIX;
