@@ -617,18 +617,18 @@ class JobChecklistState {
      * Set status as submitted to provider and add ID of provider submitted to
      * @return {[type]} [description]
      */
-    submitJob (ProviderRESNETId) {
+    submitJob (ProviderOID) {
         this.job
             .History
             .push(this.formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.STATUS,
                 Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.SUBMITTED_TO_PROVIDER,
-                Data        : ProviderRESNETId
+                Data        : ProviderOID
             }));
 
         this.job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
         this.job.InternalReview  = false;
-        this.job.ProviderCompany = ProviderRESNETId;
+        this.job.ProviderCompany = ProviderOID;
 
         this.putJobData();
     }

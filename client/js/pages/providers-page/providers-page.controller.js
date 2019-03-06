@@ -1,6 +1,4 @@
 import _find from 'lodash/find';
-import _findIndex from 'lodash/findIndex';
-import _reject from 'lodash/reject';
 
 class ProvidersPageController {
     constructor ($log, $q, AuthorizationService, DialogService, UserCompanyService, UI_ENUMS) {
@@ -26,7 +24,6 @@ class ProvidersPageController {
             .UserCompanyService
             .getCompany(this.AuthorizationService.getCurrentOrganizationId())
             .then((company) => {
-                // debugger;
                 this.company = company;
 
                 return this

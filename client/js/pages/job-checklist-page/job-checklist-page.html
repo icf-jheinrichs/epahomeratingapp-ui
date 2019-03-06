@@ -204,18 +204,18 @@
         <h3 class="dialog-title">Submit Job to Provider</h3>
     </div>
     <div class="dialog-body">
-        <div class="form-group" data-ng-if="jobsChecklistPageCtrl.company.RelatedProviderCompanys.length > 1">
+        <div class="form-group" data-ng-if="jobsChecklistPageCtrl.relatedProviderCompanys.length > 1">
             <label for="selectedProviderToAdd" class="control-label">Select Provider</label>
             <select
                 class="form-control"
                 data-ng-model="jobsChecklistPageCtrl.selectedProviderToAdd"
                 id="selectedProviderToAdd"
-                data-ng-options="provider.Name for provider in jobsChecklistPageCtrl.company.RelatedProviderCompanys track by provider.ProviderRESNETId">
+                data-ng-options="provider.Name for provider in jobsChecklistPageCtrl.relatedProviderCompanys track by provider.O_ID">
             </select>
         </div>
 
-        <div class="form-group" data-ng-if="jobsChecklistPageCtrl.company.RelatedProviderCompanys.length === 1">
-            <p for="selectedProviderToAdd" class="control-label">This job will be submitted to: {{jobsChecklistPageCtrl.company.RelatedProviderCompanys[0].Name}}</p>
+        <div class="form-group" data-ng-if="jobsChecklistPageCtrl.relatedProviderCompanys.length === 1">
+            <p for="selectedProviderToAdd" class="control-label">This job will be submitted to: {{jobsChecklistPageCtrl.relatedProviderCompanys[0].Name}}</p>
         </div>
 
         <div data-ng-if="!jobsChecklistPageCtrl.hasRelatedProviderCompanies">
