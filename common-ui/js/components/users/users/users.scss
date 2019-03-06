@@ -5,8 +5,35 @@
         max-width: 50px;
     }
 
-    .authorization-checkbox {
-        width: 100px;
+    .column-rater-id {
+        width: 90px;
+    }
+
+    .column-eligibility {
+        width: 150px;
+    }
+
+
+    .column-authorization-checkbox {
+        width: 75px;
+    }
+
+    td.column-authorization-checkbox {
+        text-align: center;
+    }
+
+    .has-access {
+        font-size: $font-size-h4;
+        color: $brand-secondary;
+    }
+
+    th {
+        line-height: $line-height-small;
+    }
+
+    .btn-sm {
+        display: block;
+        width: 100%;
     }
 }
 
