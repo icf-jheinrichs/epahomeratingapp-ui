@@ -21,15 +21,25 @@ const DEFAULT_USER = Object.freeze({
 const USER_SESSION_ITEM = 'user';
 
 class AuthenticationService {
-    constructor ($log, $q, COGNITO, UI_ENUMS, S3_CONFIG) {
+    constructor (
+        $http,
+        $log,
+        $q,
+        API_URL,
+        COGNITO,
+        UI_ENUMS,
+        S3_CONFIG
+    ) {
         'ngInject';
 
-        this.$log                 = $log;
-        this.$q                   = $q;
+        this.$http         = $http;
+        this.$log          = $log;
+        this.$q            = $q;
 
-        this.COGNITO              = COGNITO;
-        this.S3_CONFIG            = S3_CONFIG;
-        this.USER_TYPES           = UI_ENUMS.USER_TYPE;
+        this.COGNITO       = COGNITO;
+        this.S3_CONFIG     = S3_CONFIG;
+        this.USER_TYPES    = UI_ENUMS.USER_TYPE;
+        this.API_URL_LOGIN = API_URL.LOGIN;
 
         this.clearReturnState();
 
@@ -111,6 +121,35 @@ class AuthenticationService {
     checkLogin () {
         return this.$q((resolve, reject) => {
             reject('cached login not supported on website');
+        });
+    }
+
+    loginViaHttps (user) {
+        return this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'POST',
+                    url     : this.API_URL_LOGIN,
+                    data    : {
+                        username : user.userId,
+                        password : user.password
+                    }
+                })
+                .then((result) => {
+                    this.userIsAuthenticated = true;
+
+                    this.user = Object.assign({}, result.data.data);
+
+                    // TODO: Is there a more secure way to store persistant login?
+                    window.sessionStorage.setItem(USER_SESSION_ITEM, angular.toJson(this.user));
+
+                    this.userIDtoAWSCognitoCredentials(this.user.id_token);
+
+                    resolve(this.user);
+                })
+                .catch((error) => {
+                    reject(error);
+                });
         });
     }
 
