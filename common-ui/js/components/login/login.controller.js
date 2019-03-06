@@ -1,10 +1,22 @@
 class LoginController {
-    constructor ($log, $rootScope, $state, $transitions, $q, AuthenticationService, AuthorizationService, UI_ENUMS, VALIDATION_PATTERN) {
+    constructor (
+        $log,
+        $rootScope,
+        $state,
+        $stateParams,
+        $transitions,
+        $q,
+        AuthenticationService,
+        AuthorizationService,
+        UI_ENUMS,
+        VALIDATION_PATTERN
+    ) {
         'ngInject';
 
         this.$log         = $log;
         this.$rootScope   = $rootScope;
         this.$state       = $state;
+        this.$stateParams = $stateParams;
         this.$transitions = $transitions;
         this.$q           = $q;
 
@@ -102,11 +114,18 @@ class LoginController {
         return isUserAuthorized;
     }
 
+    loginMethod (user) {
+        if (this.$stateParams.loginMethod === 'https') {
+            return this.AuthenticationService.loginViaHttps(user);
+        } else {
+            return this.AuthenticationService.login(user);
+        }
+    }
+
     login (user) {
         return this.$q((resolve, reject) => {
             this
-                .AuthenticationService
-                .login(user)
+                .loginMethod(user)
                 .then((user) => {
                     this.notAuthorized = false;
                     this.setAction('authorization');
