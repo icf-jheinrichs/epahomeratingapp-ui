@@ -8,11 +8,14 @@ const FILE_TYPE_ERROR = {
 };
 
 class FileManagerController {
-    constructor ($element, $scope, CONTEXT, UI_ENUMS) {
+    constructor ($element, $scope, $rootScope, CONTEXT, UI_ENUMS) {
         'ngInject';
 
         this.$element = $element;
         this.$scope = $scope;
+        this.$rootScope = $rootScope;
+
+        this.VALIDATION_MESSAGE    = UI_ENUMS.VALIDATION_MESSAGE;
 
         this.CONTEXT_IS_APP = CONTEXT === UI_ENUMS.CONTEXT.APP;
         this.CONTEXT_IS_ADMIN = CONTEXT === UI_ENUMS.CONTEXT.ADMIN;
@@ -61,19 +64,6 @@ class FileManagerController {
     triggerInput (fileInput) {
         var file = document.getElementById(fileInput);
         document.getElementById(fileInput).click();
-        //Alert if file type is not pdf
-        file.onchange = function pdfCheck (e) {
-            var ext = this.value.match(/\.(.+)$/)[1];
-            switch (ext) {
-            case 'pdf':
-                break;
-            default:
-                this.message = Object.assign({}, FILE_TYPE_ERROR);
-
-                console.log(this.message);
-                this.value = '';
-            }
-        };
     }
 
     addFile (file) {

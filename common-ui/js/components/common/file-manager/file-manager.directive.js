@@ -1,9 +1,15 @@
 import _values from 'lodash/values';
 
+const FILE_TYPE_ERROR = {
+    type        : 'error',
+    text        : 'File type not allowed.',
+    dismissable : false
+};
+
 function fileManager ($timeout) {
     return {
         scope    : {
-            LocalFiles : '='
+            LocalFiles  : '=',
         },
         restrict : 'A',
         link     : (scope, element, attrs, fileManagerCtrl) => {
@@ -13,12 +19,19 @@ function fileManager ($timeout) {
             // may need to make this better...
             element.bind('change', function onChange (event) {
                 let parentScope = scope.$parent.$parent;
-
                 $timeout(()=>{
-                    console.log(parentScope.fileManagerCtrl.files);
-                    console.log(_values(event.target.files));
                     //parentScope.fileManagerCtrl.files = _values(event.target.files);
-                    parentScope.fileManagerCtrl.files.push(_values(event.target.files));
+                    if (this.accept === 'application/pdf') {
+                        var ext = this.value.match(/\.(.+)$/)[1];
+                        switch (ext) {
+                        case 'pdf':
+                            break;
+                        default:
+                            parentScope.fileManagerCtrl.handleError({error : 'fileError'});
+                            this.value = '';
+                        }
+                    }
+                    parentScope.fileManagerCtrl.files.push.apply(parentScope.fileManagerCtrl.files, _values(event.target.files));
                     parentScope.fileManagerCtrl.localSelectedCallback();
                 }, 0);
             });
