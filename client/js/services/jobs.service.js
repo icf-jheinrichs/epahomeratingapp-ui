@@ -19,6 +19,7 @@ class JobsService {
      * @param  {object}   API_URL   epahomeratingapp constants - contains paths to API
      */
     constructor ($q,
+        $sce,
         $http,
         $log,
         $rootScope,
@@ -40,6 +41,7 @@ class JobsService {
         this.$sanitize             = $sanitize;
         this.$stateParams          = $stateParams;
         this.$rootScope            = $rootScope;
+        this.$sce                  = $sce;
 
         this.SEARCH_PARAMS         = UI_ENUMS.SEARCH_PARAMS;
         this.JOB_STATUS            = UI_ENUMS.JOB_STATUS;
@@ -634,29 +636,53 @@ class JobsService {
     }
 
     sanitize (job) {
-        job.Primary.Builder                             = this.$sanitize(job.Primary.Builder);
-        job.Primary.AddressInformation.Address1         = this.$sanitize(job.Primary.AddressInformation.Address1);
-        job.Primary.AddressInformation.CityMunicipality = this.$sanitize(job.Primary.AddressInformation.CityMunicipality);
-        job.Primary.AddressInformation.CommunityName    = this.$sanitize(job.Primary.AddressInformation.CommunityName);
-        job.Primary.AddressInformation.LotNo            = this.$sanitize(job.Primary.AddressInformation.LotNo);
-        job.Primary.AddressInformation.ManualId         = this.$sanitize(job.Primary.AddressInformation.ManualId);
-        job.Primary.AddressInformation.StateCode        = this.$sanitize(job.Primary.AddressInformation.StateCode);
-        job.Primary.AddressInformation.ZipCode          = this.$sanitize(job.Primary.AddressInformation.ZipCode);
-        job.Primary.ExportFilename                      = this.$sanitize(job.Primary.ExportFilename);
+        console.log(this.trustAsHtml(job.Primary.Builder));
+
+        job.Primary.Builder                             = this.trustAsHtml(job.Primary.Builder);
+
+        job.Primary.AddressInformation.Address1         = this.trustAsHtml(job.Primary.AddressInformation.Address1);
+        job.Primary.AddressInformation.CityMunicipality = this.trustAsHtml(job.Primary.AddressInformation.CityMunicipality);
+        job.Primary.AddressInformation.CommunityName    = this.trustAsHtml(job.Primary.AddressInformation.CommunityName);
+        job.Primary.AddressInformation.LotNo            = this.trustAsHtml(job.Primary.AddressInformation.LotNo);
+        job.Primary.AddressInformation.ManualId         = this.trustAsHtml(job.Primary.AddressInformation.ManualId);
+        job.Primary.AddressInformation.StateCode        = this.trustAsHtml(job.Primary.AddressInformation.StateCode);
+        job.Primary.AddressInformation.ZipCode          = this.trustAsHtml(job.Primary.AddressInformation.ZipCode);
+        job.Primary.ExportFilename                      = this.trustAsHtml(job.Primary.ExportFilename);
 
         job.Secondary.forEach((secondary, index) => {
-            job.Secondary[index].Builder                             = this.$sanitize(job.Secondary[index].Builder);
-            job.Secondary[index].AddressInformation.Address1         = this.$sanitize(job.Secondary[index].AddressInformation.Address1);
-            job.Secondary[index].AddressInformation.CityMunicipality = this.$sanitize(job.Secondary[index].AddressInformation.CityMunicipality);
-            job.Secondary[index].AddressInformation.CommunityName    = this.$sanitize(job.Secondary[index].AddressInformation.CommunityName);
-            job.Secondary[index].AddressInformation.LotNo            = this.$sanitize(job.Secondary[index].AddressInformation.LotNo);
-            job.Secondary[index].AddressInformation.ManualId         = this.$sanitize(job.Secondary[index].AddressInformation.ManualId);
-            job.Secondary[index].AddressInformation.StateCode        = this.$sanitize(job.Secondary[index].AddressInformation.StateCode);
-            job.Secondary[index].AddressInformation.ZipCode          = this.$sanitize(job.Secondary[index].AddressInformation.ZipCode);
-            job.Secondary[index].ExportFilename                      = this.$sanitize(job.Secondary[index].ExportFilename);
+            job.Secondary[index].Builder                             = this.trustAsHtml(job.Secondary[index].Builder);
+            job.Secondary[index].AddressInformation.Address1         = this.trustAsHtml(job.Secondary[index].AddressInformation.Address1);
+            job.Secondary[index].AddressInformation.CityMunicipality = this.trustAsHtml(job.Secondary[index].AddressInformation.CityMunicipality);
+            job.Secondary[index].AddressInformation.CommunityName    = this.trustAsHtml(job.Secondary[index].AddressInformation.CommunityName);
+            job.Secondary[index].AddressInformation.LotNo            = this.trustAsHtml(job.Secondary[index].AddressInformation.LotNo);
+            job.Secondary[index].AddressInformation.ManualId         = this.trustAsHtml(job.Secondary[index].AddressInformation.ManualId);
+            job.Secondary[index].AddressInformation.StateCode        = this.trustAsHtml(job.Secondary[index].AddressInformation.StateCode);
+            job.Secondary[index].AddressInformation.ZipCode          = this.trustAsHtml(job.Secondary[index].AddressInformation.ZipCode);
+            job.Secondary[index].ExportFilename                      = this.trustAsHtml(job.Secondary[index].ExportFilename);
         });
-
         return job;
+    }
+
+    trustAsHtml (s) {
+        return this.$sce.trustAsHtml(s);
+    }
+
+
+    unsanitize (sanitizedString) {
+
+        console.log(sanitizedString);
+        var str = sanitizedString;
+        var ele = document.createElement('div');
+
+        // use setAttribute to set attributes
+        ele.setAttribute('name', str);
+        console.log(str);
+        console.log(ele);
+        // use textContent to set the content of the element
+        ele.textContent = str;
+        console.log(ele.textContent);
+        var unSanitizedString = ele.outerHTML;
+        return unSanitizedString;
     }
 }
 
