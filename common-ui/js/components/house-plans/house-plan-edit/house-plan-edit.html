@@ -43,6 +43,7 @@
             </fieldset>
 
             <fieldset class="row">
+            
                 <legend class="fieldset-legend">HVAC Design Report</legend>
 
                 <file-manager
@@ -50,7 +51,8 @@
                     accept="application/pdf"
                     label="HVAC Design Report"
                     input-id="HvacDesignReport"
-                    files="housePlanEditCtrl.housePlan.HvacDesignReport">
+                    files="housePlanEditCtrl.housePlan.HvacDesignReport"
+                    handle-error="housePlanEditCtrl.onError(error)">
                 </file-manager>
             </fieldset>
 
@@ -62,7 +64,8 @@
                     accept="application/pdf"
                     label="Rater Design Review Checklist"
                     input-id="RaterDesignReviewChecklist"
-                    files="housePlanEditCtrl.housePlan.RaterDesignReviewChecklist">
+                    files="housePlanEditCtrl.housePlan.RaterDesignReviewChecklist"
+                    handle-error="housePlanEditCtrl.onError(error)">
                 </file-manager>
             </fieldset>
 

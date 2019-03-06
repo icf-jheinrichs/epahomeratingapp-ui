@@ -23,7 +23,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
 
     $stateProvider
         .state(STATE_NAME.LOGIN, {
-            url        : '/login',
+            url        : '/login?loginMethod',
             component  : 'loginPage',
             data       : {
                 requiresAuth : false

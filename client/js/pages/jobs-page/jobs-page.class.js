@@ -22,6 +22,7 @@ class JobsPage {
         AuthorizationService,
         DialogService,
         GeolocationService,
+        JobHistoryService,
         JobsService,
         UserCompanyService,
         UI_ENUMS,
@@ -40,6 +41,7 @@ class JobsPage {
         this.AuthorizationService  = AuthorizationService;
         this.DialogService         = DialogService;
         this.GeolocationService    = GeolocationService;
+        this.JobHistoryService     = JobHistoryService;
         this.JobsService           = JobsService;
         this.UserCompanyService    = UserCompanyService;
 

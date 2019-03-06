@@ -6,6 +6,7 @@ import './users.scss';
 let usersComponent = {
     bindings : {
         users       : '<',
+        onSaveUser  : '&',
         onSaveUsers : '&'
     },
     template,

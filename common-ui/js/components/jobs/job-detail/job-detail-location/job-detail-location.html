@@ -91,9 +91,10 @@
     <legend class="col-xs-3">HVAC Design Report</legend>
     <div class="offset-xs-3 col-xs-9">
         <file-manager
-            upload-only="false"
-            accept="application/pdf"
+            upload-only="true"
+            accept=".pdf, application/pdf"
             label="Rating File"
+            label="Report"
             show-details="jobDetailLocationCtrl.showFileDetails"
             library="jobDetailLocationCtrl.housePlansHVACDesignReports"
             input-id="HvacDesignReport-{{jobDetailLocationCtrl.location.HouseId}}"
@@ -106,10 +107,10 @@
     <legend class="col-xs-3">Rater Design Review Checklist</legend>
     <div class="offset-xs-3 col-xs-9">
         <file-manager
-            upload-only="false"
-            accept="application/pdf"
+            upload-only="true"
+            accept=".pdf, application/pdf"
             show-details="jobDetailLocationCtrl.showFileDetails"
-            label="Rating File"
+            label="Checklist"
             library="jobDetailLocationCtrl.housePlansRaterDesignReviewChecklists"
             input-id="RaterDesignReviewChecklist-{{jobDetailLocationCtrl.location.HouseId}}"
             files="jobDetailLocationCtrl.location.RaterDesignReviewChecklist">

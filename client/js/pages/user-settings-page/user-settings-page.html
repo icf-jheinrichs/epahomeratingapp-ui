@@ -25,14 +25,14 @@
             novalidate
             class="col-xs-12"
             name="userSettingsPageCtrl.userSettings"
-            data-ng-submit="userSettingsPageCtrl.onSubmit()">
+            data-ng-submit="userSettingsPageCtrl.userSettings.$valid && userSettingsPageCtrl.onSubmit()">
 
             <h3>User Settings</h3>
 
             <div class="col-xs-12">
                 <p>To update your RaterPRO login information, use the form below.</p>
 
-                <status-message status="userSettingsPageCtrl.message"></status-message>
+                <status-message status="fileManagerCtrl.message"></status-message>
             </div>
 
             <fieldset>
@@ -48,13 +48,15 @@
                         data-ng-pattern="userSettingsPageCtrl.userNamePattern"
                         data-ng-minlength="7"
                         placeholder="User Name"
-                        data-ng-model="userSettingsPageCtrl.userName" />
+                        data-ng-model="userSettingsPageCtrl.userName" 
+                        required/>
 
                     <p class="form-control-error" role="alert">
                         {{::userSettingsPageCtrl.VALIDATION_MESSAGE.USER_NAME}}
                     </p>
                 </div>
             </fieldset>
+
 
             <fieldset>
                 <legend class="fieldset-legend">Password</legend>
@@ -109,10 +111,7 @@
             </fieldset>
 
             <div class="form-actions">
-                <button
-                    type="submit"
-                    class="btn">
-
+                <button type="submit" ng-disabled="userName.$invalid" class="btn">
                     Save
                 </button>
             </button>
