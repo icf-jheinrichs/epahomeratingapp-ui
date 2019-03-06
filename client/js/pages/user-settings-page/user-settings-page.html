@@ -48,7 +48,8 @@
                         data-ng-pattern="userSettingsPageCtrl.userNamePattern"
                         data-ng-minlength="7"
                         placeholder="User Name"
-                        data-ng-model="userSettingsPageCtrl.userName" />
+                        data-ng-model="userSettingsPageCtrl.userName" 
+                        required/>
 
                     <p class="form-control-error" role="alert">
                         {{::userSettingsPageCtrl.VALIDATION_MESSAGE.USER_NAME}}
