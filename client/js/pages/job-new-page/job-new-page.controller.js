@@ -273,6 +273,7 @@ class JobsNewPageController {
                 if (error.reason) {
                     this.message.text += '. ' + error.reason;
                 }
+                this.deleteLocalHousePlan(job.Primary.HousePlan);
             })
             .finally(() => {
                 this.isBusy = false;
@@ -296,6 +297,23 @@ class JobsNewPageController {
         });
 
         return this.$q.all(uploadLocalHousePlanPromises);
+    }
+
+    deleteLocalHousePlan (files) {
+        this.$log.log('deleting files');
+        let deleteLocalHousePlanPromises = [];
+        let self = this;
+
+        function deleteSingle (file) {
+            return self.HousePlansService.delete(file);
+        }
+
+        files.forEach(file => {
+            this.$log.log(`deleting file ${file}`);
+            deleteLocalHousePlanPromises.push(deleteSingle(file));
+        });
+
+        return this.$q.all(deleteLocalHousePlanPromises);
     }
 }
 
