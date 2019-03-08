@@ -15,12 +15,10 @@ class JobsService {
      *
      * @param  {function} $q        angular.$q promise providers
      * @param  {function} $http     angular.$http ajax requests
-     * @param  {function} $sce
      * @param  {function} $sanitize angular.$sanitize html injection
      * @param  {object}   API_URL   epahomeratingapp constants - contains paths to API
      */
     constructor ($q,
-        $sce,
         $http,
         $log,
         $rootScope,

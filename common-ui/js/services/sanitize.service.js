@@ -1,8 +1,15 @@
 class SanitizeService {
-    sanitize (element) {
-        element = this.SanitizeService.sanitize(element);
-        element = element.replace('&amp;','&');
-        return element;
+    constructor (
+        $sanitize
+    ) {
+        'ngInject';
+        this.$sanitize = $sanitize;
+    }
+    
+    sanitize (unsanitizedString) {
+        sanitizedString = this.$sanitize(unsanitizedString);
+        replacedSanitizedString = sanitizedString.replace(/&amp;/g,'&');
+        return replacedSanitizedString;
     }
 }
 
