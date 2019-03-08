@@ -40,7 +40,6 @@ class JobsService {
         this.$sanitize             = $sanitize;
         this.$stateParams          = $stateParams;
         this.$rootScope            = $rootScope;
-        this.$sce                  = $sce;
 
         this.SEARCH_PARAMS         = UI_ENUMS.SEARCH_PARAMS;
         this.JOB_STATUS            = UI_ENUMS.JOB_STATUS;

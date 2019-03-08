@@ -8,8 +8,8 @@ class SanitizeService {
     
     sanitize (unsanitizedString) {
         sanitizedString = this.$sanitize(unsanitizedString);
-        replacedSanitizedString = sanitizedString.replace(/&amp;/g,'&');
-        return replacedSanitizedString;
+        sanitizedString = sanitizedString.replace(/&amp;/g,'&');
+        return sanitizedString;
     }
 }
 
