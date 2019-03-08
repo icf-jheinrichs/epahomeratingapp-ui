@@ -33,9 +33,12 @@
                 <i class="fa fa-check-circle-o has-access" aria-label="User has provider status" data-ng-if="user.authorizations.Provider"></i>
             </td>
 
-            <td class="column-authorization-checkbox" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">
+            <td class="column-authorization-checkbox">
                 <button class="btn btn-default btn-sm"
-                    ng-click="usersCtrl.openEditUserModal(user.CognitoId)">{{(user.CognitoId === usersCtrl.currentUserCognitoId) ? 'View' : 'Edit'}}</button>
+                    ng-click="usersCtrl.openEditUserModal(user.CognitoId)">
+
+                    {{(user.CognitoId === usersCtrl.currentUserCognitoId) ? 'View' : 'Edit'}}
+                </button>
             </td>
         </tr>
     </tbody>
