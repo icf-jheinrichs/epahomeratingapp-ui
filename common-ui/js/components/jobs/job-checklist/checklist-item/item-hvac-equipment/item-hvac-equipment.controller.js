@@ -127,19 +127,19 @@ class ChecklistItemHVACCommissioningController extends ChecklistItemClass {
                                 equipment,
                                 {
                                     Furnace : {
-                                        Manufacturer : this.$sanitize(equipment.Furnace.Manufacturer),
-                                        Model        : this.$sanitize(equipment.Furnace.Model),
-                                        SerialNumber : this.$sanitize(equipment.Furnace.SerialNumber)
+                                        Manufacturer : this.SanitizeService.sanitize(equipment.Furnace.Manufacturer),
+                                        Model        : this.SanitizeService.sanitize(equipment.Furnace.Model),
+                                        SerialNumber : this.SanitizeService.sanitize(equipment.Furnace.SerialNumber)
                                     },
                                     Condenser    : {
-                                        Manufacturer : this.$sanitize(equipment.Condenser.Manufacturer),
-                                        Model        : this.$sanitize(equipment.Condenser.Model),
-                                        SerialNumber : this.$sanitize(equipment.Condenser.SerialNumber)
+                                        Manufacturer : this.SanitizeService.sanitize(equipment.Condenser.Manufacturer),
+                                        Model        : this.SanitizeService.sanitize(equipment.Condenser.Model),
+                                        SerialNumber : this.SanitizeService.sanitize(equipment.Condenser.SerialNumber)
                                     },
                                     Evaporator   : {
-                                        Manufacturer : this.$sanitize(equipment.Evaporator.Manufacturer),
-                                        Model        : this.$sanitize(equipment.Evaporator.Model),
-                                        SerialNumber : this.$sanitize(equipment.Evaporator.SerialNumber)
+                                        Manufacturer : this.SanitizeService.sanitize(equipment.Evaporator.Manufacturer),
+                                        Model        : this.SanitizeService.sanitize(equipment.Evaporator.Model),
+                                        SerialNumber : this.SanitizeService.sanitize(equipment.Evaporator.SerialNumber)
                                     }
                                 }
                             );

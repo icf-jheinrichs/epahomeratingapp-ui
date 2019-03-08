@@ -637,7 +637,7 @@ class JobsService {
     }
 
     sanitize (job) {
-        job.Primary.Builder                             = this.sanitizeReplace(job.Primary.Builder);
+        //job.Primary.Builder                             = this.sanitizeReplace(job.Primary.Builder);
         job.Primary.AddressInformation.Address1         = this.sanitizeReplace(job.Primary.AddressInformation.Address1);
         job.Primary.AddressInformation.CityMunicipality = this.sanitizeReplace(job.Primary.AddressInformation.CityMunicipality);
         job.Primary.AddressInformation.CommunityName    = this.sanitizeReplace(job.Primary.AddressInformation.CommunityName);

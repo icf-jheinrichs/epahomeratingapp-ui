@@ -5,6 +5,7 @@ class ChecklistItemClass {
         $rootScope,
         $timeout,
         $sanitize,
+        SanitizeService,
         $stateParams,
         UI_ENUMS,
         DisplayLogicDigestService,
@@ -21,11 +22,14 @@ class ChecklistItemClass {
         this.$timeout     = $timeout;
         this.$sanitize    = $sanitize;
         this.$stateParams = $stateParams;
-
+            
         this.RESPONSES    = UI_ENUMS.RESPONSES;
         this.MESSAGING    = UI_ENUMS.MESSAGING;
         this.MODAL        = UI_ENUMS.MODAL;
 
+
+
+        this.SanitizeService           = SanitizeService;
         this.DisplayLogicDigestService = DisplayLogicDigestService;
         this.JobChecklistStateService  = JobChecklistStateService;
         this.ModalService              = ModalService;

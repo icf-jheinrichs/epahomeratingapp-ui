@@ -7,6 +7,7 @@ class checklistHouseSelectionController {
         $rootScope,
         $stateParams,
         $sanitize,
+        SanitizeService,
         $transitions,
         $timeout,
         AuthorizationService,
@@ -27,6 +28,7 @@ class checklistHouseSelectionController {
         this.$transitions = $transitions;
         this.$timeout     = $timeout;
 
+        this.SanitizeService             = SanitizeService;
         this.DEFAULT_PHOTO               = UI_ENUMS.IMAGES.DEFAULT_PHOTO;
         this.MESSAGING                   = UI_ENUMS.MESSAGING;
         this.AssetPathService            = AssetPathService;
@@ -171,7 +173,7 @@ class checklistHouseSelectionController {
         if (this.userAuthorization.Provider) {
             this
                 .JobChecklistStateService
-                .putProviderComment(JSON.stringify(this.$sanitize(this.providerComment)));
+                .putProviderComment(JSON.stringify(this.SanitizeService.sanitize(this.providerComment)));
 
             this.ModalService.closeModal(this.MODAL_PROVIDER_JOB_COMMENTS);
         }

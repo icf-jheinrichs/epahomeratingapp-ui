@@ -80,9 +80,9 @@ class ChecklistItemHVACCommissioningController extends ChecklistItemClass {
                     .itemData
                     .Equipment
                     = _filter(this.editEquipmentData, equipment => {
-                            equipment.Manufacturer = this.$sanitize(equipment.Manufacturer);
-                            equipment.Model        = this.$sanitize(equipment.Model);
-                            equipment.SerialNumber = this.$sanitize(equipment.SerialNumber);
+                            equipment.Manufacturer = this.SanitizeService.sanitize(equipment.Manufacturer);
+                            equipment.Model        = this.SanitizeService.sanitize(equipment.Model);
+                            equipment.SerialNumber = this.SanitizeService.sanitize(equipment.SerialNumber);
 
                             return (equipment.Manufacturer !== '') || (equipment.Model !== '') || (equipment.SerialNumber !== '');
                         });

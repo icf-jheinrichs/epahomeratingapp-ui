@@ -2,7 +2,7 @@ import MrfEditField from '../field.class.js';
 
 class MrfEditFieldDefaultController extends MrfEditField {
     sanitize () {
-        this.value = this.$sanitize(this.value);
+        this.value = this.SanitizeService.sanitize(this.value);
     }
 }
 
