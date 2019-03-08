@@ -241,7 +241,7 @@ class JobsNewPageController {
             .then((results) => {
                 this.updateJobFileData(results, job);
 
-                return this.uploadLocalHousePlan(job.Primary.HousePlan);
+                return this.uploadLocalHousePlans(job.Primary.HousePlan);
             })
             .then(response => {
                 let HousePlan = [];
@@ -273,7 +273,7 @@ class JobsNewPageController {
                 if (error.reason) {
                     this.message.text += '. ' + error.reason;
                 }
-                this.deleteLocalHousePlan(job.Primary.HousePlan);
+                this.deleteLocalHousePlans(job.Primary.HousePlan);
             })
             .finally(() => {
                 this.isBusy = false;
