@@ -281,38 +281,19 @@ class JobsNewPageController {
     }
 
     // upload house plan as temp use
-    uploadLocalHousePlan (files) {
-        let uploadLocalHousePlanPromises = [];
-        let self = this;
-
-        function uploadSingle (file) {
+    uploadLocalHousePlans (files) {
+        const uploadLocalHousePlanPromises = files.map((file) => {
             let formData = new window.FormData();
             formData.append('filedata', file, file.name);
-
-            return self.HousePlansService.post(formData, 'temporary');
-        }
-
-        files.forEach(file => {
-            uploadLocalHousePlanPromises.push(uploadSingle(file));
+            return this.HousePlansService.post(formData, 'temporary');
         });
-
         return this.$q.all(uploadLocalHousePlanPromises);
     }
 
-    deleteLocalHousePlan (files) {
-        this.$log.log('deleting files');
-        let deleteLocalHousePlanPromises = [];
-        let self = this;
-
-        function deleteSingle (file) {
-            return self.HousePlansService.delete(file);
-        }
-
-        files.forEach(file => {
-            this.$log.log(`deleting file ${file}`);
-            deleteLocalHousePlanPromises.push(deleteSingle(file));
+    deleteLocalHousePlans (files) {
+        const deleteLocalHousePlanPromises = files.map((file) => {
+            return this.HousePlansService.delete(file);
         });
-
         return this.$q.all(deleteLocalHousePlanPromises);
     }
 }
