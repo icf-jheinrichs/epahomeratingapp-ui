@@ -107,6 +107,11 @@ class JobsService {
      */
     getProviderJobs (ratingCompanyID) {
         let promise = this.$q((resolve, reject) => {
+            if (!ratingCompanyID) {
+                resolve([]);
+                return;
+            }
+
             this
                 .$http({
                     method          : 'GET',
@@ -272,6 +277,11 @@ class JobsService {
 
     searchProviderJobs (stateParams) {
         let promise = this.$q((resolve, reject) => {
+            if (!stateParams.rater) {
+                resolve([]);
+                return;
+            }
+
             this
                 .$http({
                     method          : 'GET',
