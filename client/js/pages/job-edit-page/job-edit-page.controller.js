@@ -22,7 +22,6 @@ class JobsEditPageController {
     constructor ($q,
         $state,
         AuthenticationService,
-        GeolocationService,
         JobHistoryService,
         JobsService,
         S3Service,
@@ -35,7 +34,6 @@ class JobsEditPageController {
         this.$state      = $state;
 
         this.AuthenticationService = AuthenticationService;
-        this.GeolocationService    = GeolocationService;
         this.JobHistoryService     = JobHistoryService;
         this.JobsService           = JobsService;
         this.S3Service             = S3Service;
@@ -213,7 +211,7 @@ class JobsEditPageController {
                         Subcategory     : this.HISTORY.SUBCATEGORIES.MANAGE.UPDATED,
                         UserId          : user.userId,
                         UserName        : `${user.firstName} ${user.lastName}`,
-                        LatLongAccuracy : this.GeolocationService.getLocation()
+                        LatLongAccuracy : undefined
                     }));
 
                     return this.JobsService.put(job);

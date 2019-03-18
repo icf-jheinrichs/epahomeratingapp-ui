@@ -422,17 +422,24 @@ class JobChecklistState {
         const now  = new Date();
         const user = this.AuthenticationService.getUserInfo();
 
-        const historyRecord = Object.assign(
-            {
-                DateTime        : now.toUTCString(),
-                UserId          : user.userId,
-                UserName        : `${user.firstName} ${user.lastName}`,
-                LatLongAccuracy : this.GeolocationService.getLocation()
-            },
-            data
-        );
+        return this.$q((resolve, reject) => {
+            this
+                .GeolocationService
+                .getLocation()
+                .then((position) => {
+                    const historyRecord = Object.assign(
+                        {
+                            DateTime        : now.toUTCString(),
+                            UserId          : user.userId,
+                            UserName        : `${user.firstName} ${user.lastName}`,
+                            LatLongAccuracy : position
+                        },
+                        data
+                    );
 
-        return this.JobHistoryService.serializeHistoryRecord(historyRecord);
+                    resolve(this.JobHistoryService.serializeHistoryRecord(historyRecord));
+                });
+        });
     }
 
     /**
@@ -440,25 +447,29 @@ class JobChecklistState {
      * @param  {object} photoData ID of house to update, URL of photo
      */
     updateHousePhoto (photoData) {
-        this.job
-            .History
-            .push(this.formatHistoryRecord({
+        this
+            .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.EDITED,
                 Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.PHOTO,
                 Data        : `${photoData.HouseId}: ${photoData.key}`
-            }));
+            })
+            .then((historyRecord) => {
+                this.job
+                    .History
+                    .push(historyRecord);
 
-        let secondaryIndex;
+                let secondaryIndex;
 
-        if (this.job.Primary.HouseId === photoData.HouseId) {
-            this.job.Primary.Photo[photoData.key] = photoData.photo;
-        } else {
-            secondaryIndex = _findIndex(this.job.Secondary, {HouseId : photoData.HouseId});
+                if (this.job.Primary.HouseId === photoData.HouseId) {
+                    this.job.Primary.Photo[photoData.key] = photoData.photo;
+                } else {
+                    secondaryIndex = _findIndex(this.job.Secondary, {HouseId : photoData.HouseId});
 
-            this.job.Secondary[secondaryIndex].Photo[photoData.key] = photoData.photo;
-        }
+                    this.job.Secondary[secondaryIndex].Photo[photoData.key] = photoData.photo;
+                }
 
-        this.putJobData();
+                this.putJobData();
+            });
     }
 
     /**
@@ -467,23 +478,27 @@ class JobChecklistState {
      * @return {[type]}             [description]
      */
     updateMrfData (mrfEditData) {
-        this.job
-            .History
-            .push(this.formatHistoryRecord({
+        this
+            .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.EDITED,
                 Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.EDIT_MRF,
                 Data        : `[${mrfEditData.ItemId}: ${mrfEditData.title}] ${mrfEditData.key}`
-            }));
+            })
+            .then((historyRecord) => {
+                this.job
+                    .History
+                    .push(historyRecord);
 
-        this
-            .jobDataHomePerformance[this.currentHouse.HouseId]
-            .ChecklistItems[mrfEditData.ItemId][mrfEditData.key][mrfEditData.index] = mrfEditData.mrfData;
+                this
+                    .jobDataHomePerformance[this.currentHouse.HouseId]
+                    .ChecklistItems[mrfEditData.ItemId][mrfEditData.key][mrfEditData.index] = mrfEditData.mrfData;
 
-        this
-            .JobDataHomePerformanceService
-            .put(this.jobDataHomePerformance[this.currentHouse.HouseId]);
+                this
+                    .JobDataHomePerformanceService
+                    .put(this.jobDataHomePerformance[this.currentHouse.HouseId]);
 
-        this.putJobData();
+                this.putJobData();
+            });
     }
 
     /**
@@ -500,48 +515,52 @@ class JobChecklistState {
      * @param  {object} response [selected response meta and response]
      */
     updateChecklistResponse (response) {
-        let updateResponse = (response.Response.length === 0) ? undefined : response.Response;
-
-        this.job
-            .History
-            .push(this.formatHistoryRecord({
+        this
+            .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.EDITED,
                 Subcategory : response.CategoryProgress === this.CATEGORY_PROGRESS['pre-drywall'].Key ? this.HISTORY.SUBCATEGORIES.EDITED.UPDATE_PREDRYWALL : this.HISTORY.SUBCATEGORIES.EDITED.UPDATE_FINAL,
                 Data        : `[${response.Category} ${response.CategoryProgress}: ${response.ItemId}] ${response.Response[0]}`
-            }));
+            })
+            .then((historyRecord) => {
+                let updateResponse = (response.Response.length === 0) ? undefined : response.Response;
 
-        this
-            .jobDataResponse
-            .ChecklistItems[response.Category][response.CategoryProgress][response.ItemId]
-            .Response = updateResponse;
+                this.job
+                    .History
+                    .push(historyRecord);
 
-        this
-            .jobDataResponse
-            .ChecklistItems[response.Category][response.CategoryProgress][response.ItemId]
-            .ResponseHouseId = this.currentHouse.HouseId;
+                this
+                    .jobDataResponse
+                    .ChecklistItems[response.Category][response.CategoryProgress][response.ItemId]
+                    .Response = updateResponse;
 
-        this
-            .jobDataResponse
-            .Progress[response.Category][response.CategoryProgress]
-            = this.JobChecklistProgressService.calculateCategoryStageProgress(this.jobDataResponse, this.itemStatusQuery, response);
+                this
+                    .jobDataResponse
+                    .ChecklistItems[response.Category][response.CategoryProgress][response.ItemId]
+                    .ResponseHouseId = this.currentHouse.HouseId;
 
-        this
-            .job
-            .Progress
-            = this.JobChecklistProgressService.calculateJobProgress(this.jobDataResponse.Progress);
+                this
+                    .jobDataResponse
+                    .Progress[response.Category][response.CategoryProgress]
+                    = this.JobChecklistProgressService.calculateCategoryStageProgress(this.jobDataResponse, this.itemStatusQuery, response);
 
-        this
-            .job
-            .ProgressLevel
-            = this.JobChecklistProgressService.jobProgressLevel(this.job.Progress);
+                this
+                    .job
+                    .Progress
+                    = this.JobChecklistProgressService.calculateJobProgress(this.jobDataResponse.Progress);
 
-        this
-            .job
-            .BuilderMustCorrect
-            = this.JobChecklistProgressService.builderMustCorrect(this.job.Progress);
+                this
+                    .job
+                    .ProgressLevel
+                    = this.JobChecklistProgressService.jobProgressLevel(this.job.Progress);
 
-        this.putJobDataResponse();
-        this.putJobData();
+                this
+                    .job
+                    .BuilderMustCorrect
+                    = this.JobChecklistProgressService.builderMustCorrect(this.job.Progress);
+
+                this.putJobDataResponse();
+                this.putJobData();
+            });
     }
 
     /**
@@ -580,15 +599,19 @@ class JobChecklistState {
     }
 
     putProviderComment (providerComment) {
-        this.job
-            .History
-            .push(this.formatHistoryRecord({
+        this
+            .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.EDITED,
                 Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.PROVIDER_COMMENT
-            }));
+            })
+            .then((historyRecord) => {
+                this.job
+                    .History
+                    .push(historyRecord);
 
-        this.job.ProviderComment = providerComment;
-        this.putJobData();
+                this.job.ProviderComment = providerComment;
+                this.putJobData();
+            });
     }
 
     /**
@@ -596,21 +619,25 @@ class JobChecklistState {
      * @param  {object} photoData ID of house to update, URL of photo
      */
     postComment (comment) {
-        this.job
-            .History
-            .push(this.formatHistoryRecord({
+        this
+            .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.EDITED,
                 Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.COMMENT
-            }));
+            })
+            .then((historyRecord) => {
+                this.job
+                    .History
+                    .push(historyRecord);
 
-        this
-            .jobDataResponse
-            .ChecklistItems[comment.Category][comment.CategoryProgress][comment.ItemId]
-            .Comments
-            .push(comment.Comment);
+                this
+                    .jobDataResponse
+                    .ChecklistItems[comment.Category][comment.CategoryProgress][comment.ItemId]
+                    .Comments
+                    .push(comment.Comment);
 
-        this.putJobData(); // update the job data object so that job set to JobInitiated = true
-        this.putJobDataResponse();
+                this.putJobData(); // update the job data object so that job set to JobInitiated = true
+                this.putJobDataResponse();
+            });
     }
 
     /**
@@ -618,64 +645,80 @@ class JobChecklistState {
      * @return {[type]} [description]
      */
     submitJob (ProviderOID) {
-        this.job
-            .History
-            .push(this.formatHistoryRecord({
+        this
+            .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.STATUS,
                 Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.SUBMITTED_TO_PROVIDER,
                 Data        : ProviderOID
-            }));
+            })
+            .then((historyRecord) => {
+                this.job
+                    .History
+                    .push(historyRecord);
 
-        this.job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
-        this.job.InternalReview  = false;
-        this.job.ProviderCompany = ProviderOID;
+                this.job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
+                this.job.InternalReview  = false;
+                this.job.ProviderCompany = ProviderOID;
 
-        this.putJobData();
+                this.putJobData();
+            });
     }
 
     /**
      * Update job state as complete, then call putJobData
      */
     completeJob () {
-        this.job
-            .History
-            .push(this.formatHistoryRecord({
+        this
+            .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.STATUS,
                 Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.COMPLETED
-            }));
+            })
+            .then((historyRecord) => {
+                this.job
+                    .History
+                    .push(historyRecord);
 
-        this.job.Status = this.JOB_STATUS.COMPLETED;
+                this.job.Status = this.JOB_STATUS.COMPLETED;
 
-        this.putJobData();
+                this.putJobData();
+            });
     }
 
     /**
      * Flag job for review, then call putJobData
      */
     flagJobForReview () {
-        this.job
-            .History
-            .push(this.formatHistoryRecord({
+        this
+            .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.STATUS,
                 Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.INTERNAL_REVIEW
-            }));
+            })
+            .then((historyRecord) => {
+                this.job
+                    .History
+                    .push(historyRecord);
 
-        this.job.InternalReview = true;
+                this.job.InternalReview = true;
 
-        this.putJobData();
+                this.putJobData();
+            });
     }
 
     markAsRegistered () {
-        this.job
-            .History
-            .push(this.formatHistoryRecord({
+        this
+            .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.STATUS,
                 Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.INTERNAL_REVIEW
-            }));
+            })
+            .then((historyRecord) => {
+                this.job
+                    .History
+                    .push(historyRecord);
 
-        this.job.Status = this.JOB_STATUS.REGISTERED;
+                this.job.Status = this.JOB_STATUS.REGISTERED;
 
-        this.putJobData();
+                this.putJobData();
+            });
     }
 
     /**
