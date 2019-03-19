@@ -42,7 +42,13 @@ class jobHistoryController {
             .JobChecklistStateService
             .updateJobHistory(updatedHistory)
             .finally((response) => {
-                this.$state.transitionTo(this.$state.current, this.$stateParams, {reload : true, inherit : true, notify : true});
+                this
+                    .$state
+                    .transitionTo(
+                        this.$state.current,
+                        this.$stateParams,
+                        {reload : true, inherit : true, notify : true}
+                    );
             });
     }
 }
