@@ -40,7 +40,7 @@ class jobHistoryController {
     }
 
     $postLink () {
-        if (!google) {
+        if (!window.google) {
             return;
         }
 
