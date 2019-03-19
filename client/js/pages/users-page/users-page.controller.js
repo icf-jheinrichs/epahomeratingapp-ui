@@ -1,4 +1,5 @@
 import _findIndex from 'lodash/findIndex';
+import _cloneDeep from 'lodash/cloneDeep';
 
 class UsersPageController {
     constructor ($log, $q, AuthorizationService, DialogService, UserCompanyService, UI_ENUMS) {
@@ -46,8 +47,8 @@ class UsersPageController {
             });
     }
 
-    saveUsers (users) {
-        users.forEach((user) => {
+    saveUser (user) {
+        return this.$q((resolve, reject) => {
             const O_ID           = this.AuthorizationService.getCurrentOrganizationId();
             const userCognitoId  = user.CognitoId;
             const userIndex      = _findIndex(this.usersData, (userData) => {
@@ -55,28 +56,31 @@ class UsersPageController {
             });
 
             if (userIndex >= 0) {
+                const editedUser = _cloneDeep(this.usersData[userIndex]);
+
                 const userCompanyIndex = _findIndex(this.usersData[userIndex].userCompany, {O_ID : O_ID});
 
                 if (userCompanyIndex >= 0) {
-                    this.usersData[userIndex].userCompany[userCompanyIndex].Admin    = user.authorizations.Admin;
-                    this.usersData[userIndex].userCompany[userCompanyIndex].Provider = user.authorizations.Provider;
-                    this.usersData[userIndex].userCompany[userCompanyIndex].Rater    = user.authorizations.Rater;
-                }
-            }
-        });
+                    editedUser.userCompany[userCompanyIndex].Admin    = user.authorizations.Admin;
+                    editedUser.userCompany[userCompanyIndex].Provider = user.authorizations.Provider;
+                    editedUser.userCompany[userCompanyIndex].Rater    = user.authorizations.Rater;
 
-        return this.$q((resolve, reject) => {
-            this.usersData.forEach((userData) => {
-                this
-                    .UserCompanyService
-                    .putUser(userData)
-                    .then(() => {
-                        resolve({status : 'success'});
-                    })
-                    .catch(() => {
-                        reject({status : 'success'});
-                    });
-            });
+                    this
+                        .UserCompanyService
+                        .putUser(editedUser)
+                        .then(() => {
+                            this.usersData[userIndex] = editedUser;
+                            resolve({status : 'success'});
+                        })
+                        .catch((error) => {
+                            reject(error);
+                        });
+                } else {
+                    reject('user not associated with company');
+                }
+            } else {
+                reject('user not found');
+            }
         });
     }
 
@@ -88,10 +92,9 @@ class UsersPageController {
             Provider        : false,
             Rater           : false
         };
-        let companyUsers = [];
 
-        userAuthorizations.forEach((userUserCompany) => {
-            let user = userUserCompany.user;
+        return userAuthorizations.map((userUserCompany) => {
+            let user = Object.assign({}, userUserCompany.user);
 
             let userAuthorizationIndex = _findIndex(userUserCompany.userCompany, {O_ID : O_ID});
 
@@ -104,11 +107,8 @@ class UsersPageController {
                 }, defaultUserAuthorization);
             }
 
-            companyUsers.push(user);
+            return user;
         });
-
-
-        return companyUsers;
     }
 }
 

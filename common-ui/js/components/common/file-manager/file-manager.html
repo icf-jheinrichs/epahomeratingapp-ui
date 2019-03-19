@@ -1,6 +1,8 @@
-<div class="file-manager flex-row">
-    <div class="file-manager-actions flex-item-static" data-ng-if="fileManagerCtrl.enabled !== false">
 
+        
+<div class="file-manager flex-row">
+    
+    <div class="file-manager-actions flex-item-static" data-ng-if="fileManagerCtrl.enabled !== false">
         <div data-ng-if="fileManagerCtrl.uploadOnly==='true'">
             <label class="btn nowrap" for="{{::fileManagerCtrl.inputId}}">Upload {{::fileManagerCtrl.label}}</label>
             <input
@@ -10,9 +12,8 @@
                 accept="{{::fileManagerCtrl.accept}}"
                 type="file"
                 name="{{::fileManagerCtrl.inputId}}"
-                id="{{::fileManagerCtrl.inputId}}" />
+                id="{{::fileManagerCtrl.inputId}}"/>
         </div>
-
         <div dropdown="dropdown" data-ng-if="fileManagerCtrl.uploadOnly==='false'">
             <button
                 type="button"

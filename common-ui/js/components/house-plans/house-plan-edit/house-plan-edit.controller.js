@@ -7,6 +7,12 @@ const ERROR_SERVER = {
     dismissable : false
 };
 
+const FILE_TYPE_ERROR = {
+    type        : 'error',
+    text        : 'The wrong type file was uploaded.',
+    dismissable : false
+};
+
 class HousePlanController {
     constructor ($log, $q, $rootScope, $sanitize, SanitizeService, $state, HousePlansService, S3Service, S3_CONFIG, UI_ENUMS) {
         'ngInject';
@@ -16,14 +22,18 @@ class HousePlanController {
         this.$rootScope           = $rootScope;
         this.$sanitize            = $sanitize;
         this.$state               = $state;
+        this.message              = {};
 
-        
         this.SanitizeService      = SanitizeService;
         this.HousePlansService    = HousePlansService;
         this.S3Service            = S3Service;
         this.MESSAGING            = UI_ENUMS.MESSAGING;
         this.isBusy               = false;
         this.PDF_FILE_PATH        = S3_CONFIG.PATH_PDF;
+    }
+
+    onError (error) {
+        this.message = Object.assign({}, FILE_TYPE_ERROR);
     }
 
     /**
@@ -34,6 +44,8 @@ class HousePlanController {
     isValidFile (file) {
         return file.type === 'application/pdf' && ((file.size / 1048576) < 2);
     }
+
+
 
     //TODO: Either move this to a house-plan-edit class or into the filemanager
     updateHvacDesignReports (files) {

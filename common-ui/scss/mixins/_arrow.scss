@@ -5,3 +5,11 @@
     border-left: $size solid transparent;
     border-right: $size solid transparent;
 }
+
+@mixin arrow-left($size: $arrow-default, $color: $brand-auxillary) {
+    width: 0;
+    height: 0;
+    border-right: $size solid $color;
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+}

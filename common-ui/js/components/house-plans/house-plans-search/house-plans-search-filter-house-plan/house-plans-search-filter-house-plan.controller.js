@@ -37,7 +37,7 @@ class SearchFilterHousePlanController {
                 param      : {}
             };
 
-            filter.param[this.param] = encodeURIComponent(this.this.SanitizeService.sanitize(this.keywords));
+            filter.param[this.param] = encodeURIComponent(this.SanitizeService.sanitize(this.keywords));
         }
 
         return filter;
