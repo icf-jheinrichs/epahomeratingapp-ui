@@ -18,14 +18,11 @@ class NavbarAdminController {
     }
 
     setNavVisibility () {
-        this.userRole          = this.AuthorizationService.getUserRole();
-        this.organizationTypes = this.AuthorizationService.getOrganizationTypes();
-
         this.navVisibility = {
-            jobs            : this.organizationTypes.RaterOrg,
-            templateLibrary : this.organizationTypes.RaterOrg,
-            jobsProvider    : this.organizationTypes.ProviderOrg,
-            users           : this.userRole.Admin || this.userRole.Provider
+            jobs            : this.AuthorizationService.userIsAuthorizedForRoute(this.STATE_NAME.JOBS_SEARCH),
+            templateLibrary : this.AuthorizationService.userIsAuthorizedForRoute(this.STATE_NAME.TEMPLATE_LIBRARY),
+            jobsProvider    : this.AuthorizationService.userIsAuthorizedForRoute(this.STATE_NAME.JOBS_PROVIDER_SEARCH),
+            users           : this.AuthorizationService.userIsAuthorizedForRoute(this.STATE_NAME.USERS)
         };
     }
 

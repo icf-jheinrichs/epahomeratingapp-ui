@@ -39,3 +39,17 @@
         position: absolute;
     }
 }
+
+.tooltip-wrapper-right .tooltip {
+    left: 100%;
+    margin-left: $offset-default;
+    top: -$offset-default;
+
+    &::before {
+        @include arrow-left($arrow-small, $brand-tertiary);
+
+        bottom: calc(50% - #{$arrow-small / 2});
+        left: auto;
+        right: 100%;
+    }
+}

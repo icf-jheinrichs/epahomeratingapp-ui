@@ -1,5 +1,3 @@
-import {PATTERN} from '../../epahomeratingapp.config.js';
-
 const USER_SETTINGS_ERROR = {
     type        : 'error',
     text        : 'An error occurred while trying to create your account.',

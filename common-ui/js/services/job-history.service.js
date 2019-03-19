@@ -1,3 +1,4 @@
+/* globals navigator, Connection */
 
 import moment from 'moment';
 
@@ -6,7 +7,7 @@ const MINS_IN_MS     = 60 * SECOND_IN_MS;
 const MAX_DATE_DELTA = 60 * MINS_IN_MS;
 
 class JobHistory {
-    constructor (UI_ENUMS) {
+    constructor (UI_ENUMS, CONTEXT) {
         'ngInject';
 
         this.HISTORY = {
@@ -15,6 +16,8 @@ class JobHistory {
             TITLES            : UI_ENUMS.HISTORY_TITLES,
             SHORT_DESCRIPTION : UI_ENUMS.HISTORY_SHORT_DESCRIPTION
         };
+
+        this.CONTEXT_IS_APP = CONTEXT === UI_ENUMS.CONTEXT.APP;
     }
 
     getShortDescription (historyData) {
@@ -164,6 +167,29 @@ class JobHistory {
         return history.map((historyGroup) => {
             const isEditedCategory = historyGroup[0].Category === this.HISTORY.CATEGORIES.EDITED;
             let details;
+            const map = {
+                showMap     : true,
+                coordinates : []
+            };
+
+            if (this.CONTEXT_IS_APP && navigator.connection.type === Connection.NONE) {
+                map.showMap = false;
+            }
+
+            if (map.showMap) {
+                map.coordinates
+                    = historyGroup
+                        .filter((historyRecord) => {
+                            return historyRecord.LatLongAccuracy;
+                        })
+                        .map((historyRecord) => {
+                            return historyRecord.LatLongAccuracy;
+                        });
+
+                if (map.coordinates.length === 0) {
+                    map.showMap = false;
+                }
+            }
 
             if (isEditedCategory) {
                 const durationInMs  = historyGroup[historyGroup.length - 1].DateTime - historyGroup[0].DateTime;
@@ -221,7 +247,8 @@ class JobHistory {
                 title   : isEditedCategory ? this.HISTORY.SHORT_DESCRIPTION.EDITED : this.HISTORY.TITLES[historyGroup[0].Category][historyGroup[0].Subcategory],
                 date    : historyGroup[0].DateTime,
                 user    : historyGroup[0].UserName,
-                details : details
+                details,
+                map
             };
         });
     }

@@ -1,10 +1,14 @@
 class GeolocationService {
-    constructor () {
+    constructor ($q) {
         'ngInject';
+
+        this.$q = $q;
     }
 
     getLocation () {
-        return undefined;
+        return this.$q((resolve, reject) => {
+            resolve(undefined);
+        });
     }
 }
 

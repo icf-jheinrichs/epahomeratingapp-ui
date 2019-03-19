@@ -13,7 +13,6 @@ class JobsProviderPageController extends JobsPage {
             .UserCompanyService
             .getCompany(this.AuthorizationService.getCurrentOrganizationId())
             .then((company) => {
-                // debugger;
                 this.company = company;
 
                 return this

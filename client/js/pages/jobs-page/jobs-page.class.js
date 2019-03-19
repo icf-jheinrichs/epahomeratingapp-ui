@@ -21,7 +21,7 @@ class JobsPage {
         AuthenticationService,
         AuthorizationService,
         DialogService,
-        GeolocationService,
+        JobHistoryService,
         JobsService,
         UserCompanyService,
         UI_ENUMS,
@@ -39,7 +39,7 @@ class JobsPage {
         this.AuthenticationService = AuthenticationService;
         this.AuthorizationService  = AuthorizationService;
         this.DialogService         = DialogService;
-        this.GeolocationService    = GeolocationService;
+        this.JobHistoryService     = JobHistoryService;
         this.JobsService           = JobsService;
         this.UserCompanyService    = UserCompanyService;
 
@@ -257,7 +257,7 @@ class JobsPage {
                 DateTime        : now.toUTCString(),
                 UserId          : user.userId,
                 UserName        : `${user.firstName} ${user.lastName}`,
-                LatLongAccuracy : this.GeolocationService.getLocation()
+                LatLongAccuracy : undefined
             },
             data
         );

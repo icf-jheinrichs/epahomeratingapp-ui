@@ -45,13 +45,13 @@ class paginationController {
                 },
                 {
                     // prevent the events onStart and onSuccess from firing
-                    notify : false,
+                    notify   : false,
                     // prevent reload of the current state
-                    reload : false,
+                    reload   : false,
                     // replace the last record when changing the params so you don't hit the back button and get old params
                     location : 'replace',
                     // inherit the current params on the url
-                    inherit : true
+                    inherit  : true
                 }
             );
     }

@@ -11,3 +11,19 @@
 .history-group-title {
     margin-bottom: 0;
 }
+
+.history-group-details {
+    margin-right: $gutter-full;
+    width: 350px;
+}
+
+.history-group-map .map-link {
+    color: $link-color;
+    text-decoration: underline;
+}
+
+.job-history-map {
+    margin-bottom: $offset-default;
+    min-height: 300px;
+    width: 100%;
+}

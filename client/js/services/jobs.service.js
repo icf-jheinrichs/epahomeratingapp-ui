@@ -28,7 +28,6 @@ class JobsService {
         API_URL,
         AuthorizationService,
         AuthenticationService,
-        GeolocationService,
         JobHistoryService,
         jobTitleFilter
     ) {
@@ -52,7 +51,6 @@ class JobsService {
 
         this.AuthorizationService  = AuthorizationService;
         this.AuthenticationService = AuthenticationService;
-        this.GeolocationService    = GeolocationService;
         this.JobHistoryService     = JobHistoryService;
 
         this.API_URL               = API_URL;
@@ -625,7 +623,7 @@ class JobsService {
                 DateTime        : now.toUTCString(),
                 UserId          : user.userId,
                 UserName        : `${user.firstName} ${user.lastName}`,
-                LatLongAccuracy : this.GeolocationService.getLocation()
+                LatLongAccuracy : undefined
             },
             data
         );

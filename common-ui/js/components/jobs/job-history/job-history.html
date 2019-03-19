@@ -10,14 +10,25 @@
 
     <div ng-if="jobHistoryCtrl.historyType === jobHistoryCtrl.HISTORY_TYPES.NEW">
         <div
-            class="history-group"
+            class="history-group flex-row"
             data-ng-repeat="historyGroup in ::jobHistoryCtrl.history track by $index">
 
-            <p class="history-group-title"><stong>{{historyGroup.title}}:</stong> {{historyGroup.date | date:'medium' }} by {{historyGroup.user}}</p>
+            <div class="history-group-details">
+                <p class="history-group-title"><stong>{{historyGroup.title}}:</stong> {{historyGroup.date | date:'medium' }} by {{historyGroup.user}}</p>
 
-            <ul ng-if="historyGroup.details">
-                <li ng-repeat="detail in historyGroup.details track by $index">{{::detail}}</li>
-            </ul>
+                <ul ng-if="historyGroup.details">
+                    <li ng-repeat="detail in historyGroup.details track by $index">{{::detail}}</li>
+                </ul>
+            </div>
+
+            <div
+                class="history-group-map flex-item-grow"
+                data-ng-if="historyGroup.map.showMap">
+
+                <job-history-map
+                    map="historyGroup.map">
+                </job-history-map>
+            </div>
         </div>
     </div>
 

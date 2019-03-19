@@ -153,8 +153,10 @@ class AuthorizationService {
     }
 
     userIsAuthorizedForRoute (route) {
-        const orgTypes = this.getOrganizationTypes();
-        const userRole = this.getUserRole();
+        const orgTypes              = this.getOrganizationTypes();
+        const userRole              = this.getUserRole();
+        const roleIsAdminOrRater    = userRole.Admin || userRole.Rater;
+        const roleIsAdminOrProvider = userRole.Admin || userRole.Provider;
 
         let transitionTo = route;
 
@@ -174,33 +176,33 @@ class AuthorizationService {
         case this.STATE_NAME.PROGRESS :
             return false;
         case this.STATE_NAME.TEMPLATE_LIBRARY :
-            return orgTypes.RaterOrg;
+            return orgTypes.RaterOrg && roleIsAdminOrRater;
         case this.STATE_NAME.TEMPLATE_LIBRARY_NEW :
-            return orgTypes.RaterOrg;
+            return orgTypes.RaterOrg && roleIsAdminOrRater;
         case this.STATE_NAME.TEMPLATE_LIBRARY_EDIT :
-            return orgTypes.RaterOrg;
+            return orgTypes.RaterOrg && roleIsAdminOrRater;
         case this.STATE_NAME.TEMPLATE_LIBRARY_EDIT_BULK :
-            return orgTypes.RaterOrg;
+            return orgTypes.RaterOrg && roleIsAdminOrRater;
         case this.STATE_NAME.TEMPLATE_LIBRARY_SEARCH :
-            return orgTypes.RaterOrg;
+            return orgTypes.RaterOrg && roleIsAdminOrRater;
         case this.STATE_NAME.TEMPLATE_LIBRARY_SEARCH_NEW :
-            return orgTypes.RaterOrg;
+            return orgTypes.RaterOrg && roleIsAdminOrRater;
         case this.STATE_NAME.TEMPLATE_LIBRARY_SEARCH_EDIT :
-            return orgTypes.RaterOrg;
+            return orgTypes.RaterOrg && roleIsAdminOrRater;
         case this.STATE_NAME.TEMPLATE_LIBRARY_SEARCH_EDIT_BULK :
-            return orgTypes.RaterOrg;
+            return orgTypes.RaterOrg && roleIsAdminOrRater;
         case this.STATE_NAME.JOBS :
-            return orgTypes.RaterOrg;
+            return orgTypes.RaterOrg && roleIsAdminOrRater;
         case this.STATE_NAME.JOBS_SEARCH :
-            return orgTypes.RaterOrg;
+            return orgTypes.RaterOrg && roleIsAdminOrRater;
         case this.STATE_NAME.JOBS_PROVIDER :
-            return orgTypes.ProviderOrg;
+            return orgTypes.ProviderOrg && userRole.Provider;
         case this.STATE_NAME.JOBS_PROVIDER_SEARCH :
-            return orgTypes.ProviderOrg;
+            return orgTypes.ProviderOrg && userRole.Provider;
         case this.STATE_NAME.JOB_NEW :
-            return orgTypes.RaterOrg;
+            return orgTypes.RaterOrg && roleIsAdminOrRater;
         case this.STATE_NAME.JOB_EDIT :
-            return orgTypes.RaterOrg;
+            return orgTypes.RaterOrg && roleIsAdminOrRater;
         case this.STATE_NAME.JOB_CHECKLIST :
             return true;
         case this.STATE_NAME.JOB_CHECKLIST_CATEGORY :
@@ -212,11 +214,11 @@ class AuthorizationService {
         case this.STATE_NAME.JOB_CHECKLIST_REVIEW_CATEGORY :
             return true;
         case this.STATE_NAME.PROVIDERS :
-            return userRole.Admin || userRole.Provider;
+            return roleIsAdminOrProvider;
         case this.STATE_NAME.USERS :
-            return userRole.Admin || userRole.Provider;
+            return roleIsAdminOrProvider;
         case this.STATE_NAME.USER_EDIT :
-            return userRole.Admin || userRole.Provider;
+            return roleIsAdminOrProvider;
         case this.STATE_NAME.USER_SETTINGS :
             return true;
         default :

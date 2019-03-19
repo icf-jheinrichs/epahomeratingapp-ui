@@ -268,6 +268,7 @@ const MODAL = {
     DOWNLOAD_REM_XML            : 'modal-download-rem-xml',
     EDIT_HVAC_EQUIPMENT         : 'modal-edit-hvac-equipment',
     EDIT_WATER_HEATER_EQUIPMENT : 'modal-edit-water-heater-equipment',
+    EDIT_USER                   : 'modal-edit-user',
     OPEN_JOB                    : 'modal-open-job',
     PROVIDER_JOB_COMMENTS       : 'modal-provider-job-comments',
     SHOW_FOOTNOTE               : 'modal-show-footnote',
