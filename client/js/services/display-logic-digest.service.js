@@ -11,7 +11,7 @@ class DisplayLogicDigestService {
 
         this.API_URL   = API_URL;
 
-        this.digest    = this.$http({
+        this.digest = this.$http({
             method  : 'GET',
             url     : this.API_URL.DISPLAY_LOGIC_DIGEST
         });
@@ -28,11 +28,11 @@ class DisplayLogicDigestService {
     get (id) {
         let checklistItemDisplay = this.digest
             .then(digest => {
-                let checklistItem = _cloneDeep(digest.data.ChecklistItems[id]); 
+                let checklistItem = _cloneDeep(digest.data.ChecklistItems[id]);
                 checklistItem.Footnotes = this.FootNotesService.fetchData(id).Footnotes;
                 return checklistItem;
             });
-        
+
 
         return checklistItemDisplay;
     }

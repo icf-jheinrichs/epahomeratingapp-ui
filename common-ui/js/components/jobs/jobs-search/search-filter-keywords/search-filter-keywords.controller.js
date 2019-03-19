@@ -1,9 +1,8 @@
 class SearchFilterKeywordsController {
-    constructor ($stateParams, $sanitize, SanitizeService, UI_ENUMS) {
+    constructor ($stateParams, SanitizeService, UI_ENUMS) {
         'ngInject';
 
         this.$stateParams    = $stateParams;
-        this.$sanitize       = $sanitize;
         this.SanitizeService = SanitizeService;
         this.param           = UI_ENUMS.SEARCH_PARAMS.KEYWORDS;
     }

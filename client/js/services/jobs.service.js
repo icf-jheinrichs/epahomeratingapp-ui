@@ -15,7 +15,6 @@ class JobsService {
      *
      * @param  {function} $q        angular.$q promise providers
      * @param  {function} $http     angular.$http ajax requests
-     * @param  {function} $sanitize angular.$sanitize html injection
      * @param  {object}   API_URL   epahomeratingapp constants - contains paths to API
      */
     constructor ($q,
@@ -23,12 +22,12 @@ class JobsService {
         $log,
         $rootScope,
         $stateParams,
-        $sanitize,
         UI_ENUMS,
         API_URL,
         AuthorizationService,
         AuthenticationService,
         JobHistoryService,
+        SanitizeService,
         jobTitleFilter
     ) {
         'ngInject';
@@ -36,7 +35,6 @@ class JobsService {
         this.$http                 = $http;
         this.$log                  = $log;
         this.$q                    = $q;
-        this.$sanitize             = $sanitize;
         this.$stateParams          = $stateParams;
         this.$rootScope            = $rootScope;
 
@@ -55,6 +53,8 @@ class JobsService {
 
         this.API_URL               = API_URL;
         this.jobTitleFilter        = jobTitleFilter;
+
+        this.SanitizeService       = SanitizeService.sanitize;
     }
 
     /**
@@ -642,34 +642,29 @@ class JobsService {
     }
 
     sanitize (job) {
-        //job.Primary.Builder                             = this.sanitizeReplace(job.Primary.Builder);
-        job.Primary.AddressInformation.Address1         = this.sanitizeReplace(job.Primary.AddressInformation.Address1);
-        job.Primary.AddressInformation.CityMunicipality = this.sanitizeReplace(job.Primary.AddressInformation.CityMunicipality);
-        job.Primary.AddressInformation.CommunityName    = this.sanitizeReplace(job.Primary.AddressInformation.CommunityName);
-        job.Primary.AddressInformation.LotNo            = this.sanitizeReplace(job.Primary.AddressInformation.LotNo);
-        job.Primary.AddressInformation.ManualId         = this.sanitizeReplace(job.Primary.AddressInformation.ManualId);
-        job.Primary.AddressInformation.StateCode        = this.sanitizeReplace(job.Primary.AddressInformation.StateCode);
-        job.Primary.AddressInformation.ZipCode          = this.sanitizeReplace(job.Primary.AddressInformation.ZipCode);
-        job.Primary.ExportFilename                      = this.sanitizeReplace(job.Primary.ExportFilename);
+        job.Primary.Builder                             = this.SanitizeService.sanitize(job.Primary.Builder);
+        job.Primary.AddressInformation.Address1         = this.SanitizeService.sanitize(job.Primary.AddressInformation.Address1);
+        job.Primary.AddressInformation.CityMunicipality = this.SanitizeService.sanitize(job.Primary.AddressInformation.CityMunicipality);
+        job.Primary.AddressInformation.CommunityName    = this.SanitizeService.sanitize(job.Primary.AddressInformation.CommunityName);
+        job.Primary.AddressInformation.LotNo            = this.SanitizeService.sanitize(job.Primary.AddressInformation.LotNo);
+        job.Primary.AddressInformation.ManualId         = this.SanitizeService.sanitize(job.Primary.AddressInformation.ManualId);
+        job.Primary.AddressInformation.StateCode        = this.SanitizeService.sanitize(job.Primary.AddressInformation.StateCode);
+        job.Primary.AddressInformation.ZipCode          = this.SanitizeService.sanitize(job.Primary.AddressInformation.ZipCode);
+        job.Primary.ExportFilename                      = this.SanitizeService.sanitize(job.Primary.ExportFilename);
 
         job.Secondary.forEach((secondary, index) => {
-            job.Secondary[index].Builder                             = this.sanitizeReplace(job.Secondary[index].Builder);
-            job.Secondary[index].AddressInformation.Address1         = this.sanitizeReplace(job.Secondary[index].AddressInformation.Address1);
-            job.Secondary[index].AddressInformation.CityMunicipality = this.sanitizeReplace(job.Secondary[index].AddressInformation.CityMunicipality);
-            job.Secondary[index].AddressInformation.CommunityName    = this.sanitizeReplace(job.Secondary[index].AddressInformation.CommunityName);
-            job.Secondary[index].AddressInformation.LotNo            = this.sanitizeReplace(job.Secondary[index].AddressInformation.LotNo);
-            job.Secondary[index].AddressInformation.ManualId         = this.sanitizeReplace(job.Secondary[index].AddressInformation.ManualId);
-            job.Secondary[index].AddressInformation.StateCode        = this.sanitizeReplace(job.Secondary[index].AddressInformation.StateCode);
-            job.Secondary[index].AddressInformation.ZipCode          = this.sanitizeReplace(job.Secondary[index].AddressInformation.ZipCode);
-            job.Secondary[index].ExportFilename                      = this.sanitizeReplace(job.Secondary[index].ExportFilename);
+            job.Secondary[index].Builder                             = this.SanitizeService.sanitize(job.Secondary[index].Builder);
+            job.Secondary[index].AddressInformation.Address1         = this.SanitizeService.sanitize(job.Secondary[index].AddressInformation.Address1);
+            job.Secondary[index].AddressInformation.CityMunicipality = this.SanitizeService.sanitize(job.Secondary[index].AddressInformation.CityMunicipality);
+            job.Secondary[index].AddressInformation.CommunityName    = this.SanitizeService.sanitize(job.Secondary[index].AddressInformation.CommunityName);
+            job.Secondary[index].AddressInformation.LotNo            = this.SanitizeService.sanitize(job.Secondary[index].AddressInformation.LotNo);
+            job.Secondary[index].AddressInformation.ManualId         = this.SanitizeService.sanitize(job.Secondary[index].AddressInformation.ManualId);
+            job.Secondary[index].AddressInformation.StateCode        = this.SanitizeService.sanitize(job.Secondary[index].AddressInformation.StateCode);
+            job.Secondary[index].AddressInformation.ZipCode          = this.SanitizeService.sanitize(job.Secondary[index].AddressInformation.ZipCode);
+            job.Secondary[index].ExportFilename                      = this.SanitizeService.sanitize(job.Secondary[index].ExportFilename);
         });
-        return job;
-    }
 
-    sanitizeReplace(s) {
-        s = this.$sanitize(s);
-        s = s.replace('&amp;','&');
-        return s;
+        return job;
     }
 }
 

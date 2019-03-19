@@ -8,13 +8,12 @@ const ERROR_SERVER = {
 };
 
 class HousePlanEditBulkController {
-    constructor ($q, $rootScope, $sanitize, SanitizeService, $scope, $state, $stateParams, HousePlansService, S3Service, S3_CONFIG, UI_ENUMS) {
+    constructor ($q, $rootScope, SanitizeService, $scope, $state, $stateParams, HousePlansService, S3Service, S3_CONFIG, UI_ENUMS) {
         'ngInject';
 
         this.$q                = $q;
         this.$state            = $state;
         this.$rootScope        = $rootScope;
-        this.$sanitize         = $sanitize;
         this.$scope            = $scope;
         this.$stateParams      = $stateParams;
 

@@ -14,13 +14,12 @@ const FILE_TYPE_ERROR = {
 };
 
 class HousePlanController {
-    constructor ($log, $q, $rootScope, $sanitize, SanitizeService, $state, HousePlansService, S3Service, S3_CONFIG, UI_ENUMS) {
+    constructor ($log, $q, $rootScope, SanitizeService, $state, HousePlansService, S3Service, S3_CONFIG, UI_ENUMS) {
         'ngInject';
 
         this.$log                 = $log;
         this.$q                   = $q;
         this.$rootScope           = $rootScope;
-        this.$sanitize            = $sanitize;
         this.$state               = $state;
         this.message              = {};
 

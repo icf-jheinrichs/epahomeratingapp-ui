@@ -1,10 +1,9 @@
 import moment from 'moment';
 
 class ChecklistCommentsController {
-    constructor ($log, $sanitize, SanitizeService, AssetPathService, UI_ENUMS, CONTEXT, AuthenticationService, BASE_IMAGE_URL) {
+    constructor ($log, SanitizeService, AssetPathService, UI_ENUMS, CONTEXT, AuthenticationService, BASE_IMAGE_URL) {
         'ngInject';
         this.$log              = $log;
-        this.$sanitize         = $sanitize;
         this.AssetPathService  = AssetPathService;
         this.BASE_IMAGE_URL    = BASE_IMAGE_URL;
         this.user              = AuthenticationService.getUserInfo();

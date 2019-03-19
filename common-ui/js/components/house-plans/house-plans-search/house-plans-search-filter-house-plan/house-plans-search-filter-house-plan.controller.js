@@ -1,9 +1,8 @@
 class SearchFilterHousePlanController {
-    constructor ($stateParams, SanitizeService, $sanitize, UI_ENUMS) {
+    constructor ($stateParams, SanitizeService, UI_ENUMS) {
         'ngInject';
 
         this.$stateParams       = $stateParams;
-        this.$sanitize          = $sanitize;
         this.SanitizeService    = SanitizeService;
         this.param   = UI_ENUMS.HOUSE_PLANS_SEARCH_PARAMS.KEYWORDS;
     }

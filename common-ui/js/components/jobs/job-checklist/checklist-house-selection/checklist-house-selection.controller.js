@@ -6,7 +6,6 @@ class checklistHouseSelectionController {
         $log,
         $rootScope,
         $stateParams,
-        $sanitize,
         SanitizeService,
         $transitions,
         $timeout,
@@ -24,7 +23,6 @@ class checklistHouseSelectionController {
         this.$log         = $log;
         this.$rootScope   = $rootScope;
         this.$stateParams = $stateParams;
-        this.$sanitize    = $sanitize;
         this.$transitions = $transitions;
         this.$timeout     = $timeout;
 
