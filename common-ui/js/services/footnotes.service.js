@@ -1,4 +1,4 @@
-import footnotes from "./footnotes.js";
+import footnotes from './footnotes.js';
 
 class FootNotesService {
 
@@ -6,11 +6,11 @@ class FootNotesService {
         'ngInject';
 
         this.$http = $http;
-        this.$q    = $q;   
+        this.$q    = $q;
     }
 
     fetchData (id) {
-        return footnotes[id] || '';
+        return footnotes[id] || {Footnotes : ''};
     }
 }
 
