@@ -73,8 +73,8 @@ class UserResetPasswordPageController {
                 })
                 .then(response => {
                     return this
-                                .$state
-                                .go(this.STATE_NAME.LOGIN);
+                        .$state
+                        .go(this.STATE_NAME.LOGIN);
                 })
                 .catch((error) => {
                     this.message = Object.assign({}, USER_SETTINGS_ERROR);

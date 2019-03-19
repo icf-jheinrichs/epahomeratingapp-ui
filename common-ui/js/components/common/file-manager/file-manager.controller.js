@@ -1,12 +1,6 @@
 import _findIndex from 'lodash/findIndex';
 import _isEmpty from 'lodash/isEmpty';
 
-const FILE_TYPE_ERROR = {
-    type        : 'error',
-    text        : 'File type not allowed.',
-    dismissable : false
-};
-
 class FileManagerController {
     constructor ($element, $scope, $rootScope, CONTEXT, UI_ENUMS) {
         'ngInject';
@@ -62,7 +56,6 @@ class FileManagerController {
     }
 
     triggerInput (fileInput) {
-        var file = document.getElementById(fileInput);
         document.getElementById(fileInput).click();
     }
 

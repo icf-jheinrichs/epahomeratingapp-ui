@@ -32,7 +32,6 @@ class HousePlanController {
     }
 
     onError (error) {
-        console.log(error);
         this.message = Object.assign({}, FILE_TYPE_ERROR);
     }
 

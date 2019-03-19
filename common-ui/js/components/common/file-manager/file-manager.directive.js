@@ -1,11 +1,5 @@
 import _values from 'lodash/values';
 
-const FILE_TYPE_ERROR = {
-    type        : 'error',
-    text        : 'File type not allowed.',
-    dismissable : false
-};
-
 function fileManager ($timeout) {
     return {
         scope    : {
@@ -22,7 +16,7 @@ function fileManager ($timeout) {
                 $timeout(()=>{
                     //parentScope.fileManagerCtrl.files = _values(event.target.files);
                     if (this.accept === 'application/pdf') {
-                        var ext = this.value.match(/\.(.+)$/)[1];
+                        const ext = this.value.match(/\.(.+)$/)[1];
                         switch (ext) {
                         case 'pdf':
                             break;
