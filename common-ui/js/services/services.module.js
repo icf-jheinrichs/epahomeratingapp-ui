@@ -4,14 +4,18 @@ import JobChecklistStateService from './job-checklist-state.service';
 import JobHistoryService from './job-history.service';
 import ScrollService from './scroll.service.js';
 import S3Service from './s3.service';
+import SanitizeService from './sanitize.service';
+import FootNotesService from './footnotes.service';
 
 let UIServicesModule = angular
     .module('epahomeratingapp.services.ui', [])
     .service('DOMUtilitiesService', DOMUtilitiesService)
+    .service('FootNotesService', FootNotesService)
     .service('JobChecklistProgressService', JobChecklistProgressService)
     .service('JobChecklistStateService', JobChecklistStateService)
     .service('JobHistoryService', JobHistoryService)
     .service('ScrollService', ScrollService)
-    .service('S3Service', S3Service);
+    .service('S3Service', S3Service)
+    .service('SanitizeService', SanitizeService);
 
 export default UIServicesModule;

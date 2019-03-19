@@ -1,13 +1,17 @@
+import _cloneDeep from 'lodash/cloneDeep';
+
 class DisplayLogicDigestService {
-    constructor ($http, $q, API_URL) {
+    constructor ($http, $q, API_URL, FootNotesService) {
         'ngInject';
 
         this.$http = $http;
         this.$q    = $q;
 
-        this.API_URL = API_URL;
+        this.FootNotesService = FootNotesService;
 
-        this.digest = this.$http({
+        this.API_URL   = API_URL;
+
+        this.digest    = this.$http({
             method  : 'GET',
             url     : this.API_URL.DISPLAY_LOGIC_DIGEST
         });
@@ -24,9 +28,11 @@ class DisplayLogicDigestService {
     get (id) {
         let checklistItemDisplay = this.digest
             .then(digest => {
-                return digest.data.ChecklistItems[id];
+                let checklistItem = _cloneDeep(digest.data.ChecklistItems[id]); 
+                checklistItem.Footnotes = this.FootNotesService.fetchData(id).Footnotes;
+                return checklistItem;
             });
-
+        
 
         return checklistItemDisplay;
     }

@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 class ChecklistCommentsController {
-    constructor ($log, $sanitize, AssetPathService, UI_ENUMS, CONTEXT, AuthenticationService, BASE_IMAGE_URL) {
+    constructor ($log, $sanitize, SanitizeService, AssetPathService, UI_ENUMS, CONTEXT, AuthenticationService, BASE_IMAGE_URL) {
         'ngInject';
         this.$log              = $log;
         this.$sanitize         = $sanitize;
@@ -9,6 +9,7 @@ class ChecklistCommentsController {
         this.BASE_IMAGE_URL    = BASE_IMAGE_URL;
         this.user              = AuthenticationService.getUserInfo();
         this.CONTEXT_IS_APP    = CONTEXT === UI_ENUMS.CONTEXT.APP;
+        this.SanitizeService   = SanitizeService;
     }
 
     $onInit () {
@@ -45,7 +46,7 @@ class ChecklistCommentsController {
             //TODO: make a stub user service that provides user id.
             const comment = {
                 'PhotoUrl'  : this.newCommentPhotoUrl,
-                'Comment'   : this.$sanitize(this.newCommentText),
+                'Comment'   : this.SanitizeService.sanitize(this.newCommentText),
                 'User'      : this.user,
                 'Timestamp' : moment().format()
             };

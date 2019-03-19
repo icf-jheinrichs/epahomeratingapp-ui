@@ -1,15 +1,18 @@
 import _isEmpty from 'lodash/isEmpty';
 
 class jobChecklistChecklistController {
-    constructor ($rootScope, $stateParams, JobChecklistStateService, JobDataHomePerformanceService, ModalService, UI_ENUMS) {
+    constructor ($rootScope, $stateParams, FootNotesService, JobChecklistStateService, JobDataHomePerformanceService, ModalService, UI_ENUMS) {
         'ngInject';
 
         this.$rootScope                    = $rootScope;
         this.$stateParams                  = $stateParams;
         this.JobChecklistStateService      = JobChecklistStateService;
         this.JobDataHomePerformanceService = JobDataHomePerformanceService;
-        this.JobChecklistStateService      = JobChecklistStateService;
         this.ModalService                  = ModalService;
+        this.FootNotesService              = FootNotesService;
+
+        let fnData = this.FootNotesService.fetchData();
+        console.log(fnData);
 
         this.MESSAGING           = UI_ENUMS.MESSAGING;
         this.CATEGORIES          = UI_ENUMS.CATEGORIES;

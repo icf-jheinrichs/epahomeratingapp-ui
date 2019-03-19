@@ -8,7 +8,7 @@ const ERROR_SERVER = {
 };
 
 class HousePlanEditBulkController {
-    constructor ($q, $rootScope, $sanitize, $scope, $state, $stateParams, HousePlansService, S3Service, S3_CONFIG, UI_ENUMS) {
+    constructor ($q, $rootScope, $sanitize, SanitizeService, $scope, $state, $stateParams, HousePlansService, S3Service, S3_CONFIG, UI_ENUMS) {
         'ngInject';
 
         this.$q                = $q;
@@ -20,6 +20,7 @@ class HousePlanEditBulkController {
 
         this.HousePlansService = HousePlansService;
         this.S3Service         = S3Service;
+        this.SanitizeService   = SanitizeService;
         this.MESSAGING         = UI_ENUMS.MESSAGING;
         this.isBusy            = false;
         this.PDF_FILE_PATH     = S3_CONFIG.PATH_PDF;
@@ -141,10 +142,10 @@ class HousePlanEditBulkController {
         let hvacDesignReportUploads            = [];
         let raterDesignReviewChecklistUploads  = [];
 
-        this.housePlan.Name          = this.$sanitize(this.housePlan.Name);
-        this.housePlan.SubplanName   = this.$sanitize(this.housePlan.SubplanName);
-        this.housePlan.BuilderName   = this.$sanitize(this.housePlan.BuilderName);
-        this.housePlan.CommunityName = this.$sanitize(this.housePlan.CommunityName);
+        this.housePlan.Name          = this.SanitizeService.sanitize(this.housePlan.Name);
+        this.housePlan.SubplanName   = this.SanitizeService.sanitize(this.housePlan.SubplanName);
+        this.housePlan.BuilderName   = this.SanitizeService.sanitize(this.housePlan.BuilderName);
+        this.housePlan.CommunityName = this.SanitizeService.sanitize(this.housePlan.CommunityName);
 
         this.filterInvalidFiles();
 
