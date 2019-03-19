@@ -1,7 +1,7 @@
 const footnotes = {
     '1.1-A' : {
-        'Item'     : '1.1',
-        'id'       : '1.1-A',
+        'Item'      : '1.1',
+        'id'        : '1.1-A',
         'Footnotes' : `
         <h3>1.1	Fenestration meets or exceeds levels specified in Item 2.1 of the Rater Design Review Checklist.</h3>
         <p>For more information, visit the Building America Solutions Center at: <a href="https://basc.pnnl.gov/resource-guides/energy-star-windows">https://basc.pnnl.gov/resource-guides/energy-star-windows">https://basc.pnnl.gov/resource-guides/energy-star-windows">https://basc.pnnl.gov/resource-guides/energy-star-windows</a></p>
@@ -28,8 +28,8 @@ const footnotes = {
 
     },
     '2.1-A' : {
-        'Item'     : '2.1',
-        'id'       : '2.1-A',
+        'Item'      : '2.1',
+        'id'        : '2.1-A',
         'Footnotes' : `
         <h3>2.1	Dropped ceilings / soffits below unconditioned attics, and all other ceilings.</h3>
         <p><u>Fully-Aligned Air Barriers</u><sup>5</sup>: At each insulated location, a complete air barrier is provided that is fully aligned as follows:</p>
@@ -43,8 +43,8 @@ const footnotes = {
         `,
     },
     '2.2-A' : {
-        'Item'     : '2.2',
-        'id'       : '2.2-A',
+        'Item'      : '2.2',
+        'id'        : '2.2-A',
         'Footnotes' : `
         <h3>2.2 Walls behind showers, tubs, staircases, and fireplaces.</h3>
         <p><u>Fully-Aligned Air Barriers</u><sup>5</sup>: At each insulated location, a complete air barrier is provided that is fully aligned as follows:</p>
@@ -58,8 +58,8 @@ const footnotes = {
         `,
     },
     '2.3-A' : {
-        'Item'     : '2.3',
-        'id'       : '2.3-A',
+        'Item'      : '2.3',
+        'id'        : '2.3-A',
         'Footnotes' : `
         <h3>2.3 Attic knee walls and skylight shaft walls. <sup>8</sup></h3>
         <p><u>Fully-Aligned Air Barriers</u><sup>5</sup>: At each insulated location, a complete air barrier is provided that is fully aligned as follows:</p>
@@ -74,8 +74,8 @@ const footnotes = {
         `,
     },
     '2.4-A' : {
-        'Item'     : '2.4',
-        'id'       : '2.4-A',
+        'Item'      : '2.4',
+        'id'        : '2.4-A',
         'Footnotes' : `
         <h3>2.4 Walls adjoining porch roofs or garages.</h3>
         <p><u>Fully-Aligned Air Barriers</u><sup>5</sup>: At each insulated location, a complete air barrier is provided that is fully aligned as follows:</p>
@@ -89,8 +89,8 @@ const footnotes = {
         `,
     },
     '2.5-A' : {
-        'Item'     : '2.5',
-        'id'       : '2.5-A',
+        'Item'      : '2.5',
+        'id'        : '2.5-A',
         'Footnotes' : `
         <h3>2.5 Double-walls and all other exterior walls.</h3>
         <p><u>Fully-Aligned Air Barriers</u><sup>5</sup>: At each insulated location, a complete air barrier is provided that is fully aligned as follows:</p>
@@ -104,8 +104,8 @@ const footnotes = {
         `,
     },
     '2.6-A' : {
-        'Item'     : '2.6',
-        'id'       : '2.6-A',
+        'Item'      : '2.6',
+        'id'        : '2.6-A',
         'Footnotes' : `
         <h3>2.6 Floors above garages, floors above unconditioned basements or crawlspaces, and cantilevered floors.</h3>
         <p><u>Fully-Aligned Air Barriers</u><sup>5</sup>: At each insulated location, a complete air barrier is provided that is fully aligned as follows:</p>
@@ -121,8 +121,8 @@ const footnotes = {
         `,
     },
     '2.7-A' : {
-        'Item'     : '2.7',
-        'id'       : '2.7-A',
+        'Item'      : '2.7',
+        'id'        : '2.7-A',
         'Footnotes' : `
         <h3>2.7 All other floors adjoining unconditioned space (e.g., rim / band joists at exterior wall or at porch roof).</h3>
         <p><u>Fully-Aligned Air Barriers</u><sup>5</sup>: At each insulated location, a complete air barrier is provided that is fully aligned as follows:</p>
@@ -138,8 +138,8 @@ const footnotes = {
         `,
     },
     '3.1-A' : {
-        'Item'     : '3.1',
-        'id'       : '3.1-A',
+        'Item'      : '3.1',
+        'id'        : '3.1-A',
         'Footnotes' : `
         <h3>3.1	For insulated ceilings with attic space above (i.e., non-cathedralized), Grade I insulation extends to the inside face of the exterior wall below and is ≥ R-21 in CZ 1-5; ≥ R-30 in CZ 6-8.<sup>12</sup></h3>
         <dl><dt><p><i>Footnote 12:</i></dt><dd> The minimum designated R-values must be achieved regardless of the trade-offs determined using an equivalent U-factor or UA alternative calculation, with the following exception:
@@ -151,8 +151,8 @@ const footnotes = {
         `,
     },
     '3.2-A' : {
-        'Item'     : '3.2',
-        'id'       : '3.2-A',
+        'Item'      : '3.2',
+        'id'        : '3.2-A',
         'Footnotes' : `
         <h3>3.2	For slabs on grade in CZ 4-8, 100% of slab edge insulated to ≥ R-5 at the depth specified by the 2009 IECC and aligned with the thermal boundary of the walls.<sup>13, 14</sup></h3>
         <dl><dt><i>Footnote 13:</i></dt><dd> Consistent with the 2009 IECC, slab edge insulation is only required for slab-on-grade floors with a floor surface less than 12 inches below grade. Slab insulation shall extend to the top of the slab to provide a complete thermal break. If the top edge of the insulation is installed between the exterior wall and the edge of the interior slab, it shall be permitted to be cut at a 45-degree angle away from the exterior wall. Alternatively, the thermal break is permitted to be created using ≥ R-3 rigid insulation on top of an existing slab (e.g., in a home undergoing a gut rehabilitation). In such cases, up to 10% of the slab surface is permitted to not be insulated (e.g., for sleepers, for sill plates).
@@ -163,8 +163,8 @@ const footnotes = {
         `,
     },
     '3.3-A' : {
-        'Item'     : '3.3',
-        'id'       : '3.3-A',
+        'Item'      : '3.3',
+        'id'        : '3.3-A',
         'Footnotes' : `
         <h3>3.3	Insulation beneath attic platforms (e.g., HVAC platforms, walkways) ≥ R-21 in CZ 1-5; ≥ R-30 in CZ 6-8.</h3>
         <p>For more information, visit the Building America Solutions Center at: <a href="https://basc.pnnl.gov/resource-guides/insulation-below-attic-platforms">https://basc.pnnl.gov/resource-guides/insulation-below-attic-platforms</a></p>
@@ -172,8 +172,8 @@ const footnotes = {
         `,
     },
     '3.4-A' : {
-        'Item'     : '3.4',
-        'id'       : '3.4-A',
+        'Item'      : '3.4',
+        'id'        : '3.4-A',
         'Footnotes' : `
         <h3>3.4	At above-grade walls separating conditioned from unconditioned space, one of the following options used (rim / band joists exempted): <sup>15</sup></h3>
         <dl><dt><i>Footnote 15:</i></dt><dd> Mass walls utilized as the thermal mass component of a passive solar design (e.g., a Trombe wall) are exempt from this Item. To be eligible for this exemption, the passive solar design shall be comprised of the following five components: an aperture or collector, an absorber, thermal mass, a distribution system, and a control system. For more information, see: <a href="https://www.energy.gov/sites/prod/files/guide_to_passive_solar_home_design.pdf">energy.gov/sites/prod/files/guide_to_passive_solar_home_design.pdf. </a>
@@ -303,8 +303,8 @@ const footnotes = {
     //     `,
     // },
     '4.2-A' : {
-        'Item'     : '4.2',
-        'id'       : '4.2-A',
+        'Item'      : '4.2',
+        'id'        : '4.2-A',
         'Footnotes' : `
         <h3>4.2	Recessed lighting fixtures adjacent to unconditioned space ICAT labeled and gasketed. Also, if in insulated ceiling without attic above, exterior surface of fixture insulated to ≥ R-10 in CZ 4-8.</h3>
         <p>Unless otherwise noted below, “sealed” indicates the use of caulk, foam, or equivalent material.</p>
@@ -313,8 +313,8 @@ const footnotes = {
         `,
     },
     '4.3-A' : {
-        'Item'     : '4.3',
-        'id'       : '4.3-A',
+        'Item'      : '4.3',
+        'id'        : '4.3-A',
         'Footnotes' : `
         <h3>4.3	Above-grade sill plates adjacent to conditioned space sealed to foundation or sub-floor. Gasket also placed beneath above-grade sill plate if resting atop concrete / masonry & adjacent to cond. Space. <sup>25, 26</sup></h3>
         <p>Unless otherwise noted below, “sealed” indicates the use of caulk, foam, or equivalent material.</p>
@@ -325,8 +325,8 @@ const footnotes = {
         `,
     },
     '4.4-A' : {
-        'Item'     : '4.4',
-        'id'       : '4.4-A',
+        'Item'      : '4.4',
+        'id'        : '4.4-A',
         'Footnotes' : `
         <h3>4.4 Continuous top plate or blocking is at top of walls adjoining unconditioned space, and sealed.</h3>
         <p>Unless otherwise noted below, “sealed” indicates the use of caulk, foam, or equivalent material.</p>
@@ -335,8 +335,8 @@ const footnotes = {
         `,
     },
     '4.5-A' : {
-        'Item'     : '4.5',
-        'id'       : '4.5-A',
+        'Item'      : '4.5',
+        'id'        : '4.5-A',
         'Footnotes' : `
         <h3>4.5 Drywall sealed to top plate at all unconditioned attic / wall interfaces using caulk, foam, drywall adhesive (but not other construction adhesives), or equivalent material. Either apply sealant directly between drywall and top plate or to the seam between the two from the attic above.</h3>
         <p>Unless otherwise noted below, “sealed” indicates the use of caulk, foam, or equivalent material.</p>
@@ -345,8 +345,8 @@ const footnotes = {
         `,
     },
     '4.6-A' : {
-        'Item'     : '4.6',
-        'id'       : '4.6-A',
+        'Item'      : '4.6',
+        'id'        : '4.6-A',
         'Footnotes' : `
         <h3>4.6 Rough opening around windows & exterior doors sealed.<sup>27</sup></h3>
         <p>Unless otherwise noted below, “sealed” indicates the use of caulk, foam, or equivalent material.</p>
@@ -356,8 +356,8 @@ const footnotes = {
         `,
     },
     '4.7-A' : {
-        'Item'     : '4.7',
-        'id'       : '4.7-A',
+        'Item'      : '4.7',
+        'id'        : '4.7-A',
         'Footnotes' : `
         <h3>4.7 Walls that separate attached garages from occupiable space sealed and, also, an air barrier installed and sealed at floor cavities aligned with these walls.</h3>
         <p>Unless otherwise noted below, “sealed” indicates the use of caulk, foam, or equivalent material.</p>
@@ -366,8 +366,8 @@ const footnotes = {
         `,
     },
     '4.8-A' : {
-        'Item'     : '4.8',
-        'id'       : '4.8-A',
+        'Item'      : '4.8',
+        'id'        : '4.8-A',
         'Footnotes' : `
         <h3>4.8 In multifamily buildings, the gap between the common wall (e.g. the drywall shaft wall) and the structural framing between units sealed at all exterior boundaries.</h3>
         <p>Unless otherwise noted below, “sealed” indicates the use of caulk, foam, or equivalent material.</p>
@@ -376,8 +376,8 @@ const footnotes = {
         `,
     },
     '4.9-A' : {
-        'Item'     : '4.9',
-        'id'       : '4.9-A',
+        'Item'      : '4.9',
+        'id'        : '4.9-A',
         'Footnotes' : `
         <h3>4.9 Doors adjacent to unconditioned space (e.g., attics, garages, basements) or ambient conditions made substantially air-tight with weatherstripping or equivalent gasket.</h3>
         <p>Unless otherwise noted below, “sealed” indicates the use of caulk, foam, or equivalent material.</p>
@@ -386,8 +386,8 @@ const footnotes = {
         `,
     },
     '4.10-A' : {
-        'Item'     : '4.10',
-        'id'       : '4.10-A',
+        'Item'      : '4.10',
+        'id'        : '4.10-A',
         'Footnotes' : `
         <h3>4.10    Attic access panels, drop-down stairs, & whole-house fans equipped with durable ≥ R-10 cover that is gasketed (i.e., not caulked). Fan covers either installed on house side or mechanically operated. <sup>28</sup></h3>
         <p>Unless otherwise noted below, “sealed” indicates the use of caulk, foam, or equivalent material.</p>
@@ -397,8 +397,8 @@ const footnotes = {
         `,
     },
     '5.1-A' : {
-        'Item'     : '5.1',
-        'id'       : '5.1-A',
+        'Item'      : '5.1',
+        'id'        : '5.1-A',
         'Footnotes' : `
         <h3>5.1 HVAC manufacturer & model number on installed equipment matches either of the following (check box): <sup>31</sup></h3>
         <h5><input type="checkbox" style="float:left; "> HVAC Design Report(4.3, 4.4, & 4.17)</h5>
@@ -411,8 +411,8 @@ const footnotes = {
         `,
     },
     '5.2-A' : {
-        'Item'     : '5.2',
-        'id'       : '5.2-A',
+        'Item'      : '5.2',
+        'id'        : '5.2-A',
         'Footnotes' : `
         <h3>5.2 External static pressure measured by Rater at contractor-provided test locations and documented below: <sup>32</sup></h3>
         <h5>Return-Side External Static Pressure: _________IWC   Supply-Side</h5>
@@ -425,8 +425,8 @@ const footnotes = {
         `,
     },
     '5.3-A' : {
-        'Item'     : '5.3',
-        'id'       : '5.3-A',
+        'Item'      : '5.3',
+        'id'        : '5.3-A',
         'Footnotes' : `
         <h3>5.3 <u>Permitted, but not required</u>: HVAC Commissioning Checklist collected, with no items left blank.</h3>
         <h5>Return-Side External Static Pressure: _________IWC   Supply-Side</h5>
@@ -438,8 +438,8 @@ const footnotes = {
         `,
     },
     '6.1-A' : {
-        'Item'     : '6.1',
-        'id'       : '6.1-A',
+        'Item'      : '6.1',
+        'id'        : '6.1-A',
         'Footnotes' : `
         <h3>6.1 Ductwork installed without kinks, sharp bends, compressions, or excessive coiled flexible ductwork. <sup>33</sup></h3>
         <p>Applies to heating, cooling, ventilation, exhaust, & pressure balancing ducts, unless noted in footnote</p>
@@ -450,8 +450,8 @@ const footnotes = {
         `,
     },
     '6.2-A' : {
-        'Item'     : '6.2',
-        'id'       : '6.2-A',
+        'Item'      : '6.2',
+        'id'        : '6.2-A',
         'Footnotes' : `
         <h3>6.2 Bedrooms pressure-balanced using any combination of transfer grills, jump ducts, dedicated return ducts, and / or undercut doors to achieve a Rater-measured pressure differential ≤ 3 Pa with respect to the main body of the house when all bedroom doors are closed and all air handlers are operating. See Footnote 34 for alternative. <sup>34</sup></h3>
         <p>Applies to heating, cooling, ventilation, exhaust, & pressure balancing ducts, unless noted in footnote</p>
@@ -462,8 +462,8 @@ const footnotes = {
         `,
     },
     '6.3-A' : {
-        'Item'     : '6.3',
-        'id'       : '6.3-A',
+        'Item'      : '6.3',
+        'id'        : '6.3-A',
         'Footnotes' : `
         <h3>6.3 All supply and return ducts in unconditioned space, including connections to trunk ducts, are insulated to ≥ R-6. <sup>35</sup></h3>
         <p>Applies to heating, cooling, ventilation, exhaust, & pressure balancing ducts, unless noted in footnote</p>
@@ -474,8 +474,8 @@ const footnotes = {
         `,
     },
     '6.4-A' : {
-        'Item'     : '6.4',
-        'id'       : '6.4-A',
+        'Item'      : '6.4',
+        'id'        : '6.4-A',
         'Footnotes' : `
         <h3>6.4 Rater-measured total duct leakage meets one of the following two options. See Footnote 37 for alternative: <sup>36, 37, 38</sup></h3>
         <p>Applies to heating, cooling, ventilation, exhaust, & pressure balancing ducts, unless noted in footnote</p>
@@ -519,8 +519,8 @@ const footnotes = {
     //     `,
     // },
     '6.5-A' : {
-        'Item'     : '6.5',
-        'id'       : '6.5-A',
+        'Item'      : '6.5',
+        'id'        : '6.5-A',
         'Footnotes' : `
         <h3>6.5 Rater-measured duct leakage to outdoors the greater of ≤ 4 CFM25 per 100 sq. ft. of CFA or ≤ 40 CFM25. <sup>36, 38, 41</sup></h3>
         <p>Applies to heating, cooling, ventilation, exhaust, & pressure balancing ducts, unless noted in footnote</p>
@@ -533,8 +533,8 @@ const footnotes = {
         `,
     },
     '7.1-A' : {
-        'Item'     : '7.1',
-        'id'       : '7.1-A',
+        'Item'      : '7.1',
+        'id'        : '7.1-A',
         'Footnotes' : `
         <h3>7.1 Rater-measured ventilation rate is within either ± 15 CFM or ±15% of design value (2.3). <sup>42</sup></h3>
         <p>HVAC Design Report Item # indicated in parenthesis.</p>
@@ -545,8 +545,8 @@ const footnotes = {
         `,
     },
     '7.2-A' : {
-        'Item'     : '7.2',
-        'id'       : '7.2-A',
+        'Item'      : '7.2',
+        'id'        : '7.2-A',
         'Footnotes' : `
         <h3>7.2 A readily-accessible ventilation override control installed and also labeled if its function is not obvious (e.g., a label is required for a standalone wall switch, but not for a switch that’s on the ventilation equipment).</h3>
         <dl><dt><i>Footnote 30:</i></dt><dd> This Checklist is designed to meet the requirements of ASHRAE 62.2-2010 / 2013, and ANSI / ACCA’s 5 QI-2015 protocol, thereby improving the performance of HVAC equipment in new homes when compared to homes built to minimum code. However, these features alone cannot prevent all ventilation, indoor air quality, and HVAC problems, (e.g., those caused by a lack of maintenance by occupants). Therefore, this Checklist is not a guarantee of proper ventilation, indoor air quality, or HVAC performance.</dd></dl>
@@ -555,8 +555,8 @@ const footnotes = {
         `,
     },
     '7.3-A' : {
-        'Item'     : '7.3',
-        'id'       : '7.3-A',
+        'Item'      : '7.3',
+        'id'        : '7.3-A',
         'Footnotes' : `
         <h3>7.3 No outdoor air intakes connected to return side of the HVAC system, unless controls are installed to operate intermittently & automatically based on a timer and to restrict intake when not in use (e.g., motorized damper).</h3>
         <dl><dt><i>Footnote 30:</i></dt><dd> This Checklist is designed to meet the requirements of ASHRAE 62.2-2010 / 2013, and ANSI / ACCA’s 5 QI-2015 protocol, thereby improving the performance of HVAC equipment in new homes when compared to homes built to minimum code. However, these features alone cannot prevent all ventilation, indoor air quality, and HVAC problems, (e.g., those caused by a lack of maintenance by occupants). Therefore, this Checklist is not a guarantee of proper ventilation, indoor air quality, or HVAC performance.</dd></dl>
@@ -565,8 +565,8 @@ const footnotes = {
         `,
     },
     '7.4-A' : {
-        'Item'     : '7.4',
-        'id'       : '7.4-A',
+        'Item'      : '7.4',
+        'id'        : '7.4-A',
         'Footnotes' : `
         <h3>7.4 System fan rated ≤ 3 sones if intermittent and ≤ 1 sone if continuous, or exempted. <sup>43</sup></h3>
         <dl><dt><i>Footnote 30:</i></dt><dd> This Checklist is designed to meet the requirements of ASHRAE 62.2-2010 / 2013, and ANSI / ACCA’s 5 QI-2015 protocol, thereby improving the performance of HVAC equipment in new homes when compared to homes built to minimum code. However, these features alone cannot prevent all ventilation, indoor air quality, and HVAC problems, (e.g., those caused by a lack of maintenance by occupants). Therefore, this Checklist is not a guarantee of proper ventilation, indoor air quality, or HVAC performance.</dd></dl>
@@ -576,8 +576,8 @@ const footnotes = {
         `,
     },
     '7.5-A' : {
-        'Item'     : '7.5',
-        'id'       : '7.5-A',
+        'Item'      : '7.5',
+        'id'        : '7.5-A',
         'Footnotes' : `
         <h3>7.5 If system utilizes the HVAC fan, then the specified fan type is ECM / ICM (4.7), or the controls will reduce the standalone ventilation run-time by accounting for hours when the HVAC system is heating or cooling.</h3>
         <p>HVAC Design Report Item # indicated in parenthesis.</p>
@@ -587,8 +587,8 @@ const footnotes = {
         `,
     },
     '7.6-A' : {
-        'Item'     : '7.6',
-        'id'       : '7.6-A',
+        'Item'      : '7.6',
+        'id'        : '7.6-A',
         'Footnotes' : `
         <h3>7.6 Bathroom fans are ENERGY STAR certified if used as part of the whole-house system. <sup>44</sup></h3>
         <p>HVAC Design Report Item # indicated in parenthesis.</p>
@@ -599,8 +599,8 @@ const footnotes = {
         `,
     },
     '7.7-A' : {
-        'Item'     : '7.7',
-        'id'       : '7.7-A',
+        'Item'      : '7.7',
+        'id'        : '7.7-A',
         'Footnotes' : `
         <h3>7.7 Air inlet location (Complete if ventilation air inlet location was specified (2.12, 2.13); otherwise check “N/A”):  <sup>45, 46</sup></h3>
         <dl><dt><i>Footnote 30:</i></dt><dd> This Checklist is designed to meet the requirements of ASHRAE 62.2-2010 / 2013, and ANSI / ACCA’s 5 QI-2015 protocol, thereby improving the performance of HVAC equipment in new homes when compared to homes built to minimum code. However, these features alone cannot prevent all ventilation, indoor air quality, and HVAC problems, (e.g., those caused by a lack of maintenance by occupants). Therefore, this Checklist is not a guarantee of proper ventilation, indoor air quality, or HVAC performance.</dd></dl>
@@ -650,8 +650,8 @@ const footnotes = {
     //     `,
     // },
     '8.1-A' : {
-        'Item'     : '8.1',
-        'id'       : '8.1-A',
+        'Item'      : '8.1',
+        'id'        : '8.1-A',
         'Footnotes' : `
         <h3>8.1 In each kitchen, a system is installed that exhausts directly to the outdoors and meets one of the following Rater-measured airflow and manufacturer-rated sound level standards: <sup>42, 47</sup></h3>
                             <table style="font-family: arial, sans-serif;
@@ -707,8 +707,8 @@ const footnotes = {
         `,
     },
     '8.2-A' : {
-        'Item'     : '8.2',
-        'id'       : '8.2-A',
+        'Item'      : '8.2',
+        'id'        : '8.2-A',
         'Footnotes' : `
         <h3>8.2 In each bathroom, a system is installed that exhausts directly to the outdoors and meets one of the following Rater-measured airflow</h3>
                             <table style="font-family: arial, sans-serif;
@@ -762,8 +762,8 @@ const footnotes = {
         `,
     },
     '9.1-A' : {
-        'Item'     : '9.1',
-        'id'       : '9.1-A',
+        'Item'      : '9.1',
+        'id'        : '9.1-A',
         'Footnotes' : `
         <h3>9.1 At least one MERV 6 or higher filter installed in each ducted mechanical system in a location that facilitates access and regular service by the owner.  <sup>52</sup></h3>
 
@@ -776,8 +776,8 @@ const footnotes = {
         `,
     },
     '9.2-A' : {
-        'Item'     : '9.2',
-        'id'       : '9.2-A',
+        'Item'      : '9.2',
+        'id'        : '9.2-A',
         'Footnotes' : `
         <h3>9.2 Filter access panel includes gasket or comparable sealing mechanism and fits snugly against the exposed edge of filter when closed to prevent bypass.  <sup>53</sup></h3>
 
@@ -790,8 +790,8 @@ const footnotes = {
         `,
     },
     '9.3-A' : {
-        'Item'     : '9.3',
-        'id'       : '9.3-A',
+        'Item'      : '9.3',
+        'id'        : '9.3-A',
         'Footnotes' : `
         <h3>9.3 All return air and mechanically supplied outdoor air passes through filter prior to conditioning.</h3>
 
@@ -803,8 +803,8 @@ const footnotes = {
         `,
     },
     '10.1-A' : {
-        'Item'     : '10.1',
-        'id'       : '10.1-A',
+        'Item'      : '10.1',
+        'id'        : '10.1-A',
         'Footnotes' : `
         <h3>10.1    Furnaces, boilers, and water heaters located within the home’s pressure boundary are mechanically drafted or direct-vented. See Footnote 56 for alternatives. <sup>54, 55, 56</sup></h3>
 
@@ -819,8 +819,8 @@ const footnotes = {
         `,
     },
     '10.2-A' : {
-        'Item'     : '10.2',
-        'id'       : '10.2-A',
+        'Item'      : '10.2',
+        'id'        : '10.2-A',
         'Footnotes' : `
         <h3>10.2    Fireplaces located within the home’s pressure boundary are mechanically drafted or direct-vented. See Footnote 57 for alternatives <sup>54, 55, 57</sup></h3>
 
@@ -835,8 +835,8 @@ const footnotes = {
         `,
     },
     '10.3-A' : {
-        'Item'     : '10.3',
-        'id'       : '10.3-A',
+        'Item'      : '10.3',
+        'id'        : '10.3-A',
         'Footnotes' : `
         <h3>10.3    If unvented combustion appliances other than cooking ranges or ovens are located inside the home’s pressure boundary, the Rater has followed Section 805 of RESNET’s Standards, encompassing ANSI/ACCA 12 QH-2014, Appendix A, Section A3 (Carbon Monoxide Test), and verified the equipment meets the limits defined within. <sup>54, 58</sup></h3>
 

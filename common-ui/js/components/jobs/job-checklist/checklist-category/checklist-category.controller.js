@@ -11,9 +11,6 @@ class jobChecklistChecklistController {
         this.ModalService                  = ModalService;
         this.FootNotesService              = FootNotesService;
 
-        let fnData = this.FootNotesService.fetchData();
-        console.log(fnData);
-
         this.MESSAGING           = UI_ENUMS.MESSAGING;
         this.CATEGORIES          = UI_ENUMS.CATEGORIES;
         this.CATEGORY_PROGRESS   = UI_ENUMS.CATEGORY_PROGRESS;
