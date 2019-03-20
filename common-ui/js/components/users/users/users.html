@@ -115,7 +115,7 @@
                 </div>
             </div>
 
-            <div class="form-group" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg && usersCtrl.editUser.authorizations.OrgTypeRater">
+            <div class="form-group" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">
                 <div class="tooltip-wrapper tooltip-wrapper-right" data-ng-class="{'tooltip-enabled' : usersCtrl.editUser.CognitoId === usersCtrl.currentUserCognitoId}">
                     <label><input data-ng-disabled="usersCtrl.editUser.CognitoId === usersCtrl.currentUserCognitoId" data-ng-model="usersCtrl.editUser.authorizations.Rater" type="checkbox" /> Rater</label>
                     <p class="tooltip">You cannot change your own rater status. Please have another admin make this change.</p>
@@ -129,7 +129,7 @@
                 </div>
             </div>
 
-            <div class="form-group" data-ng-if="usersCtrl.organizaitonTypes.ProviderOrg && usersCtrl.editUser.authorizations.OrgTypeRater">
+            <div class="form-group" data-ng-if="usersCtrl.organizaitonTypes.ProviderOrg">
                 <div class="tooltip-wrapper tooltip-wrapper-right" data-ng-class="{'tooltip-enabled' : usersCtrl.editUser.CognitoId === usersCtrl.currentUserCognitoId}">
                     <label><input data-ng-disabled="usersCtrl.editUser.CognitoId === usersCtrl.currentUserCognitoId" data-ng-model="usersCtrl.editUser.authorizations.Provider" type="checkbox" /> Provider</label>
                     <p class="tooltip">You cannot change your own provider status. Please have another provider make this change.</p>
