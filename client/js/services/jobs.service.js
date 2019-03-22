@@ -54,7 +54,7 @@ class JobsService {
         this.API_URL               = API_URL;
         this.jobTitleFilter        = jobTitleFilter;
 
-        this.SanitizeService       = SanitizeService.sanitize;
+        this.SanitizeService       = SanitizeService;
     }
 
     /**

@@ -3,7 +3,7 @@ import _values from 'lodash/values';
 function fileManager ($timeout) {
     return {
         scope    : {
-            LocalFiles  : '=',
+            LocalFiles  : '='
         },
         restrict : 'A',
         link     : (scope, element, attrs, fileManagerCtrl) => {
@@ -14,7 +14,7 @@ function fileManager ($timeout) {
             element.bind('change', function onChange (event) {
                 let parentScope = scope.$parent.$parent;
                 $timeout(()=>{
-                    //parentScope.fileManagerCtrl.files = _values(event.target.files);
+
                     if (this.accept === 'application/pdf') {
                         const ext = this.value.match(/\.(.+)$/)[1];
                         switch (ext) {
@@ -25,14 +25,14 @@ function fileManager ($timeout) {
                             this.value = '';
                         }
                     }
-                    parentScope.fileManagerCtrl.files.push.apply(parentScope.fileManagerCtrl.files, _values(event.target.files));
+                    parentScope.fileManagerCtrl.files = _values(event.target.files);
                     parentScope.fileManagerCtrl.localSelectedCallback();
                 }, 0);
             });
 
-            //element.bind('click', function onClick (event) {
-            //    element[0].value = null;
-            //});
+            element.bind('click', function onClick (event) {
+               element[0].value = null;
+            });
         }
     };
 }

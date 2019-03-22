@@ -80,12 +80,10 @@ class FileManagerController {
             this.showDetails === 'File'
             && _findIndex(this.files, {Key : file.Key}) < 0
         ) {
-            this.files.push(
-                angular.copy({
-                    Key  : file.Key,
-                    Name : file.Name
-                })
-            );
+            this.files.push({
+                Key  : file.Key,
+                Name : file.Name
+            });
 
             this.librarySelectedCallback();
         }
