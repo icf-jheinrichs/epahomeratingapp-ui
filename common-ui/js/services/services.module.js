@@ -1,15 +1,17 @@
 import DOMUtilitiesService from './dom-utilities.service';
+import FileUtilityService from './file-utility.service';
+import FootNotesService from './footnotes.service';
 import JobChecklistProgressService from './job-checklist-progress.service';
 import JobChecklistStateService from './job-checklist-state.service';
 import JobHistoryService from './job-history.service';
 import ScrollService from './scroll.service.js';
 import S3Service from './s3.service';
 import SanitizeService from './sanitize.service';
-import FootNotesService from './footnotes.service';
 
 let UIServicesModule = angular
     .module('epahomeratingapp.services.ui', [])
     .service('DOMUtilitiesService', DOMUtilitiesService)
+    .service('FileUtilityService', FileUtilityService)
     .service('FootNotesService', FootNotesService)
     .service('JobChecklistProgressService', JobChecklistProgressService)
     .service('JobChecklistStateService', JobChecklistStateService)

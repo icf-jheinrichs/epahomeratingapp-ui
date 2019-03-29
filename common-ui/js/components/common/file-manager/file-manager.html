@@ -1,138 +1,138 @@
+<div class="file-manager">
 
-        
-<div class="file-manager flex-row">
-    
-    <div class="file-manager-actions flex-item-static" data-ng-if="fileManagerCtrl.enabled !== false">
-        <div data-ng-if="fileManagerCtrl.uploadOnly==='true'">
-            <label class="btn nowrap" for="{{::fileManagerCtrl.inputId}}">Upload {{::fileManagerCtrl.label}}</label>
-            <input
-                multiple="multiple"
-                select-local-file="LocalFiles"
-                class="hidden"
-                accept="{{::fileManagerCtrl.accept}}"
-                type="file"
-                name="{{::fileManagerCtrl.inputId}}"
-                id="{{::fileManagerCtrl.inputId}}"/>
-        </div>
-        <div dropdown="dropdown" data-ng-if="fileManagerCtrl.uploadOnly==='false'">
-            <button
-                type="button"
-                class="btn"
-                dropdown-toggle="dropdown-toggle">
+    <status-message status="fileManagerCtrl.message"></status-message>
 
-                Add <i class="fa fa-caret-down" aria-hidden="true"></i>
-            </button>
-
-            <nav
-                class="drop-down drop-down-left hidden"
-                dropdown-menu="dropdown-menu"
-                role="menu"
-                popover="popover">
-
-                <input id="fileInput-{{::fileManagerCtrl.inputId}}" type="file"
+    <div class="flex-row">
+        <div class="file-manager-actions flex-item-static" data-ng-if="fileManagerCtrl.enabled !== false">
+            <div data-ng-if="fileManagerCtrl.uploadOnly==='true'">
+                <label class="btn nowrap" for="{{::fileManagerCtrl.inputId}}">Upload {{::fileManagerCtrl.label}}</label>
+                <input
+                    multiple="multiple"
+                    class="hidden"
                     accept="{{::fileManagerCtrl.accept}}"
-                    select-local-file="LocalFiles"
-                    style="display:none;"
-                    multiple />
+                    type="file"
+                    name="{{::fileManagerCtrl.inputId}}"
+                    id="{{::fileManagerCtrl.inputId}}"/>
+            </div>
+            <div dropdown="dropdown" data-ng-if="fileManagerCtrl.uploadOnly==='false'">
+                <button
+                    type="button"
+                    class="btn"
+                    dropdown-toggle="dropdown-toggle">
 
-                <div data-ng-if="fileManagerCtrl.CONTEXT_IS_ADMIN">
+                    Add <i class="fa fa-caret-down" aria-hidden="true"></i>
+                </button>
+
+                <nav
+                    class="drop-down drop-down-left hidden"
+                    dropdown-menu="dropdown-menu"
+                    role="menu"
+                    popover="popover">
+
+                    <input id="fileInput-{{::fileManagerCtrl.inputId}}" type="file"
+                        accept="{{::fileManagerCtrl.accept}}"
+                        select-local-file="LocalFiles"
+                        style="display:none;"
+                        multiple />
+
+                    <div data-ng-if="fileManagerCtrl.CONTEXT_IS_ADMIN">
+                        <button
+                            class="drop-down-item"
+                            type="button"
+                            role="menuitem"
+                            ng-click="fileManagerCtrl.triggerInput('fileInput-' + fileManagerCtrl.inputId)">
+
+                            From Computer
+                        </button>
+                    </div>
+
                     <button
                         class="drop-down-item"
                         type="button"
                         role="menuitem"
-                        ng-click="fileManagerCtrl.triggerInput('fileInput-' + fileManagerCtrl.inputId)">
+                        popover-toggle="popover-toggle">
 
-                        From Computer
+                        From {{fileManagerCtrl.label}}
                     </button>
-                </div>
 
-                <button
-                    class="drop-down-item"
-                    type="button"
-                    role="menuitem"
-                    popover-toggle="popover-toggle">
+                    <div class="popover popover-has-search popover-medium hidden" popover-body="popover-body">
+                        <div class="popover-panel-wrapper">
+                            <section class="popover-panel">
+                                <header class="popover-panel-header flex-row flex-align-center">
+                                    <div class="flex-item-static">
+                                        <button type="button" class="btn btn-link popover-close">
+                                            <i class="fa fa-close" aria-hidden="true"></i> Close
+                                        </button>
+                                    </div>
 
-                    From {{fileManagerCtrl.label}}
-                </button>
+                                    <h5 class="flex-item-grow popover-panel-title">Add {{::(fileManagerCtrl.label === 'Template Library') ? 'Rating File' : fileManagerCtrl.label}}</h5>
+                                </header>
 
-                <div class="popover popover-has-search popover-medium hidden" popover-body="popover-body">
-                    <div class="popover-panel-wrapper">
-                        <section class="popover-panel">
-                            <header class="popover-panel-header flex-row flex-align-center">
-                                <div class="flex-item-static">
-                                    <button type="button" class="btn btn-link popover-close">
-                                        <i class="fa fa-close" aria-hidden="true"></i> Close
-                                    </button>
+                                <div class="popover-panel-search">
+                                    <div class="form-group has-feedback">
+                                        <label for="search_{{::fileManagerCtrl.inputId}}" class="sr-only">Search {{::fileManagerCtrl.label}}</label>
+
+                                        <input
+                                            data-ng-model="fileManagerCtrl.search"
+                                            ng-model-options="{debounce: 200}"
+                                            placeholder="Search"
+                                            class="form-control"
+                                            type="text"
+                                            id="search_{{::fileManagerCtrl.inputId}}"
+                                            name="search_{{::fileManagerCtrl.inputId}}" />
+
+                                        <span class="form-control-feedback"><i class="fa fa-search" aria-hidden="true"></i></span>
+                                    </div>
                                 </div>
 
-                                <h5 class="flex-item-grow popover-panel-title">Add {{::(fileManagerCtrl.label === 'Template Library') ? 'Rating File' : fileManagerCtrl.label}}</h5>
-                            </header>
-
-                            <div class="popover-panel-search">
-                                <div class="form-group has-feedback">
-                                    <label for="search_{{::fileManagerCtrl.inputId}}" class="sr-only">Search {{::fileManagerCtrl.label}}</label>
-
-                                    <input
-                                        data-ng-model="fileManagerCtrl.search"
-                                        ng-model-options="{debounce: 200}"
-                                        placeholder="Search"
-                                        class="form-control"
-                                        type="text"
-                                        id="search_{{::fileManagerCtrl.inputId}}"
-                                        name="search_{{::fileManagerCtrl.inputId}}" />
-
-                                    <span class="form-control-feedback"><i class="fa fa-search" aria-hidden="true"></i></span>
-                                </div>
-                            </div>
-
-                            <div class="popover-panel-body">
-                                <div class="item-list">
-                                    <button
-                                        type="button"
-                                        data-ng-click="fileManagerCtrl.addFile(item)"
-                                        data-ng-repeat="item in fileManagerCtrl.library | filter:fileManagerCtrl.search"
-                                        class="drop-down-item popover-close item-list-item">
-                                        <div class="ellipsis" ng-if="fileManagerCtrl.showDetails === 'HousePlanLibrary'">
-                                            <strong>{{item.Name}} - subplan {{item.SubplanName}}</strong>
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div class="ellipsis">Builder: {{item.BuilderName}}</div>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <div class="ellipsis">Community: {{item.CommunityName}}</div>
+                                <div class="popover-panel-body">
+                                    <div class="item-list">
+                                        <button
+                                            type="button"
+                                            data-ng-click="fileManagerCtrl.addFile(item)"
+                                            data-ng-repeat="item in fileManagerCtrl.library | filter:fileManagerCtrl.search"
+                                            class="drop-down-item popover-close item-list-item">
+                                            <div class="ellipsis" ng-if="fileManagerCtrl.showDetails === 'HousePlanLibrary'">
+                                                <strong>{{item.Name}} - subplan {{item.SubplanName}}</strong>
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        <div class="ellipsis">Builder: {{item.BuilderName}}</div>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <div class="ellipsis">Community: {{item.CommunityName}}</div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="ellipsis" ng-if="fileManagerCtrl.showDetails === 'File'">
-                                            {{item.Name}}
-                                        </div>
-                                    </button>
+                                            <div class="ellipsis" ng-if="fileManagerCtrl.showDetails === 'File'">
+                                                {{item.Name}}
+                                            </div>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                        </section>
+                            </section>
+                        </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </div>
         </div>
-    </div>
 
-    <div class="file-manager-list flex-item-grow">
-        <ul class="list-unstyled">
-            <li class="file-manager-file clearfix"
-                data-ng-repeat="file in fileManagerCtrl.files track by $index">
-                {{file.name}}
-                {{file.Name}}
+        <div class="file-manager-list flex-item-grow">
+            <ul class="list-unstyled">
+                <li class="file-manager-file clearfix"
+                    data-ng-repeat="file in fileManagerCtrl.files track by $index">
+                    {{file.name || file.Name}}
 
-                <button
-                    class="btn btn-no-label btn-link btn-remove pull-right"
-                    type="button"
-                    aria-label="Remove {{::file.Name}}"
-                    data-ng-click="fileManagerCtrl.removeFile(file._id)"
-                    data-ng-if="fileManagerCtrl.enabled !== false">
+                    <button
+                        class="btn btn-no-label btn-link btn-remove pull-right"
+                        type="button"
+                        aria-label="Remove {{::file.Name}}"
+                        data-ng-click="fileManagerCtrl.removeFile(file)"
+                        data-ng-if="fileManagerCtrl.enabled !== false">
 
-                    <i class="fa fa-remove" aria-hidden="true"></i>
-                </button>
-            </li>
-        </ul>
+                        <i class="fa fa-remove" aria-hidden="true"></i>
+                    </button>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>

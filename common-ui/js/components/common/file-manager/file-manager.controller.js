@@ -1,18 +1,22 @@
+/* global File */
+
 import _findIndex from 'lodash/findIndex';
 import _isEmpty from 'lodash/isEmpty';
 
+const FILE_TYPE_ERROR = {
+    type        : 'error',
+    text        : 'Some selected files were not the right type and were skipped.',
+    dismissable : false
+};
 class FileManagerController {
-    constructor ($element, $scope, $rootScope, CONTEXT, UI_ENUMS) {
+    constructor ($element, $scope, $rootScope, FileUtilityService) {
         'ngInject';
 
-        this.$element = $element;
-        this.$scope = $scope;
+        this.$element   = $element;
+        this.$scope     = $scope;
         this.$rootScope = $rootScope;
 
-        this.VALIDATION_MESSAGE    = UI_ENUMS.VALIDATION_MESSAGE;
-
-        this.CONTEXT_IS_APP = CONTEXT === UI_ENUMS.CONTEXT.APP;
-        this.CONTEXT_IS_ADMIN = CONTEXT === UI_ENUMS.CONTEXT.ADMIN;
+        this.FileUtilityService = FileUtilityService;
     }
 
     $onInit () {
@@ -33,6 +37,10 @@ class FileManagerController {
         }
     }
 
+    handleFileTypeError () {
+        this.message = Object.assign({}, FILE_TYPE_ERROR);
+    }
+
     $onDestroy () {
         if (this.uploadOnly === 'true') {
             this.$element[0].removeEventListener(
@@ -44,14 +52,32 @@ class FileManagerController {
     }
 
     handleFileChange (event) {
-        let file;
-        if (event.target.files.length > 0) {
-            file = event.target.files[0];
+        this.message = {};
+        let fileErrors = false;
 
-            this.addFile({
-                _id  : file.lastModified,
-                Name : file.name
-            });
+        for (let index = 0; index < event.target.files.length; index++) {
+            const file = event.target.files[index];
+
+            switch (this.accept) {
+            case 'application/pdf' :
+                if (this.FileUtilityService.isValidPdf(file)) {
+                    this.addFile(file);
+                } else {
+                    fileErrors = true;
+                }
+                break;
+            default :
+                this.addFile(file);
+                break;
+            }
+        }
+
+        if (fileErrors) {
+            this.handleFileTypeError();
+        }
+
+        if (this.uploadOnly === 'true') {
+            this.$scope.$apply();
         }
     }
 
@@ -75,26 +101,25 @@ class FileManagerController {
                 _id  : file._id,
                 Name : file.Name
             });
-            this.librarySelectedCallback();
-        } else if (
-            this.showDetails === 'File'
-            && _findIndex(this.files, {Key : file.Key}) < 0
-        ) {
-            this.files.push({
-                Key  : file.Key,
-                Name : file.Name
-            });
 
             this.librarySelectedCallback();
-        }
-        if (this.uploadOnly === 'true') {
-            this.$scope.$apply();
+        } else if (this.showDetails === 'File') {
+            this.files.push(file);
         }
     }
 
-    removeFile (_id) {
-        let index = _findIndex(this.files, {_id : _id});
-        this.files.splice(index, 1);
+    removeFile (fileToRemove) {
+        let index = this.files.findIndex(file => {
+            if (file instanceof File) {
+                return fileToRemove.name === file.name;
+            } else {
+                return fileToRemove.Name === file.Name;
+            }
+        });
+
+        if (index >= 0) {
+            this.files.splice(index, 1);
+        }
     }
 }
 

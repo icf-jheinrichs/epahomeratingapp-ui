@@ -43,29 +43,29 @@
             </fieldset>
 
             <fieldset class="row">
-            
-                <legend class="fieldset-legend">HVAC Design Report</legend>
+
+                <legend class="fieldset-legend">HVAC Design Report (PDF)</legend>
 
                 <file-manager
-                    upload-only="true"
                     accept="application/pdf"
-                    label="HVAC Design Report"
-                    input-id="HvacDesignReport"
                     files="housePlanEditCtrl.housePlan.HvacDesignReport"
-                    handle-error="housePlanEditCtrl.onError(error)">
+                    input-id="HvacDesignReport"
+                    label="HVAC Design Report"
+                    show-details="housePlanEditCtrl.showFileDetails"
+                    upload-only="true">
                 </file-manager>
             </fieldset>
 
             <fieldset class="row">
-                <legend class="fieldset-legend">Rater Design Review Checklist</legend>
+                <legend class="fieldset-legend">Rater Design Review Checklist (PDF)</legend>
 
                 <file-manager
-                    upload-only="true"
                     accept="application/pdf"
-                    label="Rater Design Review Checklist"
-                    input-id="RaterDesignReviewChecklist"
                     files="housePlanEditCtrl.housePlan.RaterDesignReviewChecklist"
-                    handle-error="housePlanEditCtrl.onError(error)">
+                    input-id="RaterDesignReviewChecklist"
+                    label="Rater Design Review Checklist"
+                    show-details="housePlanEditCtrl.showFileDetails"
+                    upload-only="true">
                 </file-manager>
             </fieldset>
 

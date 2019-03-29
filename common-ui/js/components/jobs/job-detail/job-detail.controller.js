@@ -58,63 +58,7 @@ class JobDetailController {
         return this.currentLocation === houseId;
     }
 
-    /**
-     * Check if file is PDF and less than 2 MB
-     * @param  {File}      file file to validify
-     * @return {Boolean}   validity
-     */
-    //TODO make DRY
-    isValidFile (file) {
-        return file.type === 'application/pdf' && ((file.size / 1048576) < 2);
-    }
-
-    filterErrantFiles () {
-        this.job
-            .Primary
-            .HvacDesignReport
-            = this.job
-                    .Primary
-                    .HvacDesignReport
-                    .filter((hvacDesignReport) => {
-                        return hvacDesignReport instanceof File && this.isValidFile(hvacDesignReport);
-                    });
-
-        this.job
-            .Primary
-            .RaterDesignReviewChecklist
-            = this.job
-                    .Primary
-                    .RaterDesignReviewChecklist
-                    .filter((raterDesignReviewChecklist) => {
-                        return raterDesignReviewChecklist instanceof File && this.isValidFile(raterDesignReviewChecklist);
-                    });
-
-        this.job
-            .Secondary
-            .forEach((location, locationIndex) => {
-                this.job
-                    .Secondary[locationIndex]
-                    .HvacDesignReport
-                    = location
-                            .HvacDesignReport
-                            .filter((hvacDesignReport) => {
-                                return hvacDesignReport instanceof File && this.isValidFile(hvacDesignReport);
-                            });
-
-                this.job
-                    .Secondary[locationIndex]
-                    .RaterDesignReviewChecklist
-                    = location
-                            .RaterDesignReviewChecklist
-                            .filter((raterDesignReviewChecklist) => {
-                                return raterDesignReviewChecklist instanceof File && this.isValidFile(raterDesignReviewChecklist);
-                            });
-            });
-    }
-
     onSubmit () {
-        this.filterErrantFiles();
-
         this.submitJob({
             job : this.job
         });

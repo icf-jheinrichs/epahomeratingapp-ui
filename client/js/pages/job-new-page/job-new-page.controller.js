@@ -19,24 +19,30 @@ const HOUSE_PLAN_REQUIRED = {
 };
 
 class JobsNewPageController {
-    constructor ($q, $log, $state, AnalyticsService, JobsService, HousePlansService, S3Service, S3_CONFIG) {
+    constructor ($q, $log, $state, AnalyticsService, FileUtilityService, JobsService, HousePlansService, S3Service, S3_CONFIG) {
         'ngInject';
 
         this.$q                = $q;
         this.$log              = $log;
         this.$state            = $state;
 
-        this.AnalyticsService  = AnalyticsService;
-        this.JobsService       = JobsService;
-        this.HousePlansService = HousePlansService;
-        this.S3Service         = S3Service;
-        this.PDF_FILE_PATH     = S3_CONFIG.PATH_PDF;
+        this.AnalyticsService   = AnalyticsService;
+        this.FileUtilityService = FileUtilityService;
+        this.JobsService        = JobsService;
+        this.HousePlansService  = HousePlansService;
+        this.S3Service          = S3Service;
+        this.PDF_FILE_PATH      = S3_CONFIG.PATH_PDF;
     }
 
     $onInit () {
         this.message = {};
     }
 
+    /**
+     * Validates that house plan is selected for every sample in job on save
+     *
+     * @param {object} job job blob
+     */
     housePlansAreValid (job) {
         let housePlansValid = true;
 
@@ -44,11 +50,13 @@ class JobsNewPageController {
             housePlansValid = false;
         }
 
-        job.Secondary.forEach((location) => {
-            if (location.HousePlan.length < 1) {
-                housePlansValid = false;
-            }
-        });
+        job
+            .Secondary
+            .forEach((location) => {
+                if (location.HousePlan.length < 1) {
+                    housePlansValid = false;
+                }
+            });
 
         return housePlansValid;
     }
@@ -83,97 +91,6 @@ class JobsNewPageController {
         }
     }
 
-    /**
-     * Check if file is PDF and less than 2 MB
-     * @param  {File}      file file to validify
-     * @return {Boolean}   validity
-     */
-    //TODO make DRY
-    isValidFile (file) {
-        return file.type === 'application/pdf' && ((file.size / 1048576) < 2);
-    }
-
-    gatherJobFiles (job) {
-        this.jobFileMap = {};
-        let jobFiles    = [];
-
-        job.Primary.HvacDesignReport.forEach((hvacDesignReport, index) => {
-            if (hvacDesignReport instanceof File && this.isValidFile(hvacDesignReport)) {
-                const token = `Primary:0:HvacDesignReport:${hvacDesignReport.name}`;
-
-                jobFiles.push({
-                    file  : hvacDesignReport,
-                    token : token
-                });
-
-                this.jobFileMap[token] = {
-                    type      : 'Primary',
-                    index     : 0,
-                    fileType  : 'HvacDesignReport',
-                    fileIndex : index
-                };
-            }
-        });
-
-        job.Primary.RaterDesignReviewChecklist.forEach((raterDesignReviewChecklist, index) => {
-            if (raterDesignReviewChecklist instanceof File && this.isValidFile(raterDesignReviewChecklist)) {
-                const token = `Primary:0:RaterDesignReviewChecklist:${raterDesignReviewChecklist.name}`;
-
-                jobFiles.push({
-                    file  : raterDesignReviewChecklist,
-                    token : token
-                });
-
-                this.jobFileMap[token] = {
-                    type      : 'Primary',
-                    index     : 0,
-                    fileType  : 'RaterDesignReviewChecklist',
-                    fileIndex : index
-                };
-            }
-        });
-
-        job.Secondary.forEach((location, locationIndex) => {
-            location.HvacDesignReport.forEach((hvacDesignReport, index) => {
-                if (hvacDesignReport instanceof File && this.isValidFile(hvacDesignReport)) {
-                    const token = `Secondary:${locationIndex}:HvacDesignReport:${hvacDesignReport.name}`;
-
-                    jobFiles.push({
-                        file  : hvacDesignReport,
-                        token : token
-                    });
-
-                    this.jobFileMap[token] = {
-                        type      : 'Secondary',
-                        index     : locationIndex,
-                        fileType  : 'HvacDesignReport',
-                        fileIndex : index
-                    };
-                }
-            });
-
-            location.RaterDesignReviewChecklist.forEach((raterDesignReviewChecklist, index) => {
-                if (raterDesignReviewChecklist instanceof File && this.isValidFile(raterDesignReviewChecklist)) {
-                    const token = `Secondary:${locationIndex}:RaterDesignReviewChecklist:${raterDesignReviewChecklist.name}`;
-
-                    jobFiles.push({
-                        file  : raterDesignReviewChecklist,
-                        token : token
-                    });
-
-                    this.jobFileMap[token] = {
-                        type      : 'Secondary',
-                        index     : locationIndex,
-                        fileType  : 'RaterDesignReviewChecklist',
-                        fileIndex : index
-                    };
-                }
-            });
-        });
-
-        return jobFiles;
-    }
-
     updateJobFileData (results, job) {
         results.forEach((result) => {
             if (this.jobFileMap[result.data.request.token]) {
@@ -198,7 +115,10 @@ class JobsNewPageController {
     }
 
     submitJobWithLibrarayHousePlan (job) {
-        let jobFiles    = this.gatherJobFiles(job);
+        const jobFileMeta = this.FileUtilityService.gatherJobFiles(job);
+
+        let jobFiles    = jobFileMeta.jobFiles;
+        this.jobFileMap = jobFileMeta.jobFileMap;
         let fileUploads = [];
 
         jobFiles.forEach((file) => {
@@ -228,7 +148,10 @@ class JobsNewPageController {
     sumbitJobWithLocalHousePlan (job) {
         this.$log.log('Uploading Rating File');
 
-        let jobFiles    = this.gatherJobFiles(job);
+        const jobFileMeta = this.FileUtilityService.gatherJobFiles(job);
+
+        let jobFiles    = jobFileMeta.jobFiles;
+        this.jobFileMap = jobFileMeta.jobFileMap;
         let fileUploads = [];
 
         jobFiles.forEach((file) => {

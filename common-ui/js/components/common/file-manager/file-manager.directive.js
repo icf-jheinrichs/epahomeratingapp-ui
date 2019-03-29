@@ -8,30 +8,19 @@ function fileManager ($timeout) {
         restrict : 'A',
         link     : (scope, element, attrs, fileManagerCtrl) => {
 
-            // angular not support ngchange for input type file
-            // this is a work around
-            // may need to make this better...
+            // angular doesn't support ngchange for input type file
+            // this is a work around for when uploadOnly === 'false'
             element.bind('change', function onChange (event) {
                 let parentScope = scope.$parent.$parent;
-                $timeout(()=>{
 
-                    if (this.accept === 'application/pdf') {
-                        const ext = this.value.match(/\.(.+)$/)[1];
-                        switch (ext) {
-                        case 'pdf':
-                            break;
-                        default:
-                            parentScope.fileManagerCtrl.handleError({error : 'fileError'});
-                            this.value = '';
-                        }
-                    }
+                $timeout(()=>{
                     parentScope.fileManagerCtrl.files = _values(event.target.files);
                     parentScope.fileManagerCtrl.localSelectedCallback();
                 }, 0);
             });
 
             element.bind('click', function onClick (event) {
-               element[0].value = null;
+                element[0].value = null;
             });
         }
     };

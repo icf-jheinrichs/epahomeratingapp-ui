@@ -12,8 +12,7 @@ let fileManagerComponent = {
         showDetails             : '<',
         library                 : '<',
         librarySelectedCallback : '&',
-        localSelectedCallback   : '&',
-        handleError             : '&'
+        localSelectedCallback   : '&'
     },
     template,
     controller,

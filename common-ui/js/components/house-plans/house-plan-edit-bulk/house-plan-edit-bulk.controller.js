@@ -27,6 +27,8 @@ class HousePlanEditBulkController {
         this.housePlan         = {};
         this.currentIndex      = 0;
 
+        this.showFileDetails   = 'File';
+
         this.getCurrentHousePlan();
     }
 
@@ -71,15 +73,6 @@ class HousePlanEditBulkController {
             });
     }
 
-    /**
-     * Check if file is PDF and less than 2 MB
-     * @param  {File}      file file to validify
-     * @return {Boolean}   validity
-     */
-    isValidFile (file) {
-        return file.type === 'application/pdf' && ((file.size / 1048576) < 2);
-    }
-
     //TODO: Either move this to a house-plan-edit class or into the filemanager
     updateHvacDesignReports (files) {
         files.forEach((file) => {
@@ -114,26 +107,6 @@ class HousePlanEditBulkController {
         });
     }
 
-    filterInvalidFiles () {
-        this
-            .housePlan
-            .HvacDesignReport
-            = this.housePlan
-                    .HvacDesignReport
-                    .filter((hvacDesignReport) => {
-                        return hvacDesignReport instanceof File && this.isValidFile(hvacDesignReport);
-                    });
-
-        this
-            .housePlan
-            .RaterDesignReviewChecklist
-            = this.housePlan
-                    .RaterDesignReviewChecklist
-                    .filter((raterDesignReviewChecklist) => {
-                        return raterDesignReviewChecklist instanceof File && this.isValidFile(raterDesignReviewChecklist);
-                    });
-    }
-
     saveCurrentHousePlan () {
         this.message = {};
         this.isBusy  = true;
@@ -146,19 +119,23 @@ class HousePlanEditBulkController {
         this.housePlan.BuilderName   = this.SanitizeService.sanitize(this.housePlan.BuilderName);
         this.housePlan.CommunityName = this.SanitizeService.sanitize(this.housePlan.CommunityName);
 
-        this.filterInvalidFiles();
+        this
+            .housePlan
+            .HvacDesignReport
+            .forEach((hvacDesignReport) => {
+                if (hvacDesignReport instanceof File) {
+                    hvacDesignReportUploads.push(this.S3Service.upload(this.PDF_FILE_PATH, hvacDesignReport));
+                }
+            });
 
-        this.housePlan.HvacDesignReport.forEach((hvacDesignReport) => {
-            if (hvacDesignReport instanceof File && this.isValidFile(hvacDesignReport)) {
-                hvacDesignReportUploads.push(this.S3Service.upload(this.PDF_FILE_PATH, hvacDesignReport));
-            }
-        });
-
-        this.housePlan.RaterDesignReviewChecklist.forEach((raterDesignReviewChecklist) => {
-            if (raterDesignReviewChecklist instanceof File && this.isValidFile(raterDesignReviewChecklist)) {
-                raterDesignReviewChecklistUploads.push(this.S3Service.upload(this.PDF_FILE_PATH, raterDesignReviewChecklist));
-            }
-        });
+        this
+            .housePlan
+            .RaterDesignReviewChecklist
+            .forEach((raterDesignReviewChecklist) => {
+                if (raterDesignReviewChecklist instanceof File) {
+                    raterDesignReviewChecklistUploads.push(this.S3Service.upload(this.PDF_FILE_PATH, raterDesignReviewChecklist));
+                }
+            });
 
         let promise = this.$q((resolve, reject) => {
             this

@@ -7,44 +7,24 @@ const ERROR_SERVER = {
     dismissable : false
 };
 
-const FILE_TYPE_ERROR = {
-    type        : 'error',
-    text        : 'The wrong type file was uploaded.',
-    dismissable : false
-};
-
 class HousePlanController {
     constructor ($log, $q, $rootScope, SanitizeService, $state, HousePlansService, S3Service, S3_CONFIG, UI_ENUMS) {
         'ngInject';
 
-        this.$log                 = $log;
-        this.$q                   = $q;
-        this.$rootScope           = $rootScope;
-        this.$state               = $state;
-        this.message              = {};
+        this.$log              = $log;
+        this.$q                = $q;
+        this.$rootScope        = $rootScope;
+        this.$state            = $state;
 
-        this.SanitizeService      = SanitizeService;
-        this.HousePlansService    = HousePlansService;
-        this.S3Service            = S3Service;
-        this.MESSAGING            = UI_ENUMS.MESSAGING;
-        this.isBusy               = false;
-        this.PDF_FILE_PATH        = S3_CONFIG.PATH_PDF;
+        this.message           = {};
+        this.SanitizeService   = SanitizeService;
+        this.HousePlansService = HousePlansService;
+        this.S3Service         = S3Service;
+        this.MESSAGING         = UI_ENUMS.MESSAGING;
+        this.isBusy            = false;
+        this.PDF_FILE_PATH     = S3_CONFIG.PATH_PDF;
+        this.showFileDetails   = 'File';
     }
-
-    onError (error) {
-        this.message = Object.assign({}, FILE_TYPE_ERROR);
-    }
-
-    /**
-     * Check if file is PDF and less than 2 MB
-     * @param  {File}      file file to validify
-     * @return {Boolean}   validity
-     */
-    isValidFile (file) {
-        return file.type === 'application/pdf' && ((file.size / 1048576) < 2);
-    }
-
-
 
     //TODO: Either move this to a house-plan-edit class or into the filemanager
     updateHvacDesignReports (files) {
@@ -80,26 +60,6 @@ class HousePlanController {
         });
     }
 
-    filterInvalidFiles () {
-        this
-            .housePlan
-            .HvacDesignReport
-            = this.housePlan
-                    .HvacDesignReport
-                    .filter((hvacDesignReport) => {
-                        return hvacDesignReport instanceof File && this.isValidFile(hvacDesignReport);
-                    });
-
-        this
-            .housePlan
-            .RaterDesignReviewChecklist
-            = this.housePlan
-                    .RaterDesignReviewChecklist
-                    .filter((raterDesignReviewChecklist) => {
-                        return raterDesignReviewChecklist instanceof File && this.isValidFile(raterDesignReviewChecklist);
-                    });
-    }
-
     onSubmit () {
         this.message = {};
         this.isBusy  = true;
@@ -112,16 +72,14 @@ class HousePlanController {
         this.housePlan.BuilderName   = this.SanitizeService.sanitize(this.housePlan.BuilderName);
         this.housePlan.CommunityName = this.SanitizeService.sanitize(this.housePlan.CommunityName);
 
-        this.filterInvalidFiles();
-
         this.housePlan.HvacDesignReport.forEach((hvacDesignReport) => {
-            if (hvacDesignReport instanceof File && this.isValidFile(hvacDesignReport)) {
+            if (hvacDesignReport instanceof File) {
                 hvacDesignReportUploads.push(this.S3Service.upload(this.PDF_FILE_PATH, hvacDesignReport));
             }
         });
 
         this.housePlan.RaterDesignReviewChecklist.forEach((raterDesignReviewChecklist) => {
-            if (raterDesignReviewChecklist instanceof File && this.isValidFile(raterDesignReviewChecklist)) {
+            if (raterDesignReviewChecklist instanceof File) {
                 raterDesignReviewChecklistUploads.push(this.S3Service.upload(this.PDF_FILE_PATH, raterDesignReviewChecklist));
             }
         });
