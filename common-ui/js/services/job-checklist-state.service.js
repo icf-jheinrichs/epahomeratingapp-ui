@@ -57,6 +57,7 @@ class JobChecklistState {
         this.subItemTable                  = [];
 
         this.clearState();
+        this.Promise = undefined;
     }
 
     /**
@@ -619,21 +620,38 @@ class JobChecklistState {
      * @param  {object} photoData ID of house to update, URL of photo
      */
     postComment (comment) {
-        this
+        const historyRecordPromises = [];
+
+        historyRecordPromises.push(this
             .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.EDITED,
                 Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.COMMENT
-            })
-            .then((historyRecord) => {
-                this.job
-                    .History
-                    .push(historyRecord);
+            }));
+
+        if (comment.PhotoUrl) {
+            historyRecordPromises.push(this
+                .formatHistoryRecord({
+                    Category    : this.HISTORY.CATEGORIES.EDITED,
+                    Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.COMMENT_PHOTO
+                }));
+
+        }
+
+        this
+            .$q.all(historyRecordPromises)
+
+            .then((historyRecords) => {
+                historyRecords.forEach((historyRecord) => {
+                    this.job
+                        .History
+                        .push(historyRecord);
+                });
 
                 this
                     .jobDataResponse
                     .ChecklistItems[comment.Category][comment.CategoryProgress][comment.ItemId]
                     .Comments
-                    .push(comment.Comment);
+                    .push(comment.Comment, comment.PhotoUrl);
 
                 this.putJobData(); // update the job data object so that job set to JobInitiated = true
                 this.putJobDataResponse();

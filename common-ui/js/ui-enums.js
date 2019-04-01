@@ -37,6 +37,7 @@ const HISTORY_CATEGORIES = {
 const HISTORY_SUBCATEGORIES = {
     'EDITED' : {
         'COMMENT'           : 'COMMENT',
+        'COMMENT_PHOTO'     : 'COMMENT_PHOTO',
         'PROVIDER_COMMENT'  : 'PROVIDER_COMMENT',
         'EDIT_MRF'          : 'EDIT_MRF',
         'PHOTO'             : 'PHOTO',
@@ -63,9 +64,10 @@ const HISTORY_SUBCATEGORIES = {
 const HISTORY_TITLES = {
     'EDITED' : {
         'COMMENT'           : 'comment(s)',
+        'COMMENT_PHOTO'     : 'photo(s) in comment(s)',
         'PROVIDER_COMMENT'  : 'provider comment updated',
         'EDIT_MRF'          : 'minimum rated featue(s) edited',
-        'PHOTO'             : 'photo(s)',
+        'PHOTO'             : 'elevation photo(s)',
         'UPDATE_PREDRYWALL' : 'pre-drywall status update(s)',
         'UPDATE_FINAL'      : 'final status update(s)'
     },
