@@ -57,7 +57,6 @@ class JobChecklistState {
         this.subItemTable                  = [];
 
         this.clearState();
-        this.Promise = undefined;
     }
 
     /**
@@ -628,7 +627,7 @@ class JobChecklistState {
                 Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.COMMENT
             }));
 
-        if (comment.PhotoUrl) {
+        if (comment.Comment.PhotoUrl) {
             historyRecordPromises.push(this
                 .formatHistoryRecord({
                     Category    : this.HISTORY.CATEGORIES.EDITED,
@@ -651,7 +650,7 @@ class JobChecklistState {
                     .jobDataResponse
                     .ChecklistItems[comment.Category][comment.CategoryProgress][comment.ItemId]
                     .Comments
-                    .push(comment.Comment, comment.PhotoUrl);
+                    .push(comment.Comment);
 
                 this.putJobData(); // update the job data object so that job set to JobInitiated = true
                 this.putJobDataResponse();
