@@ -117,7 +117,7 @@ class JobsPageController extends JobsPage {
                             // TODO - Pop error message to user
                             job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
                             job.InternalReview  = false;
-                            job.ProviderCompany = this.selectedProviderToAdd.O_ID;
+                            job.ProviderCompany = this.selectedProviderToAdd.Name;
 
                             job
                                 .History

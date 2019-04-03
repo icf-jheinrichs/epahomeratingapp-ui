@@ -83,13 +83,14 @@ class JobsProviderPageController extends JobsPage {
                         if (job.Status === this.JOB_STATUS.SUBMITTED_TO_PROVIDER) {
                             // TODO - Pop error message to user
                             job.Status          = this.JOB_STATUS.COMPLETED;
-                            job.ProviderCompany = undefined;
+                            job.ProviderCompany = this.company.Name;
 
                             job
                                 .History
                                 .push(this.formatHistoryRecord({
                                     Category    : this.HISTORY.CATEGORIES.STATUS,
-                                    Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.DECLINED_BY_PROVIDER
+                                    Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.DECLINED_BY_PROVIDER,
+                                    Data        : this.company.O_ID
                                 }));
 
                             submitJobs.push(this.JobsService.put(job));
@@ -115,12 +116,14 @@ class JobsProviderPageController extends JobsPage {
             if (job.Status === this.JOB_STATUS.SUBMITTED_TO_PROVIDER) {
                 // TODO - Pop error message to user
                 job.Status = this.JOB_STATUS.REGISTERED;
+                job.ProviderCompany = this.company.Name;
 
                 job
                     .History
                     .push(this.formatHistoryRecord({
                         Category    : this.HISTORY.CATEGORIES.STATUS,
-                        Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.REGISTERED
+                        Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.REGISTERED,
+                        Data        : this.company.O_ID
                     }));
 
                 submitJobs.push(this.JobsService.put(job, this.selectedRater.O_ID));

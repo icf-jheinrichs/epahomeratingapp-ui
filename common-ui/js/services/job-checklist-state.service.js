@@ -11,6 +11,7 @@ class JobChecklistState {
         $stateParams,
         $q,
         AuthenticationService,
+        AuthorizationService,
         DisplayLogicDigestService,
         GeolocationService,
         JobChecklistProgressService,
@@ -36,6 +37,7 @@ class JobChecklistState {
         };
 
         this.AuthenticationService         = AuthenticationService;
+        this.AuthorizationService          = AuthorizationService;
         this.DisplayLogicDigestService     = DisplayLogicDigestService;
         this.GeolocationService            = GeolocationService;
         this.JobChecklistProgressService   = JobChecklistProgressService;
@@ -602,7 +604,8 @@ class JobChecklistState {
         this
             .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.EDITED,
-                Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.PROVIDER_COMMENT
+                Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.PROVIDER_COMMENT,
+                Data        : this.currentCompany
             })
             .then((historyRecord) => {
                 this.job
@@ -774,6 +777,26 @@ class JobChecklistState {
             }
         }
         return elements;
+    }
+
+    /**
+     * Getting the provider company name
+     */
+    getCurrentCompany () {
+        this.currentCompany = this.AuthorizationService.getCurrentOrganizationId();
+
+        this.currentCompany
+          = this
+                .AuthorizationService
+                .companies
+                .find (
+                    (company) => {
+                        return this.AuthorizationService.companies.O_ID === this.currentOrganization;
+                    });
+
+        this.currentCompany = this.currentCompany.Name;
+
+        return this.currentCompany;
     }
 
     getJobHistory () {
