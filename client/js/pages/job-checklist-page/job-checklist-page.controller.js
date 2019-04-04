@@ -233,11 +233,11 @@ class JobsChecklistPageController {
                     if (confirmation) {
                         this.job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
                         this.job.InternalReview  = false;
-                        this.job.ProviderCompany = this.selectedProviderToAdd.Name;
+                        this.job.ProviderCompany = this.selectedProviderToAdd.O_ID;
 
                         this
                             .JobChecklistStateService
-                            .submitJob(this.selectedProviderToAdd.O_ID);
+                            .submitJob(this.selectedProviderToAdd);
                     }
                 });
         }

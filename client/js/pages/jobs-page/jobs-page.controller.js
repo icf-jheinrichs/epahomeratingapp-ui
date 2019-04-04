@@ -117,14 +117,14 @@ class JobsPageController extends JobsPage {
                             // TODO - Pop error message to user
                             job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
                             job.InternalReview  = false;
-                            job.ProviderCompany = this.selectedProviderToAdd.Name;
+                            job.ProviderCompany = this.selectedProviderToAdd.O_ID;
 
                             job
                                 .History
                                 .push(this.formatHistoryRecord({
                                     Category    : this.HISTORY.CATEGORIES.STATUS,
                                     Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.SUBMITTED_TO_PROVIDER,
-                                    Data        : this.selectedProviderToAdd.O_ID
+                                    Data        : this.selectedProviderToAdd.Name
                                 }));
 
                             submitJobs.push(this.JobsService.put(job));

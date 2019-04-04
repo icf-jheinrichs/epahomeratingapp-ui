@@ -96,6 +96,15 @@ class AuthorizationService {
         return this.currentOrganization;
     }
 
+    getCurrentOrganization () {
+        return this
+            .companies
+            .find (
+                (company) => {
+                    return company.O_ID === this.currentOrganization;
+                });
+    }
+
     getUserMESAData () {
         return this.user.user;
     }
