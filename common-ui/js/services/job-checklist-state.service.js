@@ -619,15 +619,32 @@ class JobChecklistState {
      * @param  {object} photoData ID of house to update, URL of photo
      */
     postComment (comment) {
-        this
+        const historyRecordPromises = [];
+
+        historyRecordPromises.push(this
             .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.EDITED,
                 Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.COMMENT
-            })
-            .then((historyRecord) => {
-                this.job
-                    .History
-                    .push(historyRecord);
+            }));
+
+        if (comment.Comment.PhotoUrl) {
+            historyRecordPromises.push(this
+                .formatHistoryRecord({
+                    Category    : this.HISTORY.CATEGORIES.EDITED,
+                    Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.COMMENT_PHOTO
+                }));
+
+        }
+
+        this
+            .$q.all(historyRecordPromises)
+
+            .then((historyRecords) => {
+                historyRecords.forEach((historyRecord) => {
+                    this.job
+                        .History
+                        .push(historyRecord);
+                });
 
                 this
                     .jobDataResponse

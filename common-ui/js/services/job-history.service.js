@@ -225,6 +225,7 @@ class JobHistory {
                     return quantities;
                 }, {
                     'COMMENT'           : 0,
+                    'COMMENT_PHOTO'     : 0,
                     'PROVIDER_COMMENT'  : 0,
                     'EDIT_MRF'          : 0,
                     'PHOTO'             : 0,
