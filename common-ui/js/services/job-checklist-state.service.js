@@ -479,26 +479,14 @@ class JobChecklistState {
      */
     updateMrfData (mrfEditData) {
         this
-            .formatHistoryRecord({
-                Category    : this.HISTORY.CATEGORIES.EDITED,
-                Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.EDIT_MRF,
-                Data        : `[${mrfEditData.ItemId}: ${mrfEditData.title}] ${mrfEditData.key}`
-            })
-            .then((historyRecord) => {
-                this.job
-                    .History
-                    .push(historyRecord);
+            .jobDataHomePerformance[this.currentHouse.HouseId]
+            .ChecklistItems[mrfEditData.ItemId][mrfEditData.key][mrfEditData.index] = mrfEditData.mrfData;
 
-                this
-                    .jobDataHomePerformance[this.currentHouse.HouseId]
-                    .ChecklistItems[mrfEditData.ItemId][mrfEditData.key][mrfEditData.index] = mrfEditData.mrfData;
+        this
+            .JobDataHomePerformanceService
+            .put(this.jobDataHomePerformance[this.currentHouse.HouseId]);
 
-                this
-                    .JobDataHomePerformanceService
-                    .put(this.jobDataHomePerformance[this.currentHouse.HouseId]);
-
-                this.putJobData();
-            });
+        this.putJobData();
     }
 
     /**
@@ -590,8 +578,22 @@ class JobChecklistState {
             .Progress
             = this.JobChecklistProgressService.calculateJobProgress(this.jobDataResponse.Progress);
 
-        this.putJobDataResponse();
-        this.putJobData();
+        this
+            .formatHistoryRecord({
+                Category    : this.HISTORY.CATEGORIES.EDITED,
+                Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.EDIT_MRF,
+                Data        : `[${update.Category} ${update.CategoryProgress}: ${update.ItemId}]}`
+            })
+            .then((historyRecord) => {
+                this.job
+                    .History
+                    .push(historyRecord);
+
+                this.putJobDataResponse();
+                this.putJobData();
+            });
+
+
     }
 
     getProviderComment () {
