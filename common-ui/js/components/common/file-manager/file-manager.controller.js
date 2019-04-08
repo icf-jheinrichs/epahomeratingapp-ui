@@ -9,7 +9,7 @@ const FILE_TYPE_ERROR = {
     dismissable : false
 };
 class FileManagerController {
-    constructor ($element, $scope, $rootScope, FileUtilityService) {
+    constructor ($element, $scope, $rootScope, FileUtilityService, CONTEXT, UI_ENUMS) {
         'ngInject';
 
         this.$element   = $element;
@@ -17,6 +17,7 @@ class FileManagerController {
         this.$rootScope = $rootScope;
 
         this.FileUtilityService = FileUtilityService;
+        this.CONTEXT_IS_ADMIN   = CONTEXT === UI_ENUMS.CONTEXT.ADMIN;
     }
 
     $onInit () {
