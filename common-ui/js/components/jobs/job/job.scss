@@ -28,6 +28,15 @@ $job-photo-height-small:  85px;
             transform: translateX($offset-default);
         }
     }
+
+    &.job-inactive {
+        cursor: not-allowed;
+
+        &:hover,
+        &:focus {
+            background-color: $body-bg;
+        }
+    }
 }
 
 .job-meta {

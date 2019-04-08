@@ -1,0 +1,33 @@
+    <label data-ng-class="{'job-select-marked' : jobInactiveCtrl.marked}" class="job-select flex-item-static flex-row flex-align-center" aria-labelledby="job-{{jobInactiveCtrl.job._id}}">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        <span class="sr-only">Mark job for bulk operations.</span>
+        <input class="form-control-check" type="checkbox" ng-model="jobInactiveCtrl.marked" ng-change="jobInactiveCtrl.setBulkOperationStatus()" />
+    </label>
+
+    <div class="tooltip-wrapper tooltip-wrapper-top tooltip-enabled flex-item-grow">
+        <p class="tooltip">To view or edit a job, make it active to restore it to Active Jobs.</p>
+        <div aria-labelledby="job-{{jobInactiveCtrl.job._id}}"
+            class="job job-admin job-inactive flex-row flex-align-center">
+
+            <div class="job-info flex-item-grow">
+                <div class="job-meta flex-row">
+                    <span class="label-rating-type" data-ng-class="::jobInactiveCtrl.RatingTypeClass">{{::jobInactiveCtrl.RatingType}}</span>
+                    <span class="label label-sample-set" data-ng-if="::jobInactiveCtrl.isSample">Sample Set: {{::jobInactiveCtrl.job.SampleSize}} <i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                    <span class="last-update small"><strong>{{::jobInactiveCtrl.lastUpdateType}}:</strong> {{::jobInactiveCtrl.lastUpdateTime}}</span>
+                </div>
+
+                <h3 class="list-item-title job-title" id="job-{{jobInactiveCtrl.job._id}}" data-ng-bind-html="jobInactiveCtrl.JobTitle"></h3>
+
+                <div class="flex-row">
+                    <span class="job-builder">{{::jobInactiveCtrl.job.Primary.Builder}}</span>
+                    <span class="job-status" data-ng-if="jobInactiveCtrl.hideJobStatus()">{{::jobInactiveCtrl.job.Status}}</span>
+                </div>
+
+            </div>
+
+            <div class="job-progress">
+                <div class="radial-progress"><radial-progress title="Pre-drywall" progress="jobInactiveCtrl.job.Progress.PreDrywall" /></radial-progress></div>
+                <div class="radial-progress"><radial-progress title="Final" progress="jobInactiveCtrl.job.Progress.Final" /></radial-progress></div>
+            </div>
+        </div>
+</div>

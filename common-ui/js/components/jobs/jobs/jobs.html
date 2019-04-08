@@ -9,9 +9,19 @@
 </div>
 
 <div class="item-list">
+    <job-inactive
+        enabled="jobsCtrl.enabled"
+        data-ng-if="::jobsCtrl.CONTEXT_IS_ADMIN && jobsCtrl.jobIsArchived"
+        class="item-list-item item-list-item-job flex-row"
+        data-ng-repeat="job in jobsCtrl.jobs track by job._id"
+        job="job"
+        marked="jobsCtrl.markedJobs[$index]"
+        on-set-bulk-operation-status="jobsCtrl.setBulkOperationStatus()">
+    </job-inactive>
+
     <job-admin
         enabled="jobsCtrl.enabled"
-        data-ng-if="::jobsCtrl.CONTEXT_IS_ADMIN && (jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS || jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS_SEARCH)"
+        data-ng-if="::jobsCtrl.CONTEXT_IS_ADMIN && !jobsCtrl.jobIsArchived && (jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS || jobsCtrl.currentStateName === jobsCtrl.STATE_NAME.JOBS_SEARCH)"
         class="item-list-item item-list-item-job flex-row"
         data-ng-repeat="job in jobsCtrl.jobs track by job._id"
         job="job"

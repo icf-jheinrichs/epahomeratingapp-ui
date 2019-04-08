@@ -53,3 +53,17 @@
         right: 100%;
     }
 }
+
+.tooltip-wrapper-top .tooltip {
+    bottom: 100%;
+    top: auto;
+
+    &::before {
+        @include arrow-down($arrow-small, $brand-tertiary);
+
+        bottom: auto;
+        left: calc(50% - #{$arrow-small / 2});
+        right: auto;
+        top: 100%;
+    }
+}
