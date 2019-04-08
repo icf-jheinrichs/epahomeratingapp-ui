@@ -51,7 +51,7 @@ class JobHistory {
                 Subcategory     : this.HISTORY.CATEGORIES.UNKNOWN,
                 UserId          : undefined,
                 UserName        : historyData.User,
-                Data            : undefined,
+                Data            : historyData.Data,
                 LatLongAccuracy : undefined
             };
         }
@@ -248,6 +248,7 @@ class JobHistory {
                 title   : isEditedCategory ? this.HISTORY.SHORT_DESCRIPTION.EDITED : this.HISTORY.TITLES[historyGroup[0].Category][historyGroup[0].Subcategory],
                 date    : historyGroup[0].DateTime,
                 user    : historyGroup[0].UserName,
+                data    : !isEditedCategory ? historyGroup[0].Data : undefined,
                 details,
                 map
             };

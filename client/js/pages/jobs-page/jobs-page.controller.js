@@ -124,7 +124,7 @@ class JobsPageController extends JobsPage {
                                 .push(this.formatHistoryRecord({
                                     Category    : this.HISTORY.CATEGORIES.STATUS,
                                     Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.SUBMITTED_TO_PROVIDER,
-                                    Data        : this.selectedProviderToAdd.O_ID
+                                    Data        : this.selectedProviderToAdd.Name
                                 }));
 
                             submitJobs.push(this.JobsService.put(job));

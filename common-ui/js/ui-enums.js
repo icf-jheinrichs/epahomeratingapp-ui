@@ -47,6 +47,7 @@ const HISTORY_SUBCATEGORIES = {
     'STATUS' : {
         'COMPLETED'             : 'COMPLETED',
         'INTERNAL_REVIEW'       : 'INTERNAL_REVIEW',
+        'PROVIDER_COMMENT'      : 'PROVIDER_COMMENT',
         'SUBMITTED_TO_PROVIDER' : 'SUBMITTED_TO_PROVIDER',
         'DECLINED_BY_PROVIDER'  : 'DECLINED_BY_PROVIDER',
         'REGISTERED'            : 'REGISTERED'
@@ -65,7 +66,7 @@ const HISTORY_TITLES = {
     'EDITED' : {
         'COMMENT'           : 'comment(s)',
         'COMMENT_PHOTO'     : 'photo(s) in comment(s)',
-        'PROVIDER_COMMENT'  : 'provider comment updated',
+        'PROVIDER_COMMENT'  : 'provider comment updated', // this is deprecated in favor of the 'STATUS.PROVIDER_COMMENT' records. keeping here for existing records
         'EDIT_MRF'          : 'minimum rated featue(s) edited',
         'PHOTO'             : 'elevation photo(s)',
         'UPDATE_PREDRYWALL' : 'pre-drywall status update(s)',
@@ -76,7 +77,8 @@ const HISTORY_TITLES = {
         'INTERNAL_REVIEW'       : 'Flagged for Internal Review',
         'SUBMITTED_TO_PROVIDER' : 'Submitted to Provider',
         'DECLINED_BY_PROVIDER'  : 'Declined by Provider',
-        'REGISTERED'            : 'Registered'
+        'REGISTERED'            : 'Marked as Registered',
+        'PROVIDER_COMMENT'      : 'Job Comments Edited',
     },
     'MANAGE' : {
         'CREATED'    : 'Created',
@@ -98,7 +100,8 @@ const HISTORY_SHORT_DESCRIPTION = {
         'INTERNAL_REVIEW'       : 'Flagged',
         'SUBMITTED_TO_PROVIDER' : 'Submitted',
         'DECLINED_BY_PROVIDER'  : 'Declined',
-        'REGISTERED'            : 'Registered'
+        'REGISTERED'            : 'Registered',
+        'PROVIDER_COMMENT'      : 'Job Comment'
     },
     'MANAGE' : {
         'CREATED'    : 'Created',

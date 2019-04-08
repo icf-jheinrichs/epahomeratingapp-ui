@@ -74,14 +74,13 @@ class JobsProviderPageController extends JobsPage {
 
         this
             .DialogService
-            .openDialog(this.DIALOG.DECLINE_JOBS)
+            .openDialog(this.DIALOG.DECLINE_JOB)
             .then((confirmation) => {
                 let submitJobs = [];
                 if (confirmation) {
                     markedJobs.forEach((index) => {
                         let job = this.viewJobs[index];
                         if (job.Status === this.JOB_STATUS.SUBMITTED_TO_PROVIDER) {
-                            // TODO - Pop error message to user
                             job.Status          = this.JOB_STATUS.COMPLETED;
                             job.ProviderCompany = undefined;
 
@@ -89,10 +88,11 @@ class JobsProviderPageController extends JobsPage {
                                 .History
                                 .push(this.formatHistoryRecord({
                                     Category    : this.HISTORY.CATEGORIES.STATUS,
-                                    Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.DECLINED_BY_PROVIDER
+                                    Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.DECLINED_BY_PROVIDER,
+                                    Data        : this.company.Name
                                 }));
 
-                            submitJobs.push(this.JobsService.put(job));
+                            submitJobs.push(this.JobsService.put(job, this.selectedRater.O_ID));
                         }
                     });
 
@@ -120,7 +120,8 @@ class JobsProviderPageController extends JobsPage {
                     .History
                     .push(this.formatHistoryRecord({
                         Category    : this.HISTORY.CATEGORIES.STATUS,
-                        Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.REGISTERED
+                        Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.REGISTERED,
+                        Data        : this.company.Name
                     }));
 
                 submitJobs.push(this.JobsService.put(job, this.selectedRater.O_ID));

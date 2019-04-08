@@ -14,10 +14,15 @@
             data-ng-repeat="historyGroup in ::jobHistoryCtrl.history track by $index">
 
             <div class="history-group-details">
-                <p class="history-group-title"><stong>{{historyGroup.title}}:</stong> {{historyGroup.date | date:'medium' }} by {{historyGroup.user}}</p>
+                <h3 class="history-group-title h4">{{historyGroup.title}}</h3>
+                <p>{{historyGroup.date | date:'medium' }} by {{historyGroup.user}}</p>
 
                 <ul ng-if="historyGroup.details">
                     <li ng-repeat="detail in historyGroup.details track by $index">{{::detail}}</li>
+                </ul>
+
+                <ul ng-if="historyGroup.data">
+                    <li>{{historyGroup.data}}</li>
                 </ul>
             </div>
 

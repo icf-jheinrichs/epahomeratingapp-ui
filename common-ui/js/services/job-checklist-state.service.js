@@ -11,6 +11,7 @@ class JobChecklistState {
         $stateParams,
         $q,
         AuthenticationService,
+        AuthorizationService,
         DisplayLogicDigestService,
         GeolocationService,
         JobChecklistProgressService,
@@ -55,6 +56,8 @@ class JobChecklistState {
         this.CATEGORIES                    = UI_ENUMS.CATEGORIES;
 
         this.subItemTable                  = [];
+
+        this.company                       = AuthorizationService.getCurrentOrganization();
 
         this.clearState();
     }
@@ -503,6 +506,38 @@ class JobChecklistState {
      * @param  {object} response [selected response meta and response]
      */
     updateChecklistResponse (response) {
+        let updateResponse = (response.Response.length === 0) ? undefined : response.Response;
+
+        this
+            .jobDataResponse
+            .ChecklistItems[response.Category][response.CategoryProgress][response.ItemId]
+            .Response = updateResponse;
+
+        this
+            .jobDataResponse
+            .ChecklistItems[response.Category][response.CategoryProgress][response.ItemId]
+            .ResponseHouseId = this.currentHouse.HouseId;
+
+        this
+            .jobDataResponse
+            .Progress[response.Category][response.CategoryProgress]
+            = this.JobChecklistProgressService.calculateCategoryStageProgress(this.jobDataResponse, this.itemStatusQuery, response);
+
+        this
+            .job
+            .Progress
+            = this.JobChecklistProgressService.calculateJobProgress(this.jobDataResponse.Progress);
+
+        this
+            .job
+            .ProgressLevel
+            = this.JobChecklistProgressService.jobProgressLevel(this.job.Progress);
+
+        this
+            .job
+            .BuilderMustCorrect
+            = this.JobChecklistProgressService.builderMustCorrect(this.job.Progress);
+
         this
             .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.EDITED,
@@ -510,41 +545,9 @@ class JobChecklistState {
                 Data        : `[${response.Category} ${response.CategoryProgress}: ${response.ItemId}] ${response.Response[0]}`
             })
             .then((historyRecord) => {
-                let updateResponse = (response.Response.length === 0) ? undefined : response.Response;
-
                 this.job
                     .History
                     .push(historyRecord);
-
-                this
-                    .jobDataResponse
-                    .ChecklistItems[response.Category][response.CategoryProgress][response.ItemId]
-                    .Response = updateResponse;
-
-                this
-                    .jobDataResponse
-                    .ChecklistItems[response.Category][response.CategoryProgress][response.ItemId]
-                    .ResponseHouseId = this.currentHouse.HouseId;
-
-                this
-                    .jobDataResponse
-                    .Progress[response.Category][response.CategoryProgress]
-                    = this.JobChecklistProgressService.calculateCategoryStageProgress(this.jobDataResponse, this.itemStatusQuery, response);
-
-                this
-                    .job
-                    .Progress
-                    = this.JobChecklistProgressService.calculateJobProgress(this.jobDataResponse.Progress);
-
-                this
-                    .job
-                    .ProgressLevel
-                    = this.JobChecklistProgressService.jobProgressLevel(this.job.Progress);
-
-                this
-                    .job
-                    .BuilderMustCorrect
-                    = this.JobChecklistProgressService.builderMustCorrect(this.job.Progress);
 
                 this.putJobDataResponse();
                 this.putJobData();
@@ -601,17 +604,19 @@ class JobChecklistState {
     }
 
     putProviderComment (providerComment) {
+        this.job.ProviderComment = providerComment;
+
         this
             .formatHistoryRecord({
-                Category    : this.HISTORY.CATEGORIES.EDITED,
-                Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.PROVIDER_COMMENT
+                Category    : this.HISTORY.CATEGORIES.STATUS,
+                Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.PROVIDER_COMMENT,
+                Data        : this.company.Name
             })
             .then((historyRecord) => {
                 this.job
                     .History
                     .push(historyRecord);
 
-                this.job.ProviderComment = providerComment;
                 this.putJobData();
             });
     }
@@ -622,6 +627,12 @@ class JobChecklistState {
      */
     postComment (comment) {
         const historyRecordPromises = [];
+
+        this
+            .jobDataResponse
+            .ChecklistItems[comment.Category][comment.CategoryProgress][comment.ItemId]
+            .Comments
+            .push(comment.Comment);
 
         historyRecordPromises.push(this
             .formatHistoryRecord({
@@ -635,24 +646,18 @@ class JobChecklistState {
                     Category    : this.HISTORY.CATEGORIES.EDITED,
                     Subcategory : this.HISTORY.SUBCATEGORIES.EDITED.COMMENT_PHOTO
                 }));
-
         }
 
         this
-            .$q.all(historyRecordPromises)
-
+            .$q
+            .all(historyRecordPromises)
             .then((historyRecords) => {
-                historyRecords.forEach((historyRecord) => {
-                    this.job
-                        .History
-                        .push(historyRecord);
-                });
-
-                this
-                    .jobDataResponse
-                    .ChecklistItems[comment.Category][comment.CategoryProgress][comment.ItemId]
-                    .Comments
-                    .push(comment.Comment);
+                historyRecords
+                    .forEach((historyRecord) => {
+                        this.job
+                            .History
+                            .push(historyRecord);
+                    });
 
                 this.putJobData(); // update the job data object so that job set to JobInitiated = true
                 this.putJobDataResponse();
@@ -663,12 +668,12 @@ class JobChecklistState {
      * Set status as submitted to provider and add ID of provider submitted to
      * @return {[type]} [description]
      */
-    submitJob (ProviderOID) {
+    submitJob (Provider) {
         this
             .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.STATUS,
                 Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.SUBMITTED_TO_PROVIDER,
-                Data        : ProviderOID
+                Data        : Provider.Name
             })
             .then((historyRecord) => {
                 this.job
@@ -677,7 +682,7 @@ class JobChecklistState {
 
                 this.job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
                 this.job.InternalReview  = false;
-                this.job.ProviderCompany = ProviderOID;
+                this.job.ProviderCompany = Provider.O_ID;
 
                 this.putJobData();
             });

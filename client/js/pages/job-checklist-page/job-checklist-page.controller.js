@@ -237,7 +237,7 @@ class JobsChecklistPageController {
 
                         this
                             .JobChecklistStateService
-                            .submitJob(this.selectedProviderToAdd.O_ID);
+                            .submitJob(this.selectedProviderToAdd);
                     }
                 });
         }
