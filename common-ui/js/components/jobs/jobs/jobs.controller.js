@@ -32,6 +32,7 @@ class JobsController {
 
         this.STATE_NAME       = UI_ENUMS.STATE_NAME;
         this.currentStateName = this.$state.current.name;
+        this.jobIsArchived    = this.$stateParams.status === 'Archived';
     }
 
     $onInit () {

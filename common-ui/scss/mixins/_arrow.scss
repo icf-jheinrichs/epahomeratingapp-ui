@@ -1,15 +1,24 @@
 @mixin arrow-up($size: $arrow-default, $color: $brand-auxillary) {
-    width: 0;
-    height: 0;
     border-bottom: $size solid $color;
     border-left: $size solid transparent;
     border-right: $size solid transparent;
+    height: 0;
+    width: 0;
+}
+
+@mixin arrow-down($size: $arrow-default, $color: $brand-auxillary) {
+    border-bottom: $size solid transparent;
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-top: $size solid $color;
+    height: 0;
+    width: 0;
 }
 
 @mixin arrow-left($size: $arrow-default, $color: $brand-auxillary) {
-    width: 0;
-    height: 0;
+    border-bottom: $size solid transparent;
     border-right: $size solid $color;
     border-top: $size solid transparent;
-    border-bottom: $size solid transparent;
+    height: 0;
+    width: 0;
 }
