@@ -67,7 +67,7 @@ const HISTORY_TITLES = {
         'COMMENT'           : 'comment(s)',
         'COMMENT_PHOTO'     : 'photo(s) in comment(s)',
         'PROVIDER_COMMENT'  : 'provider comment updated', // this is deprecated in favor of the 'STATUS.PROVIDER_COMMENT' records. keeping here for existing records
-        'EDIT_MRF'          : 'minimum rated featue(s) edited',
+        'EDIT_MRF'          : 'minimum rated feature(s) edited',
         'PHOTO'             : 'elevation photo(s)',
         'UPDATE_PREDRYWALL' : 'pre-drywall status update(s)',
         'UPDATE_FINAL'      : 'final status update(s)'
