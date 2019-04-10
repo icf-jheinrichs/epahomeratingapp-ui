@@ -19,7 +19,7 @@
             <h3 class="list-item-title job-title" id="job-{{jobAdminCtrl.job._id}}" data-ng-bind-html="jobAdminCtrl.JobTitle"></h3>
 
             <div class="flex-row">
-                <span class="job-builder">{{::jobAdminCtrl.job.Primary.Builder}}</span>
+                <span class="job-builder ellipsis">{{::jobAdminCtrl.job.Primary.Builder}}</span>
                 <span class="job-status" data-ng-if="jobAdminCtrl.hideJobStatus()">{{::jobAdminCtrl.job.Status}}</span>
             </div>
 
