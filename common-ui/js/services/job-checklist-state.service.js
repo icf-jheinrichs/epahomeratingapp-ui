@@ -730,7 +730,7 @@ class JobChecklistState {
         this
             .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.STATUS,
-                Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.INTERNAL_REVIEW
+                Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.REGISTERED
             })
             .then((historyRecord) => {
                 this.job
