@@ -19,7 +19,7 @@
                 <h3 class="list-item-title job-title" id="job-{{jobInactiveCtrl.job._id}}" data-ng-bind-html="jobInactiveCtrl.JobTitle"></h3>
 
                 <div class="flex-row">
-                    <span class="job-builder">{{::jobInactiveCtrl.job.Primary.Builder}}</span>
+                    <span class="job-builder ellipsis">{{::jobInactiveCtrl.job.Primary.Builder}}</span>
                     <span class="job-status" data-ng-if="jobInactiveCtrl.hideJobStatus()">{{::jobInactiveCtrl.job.Status}}</span>
                 </div>
 
