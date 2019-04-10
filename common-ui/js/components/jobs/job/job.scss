@@ -155,8 +155,9 @@ $job-photo-height-small:  85px;
 }
 
 .job-status {
+    line-height: $line-height-small;
     margin-left: $offset-large;
-    line-height: $line-height-small
+    white-space: nowrap;
 }
 
 .job-history,
