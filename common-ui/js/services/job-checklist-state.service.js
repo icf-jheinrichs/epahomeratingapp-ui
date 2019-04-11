@@ -37,6 +37,7 @@ class JobChecklistState {
         };
 
         this.AuthenticationService         = AuthenticationService;
+        this.AuthorizationService          = AuthorizationService;
         this.DisplayLogicDigestService     = DisplayLogicDigestService;
         this.GeolocationService            = GeolocationService;
         this.JobChecklistProgressService   = JobChecklistProgressService;
@@ -57,7 +58,6 @@ class JobChecklistState {
 
         this.subItemTable                  = [];
 
-        this.company                       = AuthorizationService.getCurrentOrganization();
 
         this.clearState();
     }
@@ -604,6 +604,7 @@ class JobChecklistState {
     }
 
     putProviderComment (providerComment) {
+        this.company             = this.AuthorizationService.getCurrentOrganization();
         this.job.ProviderComment = providerComment;
 
         this
@@ -729,10 +730,13 @@ class JobChecklistState {
     }
 
     markAsRegistered () {
+        this.company = this.AuthorizationService.getCurrentOrganization();
+
         this
             .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.STATUS,
-                Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.REGISTERED
+                Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.REGISTERED,
+                Data        : this.company.Name
             })
             .then((historyRecord) => {
                 this.job
