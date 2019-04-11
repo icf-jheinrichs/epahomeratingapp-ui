@@ -670,6 +670,7 @@ class JobChecklistState {
      * @return {[type]} [description]
      */
     submitJob (Provider) {
+        //TODO consider moving this to the jobs service since this is similar to the submitToProvider method in jobs-page.controller
         this
             .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.STATUS,
@@ -713,6 +714,7 @@ class JobChecklistState {
      * Flag job for review, then call putJobData
      */
     flagJobForReview () {
+        //TODO consider moving this to the jobs service since this is similar to the flagJobForReview method in job-page.controller
         this
             .formatHistoryRecord({
                 Category    : this.HISTORY.CATEGORIES.STATUS,
@@ -730,6 +732,7 @@ class JobChecklistState {
     }
 
     markAsRegistered () {
+        //TODO consider moving this to the jobs service since this is similar to the markAsRegistered method in job-provider-page.controller
         this.company = this.AuthorizationService.getCurrentOrganization();
 
         this

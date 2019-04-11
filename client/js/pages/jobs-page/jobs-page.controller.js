@@ -49,6 +49,7 @@ class JobsPageController extends JobsPage {
     }
 
     flagForReview () {
+        //TODO consider moving this to the jobs service since this is similar to the flagJobForReview method in job-checklist-state.service
         const markedJobs = this.jobsHandlers.getSelectedJobs();
         let submitJobs   = [];
 
@@ -102,6 +103,7 @@ class JobsPageController extends JobsPage {
     }
 
     submitToProvider () {
+        //TODO consider moving this to the jobs service since this is similar to the submitJob method in job-checklist-state.service
         const markedJobs = this.jobsHandlers.getSelectedJobs();
         this.marked      = markedJobs.length;
 

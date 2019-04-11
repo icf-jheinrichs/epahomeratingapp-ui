@@ -106,6 +106,7 @@ class JobsProviderPageController extends JobsPage {
             });
     }
 
+    //TODO consider moving this to the jobs service since this is similar to the markAsRegistered method in job-checklist-state.service
     markAsRegistered () {
         const markedJobs = this.jobsHandlers.getSelectedJobs();
         let submitJobs   = [];
