@@ -91,6 +91,14 @@ class JobsNewPageController {
         }
     }
 
+    /**
+     * After job files have been uploaded to s3, remap the File objects in the HvacDesignReport and RaterDesignReviewChecklist arrays
+     * to the S3 key and filename
+     *
+     * @param {array} results of s3 uploads. includes the map to which file is being updated
+     * @param {object} job object
+     * @memberof JobsNewPageController
+     */
     updateJobFileData (results, job) {
         results.forEach((result) => {
             if (this.jobFileMap[result.data.request.token]) {
@@ -114,6 +122,12 @@ class JobsNewPageController {
         });
     }
 
+    /**
+     * If a
+     *
+     * @param {*} job
+     * @memberof JobsNewPageController
+     */
     submitJobWithLibrarayHousePlan (job) {
         const jobFileMeta = this.FileUtilityService.gatherJobFiles(job);
 

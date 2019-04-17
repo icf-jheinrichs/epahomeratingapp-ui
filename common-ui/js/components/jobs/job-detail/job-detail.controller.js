@@ -1,5 +1,3 @@
-/* global File */
-
 //TODO: put this in a config somewhere.
 const MAX_SAMPLE_SIZE = 7;
 

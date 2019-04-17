@@ -21,7 +21,7 @@ import TypeAheadModule from './type-ahead/type-ahead.module';
 import ScrollModule from './scroll/scroll.module';
 import inputFocusDirective from './input-focus/input-focus.directive.js';
 
-let commonModule
+const commonModule
     = angular
         .module('epahomeratingapp.common', [
             DropdownModule.name,

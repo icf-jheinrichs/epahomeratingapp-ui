@@ -25,17 +25,19 @@ class FileManagerController {
             this.files = [this.files];
         }
         this.message = {};
-        this.eventListener = this.handleFileChange.bind(this);
+        this.eventListener = this.handleInputFileChange.bind(this);
     }
 
     $postLink () {
-        if (this.uploadOnly === 'true') {
-            this.$element[0].addEventListener(
-                'change',
-                this.eventListener,
-                true
-            );
-        }
+        this.$element[0].addEventListener(
+            'change',
+            this.eventListener,
+            true
+        );
+    }
+
+    handleInputFileClick (event) {
+        event.target.value = null;
     }
 
     handleFileTypeError () {
@@ -43,16 +45,18 @@ class FileManagerController {
     }
 
     $onDestroy () {
-        if (this.uploadOnly === 'true') {
-            this.$element[0].removeEventListener(
-                'change',
-                this.eventListener,
-                true
-            );
-        }
+        this.$element[0].removeEventListener(
+            'change',
+            this.eventListener,
+            true
+        );
     }
 
-    handleFileChange (event) {
+    handleInputFileChange (event) {
+        if (event.target.getAttribute('type') !== 'file') {
+            return;
+        }
+
         this.message = {};
         let fileErrors = false;
 
@@ -62,6 +66,13 @@ class FileManagerController {
             switch (this.accept) {
             case 'application/pdf' :
                 if (this.FileUtilityService.isValidPdf(file)) {
+                    this.addFile(file);
+                } else {
+                    fileErrors = true;
+                }
+                break;
+            case 'text/xml' :
+                if (this.FileUtilityService.isValidXml(file)) {
                     this.addFile(file);
                 } else {
                     fileErrors = true;
@@ -77,9 +88,7 @@ class FileManagerController {
             this.handleFileTypeError();
         }
 
-        if (this.uploadOnly === 'true') {
-            this.$scope.$apply();
-        }
+        this.$scope.$apply();
     }
 
     triggerInput (fileInput) {
@@ -87,25 +96,19 @@ class FileManagerController {
     }
 
     addFile (file) {
-        if (
-            this.$scope.LocalFiles !== undefined
-            && !_isEmpty(this.$scope.LocalFiles)
-        ) {
-            return; // don't allow select local and library at the same time
-        }
+        this.files.push(file);
 
-        if (
-            this.showDetails === 'HousePlanLibrary'
-            && _findIndex(this.files, {_id : file._id}) < 0
-        ) {
+        this.localSelectedCallback();
+    }
+
+    addFileFromLibrary (file) {
+        if (_findIndex(this.files, {_id : file._id}) < 0) {
             this.files.push({
                 _id  : file._id,
                 Name : file.Name
             });
 
             this.librarySelectedCallback();
-        } else if (this.showDetails === 'File') {
-            this.files.push(file);
         }
     }
 
