@@ -153,6 +153,7 @@ const DIALOG = {
     DECLINE_JOB               : 'dialog-decline-jobs',
     DELETE_JOB                : 'dialog-delete-job',
     ARCHIVE_JOB               : 'dialog-archive-job',
+    DOWNLOAD_ERROR            : 'dialog-download-error',
     DOCUMENT_VIEWER_ERROR     : 'dialog-document-viewer-error'
 };
 
