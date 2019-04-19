@@ -39,11 +39,13 @@ class JobHistory {
             historyData.UserId,
             historyData.UserName,
             historyData.Data,
-            historyData.LatLongAccuracy
+            historyData.LatLongAccuracy,
+            historyData.Sample
         ];
     }
 
     deserializeHistoryRecord (historyData) {
+        // if history record is in old format
         if (historyData.Description !== undefined) {
             return {
                 DateTime        : new Date(historyData.DateTime),
@@ -52,7 +54,8 @@ class JobHistory {
                 UserId          : undefined,
                 UserName        : historyData.User,
                 Data            : historyData.Data,
-                LatLongAccuracy : undefined
+                LatLongAccuracy : undefined,
+                Sample          : undefined
             };
         }
 
@@ -63,7 +66,8 @@ class JobHistory {
             UserId,
             UserName,
             Data,
-            LatLongAccuracy
+            LatLongAccuracy,
+            Sample
         ] = historyData;
 
         return {
@@ -73,7 +77,8 @@ class JobHistory {
             UserId,
             UserName,
             Data,
-            LatLongAccuracy
+            LatLongAccuracy,
+            Sample
         };
     }
 
@@ -90,7 +95,8 @@ class JobHistory {
             if (previousRecord.UserId !== historyRecord.UserId
                 || dateTimeDelta > MAX_DATE_DELTA
                 || previousRecord.Category !== historyRecord.Category
-                || (previousRecord.Category !== this.HISTORY.CATEGORIES.EDITED && previousRecord.Subcategory !== historyRecord.Subcategory)) {
+                || (previousRecord.Category !== this.HISTORY.CATEGORIES.EDITED && previousRecord.Subcategory !== historyRecord.Subcategory)
+                || previousRecord.Sample !== historyRecord.Sample) {
 
                 groupedHistory.push(historyGroup);
                 historyGroup = [historyRecord];
@@ -158,7 +164,8 @@ class JobHistory {
                 UserId          : undefined,
                 UserName        : historyRecord.User,
                 Data            : undefined,
-                LatLongAccuracy : undefined
+                LatLongAccuracy : undefined,
+                Sample          : undefined
             });
         });
     }
@@ -246,6 +253,7 @@ class JobHistory {
 
             return {
                 title   : isEditedCategory ? this.HISTORY.SHORT_DESCRIPTION.EDITED : this.HISTORY.TITLES[historyGroup[0].Category][historyGroup[0].Subcategory],
+                sample  : historyGroup[0].Sample,
                 date    : historyGroup[0].DateTime,
                 user    : historyGroup[0].UserName,
                 data    : !isEditedCategory ? historyGroup[0].Data : undefined,
