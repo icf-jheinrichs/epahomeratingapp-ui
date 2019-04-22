@@ -107,3 +107,18 @@
         <button class="btn" data-ng-click="dismiss(true)">Decline</button>
     </div>
 </div>
+
+<div class="dialog hidden" dialog="dialog" id="dialog-download-error">
+    <div class="dialog-header">
+        <h3 class="dialog-title">Download XML</h3>
+    </div>
+    <div class="dialog-body">
+        <p>The following <ng-pluralize count="jobsProviderPageCtrl.failedDownloads.length" when="{'one' : 'XML file', 'other' : '{} XML files'}"></ng-pluralize> could not be downloaded:</p>
+        <ul>
+            <li ng-repeat="download in jobsProviderPageCtrl.failedDownloads">{{download}}</li>
+        </ul>
+    </div>
+    <div class="dialog-footer text-right">
+        <button class="btn" data-ng-click="dismiss(true)">Okay</button>
+    </div>
+</div>

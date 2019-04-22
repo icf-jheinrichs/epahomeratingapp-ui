@@ -111,6 +111,7 @@ class JobsPage {
     }
 
     downloadSingleXML (markedJobIndex) {
+        this.failedDownloads = [];
         let downloadJob = this.viewJobs[markedJobIndex];
 
         let downloadTask = {
@@ -121,26 +122,35 @@ class JobsPage {
         this.JobsService
             .getExportSignedUrl(downloadTask)
             .then((downloadUrl) => {
-                let link = document.createElement('a');
-                link.href = downloadUrl;
-                link.download = this.getExportFileName(markedJobIndex);
-                link.click();
+                if (!downloadUrl) {
+                    this.failedDownloads.push(this.getExportFileName(markedJobIndex));
+                    this.showFailedDownloadsDialog();
+                    return;
+                }
 
+                const link    = document.createElement('a');
+                link.href     = downloadUrl;
+                link.download = this.getExportFileName(markedJobIndex);
+
+                link.click();
+            })
+            .finally(() => {
                 this.downloadingRem = false;
                 this.xmlDownloadButtonMessage = xmlDownloadMessage.notDownloading;
             });
     }
 
     bulkDownload () {
-        const markedJobs    = this.jobsHandlers.getSelectedJobs();
-        let downloadJobs    = [];
-        let self            = this;
-        let zip             = new JSZip();
-        let zipFilename     = 'ExportedXML.zip';
+        const markedJobs     = this.jobsHandlers.getSelectedJobs();
+        let downloadJobs     = [];
+        const self           = this;
+        let zip              = new JSZip();
+        let zipFilename      = 'ExportedXML.zip';
+        this.failedDownloads = [];
 
-        this.downloadingRem = true;
-        this.downloadProgress = 0;
-        this.downloadTotal = markedJobs.length;
+        this.downloadingRem           = true;
+        this.downloadProgress         = 0;
+        this.downloadTotal            = markedJobs.length;
         this.xmlDownloadButtonMessage = `${xmlDownloadMessage.downloading} ${this.downloadProgress}/${this.downloadTotal}`;
 
         // if only one selected
@@ -200,6 +210,11 @@ class JobsPage {
                     return self.$http(config);
                 })
                 .then((response) => {
+                    if (!response) {
+                        self.failedDownloads.push(downloadJob.fileName);
+                        return;
+                    }
+
                     if (downloadJob.fileNameDup !== 0) {
                         downloadJob.fileName = `${downloadJob.fileName} (${downloadJob.fileNameDup})`;
                     }
@@ -213,17 +228,34 @@ class JobsPage {
 
         sequence
             .then(() => {
+                return zip.generateAsync({type : 'Blob'});
+            })
+            .then((base64) => {
+                if (downloadJobs.length !== this.failedDownloads.length) {
+                    FileSaver.saveAs(base64, zipFilename);
+                }
+            })
+            .finally(() => {
                 self.downloadingRem = false;
                 self.xmlDownloadButtonMessage = xmlDownloadMessage.notDownloading;
+
+                if (this.failedDownloads.length) {
+                    this.showFailedDownloadsDialog();
+                }
 
                 _defer(function afterDigest () {
                     self.$scope.$apply();
                 });
+            });
 
-                return zip.generateAsync({type : 'Blob'});
-            })
-            .then((base64) => {
-                FileSaver.saveAs(base64, zipFilename);
+    }
+
+    showFailedDownloadsDialog () {
+        this
+            .DialogService
+            .openDialog(this.DIALOG.DOWNLOAD_ERROR)
+            .finally(() => {
+                this.failedDownloads = [];
             });
     }
 
