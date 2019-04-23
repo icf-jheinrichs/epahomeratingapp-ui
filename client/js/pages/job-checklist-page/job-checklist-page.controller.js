@@ -284,8 +284,15 @@ class JobsChecklistPageController {
         this.JobsService
             .getExportSignedUrl(downloadTask)
             .then((response) => {
-                this.downloadUrl = response;
-                this.ModalService.openModal(this.MODAL.DOWNLOAD_REM_XML);
+                if (response) {
+                    this.downloadUrl = response;
+
+                    this.ModalService
+                        .openModal(this.MODAL.DOWNLOAD_REM_XML);
+                } else {
+                    this.DialogService
+                        .openDialog(this.DIALOG.DOWNLOAD_ERROR);
+                }
             });
     }
 
