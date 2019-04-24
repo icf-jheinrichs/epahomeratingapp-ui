@@ -3,6 +3,7 @@ import _findIndex from 'lodash/findIndex';
 import _forOwn from 'lodash/forOwn';
 // import _forEach from 'lodash/forEach';
 import _cloneDeep from 'lodash/cloneDeep';
+import 'babel-polyfill';
 
 class JobChecklistState {
     constructor (
@@ -174,6 +175,133 @@ class JobChecklistState {
         });
 
         return setJobHouseStatePromise;
+    }
+
+    async getPdfInfo () {
+
+      const data = {
+        home: {
+          model: '',
+          type: '',
+          foundation: '',
+          sqfoot: '',
+          subplan: '',
+          export: ''
+        },
+        utility: {
+          fuel: [],
+          waterHeater: [],
+          hvac: [],
+        },
+        checklist: [],
+        history: []
+      };
+
+      data.home.type = this.jobDataHomePerformance[this.currentHouse.HouseId].ChecklistItems['BE 1'].BuildingSummary[0].ResidentialFacilityType;
+      data.home.sqfoot = this.jobDataHomePerformance[this.currentHouse.HouseId].ChecklistItems['BE 1'].BuildingSummary[0].ConditionedFloorArea;
+      data.home.model = this.currentHouse.HousePlan[0].Name;
+      data.home.export = this.currentHouse.ExportFilename;
+      data.home.foundation = this.jobDataHomePerformance[this.currentHouse.HouseId].ChecklistItems['BE 2'].Foundation[0].FoundationType;
+      data.home.export = this.currentHouse.ExportFilename;
+      data.utility.fuel = this.jobDataHomePerformance[this.currentHouse.HouseId].ChecklistItems['BE 27'].UtilityInformation.map((utility) => {
+        return {
+          meterNumber: utility.MeterNumber,
+          fuelType: utility.UtilityServiceTypeProvided,
+          meterId: utility.UtilityName
+        }
+      })
+      data.utility.waterHeater = (() => {
+        let item = this.jobDataResponse.ChecklistItems.HvacWater.Final['BE 14'];
+        if ('ItemData' in item) {
+          if ('Equipment' in item.ItemData) {
+            return item.ItemData.Equipment;
+          }
+        }
+        return '';
+      })();
+      data.utility.hvac = (() => {
+        let item = this.jobDataResponse.ChecklistItems.HvacWater.Final['5.1-A'];
+        if ('ItemData' in item) {
+          if ('Equipment' in item.ItemData) {
+            return item.ItemData.Equipment;
+          }
+        }
+        return '';
+      })();
+
+      data.history = this.JobHistoryService.parseHistory(this.job.History);
+
+      const checklistPrePromise = [];
+      const ids = (() => {
+        const idArray = [];
+        Object.keys(this.jobDataResponse.ChecklistItems).map((subcategory) => {
+          Object.keys(this.jobDataResponse.ChecklistItems[subcategory].Final).map((checklistId) => {
+            idArray.push({
+              id: checklistId,
+              response: ('Response' in this.jobDataResponse.ChecklistItems[subcategory].Final[checklistId] ?  this.jobDataResponse.ChecklistItems[subcategory].Final[checklistId].Response[0] : ''),
+              stage: 'Final',
+              category: subcategory
+            });
+          })
+          Object.keys(this.jobDataResponse.ChecklistItems[subcategory].PreDrywall).map((checklistId) => {
+            idArray.push({
+              id: checklistId,
+              response: (this.jobDataResponse.ChecklistItems[subcategory].PreDrywall[checklistId]['Response'] !== undefined ?  this.jobDataResponse.ChecklistItems[subcategory].PreDrywall[checklistId].Response[0] : ''),
+              stage: 'PreDrywall',
+              category: subcategory
+            });
+          })
+        })
+        return idArray;
+      })();
+      ids.map((obj) => {
+        checklistPrePromise.push(this.DisplayLogicDigestService.get(obj.id)
+          .then((checklistItem) => {
+            return {
+              id: obj.id,
+              response: obj.response,
+              desc: checklistItem.Shorthand,
+              stage: obj.stage,
+              ratingType: checklistItem.RatingType,
+              category: obj.category
+            }
+        }))
+      })
+      const checklistPostPromise = await Promise.all(checklistPrePromise);
+      data.checklist = (() => {
+        const mutated = {
+          CeilingsRoofs: {},
+          FoundationFloors: {},
+          HvacWater: {},
+          PlugLoadsLightingPv: {},
+          Tests: {},
+          Walls: {},
+        };
+        checklistPostPromise.map((item) => {
+          if(mutated[item.category] && mutated[item.category].hasOwnProperty(item.id)) {
+            switch(item.stage) {
+              case 'PreDrywall':
+                mutated[item.category][item.id].status.predrywall = item.response;
+                break;
+              case 'Final':
+                mutated[item.category][item.id].status.final = item.response;
+                break;
+            }
+          } else {
+            mutated[item.category][item.id] = {
+              status: {
+                final: (item.stage == 'PreDrywall' ? '' : item.response),
+                predrywall: (item.stage == 'Final' ? '' : item.response)
+              },
+              desc: item.desc,
+              ratingType: item.ratingType,
+            }
+          }
+        });
+        return mutated;
+      })();
+      console.warn('[getPdfInfo]', data);
+      return data;
     }
 
     /**
