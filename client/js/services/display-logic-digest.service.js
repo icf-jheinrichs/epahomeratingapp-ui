@@ -92,6 +92,12 @@ class DisplayLogicDigestService {
                 });
         });
     }
+
+    getOrder () {
+        return this.digest.then((digest) => {
+            return digest.data.Order;
+        });
+    }
 }
 
 export default DisplayLogicDigestService;
