@@ -14,16 +14,13 @@
             data-ng-repeat="historyGroup in ::jobHistoryCtrl.history track by $index">
 
             <div class="history-group-details">
-                <h3 class="history-group-title h4">{{historyGroup.title}}</h3>
-                <p class="history-group-meta">{{historyGroup.date | date:'medium' }} by {{historyGroup.user}}</p>
+                <h3 class="history-group-title h4">{{::historyGroup.title}}</h3>
+                <p class="history-group-meta" ng-if="historyGroup.data"><strong>{{::historyGroup.data}}</strong></p>
+                <p class="history-group-meta">{{historyGroup.date | date:'medium' }} by {{::historyGroup.user}}</p>
                 <p class="history-group-address" ng-if="jobHistoryCtrl.jobIsSample && historyGroup.sample" ng-bind-html="jobHistoryCtrl.getHouseTitle(historyGroup.sample)"></p>
 
                 <ul ng-if="historyGroup.details">
                     <li ng-repeat="detail in historyGroup.details track by $index">{{::detail}}</li>
-                </ul>
-
-                <ul ng-if="historyGroup.data">
-                    <li>{{historyGroup.data}}</li>
                 </ul>
             </div>
 
