@@ -170,7 +170,7 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
                     if ($stateParams && $stateParams.rater) {
                         raterId = $stateParams.rater;
                     } else if (relatedRaterCompanies.length) {
-                        raterId = relatedRaterCompanies[0];
+                        raterId = relatedRaterCompanies[0].O_ID;
                     }
 
                     if (raterId) {
@@ -199,10 +199,18 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
                 relatedRaterCompanies : (AuthorizationService, UserCompanyService) => {
                     return UserCompanyService.getRelatedRatingCompanies(AuthorizationService.getCurrentOrganizationId());
                 },
-                jobs   : (JobsService, $stateParams) => {
+                jobs   : (relatedRaterCompanies, JobsService, $stateParams) => {
+                    let raterId;
+
+                    if ($stateParams && $stateParams.rater) {
+                        raterId = $stateParams.rater;
+                    } else if (relatedRaterCompanies.length) {
+                        raterId = relatedRaterCompanies[0].O_ID;
+                    }
+
                     let jobPromise
                         = JobsService
-                            .searchProviderJobs($stateParams)
+                            .searchProviderJobs($stateParams, raterId)
                             .then(jobs => {
                                 return jobs;
                             });
