@@ -37,14 +37,6 @@ class UsersPageController {
             .then((company) => {
                 this.company = company;
             });
-
-        this
-            .UserCompanyService
-            .getProviderCompanies()
-            .then((providerCompanies) => {
-                this.providerCompanies     = providerCompanies;
-                this.selectedProviderToAdd = providerCompanies[0];
-            });
     }
 
     saveUser (user) {

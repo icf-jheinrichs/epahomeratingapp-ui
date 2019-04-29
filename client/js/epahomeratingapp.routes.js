@@ -161,23 +161,30 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
                 company : (AuthorizationService, UserCompanyService) => {
                     return UserCompanyService.getCompany(AuthorizationService.getCurrentOrganizationId());
                 },
-                jobs   : (company, JobsService, $stateParams) => {
+                relatedRaterCompanies : (AuthorizationService, UserCompanyService) => {
+                    return UserCompanyService.getRelatedRatingCompanies(AuthorizationService.getCurrentOrganizationId());
+                },
+                jobs   : (relatedRaterCompanies, JobsService, $stateParams) => {
                     let raterId;
 
                     if ($stateParams && $stateParams.rater) {
                         raterId = $stateParams.rater;
-                    } else if (company.RelatedRaterCompanys.length) {
-                        raterId = company.RelatedRaterCompanys[0];
+                    } else if (relatedRaterCompanies.length) {
+                        raterId = relatedRaterCompanies[0];
                     }
 
-                    let jobPromise
-                        = JobsService
-                            .getProviderJobs(raterId)
-                            .then(jobs => {
-                                return jobs;
-                            });
+                    if (raterId) {
+                        let jobPromise
+                            = JobsService
+                                .getProviderJobs(raterId)
+                                .then(jobs => {
+                                    return jobs;
+                                });
 
-                    return jobPromise;
+                        return jobPromise;
+                    } else {
+                        return [];
+                    }
                 }
             }
         })
@@ -188,6 +195,9 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             resolve    : {
                 company : (AuthorizationService, UserCompanyService) => {
                     return UserCompanyService.getCompany(AuthorizationService.getCurrentOrganizationId());
+                },
+                relatedRaterCompanies : (AuthorizationService, UserCompanyService) => {
+                    return UserCompanyService.getRelatedRatingCompanies(AuthorizationService.getCurrentOrganizationId());
                 },
                 jobs   : (JobsService, $stateParams) => {
                     let jobPromise
@@ -207,9 +217,6 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             url        : '/jobs',
             component  : 'jobsPage',
             resolve    : {
-                company : (AuthorizationService, UserCompanyService) => {
-                    return UserCompanyService.getCompany(AuthorizationService.getCurrentOrganizationId());
-                },
                 jobs   : (JobsService) => {
                     let jobPromise
                         = JobsService
@@ -227,9 +234,6 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             url        : `/jobs?${searchParams.join('&')}`,
             component  : 'jobsPage',
             resolve    : {
-                company : (AuthorizationService, UserCompanyService) => {
-                    return UserCompanyService.getCompany(AuthorizationService.getCurrentOrganizationId());
-                },
                 jobs   : (JobsService, $stateParams) => {
                     let jobPromise
                         = JobsService

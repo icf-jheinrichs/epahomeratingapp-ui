@@ -1,4 +1,3 @@
-import _find from 'lodash/find';
 import _findIndex from 'lodash/findIndex';
 
 import JobsPage from '../jobs-page/jobs-page.class.js';
@@ -9,37 +8,21 @@ class JobsProviderPageController extends JobsPage {
 
         let raterCompanyIndex = 0;
 
-        this
-            .UserCompanyService
-            .getCompany(this.AuthorizationService.getCurrentOrganizationId())
-            .then((company) => {
-                this.company = company;
+        this.relatedRaterCompanies.forEach((company, index) => {
+            if (this.company.RelatedRaterCompanys.includes(company.O_ID)) {
+                this.relatedRaterCompanies[index].relationship = 'Current Rater Companies';
+            } else {
+                this.relatedRaterCompanies[index].relationship = 'Previous Rater Companies';
+            }
+        });
 
-                return this
-                    .UserCompanyService
-                    .getRatingCompanies();
-            })
-            .then((raterCompanies) => {
-                this.raterCompanies = raterCompanies;
-
-                const relatedRaters = this.company.RelatedRaterCompanys.map((O_ID) => {
-                    return _find(this.raterCompanies, {O_ID});
-                });
-
-                const previouslyRelatedRaters = this.company.PastRaterCompanies.map((O_ID) => {
-                    return _find(this.raterCompanies, {O_ID});
-                });
-
-                this.relatedRaterCompanys = relatedRaters.concat(previouslyRelatedRaters);
-
-                if (this.$stateParams.rater) {
-                    raterCompanyIndex = _findIndex(this.relatedRaterCompanys, {
-                        O_ID : this.$stateParams.rater
-                    });
-                }
-
-                this.selectedRater = this.relatedRaterCompanys[raterCompanyIndex];
+        if (this.$stateParams.rater) {
+            raterCompanyIndex = _findIndex(this.relatedRaterCompanies, {
+                O_ID : this.$stateParams.rater
             });
+        }
+
+        this.selectedRater = this.relatedRaterCompanies[raterCompanyIndex];
 
         if (this.$stateParams.status) {
             this.currentState = this.$stateParams.status;

@@ -226,6 +226,12 @@ class UserCompanyService {
         });
     }
 
+    /**
+     * Returns full list of provider companies
+     *
+     * @returns
+     * @memberof UserCompanyService
+     */
     getProviderCompanies () {
         return this.$q((resolve, reject) => {
             this
@@ -267,6 +273,30 @@ class UserCompanyService {
                         //TODO: make this less bad
                         this.$log.error(`[user-company.service.js getRatingCompanies] ${JSON.stringify(response)}`);
                         reject('somethings amiss');
+                    }
+                })
+                .catch((error) => {
+                    this.$log.error(`[user-company.service.js getRatingCompanies] ${JSON.stringify(error)}`);
+                    reject(error);
+                });
+        });
+    }
+
+    getRelatedRatingCompanies (providerOid) {
+        return this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'GET',
+                    url     : `${this.API_URL.COMPANY}/${providerOid}/raters`
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        resolve(response.data.data);
+                    } else {
+                        const message = `ERROR: [user-company.service.js getRatingCompanies] ${JSON.stringify(response)}`;
+
+                        this.$log.error(message);
+                        reject(message);
                     }
                 })
                 .catch((error) => {
