@@ -563,7 +563,8 @@ class JobChecklistState {
                             DateTime        : now.toUTCString(),
                             UserId          : user.userId,
                             UserName        : `${user.firstName} ${user.lastName}`,
-                            LatLongAccuracy : position
+                            LatLongAccuracy : position,
+                            Sample          : this.currentHouse.HouseId
                         },
                         data
                     );

@@ -50,10 +50,8 @@ class JobDetailLocationController {
             return;
         }
 
-        //TODO Make this work with multiple houseplans - including if one is from computer
-        let self = this;
-        let selectedHousePlan = _find(this.housePlans.housePlan, function compare (o) {
-            return o._id === self.location.HousePlan[0]._id;
+        const selectedHousePlan = _find(this.housePlans.housePlan, (o) => {
+            return o._id === this.location.HousePlan[0]._id;
         });
 
         if (selectedHousePlan !== undefined) {

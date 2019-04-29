@@ -3,7 +3,8 @@ class jobHistoryController {
         $state,
         $stateParams,
         JobHistoryService,
-        JobChecklistStateService
+        JobChecklistStateService,
+        jobTitleFilter
     ) {
         'ngInject';
 
@@ -12,6 +13,7 @@ class jobHistoryController {
 
         this.JobHistoryService        = JobHistoryService;
         this.JobChecklistStateService = JobChecklistStateService;
+        this.jobTitleFilter           = jobTitleFilter;
 
         this.HISTORY_TYPES = {
             'NEW' : 'new',
@@ -19,6 +21,7 @@ class jobHistoryController {
         };
         this.historyType               = undefined;
         this.isHistoryUpdateProcessing = false;
+        this.jobIsSample               = this.JobChecklistStateService.getJob().SampleSize > 1;
     }
 
     $onInit () {
@@ -28,6 +31,12 @@ class jobHistoryController {
             this.history = this.JobHistoryService.parseHistory(this.jobHistory);
             this.historyType = this.HISTORY_TYPES.NEW;
         }
+    }
+
+    getHouseTitle (houseId) {
+        const house = this.JobChecklistStateService.getHouse(houseId);
+
+        return this.jobTitleFilter(house.AddressInformation);
     }
 
     updateHistoryFormat () {

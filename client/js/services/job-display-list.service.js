@@ -1,21 +1,25 @@
-import _map from 'lodash/map';
-import _findIndex from 'lodash/findIndex';
-
 class JobDisplayListService {
-    constructor ($q, $http, API_URL, UI_ENUMS) {
+    constructor ($q, $http, API_URL, UI_ENUMS, DisplayLogicDigestService) {
         'ngInject';
 
         this.$q    = $q;
         this.$http = $http;
 
         this.API_URL           = API_URL;
-        this.CATEGORIES        = UI_ENUMS.CATEGORIES;
-        this.CATEGORY_PROGRESS = Object.assign({}, UI_ENUMS.CATEGORY_PROGRESS);
+
+        this.CATEGORIES        = Object.keys(UI_ENUMS.CATEGORIES).map(key => {
+            return UI_ENUMS.CATEGORIES[key].Key;
+        });
+
+        this.CATEGORY_PROGRESS = Object.keys(UI_ENUMS.CATEGORY_PROGRESS).map(key => {
+            return UI_ENUMS.CATEGORY_PROGRESS[key].Key;
+        });
+
+        this.displayOrderPromise = DisplayLogicDigestService.getOrder();
     }
 
     getById (housePlanIds, ratingCompanyID) {
-        let promise;
-        let houseDisplayListPromises = [];
+        const houseDisplayListPromises = [];
 
         housePlanIds.forEach(id => {
             houseDisplayListPromises.push(
@@ -27,83 +31,84 @@ class JobDisplayListService {
             );
         });
 
-        promise = this.$q((resolve, reject) => {
+        return this.$q((resolve, reject) => {
             this.$q
                 .all(houseDisplayListPromises)
                 .then((response) => {
-                    let houseDisplayLists = _map(response, 'data');
+                    const houseDisplayLists = response.map((houseDisplay) => {
+                        return houseDisplay.data;
+                    });
 
-                    resolve(this.mergeDisplayList(houseDisplayLists));
+                    return this.mergeDisplayList(houseDisplayLists);
+                })
+                .then((jobDisplayList) => {
+                    resolve(jobDisplayList);
                 })
                 .catch((err) => {
                     reject(err);
                 });
         });
-
-        return promise;
     }
 
     mergeDisplayList (houseDisplayLists) {
-        let jobDisplayList = {};
-        let mergedCategoryProgress;
-
-        for (let category in this.CATEGORIES) {
-            let categoryKey = this.CATEGORIES[category].Key;
-
-            jobDisplayList[categoryKey] = {};
-
-            for (let progress in this.CATEGORY_PROGRESS) {
-                let progressKey    = this.CATEGORY_PROGRESS[progress].Key;
-                let categoryLength = this.getCategoryMaxLength(houseDisplayLists, categoryKey, progressKey);
-
-                jobDisplayList[categoryKey][progressKey] = [];
-
-                for (let index = 0; index < categoryLength; index++) {
-                    mergedCategoryProgress = this.getMergedCategoryProgress(houseDisplayLists, index, progressKey, categoryKey);
-                    jobDisplayList[categoryKey][progressKey] = jobDisplayList[categoryKey][progressKey].concat(mergedCategoryProgress);
-                }
+        const jobDisplayList = {
+            'Walls' : {
+                'Final'      : [],
+                'PreDrywall' : []
+            },
+            'CeilingsRoofs' : {
+                'Final'      : [],
+                'PreDrywall' : []
+            },
+            'FoundationFloors' : {
+                'Final'      : [],
+                'PreDrywall' : []
+            },
+            'Tests' : {
+                'Final'      : [],
+                'PreDrywall' : []
+            },
+            'HvacWater' : {
+                'Final'      : [],
+                'PreDrywall' : []
+            },
+            'PlugLoadsLightingPv' : {
+                'Final'      : [],
+                'PreDrywall' : []
             }
-        }
+        };
 
-        return jobDisplayList;
-    }
+        return this.displayOrderPromise
+            .then((displayOrder) => {
+                this
+                    .CATEGORIES
+                    .forEach((categoryKey) => {
+                        this
+                            .CATEGORY_PROGRESS
+                            .forEach((progressKey) => {
+                                displayOrder[categoryKey][progressKey]
+                                    .forEach((item) => {
+                                        const checklistItem = {
+                                            checklistItemRef : item.checklistItemRef,
+                                            houses           : []
+                                        };
 
-    getMergedCategoryProgress (houseDisplayLists, index, progressKey, categoryKey) {
-        let mergedCategoryProgress = [];
+                                        houseDisplayLists
+                                            .forEach((houseDisplayList) => {
+                                                if (houseDisplayList[progressKey][categoryKey].includes(checklistItem.checklistItemRef)) {
+                                                    checklistItem.houses.push(houseDisplayList._id);
+                                                }
+                                            });
 
-        houseDisplayLists.forEach(houseDisplayList => {
-            let item = houseDisplayList[progressKey][categoryKey][index];
-            let mergedIndex;
+                                        if (checklistItem.houses.length) {
+                                            jobDisplayList[categoryKey][progressKey].push(checklistItem);
+                                        }
+                                    });
+                            });
+                    });
 
-            if (item === undefined) {
-                return;
-            }
-
-            mergedIndex = _findIndex(mergedCategoryProgress, mergedItem => {
-                return (mergedItem.checklistItemRef === item);
+                return jobDisplayList;
             });
-
-            if (mergedIndex < 0) {
-                mergedCategoryProgress.push({
-                    'checklistItemRef' : item,
-                    'houses'           : [houseDisplayList._id]
-                });
-            } else {
-                mergedCategoryProgress[mergedIndex].houses.push(houseDisplayList._id);
-            }
-        });
-
-        return mergedCategoryProgress;
-    }
-
-    getCategoryMaxLength (houseDisplayLists, category, progress) {
-        let maxLength = 0;
-
-        houseDisplayLists.forEach(houseDisplayList => {
-            maxLength = Math.max(maxLength, houseDisplayList[progress][category].length);
-        });
-
-        return maxLength;
     }
 }
 

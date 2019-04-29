@@ -7,6 +7,7 @@ class Job {
         $log,
         $rootScope,
         $scope,
+        $stateParams,
         $timeout,
         JobHistoryService,
         jobTitleFilter,
@@ -17,11 +18,12 @@ class Job {
     ) {
         'ngInject';
 
-        this.$location = $location;
-        this.$log = $log;
-        this.$rootScope = $rootScope;
-        this.$scope = $scope;
-        this.$timeout = $timeout;
+        this.$location    = $location;
+        this.$log         = $log;
+        this.$rootScope   = $rootScope;
+        this.$scope       = $scope;
+        this.$stateParams = $stateParams;
+        this.$timeout     = $timeout;
 
         this.JobHistoryService = JobHistoryService;
         this.jobTitleFilter    = jobTitleFilter;
@@ -59,7 +61,7 @@ class Job {
     }
 
     hideJobStatus () {
-        return _isEmpty(this.$location.$$search);
+        return _isEmpty(this.$stateParams.status);
     }
 
     setLastUpdate () {

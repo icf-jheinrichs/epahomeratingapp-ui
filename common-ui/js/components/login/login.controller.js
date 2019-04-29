@@ -25,6 +25,7 @@ class LoginController {
 
         this.userIdPattern = VALIDATION_PATTERN.USER_NAME;
         this.STATE_NAME    = UI_ENUMS.STATE_NAME;
+        this.JOB_PAGE_TAB  = UI_ENUMS.JOB_PAGE_TAB;
     }
 
     $onInit () {
@@ -80,10 +81,11 @@ class LoginController {
 
     returnToOriginalState () {
         const returnState      = this.AuthenticationService.getReturnState();
+        const authorizedState  = this.AuthorizationService.getAuthorizedRedirect();
         let authorizedRedirect = {
-            name   : this.AuthorizationService.getAuthorizedRedirect(),
+            name   : authorizedState,
             params : {
-                'status' : 'Active'
+                'status' : authorizedState === this.STATE_NAME.JOBS_SEARCH ? this.JOB_PAGE_TAB.ACTIVE : this.JOB_PAGE_TAB.SUBMITTED_TO_PROVIDER
             }
         };
 

@@ -12,6 +12,16 @@
     margin-bottom: 0;
 }
 
+.history-group-meta {
+    margin-bottom: 0;
+}
+
+.history-group-address {
+    .ellipsis {
+        display: block;
+    }
+}
+
 .history-group-details {
     margin-right: $gutter-full;
     width: 350px;
