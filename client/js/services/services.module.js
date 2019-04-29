@@ -13,6 +13,7 @@ import JobDisplayListService from './job-display-list.service';
 import JobDataResponseService from './job-data-response.service';
 import JobDataHomePerformanceService from './job-data-home-performance.service';
 import ManufacturersService from './manufacturers.service';
+import PDFService from './pdf/pdf.service';
 import ScannerService from './scanner.service';
 import SyncService from './sync.service';
 import AssetLocalService from './asset-local.service';
@@ -35,6 +36,7 @@ let servicesModule
         .service('JobDataResponseService', JobDataResponseService)
         .service('JobDataHomePerformanceService', JobDataHomePerformanceService)
         .service('ManufacturersService', ManufacturersService)
+        .service('PDFService', PDFService)
         .service('ScannerService', ScannerService)
         .service('SyncService', SyncService)
         .service('UserCompanyService', UserCompanyService);
