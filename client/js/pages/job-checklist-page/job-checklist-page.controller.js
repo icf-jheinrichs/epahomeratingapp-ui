@@ -1,6 +1,7 @@
 import _findIndex from 'lodash/findIndex';
 import _find from 'lodash/find';
 
+
 class JobsChecklistPageController {
     constructor (
         $rootScope,
@@ -19,7 +20,8 @@ class JobsChecklistPageController {
         UserCompanyService,
         ScrollService,
         UI_ENUMS,
-        jobTitleFilter
+        jobTitleFilter,
+        PDFService
     ) {
         'ngInject';
 
@@ -46,6 +48,7 @@ class JobsChecklistPageController {
         this.USER_TYPE                = UI_ENUMS.USER_TYPE;
         this.DIALOG                   = UI_ENUMS.DIALOG;
         this.MODAL                    = UI_ENUMS.MODAL;
+        this.pdfService               = PDFService;
 
         this.jobTitleFilter           = jobTitleFilter;
 
@@ -152,6 +155,16 @@ class JobsChecklistPageController {
         this
             .$rootScope
             .$broadcast(this.MESSAGING.SET_TOP_PAD, 45);
+    }
+
+    onGetReport() {
+      this
+        .pdfService
+        .generateBuilderNotification()
+        .then((builderNotificationObject) => {
+          this.$log.log('Output from PDF Service ');
+          this.$log.log(builderNotificationObject);
+        })
     }
 
     appendFilterParams () {
