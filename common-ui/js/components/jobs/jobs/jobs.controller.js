@@ -46,8 +46,6 @@ class JobsController {
             toggleAllJobs   : this.toggleAllJobs.bind(this),
             getSelectedJobs : this.getSelectedJobs.bind(this)
         });
-
-        this.ratingCompanyId = this.$stateParams.rater;
     }
 
     $onChanges (changes) {
