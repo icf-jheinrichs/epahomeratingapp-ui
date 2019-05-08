@@ -23,7 +23,6 @@
     </div>
 
     <div>
-      <!-- <a class="btn" data-ng-if="::checklistItemAirInletLocationsCtrl.hasHVACDesignReport" ng-href="https://s3.amazonaws.com/{{checklistItemAirInletLocationsCtrl.s3Bucket}}/{{checklistItemAirInletLocationsCtrl.house.HvacDesignReport[0].Key}}" key="{{checklistItemAirInletLocationsCtrl.house.HvacDesignReport[0].Key}}" download="{{checklistItemAirInletLocationsCtrl.house.HvacDesignReport[0].Name}}" document-handler="document-handler">View HVAC Design Report</a> -->
       <span data-ng-if="::!checklistItemAirInletLocationsCtrl.hasHVACDesignReport" class="status-message status-warning">No HVAC Design Report associated with this location</span>
         <div data-ng-if="::checklistItemAirInletLocationsCtrl.hasHVACDesignReport" dropdown="dropdown">
             <button
@@ -51,7 +50,10 @@
                         data-ng-repeat="file in checklistItemAirInletLocationsCtrl.house.HvacDesignReport"
                         data-ng-href="{{$parent.checklistItemAirInletLocationsCtrl.getHvacUrl(file)}}"
                         class="drop-down-item"
-                        role="menuitem">
+                        role="menuitem"
+                        download="{{checklistItemAirInletLocationsCtrl.house.HvacDesignReport[$index].Name}}"
+                        key="{{checklistItemAirInletLocationsCtrl.house.HvacDesignReport[$index].Key}}"
+                        document-handler="document-handler">
                         {{file.name || file.Name}}
                     </a>
             </nav>

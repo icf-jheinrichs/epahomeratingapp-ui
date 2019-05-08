@@ -76,7 +76,10 @@
                         data-ng-repeat="file in checklistItemHVACEquipmentCtrl.house.HvacDesignReport"
                         data-ng-href="{{$parent.checklistItemHVACEquipmentCtrl.getHvacUrl(file)}}"
                         class="drop-down-item"
-                        role="menuitem">
+                        role="menuitem"
+                        download="{{checklistItemHVACEquipmentCtrl.house.HvacDesignReport[$index].Name}}"
+                        key="{{checklistItemHVACEquipmentCtrl.house.HvacDesignReport[$index].Key}}"
+                        document-handler="document-handler">
                         {{file.name || file.Name}}
                     </a>
             </nav>
