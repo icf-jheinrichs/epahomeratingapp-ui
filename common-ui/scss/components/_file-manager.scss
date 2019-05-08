@@ -4,6 +4,11 @@
 }
 
 .file-manager-file {
+    a {
+      color: $brand-secondary;
+      text-decoration: underline;
+    }
+
     padding: 1px 0;
     position: relative;
 }

@@ -1,8 +1,9 @@
 class ChecklistItemController {
-    constructor ($stateParams, DisplayLogicDigestService, JobChecklistStateService, CONTEXT, UI_ENUMS) {
+    constructor ($stateParams, DisplayLogicDigestService, JobChecklistStateService, CONTEXT, UI_ENUMS, $http) {
         'ngInject';
 
         this.$stateParams = $stateParams;
+        this.$http        = $http;
 
         this.DisplayLogicDigestService = DisplayLogicDigestService;
         this.JobChecklistStateService  = JobChecklistStateService;

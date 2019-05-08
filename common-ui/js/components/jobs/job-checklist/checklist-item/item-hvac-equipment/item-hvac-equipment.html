@@ -50,10 +50,38 @@
     </div>
 
     <div>
-        <p>
-            <a class="btn" data-ng-if="::checklistItemHVACEquipmentCtrl.hasHVACDesignReport" ng-href="https://s3.amazonaws.com/{{checklistItemHVACEquipmentCtrl.s3Bucket}}/{{checklistItemHVACEquipmentCtrl.house.HvacDesignReport[0].Key}}" key="{{checklistItemHVACEquipmentCtrl.house.HvacDesignReport[0].Key}}" download="{{checklistItemHVACEquipmentCtrl.house.HvacDesignReport[0].Name}}" document-handler="document-handler">View HVAC Design Report</a>
-            <span data-ng-if="::!checklistItemHVACEquipmentCtrl.hasHVACDesignReport" class="status-message status-warning">No HVAC Design Report associated with this location</span>
-        </p>
+        <div data-ng-if="::checklistItemHVACEquipmentCtrl.hasHVACDesignReport" dropdown="dropdown">
+            <button
+                type="button"
+                class="btn"
+                dropdown-toggle="dropdown-toggle">
+
+                View HVAC Design Report <i class="fa fa-caret-down" aria-hidden="true"></i>
+            </button>
+
+            <nav
+                class="drop-down drop-down-left hidden"
+                dropdown-menu="dropdown-menu"
+                role="menu"
+                popover="popover">
+                    <button
+                        data-ng-if="::!checklistItemHVACEquipmentCtrl.isOnApp"
+                        ng-click="checklistItemHVACEquipmentCtrl.downloadAllHvacs(checklistItemHVACEquipmentCtrl.house.HvacDesignReport)"
+                        class="drop-down-item"
+                        type="button"
+                        role="menuitem">
+                        Download All
+                    </button>
+                    <a
+                        data-ng-repeat="file in checklistItemHVACEquipmentCtrl.house.HvacDesignReport"
+                        data-ng-href="{{$parent.checklistItemHVACEquipmentCtrl.getHvacUrl(file)}}"
+                        class="drop-down-item"
+                        role="menuitem">
+                        {{file.name || file.Name}}
+                    </a>
+            </nav>
+        </div>
+        <span data-ng-if="::!checklistItemHVACEquipmentCtrl.hasHVACDesignReport" class="status-message status-warning">No HVAC Design Report associated with this location</span>
 
         <div class="item-list item-list-equipment">
             <div class="flex-row">
