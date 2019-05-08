@@ -273,9 +273,9 @@ class JobsService {
         return promise;
     }
 
-    searchProviderJobs (stateParams) {
+    searchProviderJobs (stateParams, raterId) {
         let promise = this.$q((resolve, reject) => {
-            if (!stateParams.rater) {
+            if (!raterId) {
                 resolve([]);
                 return;
             }
@@ -284,13 +284,14 @@ class JobsService {
                 .$http({
                     method          : 'GET',
                     url             : this.API_URL.JOB,
-                    ratingCompanyID : stateParams.rater
+                    ratingCompanyID : raterId
                 })
                 .then((response) => {
                     if (response.status === 200) {
-                        let allJobs = response.data;
+                        const allJobs = response.data;
                         let filteredJobs;
 
+                        const currentOID = this.AuthorizationService.getCurrentOrganizationId();
                         let searchParams = Object.assign({}, stateParams);
 
                         searchParams = _omitBy(searchParams, (param) => {
@@ -300,6 +301,10 @@ class JobsService {
                         filteredJobs = _pickBy(allJobs, (job) => {
                             let pick          = true;
                             let progressLevel = stateParams[this.SEARCH_PARAMS.PROGRESS_LEVEL];
+
+                            if (job.ProviderCompany !== currentOID) {
+                                return false;
+                            }
 
                             _forOwn(searchParams, (value, key) => {
                                 switch (key) {
@@ -352,11 +357,6 @@ class JobsService {
                                     break;
                                 case this.SEARCH_PARAMS.INTERNAL_REVIEW :
                                     if (!job.InternalReview) {
-                                        pick = false;
-                                    }
-                                    break;
-                                case this.SEARCH_PARAMS.RATER :
-                                    if (job.ProviderCompany !== this.AuthorizationService.getCurrentOrganizationId()) {
                                         pick = false;
                                     }
                                     break;
