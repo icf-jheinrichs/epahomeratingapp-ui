@@ -7,10 +7,11 @@ import { BASE_IMAGE_URL, BASE_S3_URL } from '../../epahomeratingapp.config';
 
 
 const getDataUri = (url) => {
+
+
   return new Promise((res, rej) => {
     var image = new Image();
     image.crossOrigin = 'Anonymous';
-
     image.onload = function () {
         var canvas = document.createElement('canvas');
         canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
@@ -18,6 +19,9 @@ const getDataUri = (url) => {
         canvas.getContext('2d').drawImage(this, 0, 0);
         res(canvas.toDataURL('image/png'));
     };
+    image.onerror = function() {
+      this.src = '/img/imageMissing.png';
+    }
     image.src = url;
   })
 }
@@ -173,6 +177,7 @@ class PDFService {
             left: houseImages[2],
             right: houseImages[3]
           };
+          console.warn('HOUSE IMAGES', houseImages, this.pdfInputs.images);
 
           return this.$q.all({
               company : this.UserCompanyService.getCompany(
