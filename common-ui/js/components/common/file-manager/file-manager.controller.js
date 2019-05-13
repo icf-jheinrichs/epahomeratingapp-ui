@@ -9,7 +9,7 @@ const FILE_TYPE_ERROR = {
     dismissable : false
 };
 class FileManagerController {
-    constructor ($element, $scope, $rootScope, FileUtilityService, CONTEXT, UI_ENUMS) {
+    constructor ($element, $scope, $rootScope, FileUtilityService, CONTEXT, UI_ENUMS, S3_CONFIG) {
         'ngInject';
 
         this.$element   = $element;
@@ -18,12 +18,14 @@ class FileManagerController {
 
         this.FileUtilityService = FileUtilityService;
         this.CONTEXT_IS_ADMIN   = CONTEXT === UI_ENUMS.CONTEXT.ADMIN;
+        this.s3Bucket               = `${S3_CONFIG.S3_BUCKET_NAME_PREFIX}-rating-company`;
     }
 
     $onInit () {
         if (!Array.isArray(this.files)) {
             this.files = [this.files];
         }
+        this.downloadable = this.downloadable;
         this.message = {};
         this.eventListener = this.handleInputFileChange.bind(this);
     }

@@ -1,3 +1,6 @@
+let JSZip      = require('jszip');
+let FileSaver  = require('file-saver');
+
 class ChecklistItemClass {
     constructor (
         $log,
@@ -11,15 +14,25 @@ class ChecklistItemClass {
         JobChecklistStateService,
         ModalService,
         PopoverService,
-        S3_CONFIG) {
-
+        S3_CONFIG,
+        $http,
+        $injector
+        ) {
         'ngInject';
+
+        this.isOnApp = true;
+        try {
+          this.$cordovaFile = $injector.get("$cordovaFile");
+        } catch (err) {
+          this.isOnApp = false;
+        }
 
         this.$log         = $log;
         this.$q           = $q;
         this.$rootScope   = $rootScope;
         this.$timeout     = $timeout;
         this.$stateParams = $stateParams;
+        this.$http        = $http;
 
         this.RESPONSES    = UI_ENUMS.RESPONSES;
         this.MESSAGING    = UI_ENUMS.MESSAGING;
@@ -63,6 +76,36 @@ class ChecklistItemClass {
                     reject(error);
                 });
         });
+    }
+
+    getHvacUrls(arr) {
+      return arr.map((hvac) => {
+        return this.getHvacUrl(hvac);
+      })
+    }
+
+    getHvacUrl(hvac) {
+      return 'https://s3.amazonaws.com/' + this.s3Bucket + '/' + hvac.Key;
+    }
+
+    downloadAllHvacs(hvacs) {
+      let zip = new JSZip();
+      let urls = this.getHvacUrls(hvacs);
+
+      Promise.all(urls.map((url) => {
+        return this.$http.get(url, { responseType: 'arraybuffer' })
+      }))
+        .then((files) => {
+          files.map((res, index) => {
+            return zip.file(hvacs[index].Name, res.data);
+          })
+          zip.generateAsync({type:"blob"}).then((content) => {
+              FileSaver.saveAs(content, "HvacReports.zip");
+          });
+        })
+        .catch((err) => {
+          console.error('Error Downloading HVAC Design Reports');
+        })
     }
 
     onEditResponse () {
