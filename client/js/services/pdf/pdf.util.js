@@ -271,6 +271,7 @@ export const ChecklistList = ({ checklist, ratingType, icons, category }) => {
     width: '100%',
     headlineLevel: 1,
     table: {
+      dontBreakRows: 1,
       widths: ['54%', '23%', '23%'],
       margin: [0],
       body: [
@@ -292,8 +293,8 @@ export const ChecklistList = ({ checklist, ratingType, icons, category }) => {
                 { text: checklist[category][id].desc, border: [false,false,false,false] },
                 (() => {
                   switch(checklist[category][id].status.predrywall) {
-                    case 'BuilderVerified':
-                      return { text: "Builder Verified", alignment: 'center'}
+                    // case 'BuilderVerified':
+                    //   return { text: "Builder Verified", alignment: 'center'}
                     case 'RaterVerified':
                       return {
                             width: '100%',
@@ -328,7 +329,7 @@ export const ChecklistList = ({ checklist, ratingType, icons, category }) => {
                             },
                             layout: 'noBorders'
                           };
-                    case 'MustVerify':
+                    case 'BuilderVerified':
                       return {
                             table: {
                               widths: WIDTHS,
@@ -336,7 +337,7 @@ export const ChecklistList = ({ checklist, ratingType, icons, category }) => {
                                 [
                                   { text: '' },
                                   { image: icons.verify, width: 10, height: 10, alignment: 'center'},
-                                  { text: 'Must Verify', alignment: 'center', bold: true},
+                                  { text: 'Builder Verified', alignment: 'center', bold: true},
                                   { text: '' }
                                 ]
                               ]
@@ -349,8 +350,8 @@ export const ChecklistList = ({ checklist, ratingType, icons, category }) => {
                 })(),
                 (() => {
                   switch(checklist[category][id].status.final) {
-                    case 'BuilderVerified':
-                      return { text: "Builder Verified", alignment: 'center'}
+                    // case 'BuilderVerified':
+                    //   return { text: "Builder Verified", alignment: 'center'}
                     case 'RaterVerified':
                       return {
                             table: {
@@ -383,7 +384,7 @@ export const ChecklistList = ({ checklist, ratingType, icons, category }) => {
                             },
                             layout: 'noBorders'
                           };
-                    case 'MustVerify':
+                    case 'BuilderVerified':
                       return {
                             table: {
                               widths: WIDTHS,
@@ -391,7 +392,7 @@ export const ChecklistList = ({ checklist, ratingType, icons, category }) => {
                                 [
                                   { text: '' },
                                   { image: icons.verify, width: 10, height: 10, alignment: 'center'},
-                                  { text: 'Must Verify', alignment: 'center', bold: true},
+                                  { text: 'Builder Verified', alignment: 'center', bold: true},
                                   { text: '' }
                                 ]
                               ]
@@ -576,17 +577,18 @@ export const HouseImages = ({ images }) => {
      return {}
    };
    return {
-     headlineLevel: 1,
      width: '100%',
-     margin: [0,20,0,20],
+     margin: [0,30,0,20],
      table: {
-       widths: ['20%','30%','30%', '20%'],
+       widths: ['0%','25%','25%', '25%','25%', '0%'],
        body: [
-         [{text: ''},{ text: 'Exterior Photos', fontSize: 14, colSpan: 2, bold: true}, '', {text: ''}],
-         [{text: ''},(('front' in images) ? { image: images.front, width: 150, height: 150, alignment: 'left'} : {}),
-         (('left' in images) ? { image: images.left, width: 150, height: 150, alignment: 'right'} : {}),{text: ''}],
-         [{text: ''},(('right' in images) ? { image: images.right, width: 150, height: 150, alignment: 'left'} : {}),
-         (('back' in images) ? { image: images.back, width: 150, height: 150, alignment: 'right'} : {}), {text: ''}],
+         [{text: ''},{ text: 'Exterior Photos', fontSize: 12, margin: [0,0,0,10], colSpan: 2, bold: true}, '', '', '', {text: ''}],
+         ['', 'Front', 'Back', 'Left', 'Right', ''],
+         [{text: ''},(!_isEmpty(images.front) ? { image: images.front, width: 120, height: 120, alignment: 'left'} : {}),
+         (!_isEmpty(images.back) ? { image: images.back, width: 120, height: 120, alignment: 'right'} : {}), (!_isEmpty(images.left) ? { image: images.left, width: 120, height: 120, alignment: 'left'} : {}),
+         (!_isEmpty(images.right) ? { image: images.right, width: 120, height: 120, alignment: 'right'} : {}), {text: ''}],
+         // [{text: ''},(!_isEmpty(images.left) ? { image: images.left, width: 150, height: 150, alignment: 'left'} : {}),
+         // (!_isEmpty(images.right) ? { image: images.right, width: 150, height: 150, alignment: 'right'} : {}), {text: ''}],
        ]
      },
      layout: 'noBorders'
@@ -632,6 +634,7 @@ export const Header = ({ home, builder, ratingOrg, rater, otherHomes }) => {
             [
               { text: "Primary Home:", bold: true, margin: MARGIN},
               { text: (() => {
+                console.warn('home?', home);
                 let merged = home.streetAddress;
                 merged = !_isEmpty(home.communityName) ? merged + '\n' + home.communityName : merged;
                 merged = !_isEmpty(home.lotNo) ? merged + ', Lot ' + home.lotNo : merged;
@@ -705,7 +708,7 @@ export const ChecklistItem = ({ checklist, icons }) => {
                             [
                               { text: '' },
                               { image: (checklist.response === 'MustCorrect' ? icons.correct : icons.verify), width: 10, height: 10, alignment: 'center'},
-                              { text: (checklist.response === 'MustCorrect' ? 'Must Correct' : 'Must Verify'), alignment: 'center', bold: true},
+                              { text: (checklist.response === 'MustCorrect' ? 'Must Correct' : 'Builder Verified'), alignment: 'center', bold: true},
                               { text: '' }
                             ]
                           ]
@@ -728,7 +731,7 @@ export const ChecklistItem = ({ checklist, icons }) => {
                             [
                               { text: '' },
                               { image: (checklist.response === 'MustCorrect' ? icons.correct : icons.verify), width: 10, height: 10, alignment: 'center'},
-                              { text: (checklist.response === 'MustCorrect' ? 'Must Correct' : 'Must Verify'), alignment: 'center', bold: true},
+                              { text: (checklist.response === 'MustCorrect' ? 'Must Correct' : 'Builder Verified'), alignment: 'center', bold: true},
                               { text: '' }
                             ]
                           ]
@@ -753,14 +756,16 @@ export const ChecklistItem = ({ checklist, icons }) => {
 };
 
 export const Comments = ({ comments, checklist, otherHomes, houseId, address, icons }) => {
-  const commentsToPdf = comments.map((comment) => {
+  const commentsToPdf = comments.map((comment, i) => {
     return [{
       margin: [40,5,40,5],
+      fillColor: COLORS.LIGHT_GREY,
+      headlineLevel: (i == 0 ? 1 : 5),
       table: {
         body: [
           [produceText({ text: comment.username, fontStyle: { bold: true }})],
           [produceText({ text: moment(comment.timestamp).format('MM/DD/YYYY'), fontStyle: { bold: true }})],
-          [produceText({ text: INDENT + comment.comment})],
+          [{ text: INDENT + comment.comment, headlineLevel: 1}],
           (() => {
             if(_isEmpty(comment.photoUrl) || _isEmpty(comment.photoUri)) {
               return [{}]
@@ -789,7 +794,6 @@ export const Comments = ({ comments, checklist, otherHomes, houseId, address, ic
           return {
                   headlineLevel: 1,
                   width: "100%",
-                  fillColor: COLORS.LIGHT_GREY,
                   margin: [0,0,0,15],
                   table: {
                     widths: ["100%"],
@@ -798,6 +802,7 @@ export const Comments = ({ comments, checklist, otherHomes, houseId, address, ic
                         if(!_isEmpty(otherHomes)) {
                           return [{
                             margin: [10,10,10,10],
+                            fillColor: COLORS.LIGHT_GREY,
                             text: [
                               { text: "Location\n\n", fontSize: 16, bold: true},
                               {
@@ -825,7 +830,9 @@ export const Comments = ({ comments, checklist, otherHomes, houseId, address, ic
                           return [''];
                         }
                       })(),
-                      [{ table: {
+                      [{  headlineLevel: 3,
+                          fillColor: COLORS.LIGHT_GREY,
+                          table: {
                           body: [
                             [{
                               image: icons.comment,

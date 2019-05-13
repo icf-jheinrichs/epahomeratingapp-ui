@@ -7,8 +7,6 @@ import { BASE_IMAGE_URL, BASE_S3_URL } from '../../epahomeratingapp.config';
 
 
 const getDataUri = (url) => {
-
-
   return new Promise((res, rej) => {
     var image = new Image();
     image.crossOrigin = 'Anonymous';
@@ -98,32 +96,55 @@ class PDFService {
           let job = this.JobChecklistStateService.getJob();
           let houses = this.JobChecklistStateService.getJobHouses();
           let house = houses[job.Primary.HouseId];
-          let res = [];
-
-          house.Photo.map((photoUrl) => {
-            res.push(BASE_S3_URL + photoUrl);
-          })
-          resolve(res);
+          let preRes = [],
+              postRes = {
+                front: '',
+                back: '',
+                left: '',
+                right: ''
+              };
+          for(let i = 0; i < 4; i++) {
+            if(!_isEmpty(house.Photo[i])) {
+              preRes[i] = BASE_S3_URL + house.Photo[i];
+            } else {
+              preRes[i] = null
+            }
+          }
+          (_isEmpty(preRes[0]) ? this.$q((res,rej) => {res(null)}) : getDataUri(preRes[0]))
+            .then((front) => {
+              postRes.front = _isEmpty(front) ? null : front;
+              return (_isEmpty(preRes[1]) ? this.$q((res,rej) => {res(null)}) : getDataUri(preRes[1]));
+            })
+            .then((back) => {
+              postRes.back = _isEmpty(back) ? null : back;
+              return (_isEmpty(preRes[2]) ? this.$q((res,rej) => {res(null)}) : getDataUri(preRes[2]));
+            })
+            .then((left) => {
+              postRes.left = _isEmpty(left) ? null : left;
+              return (_isEmpty(preRes[3]) ? this.$q((res,rej) => {res(null)}) : getDataUri(preRes[3]));
+            })
+            .then((right) => {
+              postRes.right = _isEmpty(right) ? null : right;
+              resolve(postRes)
+            })
       });
     }
 
     generateBuilderNotification() {
       return this.$q((res, rej) => {
         this.getHouseImages()
-        .then((houseImagesArray) => {
-          houseImagesArray.map((houseUrl) => {
-            return getDataUri(houseUrl);
-          })
-          return Promise.all(houseImagesArray.map((houseUrl) => {
-              return getDataUri(houseUrl);
-          }));
-        })
+        // .then((houseImagesArray) => {
+        //   return Promise.all(houseImagesArray.map((houseUrl) => {
+        //       return getDataUri(houseUrl);
+        //   }));
+        // })
         .then((houseImages) => {
           const user    = this.AuthenticationService.getUser();
           const job     = this.JobChecklistStateService.getJob();
           const house   = this.JobChecklistStateService.getHouse(job.Primary.HouseId);
           const hpd     = this.JobChecklistStateService.jobDataHomePerformance[this.JobChecklistStateService.currentHouse.HouseId];
           const ai      = house.AddressInformation;
+          console.warn('ai', ai);
 
           const address = _isEmpty(ai.Address1) ? '' : ai.Address1;
           const city    = _isEmpty(ai.CityMunicipality) ? '' : ai.CityMunicipality;
@@ -132,6 +153,7 @@ class PDFService {
 
           this.pdfInputs.otherHomes = [];
           job.Secondary.map((house) => {
+            console.warn('house secondary', house);
             let oai = house.AddressInformation;
             let otherHome = {
               houseId: house.HouseId,
@@ -139,7 +161,7 @@ class PDFService {
                 communityName : oai.CommunityName,
                 streetAddress : (_isEmpty(oai.Address1) ? '' : oai.Address1) + ', ' + (_isEmpty(oai.CityMunicipality) ? '' : oai.CityMunicipality) + ', ' + (_isEmpty(ai.StateCode) ? '' : ai.StateCode),
                 lotNo         : oai.LotNo,
-                manualid      : oai.manualId,
+                manualid      : oai.ManualId,
               }
             };
             this.pdfInputs.otherHomes.push(otherHome);
@@ -152,8 +174,9 @@ class PDFService {
           this.pdfInputs.house.model              = _isEmpty(house.HousePlan.Name) ? '' : house.HousePlan.Name;
           this.pdfInputs.address.lotNo            = _isEmpty(ai.LotNo) ? '' : ai.LotNo;
 
-          this.pdfInputs.address.manualid = _isEmpty(ai.ManualIdentifier) ? '' : ai.ManualIdentifier;
-          this.pdfInputs.address.streetAddress    = `${address}, ${city}, ${state} ${zipcode}`;
+          this.pdfInputs.address.manualid = _isEmpty(ai.ManualId) ? '' : ai.ManualId;
+          this.pdfInputs.address.streetAddress    = (_isEmpty(address) && _isEmpty(city) && _isEmpty(state) && _isEmpty(zipcode) ? '' : `${address}, ${city}, ${state} ${zipcode}`);
+          this.pdfInputs.address.communityName = ai.CommunityName;
           this.pdfInputs.general.inspectionDate   = moment(job.History[job.History.length - 1].DateTime).format('MMM Do YYYY h:mm a');
           this.pdfInputs.general.createdDate      = `${moment().format('MM/DD/YYYY')}`;
           this.pdfInputs.house.type               = (_isEmpty(hpd.ChecklistItems['BE 1'].BuildingSummary[0].ResidentialFacilityType))
@@ -171,12 +194,14 @@ class PDFService {
           this.pdfInputs.address.merged +=  _isEmpty(this.pdfInputs.address.lotNo) ? '' : 'Lot ' + this.pdfInputs.address.lotNo + '\n';
           this.pdfInputs.address.merged +=  _isEmpty(this.pdfInputs.general.manualIdentifier) ? '' : this.pdfInputs.general.manualIdentifier + '\n';
 
-          this.pdfInputs.images = (_isEmpty(houseImages)) ? {} : {
-            front: houseImages[0],
-            back: houseImages[1],
-            left: houseImages[2],
-            right: houseImages[3]
-          };
+          this.pdfInputs.images = houseImages;
+
+          // this.pdfInputs.images = (_isEmpty(houseImages)) ? {} : {
+          //   front: (_isEmpty(houseImages[0]) ? null : houseImages[0]),
+          //   back: (_isEmpty(houseImages[1]) ? null : houseImages[1]),
+          //   left: (_isEmpty(houseImages[2]) ? null : houseImages[2]),
+          //   right: (_isEmpty(houseImages[3]) ? null : houseImages[3])
+          // };
           console.warn('HOUSE IMAGES', houseImages, this.pdfInputs.images);
 
           return this.$q.all({
@@ -189,6 +214,9 @@ class PDFService {
         .then((response) => {
           const company = response.company,
                 digest = response.digest.data;
+
+          this.pdfInputs.general.ratingOrganization = (_isEmpty(company.Name) ? '<No Name>' : company.Name);
+
 
           return this.$q((res, rej) => {
             const checklistItems = this.JobChecklistStateService.getCheckListElementsForBuilderReport();
@@ -258,6 +286,7 @@ class PDFService {
         })
         .then(() => {
           // generate PDF here.
+          console.warn('this inputs', this.pdfInputs);
           const pdf = PDFService.getArchivalReport(this.pdfInputs);
           // this.$log.log('PDF Inputs: ', JSON.stringify(this.pdfInputs));
           this.$log.log('Generated PDF: ', JSON.stringify(pdf));
@@ -323,6 +352,9 @@ class PDFService {
               util.JobHistory({ history: inputs.archive.history })
           ],
           pageBreakBefore : function (currentNode, followingNodesOnPage, nodesOnNextPage, previousNodesOnPage) {
+            if(currentNode.headlineLevel !== 1 && ((previousNodesOnPage.length > 0 && currentNode.pageNumbers.length > 1  && currentNode.stack !== true) || (currentNode.headlineLevel == 2 && followingNodesOnPage.length <= 4)  || (currentNode.headlineLevel == 3 && followingNodesOnPage.length <= 6))) {
+              console.warn('poop', currentNode);
+            }
               /*
               CONDITIONS:
                 {currentNode.stack !== true}
@@ -334,7 +366,7 @@ class PDFService {
                 {previousNodesOnPage.length > 0}
                   - Prevent blank pages
               */
-              return (previousNodesOnPage.length > 0 && currentNode.pageNumbers.length > 1 && currentNode.headlineLevel !== 1  && currentNode.stack !== true) || (currentNode.headlineLevel == 2 && followingNodesOnPage.length == 1);
+              return currentNode.headlineLevel !== 1 && ((previousNodesOnPage.length > 0 && currentNode.pageNumbers.length > 1  && currentNode.stack !== true) || (currentNode.headlineLevel == 2 && followingNodesOnPage.length <= 4)  || (currentNode.headlineLevel == 3 && followingNodesOnPage.length <= 6));
           },
           styles  : util.Styles,
           defaultStyle : {
