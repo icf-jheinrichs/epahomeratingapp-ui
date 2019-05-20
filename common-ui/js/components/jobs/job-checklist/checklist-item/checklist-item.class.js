@@ -16,7 +16,8 @@ class ChecklistItemClass {
         PopoverService,
         S3_CONFIG,
         $http,
-        $injector
+        $injector,
+        DialogService
         ) {
         'ngInject';
 
@@ -37,6 +38,7 @@ class ChecklistItemClass {
         this.RESPONSES    = UI_ENUMS.RESPONSES;
         this.MESSAGING    = UI_ENUMS.MESSAGING;
         this.MODAL        = UI_ENUMS.MODAL;
+        this.DIALOG       = UI_ENUMS.DIALOG;
 
 
 
@@ -45,6 +47,7 @@ class ChecklistItemClass {
         this.JobChecklistStateService  = JobChecklistStateService;
         this.ModalService              = ModalService;
         this.PopoverService            = PopoverService;
+        this.DialogService             = DialogService;
 
         this.isReview                  = this.JobChecklistStateService.isReview;
         this.s3Bucket                  = `${S3_CONFIG.S3_BUCKET_NAME_PREFIX}-rating-company`; //TODO DRY
@@ -88,6 +91,22 @@ class ChecklistItemClass {
       return 'https://s3.amazonaws.com/' + this.s3Bucket + '/' + hvac.Key;
     }
 
+    downloadSingleHvac(e) {
+      try {
+        this.$http.get(e.target.dataset['hvacurl']).then((arraybuffer) => {
+            FileSaver.saveAs(e.target.dataset['hvacurl'], e.target.attributes['download'].nodeValue);
+        }).catch((err) => {
+          this
+              .DialogService
+              .openDialog('dialog-hvac-error')
+        })
+      } catch (err) {
+        this
+            .DialogService
+            .openDialog('dialog-hvac-error')
+      }
+    }
+
     downloadAllHvacs(hvacs) {
       let zip = new JSZip();
       let urls = this.getHvacUrls(hvacs);
@@ -104,7 +123,9 @@ class ChecklistItemClass {
           });
         })
         .catch((err) => {
-          console.error('Error Downloading HVAC Design Reports');
+          this
+              .DialogService
+              .openDialog('dialog-hvac-error')
         })
     }
 

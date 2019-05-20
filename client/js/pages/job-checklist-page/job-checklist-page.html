@@ -54,6 +54,18 @@
     </div>
 </div>
 
+<div class="dialog hidden" dialog="dialog" id="dialog-hvac-error">
+    <div class="dialog-header">
+        <h3 class="dialog-title">Error</h3>
+    </div>
+    <div class="dialog-body">
+        <p>There was an error trying to retrieve the report.</p>
+    </div>
+    <div class="dialog-footer text-right">
+        <button class="btn" data-ng-click="dismiss(true)">OK</button>
+    </div>
+</div>
+
 <!-- modal: Download HVAC Design Report -->
 
 <div class="modal modal-dialog" data-ng-class="{'hidden' : !jobsChecklistPageCtrl.showHvacDesignReportModal}">

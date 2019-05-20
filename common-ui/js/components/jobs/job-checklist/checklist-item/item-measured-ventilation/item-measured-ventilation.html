@@ -62,18 +62,19 @@
                         class="drop-down-item"
                         type="button"
                         role="menuitem">
-                        Download All
+                        Download All (zip)
                     </button>
-                    <a
+                    <button
                         data-ng-repeat="file in checklistItemAirInletLocationsCtrl.house.HvacDesignReport"
-                        data-ng-href="{{$parent.checklistItemAirInletLocationsCtrl.getHvacUrl(file)}}"
+                        ng-click="$parent.checklistItemAirInletLocationsCtrl.downloadSingleHvac($event)"
+                        data-hvacurl="{{$parent.checklistItemAirInletLocationsCtrl.getHvacUrl(file)}}"
                         class="drop-down-item"
                         role="menuitem"
                         download="{{checklistItemAirInletLocationsCtrl.house.HvacDesignReport[$index].Name}}"
                         key="{{checklistItemAirInletLocationsCtrl.house.HvacDesignReport[$index].Key}}"
                         document-handler="document-handler">
                         {{file.name || file.Name}}
-                    </a>
+                    </button>
             </nav>
         </div>
         <span data-ng-if="::!checklistItemCtrl.hasHVACDesignReport" class="status-message status-warning">No HVAC Design Report associated with this location</span>

@@ -72,16 +72,17 @@
                         role="menuitem">
                         Download All
                     </button>
-                    <a
+                    <button
                         data-ng-repeat="file in checklistItemHVACEquipmentCtrl.house.HvacDesignReport"
-                        data-ng-href="{{$parent.checklistItemHVACEquipmentCtrl.getHvacUrl(file)}}"
+                        ng-click="$parent.checklistItemHVACEquipmentCtrl.downloadSingleHvac($event)"
+                        data-hvacurl="{{$parent.checklistItemHVACEquipmentCtrl.getHvacUrl(file)}}"
                         class="drop-down-item"
                         role="menuitem"
                         download="{{checklistItemHVACEquipmentCtrl.house.HvacDesignReport[$index].Name}}"
                         key="{{checklistItemHVACEquipmentCtrl.house.HvacDesignReport[$index].Key}}"
                         document-handler="document-handler">
                         {{file.name || file.Name}}
-                    </a>
+                    </button>
             </nav>
         </div>
         <span data-ng-if="::!checklistItemHVACEquipmentCtrl.hasHVACDesignReport" class="status-message status-warning">No HVAC Design Report associated with this location</span>
