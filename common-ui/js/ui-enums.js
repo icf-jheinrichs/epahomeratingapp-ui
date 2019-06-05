@@ -396,6 +396,7 @@ const STATE_NAME = {
     JOB_CHECKLIST                     : 'job-checklist',
     JOB_CHECKLIST_CATEGORY            : 'job-checklist.category',
     JOB_CHECKLIST_HISTORY             : 'job-checklist.history',
+    JOB_CHECKLIST_OVERVIEW            : 'job-checklist.overview',
     JOB_CHECKLIST_STATUS              : 'job-checklist.status',
     JOB_CHECKLIST_REVIEW              : 'job-checklist-review',
     JOB_CHECKLIST_REVIEW_CATEGORY     : 'job-checklist-review.category',

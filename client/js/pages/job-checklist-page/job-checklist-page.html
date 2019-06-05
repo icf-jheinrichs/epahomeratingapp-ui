@@ -103,14 +103,137 @@
             </a>
 
             <div class="job-checklist-meta ellipsis">
-                <span class="label label-rating-type" data-ng-class="jobsChecklistPageCtrl.getRatingTypeClass()">
-                    {{::jobsChecklistPageCtrl.RatingTypeLabel}}
-                </span>
+              <div dropdown="dropdown">
+                <button   type="button"
+                  class="btn btn-job-dropdown-toggle" dropdown-toggle="dropdown-toggle"
+                  data-ng-disabled="jobsChecklistPageCtrl.houses.Secondary.length == 0">
+                    <span class="label label-rating-type" data-ng-class="jobsChecklistPageCtrl.getRatingTypeClass()">
+                        {{::jobsChecklistPageCtrl.RatingTypeLabel}}
+                    </span>
 
-                <h2 class="job-checklist-title" data-ng-bind-html="jobsChecklistPageCtrl.JobTitle"></h2>
+                    <h2 class="job-checklist-title" data-ng-bind-html="jobsChecklistPageCtrl.getJobTitle(jobsChecklistPageCtrl.$stateParams.houseId)"></h2>
+
+                    <div class="job-checklist-sampleset"
+                         data-ng-if="jobsChecklistPageCtrl.houses.Secondary.length > 0">
+                      <span class="job-checklist-sampleset-count">{{::jobsChecklistPageCtrl.houses.Secondary.length + 1}}</span>
+                      <span class="job-checklist-sampleset-icon">
+                        <img src="img/sampleset-icon.png">
+                      </span>
+                      <span class="job-checklist-sampleset-label">Sample Set</span>
+                      <span class="job-checklist-sampleset-close">X</span>
+                    </div>
+                  </button>
+                <nav
+                  class="drop-down drop-down-left hidden job-selection-dropdown"
+                  dropdown-menu="dropdown-menu"
+                  role="menu"
+                  popover="popover">
+                  <a
+                    ui-sref="{houseId: jobsChecklistPageCtrl.houses.Primary.HouseId}"
+                    data-ng-bind-html="jobsChecklistPageCtrl.getJobTitle(jobsChecklistPageCtrl.houses.Primary.HouseId)"
+                    data-ng-if="jobsChecklistPageCtrl.houses.Primary.HouseId  != jobsChecklistPageCtrl.$stateParams.houseId"
+                    class="drop-down-item job-selection-dropdown-item"
+                  >
+                  </a>
+                  <a
+                    data-ng-repeat="house in jobsChecklistPageCtrl.houses.Secondary"
+                    ui-sref="{houseId: house.HouseId}"
+                    data-ng-bind-html="jobsChecklistPageCtrl.getJobTitle(house.HouseId)"
+                    data-ng-if="house.HouseId != jobsChecklistPageCtrl.$stateParams.houseId"
+                    class="drop-down-item job-selection-dropdown-item"
+                    data-ng-class="{'last-item': $last}"
+                  >{{house.HouseId}}</a>
+                </nav>
+              </div>
             </div>
 
-            <div class="actions flex-row flex-item-pull-right flex-align-center">
+            <div class="job-actions">
+              <button
+                  data-ng-click="jobsChecklistPageCtrl.completeJob()"
+                  data-ng-disabled="!jobsChecklistPageCtrl.jobIsActive"
+                  data-ng-class="{'btn-disabled' : !jobsChecklistPageCtrl.canCompleteJob()}"
+                  data-ng-if="jobsChecklistPageCtrl.role !== 'provider' && jobsChecklistPageCtrl.role !== 'admin'"
+                  class="btn btn-sm"
+                  type="button"
+                  style="margin-bottom: 5px">
+
+                  Complete
+              </button>
+              <button
+                  type="button"
+                  data-ng-click="jobsChecklistPageCtrl.onDownloadRequest()"
+                  class="btn btn-sm">
+
+                  Download XML
+              </button>
+            </div>
+
+            <div class="job-extended-menu" dropdown="dropdown">
+              <button   type="button"
+                class="btn job-extended-menu-toggle" dropdown-toggle="dropdown-toggles">
+                <img class="job-extended-menu-icon" src="img/menu-icon.svg">
+                <span class="job-extended-menu-label">Menu</span>
+                <span class="job-extended-menu-close">X</span>
+              </button>
+              <nav
+                class="drop-down drop-down-right job-extended-menu-dropdown hidden"
+                dropdown-menu="dropdown-menu"
+                role="menu"
+                popover="popover">
+                <a
+                    class="drop-down-item"
+                    role="menuitem"
+                    data-ui-sref=".history({houseId: jobsChecklistPageCtrl.houseId})">
+
+                    View Job History
+                </a>
+                <a
+                    class="drop-down-item"
+                    role="menuitem"
+                    data-ng-click="jobsChecklistPageCtrl.onGetReport()">
+                  View Archival Report
+                </a>
+                <a
+                    data-ui-sref="job-edit({id: jobsChecklistPageCtrl.job._id})"
+                    data-ng-if="jobsChecklistPageCtrl.role==='admin'"
+                    class="drop-down-item">
+
+                    Edit Profile
+                </a>
+                <a
+                    data-ng-if="jobsChecklistPageCtrl.role==='admin'"
+                    data-ng-click="jobsChecklistPageCtrl.flagJobForReview()"
+                    data-ng-disabled="!jobsChecklistPageCtrl.canFlagForReview"
+                    data-ng-class="{ 'disabled' : !jobsChecklistPageCtrl.canFlagForReview }"
+                    class="drop-down-item">
+
+                    Flag for Review
+                </a>
+                <a
+                    data-ng-disabled="!jobsChecklistPageCtrl.canSubmitJob()"
+                    data-ng-class="{ 'disabled' : !jobsChecklistPageCtrl.canSubmitJob() }"
+                    data-ng-class="{'btn-disabled' : !jobsChecklistPageCtrl.canSubmitJob()}"
+                    class="drop-down-item"
+                    data-ng-click="jobsChecklistPageCtrl.submitToProvider()"
+                    data-ng-if="jobsChecklistPageCtrl.role==='admin'">
+
+                    Submit to Provider
+                </a>
+                <a
+                    data-ng-disabled="!jobsChecklistPageCtrl.canMarkAsRegistered()"
+                    data-ng-class="{ 'disabled' : !jobsChecklistPageCtrl.canMarkAsRegistered() }"
+                    data-ng-class="{'btn-disabled' : !jobsChecklistPageCtrl.canMarkAsRegistered()}"
+                    class="drop-down-item"
+                    data-ng-if="jobsChecklistPageCtrl.role === 'provider' && jobsChecklistPageCtrl.userAuthorization.Provider"
+                    data-ng-click="jobsChecklistPageCtrl.markAsRegistered()">
+
+                    Mark as Registered
+                </a>
+              </nav>
+            </div>
+
+
+            <!-- <div class="actions flex-row flex-item-pull-right flex-align-center">
                 <div dropdown="dropdown" id="dropdown-job-info">
                     <button
                         type="button"
@@ -205,7 +328,7 @@
 
                     Download XML
                 </button>
-            </div>
+            </div> -->
         </header>
     </div>
 

@@ -358,6 +358,20 @@ class JobsChecklistPageController {
         return this.jobTitleFilter(this.job.Primary.AddressInformation);
     }
 
+    getJobTitle(id) {
+      let res = '';
+      if(this.houses.Primary.HouseId == id) {
+        return this.jobTitleFilter(this.houses.Primary.AddressInformation)
+      } else {
+        this.houses.Secondary.map((house) => {
+          if (house.HouseId == id) {
+            res = this.jobTitleFilter(house.AddressInformation);
+          }
+        })
+      }
+      return res;
+    }
+
     canSubmitJob () {
         return this.job.Status === this.JOB_STATUS.COMPLETED;
     }

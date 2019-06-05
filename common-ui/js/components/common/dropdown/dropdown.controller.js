@@ -52,6 +52,10 @@ class DropdownController {
             .overlayElement
             .removeClass(HIDDEN_CLASS);
 
+        this
+            .toggleElement
+            .addClass('active');
+
         this.toggleElement.attr('aria-expanded', this.isOpen);
     }
 
@@ -65,6 +69,10 @@ class DropdownController {
         this
             .overlayElement
             .addClass(HIDDEN_CLASS);
+
+        this
+            .toggleElement
+            .removeClass('active');
 
         this
             .toggleElement

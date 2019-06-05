@@ -1,0 +1,14 @@
+<p>Hello</p>
+
+<div class="house-selection-list flex-row">
+    <house-selection-item
+        house="jobOverviewCtrl.job.Primary"
+        is-primary="true">
+    </house-selection-item>
+
+    <house-selection-item
+        data-ng-repeat="house in jobOverviewCtrl.job.Secondary"
+        house="house"
+        is-primary="false">
+    </house-selection-item>
+</div>
