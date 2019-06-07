@@ -39,7 +39,7 @@
                 role="menu"
                 popover="popover">
                     <button
-                        data-ng-if="::!checklistItemAirInletLocationsCtrl.isOnApp"
+                        data-ng-if="::!checklistItemAirInletLocationsCtrl.isOnApp && checklistItemAirInletLocationsCtrl.house.HvacDesignReport.length > 1"
                         ng-click="checklistItemAirInletLocationsCtrl.downloadAllHvacs(checklistItemAirInletLocationsCtrl.house.HvacDesignReport)"
                         class="drop-down-item"
                         type="button"

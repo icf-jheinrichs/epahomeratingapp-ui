@@ -57,21 +57,21 @@
                 role="menu"
                 popover="popover">
                     <button
-                        data-ng-if="::!checklistItemAirInletLocationsCtrl.isOnApp"
-                        ng-click="checklistItemAirInletLocationsCtrl.downloadAll(checklistItemAirInletLocationsCtrl.house.HvacDesignReport)"
+                        data-ng-if="::!checklistItemCtrl.isOnApp && checklistItemCtrl.house.HvacDesignReport.length > 1"
+                        ng-click="checklistItemCtrl.downloadAll(checklistItemCtrl.house.HvacDesignReport)"
                         class="drop-down-item"
                         type="button"
                         role="menuitem">
                         Download All (zip)
                     </button>
                     <button
-                        data-ng-repeat="file in checklistItemAirInletLocationsCtrl.house.HvacDesignReport"
-                        ng-click="$parent.checklistItemAirInletLocationsCtrl.downloadSingleHvac($event)"
-                        data-hvacurl="{{$parent.checklistItemAirInletLocationsCtrl.getHvacUrl(file)}}"
+                        data-ng-repeat="file in checklistItemCtrl.house.HvacDesignReport"
+                        ng-click="$parent.checklistItemCtrl.downloadSingleHvac($event)"
+                        data-hvacurl="{{$parent.checklistItemCtrl.getHvacUrl(file)}}"
                         class="drop-down-item"
                         role="menuitem"
-                        download="{{checklistItemAirInletLocationsCtrl.house.HvacDesignReport[$index].Name}}"
-                        key="{{checklistItemAirInletLocationsCtrl.house.HvacDesignReport[$index].Key}}"
+                        download="{{checklistItemCtrl.house.HvacDesignReport[$index].Name}}"
+                        key="{{checklistItemCtrl.house.HvacDesignReport[$index].Key}}"
                         document-handler="document-handler">
                         {{file.name || file.Name}}
                     </button>

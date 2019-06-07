@@ -92,8 +92,22 @@ class ChecklistItemClass {
     }
 
     downloadSingleHvac(e) {
+      //if on app let document-handler hangle
+      if(this.isOnApp) {
+        return;
+      }
+      //if on admin download file
       try {
-        this.$http.get(e.target.dataset['hvacurl']).then((arraybuffer) => {
+        let url = e.target.dataset['hvacurl'];
+        let config = {
+            method  : 'GET',
+            url     : url,
+            headers : {
+                Authorization : 'Remove in Interceptor'
+            }
+        };
+
+        this.$http(config).then((arraybuffer) => {
             FileSaver.saveAs(e.target.dataset['hvacurl'], e.target.attributes['download'].nodeValue);
         }).catch((err) => {
           this
@@ -107,12 +121,22 @@ class ChecklistItemClass {
       }
     }
 
+    //TODO: get this to work, $http.get inconsistent w/ CORS and 400 errors
     downloadAllHvacs(hvacs) {
       let zip = new JSZip();
       let urls = this.getHvacUrls(hvacs);
+      let config = {};
 
       Promise.all(urls.map((url) => {
-        return this.$http.get(url, { responseType: 'arraybuffer' })
+        config = {
+            method  : 'GET',
+            url     : url,
+            headers : {
+                Authorization : 'Remove in Interceptor'
+            },
+            responseType: 'arraybuffer'
+        };
+        return this.$http(config)
       }))
         .then((files) => {
           files.map((res, index) => {

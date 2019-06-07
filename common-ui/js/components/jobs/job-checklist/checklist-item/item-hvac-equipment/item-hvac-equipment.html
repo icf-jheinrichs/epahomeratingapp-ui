@@ -65,7 +65,7 @@
                 role="menu"
                 popover="popover">
                     <button
-                        data-ng-if="::!checklistItemHVACEquipmentCtrl.isOnApp"
+                        data-ng-if="::!checklistItemHVACEquipmentCtrl.isOnApp && checklistItemHVACEquipmentCtrl.house.HvacDesignReport.length > 1"
                         ng-click="checklistItemHVACEquipmentCtrl.downloadAllHvacs(checklistItemHVACEquipmentCtrl.house.HvacDesignReport)"
                         class="drop-down-item"
                         type="button"
