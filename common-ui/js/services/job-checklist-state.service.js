@@ -897,6 +897,31 @@ class JobChecklistState {
         this.itemStatusQuery[id] = query;
     }
 
+    getCheckListElementsForArchivalReport () {
+        let elements = [];
+        let checklist = this.jobDataResponse.ChecklistItems;
+
+        for (let category in checklist) {
+            for (let stage in checklist[category]) {
+                for (let element in checklist[category][stage]) {
+                    let checklistElement = checklist[category][stage][element];
+
+                    if (checklistElement.Comments.length > 0) {
+                        checklistElement['category'] = category;
+                        checklistElement['stage'] = stage;
+                        checklistElement['element'] = element;
+                        if('Response' in checklistElement) {
+                        } else {
+                          checklistElement['Response'] = [''];
+                        }
+                        elements.push(checklistElement);
+                    }
+                }
+            }
+        }
+        return elements;
+    }
+
     /**
      * Get list of must correct and builder verified items for the builder report PDF
      * @return {array} array of checklist element objects

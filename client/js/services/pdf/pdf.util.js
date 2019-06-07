@@ -701,20 +701,58 @@ export const ChecklistItem = ({ checklist, icons }) => {
               { text: checklist.detail, margin: [5,0,5,0] },
               (() => {
                 if(checklist.stage === 'PreDrywall') {
-                  return {
-                        table: {
-                          widths: ['7%', '3%', '69%', '21%'],
-                          body: [
-                            [
-                              { text: '' },
-                              { image: (checklist.response === 'MustCorrect' ? icons.correct : icons.verify), width: 10, height: 10, alignment: 'center'},
-                              { text: (checklist.response === 'MustCorrect' ? 'Must Correct' : 'Builder Verified'), alignment: 'center', bold: true},
-                              { text: '' }
+                  switch(checklist.response) {
+                    case 'RaterVerified':
+                      return {
+                          table: {
+                            widths: ['7%', '3%', '69%', '21%'],
+                            body: [
+                              [
+                                { text: '' },
+                                { text: '' },
+                                { text: 'Rater Verified', alignment: 'center'},
+                                { text: '' }
+                              ]
                             ]
-                          ]
-                        },
-                        layout: 'noBorders'
-                      }
+                          },
+                          layout: 'noBorders'
+                        }
+                    case 'NotApplicable':
+                      return { text: "Not Applicable", alignment: 'center'}
+                    case 'MustCorrect':
+                      return {
+                            table: {
+                              widths: ['7%', '3%', '69%', '21%'],
+                              body: [
+                                [
+                                  { text: '' },
+                                  { image: icons.correct, width: 10, height: 10, alignment: 'center'},
+                                  { text: 'Must Correct', alignment: 'center', bold: true},
+                                  { text: '' }
+                                ]
+                              ]
+                            },
+                            layout: 'noBorders'
+                          }
+                      case 'BuilderVerified':
+                        return {
+                              table: {
+                                widths: ['7%', '3%', '69%', '21%'],
+                                body: [
+                                  [
+                                    { text: '' },
+                                    { image: icons.verify, width: 10, height: 10, alignment: 'center'},
+                                    { text: 'Builder Verified', alignment: 'center', bold: true},
+                                    { text: '' }
+                                  ]
+                                ]
+                              },
+                              layout: 'noBorders'
+                            };
+                        default:
+                          return { text: "-", alignment: 'center'}
+
+                  }
                 } else {
                   return {
                     margin: [5,0,5,0], alignment: "center",
@@ -724,20 +762,58 @@ export const ChecklistItem = ({ checklist, icons }) => {
               })(),
               (() => {
                 if(checklist.stage === 'Final') {
-                  return {
-                        table: {
-                          widths: ['7%', '3%', '69%', '21%'],
-                          body: [
-                            [
-                              { text: '' },
-                              { image: (checklist.response === 'MustCorrect' ? icons.correct : icons.verify), width: 10, height: 10, alignment: 'center'},
-                              { text: (checklist.response === 'MustCorrect' ? 'Must Correct' : 'Builder Verified'), alignment: 'center', bold: true},
-                              { text: '' }
+                  switch(checklist.response) {
+                    case 'RaterVerified':
+                      return {
+                          table: {
+                            widths: ['7%', '3%', '69%', '21%'],
+                            body: [
+                              [
+                                { text: '' },
+                                { text: '' },
+                                { text: 'Rater Verified', alignment: 'center'},
+                                { text: '' }
+                              ]
                             ]
-                          ]
-                        },
-                        layout: 'noBorders'
-                      }
+                          },
+                          layout: 'noBorders'
+                        }
+                    case 'NotApplicable':
+                      return { text: "Not Applicable", alignment: 'center'}
+                    case 'MustCorrect':
+                      return {
+                            table: {
+                              widths: ['7%', '3%', '69%', '21%'],
+                              body: [
+                                [
+                                  { text: '' },
+                                  { image: icons.correct, width: 10, height: 10, alignment: 'center'},
+                                  { text: 'Must Correct', alignment: 'center', bold: true},
+                                  { text: '' }
+                                ]
+                              ]
+                            },
+                            layout: 'noBorders'
+                          }
+                      case 'BuilderVerified':
+                        return {
+                              table: {
+                                widths: ['7%', '3%', '69%', '21%'],
+                                body: [
+                                  [
+                                    { text: '' },
+                                    { image: icons.verify, width: 10, height: 10, alignment: 'center'},
+                                    { text: 'Builder Verified', alignment: 'center', bold: true},
+                                    { text: '' }
+                                  ]
+                                ]
+                              },
+                              layout: 'noBorders'
+                            };
+                        default:
+                          return { text: "-", alignment: 'center'}
+
+                  }
                 } else {
                   return {
                     margin: [5,0,5,0], alignment: "center",

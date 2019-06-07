@@ -26,7 +26,7 @@ const getDataUri = (url) => {
 
 class Comment {
     constructor (photoUrl = '', comment = '', timestamp = '', username = '') { // eslint-disable-line no-empty-function
-        this.photoUrl         = BASE_S3_URL + photoUrl;
+        this.photoUrl         = _isEmpty(photoUrl) ? '' : BASE_S3_URL + photoUrl;
         this.comment          = comment;
         this.timestamp        = timestamp;
         this.username         = username;
@@ -219,7 +219,7 @@ class PDFService {
 
 
           return this.$q((res, rej) => {
-            const checklistItems = this.JobChecklistStateService.getCheckListElementsForBuilderReport();
+            const checklistItems = this.JobChecklistStateService.getCheckListElementsForArchivalReport();
 
             this.$log.log('Checklist Items: ', checklistItems, MAX_MUST_CORRECTS);
             if (checklistItems.length > MAX_MUST_CORRECTS) {
