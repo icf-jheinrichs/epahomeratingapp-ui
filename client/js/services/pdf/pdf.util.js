@@ -181,17 +181,17 @@ export const SectionHeader = ({ text }) => {
 }
 
 const getDate = (someDate) => {
-  const MONTHS = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   let h = (() => {
-    let hh = someDate.getUTCHours();
+    let hh = someDate.getHours();
     return (hh > 12 ? hh - 12 : hh);
   })(),
-      p = (someDate.getUTCHours() > 12 ? 'pm' : 'am'),
-      m = MONTHS[someDate.getUTCMonth()],
-      min = someDate.getUTCMinutes(),
-      y = someDate.getUTCFullYear(),
-      d = someDate.getUTCDay();
+      p = (someDate.getHours() > 12 ? 'pm' : 'am'),
+      m = MONTHS[someDate.getMonth()],
+      min = someDate.getMinutes(),
+      y = someDate.getFullYear(),
+      d = someDate.getDay();
 
   return h + ':' + min + p + ', ' + m + ' ' + d + ', ' + y;
 }
