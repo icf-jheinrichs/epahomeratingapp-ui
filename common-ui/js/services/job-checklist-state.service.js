@@ -3,6 +3,7 @@ import _findIndex from 'lodash/findIndex';
 import _forOwn from 'lodash/forOwn';
 // import _forEach from 'lodash/forEach';
 import _cloneDeep from 'lodash/cloneDeep';
+import _isEmpty from 'lodash/isEmpty';
 import 'babel-polyfill';
 
 class JobChecklistState {
@@ -178,7 +179,6 @@ class JobChecklistState {
     }
 
     async getPdfInfo () {
-
       const data = {
         home: {
           model: '',
@@ -238,7 +238,7 @@ class JobChecklistState {
           Object.keys(this.jobDataResponse.ChecklistItems[subcategory].Final).map((checklistId) => {
             idArray.push({
               id: checklistId,
-              response: ('Response' in this.jobDataResponse.ChecklistItems[subcategory].Final[checklistId] ?  this.jobDataResponse.ChecklistItems[subcategory].Final[checklistId].Response[0] : ''),
+              response: ('Response' in this.jobDataResponse.ChecklistItems[subcategory].Final[checklistId] && this.jobDataResponse.ChecklistItems[subcategory].Final[checklistId]['Response'] !== undefined ?  this.jobDataResponse.ChecklistItems[subcategory].Final[checklistId].Response[0] : ''),
               stage: 'Final',
               category: subcategory
             });
@@ -246,7 +246,7 @@ class JobChecklistState {
           Object.keys(this.jobDataResponse.ChecklistItems[subcategory].PreDrywall).map((checklistId) => {
             idArray.push({
               id: checklistId,
-              response: (this.jobDataResponse.ChecklistItems[subcategory].PreDrywall[checklistId]['Response'] !== undefined ?  this.jobDataResponse.ChecklistItems[subcategory].PreDrywall[checklistId].Response[0] : ''),
+              response: ('Response' in this.jobDataResponse.ChecklistItems[subcategory].PreDrywall[checklistId] && this.jobDataResponse.ChecklistItems[subcategory].PreDrywall[checklistId]['Response'] !== undefined ?  this.jobDataResponse.ChecklistItems[subcategory].PreDrywall[checklistId].Response[0] : ''),
               stage: 'PreDrywall',
               category: subcategory
             });
@@ -257,6 +257,10 @@ class JobChecklistState {
       ids.map((obj) => {
         checklistPrePromise.push(this.DisplayLogicDigestService.get(obj.id)
           .then((checklistItem) => {
+            if('Options' in checklistItem) {
+              return {}
+            }
+
             return {
               id: obj.id,
               response: obj.response,
@@ -278,6 +282,9 @@ class JobChecklistState {
           Walls: {},
         };
         checklistPostPromise.map((item) => {
+          if(_isEmpty(item)) {
+            return;
+          }
           if(mutated[item.category] && mutated[item.category].hasOwnProperty(item.id)) {
             switch(item.stage) {
               case 'PreDrywall':
@@ -888,6 +895,31 @@ class JobChecklistState {
      */
     registerItemStatusQuery (id, query) {
         this.itemStatusQuery[id] = query;
+    }
+
+    getCheckListElementsForArchivalReport () {
+        let elements = [];
+        let checklist = this.jobDataResponse.ChecklistItems;
+
+        for (let category in checklist) {
+            for (let stage in checklist[category]) {
+                for (let element in checklist[category][stage]) {
+                    let checklistElement = checklist[category][stage][element];
+
+                    if (checklistElement.Comments.length > 0) {
+                        checklistElement['category'] = category;
+                        checklistElement['stage'] = stage;
+                        checklistElement['element'] = element;
+                        if('Response' in checklistElement) {
+                        } else {
+                          checklistElement['Response'] = [''];
+                        }
+                        elements.push(checklistElement);
+                    }
+                }
+            }
+        }
+        return elements;
     }
 
     /**

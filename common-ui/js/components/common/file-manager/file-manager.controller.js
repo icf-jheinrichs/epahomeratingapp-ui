@@ -1,5 +1,8 @@
 /* global File */
 
+let FileSaver  = require('file-saver');
+
+
 import _findIndex from 'lodash/findIndex';
 import _isEmpty from 'lodash/isEmpty';
 
@@ -9,21 +12,25 @@ const FILE_TYPE_ERROR = {
     dismissable : false
 };
 class FileManagerController {
-    constructor ($element, $scope, $rootScope, FileUtilityService, CONTEXT, UI_ENUMS) {
+    constructor ($element, $scope, $rootScope, FileUtilityService, CONTEXT, UI_ENUMS, S3_CONFIG, DialogService, $http) {
         'ngInject';
 
-        this.$element   = $element;
-        this.$scope     = $scope;
-        this.$rootScope = $rootScope;
+        this.$element      = $element;
+        this.$scope        = $scope;
+        this.$rootScope    = $rootScope;
+        this.DialogService = DialogService;
+        this.$http         = $http;
 
         this.FileUtilityService = FileUtilityService;
         this.CONTEXT_IS_ADMIN   = CONTEXT === UI_ENUMS.CONTEXT.ADMIN;
+        this.s3Bucket               = `${S3_CONFIG.S3_BUCKET_NAME_PREFIX}-rating-company`;
     }
 
     $onInit () {
         if (!Array.isArray(this.files)) {
             this.files = [this.files];
         }
+        this.downloadable = this.downloadable;
         this.message = {};
         this.eventListener = this.handleInputFileChange.bind(this);
     }
@@ -124,6 +131,35 @@ class FileManagerController {
         if (index >= 0) {
             this.files.splice(index, 1);
         }
+    }
+    getHvacUrl(hvac) {
+      return 'https://s3.amazonaws.com/' + this.s3Bucket + '/' + hvac.Key;
+    }
+
+    downloadFile(e) {
+      try {
+        let url = e.target.dataset['url'];
+        let config = {
+            method  : 'GET',
+            url     : url,
+            headers : {
+                Authorization : 'Remove in Interceptor'
+            }
+        };
+
+        this.$http(config).then((arraybuffer) => {
+            FileSaver.saveAs(e.target.dataset['url'], e.target.attributes['download'].nodeValue);
+        }).catch((err) => {
+          this
+              .DialogService
+              .openDialog('dialog-hvac-error')
+        })
+      } catch (err) {
+
+        this
+            .DialogService
+            .openDialog('dialog-hvac-error')
+      }
     }
 }
 

@@ -5,7 +5,7 @@ import _isEmpty from 'lodash/isEmpty';
 import xmlToJSON from 'xmltojson';
 
 class JobDetailLocationController {
-    constructor (UI_ENUMS, $scope, $timeout) {
+    constructor (UI_ENUMS, $scope, $timeout, S3_CONFIG) {
         'ngInject';
 
         this.ratingTypeOptions      = UI_ENUMS.RATING_TYPES;
@@ -14,10 +14,18 @@ class JobDetailLocationController {
 
         this.$scope                 = $scope;
         this.$timeout               = $timeout;
+        this.s3Bucket               = `${S3_CONFIG.S3_BUCKET_NAME_PREFIX}-rating-company`;
     }
 
     $onInit () {
         this.gatherReports();
+    }
+
+    //might not need
+    generateHvacFileLinks (files) {
+      return files.map((file) => {
+        return 'https://s3.amazonaws.com/' + this.s3Bucket + '/' + file.Key;
+      })
     }
 
     gatherReports () {

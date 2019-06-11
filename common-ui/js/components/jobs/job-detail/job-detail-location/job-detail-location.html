@@ -91,13 +91,14 @@
     <legend class="col-xs-3">HVAC Design Report (PDF)</legend>
     <div class="offset-xs-3 col-xs-9">
         <file-manager
+            downloadable="true"
             upload-only="true"
             accept="application/pdf"
             label="Checklist"
             show-details="jobDetailLocationCtrl.showFileDetails"
             library="jobDetailLocationCtrl.housePlansHVACDesignReports"
             input-id="HvacDesignReport-{{jobDetailLocationCtrl.location.HouseId}}"
-            files="jobDetailLocationCtrl.location.HvacDesignReport">
+            files="jobDetailLocationCtrl.location.HvacDesignReport"
         </file-manager>
     </div>
 </fieldset>
@@ -106,6 +107,7 @@
     <legend class="col-xs-3">Rater Design Review Checklist (PDF)</legend>
     <div class="offset-xs-3 col-xs-9">
         <file-manager
+            downloadable="true"
             upload-only="true"
             accept="application/pdf"
             show-details="jobDetailLocationCtrl.showFileDetails"
@@ -116,3 +118,15 @@
         </file-manager>
     </div>
 </fieldset>
+
+<div class="dialog hidden" dialog="dialog" id="dialog-hvac-error">
+    <div class="dialog-header">
+        <h3 class="dialog-title">Error</h3>
+    </div>
+    <div class="dialog-body">
+        <p>There was an error trying to retrieve the report.</p>
+    </div>
+    <div class="dialog-footer text-right">
+        <button class="btn" data-ng-click="dismiss(true)">OK</button>
+    </div>
+</div>

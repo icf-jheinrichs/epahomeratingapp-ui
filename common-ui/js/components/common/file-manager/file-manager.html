@@ -125,8 +125,16 @@
             <ul class="list-unstyled">
                 <li class="file-manager-file clearfix"
                     data-ng-repeat="file in fileManagerCtrl.files track by $index">
-                    {{file.name || file.Name}}
-
+                    <!-- <a data-ng-href="{{'https://s3.amazonaws.com/' + $parent.fileManagerCtrl.s3Bucket + '/' + file.Key}}" data-ng-if="$parent.fileManagerCtrl.downloadable === 'true' && file.Key">{{file.name || file.Name}}</a> -->
+                    <a
+                        class="clickable-link"
+                        data-ng-if="$parent.fileManagerCtrl.downloadable === 'true' && file.Key"
+                        ng-click="$parent.fileManagerCtrl.downloadFile($event)"
+                        download="{{file.Name}}"
+                        data-url="{{$parent.fileManagerCtrl.getHvacUrl(file)}}">
+                        {{file.name || file.Name}}
+                    </a>
+                    <span data-ng-if="$parent.fileManagerCtrl.downloadable !== 'true' || !file.Key">{{file.name || file.Name}}</span>
                     <button
                         class="btn btn-no-label btn-link btn-remove pull-right"
                         type="button"

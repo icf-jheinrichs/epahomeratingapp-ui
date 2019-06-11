@@ -9,6 +9,7 @@ class SanitizeService {
     sanitize (unsanitizedString) {
         let sanitizedString = this.$sanitize(unsanitizedString);
         sanitizedString = sanitizedString.replace(/&amp;/g, '&');
+        sanitizedString = sanitizedString.replace(/&#10;/g, '\n');
 
         return sanitizedString;
     }

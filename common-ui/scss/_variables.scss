@@ -281,16 +281,20 @@ $scrollable-height-large: 400px;
 
 $zindex-lightbox:         1200;
 $zindex-lightbox-overlay: 1150;
-$zindex-drop-down:        1150;
+// $zindex-drop-down:        1150;
 $zindex-popover:          1125;
 $zindex-dialog:           1110;
 $zindex-dialog-overlay:   1105;
 $zindex-modal:            1100;
 $zindex-overlay:          1050;
+// $zindex-drop-down:        1025;
+// $zindex-drop-down-overlay:1020;
 $zindex-fixed-header:     1000;
 $zindex-fixed-nav:         950;
 $zindex-affixed-default:   925;
 $zindex-fixed-footer:      900;
+$zindex-drop-down:         875;
+$zindex-drop-down-overlay: 850;
 $zindex-absolute:            5;
 
 //
