@@ -72,7 +72,7 @@ class ChecklistItem {
 }
 
 
-const MAX_MUST_CORRECTS = 10;
+const MAX_MUST_CORRECTS = 100;
 
 
 class PDFService {
@@ -294,7 +294,7 @@ class PDFService {
           PDFMake.vfs = pdfFonts.pdfMake.vfs;
           const pdfDocGenerator = PDFMake.createPdf(pdf);
 
-          pdfDocGenerator.open();
+          pdfDocGenerator.download();
 
           this.$log.log('Generated PDF: ', pdfDocGenerator);
           // pdfDocGenerator.getBuffer((blob) => {
