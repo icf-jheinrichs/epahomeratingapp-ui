@@ -1,19 +1,19 @@
 <div class="house-elevation-photos" ng-class="{'active' : houseElevationPhotosCtrl.elevationPhotosVisible}">
-    <button
+    <!-- <button
         class="btn btn-link btn-close-house-elevation-photos"
         ng-click="houseElevationPhotosCtrl.hideElevationPhotos()">
 
         <i class="fa fa-close" aria-hidden="true"></i> Close
-    </button>
+    </button> -->
 
     <div class="flex-row">
         <section ng-repeat="elevationPhoto in houseElevationPhotosCtrl.ELEVATION_PHOTOS track by $index">
-            {{::elevationPhoto.Name}}
             <photo-capture
                 class="flex-item-static"
                 photo="houseElevationPhotosCtrl.photos[elevationPhoto.Key]"
                 on-photo-capture="elevationPhoto.Callback(photo)">
             </photo-capture>
+            {{::elevationPhoto.Name}}
         </section>
     </div>
 </div>

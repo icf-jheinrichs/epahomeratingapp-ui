@@ -1,0 +1,10 @@
+<div>
+  <h3 class="checklist-section-title ellipsis">Location Information: {{jobInformationCtrl.jobTitleFilter(jobInformationCtrl.houses.Primary.AddressInformation, true)}}
+  </h3>
+
+  <house-elevation-photos
+      elevation-photos-visible="jobInformationCtrl.elevationPhotosVisible"
+      on-update-house-photo="jobInformationCtrl.handlePhotoCapture(photo, key, jobInformationCtrl.houses.Primary.HouseId)"
+      photos="jobInformationCtrl.houses.Primary.Photo">
+  </house-elevation-photos>
+</div>

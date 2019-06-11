@@ -1,8 +1,8 @@
 <nav class="nav nav-checklist-sections flex-row" data-ng-class="::{'hidden' : jobChecklistNavCtrl.hide}">
-    <a ui-sref=".overview({houseId: jobChecklistNavCtrl.houseId})"" ui-sref-active="active" class="nav-checklist-item">
+    <a ui-sref=".information({houseId: jobChecklistNavCtrl.houseId})" ui-sref-active="active" class="nav-checklist-item">
         <div class="nav-checklist-item-description">
             <img data-ng-src="img/icon-location.svg" alt="" />
-            <span>Overview</span>
+            <span>Job Information</span>
         </div>
     </a>
     <a data-ng-repeat="(key, value) in ::jobChecklistNavCtrl.categories track by $index"

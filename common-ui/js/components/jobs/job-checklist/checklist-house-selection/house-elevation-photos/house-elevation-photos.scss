@@ -1,16 +1,16 @@
 @import '../../../../../../scss/variables';
 
 .house-elevation-photos {
-    background-color: $body-bg;
-    bottom: 0;
-    box-shadow: $shadow-default;
-    left: $gutter-quarter;
-    position: absolute;
-    right: $gutter-quarter;
-    top: $gutter-half;
-    transform: translateY(110%);
-    transition: transform $transition-fast ease-in-out;
-    z-index: 5;
+    // background-color: $body-bg;
+    // bottom: 0;
+    // box-shadow: $shadow-default;
+    // left: $gutter-quarter;
+    // position: absolute;
+    // right: $gutter-quarter;
+    // top: $gutter-half;
+    // transform: translateY(110%);
+    // transition: transform $transition-fast ease-in-out;
+    // z-index: 5;
 
     &.active {
         transform: translateY(0%);
