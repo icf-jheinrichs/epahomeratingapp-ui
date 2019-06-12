@@ -1,18 +1,15 @@
-import _find from 'lodash/find';
 import _findIndex from 'lodash/findIndex';
 
 class jobInformationController {
     constructor (
         $state,
         $stateParams,
-        UI_ENUMS,
         jobTitleFilter
     ) {
         'ngInject';
 
         this.$state           = $state;
         this.$stateParams     = $stateParams;
-        this.UI_ENUMS         = UI_ENUMS;
         this.jobTitleFilter   = jobTitleFilter;
     }
 
@@ -21,9 +18,6 @@ class jobInformationController {
           Primary   : this.job.Primary,
           Secondary : this.job.Secondary
       };
-      this.houseId = this.$stateParams.houseId;
-      this.elevationPhotos = this.houses.Primary.Photo;
-      this.elevationPhotosVisible = true;
     }
 
     handlePhotoCapture (photo, key, houseId) {

@@ -7,7 +7,7 @@
     </button> -->
 
     <div class="flex-row">
-        <section ng-repeat="elevationPhoto in houseElevationPhotosCtrl.ELEVATION_PHOTOS track by $index">
+        <section ng-repeat="elevationPhoto in houseElevationPhotosCtrl.ELEVATION_PHOTOS track by $index" class="flex-justify-center flex-align-center flex-column">
             <photo-capture
                 class="flex-item-static"
                 photo="houseElevationPhotosCtrl.photos[elevationPhoto.Key]"
