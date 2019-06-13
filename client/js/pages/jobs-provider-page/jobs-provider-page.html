@@ -83,6 +83,7 @@
 
             <jobs
                 jobs="jobsProviderPageCtrl.viewJobs"
+                rating-company-id="{{::jobsProviderPageCtrl.selectedRater.O_ID}}"
                 register-handlers="jobsProviderPageCtrl.registerHandlers(toggleAllJobs, getSelectedJobs)"
                 on-mark-job-as-registered="jobsProviderPageCtrl.markJobRegistered(jobId)"
                 on-set-bulk-operation-status="jobsProviderPageCtrl.setBulkOperationStatus(status)">

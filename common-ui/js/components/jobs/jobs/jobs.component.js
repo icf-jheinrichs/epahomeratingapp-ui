@@ -7,6 +7,7 @@ let jobsComponent = {
         enabled                  : '<',
         jobs                     : '<',
         registerHandlers         : '&',
+        ratingCompanyId          : '@',
         onSetBulkOperationStatus : '&',
         onDownloadXml            : '&',
         onMarkJobAsRegistered    : '&',
