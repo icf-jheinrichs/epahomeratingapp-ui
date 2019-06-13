@@ -1,9 +1,17 @@
 <nav class="nav nav-checklist-sections flex-row" data-ng-class="::{'hidden' : jobChecklistNavCtrl.hide}">
     <a ui-sref=".information({houseId: jobChecklistNavCtrl.houseId})" ui-sref-active="active" class="nav-checklist-item">
-        <div class="nav-checklist-item-description">
-            <img data-ng-src="img/icon-location.svg" alt="" />
-            <span>Job Information</span>
-        </div>
+      <linear-progress
+          class="linear-progress linear-progress-pre-drywall not-applicable"
+          progress=0>
+      </linear-progress>
+      <div class="nav-checklist-item-description">
+          <img data-ng-src="img/icon-location.svg" alt="" />
+          <span>Job Information</span>
+      </div>
+      <linear-progress
+          class="linear-progress linear-progress-final not-applicable"
+          progress=0>
+      </linear-progress>
     </a>
     <a data-ng-repeat="(key, value) in ::jobChecklistNavCtrl.categories track by $index"
        ui-sref=".category({categoryId: key, houseId: jobChecklistNavCtrl.houseId})"

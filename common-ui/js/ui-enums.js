@@ -401,6 +401,7 @@ const STATE_NAME = {
     JOB_CHECKLIST_REVIEW              : 'job-checklist-review',
     JOB_CHECKLIST_REVIEW_CATEGORY     : 'job-checklist-review.category',
     JOB_CHECKLIST_REVIEW_HISTORY      : 'job-checklist-review.history',
+    JOB_CHECKLIST_REVIEW_INFORMATION  : 'job-checklist-review.information',
     PRIVACY_POLICY                    : 'privacy-policy',
     RATING_COMPANIES                  : 'rating-companies',
     PROVIDERS                         : 'providers',

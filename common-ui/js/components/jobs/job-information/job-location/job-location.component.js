@@ -5,7 +5,6 @@ import './job-location.scss';
 let jobLocationComponent = {
     bindings : {
       house                 : '<',
-      onUpdateHousePhoto    : '&',
       sampleSet             : '<',
       ratingType            : '<'
     },

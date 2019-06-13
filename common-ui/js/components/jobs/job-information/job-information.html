@@ -1,5 +1,4 @@
 <job-location
-  on-update-house-photo="jobInformationCtrl.handlePhotoCapture"
   house="jobInformationCtrl.houses.Primary"
   rating-type="jobInformationCtrl.job.RatingType"
   sample-set="jobInformationCtrl.houses.Secondary.length > 0"
@@ -8,7 +7,6 @@
 <div data-ng-repeat="house in jobInformationCtrl.houses.Secondary"
 >
   <job-location
-    on-update-house-photo="jobInformationCtrl.handlePhotoCapture"
     house="house"
     rating-type="jobInformationCtrl.job.RatingType"
     sample-set="jobInformationCtrl.houses.Secondary.length > 0"

@@ -14,7 +14,6 @@ class jobLocationController {
     $onInit () {
       this.elevationPhotos = this.house.Photo;
       this.elevationPhotosVisible = true;
-      console.warn('this.house', this.house);
     }
 
     get JobTitle() {

@@ -25,8 +25,9 @@
     <h4 class="job-location-elevation-photos-title">Elevation Photos</h4>
     <house-elevation-photos
         elevation-photos-visible="jobLocationCtrl.elevationPhotosVisible"
-        on-update-house-photo="jobLocationCtrl.onUpdatePhoto(photo, key, houseId)"
-        photos="jobLocationCtrl.elevationPhotos">
+        on-update-house-photo="$parent.jobInformationCtrl.handlePhotoCapture(photo, key, houseId)"
+        photos="jobLocationCtrl.elevationPhotos"
+        house="jobLocationCtrl.house">
     </house-elevation-photos>
   </div>
 </section>

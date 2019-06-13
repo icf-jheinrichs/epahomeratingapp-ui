@@ -57,10 +57,11 @@
 
 .job-checklist-meta {
     margin-left: $offset-default;
-    padding: $gutter-quarter;
+    // padding: $gutter-quarter;
     border-left: 2px solid $text-color-muted;
     border-right: 2px solid $text-color-muted;
-    width: calc(100% - 215px);
+    // width: calc(100% - 215px);
+    position: relative;
 
     .drop-down {
         // left: 0;
@@ -69,6 +70,8 @@
     .btn-job-dropdown-toggle {
       color: #fff;
       width: 100%;
+      padding: $gutter-quarter;
+      overflow: hidden;
 
       &:hover, &:focus, &:active, &:visited {
         background-color: transparent !important;
@@ -105,8 +108,8 @@
 }
 
 .job-extended-menu {
-  position: absolute;
-  right: 0;
+  // position: absolute;
+  // right: 0;
   border-left: 2px solid $text-color-muted;
 
   .job-extended-menu-toggle {
@@ -183,11 +186,12 @@
 
 
 .job-selection-dropdown.drop-down {
-  margin-top: 10px;
-  margin-left: -10px;
-  width: calc(100% - 215px);
+  // margin-top: 10px;
+  // margin-left: -10px;
+  // width: calc(100% - 215px);
   background-color: #f5f5f5;
   padding: 10px;
+  width: 100%;
 
   .job-selection-dropdown-item {
     background-color: #f5f5f5;
@@ -218,8 +222,9 @@
 .job-checklist-sampleset {
   display: flex;
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 10px;
+  top: 50%;
+  margin-top: -31px;
   flex-direction: column;
   align-items: center;
   justify-content: center;

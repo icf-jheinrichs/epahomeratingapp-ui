@@ -4,13 +4,17 @@ class jobInformationController {
     constructor (
         $state,
         $stateParams,
-        jobTitleFilter
+        jobTitleFilter,
+        $rootScope,
+        UI_ENUMS
     ) {
         'ngInject';
 
         this.$state           = $state;
         this.$stateParams     = $stateParams;
         this.jobTitleFilter   = jobTitleFilter;
+        this.$rootScope       = $rootScope;
+        this.MESSAGING        = UI_ENUMS.MESSAGING;
     }
 
     $onInit () {
