@@ -4,6 +4,11 @@
 .job-checklist-header {
     background-color: $brand-tertiary;
     color: $text-color-inverse;
+    height: $job-checklist-header-height;
+
+    header {
+      height: 100%;
+    }
 
     .btn-back {
         height: 40px;
@@ -62,12 +67,18 @@
     border-right: 2px solid $text-color-muted;
     // width: calc(100% - 215px);
     position: relative;
+    height: 100%;
+
+    .job-checklist-meta-dropdown {
+      height: 100%;
+    }
 
     .drop-down {
         // left: 0;
         right: auto;
     }
     .btn-job-dropdown-toggle {
+      height: 100%;
       color: #fff;
       width: 100%;
       padding: $gutter-quarter;
@@ -111,6 +122,7 @@
   // position: absolute;
   // right: 0;
   border-left: 2px solid $text-color-muted;
+  height: 100%;
 
   .job-extended-menu-toggle {
     transform: translateY(15px);
@@ -192,6 +204,7 @@
   background-color: #f5f5f5;
   padding: 10px;
   width: 100%;
+  margin: 0;
 
   .job-selection-dropdown-item {
     background-color: #f5f5f5;
