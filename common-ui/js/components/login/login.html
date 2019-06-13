@@ -1,4 +1,4 @@
-<div class="login-container flip-container">
+<div class="login-container flip-container page-container">
     <div class="flipper" data-ng-class="{'flipped' : (loginCtrl.action !== 'login')}">
         <login-form
             class="login-panel flip-front flip-panel"
@@ -26,6 +26,60 @@
             <div data-ng-if="loginCtrl.notAuthorized">
                 <p class="status-message status-error">{{loginCtrl.statusMessage}}</p>
                 <button type="button" class="btn btn-link" data-ng-click="loginCtrl.reset()"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="login-splash">
+    <div class="login-splash-hero">
+        <div class="page-container">
+            <div class="col-xs-8">
+                <p>Welcome to ENERGY STAR® RaterPRO™, a free mobile app and web tool developed by the U.S. EPA to help home energy raters efficiently and effectively get their field work done. Raters can use RaterPRO™ to verify homes to meet ENERGY STAR® program requirements or to facilitate data collection to generate Energy Rating Index scores.</p>
+                <a href="#" class="btn btn-filled offset-top">RaterPRO™ Support</a>
+            </div>
+        </div>
+    </div>
+    <img class="login-splash-img-sample" src="img/login/sample.png" />
+    <div class="page-container">
+        <div class="row">
+            <img class="col-xs-6" src="img/login/rater.jpg" />
+            <p class="col-xs-6 offset-top">Rather than relying on paper checklists and hand-written notes, RaterPRO™ allows home energy raters to electronically get the information they need to complete required on-site inspections, document diagnostic testing results, capture digital photos and notes, and geotag the inspection location. This all-digital workflow helps rating companies large and small deliver accurate, high-quality ratings and ENERGY STAR® certifications. Best of all, there’s no more tedious data entry thanks to two-way import/export with energy modeling software that eliminates transcription errors and saves time on every job.</p>
+        </div>
+        <div class="offset-top">
+            <h3 class="inline offset-right">Finish the <i>Job</i><br />on the <i>Job Site!</i>  </h3>
+            <p class="inline">With RaterPRO, all required paperwork is completed before the rater leaves the inspection:</p>
+        </div>
+        <div class="login-splash-featureboxes offset-top">
+            <div class="login-splash-featurebox col-xs-3">
+                <img src="img/login/icon-check.png" />
+                <p>The ENERGY STAR® Rater Field Checklist is filled out.</p>
+            </div>
+            <div class="login-splash-featurebox col-xs-3">
+                <img src="img/login/icon-sync.png" />
+                <p>Required updates to construction specs are synced back to the office in real-time.</p>
+            </div>
+            <div class="login-splash-featurebox col-xs-3">
+                <img src="img/login/icon-report.png" />
+                <p>An action report is sent to the builder noting any needed corrections to be made.</p>
+            </div>
+            <div class="login-splash-featurebox col-xs-3">
+                <img src="img/login/icon-photo.png" />
+                <p>Photos & notes are included in the digital job file, no need to clutter phone camera roll or office files.</p>
+            </div>
+        </div>
+        <div class="row offset-top">
+            <div class="col-xs-4">
+                <h3>Built for the Field</h3>
+                <p>From the start, RaterPRO™ was designed for the rigors of the jobsite. The native mobile app features a nimble, friendly interface that’s easy to use in the field.</p>
+                <p><strong>Remote job site? No problem.</strong> RaterPRO™ works with or without internet access and automatically syncs to the cloud as soon as it reconnects.</p>
+            </div>
+            <div class="col-xs-4">
+                <h3>Demonstrate Quality</h3>
+                <p>RaterPRO™ is a tool for doing high-quality ratings, allowing energy rating companies and oversight organizations to authenticate the quality of every rating with a new level of assurance. A required front elevation photo, inspection location tracking, and detailed Job History report provide a full accounting of each job.</p>
+            </div>
+            <div class="col-xs-4">
+                <h3>Join the Industry Leaders</h3>
+                <p>More than 30 of the nation’s leading energy rating companies are already using ENERGY STAR® RaterPRO™ in their day-to-day operations. Contact us at <a href="mailto:energystarhomes@energystar.gov" target="_blank">energystarhomes@energystar.gov</a> to learn more and get started today. </p>
             </div>
         </div>
     </div>
