@@ -115,14 +115,12 @@ class JobsChecklistPageController {
 
                 return this
                     .UserCompanyService
-                    .getProviderCompanies();
+                    .getRelatedProviderCompanies(this.company.O_ID);
             })
-            .then((providerCompanies) => {
-                this.relatedProviderCompanys = this.company.RelatedProviderCompanys.map((O_ID) => {
-                    return _find(providerCompanies, {O_ID});
-                });
+            .then((relatedProviderCompanies) => {
+                this.relatedProviderCompanys = relatedProviderCompanies;
 
-                if (this.company.RelatedProviderCompanys.length > 0) {
+                if (this.relatedProviderCompanys.length > 0) {
                     this.hasRelatedProviderCompanies = true;
                     this
                         .selectedProviderToAdd = this.relatedProviderCompanys[0];

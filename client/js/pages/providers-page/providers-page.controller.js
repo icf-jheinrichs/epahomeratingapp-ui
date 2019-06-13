@@ -28,19 +28,12 @@ class ProvidersPageController {
 
                 return this
                     .UserCompanyService
-                    .getProviderCompanies();
+                    .getRelatedProviderCompanies(this.AuthorizationService.getCurrentOrganizationId());
             })
             .then((providerCompanies) => {
-                this.providerCompanies     = providerCompanies;
-                this.selectedProviderToAdd = providerCompanies[0];
-
-                this.relatedProviderCompanys = this.company.RelatedProviderCompanys.map((O_ID) => {
-                    return _find(this.providerCompanies, {O_ID});
-                });
-
-                this.pendingCompanies = this.company.PendingProviderCompanies.map((O_ID) => {
-                    return _find(this.providerCompanies, {O_ID});
-                });
+                this.providerCompanies       = providerCompanies;
+                this.relatedProviderCompanys = providerCompanies.related;
+                this.pendingCompanies        = providerCompanies.pending;
             });
     }
 
@@ -52,6 +45,7 @@ class ProvidersPageController {
                 this.company.PendingProviderCompanies = this.company.PendingProviderCompanies.filter((companyId) => {
                     return companyId !== providerCompanyId;
                 });
+
                 this.pendingCompanies = this.pendingCompanies.filter((company) => {
                     return company.O_ID !== providerCompanyId;
                 });

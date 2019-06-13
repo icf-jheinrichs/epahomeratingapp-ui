@@ -8,8 +8,8 @@ export const API_URL = {
     JOB_DATA_RESPONSE         : `${APIGATEWAY_URI}/job/response_data`,
     JOB_DATA_HOME_PERFORMANCE : `${APIGATEWAY_URI}/job/home_performance_data`,
     HOUSE_PLAN                : `${APIGATEWAY_URI}/house_plan`,
-    COMPANY                   : `${APIGATEWAY_URI}/company`,
-    USER                      : `${APIGATEWAY_URI}/user`,
+    COMPANY                   : 'https://raterpro.dev.com:3007/company', //`${APIGATEWAY_URI}/company`,
+    USER                      : 'https://raterpro.dev.com:3007/user', // `${APIGATEWAY_URI}/user`,
     LOGIN                     : `${APIGATEWAY_URI}/login`
 };
 
