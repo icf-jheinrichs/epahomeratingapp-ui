@@ -59,6 +59,11 @@ $navbar-height: 75px;
     form {
         h2 {
             color: $link-color;
+            img {
+                vertical-align: -$offset-small;
+                margin-top: -$offset-large;
+                margin-right: $offset-default;
+            }
         }
     }
 }
