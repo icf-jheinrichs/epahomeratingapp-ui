@@ -39,7 +39,7 @@
                         data-ng-model="jobsProviderPageCtrl.selectedRater"
                         id="selectedRater"
                         data-ng-change="jobsProviderPageCtrl.handleRatingCompanyChange()"
-                        data-ng-options="rater.Name group by rater.relationship for rater in jobsProviderPageCtrl.relatedRaterCompanies track by rater.O_ID">
+                        data-ng-options="rater.Name group by rater.relationship for rater in jobsProviderPageCtrl.relatedCompanies track by rater.O_ID">
                     </select>
                 </div>
             </div>

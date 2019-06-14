@@ -1,4 +1,3 @@
-import _find from 'lodash/find';
 import JobsPage from './jobs-page.class.js';
 
 class JobsPageController extends JobsPage {
@@ -13,14 +12,12 @@ class JobsPageController extends JobsPage {
 
                 return this
                     .UserCompanyService
-                    .getProviderCompanies();
+                    .getRelatedProviderCompanies(this.company.O_ID);
             })
-            .then((providerCompanies) => {
-                this.relatedProviderCompanys = this.company.RelatedProviderCompanys.map((O_ID) => {
-                    return _find(providerCompanies, {O_ID});
-                });
+            .then((relatedProviderCompanies) => {
+                this.relatedProviderCompanys = relatedProviderCompanies.related;
 
-                if (this.company.RelatedProviderCompanys.length > 0) {
+                if (this.relatedProviderCompanys.length > 0) {
                     this.hasRelatedProviderCompanies = true;
                     this
                         .selectedProviderToAdd = this.relatedProviderCompanys[0];

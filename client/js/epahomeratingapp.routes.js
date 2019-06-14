@@ -164,13 +164,15 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
                 relatedRaterCompanies : (AuthorizationService, UserCompanyService) => {
                     return UserCompanyService.getRelatedRatingCompanies(AuthorizationService.getCurrentOrganizationId());
                 },
-                jobs   : (relatedRaterCompanies, JobsService, $stateParams) => {
+                jobs : (relatedRaterCompanies, JobsService, $stateParams) => {
                     let raterId;
 
                     if ($stateParams && $stateParams.rater) {
                         raterId = $stateParams.rater;
-                    } else if (relatedRaterCompanies.length) {
-                        raterId = relatedRaterCompanies[0].O_ID;
+                    } else if (relatedRaterCompanies.related.length) {
+                        raterId = relatedRaterCompanies.related[0].O_ID;
+                    } else if (relatedRaterCompanies.past.length) {
+                        raterId = relatedRaterCompanies.past[0].O_ID;
                     }
 
                     if (raterId) {
@@ -204,8 +206,10 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
 
                     if ($stateParams && $stateParams.rater) {
                         raterId = $stateParams.rater;
-                    } else if (relatedRaterCompanies.length) {
-                        raterId = relatedRaterCompanies[0].O_ID;
+                    } else if (relatedRaterCompanies.related.length) {
+                        raterId = relatedRaterCompanies.related[0].O_ID;
+                    } else if (relatedRaterCompanies.past.length) {
+                        raterId = relatedRaterCompanies.past[0].O_ID;
                     }
 
                     let jobPromise
@@ -413,16 +417,6 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
         .state(STATE_NAME.USERS, {
             url        : '/users',
             component  : 'usersPage'
-        })
-
-        .state(STATE_NAME.USER_EDIT, {
-            url        : '/users/user/{C_ID}',
-            component  : 'userEditPage',
-            resolve    : {
-                user : (UserCompanyService, $stateParams) => {
-                    return UserCompanyService.getUser($stateParams.C_ID);
-                }
-            }
         })
 
         .state(STATE_NAME.USER_RESET_PASSWORD, {

@@ -28,19 +28,11 @@ class ProvidersPageController {
 
                 return this
                     .UserCompanyService
-                    .getProviderCompanies();
+                    .getRelatedProviderCompanies(this.AuthorizationService.getCurrentOrganizationId());
             })
             .then((providerCompanies) => {
-                this.providerCompanies     = providerCompanies;
-                this.selectedProviderToAdd = providerCompanies[0];
-
-                this.relatedProviderCompanys = this.company.RelatedProviderCompanys.map((O_ID) => {
-                    return _find(this.providerCompanies, {O_ID});
-                });
-
-                this.pendingCompanies = this.company.PendingProviderCompanies.map((O_ID) => {
-                    return _find(this.providerCompanies, {O_ID});
-                });
+                this.relatedProviderCompanys = providerCompanies.related;
+                this.pendingCompanies        = providerCompanies.pending;
             });
     }
 
@@ -49,6 +41,12 @@ class ProvidersPageController {
             .UserCompanyService
             .updatePendingProviderRaterAssociation(providerCompanyId, this.company.O_ID, accept)
             .then((response) => {
+                if (accept) {
+                    this.company.RelatedProviderCompanys.push(providerCompanyId);
+
+                    this.relatedProviderCompanys.push(_find(this.pendingCompanies, {O_ID : providerCompanyId}));
+                }
+
                 this.company.PendingProviderCompanies = this.company.PendingProviderCompanies.filter((companyId) => {
                     return companyId !== providerCompanyId;
                 });
@@ -56,11 +54,6 @@ class ProvidersPageController {
                     return company.O_ID !== providerCompanyId;
                 });
 
-                if (accept) {
-                    this.company.RelatedProviderCompanys.push(providerCompanyId);
-
-                    this.relatedProviderCompanys.push(_find(this.providerCompanies, {O_ID : providerCompanyId}));
-                }
             })
             .catch((error) => {
                 //TODO: handle error

@@ -23,9 +23,9 @@ class JobDetailLocationController {
 
     //might not need
     generateHvacFileLinks (files) {
-      return files.map((file) => {
-        return 'https://s3.amazonaws.com/' + this.s3Bucket + '/' + file.Key;
-      })
+        return files.map((file) => {
+            return 'https://s3.amazonaws.com/' + this.s3Bucket + '/' + file.Key;
+        });
     }
 
     gatherReports () {
