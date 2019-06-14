@@ -1,6 +1,3 @@
-import _findIndex from 'lodash/findIndex';
-import _cloneDeep from 'lodash/cloneDeep';
-
 class UsersPageController {
     constructor ($log, $q, AuthorizationService, DialogService, UserCompanyService, UI_ENUMS) {
         'ngInject';

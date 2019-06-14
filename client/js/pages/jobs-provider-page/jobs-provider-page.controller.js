@@ -8,21 +8,22 @@ class JobsProviderPageController extends JobsPage {
 
         let raterCompanyIndex = 0;
 
-        this.relatedRaterCompanies.forEach((company, index) => {
-            if (this.company.RelatedRaterCompanys.includes(company.O_ID)) {
-                this.relatedRaterCompanies[index].relationship = 'Current Rater Companies';
-            } else {
-                this.relatedRaterCompanies[index].relationship = 'Previous Rater Companies';
-            }
+        const related = this.relatedRaterCompanies.related.map((company) => {
+            return Object.assign({}, {relationship : 'Current Rater Companies'}, company);
+        });
+        const past = this.relatedRaterCompanies.past.map((company) => {
+            return Object.assign({}, {relationship : 'Previous Rater Companies'}, company);
         });
 
+        this.relatedCompanies = related.concat(past);
+
         if (this.$stateParams.rater) {
-            raterCompanyIndex = _findIndex(this.relatedRaterCompanies, {
+            raterCompanyIndex = _findIndex(this.relatedCompanies, {
                 O_ID : this.$stateParams.rater
             });
         }
 
-        this.selectedRater = this.relatedRaterCompanies[raterCompanyIndex];
+        this.selectedRater = this.relatedCompanies[raterCompanyIndex];
 
         if (this.$stateParams.status) {
             this.currentState = this.$stateParams.status;

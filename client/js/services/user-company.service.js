@@ -1,6 +1,3 @@
-import _map from 'lodash/map';
-import _filter from 'lodash/filter';
-
 class UserCompanyService {
     constructor ($http, $log, $q, API_URL) {
         'ngInject';
@@ -42,29 +39,19 @@ class UserCompanyService {
      * @return {promise}     promise that resolves with user data
      */
     getUser (C_ID) {
-        let user;
-
         return this.$q((resolve, reject) => {
             this
-                .requestUser(C_ID)
-                .then((userResponse) => {
-                    if (userResponse !== undefined) {
-                        let userCompanies = [];
-                        user = userResponse;
-
-                        user.userCompany.forEach((company) => {
-                            userCompanies.push(company.O_ID);
-                        });
-
-                        return this.getUserCompanies(userCompanies);
-                    } else {
-                        reject({message : 'There was an error logging in.'});
-                    }
+                .$http({
+                    method  : 'GET',
+                    url     : `${this.API_URL.USER}/${C_ID}/companies`
                 })
-                .then((companies) => {
+                .then((response) => {
                     resolve({
-                        user,
-                        companies
+                        user : {
+                            user        : response.data.data.user,
+                            userCompany : response.data.data.userCompany
+                        },
+                        companies : response.data.data.company
                     });
                 })
                 .catch((error) => {
@@ -92,39 +79,6 @@ class UserCompanyService {
                 })
                 .catch((error) => {
                     this.$log.error(`[user-company.service.js putUser] ${JSON.stringify(error)}`);
-                    reject(error);
-                });
-        });
-    }
-
-    getUserCompanies (O_IDs) {
-        let userCompanyRequests = [];
-
-        O_IDs.forEach((O_ID) => {
-            userCompanyRequests.push(this.getCompany(O_ID));
-        });
-
-        return this.$q.all(userCompanyRequests);
-    }
-
-    putCompany (company) {
-        return this.$q((resolve, reject) => {
-            this
-                .$http({
-                    method  : 'PUT',
-                    url     : `${this.API_URL.COMPANY}/${company._id}`,
-                    data    : company
-                })
-                .then((response) => {
-                    if (response.status === 200) {
-                        resolve('success');
-                    } else {
-                        //TODO: make this less bad
-                        reject('somethings amiss');
-                    }
-                })
-                .catch((error) => {
-                    this.$log.error(`[user-company.service.js putCompany] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -237,7 +191,24 @@ class UserCompanyService {
                     resolve(response.data.data);
                 })
                 .catch((error) => {
-                    this.$log.error(`[user-company.service.js getProviderCompanies] ${JSON.stringify(error)}`);
+                    this.$log.error(`[user-company.service.js getAllProviderCompanies] ${JSON.stringify(error)}`);
+                    reject(error);
+                });
+        });
+    }
+
+    getAllRatingCompanies () {
+        return this.$q((resolve, reject) => {
+            this
+                .$http({
+                    method  : 'GET',
+                    url     : `${this.API_URL.COMPANY}/raters`
+                })
+                .then((response) => {
+                    resolve(response.data.data);
+                })
+                .catch((error) => {
+                    this.$log.error(`[user-company.service.js getAllRatingCompanies] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });
@@ -260,61 +231,18 @@ class UserCompanyService {
         });
     }
 
-    getAllRatingCompanies () {
+    getRelatedRatingCompanies (providerId) {
         return this.$q((resolve, reject) => {
             this
                 .$http({
                     method  : 'GET',
-                    url     : `${this.API_URL.COMPANY}`
+                    url     : `${this.API_URL.COMPANY}/${providerId}/raters`
                 })
                 .then((response) => {
-                    if (response.status === 200) {
-                        const ratingCompanies = response.data.data;
-
-                        resolve(_filter(ratingCompanies, {RaterOrg : true}));
-                    } else {
-                        //TODO: make this less bad
-                        this.$log.error(`[user-company.service.js getRatingCompanies] ${JSON.stringify(response)}`);
-                        reject('somethings amiss');
-                    }
+                    resolve(response.data.data);
                 })
                 .catch((error) => {
-                    this.$log.error(`[user-company.service.js getRatingCompanies] ${JSON.stringify(error)}`);
-                    reject(error);
-                });
-        });
-    }
-
-    requestCompanyUserAuthorizations (userCognitoIds) {
-        let userAuthorizations = [];
-
-        userCognitoIds.forEach((userCognitoId) => {
-            userAuthorizations.push(this.requestUser(userCognitoId));
-        });
-
-        return this.$q.all(userAuthorizations);
-    }
-
-    requestCompanyUsers (C_ID, O_ID) {
-        return this.$q((resolve, reject) => {
-            this
-                .$http({
-                    method  : 'GET',
-                    url     : `${this.API_URL.COMPANY}`
-                })
-                .then((response) => {
-                    if (response.status === 200) {
-                        const ratingCompanies = response.data.data;
-
-                        resolve(_filter(ratingCompanies, {RaterOrg : true}));
-                    } else {
-                        //TODO: make this less bad
-                        this.$log.error(`[user-company.service.js getRatingCompanies] ${JSON.stringify(response)}`);
-                        reject('somethings amiss');
-                    }
-                })
-                .catch((error) => {
-                    this.$log.error(`[user-company.service.js getRatingCompanies] ${JSON.stringify(error)}`);
+                    this.$log.error(`[user-company.service.js getProviderCompanies] ${JSON.stringify(error)}`);
                     reject(error);
                 });
         });

@@ -1,6 +1,4 @@
 import _findIndex from 'lodash/findIndex';
-import _find from 'lodash/find';
-
 
 class JobsChecklistPageController {
     constructor (
@@ -118,7 +116,7 @@ class JobsChecklistPageController {
                     .getRelatedProviderCompanies(this.company.O_ID);
             })
             .then((relatedProviderCompanies) => {
-                this.relatedProviderCompanys = relatedProviderCompanies;
+                this.relatedProviderCompanys = relatedProviderCompanies.related;
 
                 if (this.relatedProviderCompanys.length > 0) {
                     this.hasRelatedProviderCompanies = true;
@@ -155,14 +153,14 @@ class JobsChecklistPageController {
             .$broadcast(this.MESSAGING.SET_TOP_PAD, 45);
     }
 
-    onGetReport() {
-      this
-        .pdfService
-        .generateBuilderNotification()
-        .then((builderNotificationObject) => {
-          this.$log.log('Output from PDF Service ');
-          this.$log.log(builderNotificationObject);
-        })
+    onGetReport () {
+        this
+            .pdfService
+            .generateBuilderNotification()
+            .then((builderNotificationObject) => {
+                this.$log.log('Output from PDF Service ');
+                this.$log.log(builderNotificationObject);
+            });
     }
 
     appendFilterParams () {

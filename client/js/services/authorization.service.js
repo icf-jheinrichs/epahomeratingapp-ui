@@ -223,7 +223,9 @@ class AuthorizationService {
         case this.STATE_NAME.JOB_CHECKLIST_REVIEW_CATEGORY :
             return true;
         case this.STATE_NAME.PROVIDERS :
-            return roleIsAdminOrProvider;
+            return orgTypes.RaterOrg && roleIsAdminOrProvider;
+        case this.STATE_NAME.RATING_COMPANIES :
+            return orgTypes.ProviderOrg && roleIsAdminOrProvider;
         case this.STATE_NAME.USERS :
             return roleIsAdminOrProvider;
         case this.STATE_NAME.USER_EDIT :
