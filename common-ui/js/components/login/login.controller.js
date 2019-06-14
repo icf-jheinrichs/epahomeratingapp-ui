@@ -52,6 +52,7 @@ class LoginController {
             .catch((error) => {
                 this.$log.error(`[login.controller.js $onInit login] ${JSON.stringify(error)}`);
                 this.isBusy = {busy : false};
+                this.statusMessage = 'There was a system error. Please contact RaterPRO support.';
                 return;
             });
 

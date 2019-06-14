@@ -180,20 +180,8 @@ export const SectionHeader = ({ text }) => {
   }
 }
 
-const getDate = (someDate) => {
-  const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-  let h = (() => {
-    let hh = someDate.getHours();
-    return (hh > 12 ? hh - 12 : hh);
-  })(),
-      p = (someDate.getHours() > 12 ? 'pm' : 'am'),
-      m = MONTHS[someDate.getMonth()],
-      min = someDate.getMinutes(),
-      y = someDate.getFullYear(),
-      d = someDate.getDay();
-
-  return h + ':' + min + p + ', ' + m + ' ' + d + ', ' + y;
+const getDate = (date) => {
+  return moment(date).format('LT') + ', ' + moment(date).format('ll');
 }
 
 export const JobHistory = ({ history }) => {
