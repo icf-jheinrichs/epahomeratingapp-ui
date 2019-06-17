@@ -446,7 +446,56 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             data       : {
                 requiresAuth : false
             }
+        })
+
+        .state(STATE_NAME.SUPPORT, {
+            url        : '/support',
+            component  : 'supportPage',
+            data       : {
+                requiresAuth : false
+            }
+        })
+
+        .state(STATE_NAME.SUPPORT_USER_GUIDE, {
+            url        : '/support-user-guide',
+            component  : 'supportUserGuidePage',
+            data       : {
+                requiresAuth : false
+            }
+        })
+
+        .state(STATE_NAME.SUPPORT_USER_GUIDE_DESKTOP, {
+            url        : '/support-user-guide-desktop',
+            component  : 'supportUserGuideDesktopPage',
+            data       : {
+                requiresAuth : false
+            }
+        })
+
+        .state(STATE_NAME.SUPPORT_USER_GUIDE_MOBILE, {
+            url        : '/support-user-guide-mobile',
+            component  : 'supportUserGuideMobilePage',
+            data       : {
+                requiresAuth : false
+            }
+        })
+
+        .state(STATE_NAME.SUPPORT_USER_GUIDE_PROVIDER, {
+            url        : '/support-user-guide-provider',
+            component  : 'supportUserGuideProviderPage',
+            data       : {
+                requiresAuth : false
+            }
+        })
+
+        .state(STATE_NAME.SUPPORT_FAQ, {
+            url        : '/support-faq',
+            component  : 'supportFaqPage',
+            data       : {
+                requiresAuth : false
+            }
         });
+
 };
 
 export default epahomeratingappRoutes;

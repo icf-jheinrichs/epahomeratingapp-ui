@@ -10,6 +10,12 @@ import loginPageComponent from './login-page/login-page.component';
 import notAuthorizedPageComponent from './not-authorized-page/not-authorized-page.component';
 import ratingCompaniesPageComponent from './rating-companies-page/rating-companies-page.component';
 import privacyPolicyPageComponent from './privacy-policy-page/privacy-policy-page.component';
+import supportPageComponent from './support-page/support-page.component';
+import supportUserGuidePageComponent from './support-page/user-guide-page/user-guide-page.component';
+import supportUserGuideDesktopPageComponent from './support-page/desktop-page/desktop-page.component';
+import supportUserGuideMobilePageComponent from './support-page/mobile-page/mobile-page.component';
+import supportUserGuideProviderPageComponent from './support-page/provider-page/provider-page.component';
+import supportFaqPageComponent from './support-page/faq-page/faq-page.component';
 import providersPageComponent from './providers-page/providers-page.component';
 import userSettingsPageComponent from './user-settings-page/user-settings-page.component';
 import usersPageComponent from './users-page/users-page.component';
@@ -31,6 +37,12 @@ let servicesModule
         .component('notAuthorizedPage', notAuthorizedPageComponent)
         .component('ratingCompaniesPage', ratingCompaniesPageComponent)
         .component('privacyPolicyPage', privacyPolicyPageComponent)
+        .component('supportPage', supportPageComponent)
+        .component('supportUserGuidePage', supportUserGuidePageComponent)
+        .component('supportUserGuideDesktopPage', supportUserGuideDesktopPageComponent)
+        .component('supportUserGuideMobilePage', supportUserGuideMobilePageComponent)
+        .component('supportUserGuideProviderPage', supportUserGuideProviderPageComponent)
+        .component('supportFaqPage', supportFaqPageComponent)
         .component('providersPage', providersPageComponent)
         .component('userSettingsPage', userSettingsPageComponent)
         .component('usersPage', usersPageComponent)
