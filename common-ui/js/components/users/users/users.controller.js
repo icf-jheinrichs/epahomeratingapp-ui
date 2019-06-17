@@ -63,7 +63,7 @@ class UsersController {
             })
             .then(() => {
                 const userIndex = this.users.findIndex((user) => {
-                    return user.CognitoId === editedUserData.CognitoId;
+                    return user.C_ID === editedUserData.C_ID;
                 });
 
                 this.users[userIndex].authorizations.Rater    = editedUserData.authorizations.Rater;

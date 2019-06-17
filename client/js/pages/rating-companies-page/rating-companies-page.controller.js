@@ -29,19 +29,21 @@ class RatingCompanyPageController {
 
                 return this
                     .UserCompanyService
-                    .getRatingCompanies();
+                    .getRelatedRatingCompanies(this.company.O_ID);
+            })
+            .then((relatedCompanies) => {
+                this.relatedRatingCompanys = relatedCompanies.related;
+
+                this.pendingCompanies = relatedCompanies.pending;
+
+                return this
+                    .UserCompanyService
+                    .getAllRatingCompanies();
             })
             .then((ratingCompanies) => {
                 this.ratingCompanies            = ratingCompanies;
                 this.selectedRatingCompanyToAdd = ratingCompanies[0];
 
-                this.relatedRatingCompanys = this.company.RelatedRaterCompanys.map((O_ID) => {
-                    return _find(this.ratingCompanies, {O_ID});
-                });
-
-                this.pendingCompanies = this.company.PendingRaterCompanies.map((O_ID) => {
-                    return _find(this.ratingCompanies, {O_ID});
-                });
             });
     }
 

@@ -18,14 +18,14 @@ class ChecklistItemClass {
         $http,
         $injector,
         DialogService
-        ) {
+    ) {
         'ngInject';
 
         this.isOnApp = true;
         try {
-          this.$cordovaFile = $injector.get("$cordovaFile");
+            this.$cordovaFile = $injector.get('$cordovaFile');
         } catch (err) {
-          this.isOnApp = false;
+            this.isOnApp = false;
         }
 
         this.$log         = $log;

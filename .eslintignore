@@ -1,3 +1,8 @@
 **/*.data.js
 *karma.conf.js
 *spec.bundle.js
+
+client/js/services/pdf/pdf.util.js
+common-ui/js/components/common/file-manager/file-manager.controller.js
+common-ui/js/components/jobs/job-checklist/checklist-item/checklist-item.class.js
+client/js/services/pdf/pdf.service.js

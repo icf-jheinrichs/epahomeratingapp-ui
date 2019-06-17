@@ -1,6 +1,3 @@
-import _findIndex from 'lodash/findIndex';
-import _cloneDeep from 'lodash/cloneDeep';
-
 class UsersPageController {
     constructor ($log, $q, AuthorizationService, DialogService, UserCompanyService, UI_ENUMS) {
         'ngInject';
@@ -17,89 +14,42 @@ class UsersPageController {
     }
 
     $onInit () {
-        const C_ID = this.AuthorizationService.getUserId();
         const O_ID = this.AuthorizationService.getCurrentOrganizationId();
 
         this.organizationTypes = this.AuthorizationService.getOrganizationTypes();
 
         this
             .UserCompanyService
-            .getCompanyUsers(C_ID, O_ID)
+            .getCompany(O_ID)
+            .then((company) => {
+                this.company = company;
+
+                return this.UserCompanyService.getCompanyUsers(O_ID);
+            })
             .then((companyUsers) => {
                 this.usersData = companyUsers;
 
-                this.users = this.mergeUserUserAuthorizations(this.usersData, O_ID);
-            });
-
-        this
-            .UserCompanyService
-            .getCompany(this.AuthorizationService.getCurrentOrganizationId())
-            .then((company) => {
-                this.company = company;
+                this.users = companyUsers;
             });
     }
 
     saveUser (user) {
         return this.$q((resolve, reject) => {
-            const O_ID           = this.AuthorizationService.getCurrentOrganizationId();
-            const userCognitoId  = user.CognitoId;
-            const userIndex      = _findIndex(this.usersData, (userData) => {
-                return userData.user.CognitoId === userCognitoId;
+            const userIndex = this.users.findIndex((u) => {
+                return u.C_ID === user.C_ID;
             });
 
-            if (userIndex >= 0) {
-                const editedUser = _cloneDeep(this.usersData[userIndex]);
+            this
+                .UserCompanyService
+                .putUserAuthorization(user.authorizations)
+                .then(() => {
+                    this.users[userIndex] = user;
 
-                const userCompanyIndex = _findIndex(this.usersData[userIndex].userCompany, {O_ID : O_ID});
-
-                if (userCompanyIndex >= 0) {
-                    editedUser.userCompany[userCompanyIndex].Admin    = user.authorizations.Admin;
-                    editedUser.userCompany[userCompanyIndex].Provider = user.authorizations.Provider;
-                    editedUser.userCompany[userCompanyIndex].Rater    = user.authorizations.Rater;
-
-                    this
-                        .UserCompanyService
-                        .putUser(editedUser)
-                        .then(() => {
-                            this.usersData[userIndex] = editedUser;
-                            resolve({status : 'success'});
-                        })
-                        .catch((error) => {
-                            reject(error);
-                        });
-                } else {
-                    reject('user not associated with company');
-                }
-            } else {
-                reject('user not found');
-            }
-        });
-    }
-
-    mergeUserUserAuthorizations (userAuthorizations, O_ID) {
-        const defaultUserAuthorization = {
-            Admin           : false,
-            OrgTypeProvider : false,
-            OrgTypeRater    : false,
-            Provider        : false,
-            Rater           : false
-        };
-
-        return userAuthorizations.map((userUserCompany) => {
-            let user = Object.assign({}, userUserCompany.user);
-
-            let userAuthorizationIndex = _findIndex(userUserCompany.userCompany, {O_ID : O_ID});
-
-            if (userAuthorizationIndex >= 0) {
-                user.authorizations = userUserCompany.userCompany[userAuthorizationIndex];
-            } else {
-                user.authorizations = Object.assign({
-                    C_ID : userUserCompany.user.C_ID,
-                    O_ID : O_ID
-                }, defaultUserAuthorization);
-            }
-
-            return user;
+                    resolve({status : 'success'});
+                })
+                .catch((error) => {
+                    reject(error);
+                });
         });
     }
 }
