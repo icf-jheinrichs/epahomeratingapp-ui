@@ -16,6 +16,7 @@
 		    padding: 1em;
 		    background: $nav-stacked-background-color-defaut;
 		    cursor: pointer;
+		    font-size: $font-size-h4;
 		    &:hover {
 		      	background-color: darken($nav-stacked-background-color-defaut, 15%);
 		    }
@@ -31,7 +32,33 @@
 	  	&-content {
 		    max-height: 0;
 		    padding: 0 1em;
+		    overflow: hidden;
 		    transition: all .35s;
+		    h4 {
+		    	padding-top: $offset-default;
+		    	font-size: $font-size-large;
+		    	font-weight: bold;
+		    }
+		    a {
+		    	color: $link-color;
+		    }
+		    table {
+		    	margin-bottom: $gutter-half;
+		    }
+
+		    img {
+		    	height: 30vh;
+		    	display: block;
+		    	margin: 0 auto;
+		    }
+
+		    .img_label {
+		    	display: block;
+		    	text-align: center;
+		    	margin-bottom: $padding-large;
+		    	font-weight: bold;
+		    	font-size: $font-size-small;
+		    }
 	  	}
 	}
 
@@ -45,7 +72,7 @@
 	    	}
 	  	}
 	  	~ .accordion-content {
-	    	max-height: 100vh;
+	    	max-height: 1000vh;
 	    	padding: 1em;
 	  	}
 	}
