@@ -54,6 +54,11 @@ $navbar-height: 75px;
             padding: $gutter-half;
             width: 100%;
         }
+
+        @media all and (device-width: 768px) and (device-height: 1024px) {
+            top: -90px;
+            right: 10px;
+        }
     }
 
     form {
@@ -104,7 +109,20 @@ $navbar-height: 75px;
     }
     .login-splash-hero {
         height: 520px;
-        background: url('/img/login/bg-hero.jpg');
+        position: relative;
+        .login-splash-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: -1;
+
+            // Targeting only on iPad for long job addresses
+            @media all and (device-width: 768px) and (device-height: 1024px) {
+                width: 100vw;
+                height: 100%;
+            }
+        }
         p {
             margin-top: ($gutter-full * 2);
             font-size: $font-size-h3;
@@ -131,5 +149,4 @@ $navbar-height: 75px;
             }
         }
     }
-
 }
