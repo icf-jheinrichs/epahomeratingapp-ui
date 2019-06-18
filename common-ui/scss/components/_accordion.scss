@@ -1,0 +1,52 @@
+.accordions {
+	overflow: hidden;
+    input {
+        position: absolute;
+        opacity: 0;
+        z-index: -1;
+    }
+
+	.accordion {
+		width: 100%;
+	  	overflow: hidden;
+	  	margin-bottom: $offset-small;
+	  	&-label {
+		    display: flex;
+		    justify-content: space-between;
+		    padding: 1em;
+		    background: $nav-stacked-background-color-defaut;
+		    cursor: pointer;
+		    &:hover {
+		      	background-color: darken($nav-stacked-background-color-defaut, 15%);
+		    }
+		    &::after {
+		    	font-family: FontAwesome;
+		      	content: "\f067";
+		      	width: 1em;
+		      	height: 1em;
+		      	text-align: center;
+		      	transition: all .35s;
+		    }
+	  	}
+	  	&-content {
+		    max-height: 0;
+		    padding: 0 1em;
+		    transition: all .35s;
+	  	}
+	}
+
+	// :checked
+	input:checked {
+		+ .accordion-label {
+	    	background-color: $nav-stacked-background-color-active;
+            color: $nav-stacked-color-active;
+	    	&::after {
+	      		content: "\f067";
+	    	}
+	  	}
+	  	~ .accordion-content {
+	    	max-height: 100vh;
+	    	padding: 1em;
+	  	}
+	}
+}
