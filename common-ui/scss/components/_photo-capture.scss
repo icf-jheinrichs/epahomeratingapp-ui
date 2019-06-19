@@ -1,6 +1,7 @@
 .photo-capture {
-    height: $photo-capture-default;
-    margin: 0 $gutter-half 0 0;
+    // height: $photo-capture-default;
+    // margin: 0 $gutter-half 0 0;
+    margin: 0 0 $gutter-half 0;
     overflow: hidden;
     position: relative;
     width: $photo-capture-default;
@@ -38,6 +39,7 @@
 
 .btn-lightbox {
     padding: 0;
+    width: 100%;
 }
 
 .photo-capture-action {

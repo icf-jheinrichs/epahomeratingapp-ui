@@ -7,7 +7,8 @@ let houseElevationPhotosComponent = {
     bindings : {
         elevationPhotosVisible : '=',
         photos                 : '<',
-        onUpdateHousePhoto     : '&'
+        onUpdateHousePhoto     : '&',
+        house                  : '<'
     },
     template,
     controller,

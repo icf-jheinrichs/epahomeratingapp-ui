@@ -71,6 +71,7 @@ $gutter-half:       20px;
 $gutter-full:       ($gutter-half * 2);
 $gutter-quarter:    ($gutter-half / 2);
 
+
 $offset-default:    10px;
 $offset-small:      5px;
 $offset-large:      $gutter-half;
@@ -350,3 +351,6 @@ $grid-gutter-widths: (
 
 // Linear Progress
 $linear-progress-thickness: 10px;
+
+
+$job-checklist-header-height: 79px;

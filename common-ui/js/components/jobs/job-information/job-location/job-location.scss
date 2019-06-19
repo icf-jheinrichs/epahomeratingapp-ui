@@ -1,0 +1,36 @@
+@import '../../../../../scss/variables';
+
+.job-location-info-wrapper {
+  padding: $gutter-half;
+}
+
+.job-location-separator {
+  border: 1px solid $brand-auxillary;
+  margin: $gutter-half 0;
+}
+
+.job-location-info {
+  width: 55%;
+  margin: auto;
+}
+
+.job-location-info-block-title {
+  font-weight: bold;
+  width: 35%;
+}
+
+.job-location-info-block-content {
+  width: 65%;
+
+  span {
+    display: block;
+  }
+}
+
+.job-location-info-block {
+  margin: $gutter-quarter 0;
+}
+
+.job-location-elevation-photos-title {
+  font-weight: bold;
+}
