@@ -24,8 +24,6 @@ class JobRaterController extends Job {
         }
 
         this.assetDownloadedListener = this.$rootScope.$on(this.MESSAGING.ASSET_DOWNLOADED, (event, status) => {
-          console.warn('assetDownloadedListener POOP', status);
-
             this.$log.log(`[job.controller.js] assetDownloadedListener ${status.jobID} ${status.assetStatus.total} ${status.assetStatus.missing}`);
             if (this.job.offlineAvailable && status.jobID === this.job._id && status.assetStatus.missing > 0) {
                 this.toggleStatusClass = this.SYNC_STATUS.DOWN;
@@ -37,8 +35,6 @@ class JobRaterController extends Job {
         });
 
         this.assetBeingUploadedForJobListener = this.$rootScope.$on(this.MESSAGING.ASSET_BEING_UPLOADED_FOR_JOB, (event, status) => {
-          console.warn('assetBeingUploadedForJobListener POOP', status);
-
             this.$log.log(`[job.controller.js] assetBeingUploadedForJobListener ${status.jobID}`);
 
             if (this.job.offlineAvailable && status.jobID === this.job._id) {
@@ -50,7 +46,6 @@ class JobRaterController extends Job {
         });
 
         this.assetUploadedForJobListener = this.$rootScope.$on(this.MESSAGING.ASSET_UPLOADED_FOR_JOB, (event, status) => {
-          console.warn('assetUploadedForJobListener POOP', status);
             this.$log.log(`[job.controller.js] assetUploadedForJobListener ${status.jobID}`);
 
             this.assetUpToDate = true;
