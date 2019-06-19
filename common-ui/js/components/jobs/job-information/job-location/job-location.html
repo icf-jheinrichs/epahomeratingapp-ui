@@ -1,0 +1,33 @@
+<section class="job-location">
+  <h3 class="checklist-section-title ellipsis">Location Information: {{jobLocationCtrl.JobTitle}}
+  </h3>
+
+  <div class="job-location-info-wrapper">
+    <div class="job-location-info flex-column">
+      <div class="job-location-info-block flex-row">
+        <span class="job-location-info-block-title">Rating Type</span>
+        <span class="job-location-info-block-content">{{jobLocationCtrl.ratingType == 'energy-star' ? 'ENERGY STAR Rating' : ''}}{{jobLocationCtrl.ratingType == 'hers' ? 'HERS Rating' : ''}}</span>
+      </div>
+      <div class="job-location-info-block flex-row">
+        <span class="job-location-info-block-title">Builder</span>
+        <span class="job-location-info-block-content">{{jobLocationCtrl.house.Builder}}</span>
+      </div>
+      <div class="job-location-info-block flex-row">
+        <span class="job-location-info-block-title">Sample Set</span>
+        <span class="job-location-info-block-content">{{ jobLocationCtrl.sampleSet ? 'Yes' : 'No' }}</span>
+      </div>
+      <div class="job-location-info-block flex-row">
+        <span class="job-location-info-block-title">Location</span>
+        <span class="job-location-info-block-content" data-ng-bind-html="jobLocationCtrl.JobAddress"></span>
+      </div>
+    </div>
+    <hr class="job-location-separator "/>
+    <h4 class="job-location-elevation-photos-title">Elevation Photos</h4>
+    <house-elevation-photos
+        elevation-photos-visible="jobLocationCtrl.elevationPhotosVisible"
+        on-update-house-photo="$parent.jobInformationCtrl.handlePhotoCapture(photo, key, houseId)"
+        photos="jobLocationCtrl.elevationPhotos"
+        house="jobLocationCtrl.house">
+    </house-elevation-photos>
+  </div>
+</section>

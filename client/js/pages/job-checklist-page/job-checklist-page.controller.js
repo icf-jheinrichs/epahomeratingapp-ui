@@ -1,6 +1,4 @@
 import _findIndex from 'lodash/findIndex';
-import _find from 'lodash/find';
-
 
 class JobsChecklistPageController {
     constructor (
@@ -115,14 +113,12 @@ class JobsChecklistPageController {
 
                 return this
                     .UserCompanyService
-                    .getProviderCompanies();
+                    .getRelatedProviderCompanies(this.company.O_ID);
             })
-            .then((providerCompanies) => {
-                this.relatedProviderCompanys = this.company.RelatedProviderCompanys.map((O_ID) => {
-                    return _find(providerCompanies, {O_ID});
-                });
+            .then((relatedProviderCompanies) => {
+                this.relatedProviderCompanys = relatedProviderCompanies.related;
 
-                if (this.company.RelatedProviderCompanys.length > 0) {
+                if (this.relatedProviderCompanys.length > 0) {
                     this.hasRelatedProviderCompanies = true;
                     this
                         .selectedProviderToAdd = this.relatedProviderCompanys[0];
@@ -157,14 +153,14 @@ class JobsChecklistPageController {
             .$broadcast(this.MESSAGING.SET_TOP_PAD, 45);
     }
 
-    onGetReport() {
-      this
-        .pdfService
-        .generateBuilderNotification()
-        .then((builderNotificationObject) => {
-          this.$log.log('Output from PDF Service ');
-          this.$log.log(builderNotificationObject);
-        })
+    onGetReport () {
+        this
+            .pdfService
+            .generateBuilderNotification()
+            .then((builderNotificationObject) => {
+                this.$log.log('Output from PDF Service ');
+                this.$log.log(builderNotificationObject);
+            });
     }
 
     appendFilterParams () {
@@ -356,6 +352,20 @@ class JobsChecklistPageController {
 
     get JobTitle () {
         return this.jobTitleFilter(this.job.Primary.AddressInformation);
+    }
+
+    getJobTitle(id) {
+      let res = '';
+      if(this.houses.Primary.HouseId == id) {
+        return this.jobTitleFilter(this.houses.Primary.AddressInformation)
+      } else {
+        this.houses.Secondary.map((house) => {
+          if (house.HouseId == id) {
+            res = this.jobTitleFilter(house.AddressInformation);
+          }
+        })
+      }
+      return res;
     }
 
     canSubmitJob () {
