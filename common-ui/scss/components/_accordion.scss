@@ -1,70 +1,13 @@
-.accordions {
-	overflow: hidden;
+.accordion {
+	width: 100%;
+  	overflow: hidden;
+  	margin-bottom: $offset-small;
+
     input {
         position: absolute;
         opacity: 0;
         z-index: -1;
     }
-
-	.accordion {
-		width: 100%;
-	  	overflow: hidden;
-	  	margin-bottom: $offset-small;
-	  	&-label {
-		    display: flex;
-		    justify-content: space-between;
-		    padding: 1em;
-		    background: $nav-stacked-background-color-defaut;
-		    cursor: pointer;
-		    font-size: $font-size-h4;
-		    &:hover {
-		      	background-color: darken($nav-stacked-background-color-defaut, 15%);
-		    }
-		    &::after {
-		    	font-family: FontAwesome;
-		      	content: "\f067";
-		      	width: 1em;
-		      	height: 1em;
-		      	text-align: center;
-		      	transition: all .35s;
-		    }
-	  	}
-	  	&-content {
-		    max-height: 0;
-		    padding: 0 1em;
-		    overflow: hidden;
-		    transition: all .35s;
-		    h4 {
-		    	padding-top: $offset-default;
-		    	font-size: $font-size-large;
-		    	font-weight: bold;
-		    }
-		    a {
-		    	color: $link-color;
-		    }
-		    table {
-		    	margin-bottom: $gutter-half;
-		    }
-
-		    img {
-		    	height: 30vh;
-		    	display: block;
-		    	margin: 0 auto;
-		    	&.fullwidthImg {
-		    		width: 100%;
-		    		height: auto;
-		    	}
-		    }
-
-		    .img_label {
-		    	display: block;
-		    	text-align: center;
-		    	margin-bottom: $padding-large;
-		    	font-weight: bold;
-		    	font-size: $font-size-small;
-		    }
-	  	}
-	}
 
 	// :checked
 	input:checked {
@@ -80,4 +23,59 @@
 	    	padding: 1em;
 	  	}
 	}
+
+  	&-label {
+	    display: flex;
+	    justify-content: space-between;
+	    padding: 1em;
+	    background: $nav-stacked-background-color-defaut;
+	    cursor: pointer;
+	    font-size: $font-size-h4;
+	    &:hover {
+	      	background-color: darken($nav-stacked-background-color-defaut, 15%);
+	    }
+	    &::after {
+	    	font-family: FontAwesome;
+	      	content: "\f067";
+	      	width: 1em;
+	      	height: 1em;
+	      	text-align: center;
+	      	transition: all .35s;
+	    }
+  	}
+  	&-content {
+	    max-height: 0;
+	    padding: 0 1em;
+	    overflow: hidden;
+	    transition: all .35s;
+	    h4 {
+	    	padding-top: $offset-default;
+	    	font-size: $font-size-large;
+	    	font-weight: bold;
+	    }
+	    a {
+	    	color: $link-color;
+	    }
+	    table {
+	    	margin-bottom: $gutter-half;
+	    }
+
+	    img {
+	    	height: 30vh;
+	    	display: block;
+	    	margin: 0 auto;
+	    	&.fullwidthImg {
+	    		width: 100%;
+	    		height: auto;
+	    	}
+	    }
+
+	    .img_label {
+	    	display: block;
+	    	text-align: center;
+	    	margin-bottom: $padding-large;
+	    	font-weight: bold;
+	    	font-size: $font-size-small;
+	    }
+  	}
 }

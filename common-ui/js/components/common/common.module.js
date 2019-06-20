@@ -20,6 +20,7 @@ import PopoverModule from './popover/popover.module';
 import TypeAheadModule from './type-ahead/type-ahead.module';
 import ScrollModule from './scroll/scroll.module';
 import inputFocusDirective from './input-focus/input-focus.directive.js';
+import accordionDirective from './accordion/accordion.directive.js';
 
 const commonModule
     = angular
@@ -42,6 +43,7 @@ const commonModule
         .component('radialProgress', radialProgressComponent)
         .component('statusMessage', statusMessageComponent)
         .component('toggle', toggleComponent)
-        .directive('inputFocus', inputFocusDirective);
+        .directive('inputFocus', inputFocusDirective)
+        .directive('accordion', accordionDirective);
 
 export default commonModule;
