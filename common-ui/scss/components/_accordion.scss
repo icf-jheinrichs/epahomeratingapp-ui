@@ -50,6 +50,10 @@
 		    	height: 30vh;
 		    	display: block;
 		    	margin: 0 auto;
+		    	&.fullwidthImg {
+		    		width: 100%;
+		    		height: auto;
+		    	}
 		    }
 
 		    .img_label {
