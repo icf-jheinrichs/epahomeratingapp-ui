@@ -41,7 +41,7 @@
     "angular-sanitize": "^1.7.8",
     "angular-touch": "^1.7.8",
     "autoprefixer": "^9.6.0",
-    "aws-sdk": "^2.479.0",
+    "aws-sdk": "^2.480.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
