@@ -100,7 +100,8 @@
                         class="btn"
                         type="button"
                         data-ng-click="jobsPageCtrl.flagForReview()"
-                        data-ng-disabled="!jobsPageCtrl.bulkOperationsEnabled">
+                        data-ng-disabled="!jobsPageCtrl.bulkOperationsEnabled"
+                        data-ng-if="jobsPageCtrl.userRole.Admin">
 
                         Flag for Review
                     </button>
@@ -109,6 +110,7 @@
                         class="btn"
                         type="button"
                         data-ng-click="jobsPageCtrl.submitToProvider()"
+                        data-ng-if="jobsPageCtrl.userRole.Admin"
                         data-ng-disabled="
                             !jobsPageCtrl.bulkOperationsEnabled ||
                             !jobsPageCtrl.submitToProvierEnabled()
