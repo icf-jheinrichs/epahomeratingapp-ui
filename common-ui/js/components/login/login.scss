@@ -3,10 +3,22 @@
 $login-width:       320px;
 $login-height:      320px;
 $login-background:  $body-bg;
+$login-form-border: #81d4fa;
+$navbar-height: 75px;
+
+.login-page {
+    #admin-nav {
+        display: none;
+    }
+    #view-epahomeratingapp {
+        padding-top: 0 !important;
+    }
+}
 
 .login-container {
-    margin: $gutter-full auto 0;
-    width: $login-width;
+    &.flip-container {
+        perspective: none;
+    }
 
     .flipper,
     .login-panel,
@@ -21,6 +33,43 @@ $login-background:  $body-bg;
 
     .form-actions {
         padding: $offset-default 0 0;
+        [type=submit] {
+            display: block;
+            margin-top: $gutter-full;
+            width: 100%;
+        }
+    }
+
+    .flipper {
+        position: absolute;
+        top: -$navbar-height;
+        right: 0;
+        z-index: 1000;
+        background-color: $body-bg;
+        border: $padding-default solid $login-form-border;
+        border-top: none;
+        border-bottom-right-radius: $padding-default;
+        border-bottom-left-radius: $padding-default;
+        .login-panel {
+            padding: $gutter-half;
+            width: 100%;
+        }
+
+        @media all and (device-width: 768px) and (device-height: 1024px) {
+            top: -90px;
+            right: 10px;
+        }
+    }
+
+    form {
+        h2 {
+            color: $link-color;
+            img {
+                vertical-align: -$offset-small;
+                margin-top: -$offset-large;
+                margin-right: $offset-default;
+            }
+        }
     }
 }
 
@@ -38,4 +87,66 @@ $login-background:  $body-bg;
 
 .register-panel {
     margin: $offset-large 0;
+}
+
+.login-splash {
+    .page-container {
+        .row {
+            padding:$gutter-half 0;
+        }
+        h3 {
+            color: $brand-secondary;
+        }
+        p {
+            a {
+                color: $link-color;
+                text-decoration: underline;
+            }
+        }
+        .inline {
+            display: inline-block;
+        }
+    }
+    .login-splash-hero {
+        height: 520px;
+        position: relative;
+        .login-splash-hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: -1;
+
+            // Targeting only on iPad for long job addresses
+            @media all and (device-width: 768px) and (device-height: 1024px) {
+                width: 100vw;
+                height: 100%;
+            }
+        }
+        p {
+            margin-top: ($gutter-full * 2);
+            font-size: $font-size-h3;
+            color: $text-color-inverse;
+            line-height: $line-height-base;
+        }
+    }
+    .login-splash-img-sample {
+        display: block;
+        margin: -$gutter-full auto $gutter-full auto;
+    }
+    .login-splash-featureboxes {
+        display: flex;
+        justify-content:space-between;
+        .login-splash-featurebox {
+            box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.2);
+            min-height: 200px;
+            width: 22%;
+            border-bottom-right-radius: $padding-default;
+            border-bottom-left-radius: $padding-default;
+            img {
+                display: block;
+                margin: $gutter-half auto;
+            }
+        }
+    }
 }

@@ -70,10 +70,13 @@ class LoginController {
             this.AuthorizationService.clearState();
             this.AuthenticationService.logout();
         });
+
+        document.body.classList.add('login-page');
     }
 
     $onDestroy () {
         this.rootscopeSubscription();
+        document.body.classList.remove('login-page');
     }
 
     setAction (action) {

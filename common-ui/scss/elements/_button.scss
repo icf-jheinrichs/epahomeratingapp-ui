@@ -151,3 +151,13 @@ $btn-no-label-size: $icon-font-size + ($padding-default * 2);
         color: $text-color-muted;
     }
 }
+
+.btn-filled {
+    background-color: $brand-secondary;
+    color: $text-color-inverse;
+    border-color: $brand-secondary;
+    border-radius: $border-radius-default;
+    &:hover {
+        color: $link-color-hover;
+    }
+}

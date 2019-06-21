@@ -8,6 +8,11 @@
     margin-top: $gutter-full;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
 .flex-row {
     display: flex;
 

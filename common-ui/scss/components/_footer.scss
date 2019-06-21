@@ -1,6 +1,10 @@
 #site-footer {
-    background-color: $brand-auxillary;
+    background-color: $brand-alternate;
     height: 45px;
     margin-top: -45px;
     padding: 10px 0px;
+    a {
+		color: $text-color-inverse;
+		text-decoration: underline;
+    }
 }
