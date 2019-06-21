@@ -71,7 +71,7 @@
     "karma-mocha-reporter": "^2.2.5",
     "karma-phantomjs-launcher": "^1.0.4",
     "karma-webpack": "^3.0.5",
-    "leasot": "^7.5.0",
+    "leasot": "^7.4.0",
     "mocha": "^6.1.4",
     "ng-annotate-loader": "^0.6.1",
     "node-libs-browser": "^2.2.1",
