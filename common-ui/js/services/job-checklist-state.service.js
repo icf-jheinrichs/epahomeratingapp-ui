@@ -192,9 +192,14 @@ class JobChecklistState {
           fuel: [],
           waterHeater: [],
           hvac: [],
+          externalStatic : {
+            return: '',
+            supply: ''
+          },
+          commissionPhoto: '',
         },
         checklist: [],
-        history: []
+        history: [],
       };
 
       data.home.type = this.jobDataHomePerformance[this.currentHouse.HouseId].ChecklistItems['BE 1'].BuildingSummary[0].ResidentialFacilityType;
@@ -230,6 +235,30 @@ class JobChecklistState {
       })();
 
       data.history = this.JobHistoryService.parseHistory(this.job.History);
+      data.utility.externalStatic.return = (() => {
+        let item = this.jobDataResponse.ChecklistItems.Tests.Final['5.2-A'];
+        if('ItemData' in item) {
+          if('ReturnSideExternalStaticPressure' in item.ItemData) {
+            return item.ItemData.ReturnSideExternalStaticPressure;
+          }
+        }
+      })();
+      data.utility.externalStatic.supply = (() => {
+        let item = this.jobDataResponse.ChecklistItems.Tests.Final['5.2-A'];
+        if('ItemData' in item) {
+          if('SupplySideExternalStaticPressure' in item.ItemData) {
+            return item.ItemData.SupplySideExternalStaticPressure;
+          }
+        }
+      })();
+      data.utility.commissionPhoto = (() => {
+        let item = this.jobDataResponse.ChecklistItems.HvacWater.Final['5.3-A'];
+        if('ItemData' in item) {
+          if('Photo' in item.ItemData) {
+            return item.ItemData.Photo;
+          }
+        }
+      })();
 
       const checklistPrePromise = [];
       const ids = (() => {

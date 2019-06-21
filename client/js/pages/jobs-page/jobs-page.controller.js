@@ -47,32 +47,34 @@ class JobsPageController extends JobsPage {
 
     flagForReview () {
         //TODO consider moving this to the jobs service since this is similar to the flagJobForReview method in job-checklist-state.service
-        const markedJobs = this.jobsHandlers.getSelectedJobs();
-        let submitJobs   = [];
+        if(this.userRole.Admin) {
+          const markedJobs = this.jobsHandlers.getSelectedJobs();
+          let submitJobs   = [];
 
-        markedJobs.forEach((index) => {
-            let job = this.viewJobs[index];
-            if (job.Status === this.JOB_STATUS.COMPLETED && job.InternalReview === false) {
-                // TODO - Pop error message to user
-                job.InternalReview = true;
+          markedJobs.forEach((index) => {
+              let job = this.viewJobs[index];
+              if (job.Status === this.JOB_STATUS.COMPLETED && job.InternalReview === false) {
+                  // TODO - Pop error message to user
+                  job.InternalReview = true;
 
-                job
-                    .History
-                    .push(this.formatHistoryRecord({
-                        Category    : this.HISTORY.CATEGORIES.STATUS,
-                        Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.INTERNAL_REVIEW
-                    }));
+                  job
+                      .History
+                      .push(this.formatHistoryRecord({
+                          Category    : this.HISTORY.CATEGORIES.STATUS,
+                          Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.INTERNAL_REVIEW
+                      }));
 
-                submitJobs.push(this.JobsService.put(job));
-            }
-        });
+                  submitJobs.push(this.JobsService.put(job));
+              }
+          });
 
-        this
-            .$q
-            .all(submitJobs)
-            .then(() => {
-                this.$state.transitionTo(this.$state.current, this.$stateParams, {reload : true, inherit : true, notify : true});
-            });
+          this
+              .$q
+              .all(submitJobs)
+              .then(() => {
+                  this.$state.transitionTo(this.$state.current, this.$stateParams, {reload : true, inherit : true, notify : true});
+              });
+        }
     }
 
     archiveDeleteEnabled () {
@@ -101,43 +103,46 @@ class JobsPageController extends JobsPage {
 
     submitToProvider () {
         //TODO consider moving this to the jobs service since this is similar to the submitJob method in job-checklist-state.service
-        const markedJobs = this.jobsHandlers.getSelectedJobs();
-        this.marked      = markedJobs.length;
 
-        this
-            .DialogService
-            .openDialog(this.DIALOG.SUBMIT_TO_PROVIDER)
-            .then((confirmation) => {
-                let submitJobs = [];
-                if (confirmation) {
-                    markedJobs.forEach((index) => {
-                        let job = this.viewJobs[index];
-                        if (job.Status === this.JOB_STATUS.COMPLETED) {
-                            // TODO - Pop error message to user
-                            job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
-                            job.InternalReview  = false;
-                            job.ProviderCompany = this.selectedProviderToAdd.O_ID;
+        if(this.userRole.Admin) {
+          const markedJobs = this.jobsHandlers.getSelectedJobs();
+          this.marked      = markedJobs.length;
 
-                            job
-                                .History
-                                .push(this.formatHistoryRecord({
-                                    Category    : this.HISTORY.CATEGORIES.STATUS,
-                                    Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.SUBMITTED_TO_PROVIDER,
-                                    Data        : this.selectedProviderToAdd.Name
-                                }));
+          this
+              .DialogService
+              .openDialog(this.DIALOG.SUBMIT_TO_PROVIDER)
+              .then((confirmation) => {
+                  let submitJobs = [];
+                  if (confirmation) {
+                      markedJobs.forEach((index) => {
+                          let job = this.viewJobs[index];
+                          if (job.Status === this.JOB_STATUS.COMPLETED) {
+                              // TODO - Pop error message to user
+                              job.Status          = this.JOB_STATUS.SUBMITTED_TO_PROVIDER;
+                              job.InternalReview  = false;
+                              job.ProviderCompany = this.selectedProviderToAdd.O_ID;
 
-                            submitJobs.push(this.JobsService.put(job));
-                        }
-                    });
+                              job
+                                  .History
+                                  .push(this.formatHistoryRecord({
+                                      Category    : this.HISTORY.CATEGORIES.STATUS,
+                                      Subcategory : this.HISTORY.SUBCATEGORIES.STATUS.SUBMITTED_TO_PROVIDER,
+                                      Data        : this.selectedProviderToAdd.Name
+                                  }));
 
-                    this
-                        .$q
-                        .all(submitJobs)
-                        .then(() => {
-                            this.$state.transitionTo(this.$state.current, this.$stateParams, {reload : true, inherit : true, notify : true});
-                        });
-                }
-            });
+                              submitJobs.push(this.JobsService.put(job));
+                          }
+                      });
+
+                      this
+                          .$q
+                          .all(submitJobs)
+                          .then(() => {
+                              this.$state.transitionTo(this.$state.current, this.$stateParams, {reload : true, inherit : true, notify : true});
+                          });
+                  }
+              });
+        }
     }
 
     delete () {

@@ -27,6 +27,10 @@ export const EMPTY_PDF_INPUTS = {
         lotNo         : '',
         manualid      : '',
         merged        : '',
+        city          : '',
+        state         : '',
+        street        : '',
+        zip           : '',
     },
     otherHomes: [],
     house : {
@@ -42,7 +46,19 @@ export const EMPTY_PDF_INPUTS = {
         inspectionDate     : '',
         createdDate        : '',
     },
-    archival: {},
+    archive: {
+      checklist : {},
+      home : {
+        export : '',
+        foundation: '',
+        model: '',
+        sqfoot: '',
+        subplan: '',
+        type: ''
+      },
+      history: [],
+      utility: {}
+    },
     checklist : [],
 };
 
@@ -185,6 +201,28 @@ const getDate = (date) => {
 }
 
 export const JobHistory = ({ history }) => {
+  let getCenter = (coordinates) => {
+      const bound = new google.maps.LatLngBounds();
+
+      coordinates.forEach((coord) => {
+          bound.extend(new google.maps.LatLng({lat : coord.lat, lng : coord.lng}));
+      });
+
+      return {
+          lat : bound.getCenter().lat(),
+          lng : bound.getCenter().lng()
+      };
+  }
+  let getMapUrl = (coordinates) => {
+    if(coordinates.length > 1) {
+      return getCenter(coordinates);
+    } else if(coordinates.length == 1) {
+      return {lat : coordinates[0].lat, lng : coordinates[0].lng}
+    } else {
+      return null
+    }
+  }
+
   return history.map((change) => {
     return {
       margin: [0,3,0,3],
@@ -202,6 +240,15 @@ export const JobHistory = ({ history }) => {
               }]
             } else {
               return ['']
+            }
+          })(),
+          (() => {
+            let center = getMapUrl(change.map.coordinates);
+            if(center == null) {
+              return ['']
+            } else {
+              let googleMapLink = `https://www.google.com/maps/search/?api=1&query=${center.lat},${center.lng}`
+              return [{ text: 'Lat: ' + center.lat + ', Long: ' + center.lng, link: googleMapLink, decoration: 'underline', color: 'blue' }]
             }
           })()
         ]
@@ -421,7 +468,7 @@ export const Utility = ({ utility }) => {
         table: {
         widths: ['40%', '30%', '30%'],
         body: [
-          [{ text: 'Utility Information', bold: true, colSpan: 3}, '', ''],
+          [{ text: 'Utility Information', fontSize: 12, bold: true, colSpan: 3, margin: [0,0,0,5]}, '', ''],
           [{ text: 'Fuel Type', bold: true}, { text: 'Utility Co. Name', bold: true}, { text: 'Meter ID', bold: true}],
           ...(() => {
             if(Array.isArray(utility.fuel)) {
@@ -438,7 +485,7 @@ export const Utility = ({ utility }) => {
               return [['-', '-', '-']]
             }
           })(),
-          [{ text: 'Water Heaters', bold: true, colSpan: 3, margin: [0,10,0,0]}, '', ''],
+          [{ text: 'Water Heaters', fontSize: 12, bold: true, colSpan: 3, margin: [0,15,0,5]}, '', ''],
           [{ text: 'Manufacturer', bold: true}, { text: 'Model', bold: true}, { text: 'Model', bold: true}],
           ...(() => {
             if(Array.isArray(utility.waterHeater)) {
@@ -455,7 +502,7 @@ export const Utility = ({ utility }) => {
               return [['-', '-', '-']]
             }
           })(),
-          [{ text: 'HVAC Equipment', bold: true, colSpan: 3, margin: [0,10,0,0]}, '', ''],
+          [{ text: 'HVAC Equipment', fontSize: 12, bold: true, colSpan: 3, margin: [0,15,0,5]}, '', ''],
           [{ text: 'Furnace', bold: true, colSpan: 3}, '', ''],
           [{ text: 'Manufacturer', bold: true}, { text: 'Model', bold: true}, { text: 'Model', bold: true}],
           ...(() => {
@@ -551,6 +598,24 @@ export const Utility = ({ utility }) => {
               return [['-', '-', '-']]
             }
           })(),
+          [{ text: 'External Static Pressure', fontSize: 12, bold: true, colSpan: 3, margin: [0,15,0,5]}, '', ''],
+          [{ text: 'Return-Side External Static Pressure', bold: true }, { text: 'Supply Side External Static Pressure', bold: true, colSpan: 2 }, ''],
+          (() => {
+            let returnSide = typeof utility.externalStatic.return == 'number' ? utility.externalStatic.return : '-';
+            let supplySide = typeof utility.externalStatic.supply == 'number' ? utility.externalStatic.supply : '-';
+
+            return [returnSide, supplySide, '']
+          })(),
+          ...(() => {
+            let photo = '-';
+            if(!_isEmpty(utility.commissionPhoto)) {
+              photo = { image: utility.commissionPhoto, width: 400, height: 400, colSpan: 3 };
+            }
+            return [
+              [{ text: 'HVAC Commissioning Checklist', headlineLevel: 9, fontSize: 12, bold: true, colSpan: 3, margin: [0,10,0,3]}, '', ''],
+              [photo, '', '']
+            ]
+          })()
         ]
       },
       layout: 'noBorders'
@@ -638,10 +703,10 @@ export const Header = ({ home, builder, ratingOrg, rater, otherHomes }) => {
               { text: "Rating Organization:", bold: true, margin: MARGIN },
               { text: ratingOrg, margin: MARGIN },
             ],
-            [
-              { text: "Rater:", bold: true, margin: MARGIN },
-              { text: rater, margin: MARGIN },
-            ],
+            // [
+            //   { text: "Rater:", bold: true, margin: MARGIN },
+            //   { text: rater, margin: MARGIN },
+            // ],
             (() => {
               if(_isEmpty(otherHomes)) {
                 return ['', '']
