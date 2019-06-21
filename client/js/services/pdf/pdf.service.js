@@ -76,7 +76,7 @@ const MAX_MUST_CORRECTS = 100;
 
 
 class PDFService {
-    constructor ($q, $log, $stateParams, DisplayLogicDigestService, JobDataResponseService, JobChecklistStateService, AuthorizationService, UserCompanyService, AuthenticationService) {
+    constructor ($q, $log, $stateParams, DisplayLogicDigestService, JobDataResponseService, JobChecklistStateService, AuthorizationService, UserCompanyService, AuthenticationService, SanitizeService) {
         'ngInject';
 
         this.$q = $q;
@@ -88,7 +88,23 @@ class PDFService {
         this.AuthorizationService = AuthorizationService;
         this.UserCompanyService = UserCompanyService;
         this.AuthenticationService = AuthenticationService;
+        this.SanitizeService = SanitizeService;
         this.pdfInputs = util.EMPTY_PDF_INPUTS;
+    }
+
+    getPdfName() {
+      let exportName = this.pdfInputs.archive.home.export,
+          res = '';
+      if(!_isEmpty(exportName)) {
+        res = exportName;
+      } else {
+        let plan = this.pdfInputs.archive.home.model,
+            loc = this.pdfInputs.address.street + this.pdfInputs.address.city + this.pdfInputs.address.state + this.pdfInputs.address.zip,
+            type = 'ArchivalReport';
+
+        res = plan + loc + '_' + type;
+      }
+      return res.replace(/\s/g, '-');
     }
 
     getHouseImages() {
@@ -144,7 +160,6 @@ class PDFService {
           const house   = this.JobChecklistStateService.getHouse(job.Primary.HouseId);
           const hpd     = this.JobChecklistStateService.jobDataHomePerformance[this.JobChecklistStateService.currentHouse.HouseId];
           const ai      = house.AddressInformation;
-          console.warn('ai', ai);
 
           const address = _isEmpty(ai.Address1) ? '' : ai.Address1;
           const city    = _isEmpty(ai.CityMunicipality) ? '' : ai.CityMunicipality;
@@ -153,7 +168,6 @@ class PDFService {
 
           this.pdfInputs.otherHomes = [];
           job.Secondary.map((house) => {
-            console.warn('house secondary', house);
             let oai = house.AddressInformation;
             let otherHome = {
               houseId: house.HouseId,
@@ -172,6 +186,12 @@ class PDFService {
           this.pdfInputs.rater.email              = user.email;
           this.pdfInputs.builder.name             = house.Builder;
           this.pdfInputs.house.model              = _isEmpty(house.HousePlan.Name) ? '' : house.HousePlan.Name;
+          this.pdfInputs.address                  = {
+            street: address,
+            city: city,
+            state: state,
+            zip: zipcode
+          };
           this.pdfInputs.address.lotNo            = _isEmpty(ai.LotNo) ? '' : ai.LotNo;
 
           this.pdfInputs.address.manualid = _isEmpty(ai.ManualId) ? '' : ai.ManualId;
@@ -202,7 +222,6 @@ class PDFService {
           //   left: (_isEmpty(houseImages[2]) ? null : houseImages[2]),
           //   right: (_isEmpty(houseImages[3]) ? null : houseImages[3])
           // };
-          console.warn('HOUSE IMAGES', houseImages, this.pdfInputs.images);
 
           return this.$q.all({
               company : this.UserCompanyService.getCompany(
@@ -283,6 +302,14 @@ class PDFService {
         })
         .then((verifyIcon) => {
           this.pdfInputs.icons.verify = verifyIcon;
+          if(!_isEmpty(this.pdfInputs.archive.utility.commissionPhoto)) {
+            return getDataUri(BASE_S3_URL + this.pdfInputs.archive.utility.commissionPhoto);
+          }
+        })
+        .then((dataUri) => {
+          if(!_isEmpty(dataUri)) {
+            this.pdfInputs.archive.utility.commissionPhoto = dataUri;
+          }
         })
         .then(() => {
           // generate PDF here.
@@ -294,7 +321,7 @@ class PDFService {
           PDFMake.vfs = pdfFonts.pdfMake.vfs;
           const pdfDocGenerator = PDFMake.createPdf(pdf);
 
-          pdfDocGenerator.download();
+          pdfDocGenerator.download(this.getPdfName());
 
           this.$log.log('Generated PDF: ', pdfDocGenerator);
           // pdfDocGenerator.getBuffer((blob) => {
@@ -337,7 +364,7 @@ class PDFService {
               util.ChecklistList({checklist: inputs.archive.checklist, ratingType: 'hers', icons: inputs.icons, category: 'Tests'}),
               util.ChecklistList({checklist: inputs.archive.checklist, ratingType: 'hers', icons: inputs.icons, category: 'HvacWater'}),
               util.ChecklistList({checklist: inputs.archive.checklist, ratingType: 'hers', icons: inputs.icons, category: 'PlugLoadsLightingPv'}),
-              util.SectionHeader({ text: "ENERGYSTAR Rater Field Checklist" }),
+              util.SectionHeader({ text: "ENERGY STAR Rater Field Checklist" }),
               util.ChecklistList({checklist: inputs.archive.checklist, ratingType: 'energy-star', icons: inputs.icons, category: 'Walls'}),
               util.ChecklistList({checklist: inputs.archive.checklist, ratingType: 'energy-star', icons: inputs.icons, category: 'CeilingsRoofs'}),
               util.ChecklistList({checklist: inputs.archive.checklist, ratingType: 'energy-star', icons: inputs.icons, category: 'FoundationFloors'}),
@@ -352,9 +379,7 @@ class PDFService {
               util.JobHistory({ history: inputs.archive.history })
           ],
           pageBreakBefore : function (currentNode, followingNodesOnPage, nodesOnNextPage, previousNodesOnPage) {
-            if(currentNode.headlineLevel !== 1 && ((previousNodesOnPage.length > 0 && currentNode.pageNumbers.length > 1  && currentNode.stack !== true) || (currentNode.headlineLevel == 2 && followingNodesOnPage.length <= 4)  || (currentNode.headlineLevel == 3 && followingNodesOnPage.length <= 6))) {
-              console.warn('poop', currentNode);
-            }
+
               /*
               CONDITIONS:
                 {currentNode.stack !== true}
@@ -366,7 +391,7 @@ class PDFService {
                 {previousNodesOnPage.length > 0}
                   - Prevent blank pages
               */
-              return currentNode.headlineLevel !== 1 && ((previousNodesOnPage.length > 0 && currentNode.pageNumbers.length > 1  && currentNode.stack !== true) || (currentNode.headlineLevel == 2 && followingNodesOnPage.length <= 4)  || (currentNode.headlineLevel == 3 && followingNodesOnPage.length <= 6));
+              return currentNode.headlineLevel !== 1 && ((previousNodesOnPage.length > 0 && currentNode.pageNumbers.length > 1  && currentNode.stack !== true) || (currentNode.headlineLevel == 2 && followingNodesOnPage.length <= 4)  || (currentNode.headlineLevel == 3 && followingNodesOnPage.length <= 6) || (currentNode.headlineLevel == 9 && followingNodesOnPage.length <= 1));
           },
           styles  : util.Styles,
           defaultStyle : {
