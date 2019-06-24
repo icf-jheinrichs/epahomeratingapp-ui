@@ -4,6 +4,7 @@
             <th>Name</th>
             <th>Email</th>
             <th class="column-rater-id" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">Rater ID</th>
+            <th class="column-rater-id" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">User ID</th>
             <th class="column-authorization-checkbox" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">Rater</th>
             <th class="column-eligibility" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">Credentials</th>
             <th class="column-authorization-checkbox" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">Rater<br />Admin</th>
@@ -18,6 +19,8 @@
             <td class="ellipsis">{{::user.Email}}</td>
 
             <td class="column-rater-id" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">{{::user.RESNET_ID}}</td>
+
+            <td class="column-rater-id" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">{{::user.C_ID}}</td>
 
             <td class="column-authorization-checkbox" data-ng-if="usersCtrl.organizaitonTypes.RaterOrg">
                 <i class="fa fa-check-circle-o has-access" aria-label="User has rater status" data-ng-if="user.authorizations.Rater"></i>
