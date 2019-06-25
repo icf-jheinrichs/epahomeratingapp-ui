@@ -1,7 +1,7 @@
 @import '../../../scss/variables';
 
 $login-width:       320px;
-$login-height:      320px;
+$login-height:      350px;
 $login-background:  $body-bg;
 $login-form-border: #81d4fa;
 $navbar-height: 75px;
@@ -114,6 +114,7 @@ $navbar-height: 75px;
             position: absolute;
             top: 0;
             left: 0;
+            height: 100%;
             width: 100%;
             z-index: -1;
 
@@ -128,6 +129,11 @@ $navbar-height: 75px;
             font-size: $font-size-h3;
             color: $text-color-inverse;
             line-height: $line-height-base;
+        }
+        @media screen and (max-width: $screen-lg) {
+            a.btn {
+                display: none;
+            }
         }
     }
     .login-splash-img-sample {
