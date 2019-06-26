@@ -1,26 +1,26 @@
 class AnalyticsService {
-    constructor ($window) {
+    constructor ($window, NODE_ENV) {
         'ngInject';
-
+        this.NODE_ENV = NODE_ENV;
         this.$window = $window;
     }
 
     trackPageView (page) {
-        if (this.$window.dataLayer) {
-            this.$window.dataLayer.push({
-                'event'            : 'VirtualPageview',
-                'virtualPageURL'   : page
+        if (this.$window.ga && this.NODE_ENV === 'production') {
+            this.$window.ga('send', {
+                hitType            : 'pageview',
+                page               : page
             });
         }
     }
 
     trackEvent (event) {
-        if (this.$window.dataLayer) {
-            this.$window.dataLayer.push({
-                'event'  : event.Category,
-                'action' : event.Action,
-                'label'  : event.Label,
-                'value'  : event.Value
+        if (this.$window.ga && this.NODE_ENV === 'production') {
+            this.$window.ga('send', {
+                hitType       : 'event',
+                eventCategory : event.Category,
+                eventAction   : event.Action,
+                eventLabel    : event.Label,
             });
         }
     }
