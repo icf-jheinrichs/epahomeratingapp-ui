@@ -22,6 +22,45 @@ class S3Service {
         this.S3_CONFIG             = S3_CONFIG;
     }
 
+    get (path) {
+      const company  = this.AuthorizationService.getCurrentOrganizationId();
+
+      const id_token   = this.AuthenticationService.getUser().id_token;
+      const bucketName = `${this.S3_CONFIG.S3_BUCKET_NAME_PREFIX}-rating-company`;
+
+      let cognitoCredentials = new AWS.CognitoIdentityCredentials({
+          IdentityPoolId : this.S3_CONFIG.IDENTITY_POOL_ID,
+          Logins         : {[`cognito-idp.${this.COGNITO.REGION}.amazonaws.com/${this.COGNITO.POOL_ID}`] : id_token},
+          region         : this.S3_CONFIG.BUCKET_REGION
+      });
+
+      AWS.config.update({
+          region      : this.S3_CONFIG.BUCKET_REGION,
+          credentials : cognitoCredentials
+      });
+
+      let s3 = new AWS.S3({
+          apiVersion : '2006-03-01',
+          params     : {Bucket : bucketName}
+      });
+
+      let getParams = {
+        Bucket: bucketName,
+        Key: path
+      }
+
+      return this.$q((resolve, reject) => {
+        s3.getObject(getParams, (err, data) => {
+          if(err) {
+            reject(err);
+          } else {
+            resolve(data)
+          }
+        })
+      })
+
+    }
+
     upload (path, file, token) {
         const company  = this.AuthorizationService.getCurrentOrganizationId();
         const filename = uuidv4();

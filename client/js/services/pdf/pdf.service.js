@@ -5,43 +5,28 @@ import moment from 'moment';
 import * as util from './pdf.util.js';
 import { BASE_IMAGE_URL, BASE_S3_URL } from '../../epahomeratingapp.config';
 
-
-const getDataUri = (url) => {
-  return new Promise((res, rej) => {
-    var image = new Image();
-    image.crossOrigin = 'Anonymous';
-    image.onload = function () {
-        var canvas = document.createElement('canvas');
-        canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
-        canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
-        canvas.getContext('2d').drawImage(this, 0, 0);
-        res(canvas.toDataURL('image/png'));
-    };
-    image.onerror = function() {
-      this.src = '/img/imageMissing.png';
-    }
-    image.src = url;
-  })
-}
-
 class Comment {
-    constructor (photoUrl = '', comment = '', timestamp = '', username = '') { // eslint-disable-line no-empty-function
-        this.photoUrl         = _isEmpty(photoUrl) ? '' : BASE_S3_URL + photoUrl;
+    constructor (photoUrl = '', comment = '', timestamp = '', username = '', S3Service) { // eslint-disable-line no-empty-function
+        this.photoUrl         = _isEmpty(photoUrl) ? '' : photoUrl;
         this.comment          = comment;
         this.timestamp        = timestamp;
         this.username         = username;
         // this.cordovaFile      = cordovaFile;
         this.photoUri         = '';
+        this.S3Service        = S3Service;
     }
     getPhotoUri () {
       return new Promise((res, rej) => {
           if (_isEmpty(this.photoUrl)) {
               res(this);
           } else {
-            getDataUri(this.photoUrl)
-              .then((dataUri) => {
-                this.photoUri = dataUri;
+            this.S3Service.get(this.photoUrl)
+              .then((response) => {
+                this.photoUri = 'data:image/jpeg;base64,' + new Buffer(response.Body, 'binary').toString('base64')
                 res(this);
+              })
+              .catch((err) => {
+                rej(err);
               })
           }
       });
@@ -76,7 +61,7 @@ const MAX_MUST_CORRECTS = 100;
 
 
 class PDFService {
-    constructor ($q, $log, $stateParams, DisplayLogicDigestService, JobDataResponseService, JobChecklistStateService, AuthorizationService, UserCompanyService, AuthenticationService, SanitizeService) {
+    constructor ($q, $log, $stateParams, DisplayLogicDigestService, JobDataResponseService, JobChecklistStateService, AuthorizationService, UserCompanyService, AuthenticationService, SanitizeService, S3Service) {
         'ngInject';
 
         this.$q = $q;
@@ -90,6 +75,7 @@ class PDFService {
         this.AuthenticationService = AuthenticationService;
         this.SanitizeService = SanitizeService;
         this.pdfInputs = util.EMPTY_PDF_INPUTS;
+        this.S3Service = S3Service;
     }
 
     getPdfName() {
@@ -248,6 +234,7 @@ class PDFService {
               res(checklistItems.map((checklistItem) => {
                   // const $cordovaFile = this.$cordovaFile;
                   // const dataDirectory = cordova.file.dataDirectory;
+                  const S3Service = this.S3Service;
                   const _checklistItem = new ChecklistItem(
                       checklistItem.element,
                       checklistItem.ResponseHouseId,
@@ -258,6 +245,7 @@ class PDFService {
                               comment.Comment,
                               comment.Timestamp,
                               `${comment.User.firstName} ${comment.User.lastName}`,
+                              S3Service
                           );
                       }),
                       checklistItem.Response[0],
