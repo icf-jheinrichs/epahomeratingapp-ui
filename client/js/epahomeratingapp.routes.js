@@ -340,6 +340,13 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             resolve    : {
               job: (JobChecklistStateService) => {
                   return JobChecklistStateService.getJob();
+              },
+              jobChecklistState : (JobChecklistStateService, $stateParams) => {
+                  let jobChecklistStatePromise
+                      = JobChecklistStateService
+                          .setJobHouseState($stateParams.id, $stateParams.houseId);
+
+                  return jobChecklistStatePromise;
               }
             }
         })
@@ -406,6 +413,13 @@ let epahomeratingappRoutes = function epahomeratingappRoutes ($stateProvider, $u
             resolve    : {
               job: (JobChecklistStateService) => {
                   return JobChecklistStateService.getJob();
+              },
+              jobChecklistState : (JobChecklistStateService, $stateParams) => {
+                  let jobChecklistStatePromise
+                      = JobChecklistStateService
+                          .setJobHouseState($stateParams.id, $stateParams.houseId);
+
+                  return jobChecklistStatePromise;
               }
             }
         })
