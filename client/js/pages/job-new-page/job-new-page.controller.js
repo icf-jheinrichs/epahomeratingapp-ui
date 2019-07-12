@@ -144,7 +144,6 @@ class JobsNewPageController {
             .all(fileUploads)
             .then((results) => {
                 this.updateJobFileData(results, job);
-
                 return this.JobsService.post(job);
             })
             .then(response => {
@@ -178,20 +177,36 @@ class JobsNewPageController {
             .then((results) => {
                 this.updateJobFileData(results, job);
 
-                return this.uploadLocalHousePlans(job.Primary.HousePlan);
+                return this.$q.all([
+                  this.uploadLocalHousePlans(job.Primary.HousePlan),
+                  ...job.Secondary.map(job => {
+                    return this.uploadLocalHousePlans(job.HousePlan)
+                  })
+                ])
             })
             .then(response => {
-                let HousePlan = [];
-                for (let index in response) {
+                let JobPlans = [];
+
+                response.map((house) => {
+                  let HousePlan = [];
+                  for (let index in house) {
                     HousePlan.push({
-                        _id  : response[index].data.docID,
-                        Name : response[index].data.buildingName
-                    });
+                      _id : house[index].data.docID,
+                      Name: house[index].data.buildingName
+                    })
+                  }
+                  JobPlans.push(HousePlan);
+                })
+
+                for (let index in JobPlans) {
+                  if(index == 0) {
+                    job.Primary.HousePlan = JobPlans[index];
+                  } else {
+                    job.Secondary[index - 1].HousePlan = JobPlans[index];
+                  }
                 }
 
-                job.Primary.HousePlan = HousePlan;
                 this.$log.log('Posting Job');
-
                 return this.JobsService.post(job);
             })
             .then(response => {
