@@ -369,7 +369,7 @@ class JobsChecklistPageController {
     }
 
     canSubmitJob () {
-        return this.job.Status === this.JOB_STATUS.COMPLETED;
+        return this.userAuthorization.Admin && this.job.Status === this.JOB_STATUS.COMPLETED;
     }
 
     canCompleteJob () {

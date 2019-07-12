@@ -201,7 +201,6 @@
                     Edit Profile
                 </a>
                 <a
-                    data-ng-if="jobsChecklistPageCtrl.role==='admin'"
                     data-ng-click="jobsChecklistPageCtrl.flagJobForReview()"
                     data-ng-disabled="!jobsChecklistPageCtrl.canFlagForReview"
                     data-ng-class="{ 'disabled' : !jobsChecklistPageCtrl.canFlagForReview }"
