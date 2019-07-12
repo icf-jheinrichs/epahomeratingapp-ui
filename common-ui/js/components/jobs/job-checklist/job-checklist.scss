@@ -207,15 +207,15 @@
   width: 100%;
   margin: 0;
 
+  [class~='job-selection-dropdown-item']:last-of-type {
+    border: none;
+  }
+
   .job-selection-dropdown-item {
     background-color: #f5f5f5;
     padding: 10px;
     border-bottom: 1px solid #cbc9cc;
     color: #262b2f;
-
-    &.last-item {
-      border: none;
-    }
 
     span {
       display: block;

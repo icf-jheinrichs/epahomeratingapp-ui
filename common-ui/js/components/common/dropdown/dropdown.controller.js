@@ -93,6 +93,10 @@ class DropdownController {
 
     setMenuElement (element) {
         this.menuElement = element;
+        this.menuElement
+          .on('click', () => {
+              this.toggle();
+          });
     }
 }
 
