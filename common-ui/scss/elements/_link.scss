@@ -1,3 +1,10 @@
 .clickable-link {
   cursor: pointer;
 }
+
+.link-colored {
+	color: $link-color;
+	&:hover {
+		color: $link-color;
+	}
+}
