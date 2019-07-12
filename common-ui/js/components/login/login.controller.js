@@ -1,3 +1,8 @@
+const STATUS_MESSAGE = {
+  SYSTEM_ERROR: 'There was a system error. Please contact RaterPRO support.',
+  AUTHORIZATION_ERROR: 'You are not authorized to use this system.'
+}
+
 class LoginController {
     constructor (
         $log,
@@ -52,17 +57,17 @@ class LoginController {
             .catch((error) => {
                 this.$log.error(`[login.controller.js $onInit login] ${JSON.stringify(error)}`);
                 this.isBusy = {busy : false};
-                this.statusMessage = 'There was a system error. Please contact RaterPRO support.';
+                this.statusMessage = STATUS_MESSAGE.SYSTEM_ERROR;
                 return;
             });
 
         this.rootscopeSubscription = this.$transitions.onError({from : 'login'}, (transition) => {
             try {
                 this.$log.error(`[login.controller.js $onInit $transition onError try] ${JSON.stringify(transition._error.detail)}`);
-                this.statusMessage = transition._error.detail.message || 'There was a system error. Please contact RaterPRO support.';
+                this.statusMessage = transition._error.detail.message || STATUS_MESSAGE.SYSTEM_ERROR;
             } catch (error) {
                 this.$log.error(`[login.controller.js $onInit $transition onError catch] ${JSON.stringify(error)}`);
-                this.statusMessage = 'There was a system error. Please contact RaterPRO support.';
+                this.statusMessage = STATUS_MESSAGE.SYSTEM_ERROR;
             }
 
             this.isBusy = {busy : false};
@@ -142,13 +147,14 @@ class LoginController {
                         this.returnToOriginalState();
                     } else {
                         this.notAuthorized = true;
-                        this.statusMessage = 'You are not authorized to use this system.';
+                        this.statusMessage = STATUS_MESSAGE.AUTHORIZATION_ERROR;
                         this.AuthenticationService.logout();
                         reject({status : 'not authorized'});
                     }
                 })
                 .catch((error) => {
                     this.$log.error(`[login.controller.js login] ${JSON.stringify(error)}`);
+
                     this.notAuthorized = true;
                     this.AuthenticationService.logout();
                     reject(error);
@@ -161,7 +167,8 @@ class LoginController {
         this.action        = 'login';
 
         this.isBusy = {busy : false};
-        this.statusMessage = '';
+
+        // this.statusMessage = '';
     }
 
     resetPassword (user) {
