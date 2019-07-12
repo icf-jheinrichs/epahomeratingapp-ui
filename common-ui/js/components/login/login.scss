@@ -102,6 +102,10 @@ $navbar-height: 75px;
 }
 
 .login-splash {
+    .h3 {
+        font-weight: normal;
+        margin-bottom: $offset-large;
+    }
     .page-container {
         .row {
             padding:$gutter-half 0;
@@ -155,6 +159,7 @@ $navbar-height: 75px;
     .login-splash-featureboxes {
         display: flex;
         justify-content:space-between;
+        margin-bottom: $gutter-full;
         .login-splash-featurebox {
             box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.2);
             min-height: 200px;
