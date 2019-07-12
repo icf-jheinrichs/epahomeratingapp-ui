@@ -367,7 +367,7 @@ export const ChecklistList = ({ checklist, ratingType, icons, category }) => {
                     case 'BuilderVerified':
                       return {
                             table: {
-                              widths: WIDTHS,
+                              widths: ['5%', '3%', '79%', '13%'],
                               body: [
                                 [
                                   { text: '' },
@@ -422,7 +422,7 @@ export const ChecklistList = ({ checklist, ratingType, icons, category }) => {
                     case 'BuilderVerified':
                       return {
                             table: {
-                              widths: WIDTHS,
+                              widths: ['5%', '3%', '79%', '13%'],
                               body: [
                                 [
                                   { text: '' },
@@ -673,6 +673,7 @@ export const HomeDetails = ({ home }) => {
 };
 
 const MARGIN = [0,3,0,3];
+const LINE_HEIGHT = 1.4;
 
 export const Header = ({ home, builder, ratingOrg, rater, otherHomes }) => {
   return {
@@ -687,13 +688,12 @@ export const Header = ({ home, builder, ratingOrg, rater, otherHomes }) => {
             [
               { text: "Primary Home:", bold: true, margin: MARGIN},
               { text: (() => {
-                console.warn('home?', home);
                 let merged = home.streetAddress;
                 merged = !_isEmpty(home.communityName) ? merged + '\n' + home.communityName : merged;
                 merged = !_isEmpty(home.lotNo) ? merged + ', Lot ' + home.lotNo : merged;
                 merged = !_isEmpty(home.manualid) ? merged + '\n' + home.manualid : merged;
                 return merged;
-              })(), bold: true, margin: MARGIN, lineHeight: 1.5}
+              })(), bold: true, margin: MARGIN, lineHeight: LINE_HEIGHT}
             ],
             [
               { text: "Builder:", bold: true, margin: MARGIN },
@@ -713,13 +713,24 @@ export const Header = ({ home, builder, ratingOrg, rater, otherHomes }) => {
               } else {
                 return [
                   { text: "Other Homes in This Sample Set:", bold: true, margin: MARGIN },
-                  { text: (() => {
-                    let merged = '';
-                    otherHomes.map((house) => {
-                      merged = merged + house.address.communityName + (_isEmpty(house.address.lotNo) ? '' : ', Lot ' + house.address.lotNo) + '\n';
-                    })
-                    return merged;
-                  })(), bold: true, margin: MARGIN, lineHeight: 1.5 }
+                  { table: {
+                    body: [
+                      ...otherHomes.map((house) => {
+                        let merged2 = house.address.streetAddress;
+                        merged2 = !_isEmpty(house.address.communityName) ? merged2 + '\n' + house.address.communityName : merged2;
+                        merged2 = !_isEmpty(house.address.lotNo) ? merged2 + ', Lot ' + house.address.lotNo : merged2;
+                        merged2 = !_isEmpty(house.address.manualid) ? merged2 + '\n' + house.address.manualid : merged2;
+                        return [{
+                          text: merged2,
+                          bold: true,
+                          margin: [0,0,0,7],
+                          lineHeight: LINE_HEIGHT
+                        }];
+                      })
+                    ]
+                  },
+                  layout: 'noBorders'
+                }
                 ]
               }
             })()
@@ -790,7 +801,7 @@ export const ChecklistItem = ({ checklist, icons }) => {
                       case 'BuilderVerified':
                         return {
                               table: {
-                                widths: ['7%', '3%', '69%', '21%'],
+                                widths: ['5%', '3%', '79%', '13%'],
                                 body: [
                                   [
                                     { text: '' },
@@ -885,56 +896,65 @@ export const ChecklistItem = ({ checklist, icons }) => {
 };
 
 export const Comments = ({ comments, checklist, otherHomes, houseId, address, icons }) => {
-  const commentsToPdf = comments.map((comment, i) => {
-    return [{
-      margin: [40,5,40,5],
-      fillColor: COLORS.LIGHT_GREY,
-      headlineLevel: (i == 0 ? 1 : 5),
-      table: {
-        body: [
-          [produceText({ text: comment.username, fontStyle: { bold: true }})],
-          [produceText({ text: moment(comment.timestamp).format('MM/DD/YYYY'), fontStyle: { bold: true }})],
-          [{ text: INDENT + comment.comment, headlineLevel: 1}],
-          (() => {
-            if(_isEmpty(comment.photoUrl) || _isEmpty(comment.photoUri)) {
-              return [{}]
-            } else {
-             return [{
-                 image  : comment.photoUri,
-                 width  : 250,
-                 height : 250,
-                 margin : [28, 10],
-             }]
-            }
-          })()
-        ],
-      },
-      layout: 'noBorders'
-    }]
-  })
+  const commentsToPdf = ((comments) => {
+    if(comments.length == 0) {
+      return [[{ text: 'No Comments',
+          margin: [40,5,40,5],
+          fillColor: COLORS.LIGHT_GREY, }]]
+    } else {
+      return comments.map((comment, i) => {
+       return [{
+         margin: [40,5,40,5],
+         fillColor: COLORS.LIGHT_GREY,
+         headlineLevel: (i == 0 ? 1 : 5),
+         table: {
+           body: [
+             [produceText({ text: comment.username, fontStyle: { bold: true }})],
+             [produceText({ text: moment(comment.timestamp).format('MM/DD/YYYY'), fontStyle: { bold: true }})],
+             [{ text: INDENT + comment.comment, headlineLevel: 1}],
+             (() => {
+               if(_isEmpty(comment.photoUrl) || _isEmpty(comment.photoUri)) {
+                 return [{}]
+               } else {
+                return [{
+                    image  : comment.photoUri,
+                    width  : 250,
+                    height : 250,
+                    margin : [28, 10],
+                }]
+               }
+             })()
+           ],
+         },
+         layout: 'noBorders'
+       }]
+     })
+    }
+
+  })(comments)
+
   return {
     headlineLevel: 1,
     columns: [
       { width: '*', text: '' },
       (() => {
-        if(_isEmpty(comments)) {
-          return [{}]
-        } else {
-          return {
-                  headlineLevel: 1,
-                  width: "100%",
-                  margin: [0,0,0,15],
-                  table: {
-                    widths: ["100%"],
-                    body: [
-                      (() => {
-                        if(!_isEmpty(otherHomes)) {
-                          return [{
-                            margin: [10,10,10,10],
-                            fillColor: COLORS.LIGHT_GREY,
-                            text: [
-                              { text: "Location\n\n", fontSize: 16, bold: true},
-                              {
+        return {
+                headlineLevel: 1,
+                width: "100%",
+                margin: [0,0,0,15],
+                table: {
+                  widths: ["100%"],
+                  body: [
+                    (() => {
+                      if(!_isEmpty(otherHomes)) {
+                        return [{
+                          margin: [10,10,10,10],
+                          fillColor: COLORS.LIGHT_GREY,
+                          layout: 'noBorders',
+                          table: {
+                            body: [
+                              [{ text: "Location", fontSize: 14, bold: true, margin: [0,0,0,5]}],
+                              [{
                                 bold: true,
                                 text: (() => {
                                   let cid = '',
@@ -952,34 +972,34 @@ export const Comments = ({ comments, checklist, otherHomes, houseId, address, ic
                                   }
                                   return (theHouse.streetAddress + '\n' + theHouse.communityName + (_isEmpty(theHouse.lotNo) ? '' : ', Lot ' + theHouse.lotNo) + (_isEmpty(theHouse.manualId) ? '' : '| ' + theHouse.manualId))
                                 })()
-                              }
+                              }]
                             ]
-                          }];
-                        } else {
-                          return [''];
-                        }
-                      })(),
-                      [{  headlineLevel: 3,
-                          fillColor: COLORS.LIGHT_GREY,
-                          table: {
-                          body: [
-                            [{
-                              image: icons.comment,
-                              width: 15,
-                              height: 13,
-                              margin: [0,2,0,0]
-                            },{ text: "Comments", fontSize: 14, bold: true, headlineLevel: 1 }]
-                          ]
-                        },
-                        margin: [10,0,0,0],
-                        layout: 'noBorders'
-                      }],
-                      ...commentsToPdf
-                    ]
-                  },
-                  layout: 'noBorders'
-                }
-        }
+                          }
+                        }]
+                      } else {
+                        return [''];
+                      }
+                    })(),
+                    [{  headlineLevel: 3,
+                        fillColor: COLORS.LIGHT_GREY,
+                        table: {
+                        body: [
+                          [{
+                            image: icons.comment,
+                            width: 15,
+                            height: 13,
+                            margin: [0,2,0,0]
+                          },{ text: "Comments", fontSize: 14, bold: true, headlineLevel: 1 }]
+                        ]
+                      },
+                      margin: [10,0,0,0],
+                      layout: 'noBorders'
+                    }],
+                    ...commentsToPdf
+                  ]
+                },
+                layout: 'noBorders'
+              }
       })(),
       { width: '*', text: '' }
     ]
