@@ -65,9 +65,9 @@
     // padding: $gutter-quarter;
     border-left: 2px solid $text-color-muted;
     border-right: 2px solid $text-color-muted;
-    // width: calc(100% - 215px);
     position: relative;
     height: 100%;
+    width: 200px; //need to set to some arbritrary number
 
     .job-checklist-meta-dropdown {
       height: 100%;
@@ -224,12 +224,15 @@
 }
 
 .job-checklist-title {
-    display: inline;
+    // display: inline;
     font-size: $font-size-h4;
     margin-bottom: 0;
+    display: inline-block;
+    width: calc(100% - 70px);
 
     span {
         display: block;
+        line-height: 20px;
     }
 }
 

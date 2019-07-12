@@ -11,9 +11,10 @@
 
 .label-rating-type,
 .label-sample-set {
-    display: inline-block;
+    // display: inline-block;
     font-size: $font-size-small;
     margin-right: 1px;
+    display: block;
 }
 
 .label-sample-set {
