@@ -339,7 +339,7 @@ class PDFService {
           PDFMake.vfs = pdfFonts.pdfMake.vfs;
           const pdfDocGenerator = PDFMake.createPdf(pdf);
 
-          pdfDocGenerator.download(this.getPdfName());
+          pdfDocGenerator.download(this.getPdfName() + '.pdf');
 
           this.$log.log('Generated PDF: ', pdfDocGenerator);
           // pdfDocGenerator.getBuffer((blob) => {
