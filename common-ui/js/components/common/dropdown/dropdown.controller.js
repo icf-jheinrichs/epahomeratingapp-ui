@@ -93,10 +93,16 @@ class DropdownController {
 
     setMenuElement (element) {
         this.menuElement = element;
-        this.menuElement
-          .on('click', () => {
-              this.toggle();
-          });
+
+        //TODO: integrate this into directive
+        if(this.menuElement.length > 0 && 'attributes' in this.menuElement[0] && 'close-on-click' in this.menuElement[0].attributes && 'value' in this.menuElement[0].attributes['close-on-click'] && this.menuElement[0].attributes['close-on-click'].value == 'false') {
+          //do nothing
+        } else {
+          this.menuElement
+            .on('click', () => {
+                this.toggle();
+            });
+        }
     }
 }
 
