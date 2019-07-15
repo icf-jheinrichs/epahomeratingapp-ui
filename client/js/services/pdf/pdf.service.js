@@ -6,7 +6,6 @@ import * as util from './pdf.util.js';
 import { BASE_IMAGE_URL, BASE_S3_URL } from '../../epahomeratingapp.config';
 
 const getDataUri = (url, method, S3Service = () => {}) => {
-  console.warn('GET DATA URI', url, method, S3Service);
   let promise = '';
   switch(method) {
     case 'HTTP':
