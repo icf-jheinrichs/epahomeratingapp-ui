@@ -5,6 +5,41 @@ import moment from 'moment';
 import * as util from './pdf.util.js';
 import { BASE_IMAGE_URL, BASE_S3_URL } from '../../epahomeratingapp.config';
 
+const getDataUri = (url, method, S3Service = () => {}) => {
+  console.warn('GET DATA URI', url, method, S3Service);
+  let promise = '';
+  switch(method) {
+    case 'HTTP':
+      promise = new Promise((res, rej) => {
+        var image = new Image();
+        image.crossOrigin = 'Anonymous';
+        image.onload = function () {
+            var canvas = document.createElement('canvas');
+            canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
+            canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
+            canvas.getContext('2d').drawImage(this, 0, 0);
+            res(canvas.toDataURL('image/png'));
+        };
+        image.onerror = function() {
+          this.src = '/img/imageMissing.png';
+        }
+        image.src = url;
+      })
+      break;
+    case 'S3':
+      promise = new Promise((res, rej) => {
+        S3Service.get(url)
+          .then((response) => {
+            res('data:image/jpeg;base64,' + new Buffer(response.Body, 'binary').toString('base64'));
+          })
+          .catch((err) => {
+            rej(err);
+          })
+      })
+  }
+  return promise;
+}
+
 class Comment {
     constructor (photoUrl = '', comment = '', timestamp = '', username = '', S3Service) { // eslint-disable-line no-empty-function
         this.photoUrl         = _isEmpty(photoUrl) ? '' : photoUrl;
@@ -20,9 +55,9 @@ class Comment {
           if (_isEmpty(this.photoUrl)) {
               res(this);
           } else {
-            this.S3Service.get(this.photoUrl)
-              .then((response) => {
-                this.photoUri = 'data:image/jpeg;base64,' + new Buffer(response.Body, 'binary').toString('base64')
+            getDataUri(this.photoUrl, 'S3', this.S3Service)
+              .then((dataUri) => {
+                this.photoUri = dataUri;
                 res(this);
               })
               .catch((err) => {
@@ -107,23 +142,24 @@ class PDFService {
               };
           for(let i = 0; i < 4; i++) {
             if(!_isEmpty(house.Photo[i])) {
-              preRes[i] = BASE_S3_URL + house.Photo[i];
+              preRes[i] = house.Photo[i];
             } else {
               preRes[i] = null
             }
           }
-          (_isEmpty(preRes[0]) ? this.$q((res,rej) => {res(null)}) : getDataUri(preRes[0]))
+
+          (_isEmpty(preRes[0]) ? this.$q((res,rej) => {res(null)}) : getDataUri(preRes[0], 'S3', this.S3Service))
             .then((front) => {
               postRes.front = _isEmpty(front) ? null : front;
-              return (_isEmpty(preRes[1]) ? this.$q((res,rej) => {res(null)}) : getDataUri(preRes[1]));
+              return (_isEmpty(preRes[1]) ? this.$q((res,rej) => {res(null)}) : getDataUri(preRes[1], 'S3', this.S3Service));
             })
             .then((back) => {
               postRes.back = _isEmpty(back) ? null : back;
-              return (_isEmpty(preRes[2]) ? this.$q((res,rej) => {res(null)}) : getDataUri(preRes[2]));
+              return (_isEmpty(preRes[2]) ? this.$q((res,rej) => {res(null)}) : getDataUri(preRes[2], 'S3', this.S3Service));
             })
             .then((left) => {
               postRes.left = _isEmpty(left) ? null : left;
-              return (_isEmpty(preRes[3]) ? this.$q((res,rej) => {res(null)}) : getDataUri(preRes[3]));
+              return (_isEmpty(preRes[3]) ? this.$q((res,rej) => {res(null)}) : getDataUri(preRes[3], 'S3', this.S3Service));
             })
             .then((right) => {
               postRes.right = _isEmpty(right) ? null : right;
@@ -135,11 +171,6 @@ class PDFService {
     generateBuilderNotification() {
       return this.$q((res, rej) => {
         this.getHouseImages()
-        // .then((houseImagesArray) => {
-        //   return Promise.all(houseImagesArray.map((houseUrl) => {
-        //       return getDataUri(houseUrl);
-        //   }));
-        // })
         .then((houseImages) => {
           const user    = this.AuthenticationService.getUser();
           const job     = this.JobChecklistStateService.getJob();
@@ -274,24 +305,24 @@ class PDFService {
         })
         .then((archiveInfo) => {
           this.pdfInputs.archive = archiveInfo;
-          return getDataUri('/img/logo-raterpro.png');
+          return getDataUri('/img/logo-raterpro.png', 'HTTP');
         })
         .then((logo) => {
           this.pdfInputs.logo = logo;
-          return getDataUri('/img/comment-icon.png');
+          return getDataUri('/img/comment-icon.png', 'HTTP');
         })
         .then((commentIcon) => {
           this.pdfInputs.icons.comment = commentIcon;
-          return getDataUri('/img/mustCorrect.png');
+          return getDataUri('/img/mustCorrect.png', 'HTTP');
         })
         .then((correctIcon) => {
           this.pdfInputs.icons.correct = correctIcon;
-          return getDataUri('/img/mustVerify.png');
+          return getDataUri('/img/mustVerify.png', 'HTTP');
         })
         .then((verifyIcon) => {
           this.pdfInputs.icons.verify = verifyIcon;
           if(!_isEmpty(this.pdfInputs.archive.utility.commissionPhoto)) {
-            return getDataUri(BASE_S3_URL + this.pdfInputs.archive.utility.commissionPhoto);
+            return getDataUri(this.pdfInputs.archive.utility.commissionPhoto, 'S3', this.S3Service);
           }
         })
         .then((dataUri) => {
